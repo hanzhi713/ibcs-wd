@@ -1,0 +1,101 @@
+<html>
+  <head>
+    <title>IBCS1-WD - beat shrewmouse</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> pygame
+<span class="kw1">import</span> <span class="kw3">random</span>
+<span class="kw1">import</span> <span class="kw3">time</span>
+<span class="kw1">from</span> pygame.<span class="kw2">locals</span> <span class="kw1">import</span> *
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> get_position<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    a <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">770</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    b <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">770</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    pos<span class="sy0">=</span><span class="br0">&#91;</span>a<span class="sy0">,</span>b<span class="br0">&#93;</span>
+    <span class="kw1">return</span> pos
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> in_rec<span class="br0">&#40;</span>a<span class="sy0">,</span>b<span class="br0">&#41;</span>:
+&nbsp;
+    mx<span class="sy0">,</span> my <span class="sy0">=</span> pygame.<span class="me1">mouse</span>.<span class="me1">get_pos</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">if</span> mx<span class="sy0">&gt;</span>a:
+        <span class="kw1">if</span> mx<span class="sy0">&lt;</span><span class="br0">&#40;</span>a+<span class="nu0">30</span><span class="br0">&#41;</span>:
+            <span class="kw1">if</span> my <span class="sy0">&gt;</span> b:
+                <span class="kw1">if</span> my <span class="sy0">&lt;</span> <span class="br0">&#40;</span>b + <span class="nu0">30</span><span class="br0">&#41;</span>:
+                    <span class="kw1">return</span> <span class="kw2">True</span>
+    <span class="kw1">else</span>:
+        <span class="kw1">return</span> <span class="kw2">False</span>
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    score <span class="sy0">=</span> <span class="nu0">0</span>
+    pygame.<span class="me1">init</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    surface_sz <span class="sy0">=</span><span class="nu0">800</span>
+    main_surface <span class="sy0">=</span> pygame.<span class="me1">display</span>.<span class="me1">set_mode</span><span class="br0">&#40;</span><span class="br0">&#40;</span>surface_sz<span class="sy0">,</span> surface_sz<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    times <span class="sy0">=</span> <span class="nu0">0</span>
+    level <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;how difficult you want to have,please choose from 30 25 20 15&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    round_round  <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;how many round you want to play?&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">for</span> x <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>round_round<span class="br0">&#41;</span>:
+&nbsp;
+&nbsp;
+&nbsp;
+        a <span class="sy0">=</span> get_position<span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+        <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>level<span class="br0">&#41;</span>:
+            small_rect <span class="sy0">=</span> <span class="br0">&#40;</span>a<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span> a<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">30</span><span class="sy0">,</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+            some_color <span class="sy0">=</span> <span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+            main_surface.<span class="me1">fill</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">200</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            main_surface.<span class="me1">fill</span><span class="br0">&#40;</span>some_color<span class="sy0">,</span> small_rect<span class="br0">&#41;</span>
+            pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+            <span class="kw1">for</span> e <span class="kw1">in</span> pygame.<span class="me1">event</span>.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+                <span class="kw1">if</span> e.<span class="kw2">type</span> <span class="sy0">==</span> MOUSEBUTTONDOWN <span class="kw1">and</span> e.<span class="me1">button</span> <span class="sy0">==</span> <span class="nu0">1</span> :
+                    times <span class="sy0">=</span> times + <span class="nu0">1</span>
+                    <span class="kw1">if</span> in_rec<span class="br0">&#40;</span>a<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span> a<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw2">True</span>:
+                        score <span class="sy0">=</span> score+ <span class="nu0">1</span>
+&nbsp;
+&nbsp;
+                <span class="kw1">if</span> e.<span class="kw2">type</span> <span class="sy0">==</span> QUIT <span class="kw1">or</span> <span class="br0">&#40;</span>e.<span class="kw2">type</span> <span class="sy0">==</span> KEYUP <span class="kw1">and</span> e.<span class="me1">key</span> <span class="sy0">==</span> K_ESCAPE<span class="br0">&#41;</span>:
+                    done <span class="sy0">=</span> <span class="nu0">1</span>
+                    quit<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;the score you got is&quot;</span><span class="sy0">,</span>score<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+main<span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

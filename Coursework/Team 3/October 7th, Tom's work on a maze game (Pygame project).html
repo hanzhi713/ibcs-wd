@@ -1,0 +1,521 @@
+<html>
+  <head>
+    <title>IBCS1-WD - October 7th, Tom's work on a maze game (Pygame project)</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>October 7th, Tom's work on a maze game (Pygame project)<small> #TomsProjects </small></h1><h1 id="toc0"> </h1>
+ <a href="#toc0"> </a> | <a href="#toc1"> </a> | <a href="#Support file: me.png">Support file: me.png</a> | <a href="#toc8"> </a> | <a href="#toc9"> </a> | <a href="#Invisible Maze: Main">Invisible Maze: Main</a> | <a href="#Invisible maze: Levels">Invisible maze: Levels</a> | <a href="#For developers:">For developers:</a>
+<hr />
+<h1 id="toc1"> </h1>
+ <h2 id="toc2"><a name="x-Note:"></a><span style="color: #ff0000;">Note: </span></h2>
+ <h2 id="toc3"><a name="x-If you want to see my previous work using VB.net, click here to download the complete Visual Studio project."></a><span style="color: #ff0000;">If you want to see my previous work using VB.net, click <a href="files/Invisible%20Maze%20by%20Tom%20Zhou.zip">here</a> to download the complete Visual Studio project. </span></h2>
+ <h2 id="toc4"> </h2>
+ <h2 id="toc5"><a name="x-If you want to play the VB.net version directly, click here to download the game (system requirement: Windows XP or later Windows OS with Net Framework 2.0 or later version installed."></a><span style="color: #ff0000;">If you want to play the VB.net version directly, click <a href="files/Invisible%20Maze.exe">here</a> to download the game (system requirement: Windows XP or later Windows OS with Net Framework 2.0 or later version installed.</span></h2>
+ <br />
+<h2 id="toc6"><a name="x-If you want to run the following code directly, click here to download the package"></a><span style="color: #ff0000;">If you want to run the following code directly, click <a href="files/Maze%20Game%20by%20Tom%20Zhou.zip">here</a> to download the package</span></h2>
+ <br />
+<h1 id="toc7"><a name="Support file: me.png"></a>Support file: <a href="files/me.png">me.png</a></h1>
+ <h1 id="toc8"> </h1>
+ <h1 id="toc9"> </h1>
+ <h1 id="toc10"><a name="Invisible Maze: Main"></a>Invisible Maze: Main</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> pygame
+<span class="kw1">import</span> <span class="kw3">sys</span>
+pygame.<span class="me1">init</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+screen <span class="sy0">=</span> pygame.<span class="me1">display</span>.<span class="me1">set_mode</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">800</span><span class="sy0">,</span><span class="nu0">600</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+screen.<span class="me1">fill</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> Me:
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span> y<span class="sy0">=</span><span class="nu0">0</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">image</span> <span class="sy0">=</span> pygame.<span class="me1">transform</span>.<span class="me1">smoothscale</span><span class="br0">&#40;</span>pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">&quot;me.png&quot;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">15</span><span class="sy0">,</span> <span class="nu0">15</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+        <span class="kw2">self</span>.<span class="me1">rect</span> <span class="sy0">=</span> pygame.<span class="me1">Rect</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">15</span><span class="sy0">,</span><span class="nu0">15</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        screen.<span class="me1">blit</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">image</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> move<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x<span class="sy0">,</span> y<span class="sy0">,</span> rects<span class="sy0">,</span> win<span class="sy0">,</span> teleporters<span class="sy0">=</span><span class="kw2">None</span><span class="br0">&#41;</span>:
+        pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">rect</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">x</span> +<span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> +<span class="sy0">=</span> y
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">&gt;</span> <span class="nu0">785</span>:
+            <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> <span class="nu0">785</span>
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+            <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> <span class="nu0">0</span>
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">&gt;</span> <span class="nu0">585</span>:
+            <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> <span class="nu0">585</span>
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+            <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> <span class="nu0">0</span>
+        <span class="kw2">self</span>.<span class="me1">rect</span> <span class="sy0">=</span> pygame.<span class="me1">Rect</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">15</span><span class="sy0">,</span> <span class="nu0">15</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> teleporters <span class="kw1">is</span> <span class="kw1">not</span> <span class="kw2">None</span>:
+            <span class="kw1">for</span> <span class="br0">&#40;</span>teleporter<span class="sy0">,</span> posn<span class="br0">&#41;</span> <span class="kw1">in</span> teleporters:
+                <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">colliderect</span><span class="br0">&#40;</span>teleporter<span class="br0">&#41;</span>:
+                    <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> posn<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+                    <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> posn<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>
+                    screen.<span class="me1">blit</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">image</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                    <span class="kw2">self</span>.<span class="me1">rect</span> <span class="sy0">=</span> pygame.<span class="me1">Rect</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">15</span><span class="sy0">,</span> <span class="nu0">15</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+                    <span class="kw1">return</span>
+        <span class="kw1">for</span> rect <span class="kw1">in</span> rects:
+            <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">colliderect</span><span class="br0">&#40;</span>rect<span class="br0">&#41;</span>:
+                <span class="kw2">self</span>.<span class="me1">x</span> -<span class="sy0">=</span> x
+                <span class="kw2">self</span>.<span class="me1">y</span> -<span class="sy0">=</span> y
+                <span class="kw2">self</span>.<span class="me1">rect</span> <span class="sy0">=</span> pygame.<span class="me1">Rect</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">15</span><span class="sy0">,</span> <span class="nu0">15</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                <span class="kw1">return</span>
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">colliderect</span><span class="br0">&#40;</span>win<span class="br0">&#41;</span>:
+            <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;You win!!!&quot;</span><span class="br0">&#41;</span>
+            screen.<span class="me1">fill</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+            pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="kw1">return</span> <span class="kw2">True</span>
+        <span class="kw2">self</span>.<span class="me1">rect</span> <span class="sy0">=</span> pygame.<span class="me1">Rect</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">15</span><span class="sy0">,</span> <span class="nu0">15</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        screen.<span class="me1">blit</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">image</span><span class="sy0">,</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> abs_movement<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>x<span class="sy0">,</span>y<span class="br0">&#41;</span>:
+        pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">rect</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+        screen.<span class="me1">blit</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">image</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+me <span class="sy0">=</span> Me<span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> wait_SPACE_key<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="kw1">while</span> <span class="nu0">1</span>:
+        <span class="kw1">for</span> event <span class="kw1">in</span> pygame.<span class="me1">event</span>.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+            <span class="kw1">if</span> event.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">KEYDOWN</span>:
+                <span class="kw1">if</span> event.<span class="me1">key</span> <span class="sy0">==</span> pygame.<span class="me1">K_SPACE</span>:
+                    <span class="kw1">return</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> main<span class="br0">&#40;</span>level<span class="sy0">,</span>rects<span class="sy0">,</span> win<span class="sy0">,</span> init_posn<span class="sy0">,</span><span class="kw3">time</span><span class="sy0">,</span>telepoters<span class="sy0">=</span><span class="kw2">None</span><span class="br0">&#41;</span>:
+    me.<span class="me1">abs_movement</span><span class="br0">&#40;</span>init_posn<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span> init_posn<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">set_caption</span><span class="br0">&#40;</span>level.<span class="me1">name</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;Press SPACE to start observe the maze. You have {0} seconds&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="kw3">time</span>/<span class="nu0">1000</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    wait_SPACE_key<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    level.<span class="me1">walls_init</span><span class="br0">&#40;</span>level.<span class="me1">walls</span><span class="sy0">,</span>screen<span class="sy0">,</span><span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    pygame.<span class="kw3">time</span>.<span class="me1">delay</span><span class="br0">&#40;</span><span class="kw3">time</span><span class="br0">&#41;</span>
+    level.<span class="me1">walls_init</span><span class="br0">&#40;</span>level.<span class="me1">walls</span><span class="sy0">,</span> screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    x_movement <span class="sy0">=</span> <span class="nu0">0</span>
+    y_movement <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">while</span> <span class="kw2">True</span>:
+        <span class="kw1">for</span> event <span class="kw1">in</span> pygame.<span class="me1">event</span>.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+            <span class="kw1">if</span> event.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">QUIT</span>:
+                <span class="kw3">sys</span>.<span class="me1">exit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="kw1">if</span> event.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">KEYDOWN</span>:
+                <span class="kw1">if</span> event.<span class="me1">key</span> <span class="sy0">==</span> pygame.<span class="me1">K_w</span>:
+                    y_movement <span class="sy0">=</span> -<span class="nu0">1</span>
+                <span class="kw1">elif</span> event.<span class="me1">key</span> <span class="sy0">==</span> pygame.<span class="me1">K_a</span>:
+                    x_movement <span class="sy0">=</span> -<span class="nu0">1</span>
+                <span class="kw1">elif</span> event.<span class="me1">key</span> <span class="sy0">==</span> pygame.<span class="me1">K_s</span>:
+                    y_movement <span class="sy0">=</span> <span class="nu0">1</span>
+                <span class="kw1">elif</span> event.<span class="me1">key</span> <span class="sy0">==</span> pygame.<span class="me1">K_d</span>:
+                    x_movement <span class="sy0">=</span> <span class="nu0">1</span>
+                pygame.<span class="kw3">time</span>.<span class="me1">delay</span><span class="br0">&#40;</span><span class="nu0">40</span><span class="br0">&#41;</span>
+            <span class="kw1">elif</span> event.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">KEYUP</span>:
+                x_movement <span class="sy0">=</span> <span class="nu0">0</span>
+                y_movement <span class="sy0">=</span> <span class="nu0">0</span>
+        <span class="kw1">if</span> me.<span class="me1">move</span><span class="br0">&#40;</span>x_movement<span class="sy0">,</span> y_movement<span class="sy0">,</span> rects<span class="sy0">,</span> win<span class="sy0">,</span> telepoters<span class="br0">&#41;</span>:
+            <span class="kw1">break</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> next_level<span class="br0">&#40;</span>level<span class="br0">&#41;</span>:
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;Press SPACE to enter the next level&quot;</span><span class="br0">&#41;</span>
+    wait_SPACE_key<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    screen.<span class="me1">fill</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    win_rect <span class="sy0">=</span> level.<span class="me1">win</span><span class="br0">&#40;</span>screen<span class="br0">&#41;</span>
+    walls_Rect <span class="sy0">=</span> level.<span class="me1">rects</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    teleporters <span class="sy0">=</span> level.<span class="me1">teleporters</span>
+    main<span class="br0">&#40;</span>level<span class="sy0">,</span> walls_Rect<span class="sy0">,</span> win_rect<span class="sy0">,</span> level.<span class="me1">init_posn</span><span class="sy0">,</span> level.<span class="me1">time_to_observe</span><span class="sy0">,</span> teleporters<span class="br0">&#41;</span>
+&nbsp;
+instructions <span class="sy0">=</span> <span class="br0">&#91;</span><span class="st0">'Invisible Maze:'</span><span class="sy0">,</span> <span class="st0">'Use WASD to move'</span><span class="sy0">,</span> <span class="st0">'You cannot go through walls in MOST OF THE CASES'</span><span class="sy0">,</span>
+                <span class="st0">'Reach the win block which will appear on the screen'</span><span class="sy0">,</span> <span class="st0">'Walls may be invisible in the first place'</span><span class="sy0">,</span>
+                <span class="st0">'Teleporters may exist in later levels'</span><span class="br0">&#93;</span>
+&nbsp;
+<span class="kw1">for</span> ins <span class="kw1">in</span> instructions:
+    <span class="kw1">print</span><span class="br0">&#40;</span>ins<span class="br0">&#41;</span>
+<span class="kw1">import</span> level1
+next_level<span class="br0">&#40;</span>level1<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">import</span> level2
+next_level<span class="br0">&#40;</span>level2<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">import</span> level3
+next_level<span class="br0">&#40;</span>level3<span class="br0">&#41;</span>
+&nbsp;
+<span class="co1"># import level4</span>
+<span class="co1"># next_level(level4)</span>
+<span class="co1"># add more levels here</span>
+&nbsp;
+&nbsp;</pre>
+
+<h1 id="toc11"><a name="Invisible maze: Levels"></a>Invisible maze: Levels</h1>
+ <h3 id="toc12"><a name="Invisible maze: Levels--level1:"></a>level1:</h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> pygame
+init_posn <span class="sy0">=</span> <span class="br0">&#40;</span><span class="nu0">20</span><span class="sy0">,</span><span class="nu0">450</span><span class="br0">&#41;</span>
+time_to_observe <span class="sy0">=</span> <span class="nu0">1000</span>
+name <span class="sy0">=</span> <span class="st0">&quot;level1&quot;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> walls_init<span class="br0">&#40;</span>walls<span class="sy0">,</span> screen<span class="sy0">,</span>color<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> wall <span class="kw1">in</span> walls:
+        pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> color<span class="sy0">,</span> wall<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> wall_to_rect<span class="br0">&#40;</span>walls<span class="br0">&#41;</span>:
+    rects <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> wall <span class="kw1">in</span> walls:
+        rects.<span class="me1">append</span><span class="br0">&#40;</span>pygame.<span class="me1">Rect</span><span class="br0">&#40;</span>wall<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> rects
+walls<span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">362</span><span class="sy0">,</span> <span class="nu0">323</span><span class="sy0">,</span> <span class="nu0">52</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">499</span><span class="sy0">,</span> <span class="nu0">609</span><span class="sy0">,</span> <span class="nu0">34</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">312</span><span class="sy0">,</span> <span class="nu0">66</span><span class="sy0">,</span> <span class="nu0">40</span><span class="sy0">,</span> <span class="nu0">338</span><span class="br0">&#41;</span><span class="sy0">,</span>
+        <span class="br0">&#40;</span><span class="nu0">313</span><span class="sy0">,</span> <span class="nu0">17</span><span class="sy0">,</span> <span class="nu0">478</span><span class="sy0">,</span> <span class="nu0">49</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">608</span><span class="sy0">,</span> <span class="nu0">175</span><span class="sy0">,</span> <span class="nu0">27</span><span class="sy0">,</span> <span class="nu0">355</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">610</span><span class="sy0">,</span> <span class="nu0">143</span><span class="sy0">,</span> <span class="nu0">188</span><span class="sy0">,</span> <span class="nu0">35</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+rects <span class="sy0">=</span> wall_to_rect<span class="br0">&#40;</span>walls<span class="br0">&#41;</span>
+teleporters <span class="sy0">=</span> <span class="kw2">None</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> win<span class="br0">&#40;</span>screen<span class="br0">&#41;</span>:
+    win_rec <span class="sy0">=</span> pygame.<span class="me1">Rect</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">708</span><span class="sy0">,</span> <span class="nu0">86</span><span class="sy0">,</span> <span class="nu0">53</span><span class="sy0">,</span> <span class="nu0">37</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">123</span><span class="sy0">,</span><span class="nu0">123</span><span class="br0">&#41;</span><span class="sy0">,</span> win_rec<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> win_rec
+&nbsp;</pre>
+
+<h3 id="toc13"><a name="Invisible maze: Levels--level2:"></a>level2:</h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> pygame
+init_posn <span class="sy0">=</span> <span class="br0">&#40;</span><span class="nu0">20</span><span class="sy0">,</span><span class="nu0">250</span><span class="br0">&#41;</span>
+time_to_observe <span class="sy0">=</span> <span class="nu0">2000</span>
+name <span class="sy0">=</span> <span class="st0">&quot;level2&quot;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> walls_init<span class="br0">&#40;</span>walls<span class="sy0">,</span> screen<span class="sy0">,</span>color<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> wall <span class="kw1">in</span> walls:
+        pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> color<span class="sy0">,</span> wall<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> wall_to_rect<span class="br0">&#40;</span>walls<span class="br0">&#41;</span>:
+    rects <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> wall <span class="kw1">in</span> walls:
+        rects.<span class="me1">append</span><span class="br0">&#40;</span>pygame.<span class="me1">Rect</span><span class="br0">&#40;</span>wall<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> rects
+walls<span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">218</span><span class="sy0">,</span> <span class="nu0">277</span><span class="sy0">,</span> <span class="nu0">21</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">2</span><span class="sy0">,</span> <span class="nu0">308</span><span class="sy0">,</span> <span class="nu0">269</span><span class="sy0">,</span> <span class="nu0">9</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">241</span><span class="sy0">,</span> <span class="nu0">238</span><span class="sy0">,</span> <span class="nu0">4</span><span class="sy0">,</span> <span class="nu0">28</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">259</span><span class="sy0">,</span> <span class="nu0">317</span><span class="sy0">,</span> <span class="nu0">12</span><span class="sy0">,</span> <span class="nu0">153</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">261</span><span class="sy0">,</span> <span class="nu0">465</span><span class="sy0">,</span> <span class="nu0">198</span><span class="sy0">,</span> <span class="nu0">21</span><span class="br0">&#41;</span><span class="sy0">,</span>
+        <span class="br0">&#40;</span><span class="nu0">354</span><span class="sy0">,</span> <span class="nu0">392</span><span class="sy0">,</span> <span class="nu0">358</span><span class="sy0">,</span> <span class="nu0">17</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">275</span><span class="sy0">,</span> <span class="nu0">61</span><span class="sy0">,</span> <span class="nu0">23</span><span class="sy0">,</span> <span class="nu0">174</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">297</span><span class="sy0">,</span> <span class="nu0">98</span><span class="sy0">,</span> <span class="nu0">288</span><span class="sy0">,</span> <span class="nu0">25</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">382</span><span class="sy0">,</span> <span class="nu0">120</span><span class="sy0">,</span> <span class="nu0">25</span><span class="sy0">,</span> <span class="nu0">148</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">337</span><span class="sy0">,</span> <span class="nu0">318</span><span class="sy0">,</span> <span class="nu0">164</span><span class="sy0">,</span> <span class="nu0">13</span><span class="br0">&#41;</span><span class="sy0">,</span>
+        <span class="br0">&#40;</span><span class="nu0">481</span><span class="sy0">,</span> <span class="nu0">203</span><span class="sy0">,</span> <span class="nu0">238</span><span class="sy0">,</span> <span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">604</span><span class="sy0">,</span> <span class="nu0">208</span><span class="sy0">,</span> <span class="nu0">17</span><span class="sy0">,</span> <span class="nu0">115</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">758</span><span class="sy0">,</span> <span class="nu0">26</span><span class="sy0">,</span> <span class="nu0">23</span><span class="sy0">,</span> <span class="nu0">535</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">653</span><span class="sy0">,</span> <span class="nu0">96</span><span class="sy0">,</span> <span class="nu0">40</span><span class="sy0">,</span> <span class="nu0">109</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">562</span><span class="sy0">,</span> <span class="nu0">67</span><span class="sy0">,</span> <span class="nu0">93</span><span class="sy0">,</span> <span class="nu0">15</span><span class="br0">&#41;</span><span class="sy0">,</span>
+        <span class="br0">&#40;</span><span class="nu0">536</span><span class="sy0">,</span> <span class="nu0">256</span><span class="sy0">,</span> <span class="nu0">22</span><span class="sy0">,</span> <span class="nu0">99</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">563</span><span class="sy0">,</span> <span class="nu0">406</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> <span class="nu0">132</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">144</span><span class="sy0">,</span> <span class="nu0">533</span><span class="sy0">,</span> <span class="nu0">414</span><span class="sy0">,</span> <span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">145</span><span class="sy0">,</span> <span class="nu0">361</span><span class="sy0">,</span> <span class="nu0">19</span><span class="sy0">,</span> <span class="nu0">176</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">129</span><span class="sy0">,</span> <span class="nu0">17</span><span class="sy0">,</span> <span class="nu0">29</span><span class="sy0">,</span> <span class="nu0">166</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+rects <span class="sy0">=</span> wall_to_rect<span class="br0">&#40;</span>walls<span class="br0">&#41;</span>
+teleporters <span class="sy0">=</span> <span class="kw2">None</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> win<span class="br0">&#40;</span>screen<span class="br0">&#41;</span>:
+    win_rec <span class="sy0">=</span> pygame.<span class="me1">Rect</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">40</span><span class="sy0">,</span> <span class="nu0">74</span><span class="sy0">,</span> <span class="nu0">53</span><span class="sy0">,</span> <span class="nu0">56</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">123</span><span class="sy0">,</span><span class="nu0">123</span><span class="br0">&#41;</span><span class="sy0">,</span> win_rec<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> win_rec
+&nbsp;</pre>
+
+<h3 id="toc14"><a name="Invisible maze: Levels--level3:"></a>level3:</h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> pygame
+init_posn <span class="sy0">=</span> <span class="br0">&#40;</span><span class="nu0">50</span><span class="sy0">,</span><span class="nu0">570</span><span class="br0">&#41;</span>
+time_to_observe <span class="sy0">=</span> <span class="nu0">3000</span>
+name <span class="sy0">=</span> <span class="st0">&quot;level3&quot;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> walls_init<span class="br0">&#40;</span>walls<span class="sy0">,</span> screen<span class="sy0">,</span>color<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> wall <span class="kw1">in</span> walls:
+        pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> color<span class="sy0">,</span> wall<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> wall_to_rect<span class="br0">&#40;</span>walls<span class="br0">&#41;</span>:
+    rects <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> wall <span class="kw1">in</span> walls:
+        rects.<span class="me1">append</span><span class="br0">&#40;</span>pygame.<span class="me1">Rect</span><span class="br0">&#40;</span>wall<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> rects
+walls<span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">517</span><span class="sy0">,</span> <span class="nu0">272</span><span class="sy0">,</span> <span class="nu0">16</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">341</span><span class="sy0">,</span> <span class="nu0">372</span><span class="sy0">,</span> <span class="nu0">15</span><span class="sy0">,</span> <span class="nu0">225</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">180</span><span class="sy0">,</span> <span class="nu0">441</span><span class="sy0">,</span> <span class="nu0">92</span><span class="sy0">,</span> <span class="nu0">13</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">77</span><span class="sy0">,</span> <span class="nu0">360</span><span class="sy0">,</span> <span class="nu0">23</span><span class="sy0">,</span> <span class="nu0">169</span><span class="br0">&#41;</span><span class="sy0">,</span>
+        <span class="br0">&#40;</span><span class="nu0">108</span><span class="sy0">,</span> <span class="nu0">281</span><span class="sy0">,</span> <span class="nu0">248</span><span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">270</span><span class="sy0">,</span> <span class="nu0">284</span><span class="sy0">,</span> <span class="nu0">26</span><span class="sy0">,</span> <span class="nu0">130</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">427</span><span class="sy0">,</span> <span class="nu0">161</span><span class="sy0">,</span> <span class="nu0">11</span><span class="sy0">,</span> <span class="nu0">202</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">352</span><span class="sy0">,</span> <span class="nu0">448</span><span class="sy0">,</span> <span class="nu0">164</span><span class="sy0">,</span> <span class="nu0">18</span><span class="br0">&#41;</span><span class="sy0">,</span>
+        <span class="br0">&#40;</span><span class="nu0">435</span><span class="sy0">,</span> <span class="nu0">274</span><span class="sy0">,</span> <span class="nu0">133</span><span class="sy0">,</span> <span class="nu0">3</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">562</span><span class="sy0">,</span> <span class="nu0">277</span><span class="sy0">,</span> <span class="nu0">3</span><span class="sy0">,</span> <span class="nu0">322</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">265</span><span class="sy0">,</span> <span class="nu0">196</span><span class="sy0">,</span> <span class="nu0">164</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">250</span><span class="sy0">,</span> <span class="nu0">192</span><span class="sy0">,</span> <span class="nu0">18</span><span class="sy0">,</span> <span class="nu0">90</span><span class="br0">&#41;</span><span class="sy0">,</span>
+        <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">189</span><span class="sy0">,</span> <span class="nu0">123</span><span class="sy0">,</span> <span class="nu0">8</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">72</span><span class="sy0">,</span> <span class="nu0">109</span><span class="sy0">,</span> <span class="nu0">324</span><span class="sy0">,</span> <span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">68</span><span class="sy0">,</span> <span class="nu0">17</span><span class="sy0">,</span> <span class="nu0">9</span><span class="sy0">,</span> <span class="nu0">95</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">501</span><span class="sy0">,</span> <span class="nu0">4</span><span class="sy0">,</span> <span class="nu0">7</span><span class="sy0">,</span> <span class="nu0">265</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">136</span><span class="sy0">,</span> <span class="nu0">33</span><span class="sy0">,</span> <span class="nu0">59</span><span class="sy0">,</span> <span class="nu0">47</span><span class="br0">&#41;</span><span class="sy0">,</span>
+        <span class="br0">&#40;</span><span class="nu0">506</span><span class="sy0">,</span> <span class="nu0">93</span><span class="sy0">,</span> <span class="nu0">177</span><span class="sy0">,</span> <span class="nu0">7</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">724</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">18</span><span class="sy0">,</span> <span class="nu0">214</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">622</span><span class="sy0">,</span> <span class="nu0">211</span><span class="sy0">,</span> <span class="nu0">115</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">566</span><span class="sy0">,</span> <span class="nu0">340</span><span class="sy0">,</span> <span class="nu0">134</span><span class="sy0">,</span> <span class="nu0">7</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">622</span><span class="sy0">,</span> <span class="nu0">275</span><span class="sy0">,</span> <span class="nu0">2</span><span class="sy0">,</span> <span class="nu0">59</span><span class="br0">&#41;</span><span class="sy0">,</span>
+        <span class="br0">&#40;</span><span class="nu0">709</span><span class="sy0">,</span> <span class="nu0">415</span><span class="sy0">,</span> <span class="nu0">3</span><span class="sy0">,</span> <span class="nu0">115</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">611</span><span class="sy0">,</span> <span class="nu0">420</span><span class="sy0">,</span> <span class="nu0">97</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">608</span><span class="sy0">,</span> <span class="nu0">421</span><span class="sy0">,</span> <span class="nu0">5</span><span class="sy0">,</span> <span class="nu0">107</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">746</span><span class="sy0">,</span> <span class="nu0">464</span><span class="sy0">,</span> <span class="nu0">51</span><span class="sy0">,</span> <span class="nu0">5</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+rects <span class="sy0">=</span> wall_to_rect<span class="br0">&#40;</span>walls<span class="br0">&#41;</span>
+teleporters <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#40;</span>wall_to_rect<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="br0">&#40;</span><span class="nu0">136</span><span class="sy0">,</span> <span class="nu0">33</span><span class="sy0">,</span> <span class="nu0">59</span><span class="sy0">,</span> <span class="nu0">47</span><span class="br0">&#41;</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="br0">&#40;</span><span class="nu0">535</span><span class="sy0">,</span><span class="nu0">24</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> win<span class="br0">&#40;</span>screen<span class="br0">&#41;</span>:
+    win_rec <span class="sy0">=</span> pygame.<span class="me1">Rect</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">637</span><span class="sy0">,</span> <span class="nu0">458</span><span class="sy0">,</span> <span class="nu0">51</span><span class="sy0">,</span> <span class="nu0">47</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">123</span><span class="sy0">,</span><span class="nu0">123</span><span class="br0">&#41;</span><span class="sy0">,</span> win_rec<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> win_rec
+&nbsp;</pre>
+
+<h1 id="toc15"><a name="For developers:"></a>For developers:</h1>
+ <h3 id="toc16"><a name="For developers:--Developer's tool:"></a>Developer's tool:</h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1"># -*- coding: utf-8 -*-</span>
+<span class="kw1">import</span> pygame
+<span class="kw1">import</span> <span class="kw3">sys</span>
+pygame.<span class="me1">init</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+screen <span class="sy0">=</span> pygame.<span class="me1">display</span>.<span class="me1">set_mode</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">800</span><span class="sy0">,</span><span class="nu0">600</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+font <span class="sy0">=</span> pygame.<span class="me1">font</span>.<span class="me1">SysFont</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span><span class="sy0">,</span> <span class="nu0">20</span><span class="br0">&#41;</span>
+lc <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+index <span class="sy0">=</span> -<span class="nu0">1</span>
+rect_result <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+Instructions <span class="sy0">=</span> <span class="br0">&#91;</span><span class="st0">'Instructions:'</span><span class="sy0">,</span> <span class="st0">'You can draw a rectangle by clicking on two distinct points'</span><span class="sy0">,</span>
+                <span class="st0">'Press the key E to undo the last drawing'</span><span class="sy0">,</span><span class="st0">'Press C to clear the screen'</span><span class="sy0">,</span>
+                <span class="st0">'Press Q to generate the rectangle coordinate lists of the rectangles that have already drawn'</span><span class="sy0">,</span> <span class="st0">''</span><span class="br0">&#93;</span>
+<span class="kw1">for</span> instru <span class="kw1">in</span> Instructions:
+    <span class="kw1">print</span><span class="br0">&#40;</span>instru<span class="br0">&#41;</span>
+<span class="kw1">while</span> <span class="nu0">1</span>:
+    <span class="kw1">for</span> event <span class="kw1">in</span> pygame.<span class="me1">event</span>.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> event.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">QUIT</span>:
+            <span class="kw1">print</span><span class="br0">&#40;</span>pygame.<span class="me1">Rect</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">172</span><span class="sy0">,</span> <span class="nu0">312</span><span class="sy0">,</span> <span class="nu0">320</span><span class="sy0">,</span> -<span class="nu0">129</span><span class="br0">&#41;</span><span class="br0">&#41;</span>.<span class="me1">colliderect</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">348</span><span class="sy0">,</span> <span class="nu0">463</span><span class="sy0">,</span> <span class="nu0">252</span><span class="sy0">,</span> -<span class="nu0">232</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            <span class="kw3">sys</span>.<span class="me1">exit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> event.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">MOUSEBUTTONDOWN</span>:
+            lc.<span class="me1">append</span><span class="br0">&#40;</span>pygame.<span class="me1">mouse</span>.<span class="me1">get_pos</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            index +<span class="sy0">=</span> <span class="nu0">1</span>
+            pygame.<span class="me1">draw</span>.<span class="me1">circle</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">,</span>lc<span class="br0">&#91;</span>index<span class="br0">&#93;</span><span class="sy0">,</span><span class="nu0">5</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+            pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> event.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">MOUSEMOTION</span>:
+            pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="br0">&#40;</span><span class="nu0">100</span><span class="sy0">,</span><span class="nu0">500</span><span class="sy0">,</span><span class="nu0">130</span><span class="sy0">,</span><span class="nu0">40</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            text_surface <span class="sy0">=</span> font.<span class="me1">render</span><span class="br0">&#40;</span><span class="st0">&quot;x:{0}, y:{1}&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>pygame.<span class="me1">mouse</span>.<span class="me1">get_pos</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span> pygame.<span class="me1">mouse</span>.<span class="me1">get_pos</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">True</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            screen.<span class="me1">blit</span><span class="br0">&#40;</span>text_surface<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">500</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            pygame.<span class="me1">display</span>.<span class="me1">update</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> event.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">KEYDOWN</span>:
+            <span class="kw1">if</span> event.<span class="me1">key</span> <span class="sy0">==</span> pygame.<span class="me1">K_q</span>:
+                rect_result <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+                <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="kw2">len</span><span class="br0">&#40;</span>lc<span class="br0">&#41;</span><span class="sy0">,</span><span class="nu0">2</span><span class="br0">&#41;</span>:
+                    width <span class="sy0">=</span> lc<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> - lc<span class="br0">&#91;</span>i+<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+                    height <span class="sy0">=</span> lc<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> - lc<span class="br0">&#91;</span>i+<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>
+                    <span class="kw1">if</span> width <span class="sy0">&gt;</span> <span class="nu0">0</span>:
+                        <span class="kw1">if</span> height <span class="sy0">&gt;</span> <span class="nu0">0</span>:
+                            rect_result.<span class="me1">append</span><span class="br0">&#40;</span><span class="br0">&#40;</span>lc<span class="br0">&#91;</span>i + <span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span> lc<span class="br0">&#91;</span>i + <span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> width<span class="sy0">,</span> height<span class="br0">&#41;</span><span class="br0">&#41;</span>
+                        <span class="kw1">else</span>:
+                            rect_result.<span class="me1">append</span><span class="br0">&#40;</span><span class="br0">&#40;</span>lc<span class="br0">&#91;</span>i + <span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span> lc<span class="br0">&#91;</span>i + <span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> + height<span class="sy0">,</span> width<span class="sy0">,</span> -height<span class="br0">&#41;</span><span class="br0">&#41;</span>
+                    <span class="kw1">if</span> width <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                        <span class="kw1">if</span> height <span class="sy0">&gt;</span> <span class="nu0">0</span>:
+                            rect_result.<span class="me1">append</span><span class="br0">&#40;</span><span class="br0">&#40;</span>lc<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span> lc<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> - height<span class="sy0">,</span> -width<span class="sy0">,</span> height<span class="br0">&#41;</span><span class="br0">&#41;</span>
+                        <span class="kw1">else</span>:
+                            rect_result.<span class="me1">append</span><span class="br0">&#40;</span><span class="br0">&#40;</span>lc<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span> lc<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> -width<span class="sy0">,</span> -height<span class="br0">&#41;</span><span class="br0">&#41;</span>
+                <span class="kw1">print</span><span class="br0">&#40;</span>rect_result<span class="br0">&#41;</span>
+            <span class="kw1">elif</span> event.<span class="me1">key</span> <span class="sy0">==</span> pygame.<span class="me1">K_e</span>:
+                <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>lc<span class="br0">&#41;</span><span class="sy0">&gt;=</span><span class="nu0">2</span>:
+                    width <span class="sy0">=</span> lc<span class="br0">&#91;</span>index-<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> - lc<span class="br0">&#91;</span>index<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+                    height <span class="sy0">=</span> lc<span class="br0">&#91;</span>index-<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> - lc<span class="br0">&#91;</span>index<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>
+                    pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span>lc<span class="br0">&#91;</span>index-<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span> lc<span class="br0">&#91;</span>index-<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> -width<span class="sy0">,</span> -height<span class="br0">&#41;</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+                    lc <span class="sy0">=</span> lc<span class="br0">&#91;</span>:<span class="kw2">len</span><span class="br0">&#40;</span>lc<span class="br0">&#41;</span>-<span class="nu0">2</span><span class="br0">&#93;</span>
+                    index -<span class="sy0">=</span> <span class="nu0">2</span>
+                    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="kw1">elif</span> event.<span class="me1">key</span> <span class="sy0">==</span> pygame.<span class="me1">K_c</span>:
+                screen.<span class="me1">fill</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+                index <span class="sy0">=</span> -<span class="nu0">1</span>
+                lc <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+                pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>lc<span class="br0">&#41;</span> % <span class="nu0">2</span> <span class="sy0">==</span> <span class="nu0">0</span> <span class="kw1">and</span> <span class="kw2">len</span><span class="br0">&#40;</span>lc<span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="nu0">0</span>:
+            width <span class="sy0">=</span> lc<span class="br0">&#91;</span>index-<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> - lc<span class="br0">&#91;</span>index<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+            height <span class="sy0">=</span> lc<span class="br0">&#91;</span>index-<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> - lc<span class="br0">&#91;</span>index<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>
+            pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span>lc<span class="br0">&#91;</span>index-<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span> lc<span class="br0">&#91;</span>index-<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> -width<span class="sy0">,</span> -height<span class="br0">&#41;</span><span class="br0">&#41;</span>
+            pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<h3 id="toc17"><a name="For developers:--Level template:"></a>Level template:</h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1"># This is a template of a maze level</span>
+<span class="co1"># For your convenience, developer's tool is available for graphically design the level</span>
+<span class="co1"># You can acquire the coordinate list directly from this tool and copy it here</span>
+&nbsp;
+&nbsp;
+<span class="kw1">import</span> pygame
+<span class="co1"># Some important constants:</span>
+<span class="co1"># init_posn = (50,570)</span>
+<span class="co1"># spawn position</span>
+<span class="co1"># time_to_observe = 3000</span>
+<span class="co1"># time in milliseconds for player to observe the walls before they disappear</span>
+<span class="co1"># name = &quot;level4&quot;</span>
+<span class="co1"># level name</span>
+&nbsp;
+&nbsp;
+<span class="co1"># let wall to be draw on the screen</span>
+<span class="kw1">def</span> walls_init<span class="br0">&#40;</span>walls<span class="sy0">,</span> screen<span class="sy0">,</span>color<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> wall <span class="kw1">in</span> walls:
+        pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> color<span class="sy0">,</span> wall<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="co1"># generate the collide box of the walls</span>
+<span class="kw1">def</span> wall_to_rect<span class="br0">&#40;</span>walls<span class="br0">&#41;</span>:
+    rects <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>walls<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        <span class="co1"># if i == -- or --:</span>
+        <span class="co1">#   continue</span>
+        <span class="co1"># if specific walls are penetrable, add indices here to remove it from the collide box</span>
+        <span class="co1"># penetrable walls will appear on the screen, but they don't have the collide box</span>
+        rects.<span class="me1">append</span><span class="br0">&#40;</span>pygame.<span class="me1">Rect</span><span class="br0">&#40;</span>walls<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> rects
+walls <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>  <span class="co1"># coordinate list of the walls and teleporters. DO NOT ADD WIN BLOCK HERE!</span>
+rects <span class="sy0">=</span> wall_to_rect<span class="br0">&#40;</span>walls<span class="br0">&#41;</span> <span class="co1"># walls collide box</span>
+teleporters <span class="sy0">=</span> <span class="kw2">None</span> <span class="co1"># if the player meets the teleporter, he will be immediately teleported to another position</span>
+<span class="co1"># teleporters = [(wall_to_rect([(136, 33, 59, 47)])[0],(535,24))]</span>
+<span class="co1"># a template of how to create a teleporter</span>
+<span class="co1"># teleporters = [(wall_to_rect([(YOUR_TELEPORTER_RECT)])[0], (Destination_POS_X, Destination_POS_Y)), ……]</span>
+<span class="co1"># remember to add your teleporters to the wall list</span>
+&nbsp;
+&nbsp;
+<span class="co1"># draw the win block and generate its collide box</span>
+<span class="kw1">def</span> win<span class="br0">&#40;</span>screen<span class="br0">&#41;</span>:
+    win_rec <span class="sy0">=</span> pygame.<span class="me1">Rect</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">637</span><span class="sy0">,</span> <span class="nu0">458</span><span class="sy0">,</span> <span class="nu0">51</span><span class="sy0">,</span> <span class="nu0">47</span><span class="br0">&#41;</span><span class="br0">&#41;</span>  <span class="co1"># set the win block here</span>
+    pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">123</span><span class="sy0">,</span><span class="nu0">123</span><span class="br0">&#41;</span><span class="sy0">,</span> win_rec<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>  <span class="co1"># set the color here (R, G, B)</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> win_rec
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

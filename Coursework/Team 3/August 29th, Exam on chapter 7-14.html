@@ -1,0 +1,211 @@
+<html>
+  <head>
+    <title>IBCS1-WD - August 29th, Exam on chapter 7-14</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>August 29th, Exam on chapter 7-14<small> #TomsProjects </small></h1><h2 id="toc0"><a name="x-Q1:"></a>Q1:</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">random</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">6</span><span class="br0">&#41;</span>:
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">51</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;That complete the draw&quot;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<h2 id="toc1"><a name="x-Q2:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Q2:</span></h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">random</span>
+number_drawn <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> initialise_number_drawn<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="kw1">global</span> number_drawn
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">50</span><span class="br0">&#41;</span>:
+        number_drawn.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">False</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    initialise_number_drawn<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    generated <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">while</span> generated <span class="sy0">&lt;</span> <span class="nu0">6</span>:
+        next_number <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">51</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> number_drawn<span class="br0">&#91;</span>next_number<span class="br0">&#93;</span> <span class="sy0">==</span> <span class="kw2">False</span>:
+            <span class="kw1">print</span><span class="br0">&#40;</span>next_number<span class="br0">&#41;</span>
+            number_drawn<span class="br0">&#91;</span>next_number<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw2">True</span>
+            generated +<span class="sy0">=</span> <span class="nu0">1</span>
+&nbsp;
+&nbsp;
+main<span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<h2 id="toc2"><a name="x-Q3:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Q3:</span></h2>
+ <h3 id="toc3"> </h3>
+ <h3 id="toc4"><a name="x-Q3:-Original version:"></a>Original version:</h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">message_string <span class="sy0">=</span> <span class="st0">&quot;ATSEVEN&quot;</span>
+<span class="kw1">import</span> <span class="kw3">string</span>
+alphabet <span class="sy0">=</span> <span class="kw3">string</span>.<span class="me1">ascii_uppercase</span>
+substitution <span class="sy0">=</span> <span class="st0">&quot;PLFNOCQUDZVGIXMWJBKEAHSYRT&quot;</span>
+encrypted <span class="sy0">=</span> <span class="st0">&quot;&quot;</span>
+<span class="kw1">for</span> counter <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="kw2">len</span><span class="br0">&#40;</span>message_string<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+    <span class="kw1">for</span> index <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">26</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> message_string<span class="br0">&#91;</span>counter<span class="br0">&#93;</span> <span class="sy0">==</span> alphabet<span class="br0">&#91;</span>index<span class="br0">&#93;</span>:
+            encrypted +<span class="sy0">=</span> substitution<span class="br0">&#91;</span>index<span class="br0">&#93;</span>
+            <span class="kw1">break</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>encrypted<span class="br0">&#41;</span></pre>
+
+<h3 id="toc5"><a name="x-Q3:-Binary search version:"></a>Binary search version:</h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">message_string <span class="sy0">=</span> <span class="st0">&quot;ATSEVEN&quot;</span>
+<span class="kw1">import</span> <span class="kw3">string</span>
+alphabet <span class="sy0">=</span> <span class="kw3">string</span>.<span class="me1">ascii_uppercase</span>
+substitution <span class="sy0">=</span> <span class="st0">&quot;PLFNOCQUDZVGIXMWJBKEAHSYRT&quot;</span>
+encrypted <span class="sy0">=</span> <span class="st0">&quot;&quot;</span>
+<span class="kw1">for</span> counter <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="kw2">len</span><span class="br0">&#40;</span>message_string<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+    let <span class="sy0">=</span> message_string<span class="br0">&#91;</span>counter<span class="br0">&#93;</span>
+    lb <span class="sy0">=</span> <span class="nu0">0</span>
+    ub <span class="sy0">=</span> <span class="nu0">25</span>
+    <span class="kw1">while</span> <span class="kw2">True</span>:
+        <span class="kw1">if</span> lb <span class="sy0">==</span> ub:
+            <span class="kw2">None</span>
+        mid_index <span class="sy0">=</span> <span class="br0">&#40;</span>lb + ub<span class="br0">&#41;</span> //<span class="nu0">2</span>
+        item_at_mid <span class="sy0">=</span> alphabet<span class="br0">&#91;</span>mid_index<span class="br0">&#93;</span>
+&nbsp;
+        <span class="kw1">if</span> item_at_mid <span class="sy0">==</span> let:
+            encrypted +<span class="sy0">=</span> substitution<span class="br0">&#91;</span>mid_index<span class="br0">&#93;</span>
+            <span class="kw1">break</span>
+        <span class="kw1">if</span> item_at_mid <span class="sy0">&lt;</span> let:
+            lb <span class="sy0">=</span> mid_index + <span class="nu0">1</span>
+        <span class="kw1">else</span>:
+            ub <span class="sy0">=</span> mid_index
+<span class="kw1">print</span><span class="br0">&#40;</span>encrypted<span class="br0">&#41;</span></pre>
+
+<h3 id="toc6"><a name="x-Q3:-Most efficient version:"></a>Most efficient version:</h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">message_string <span class="sy0">=</span> <span class="st0">&quot;ATSEVEN&quot;</span>
+<span class="kw1">import</span> <span class="kw3">string</span>
+alphabet <span class="sy0">=</span> <span class="kw3">string</span>.<span class="me1">ascii_uppercase</span>
+substitution <span class="sy0">=</span> <span class="st0">&quot;PLFNOCQUDZVGIXMWJBKEAHSYRT&quot;</span>
+encrypted <span class="sy0">=</span> <span class="st0">&quot;&quot;</span>
+<span class="kw1">for</span> letter <span class="kw1">in</span> message_string:
+    encrypted +<span class="sy0">=</span> substitution<span class="br0">&#91;</span><span class="kw2">ord</span><span class="br0">&#40;</span>letter<span class="br0">&#41;</span> - <span class="nu0">65</span><span class="br0">&#93;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>encrypted<span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,726 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Criterion C - final codes (Jan 30th)</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+Arduino:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">void setup() {
+  // initialize serial comms:
+  Serial.begin(9600);
+}
+&nbsp;
+void loop() {
+  // read AO
+  //  int val1 = analogRead(1);
+  int val2 = analogRead(1);
+  Serial.print(val2);
+  Serial.print(&quot; &quot;);
+  Serial.print(val2);
+  Serial.print(&quot;\n&quot;);
+  // wait
+  delay(50);
+&nbsp;
+}
+&nbsp;</pre>
+
+<br />
+<br />
+Python:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">&nbsp;
+<span class="kw1">import</span> serial
+<span class="kw1">from</span> <span class="kw3">collections</span> <span class="kw1">import</span> deque
+&nbsp;
+<span class="kw1">import</span> matplotlib.<span class="me1">pyplot</span> <span class="kw1">as</span> plot
+<span class="kw1">import</span> matplotlib.<span class="me1">animation</span> <span class="kw1">as</span> animation
+&nbsp;
+&nbsp;
+<span class="co1"># plot class</span>
+<span class="kw1">class</span> AnalogPlot:
+    <span class="co1"># constr</span>
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> strPort<span class="sy0">,</span> maxLen<span class="br0">&#41;</span>:
+        <span class="co1"># open serial port</span>
+        <span class="kw2">self</span>.<span class="me1">ser</span> <span class="sy0">=</span> serial.<span class="me1">Serial</span><span class="br0">&#40;</span>strPort<span class="sy0">,</span> <span class="nu0">9600</span><span class="br0">&#41;</span>
+&nbsp;
+        <span class="kw2">self</span>.<span class="me1">ax</span> <span class="sy0">=</span> deque<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">0.0</span><span class="br0">&#93;</span> * maxLen<span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">ay</span> <span class="sy0">=</span> deque<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">0.0</span><span class="br0">&#93;</span> * maxLen<span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">maxLen</span> <span class="sy0">=</span> maxLen
+&nbsp;
+    <span class="co1"># add to buffer</span>
+    <span class="kw1">def</span> addToBuf<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> buf<span class="sy0">,</span> val<span class="br0">&#41;</span>:
+        <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>buf<span class="br0">&#41;</span> <span class="sy0">&lt;</span> <span class="kw2">self</span>.<span class="me1">maxLen</span>:
+            buf.<span class="me1">append</span><span class="br0">&#40;</span>val<span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            buf.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            buf.<span class="me1">appendleft</span><span class="br0">&#40;</span>val<span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1"># add data</span>
+    <span class="kw1">def</span> add<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> data<span class="br0">&#41;</span>:
+        <span class="kw1">assert</span> <span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>data<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">2</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">addToBuf</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">ax</span><span class="sy0">,</span> data<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">addToBuf</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">ay</span><span class="sy0">,</span> data<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1"># update plot</span>
+    <span class="kw1">def</span> update<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> frameNum<span class="sy0">,</span> a0<span class="sy0">,</span> a1<span class="br0">&#41;</span>:
+        line <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">ser</span>.<span class="kw3">readline</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        data <span class="sy0">=</span> <span class="br0">&#91;</span><span class="kw2">float</span><span class="br0">&#40;</span>val<span class="br0">&#41;</span> <span class="kw1">for</span> val <span class="kw1">in</span> line.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>data<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">2</span><span class="br0">&#41;</span>:
+            <span class="kw2">self</span>.<span class="me1">add</span><span class="br0">&#40;</span>data<span class="br0">&#41;</span>
+            a0.<span class="me1">set_data</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">maxLen</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">ax</span><span class="br0">&#41;</span>
+            a1.<span class="me1">set_data</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">maxLen</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">ay</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> a0<span class="sy0">,</span>
+&nbsp;
+    <span class="kw1">def</span> close<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="co1"># close serial</span>
+        <span class="kw2">self</span>.<span class="me1">ser</span>.<span class="me1">flush</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">ser</span>.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    strPort <span class="sy0">=</span> <span class="st0">&quot;/dev/cu.usbmodem1421&quot;</span>
+&nbsp;
+    <span class="co1"># plot parameters</span>
+    analogPlot <span class="sy0">=</span> AnalogPlot<span class="br0">&#40;</span>strPort<span class="sy0">,</span> <span class="nu0">100</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1"># set up animation</span>
+    fig <span class="sy0">=</span> plot.<span class="me1">figure</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    ax <span class="sy0">=</span> plot.<span class="me1">axes</span><span class="br0">&#40;</span>xlim<span class="sy0">=</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">,</span> ylim<span class="sy0">=</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">1023</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    a0<span class="sy0">,</span> <span class="sy0">=</span> ax.<span class="me1">plot</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    a1<span class="sy0">,</span> <span class="sy0">=</span> ax.<span class="me1">plot</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    anim <span class="sy0">=</span> animation.<span class="me1">FuncAnimation</span><span class="br0">&#40;</span>fig<span class="sy0">,</span> analogPlot.<span class="me1">update</span><span class="sy0">,</span>
+                                   fargs<span class="sy0">=</span><span class="br0">&#40;</span>a0<span class="sy0">,</span> a1<span class="br0">&#41;</span><span class="sy0">,</span>
+                                   interval<span class="sy0">=</span><span class="nu0">50</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1"># show plot</span>
+    plot.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1"># clean up</span>
+    analogPlot.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="co1"># call main</span>
+<span class="kw1">if</span> __name__ <span class="sy0">==</span> <span class="st0">'__main__'</span>:
+    main<span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+<br />
+Java：<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">java.awt.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.io.IOException</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.event.ChangeListener</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.event.ActionEvent</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.event.ActionListener</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">jssc.*</span><span class="sy0">;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> testGraphics <span class="kw1">extends</span> <span class="kw3">JFrame</span> <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw3">JPanel</span> pane <span class="sy0">=</span> <span class="kw2">null</span>, p <span class="sy0">=</span> <span class="kw2">null</span>, pp <span class="sy0">=</span> <span class="kw2">null</span>, ppp <span class="sy0">=</span> <span class="kw2">null</span>, p1 <span class="sy0">=</span> <span class="kw2">null</span>, p2 <span class="sy0">=</span> <span class="kw2">null</span>, p0 <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw3">JLabel</span> l1<span class="sy0">;</span>
+    <span class="kw3">CardLayout</span> card <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw3">JButton</span> b1 <span class="sy0">=</span> <span class="kw2">null</span>, b2 <span class="sy0">=</span> <span class="kw2">null</span>, b3 <span class="sy0">=</span> <span class="kw2">null</span>, b4 <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw3">JMenuBar</span> menubar1 <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> testGraphics<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw1">throws</span> <span class="kw3">IOException</span> <span class="br0">&#123;</span>
+        <span class="kw1">super</span>.<span class="me1">setTitle</span><span class="br0">&#40;</span><span class="st0">&quot;Hormones&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JFrame</span> jf <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JFrame</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        card <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">CardLayout</span><span class="br0">&#40;</span><span class="nu0">5</span>, <span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pane <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span>card<span class="br0">&#41;</span><span class="sy0">;</span>
+        p <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pp <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        ppp <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">//      Setting up buttons</span>
+        b1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JButton</span><span class="br0">&#40;</span><span class="st0">&quot;Previous&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b1.<span class="me1">setMargin</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Insets</span><span class="br0">&#40;</span><span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b1.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="co1">// going back to teh last page</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                card.<span class="me1">previous</span><span class="br0">&#40;</span>pane<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b2 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JButton</span><span class="br0">&#40;</span><span class="st0">&quot;Next&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b2.<span class="me1">setMargin</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Insets</span><span class="br0">&#40;</span><span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b2.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="co1">// going toward the next page</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                card.<span class="me1">next</span><span class="br0">&#40;</span>pane<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b3 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JButton</span><span class="br0">&#40;</span><span class="st0">&quot;Restart&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b3.<span class="me1">setMargin</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Insets</span><span class="br0">&#40;</span><span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b3.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span> <span class="co1">// coming right back to the start</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                card.<span class="me1">show</span><span class="br0">&#40;</span>pane, <span class="st0">&quot;p0&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b4 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JButton</span><span class="br0">&#40;</span><span class="st0">&quot;Help&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b4.<span class="me1">setMargin</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Insets</span><span class="br0">&#40;</span><span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b4.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> <span class="kw3">Event</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw3">JOptionPane</span>.<span class="me1">showMessageDialog</span><span class="br0">&#40;</span><span class="kw2">null</span>,<span class="st0">&quot;Remainder: <span class="es0">\n</span>&quot;</span> <span class="sy0">+</span>
+                        <span class="st0">&quot;1. Click “previous” / “next” button to go to the pervious / next page. Click “Restart” to start this experiment over.<span class="es0">\n</span>&quot;</span> <span class="sy0">+</span>
+                        <span class="st0">&quot;2. You can also click any item in the menu to enter different pages.<span class="es0">\n</span>&quot;</span>
+                <span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw3">JLabel</span> label <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="st0">&quot;&lt;html&gt;&lt;br&gt;Melatonin:&lt;br&gt;A hormone produced by the pineal gland, used to regulate sleep and wakefulness. &quot;</span> <span class="sy0">+</span>
+                <span class="st0">&quot;It gets lower in the daytime and higher in the nighttime.&lt;br&gt;&lt;br&gt;&lt;br&gt;Leptin:&lt;br&gt;&quot;</span> <span class="sy0">+</span>
+                <span class="st0">&quot;A hormone secreted by cells in adipose tissue and acts on the hypothalamus of the brain to inhibit appetite.&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/html&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        label.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Helvetica&quot;</span>, <span class="kw3">Font</span>.<span class="me1">PLAIN</span>, <span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        label.<span class="me1">setForeground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">BLACK</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p.<span class="me1">add</span><span class="br0">&#40;</span>b1<span class="br0">&#41;</span><span class="sy0">;</span>p.<span class="me1">add</span><span class="br0">&#40;</span>b2<span class="br0">&#41;</span><span class="sy0">;</span>p.<span class="me1">add</span><span class="br0">&#40;</span>b3<span class="br0">&#41;</span><span class="sy0">;</span>p.<span class="me1">add</span><span class="br0">&#40;</span>b4<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">//      create a menubar</span>
+        <span class="kw3">JMenuBar</span> menubar1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuBar</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        rootPane.<span class="me1">setJMenuBar</span><span class="br0">&#40;</span>menubar1<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenu</span> m1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenu</span><span class="br0">&#40;</span><span class="st0">&quot;Introduction&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Introduction&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        m1.<span class="me1">add</span><span class="br0">&#40;</span>item1<span class="br0">&#41;</span><span class="sy0">;</span>
+        m1.<span class="me1">addSeparator</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenu</span> m2 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenu</span><span class="br0">&#40;</span><span class="st0">&quot;Melatonin Level&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item2 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Melatonin Level&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        m2.<span class="me1">add</span><span class="br0">&#40;</span>item2<span class="br0">&#41;</span><span class="sy0">;</span>
+        m2.<span class="me1">addSeparator</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenu</span> m3 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenu</span><span class="br0">&#40;</span><span class="st0">&quot;Leptin Level&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item3 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Leptin Level&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        m3.<span class="me1">add</span><span class="br0">&#40;</span>item3<span class="br0">&#41;</span><span class="sy0">;</span>
+        m3.<span class="me1">addSeparator</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item1.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p0&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item2.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p1&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item3.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p2&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        menubar1.<span class="me1">add</span><span class="br0">&#40;</span>item1<span class="br0">&#41;</span><span class="sy0">;</span>
+        menubar1.<span class="me1">add</span><span class="br0">&#40;</span>item2<span class="br0">&#41;</span><span class="sy0">;</span>
+        menubar1.<span class="me1">add</span><span class="br0">&#40;</span>item3<span class="br0">&#41;</span><span class="sy0">;</span>
+        ppp.<span class="me1">add</span><span class="br0">&#40;</span>menubar1<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1">//setting layout of both panels</span>
+<span class="co1">//        p00 = new JPanel();p00.setLayout(new BorderLayout());</span>
+        p0 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p0.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">BorderLayout</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p1.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">BorderLayout</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p2 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p2.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">BorderLayout</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1">//create slider, add slider and slider's action</span>
+        createSlider slider1 <span class="sy0">=</span> <span class="kw1">new</span> createSlider<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">ChangeListener</span> ac1 <span class="sy0">=</span> <span class="kw1">new</span> change<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        change.<span class="me1">sa</span> <span class="sy0">=</span> slider1.<span class="me1">s</span><span class="sy0">;</span>
+        l1 <span class="sy0">=</span> change.<span class="me1">la</span><span class="sy0">;</span>
+        slider1.<span class="me1">s</span>.<span class="me1">addChangeListener</span><span class="br0">&#40;</span>ac1<span class="br0">&#41;</span><span class="sy0">;</span>
+        pp.<span class="me1">add</span><span class="br0">&#40;</span>slider1.<span class="me1">s</span>, <span class="st0">&quot;East&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p.<span class="me1">add</span><span class="br0">&#40;</span>l1, <span class="st0">&quot;South&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1">//draw all the lines and paint component method</span>
+        SerialReader reader <span class="sy0">=</span> <span class="kw1">new</span> SerialReader<span class="br0">&#40;</span><span class="st0">&quot;/dev/cu.usbmodem1421&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        testPaint tp1 <span class="sy0">=</span> <span class="kw1">new</span> testPaint<span class="br0">&#40;</span><span class="nu0">1</span>, reader<span class="br0">&#41;</span><span class="sy0">;</span>
+        testPaint tp2 <span class="sy0">=</span> <span class="kw1">new</span> testPaint<span class="br0">&#40;</span><span class="nu0">2</span>, reader<span class="br0">&#41;</span><span class="sy0">;</span>
+        p1.<span class="me1">add</span><span class="br0">&#40;</span>tp1<span class="br0">&#41;</span><span class="sy0">;</span>
+        p2.<span class="me1">add</span><span class="br0">&#40;</span>tp2<span class="br0">&#41;</span><span class="sy0">;</span>
+        p0.<span class="me1">add</span><span class="br0">&#40;</span>label,<span class="st0">&quot;Center&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pane.<span class="me1">add</span><span class="br0">&#40;</span>p0, <span class="st0">&quot;p0&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pane.<span class="me1">add</span><span class="br0">&#40;</span>p1, <span class="st0">&quot;p1&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pane.<span class="me1">add</span><span class="br0">&#40;</span>p2, <span class="st0">&quot;p2&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">this</span>.<span class="me1">getContentPane</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">add</span><span class="br0">&#40;</span>pane<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">getContentPane</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">add</span><span class="br0">&#40;</span>p, <span class="kw3">BorderLayout</span>.<span class="me1">SOUTH</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">getContentPane</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">add</span><span class="br0">&#40;</span>pp, <span class="kw3">BorderLayout</span>.<span class="me1">EAST</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">getContentPane</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">add</span><span class="br0">&#40;</span>ppp, <span class="kw3">BorderLayout</span>.<span class="me1">NORTH</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">//    main function</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="kw1">throws</span> <span class="kw3">IOException</span> <span class="br0">&#123;</span>
+        testGraphics t1 <span class="sy0">=</span> <span class="kw1">new</span> testGraphics<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        t1.<span class="me1">pack</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        t1.<span class="me1">setSize</span><span class="br0">&#40;</span><span class="nu0">750</span>, <span class="nu0">500</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        t1.<span class="me1">setDefaultCloseOperation</span><span class="br0">&#40;</span><span class="kw3">JFrame</span>.<span class="me1">EXIT_ON_CLOSE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        t1.<span class="me1">setVisible</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">java.awt.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.Graphics</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.io.IOException</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> testPaint <span class="kw1">extends</span> <span class="kw3">JPanel</span> <span class="br0">&#123;</span>
+    <span class="kw4">int</span> value<span class="sy0">;</span>
+    <span class="kw4">int</span> a<span class="sy0">;</span>
+    <span class="kw4">int</span> num<span class="sy0">;</span>
+    <span class="kw1">private</span> SerialReader reader<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> testPaint<span class="br0">&#40;</span><span class="kw4">int</span> num, SerialReader reader<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">num</span> <span class="sy0">=</span> num<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">reader</span> <span class="sy0">=</span> reader<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> valueDeterminent<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> val <span class="sy0">=</span> change.<span class="me1">sa</span>.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>val <span class="sy0">==</span> <span class="nu0">50</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            val <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+            a <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>val <span class="sy0">&lt;=</span> <span class="nu0">50</span> <span class="sy0">&amp;&amp;</span> val <span class="sy0">&gt;=</span> <span class="nu0">20</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            val <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span>val, <span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">*</span> <span class="nu0">160</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            a <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>val <span class="sy0">&gt;</span> <span class="nu0">50</span> <span class="sy0">&amp;&amp;</span> val <span class="sy0">&lt;=</span> <span class="nu0">80</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            val <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span>val <span class="sy0">*</span> <span class="nu0">0.05</span> <span class="sy0">*</span> <span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            a <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>val <span class="sy0">&gt;</span> <span class="nu0">80</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            val <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="nu0">0.3</span> <span class="sy0">*</span> val<span class="br0">&#41;</span><span class="sy0">;</span>
+            a <span class="sy0">=</span> <span class="nu0">4</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> val<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> paintComponent<span class="br0">&#40;</span><span class="kw3">Graphics</span> g<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">super</span>.<span class="me1">paintComponent</span><span class="br0">&#40;</span>g<span class="br0">&#41;</span><span class="sy0">;</span>
+        value <span class="sy0">=</span> valueDeterminent<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        setBackground<span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        repaint<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">if</span> <span class="br0">&#40;</span>num <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+<span class="co1">//          the face is drawn on the interface</span>
+            <span class="kw4">int</span> v <span class="sy0">=</span> reader.<span class="me1">readSensor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">setColor</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">fillOval</span><span class="br0">&#40;</span><span class="nu0">60</span>, <span class="nu0">80</span>, <span class="nu0">200</span>, <span class="nu0">200</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">setColor</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">BLACK</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawOval</span><span class="br0">&#40;</span><span class="nu0">90</span>, <span class="nu0">120</span>, <span class="nu0">70</span>, <span class="nu0">70</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawOval</span><span class="br0">&#40;</span><span class="nu0">170</span>, <span class="nu0">120</span>, <span class="nu0">70</span>, <span class="nu0">70</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">165</span>, <span class="nu0">220</span>, <span class="nu0">145</span>, <span class="nu0">240</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">165</span>, <span class="nu0">220</span>, <span class="nu0">185</span>, <span class="nu0">240</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">setColor</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">BLACK</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>v<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            <span class="kw1">if</span> <span class="br0">&#40;</span>v <span class="sy0">&gt;=</span> <span class="nu0">200</span> <span class="sy0">&amp;&amp;</span> v <span class="sy0">&lt;=</span> <span class="nu0">700</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">110</span> <span class="sy0">-</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="nu0">0.5</span> <span class="sy0">*</span> <span class="br0">&#40;</span><span class="nu0">142</span> <span class="sy0">-</span> <span class="nu0">125</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>, <span class="nu0">30</span> <span class="sy0">+</span> <span class="nu0">100</span>, <span class="br0">&#40;</span><span class="nu0">42</span> <span class="sy0">+</span> <span class="nu0">100</span><span class="br0">&#41;</span>, <span class="nu0">30</span> <span class="sy0">+</span> <span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">220</span> <span class="sy0">-</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="nu0">0.5</span> <span class="sy0">*</span> <span class="br0">&#40;</span><span class="nu0">142</span> <span class="sy0">-</span> <span class="nu0">205</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>, <span class="nu0">30</span> <span class="sy0">+</span> <span class="nu0">100</span>, <span class="br0">&#40;</span><span class="nu0">42</span> <span class="sy0">+</span> <span class="nu0">100</span><span class="br0">&#41;</span>, <span class="nu0">30</span> <span class="sy0">+</span> <span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                g.<span class="me1">fillArc</span><span class="br0">&#40;</span><span class="nu0">100</span>, <span class="nu0">30</span> <span class="sy0">+</span> <span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">30</span>, <span class="nu0">0</span>, <span class="sy0">-</span><span class="nu0">180</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                g.<span class="me1">fillArc</span><span class="br0">&#40;</span><span class="nu0">180</span>, <span class="nu0">30</span> <span class="sy0">+</span> <span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">30</span>, <span class="nu0">0</span>, <span class="sy0">-</span><span class="nu0">180</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                setBackground<span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">BLUE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>v <span class="sy0">&gt;=</span> <span class="nu0">20</span> <span class="sy0">&amp;&amp;</span> v <span class="sy0">&lt;</span> <span class="nu0">200</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">110</span> <span class="sy0">-</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="nu0">0.5</span> <span class="sy0">*</span> <span class="br0">&#40;</span><span class="nu0">160</span> <span class="sy0">-</span> <span class="nu0">125</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>, <span class="nu0">50</span> <span class="sy0">+</span> <span class="nu0">100</span>, <span class="br0">&#40;</span><span class="nu0">55</span> <span class="sy0">+</span> <span class="nu0">100</span><span class="br0">&#41;</span>, <span class="nu0">50</span> <span class="sy0">+</span> <span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">220</span> <span class="sy0">-</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="nu0">0.5</span> <span class="sy0">*</span> <span class="br0">&#40;</span><span class="nu0">160</span> <span class="sy0">-</span> <span class="nu0">205</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>, <span class="nu0">50</span> <span class="sy0">+</span> <span class="nu0">100</span>, <span class="br0">&#40;</span><span class="nu0">55</span> <span class="sy0">+</span> <span class="nu0">100</span><span class="br0">&#41;</span>, <span class="nu0">50</span> <span class="sy0">+</span> <span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                g.<span class="me1">fillArc</span><span class="br0">&#40;</span><span class="nu0">100</span>, <span class="nu0">50</span> <span class="sy0">+</span> <span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">30</span>, <span class="nu0">0</span>, <span class="sy0">-</span><span class="nu0">180</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                g.<span class="me1">fillArc</span><span class="br0">&#40;</span><span class="nu0">180</span>, <span class="nu0">50</span> <span class="sy0">+</span> <span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">30</span>, <span class="nu0">0</span>, <span class="sy0">-</span><span class="nu0">180</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                setBackground<span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">CYAN</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>v<span class="sy0">&lt;</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                g.<span class="me1">drawOval</span><span class="br0">&#40;</span><span class="nu0">60</span>, <span class="nu0">80</span>, <span class="nu0">200</span>, <span class="nu0">200</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                g.<span class="me1">fillOval</span><span class="br0">&#40;</span><span class="nu0">120</span>, <span class="nu0">145</span>, <span class="nu0">30</span>, <span class="nu0">30</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                g.<span class="me1">fillOval</span><span class="br0">&#40;</span><span class="nu0">200</span>, <span class="nu0">145</span>, <span class="nu0">30</span>, <span class="nu0">30</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                setBackground<span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>v <span class="sy0">&gt;</span> <span class="nu0">700</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">165</span>, <span class="nu0">220</span>, <span class="nu0">185</span>, <span class="nu0">240</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">100</span>, <span class="nu0">180</span>, <span class="nu0">150</span>, <span class="nu0">180</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">180</span>, <span class="nu0">180</span>, <span class="nu0">230</span>, <span class="nu0">180</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                setBackground<span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">BLACK</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            repaint<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>num <span class="sy0">==</span> <span class="nu0">2</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+<span class="co1">//            value = change.sa.getValue();</span>
+            g.<span class="me1">setColor</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">BLACK</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">//      head</span>
+            g.<span class="me1">drawOval</span><span class="br0">&#40;</span><span class="nu0">80</span>, <span class="nu0">80</span>, <span class="nu0">60</span>, <span class="nu0">60</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">//      neck</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">98</span>, <span class="nu0">135</span>, <span class="nu0">98</span>, <span class="nu0">150</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">120</span>, <span class="nu0">135</span>, <span class="nu0">120</span>, <span class="nu0">150</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">//      arms</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">48</span>, <span class="nu0">150</span>, <span class="nu0">98</span>, <span class="nu0">150</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">120</span>, <span class="nu0">150</span>, <span class="nu0">170</span>, <span class="nu0">150</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">48</span>, <span class="nu0">150</span>, <span class="nu0">48</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="nu0">165</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="nu0">0.5</span> <span class="sy0">*</span> value<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">170</span>, <span class="nu0">150</span>, <span class="nu0">170</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="nu0">165</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="nu0">0.5</span> <span class="sy0">*</span> value<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">48</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="nu0">165</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="nu0">0.5</span> <span class="sy0">*</span> value<span class="br0">&#41;</span><span class="br0">&#41;</span>, <span class="br0">&#40;</span><span class="nu0">93</span> <span class="sy0">-</span> value<span class="br0">&#41;</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="nu0">165</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="nu0">0.5</span> <span class="sy0">*</span> value<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">170</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="nu0">165</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="nu0">0.5</span> <span class="sy0">*</span> value<span class="br0">&#41;</span><span class="br0">&#41;</span>, <span class="br0">&#40;</span><span class="nu0">125</span> <span class="sy0">+</span> value<span class="br0">&#41;</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="nu0">165</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="nu0">0.5</span> <span class="sy0">*</span> value<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">//      body</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">93</span> <span class="sy0">-</span> value<span class="br0">&#41;</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="nu0">165</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="nu0">0.5</span> <span class="sy0">*</span> value<span class="br0">&#41;</span><span class="br0">&#41;</span>, <span class="br0">&#40;</span><span class="nu0">93</span> <span class="sy0">-</span> value<span class="br0">&#41;</span>, <span class="nu0">225</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">125</span> <span class="sy0">+</span> value<span class="br0">&#41;</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="nu0">165</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="nu0">0.5</span> <span class="sy0">*</span> value<span class="br0">&#41;</span><span class="br0">&#41;</span>, <span class="br0">&#40;</span><span class="nu0">125</span> <span class="sy0">+</span> value<span class="br0">&#41;</span>, <span class="nu0">225</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">//      legs</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">93</span> <span class="sy0">-</span> value<span class="br0">&#41;</span>, <span class="nu0">225</span>, <span class="nu0">73</span>, <span class="nu0">285</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">125</span> <span class="sy0">+</span> value<span class="br0">&#41;</span>, <span class="nu0">225</span>, <span class="nu0">145</span>, <span class="nu0">285</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">73</span>, <span class="nu0">285</span>, <span class="br0">&#40;</span><span class="nu0">93</span> <span class="sy0">-</span> value<span class="br0">&#41;</span>, <span class="nu0">285</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="nu0">145</span>, <span class="nu0">285</span>, <span class="br0">&#40;</span><span class="nu0">125</span> <span class="sy0">+</span> value<span class="br0">&#41;</span>, <span class="nu0">285</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">93</span> <span class="sy0">-</span> value<span class="br0">&#41;</span>, <span class="nu0">285</span>, <span class="nu0">109</span>, <span class="nu0">225</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">125</span> <span class="sy0">+</span> value<span class="br0">&#41;</span>, <span class="nu0">285</span>, <span class="nu0">109</span>, <span class="nu0">225</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawRoundRect</span><span class="br0">&#40;</span><span class="nu0">50</span>, <span class="nu0">290</span>, <span class="nu0">120</span>, <span class="nu0">30</span>, <span class="nu0">20</span>, <span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">//      add image of the brain</span>
+            addImage ai1 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/src/brain.jpg&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">try</span> <span class="br0">&#123;</span>
+                g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai1.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">240</span>, <span class="nu0">130</span>, <span class="nu0">170</span>, <span class="nu0">170</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+&nbsp;
+<span class="co1">//      the reaction level in brain changes with change of leptin level</span>
+            <span class="kw3">Color</span> c <span class="sy0">=</span> <span class="kw3">Color</span>.<span class="me1">RED</span><span class="sy0">;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>a <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                c <span class="sy0">=</span> <span class="kw3">Color</span>.<span class="me1">GRAY</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>a <span class="sy0">==</span> <span class="nu0">2</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                c <span class="sy0">=</span> <span class="kw3">Color</span>.<span class="me1">LIGHT_GRAY</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>a <span class="sy0">==</span> <span class="nu0">3</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                c <span class="sy0">=</span> <span class="kw3">Color</span>.<span class="me1">darkGray</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>a <span class="sy0">==</span> <span class="nu0">4</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                c <span class="sy0">=</span> <span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            g.<span class="me1">setColor</span><span class="br0">&#40;</span>c<span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">fillOval</span><span class="br0">&#40;</span><span class="nu0">320</span>, <span class="nu0">200</span>, <span class="nu0">30</span>, <span class="nu0">30</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            g.<span class="me1">setColor</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">BLACK</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawOval</span><span class="br0">&#40;</span><span class="nu0">460</span>, <span class="nu0">40</span>, <span class="nu0">150</span>, <span class="nu0">150</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            g.<span class="me1">drawOval</span><span class="br0">&#40;</span><span class="nu0">460</span>, <span class="nu0">210</span>, <span class="nu0">150</span>, <span class="nu0">150</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            addImage ai2 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/src/burger.jpeg&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            addImage ai3 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/src/burger.jpeg&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">//            addImage ai4 = new addImage(&quot;/src/burger.jpeg&quot;);</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>a <span class="sy0">==</span> <span class="nu0">2</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai2.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">475</span>, <span class="nu0">100</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai3.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">530</span>, <span class="nu0">135</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>a <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai2.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">475</span>, <span class="nu0">100</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai3.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">530</span>, <span class="nu0">135</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>a <span class="sy0">==</span> <span class="nu0">3</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai2.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">475</span>, <span class="nu0">100</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>a <span class="sy0">==</span> <span class="nu0">4</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai2.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">475</span>, <span class="nu0">100</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai3.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">530</span>, <span class="nu0">135</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai3.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">550</span>, <span class="nu0">80</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+            addImage ai4 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/src/adipose.jpg&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            addImage ai5 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/src/adipose.jpg&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            addImage ai6 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/src/adipose.jpg&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            addImage ai7 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/src/adipose.jpg&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>a <span class="sy0">==</span> <span class="nu0">3</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai4.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">475</span>, <span class="nu0">270</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>a <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai4.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">475</span>, <span class="nu0">270</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai5.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">530</span>, <span class="nu0">305</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai6.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">550</span>, <span class="nu0">250</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>a <span class="sy0">==</span> <span class="nu0">2</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai4.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">475</span>, <span class="nu0">270</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai5.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">530</span>, <span class="nu0">305</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>a <span class="sy0">==</span> <span class="nu0">4</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai4.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">475</span>, <span class="nu0">270</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai5.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">530</span>, <span class="nu0">305</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai6.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">550</span>, <span class="nu0">250</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">drawImage</span><span class="br0">&#40;</span>ai7.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">510</span>, <span class="nu0">220</span>, <span class="nu0">45</span>, <span class="nu0">45</span>, <span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>num <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            g.<span class="me1">drawRoundRect</span><span class="br0">&#40;</span><span class="nu0">40</span>, <span class="nu0">40</span>, <span class="nu0">100</span>, <span class="nu0">100</span>, <span class="nu0">10</span>, <span class="nu0">10</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">javafx.geometry.HorizontalDirection</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">java.awt.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.Dictionary</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.Hashtable</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.event.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> createSlider <span class="kw1">extends</span> <span class="kw3">JFrame</span><span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw3">JSlider</span>  s<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> createSlider<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        s <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JSlider</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        s.<span class="me1">setMajorTickSpacing</span><span class="br0">&#40;</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        s.<span class="me1">setMinorTickSpacing</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        s.<span class="me1">setPaintTicks</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        s.<span class="me1">setPaintLabels</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        s.<span class="me1">setOrientation</span><span class="br0">&#40;</span><span class="kw3">SwingConstants</span>.<span class="me1">VERTICAL</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        s.<span class="me1">getExtent</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">javax.swing.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.event.ChangeEvent</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.event.ChangeListener</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> change <span class="kw1">extends</span> <span class="kw3">JPanel</span> <span class="kw1">implements</span> <span class="kw3">ChangeListener</span> <span class="br0">&#123;</span>
+    <span class="kw1">static</span> <span class="kw3">JSlider</span> sa <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JSlider</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">static</span> <span class="kw3">JLabel</span> la <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="st0">&quot;current level&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> stateChanged<span class="br0">&#40;</span><span class="kw3">ChangeEvent</span> event<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> value <span class="sy0">=</span> sa.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>event.<span class="me1">getSource</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> sa <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            la.<span class="me1">setText</span><span class="br0">&#40;</span><span class="st0">&quot;current level:&quot;</span> <span class="sy0">+</span> <span class="kw3">Integer</span>.<span class="me1">toString</span><span class="br0">&#40;</span>value<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">java.awt.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.io.IOException</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> addImage <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> pathway<span class="sy0">;</span>
+<span class="co1">//    private JPanel panel;</span>
+    <span class="kw1">private</span> <span class="kw3">Image</span> image,image1<span class="sy0">;</span>
+<span class="co1">//    private BufferedImage image2;</span>
+&nbsp;
+    <span class="kw1">public</span> addImage<span class="br0">&#40;</span><span class="kw3">String</span> pathway<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">pathway</span> <span class="sy0">=</span> pathway<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">Image</span> load<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw1">throws</span> <span class="kw3">IOException</span> <span class="br0">&#123;</span>
+        image <span class="sy0">=</span> <span class="kw3">Toolkit</span>.<span class="me1">getDefaultToolkit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getImage</span><span class="br0">&#40;</span>pathway<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> image<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

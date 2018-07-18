@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <title>IBCS1-WD - chapter16</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>chapter16<small> #homework </small></h1>
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">class</span> Point:
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x<span class="sy0">,</span> y<span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+    <span class="kw1">def</span> setX<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x<span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+    <span class="kw1">def</span> setY<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>y<span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+    <span class="kw1">def</span> getX<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw2">self</span>.<span class="me1">x</span>
+    <span class="kw1">def</span> getY<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw2">self</span>.<span class="me1">y</span>
+    <span class="kw1">def</span> midPoint<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> target<span class="br0">&#41;</span>:
+        t <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="nu0">0.5</span> * <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span> + target.<span class="me1">x</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu0">0.5</span> * <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span> + target.<span class="me1">x</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> t
+    <span class="kw1">def</span> reflect_x<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw3">copy</span> <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> <span class="kw3">copy</span>
+    <span class="kw1">def</span> slope<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        i <span class="sy0">=</span> <span class="kw2">round</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">y</span> / <span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> i
+    <span class="kw1">def</span> get_line_to<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> point<span class="br0">&#41;</span>:
+        slope <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">y</span> - point.<span class="me1">y</span><span class="br0">&#41;</span> / <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span> - point.<span class="me1">x</span><span class="br0">&#41;</span>
+        y_inter <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">y</span> - slope * <span class="kw2">self</span>.<span class="me1">x</span>
+        <span class="kw1">return</span> <span class="br0">&#40;</span>slope<span class="sy0">,</span> y_inter<span class="br0">&#41;</span>
+    <span class="kw1">def</span> <span class="kw4">__str__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="st0">&quot;({0},{1})&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">class</span> rectangle:
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>posn<span class="sy0">,</span>w<span class="sy0">,</span>h<span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">corner</span><span class="sy0">=</span>posn
+        <span class="kw2">self</span>.<span class="me1">width</span><span class="sy0">=</span>w
+        <span class="kw2">self</span>.<span class="me1">height</span><span class="sy0">=</span>h
+    <span class="kw1">def</span> <span class="kw4">__str__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="st0">&quot;({0},{1},{2})&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">corner</span><span class="sy0">,</span><span class="kw2">self</span>.<span class="me1">width</span><span class="sy0">,</span><span class="kw2">self</span>.<span class="me1">height</span><span class="br0">&#41;</span>
+    <span class="kw1">def</span> area<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw2">self</span>.<span class="me1">width</span>*<span class="kw2">self</span>.<span class="me1">height</span>
+    <span class="kw1">def</span> flip<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        a<span class="sy0">=</span><span class="kw2">self</span>.<span class="me1">width</span>
+        <span class="kw2">self</span>.<span class="me1">width</span><span class="sy0">=</span><span class="kw2">self</span>.<span class="me1">height</span>
+        <span class="kw2">self</span>.<span class="me1">height</span><span class="sy0">=</span>a
+    <span class="kw1">def</span> perimeter<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="nu0">2</span>*<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">width</span>+<span class="kw2">self</span>.<span class="me1">height</span><span class="br0">&#41;</span>
+     <span class="kw1">def</span> contains<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>point<span class="br0">&#41;</span>:
+        <span class="kw1">if</span> point.<span class="me1">x</span><span class="sy0">&gt;=</span><span class="kw2">self</span>.<span class="me1">corner</span>.<span class="me1">x</span> <span class="kw1">and</span> point.<span class="me1">x</span><span class="sy0">&lt;</span><span class="kw2">self</span>.<span class="me1">corner</span>.<span class="me1">x</span>+<span class="kw2">self</span>.<span class="me1">width</span>:
+            <span class="kw1">if</span> point.<span class="me1">y</span><span class="sy0">&gt;=</span><span class="kw2">self</span>.<span class="me1">corner</span>.<span class="me1">y</span> <span class="kw1">and</span> point.<span class="me1">y</span><span class="sy0">&lt;</span><span class="kw2">self</span>.<span class="me1">corner</span>.<span class="me1">y</span>+<span class="kw2">self</span>.<span class="me1">height</span>:
+                <span class="kw1">return</span> <span class="kw2">True</span>
+        <span class="kw1">return</span> <span class="kw2">False</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

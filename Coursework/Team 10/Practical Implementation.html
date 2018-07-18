@@ -1,0 +1,191 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Practical Implementation</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">public class Shape {
+    private String color=&quot;red&quot;;
+    private boolean filled=true;
+&nbsp;
+    public Shape(){
+    }
+    public Shape(String color,boolean filled){
+        this.color=color;
+        this.filled=filled;
+    }
+    public String getColor(){
+        return color;
+    }
+    public void setColor(String color){
+        this.color=color;
+    }
+    public boolean isFilled(){
+        return filled;
+    }
+    public void setFilled(boolean filled){
+        filled=true;
+    }
+    public String toString(){
+        return &quot;The color is&quot;+getColor()+&quot; ,to determine if it is filled:&quot;+isFilled();
+    }
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">public class Circle extends Shape{
+    private double radius=1.0;
+&nbsp;
+    public Circle(){
+    }
+    public Circle(double radius){
+        this.radius=radius;
+    }
+    public Circle(double radius, String color,boolean filled){
+        this.radius=radius;
+        color=getColor();
+        filled=isFilled();
+    }
+    public double getRadius(){
+        return radius;
+    }
+    public void setRadius(double radius){
+        this.radius=radius;
+    }
+    public double getArea(){
+        return 3.14*radius*radius;
+    }
+    public double getPerimeter(){
+        return 3.14*radius*2;
+    }
+    public String toString(){
+        return &quot;The area is&quot;+getArea()+&quot;The perimeter is&quot;+getPerimeter();
+    }
+&nbsp;
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">public class Rectangle extends Shape {
+    private double width;
+    private double length;
+&nbsp;
+    public Rectangle(){
+    }
+    public Rectangle(double width,double length){
+        this.width=width;
+        this.length=length;
+    }
+    public Rectangle(double width,double length,boolean filled){
+        this.width=width;
+        this.length=length;
+        filled=isFilled();
+    }
+    public double getWidth(){
+        return width;
+    }
+    public void setWidth(double width){
+        this.width=width;
+    }
+    public double getLength(){
+        return length;
+    }
+    public void setLength(double length){
+        this.length=length;
+    }
+    public double getArea(){
+        return width*length;
+    }
+    public double getPerimeter(){
+        return 2*(width+length);
+    }
+    public String toString(){
+        return &quot;The area is&quot;+getArea()+&quot; .the perimeter is&quot;+getPerimeter();
+    }
+&nbsp;
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">public class Square extends Rectangle {
+    public Square(){
+    }
+    public Square(double side){
+        super(side,side);
+    }
+    public Square(double side,String color,boolean filled){
+        super(side,side);
+        color=getColor();
+        filled=isFilled();
+    }
+    public double getSide(){
+        return super.getWidth();
+    }
+    public void setSide(double side){
+        super.setWidth(side);
+        super.setLength(side);
+    }
+    public void setWidth(double side){
+        super.setWidth(side);
+        super.setLength(side);
+    }
+    public void setLength(double side){
+        super.setWidth(side);
+        super.setLength(side);
+    }
+    public String toString(){
+        return &quot;The area is&quot;+getArea()+&quot;,the perimeter is&quot;+getPerimeter();
+    }
+}</pre>
+
+<br />
+<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-11-28%20%E4%B8%8A%E5%8D%8810.23.32.png" alt=" 2016-11-28 上午10.23.32.png" title=" 2016-11-28 上午10.23.32.png" /><img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-11-28%20%E4%B8%8B%E5%8D%8812.28.04.png" alt=" 2016-11-28 下午12.28.04.png" title=" 2016-11-28 下午12.28.04.png" /><br />
+<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-11-28%20%E4%B8%8B%E5%8D%8812.20.35.png" alt=" 2016-11-28 下午12.20.35.png" title=" 2016-11-28 下午12.20.35.png" /></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

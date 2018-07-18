@@ -1,0 +1,393 @@
+<html>
+  <head>
+    <title>IBCS1-WD - HW(8-5)chapter 12</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">&nbsp;
+<span class="kw1">import</span> <span class="kw3">calendar</span>
+cal <span class="sy0">=</span> <span class="kw3">calendar</span>.<span class="me1">TextCalendar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+cal.<span class="me1">pryear</span><span class="br0">&#40;</span><span class="nu0">2012</span><span class="br0">&#41;</span></pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">calendar</span>
+cal <span class="sy0">=</span> <span class="kw3">calendar</span>.<span class="me1">TextCalendar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+cal.<span class="me1">setfirstweekday</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+cal.<span class="me1">pryear</span><span class="br0">&#40;</span><span class="nu0">2012</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">calendar</span>
+cal <span class="sy0">=</span> <span class="kw3">calendar</span>.<span class="me1">TextCalendar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+a <span class="sy0">=</span> cal.<span class="me1">prmonth</span><span class="br0">&#40;</span><span class="nu0">2000</span><span class="sy0">,</span><span class="nu0">6</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">d <span class="sy0">=</span> <span class="kw3">calendar</span>.<span class="me1">LocaleTextCalendar</span><span class="br0">&#40;</span><span class="nu0">6</span><span class="sy0">,</span> <span class="st0">&quot;SPANISH&quot;</span><span class="br0">&#41;</span>
+d.<span class="me1">pryear</span><span class="br0">&#40;</span><span class="nu0">2012</span><span class="br0">&#41;</span></pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">d <span class="sy0">=</span> <span class="kw3">calendar</span>.<span class="me1">LocaleTextCalendar</span><span class="br0">&#40;</span><span class="nu0">6</span><span class="sy0">,</span> <span class="st0">&quot;CHINESE&quot;</span><span class="br0">&#41;</span>
+d.<span class="me1">pryear</span><span class="br0">&#40;</span><span class="nu0">2012</span><span class="br0">&#41;</span></pre>
+
+leap years<br />
+2<br />
+a 44 <br />
+b math.ceil<span style="font-family: "Lucida Grande"; font-size: 19px;">(</span><span style="font-family: "Lucida Grande"; font-size: 16px;">x</span><span style="font-family: "Lucida Grande"; font-size: 19px;">)</span><br />
+Return the ceiling of x, the smallest integer greater than or equal to x. If x is not a float, delegates to <span style="background-color: #ecf0f3; color: #000000; font-family: Courier; font-size: 15px;">x.<u>ceil</u>()</span>, which should return an integral value.<br />
+<h4 id="toc0"><a name="x---math.floor(x)¶"></a></h4>
+ <span style="color: #232323; display: block; font-family: "Lucida Grande"; font-size: 16px; text-align: justify;">math.floor(x)</span><br />
+<br />
+<h4 id="toc1"><a name="x---Return the floor of x, the largest integer less than or equal to x. If x is not a float, delegates to x.floor(), which should return an Integral value."></a></h4>
+ <span style="color: #232323; display: block; font-family: "Lucida Grande"; font-size: 16px; text-align: justify;">Return the floor of x, the largest integer less than or equal to x. If x is not a float, delegates to x.<u>floor</u>(), which should return an integral value.</span><br />
+c begin with a number then get closer to it's square root <br />
+d math.pi &amp; math.e<br />
+<br />
+3<br />
+It copies all objects<br />
+<br />
+4<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1">#mymodule1</span>
+myage <span class="sy0">=</span> <span class="nu0">16</span>
+year <span class="sy0">=</span> <span class="nu0">2016</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1">#mymodule2</span>
+myage <span class="sy0">=</span> <span class="nu0">0</span>
+year <span class="sy0">=</span> <span class="nu0">2000</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> mymodule1
+<span class="kw1">import</span> mymodule2
+<span class="kw1">print</span><span class="br0">&#40;</span> <span class="br0">&#40;</span>mymodule2.<span class="me1">myage</span> - mymodule1.<span class="me1">myage</span><span class="br0">&#41;</span> <span class="sy0">==</span>
+       <span class="br0">&#40;</span>mymodule2.<span class="me1">year</span> - mymodule1.<span class="me1">year</span><span class="br0">&#41;</span>  <span class="br0">&#41;</span>
+&nbsp;</pre>
+
+5<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1">#mymodule1</span>
+myage <span class="sy0">=</span> <span class="nu0">16</span>
+year <span class="sy0">=</span> <span class="nu0">2016</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;My name is&quot;</span><span class="sy0">,</span> __name__<span class="br0">&#41;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1">#mymodule2</span>
+myage <span class="sy0">=</span> <span class="nu0">0</span>
+year <span class="sy0">=</span> <span class="nu0">1999</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;My name is&quot;</span><span class="sy0">,</span> __name__<span class="br0">&#41;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&lt;</span>span style<span class="sy0">=</span><span class="st0">&quot;height: 142px; width: 867px;&quot;</span><span class="sy0">&gt;</span><span class="kw1">import</span> mymodule1
+<span class="kw1">import</span> mymodule2
+<span class="kw1">print</span><span class="br0">&#40;</span> <span class="br0">&#40;</span>mymodule2.<span class="me1">myage</span> - mymodule1.<span class="me1">myage</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="br0">&#40;</span>mymodule2.<span class="me1">year</span> - mymodule1.<span class="me1">year</span><span class="br0">&#41;</span>  <span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;My name is&quot;</span><span class="sy0">,</span> __name__<span class="br0">&#41;</span>
+<span class="kw1">if</span> __name__ <span class="sy0">==</span> <span class="st0">&quot;__main__&quot;</span>:     <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;This won't run if I'm  imported.&quot;</span><span class="br0">&#41;</span><span class="sy0">&lt;</span>/span<span class="sy0">&gt;</span></pre>
+
+6<br />
+The Zen of Python, by Tim Peters<br />
+Beautiful is better than ugly. <br />
+Explicit is better than implicit. Simple is better than complex. <br />
+Complex is better than complicated. <br />
+Flat is better than nested. <br />
+Sparse is better than dense. <br />
+Readability counts. <br />
+Special cases aren't special enough to break the rules. <br />
+Although practicality beats purity.<br />
+Errors should never pass silently. <br />
+Unless explicitly silenced.<br />
+In the face of ambiguity, refuse the temptation to guess. <br />
+There should be one-- and preferably only one --obvious way to do it. <br />
+Although that way may not be obvious at first unless you're Dutch. <br />
+Now is better than never. <br />
+Although never is often better than *right* now. <br />
+If the implementation is hard to explain, it's a bad idea. <br />
+If the implementation is easy to explain, it may be a good idea. <br />
+Namespaces are one honking great idea -- let's do more of those!<br />
+7<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> myreplace<span class="br0">&#40;</span>old<span class="sy0">,</span> <span class="kw3">new</span><span class="sy0">,</span> s<span class="br0">&#41;</span>:
+    a <span class="sy0">=</span> s.<span class="me1">split</span><span class="br0">&#40;</span>old<span class="br0">&#41;</span>
+    b <span class="sy0">=</span> <span class="kw3">new</span>.<span class="me1">join</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>
+    <span class="kw1">return</span> b
+&nbsp;
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

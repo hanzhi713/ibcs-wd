@@ -1,0 +1,575 @@
+<html>
+  <head>
+    <title>IBCS1-WD - June 3rd 2016 by Arthur</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>June 3rd 2016 by Arthur<small> #Log </small></h1>June 3rd, 2016 by Arthur Chen<br />
+<br />
+<h2 id="toc0"><a name="x-Learning outcomes -- Edited by Arthur Chen on June 3rd"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;"><strong><span style="color: #000000; font-family: sans-serif;">Learning outcomes -- Edited by Arthur Chen on June 3</span></strong><span style="vertical-align: super;">rd</span></span></h2>
+ <br />
+Today we first reviewed yesterday's homework section --- chapter two of the book <em>How to think like a computer scientist.</em> In this section, we learnt about the term 'variables', its categories, or class, and its properties. You can <a class="wiki_link_ext" href="http://openbookproject.net/thinkcs/python/english3e/variables_expressions_statements.html#variables" rel="nofollow">click me</a> to see that chapter.<br />
+<br />
+There are several classes that we should pay attention to:<br />
+
+
+<table class="wiki_table">
+    <tr>
+        <td style="text-align: center;"><strong>name</strong><br />
+</td>
+        <td style="text-align: center;"><strong>abbreviation</strong><br />
+</td>
+        <td style="text-align: center;"><strong>meaning</strong><br />
+</td>
+        <td style="text-align: center;"><strong>converter symble() / style</strong><br />
+</td>
+        <td style="text-align: center;"><strong>example</strong><br />
+</td>
+        <td style="text-align: center;"><strong>operation</strong><br />
+</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">integer<br />
+</td>
+        <td style="text-align: center;">int<br />
+</td>
+        <td style="text-align: center;">integers<br />
+change base<br />
+</td>
+        <td style="text-align: center;">int()<br />
+int( number , base )<br />
+</td>
+        <td style="text-align: center;">6<br />
+int(11,2)<br />
+</td>
+        <td style="text-align: center;">same as in maths<br />
+int(11,2) gives 3<br />
+</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">float<br />
+</td>
+        <td style="text-align: center;">float<br />
+</td>
+        <td style="text-align: center;">decimals<br />
+</td>
+        <td style="text-align: center;">float()<br />
+</td>
+        <td style="text-align: center;">2.333<br />
+</td>
+        <td style="text-align: center;">3.0-3.4 gives -0.39999<br />
+</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">string<br />
+</td>
+        <td style="text-align: center;">str<br />
+</td>
+        <td style="text-align: center;">a sequence of characters<br />
+</td>
+        <td style="text-align: center;">str() / ' '<br />
+</td>
+        <td style="text-align: center;">a = 'string'<br />
+</td>
+        <td style="text-align: center;">'a' + 'b' = 'ab' ≠ 'b' + 'a'<br />
+a[1] gives 't'<br />
+</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">boolean<br />
+</td>
+        <td style="text-align: center;">bool<br />
+</td>
+        <td style="text-align: center;">True or False<br />
+</td>
+        <td style="text-align: center;">bool()<br />
+</td>
+        <td style="text-align: center;">True<br />
+</td>
+        <td style="text-align: center;">True or False<br />
+</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">dictionary<br />
+</td>
+        <td style="text-align: center;">dict<br />
+</td>
+        <td style="text-align: center;">/<br />
+</td>
+        <td style="text-align: center;">{ }<br />
+</td>
+        <td style="text-align: center;">{cool:'me',fun:'CS'}<br />
+</td>
+        <td style="text-align: center;">cool gives 'me'<br />
+</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">tuple<br />
+</td>
+        <td style="text-align: center;">tuple<br />
+</td>
+        <td style="text-align: center;">/<br />
+</td>
+        <td style="text-align: center;">tuple() / ( )<br />
+</td>
+        <td style="text-align: center;">a = (1,2,3,4,5)<br />
+</td>
+        <td style="text-align: center;">a[1] gives 2<br />
+</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">list<br />
+</td>
+        <td style="text-align: center;">list<br />
+</td>
+        <td style="text-align: center;">a list of elements<br />
+</td>
+        <td style="text-align: center;">list() / [ ]<br />
+</td>
+        <td style="text-align: center;">a = [1,2,3,4,5]<br />
+</td>
+        <td style="text-align: center;">a[1] gives 2<br />
+</td>
+    </tr>
+</table>
+
+<br />
+ATTENTION:<br />
+<ol><li>Python is Case Sensitive, so <u>True</u> is very different from <u>true</u>.</li><li>Python does NOT need declaration, data type can be changed along the process.</li></ol><br />
+Then we talked about statements, which are instructions that the Python interpreter can execute. The statements are always on the right side of assignment expressions. Note that the code:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&lt;</span>span style<span class="sy0">=</span><span class="st0">&quot;font-size: 13.333333015441895px;&quot;</span><span class="sy0">&gt;</span>a <span class="sy0">=</span> <span class="nu0">10</span><span class="sy0">&lt;</span>/span<span class="sy0">&gt;</span></pre>
+
+means <em>a</em> is given the value 10, so it reads: &quot;a is assigned 10.&quot;<br />
+Also note that when we are naming a variable, we should follow several rules:<br />
+<ol><li><span style="font-size: 13px;">We should pay attention to the capital letters, as said before, Python is case sensitive.</span></li><li><span style="font-size: 13px;">We CANNOT begin the name with numbers, it will make a syntax error.</span></li><li><span style="font-size: 13px;">We should NOT begin the name with _ as they usually mean something else.</span></li><li><span style="font-size: 13px;">We should avoid using Python Keywords as follow:</span></li></ol><div style="text-align: center"><img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-06-03%20%E4%B8%8B%E5%8D%889.07.58.png" alt=" 2016-06-03 下午9.07.58.png" title=" 2016-06-03 下午9.07.58.png" /></div>
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&lt;</span>span style<span class="sy0">=</span><span class="st0">&quot;font-size: 13.333333015441895px;&quot;</span><span class="sy0">&gt;</span> <span class="sy0">&lt;</span>/span<span class="sy0">&gt;</span></pre>
+
+Then we studied how to use functions like <u><em>while, if</em></u> and <em><u>for</u></em>:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&lt;</span>span style<span class="sy0">=</span><span class="st0">&quot;font-size: 13.333333015441895px;&quot;</span><span class="sy0">&gt;</span>Class<span class="sy0">=</span><span class="nu0">6</span>
+<span class="kw1">while</span> <span class="nu0">1</span>:              <span class="co1">#also can be written as while True:</span>
+    <span class="kw1">if</span> Class <span class="sy0">&gt;=</span> <span class="nu0">10</span>:
+        <span class="kw1">break</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>Class<span class="br0">&#41;</span>
+    Class <span class="sy0">=</span> Class + <span class="nu0">2</span><span class="sy0">&lt;</span>/span<span class="sy0">&gt;</span></pre>
+
+The result is 6 , 8 .<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&lt;</span>span style<span class="sy0">=</span><span class="st0">&quot;font-size: 13.333333015441895px;&quot;</span><span class="sy0">&gt;</span> <span class="sy0">&lt;</span>/span<span class="sy0">&gt;</span></pre>
+
+The function <em><u>while</u></em> works like this :<br />
+<span style="display: block; text-align: center;">while <u><em>a condition to stop</em></u>:</span><span style="display: block; text-align: center;"><u>tab</u> <u>process</u></span><br />
+<br />
+The function <u><em>if</em></u> works like this:<br />
+<span style="display: block; text-align: center;">if <u><em>a condition to begin</em></u>:</span><span style="display: block; text-align: center;"><em><u>tab</u> <u>process</u></em></span><span style="display: block; text-align: center;">elif <u><em>a condition to begin</em></u>: #not necessary</span><span style="display: block; text-align: center;"><em><u>tab</u> <u>process</u></em></span><span style="display: block; text-align: center;">else: #not necessary</span><span style="display: block; text-align: center;"><em><u>tab</u> <u>process</u></em></span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&lt;</span>span style<span class="sy0">=</span><span class="st0">&quot;font-size: 13.333333015441895px;&quot;</span><span class="sy0">&gt;</span> <span class="sy0">&lt;</span>/span<span class="sy0">&gt;</span></pre>
+
+The function <em><u>for</u></em> works like this:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&lt;</span>span style<span class="sy0">=</span><span class="st0">&quot;font-size: 13.333333015441895px;&quot;</span><span class="sy0">&gt;</span> <span class="sy0">&lt;</span>/span<span class="sy0">&gt;</span></pre>
+
+<span style="display: block; text-align: center;">for <u><em>a variable</em></u> in <u><em>a range</em></u>:</span><span style="display: block; text-align: center;"><em><u>tab</u> <u>process(including changing the variable)</u></em></span><br />
+<br />
+ATTENTION:<br />
+<br />
+<ol><li>The indentations (<span style="display: block; text-align: center;"><u>tab, or four spaces</u></span>) in these codes are very important!</li><li>Don't forget the colons, or there will be syntax error!</li></ol><br />
+The function <em><u>import</u></em> is often used at the beginning of the code, it provides packages of functions that can be used later on. For example:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&lt;</span>span style<span class="sy0">=</span><span class="st0">&quot;font-size: 13.333333015441895px;&quot;</span><span class="sy0">&gt;</span> <span class="sy0">&lt;</span>/span<span class="sy0">&gt;</span></pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&lt;</span>span style<span class="sy0">=</span><span class="st0">&quot;font-size: 13.333333015441895px;&quot;</span><span class="sy0">&gt;&gt;&gt;&gt;</span> <span class="kw1">import</span> <span class="kw3">math</span>
+<span class="sy0">&gt;&gt;&gt;</span> <span class="kw3">math</span>.<span class="me1">pi</span>
+<span class="nu0">3.141592653589793</span>
+<span class="sy0">&gt;&gt;&gt;</span> <span class="kw3">math</span>.<span class="me1">cos</span><span class="br0">&#40;</span><span class="kw3">math</span>.<span class="me1">pi</span><span class="br0">&#41;</span>
+-<span class="nu0">1.0</span><span class="sy0">&lt;</span>/span<span class="sy0">&gt;</span></pre>
+
+Here, math.pi is a setted variable carrying the value 3.141592653589793, so we can simply use it in our code.<br />
+<br />
+By the way, we were introduced to a useful function: len(). It can calculate the length of a string. For example:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&lt;</span>span style<span class="sy0">=</span><span class="st0">&quot;font-size: 13.333333015441895px;&quot;</span><span class="sy0">&gt;</span> <span class="sy0">&lt;</span>/span<span class="sy0">&gt;</span></pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&lt;</span>span style<span class="sy0">=</span><span class="st0">&quot;font-size: 13.333333015441895px;&quot;</span><span class="sy0">&gt;&gt;&gt;&gt;</span> a<span class="sy0">=</span><span class="st0">'qwerty'</span>
+<span class="sy0">&gt;&gt;&gt;</span> <span class="kw2">len</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>
+<span class="nu0">6</span><span class="sy0">&lt;</span>/span<span class="sy0">&gt;</span></pre>
+
+<br />
+After this, we were trying to use more operators other than +, -, *, /, and **. These are  and %.<em> a </em> b <em>means to count how many</em> b<em>s are in</em> a<em>. For example 11</em> // 3 gives 3. % means to calculate the remainder after the division, for example 11%3 gives 2. These to operators are useful for converting millions of seconds into hous, minutes and remaining seconds.<br />
+<br />
+<br />
+At the last of chapter 2, we learnt to let our programs receive inputs by using the function <u>input().</u> We should always keep in mind that what we type in is always treated as a string. So if we want to use it as an integer, we should first change its datatype by applying the converter int(). This can be done in the same line as input. Also, we can enter some instructions in the parentheses after input to tell the typer what kind of data we want him to give. Here's an example:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&lt;</span>span style<span class="sy0">=</span><span class="st0">&quot;font-size: 13.333333015441895px;&quot;</span><span class="sy0">&gt;</span> <span class="sy0">&lt;</span>/span<span class="sy0">&gt;</span></pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&lt;</span>span style<span class="sy0">=</span><span class="st0">&quot;font-size: 13.333333015441895px;&quot;</span><span class="sy0">&gt;&gt;&gt;&gt;</span> a <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">'Please enter an integer  '</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="st0">'Please enter an integer'</span>  <span class="nu0">3</span>
+<span class="sy0">&gt;&gt;&gt;</span> a
+<span class="nu0">3</span>
+<span class="sy0">&gt;&gt;&gt;</span> <span class="kw2">type</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>
+<span class="sy0">&lt;</span><span class="kw1">class</span> <span class="st0">'int'</span><span class="sy0">&gt;&lt;</span>/span<span class="sy0">&gt;</span></pre>
+
+Combining what we'd learnt, we can then solve the time conversion problem:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&lt;</span>span style<span class="sy0">=</span><span class="st0">&quot;font-size: 13.333333015441895px;&quot;</span><span class="sy0">&gt;</span>t<span class="sy0">=</span><span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">'seconds=  '</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>t//<span class="br0">&#40;</span><span class="nu0">3600</span>*<span class="nu0">24</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="st0">' days'</span><span class="sy0">,</span><span class="br0">&#40;</span>t%<span class="br0">&#40;</span><span class="nu0">3600</span>*<span class="nu0">24</span><span class="br0">&#41;</span><span class="br0">&#41;</span>//<span class="nu0">3600</span><span class="sy0">,</span><span class="st0">' hours '</span><span class="sy0">,</span><span class="br0">&#40;</span>t%<span class="nu0">3600</span><span class="br0">&#41;</span>//<span class="nu0">60</span><span class="sy0">,</span><span class="st0">'minutes and '</span><span class="sy0">,</span>t%<span class="nu0">60</span><span class="sy0">,</span><span class="st0">'seconds'</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="sy0">&lt;</span>/span<span class="sy0">&gt;</span></pre>
+
+At the end of the class, we began chapter 3, turtles. The 'turtle' is a package that is needed to be imported as mentioned before. There are so many fancy features in this package and thus we can create fantastic drawings.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&lt;</span>span style<span class="sy0">=</span><span class="st0">&quot;font-size: 13.333333015441895px;&quot;</span><span class="sy0">&gt;</span> <span class="sy0">&lt;</span>/span<span class="sy0">&gt;</span></pre>
+
+The basic code is:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&lt;</span>span style<span class="sy0">=</span><span class="st0">&quot;font-size: 13.333333015441895px;&quot;</span><span class="sy0">&gt;</span><span class="kw1">import</span> <span class="kw3">turtle</span>
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+alex <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+alex.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">100</span><span class="br0">&#41;</span>
+alex.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span><span class="sy0">&lt;</span>/span<span class="sy0">&gt;</span></pre>
+
+We can explore more when we are doing our homework! Resource link<br />
+<a class="wiki_link_ext" href="https://docs.python.org/3/library/turtle.html#compound-shapes" rel="nofollow">https://docs.python.org/3/library/turtle.html#compound-shapes</a><br />
+<br />
+Have fun!</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

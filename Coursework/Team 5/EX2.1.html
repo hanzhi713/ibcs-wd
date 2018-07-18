@@ -1,0 +1,300 @@
+<html>
+  <head>
+    <title>IBCS1-WD - EX2.1</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+1.Author and book<br />
+Author<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">com.company</span><span class="sy0">;</span>
+&nbsp;
+<span class="co3">/**
+ * Created by Matt An on 2016/11/27.
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> Author <span class="br0">&#123;</span> <span class="co1">// The private instance variables</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> name<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> email<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">char</span> gender<span class="sy0">;</span>   <span class="co1">// 'm' or 'f'</span>
+&nbsp;
+    <span class="co1">// The constructor</span>
+    <span class="kw1">public</span> Author<span class="br0">&#40;</span><span class="kw3">String</span> name, <span class="kw3">String</span> email, <span class="kw4">char</span> gender<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">name</span> <span class="sy0">=</span> name<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">email</span> <span class="sy0">=</span> email<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">gender</span> <span class="sy0">=</span> gender<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co1">// The public getters and setters for the private instance variables.</span>
+    <span class="co1">// No setter for name and gender as they are not designed to be changed.</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getName<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> name<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">char</span> getGender<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> gender<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getEmail<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> email<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setEmail<span class="br0">&#40;</span><span class="kw3">String</span> email<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">email</span> <span class="sy0">=</span> email<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co1">// The toString() describes itself</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> name <span class="sy0">+</span> <span class="st0">&quot; (&quot;</span> <span class="sy0">+</span> gender <span class="sy0">+</span> <span class="st0">&quot;) at &quot;</span> <span class="sy0">+</span> email<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+Book<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">com.company</span><span class="sy0">;</span>
+&nbsp;
+<span class="co3">/**
+ * Created by Matt An on 2016/11/27.
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> <span class="kw3">Book</span> <span class="br0">&#123;</span><span class="co1">// The private instance variables</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> name<span class="sy0">;</span>
+    <span class="kw1">private</span> Author author<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">double</span> price<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> qty<span class="sy0">;</span>
+&nbsp;
+    <span class="co1">// Constructor</span>
+    <span class="kw1">public</span> <span class="kw3">Book</span><span class="br0">&#40;</span><span class="kw3">String</span> name, Author author, <span class="kw4">double</span> price, <span class="kw4">int</span> qty<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">name</span> <span class="sy0">=</span> name<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">author</span> <span class="sy0">=</span> author<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">price</span> <span class="sy0">=</span> price<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">qty</span> <span class="sy0">=</span> qty<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co1">// Getters and Setters</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getName<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> name<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> Author getAuthor<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> author<span class="sy0">;</span>  <span class="co1">// return member author, which is an instance of the class Author</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> getPrice<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> price<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setPrice<span class="br0">&#40;</span><span class="kw4">double</span> price<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">price</span> <span class="sy0">=</span> price<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> getQty<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> qty<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setQty<span class="br0">&#40;</span><span class="kw4">int</span> qty<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">qty</span> <span class="sy0">=</span> qty<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co1">// The toString() describes itself</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="st0">&quot;'&quot;</span> <span class="sy0">+</span> name <span class="sy0">+</span> <span class="st0">&quot;' by &quot;</span> <span class="sy0">+</span> author<span class="sy0">;</span>  <span class="co1">// author.toString()</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+TestDriver-Main<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">com.company</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Main <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// write your code here</span>
+        Author A <span class="sy0">=</span><span class="kw1">new</span> Author<span class="br0">&#40;</span><span class="st0">&quot;Matt&quot;</span>,<span class="st0">&quot;annanzhuanyong@163.com&quot;</span>,<span class="st0">'M'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>A.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>A.<span class="me1">getEmail</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>A.<span class="me1">getGender</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        A.<span class="me1">setEmail</span><span class="br0">&#40;</span><span class="st0">&quot;annanbug@163.com&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>A.<span class="me1">getEmail</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        Author Matt <span class="sy0">=</span> <span class="kw1">new</span> Author<span class="br0">&#40;</span><span class="st0">&quot;Matt&quot;</span>, <span class="st0">&quot;annanzhuanyong@163.com&quot;</span>, <span class="st0">'m'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>Matt<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">Book</span> MattBook <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Book</span><span class="br0">&#40;</span><span class="st0">&quot;10000 dry joke&quot;</span>, Matt, <span class="nu0">9.99</span>, <span class="nu0">99</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>Matt<span class="br0">&#41;</span><span class="sy0">;</span>
+        MattBook.<span class="me1">setPrice</span><span class="br0">&#40;</span><span class="nu0">8.88</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        MattBook.<span class="me1">setQty</span><span class="br0">&#40;</span><span class="nu0">88</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>MattBook<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;name is: &quot;</span> <span class="sy0">+</span> MattBook.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;price is: &quot;</span> <span class="sy0">+</span> MattBook.<span class="me1">getPrice</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;qty is: &quot;</span> <span class="sy0">+</span> MattBook.<span class="me1">getQty</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;author is: &quot;</span> <span class="sy0">+</span> MattBook.<span class="me1">getAuthor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;author's name is: &quot;</span> <span class="sy0">+</span> MattBook.<span class="me1">getAuthor</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;author's email is: &quot;</span> <span class="sy0">+</span> MattBook.<span class="me1">getAuthor</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getEmail</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;author's gender is: &quot;</span> <span class="sy0">+</span> MattBook.<span class="me1">getAuthor</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getGender</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+<br />
+2.MyPoint<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">com.company</span><span class="sy0">;</span>
+&nbsp;
+<span class="co3">/**
+ * Created by Matt An on 2016/11/27.
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> MyPoint <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> x<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> y<span class="sy0">;</span>
+    <span class="kw1">public</span> MyPoint<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        x<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+        y<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> MyPoint<span class="br0">&#40;</span><span class="kw4">int</span> x, <span class="kw4">int</span> y<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        x<span class="sy0">=</span>x<span class="sy0">;</span>
+        y<span class="sy0">=</span>y<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> getX<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> x<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> getY<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> y<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setX<span class="br0">&#40;</span><span class="kw4">int</span> input<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">x</span><span class="sy0">=</span> input<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setY<span class="br0">&#40;</span><span class="kw4">int</span> input<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">y</span><span class="sy0">=</span>input<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> getXY<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> a<span class="sy0">=</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span>x,y<span class="br0">&#125;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> a<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setXY<span class="br0">&#40;</span><span class="kw4">int</span> a,<span class="kw4">int</span> b<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">x</span><span class="sy0">=</span>a<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">y</span><span class="sy0">=</span>b<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="st0">&quot;the point is&quot;</span><span class="sy0">+</span>x<span class="sy0">+</span>y<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> distance<span class="br0">&#40;</span><span class="kw4">int</span> x,<span class="kw4">int</span> y<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">double</span> xdiff<span class="sy0">=</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span>x<span class="sy0">-</span><span class="kw1">this</span>.<span class="me1">x</span>,<span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">double</span> ydiff<span class="sy0">=</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span>y<span class="sy0">-</span><span class="kw1">this</span>.<span class="me1">y</span>,<span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">double</span> result<span class="sy0">=</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span>xdiff<span class="sy0">+</span>ydiff,<span class="nu0">0.5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> result<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> distance<span class="br0">&#40;</span>MyPoint Matt<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">double</span> xdiff<span class="sy0">=</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span><span class="kw1">this</span>.<span class="me1">x</span><span class="sy0">-</span>Matt.<span class="me1">x</span>,<span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">double</span> ydiff<span class="sy0">=</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span><span class="kw1">this</span>.<span class="me1">y</span><span class="sy0">-</span>Matt.<span class="me1">y</span>,<span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">double</span> result<span class="sy0">=</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span>xdiff<span class="sy0">+</span>ydiff,<span class="nu0">0.5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> result<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> distance<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">double</span> xdiff<span class="sy0">=</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span><span class="kw1">this</span>.<span class="me1">x</span>,<span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">double</span> ydiff<span class="sy0">=</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span><span class="kw1">this</span>.<span class="me1">y</span>,<span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">double</span> result<span class="sy0">=</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span>xdiff<span class="sy0">+</span>ydiff,<span class="nu0">0.5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> result<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,138 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Inheritance Nov.18th.2016</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">public class Student {
+    public final static int NUM_TESTS = 3;
+    private String name;
+    private int[] tests;
+    private String grade;
+&nbsp;
+    public Student(){
+        name=&quot;&quot;;
+        tests=new int[NUM_TESTS];
+        grade=&quot;&quot;;
+    }
+    public Student(String studName,int[]studTests,String studGrade){
+        name=studName;
+        tests=studTests;
+        grade=studGrade;
+    }
+    public String getName(){
+        return name;
+    }
+    public String getGrade(){
+        return grade;
+    }
+    public void setGrade(String newGrade){
+        grade=newGrade;
+    }
+    public void computeGrade(){
+        if (name.equals(&quot;&quot;)){
+            grade=&quot;No grade&quot;;
+        }
+        else if (getTestAverage()&gt;=65){
+            grade=&quot;Pass&quot;;
+        }
+        else{
+            grade=&quot;fail&quot;;
+        }
+    }
+    public double getTestAverage(){
+        double total=0;
+        for(int score:tests){
+            total+=score;
+        }
+        return total/NUM_TESTS;
+    }
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">&nbsp;
+public class UnderGrad extends Student{
+&nbsp;
+    public UnderGrad()
+    {super();}
+&nbsp;
+    public UnderGrad(String studName,int[] studTests,String studGrade){
+        super(studName,studTests,studGrade);}
+&nbsp;
+    public void computeGrade(){
+             if (getTestAverage()&gt;=70)
+                 setGrade(&quot;Pass&quot;);
+             else{
+                 setGrade(&quot;Fail&quot;);
+             }
+         }
+    }
+&nbsp;
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">&nbsp;
+public class GradStudent extends Student {
+    private int gradID;
+    public GradStudent(){
+        super();
+        gradID=0;
+    }
+    public GradStudent(String studName,int[] studTests,String studGrade, int gradStudID){
+        super(studName,studTests,studGrade);
+        gradID=gradStudID;
+    }
+&nbsp;
+    public int getID(){
+        return gradID;
+    }
+&nbsp;
+    public void computeGrad(){
+        super.computeGrade();
+        if (getTestAverage()&gt;=90){
+            setGrade(&quot;Pass with distinctoin&quot;);
+        }
+    }
+}
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <title>IBCS1-WD - chap 12</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>chap 12<small> #coursework </small></h1><h1 id="toc0"><a name="Chapter 12:"></a>Chapter 12:</h1>
+ <br />
+1:b:change the parameter &quot;firstweekday&quot; in setfirstweekday into &quot;Thursday&quot;<br />
+d:bugs all over<br />
+e:it expects a year, it returns a bool value<br />
+<br />
+2:a:44<br />
+b: math.ceil returns the smallest integer value after x<br />
+math.floor returns the biggest integer value before x<br />
+c:<br />
+d:e = 2.718281828459045<br />
+pi = 3.141592653589793<br />
+<br />
+3: A deep copy constructs a new compound object and then, recursively, inserts *copies* into it of the objects found in the original. <br />
+<br />
+4:<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-21%20%E4%B8%8B%E5%8D%882.27.48.png" alt=" 2016-08-21 下午2.27.48.png" title=" 2016-08-21 下午2.27.48.png" style="height: 128px; width: 411px;" /><br />
+<br />
+5:<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-21%20%E4%B8%8B%E5%8D%882.36.10.png" alt=" 2016-08-21 下午2.36.10.png" title=" 2016-08-21 下午2.36.10.png" /><br />
+result as shown, because modules are only imported and the namespace.py is actually running<br />
+mymodule1.py has changed result<br />
+<br />
+6:Namespaces are one honking great idea -- let's do more of those!<br />
+<br />
+7:<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-08-21%20%E4%B8%8B%E5%8D%882.46.10.png" alt=" 2016-08-21 下午2.46.10.png" title=" 2016-08-21 下午2.46.10.png" style="height: 8px; width: 9px;" /><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> myreplace<span class="br0">&#40;</span>old<span class="sy0">,</span> <span class="kw3">new</span><span class="sy0">,</span> s<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Replace all occurrences of old with new in s. &quot;&quot;&quot;</span>
+    s.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="kw3">new</span>.<span class="me1">join</span><span class="br0">&#40;</span>s.<span class="me1">split</span><span class="br0">&#40;</span>old<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+s <span class="sy0">=</span> <span class="st0">&quot;awd aowidhaefna awodij&quot;</span>
+myreplace<span class="br0">&#40;</span><span class="st0">&quot;a&quot;</span><span class="sy0">,</span> <span class="st0">&quot;z&quot;</span><span class="sy0">,</span> s<span class="br0">&#41;</span>
+&nbsp;</pre>
+
+8:<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">def myreplace(old, new, s):
+    &quot;&quot;&quot; Replace all occurrences of old with new in s. &quot;&quot;&quot;
+    s.split()
+    s = new.join(s.split(old))
+    print(s)
+&nbsp;
+&nbsp;
+&nbsp;
+def cleanword(s):
+    a = [&quot;?&quot;,&quot;!&quot;,&quot;.&quot;,&quot;,&quot;,&quot;;&quot;,&quot;:&quot;,&quot;-&quot;,&quot;(&quot;,&quot;)&quot;,&quot;@&quot;,&quot;#&quot;,&quot;$&quot;,&quot;%&quot;,&quot;'&quot;]
+    for i in a:
+        for k in s:
+            if k == i:
+                myreplace(k, '', s)
+    print(s)
+&nbsp;
+&nbsp;
+cleanword(&quot;aw:da?&quot;)
+&nbsp;
+def has_dash(s):
+   '-' in s
+print(has_dash('w-d'))
+print(not has_dash('addda'))
+&nbsp;
+&nbsp;
+def extract_words(s):
+    cleanword(s)
+    s.spilt()
+&nbsp;
+extract_words(&quot;aw dan, wf?&quot;)</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,196 @@
+<html>
+  <head>
+    <title>IBCS1-WD - chap13</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<h1 id="toc0"><a name="Chap 13:"></a>Chap 13:</h1>
+ random access memory (RAM): fast inexpensive <strong>volatile</strong><br />
+hard-drive: <strong>non-volatile (data stored as files</strong><strong>)</strong><br />
+<strong>ex:</strong> <strong><span style="color: #000000; font-family: 'Lucida Grande','Lucida Sans Unicode',Geneva,Verdana,sans-serif; font-size: 14px;">hard drive, usb drive, or CD-RW</span></strong><br />
+<br />
+file handle: opening a file<br />
+<br />
+<span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">myfile </span><span style="color: #666666; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">=</span><span style="color: #007020; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">open</span><span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">(</span><span style="color: #4070a0; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">&quot;test.txt&quot;</span><span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">, </span><span style="color: #4070a0; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">&quot;w&quot;</span><span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">)</span><br />
+<span style="font-family: Consolas;">name of the file &amp; mode</span><br />
+<span style="font-family: Consolas;">“w”: </span><br />
+<span style="font-family: Consolas;"><span style="color: #000000; font-family: 'Lucida Grande','Lucida Sans Unicode',Geneva,Verdana,sans-serif; font-size: 14px;">if there is no file named </span><tt><span style="background-color: #f2f2f2; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">test.txt</span></tt><span style="color: #000000; font-family: 'Lucida Grande','Lucida Sans Unicode',Geneva,Verdana,sans-serif; font-size: 14px;"> on the disk, it will be created. If there already is one, it will be replaced by the file we are writing</span></span><br />
+<span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 24px;">Reading file:</span><br />
+<span style="font-family: Consolas;">a line at a time</span><br />
+<span style="font-family: Consolas;">list of lines</span><br />
+<span style="font-family: Consolas;">(sort()method arrange in alphabetical order)</span><br />
+<span style="font-family: Consolas;">Reading the whole file at once</span><br />
+<span style="font-family: Consolas;">binary files</span><br />
+<br />
+Filtering files:<br />
+<span style="color: #007020; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">if </span><span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">text[</span><span style="color: #208050; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">0</span><span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">] </span><span style="color: #666666; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">==</span><span style="color: #4070a0; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">&quot;#&quot;</span><span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">: </span><br />
+<span style="color: #007020; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;"> continue</span><br />
+executing next line without exiting the loop<br />
+<br />
+Loading files on the web:<br />
+<span style="color: #007020; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">import</span><span style="color: #0e84b5; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">urllib.request</span><span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">url </span><span style="color: #666666; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">=</span><span style="color: #4070a0; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">&quot;</span><span style="color: #4070a0; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;"><a class="wiki_link_ext" href="http://xml.resource.org/public/rfc/txt/rfc793.txt" rel="nofollow">http://xml.resource.org/public/rfc/txt/rfc793.txt</a></span><span style="color: #4070a0; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">&quot;</span><span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">destination_filename </span><span style="color: #666666; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">=</span><span style="color: #4070a0; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">&quot;rfc793.txt&quot;</span><span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">urllib</span><span style="color: #666666; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">.</span><span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">request</span><span style="color: #666666; font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">.</span><span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace; font-size: 0.95em;">urlretrieve(url,destination_filename)</span><br />
+<br />
+<span style="font-family: Consolas,Deja Vu Sans Mono,Bitstream Vera Sans Mono,monospace;">conditions:</span><br />
+<span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace;">1: resource exists</span><br />
+<span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace;">2: permission to write to the destination filename present</span><br />
+<span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace;">3:proxy server solved</span><br />
+<br />
+<h2 id="toc1"><a name="Chap 13:-Exercise:"></a><strong><span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace;">Exercise:</span></strong></h2>
+ <strong><span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace;">1:</span></strong><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> reverse<span class="br0">&#40;</span>a<span class="sy0">,</span>b<span class="br0">&#41;</span>:
+    <span class="kw3">fileinput</span> <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span>a<span class="sy0">,</span><span class="st0">'r'</span><span class="br0">&#41;</span>
+    fileoutput <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span>b<span class="sy0">,</span><span class="st0">'w'</span><span class="br0">&#41;</span>
+    line <span class="sy0">=</span> <span class="kw3">fileinput</span>.<span class="me1">readlines</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    line.<span class="me1">reverse</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> line:
+        fileoutput.<span class="me1">write</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+    <span class="kw3">fileinput</span>.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    fileoutput.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+reverse<span class="br0">&#40;</span><span class="st0">&quot;test.txt&quot;</span><span class="sy0">,</span><span class="st0">&quot;b.txt&quot;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<strong><span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace;">2:</span></strong><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> clearsnake<span class="br0">&#40;</span>a<span class="br0">&#41;</span>:
+    <span class="kw3">fileinput</span> <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span>a<span class="sy0">,</span><span class="st0">'r'</span><span class="br0">&#41;</span>
+    line <span class="sy0">=</span> <span class="kw3">fileinput</span>.<span class="me1">readlines</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> line:
+        <span class="kw1">if</span> <span class="st0">&quot;snake&quot;</span> <span class="kw1">in</span> i:
+            <span class="kw1">continue</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">print</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+    <span class="kw3">fileinput</span>.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+clearsnake<span class="br0">&#40;</span><span class="st0">&quot;test.txt&quot;</span><span class="br0">&#41;</span></pre>
+
+<strong><span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace;">3:</span></strong><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> sequenceline<span class="br0">&#40;</span>a<span class="sy0">,</span>b<span class="br0">&#41;</span>:
+    handle1 <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span>a<span class="sy0">,</span><span class="st0">'r'</span><span class="br0">&#41;</span>
+    handle2 <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span>b<span class="sy0">,</span><span class="st0">'w'</span><span class="br0">&#41;</span>
+    line <span class="sy0">=</span> handle1.<span class="me1">readlines</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    k <span class="sy0">=</span> <span class="st0">&quot;1&quot;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> line:
+        l <span class="sy0">=</span> k.<span class="me1">zfill</span><span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span> + <span class="st0">&quot; &quot;</span> + i
+        handle2.<span class="me1">write</span><span class="br0">&#40;</span>l<span class="br0">&#41;</span>
+        k <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span>k<span class="br0">&#41;</span>
+        k <span class="sy0">=</span> k + <span class="nu0">1</span>
+        k <span class="sy0">=</span> <span class="kw2">str</span><span class="br0">&#40;</span>k<span class="br0">&#41;</span>
+&nbsp;
+    handle1.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    handle2.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+sequenceline<span class="br0">&#40;</span><span class="st0">&quot;test.txt&quot;</span><span class="sy0">,</span><span class="st0">&quot;b.txt&quot;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<strong><span style="font-family: Consolas,'Deja Vu Sans Mono','Bitstream Vera Sans Mono',monospace;">4:</span></strong><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> undosequence<span class="br0">&#40;</span>a<span class="sy0">,</span>b<span class="br0">&#41;</span>:
+    handle1 <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span>a<span class="sy0">,</span><span class="st0">'r'</span><span class="br0">&#41;</span>
+    handle2 <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span>b<span class="sy0">,</span><span class="st0">'w'</span><span class="br0">&#41;</span>
+    line <span class="sy0">=</span> handle1.<span class="me1">readlines</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> line:
+        handle2.<span class="me1">write</span><span class="br0">&#40;</span>i<span class="br0">&#91;</span><span class="nu0">5</span>:<span class="br0">&#93;</span><span class="br0">&#41;</span>
+    handle1.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    handle2.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+undosequence<span class="br0">&#40;</span><span class="st0">&quot;test.txt&quot;</span><span class="sy0">,</span><span class="st0">&quot;b.txt&quot;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

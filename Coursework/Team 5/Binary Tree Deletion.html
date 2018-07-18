@@ -1,0 +1,301 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Binary Tree Deletion</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+1. Treenode class, basic elements of Tree class<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">tree</span><span class="sy0">;</span>
+&nbsp;
+<span class="co3">/**
+ * Created by Matt An on 2017/5/15.
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> <span class="kw3">TreeNode</span> <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">TreeNode</span> lefTreeNode<span class="sy0">;</span>
+    <span class="co1">// 右节点</span>
+    <span class="kw1">private</span> <span class="kw3">TreeNode</span> rightTreeNode<span class="sy0">;</span>
+    <span class="co1">// 数据</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> value<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">TreeNode</span> getLefTreeNode<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> lefTreeNode<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> setLefTreeNode<span class="br0">&#40;</span><span class="kw3">TreeNode</span> lefTreeNode<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">lefTreeNode</span> <span class="sy0">=</span> lefTreeNode<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">TreeNode</span> getRightTreeNode<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> rightTreeNode<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> setRightTreeNode<span class="br0">&#40;</span><span class="kw3">TreeNode</span> rightTreeNode<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">rightTreeNode</span> <span class="sy0">=</span> rightTreeNode<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getValue<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> value<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> setValue<span class="br0">&#40;</span><span class="kw4">int</span> value<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">value</span> <span class="sy0">=</span> value<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">TreeNode</span><span class="br0">&#40;</span><span class="kw4">int</span> value<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span><span class="br0">&#40;</span><span class="kw2">null</span>, <span class="kw2">null</span>, value<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">TreeNode</span><span class="br0">&#40;</span><span class="kw3">TreeNode</span> lefTreeNode, <span class="kw3">TreeNode</span> rightNode, <span class="kw4">int</span> value<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">lefTreeNode</span> <span class="sy0">=</span> lefTreeNode<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">rightTreeNode</span> <span class="sy0">=</span> rightNode<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">value</span> <span class="sy0">=</span> value<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+2. Binary Tree class and it's containing method<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">tree</span><span class="sy0">;</span>
+&nbsp;
+<span class="co3">/**
+ * Created by Matt An on 2017/5/15.
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> Binarytree <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">TreeNode</span> root<span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw3">TreeNode</span> getRoot<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> root<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> insert<span class="br0">&#40;</span><span class="kw4">int</span> value<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw3">TreeNode</span> newNode <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">TreeNode</span><span class="br0">&#40;</span>value<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="co1">//set root</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>root <span class="sy0">==</span> <span class="kw2">null</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            root <span class="sy0">=</span> newNode<span class="sy0">;</span>
+            root.<span class="me1">setLefTreeNode</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            root.<span class="me1">setRightTreeNode</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            <span class="kw3">TreeNode</span> currentNode <span class="sy0">=</span> root<span class="sy0">;</span>
+            <span class="kw3">TreeNode</span> parentNode<span class="sy0">;</span>
+            <span class="kw1">while</span> <span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                parentNode <span class="sy0">=</span> currentNode<span class="sy0">;</span>
+                <span class="co1">// set right</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>newNode.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&gt;</span> currentNode.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    currentNode <span class="sy0">=</span> currentNode.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>currentNode <span class="sy0">==</span> <span class="kw2">null</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        parentNode.<span class="me1">setRightTreeNode</span><span class="br0">&#40;</span>newNode<span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw1">return</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+                    <span class="co1">// set left</span>
+                    currentNode <span class="sy0">=</span> currentNode.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>currentNode <span class="sy0">==</span> <span class="kw2">null</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        parentNode.<span class="me1">setLefTreeNode</span><span class="br0">&#40;</span>newNode<span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw1">return</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">TreeNode</span> find<span class="br0">&#40;</span><span class="kw4">int</span> key<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+        <span class="kw3">TreeNode</span> currentNode <span class="sy0">=</span> root<span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">if</span> <span class="br0">&#40;</span>currentNode <span class="sy0">!=</span> <span class="kw2">null</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="kw1">while</span> <span class="br0">&#40;</span>currentNode.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">!=</span> key<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+                <span class="kw1">if</span> <span class="br0">&#40;</span>currentNode.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&gt;</span> key<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    currentNode <span class="sy0">=</span> currentNode.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+                    currentNode <span class="sy0">=</span> currentNode.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+&nbsp;
+                <span class="kw1">if</span> <span class="br0">&#40;</span>currentNode <span class="sy0">==</span> <span class="kw2">null</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw1">return</span> <span class="kw2">null</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">if</span><span class="br0">&#40;</span>currentNode.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span>key<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    <span class="kw1">break</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+&nbsp;
+        <span class="br0">&#125;</span>
+    <span class="kw1">return</span> currentNode<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">TreeNode</span> parent<span class="br0">&#40;</span><span class="kw3">TreeNode</span> find<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">TreeNode</span> temp<span class="sy0">=</span>parent<span class="br0">&#40;</span>root,find<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> temp<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">TreeNode</span> parent<span class="br0">&#40;</span><span class="kw3">TreeNode</span> node, <span class="kw3">TreeNode</span> findnode<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>node<span class="sy0">==</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">return</span> <span class="kw2">null</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span><span class="br0">&#40;</span>node.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">!=</span>null<span class="sy0">&amp;&amp;</span>node.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span>findnode.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">||</span><span class="br0">&#40;</span>node.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">!=</span>null<span class="sy0">&amp;&amp;</span>node.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span>findnode.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">return</span> node<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw3">TreeNode</span> N<span class="sy0">;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span><span class="br0">&#40;</span>N<span class="sy0">=</span>parent<span class="br0">&#40;</span>node.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span>,findnode<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">return</span> N<span class="sy0">;</span>
+        <span class="br0">&#125;</span><span class="kw1">else</span><span class="br0">&#123;</span>
+            <span class="kw1">return</span> parent<span class="br0">&#40;</span>node.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span>,findnode<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">TreeNode</span> Minright<span class="br0">&#40;</span><span class="kw3">TreeNode</span> node<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>node.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">return</span> node<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>node.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>node.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw3">TreeNode</span> temp<span class="sy0">=</span>node.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                node.<span class="me1">setLefTreeNode</span><span class="br0">&#40;</span>node.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                temp.<span class="me1">setRightTreeNode</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">return</span> temp<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw3">TreeNode</span> temp<span class="sy0">=</span>node.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            node.<span class="me1">setLefTreeNode</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">return</span> temp<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> Minright<span class="br0">&#40;</span>node.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">TreeNode</span> Maxleft<span class="br0">&#40;</span><span class="kw3">TreeNode</span> node<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>node.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">return</span> node<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>node.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>node.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw3">TreeNode</span> temp<span class="sy0">=</span>node.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                node.<span class="me1">setRightTreeNode</span><span class="br0">&#40;</span>node.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                temp.<span class="me1">setLefTreeNode</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">return</span> temp<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw3">TreeNode</span> temp<span class="sy0">=</span>node.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            node.<span class="me1">setRightTreeNode</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">return</span> temp<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> Maxleft<span class="br0">&#40;</span>node.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> delete<span class="br0">&#40;</span><span class="kw3">TreeNode</span> temp<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">TreeNode</span> parent<span class="sy0">=</span>parent<span class="br0">&#40;</span>temp<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>temp<span class="sy0">==</span>root<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw3">TreeNode</span> node1<span class="sy0">;</span>
+            node1<span class="sy0">=</span>root.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            root.<span class="me1">setLefTreeNode</span><span class="br0">&#40;</span>root.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            root.<span class="me1">setRightTreeNode</span><span class="br0">&#40;</span>root.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            root<span class="sy0">=</span>node1<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>temp.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span>null<span class="sy0">&amp;&amp;</span>temp.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span><span class="br0">&#40;</span>temp.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">&gt;</span>parent.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    temp.<span class="me1">setRightTreeNode</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>temp.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">&lt;</span>parent.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    temp.<span class="me1">setLefTreeNode</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>temp.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">!=</span>null<span class="sy0">&amp;&amp;</span>temp.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw3">TreeNode</span> Node<span class="sy0">=</span>Maxleft<span class="br0">&#40;</span>temp.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">if</span><span class="br0">&#40;</span>temp.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">&gt;</span>parent.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>temp.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> Node.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        parent.<span class="me1">setRightTreeNode</span><span class="br0">&#40;</span>temp.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        temp.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">setRightTreeNode</span><span class="br0">&#40;</span>temp.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+                        parent.<span class="me1">setRightTreeNode</span><span class="br0">&#40;</span>Node<span class="br0">&#41;</span><span class="sy0">;</span>
+                        Node.<span class="me1">setLefTreeNode</span><span class="br0">&#40;</span>temp.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        Node.<span class="me1">setRightTreeNode</span><span class="br0">&#40;</span>temp.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+                    <span class="kw1">if</span><span class="br0">&#40;</span>temp.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">&lt;</span>parent.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        <span class="kw1">if</span><span class="br0">&#40;</span>temp.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span>parent.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                            parent.<span class="me1">setLefTreeNode</span><span class="br0">&#40;</span>temp.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            temp.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">setRightTreeNode</span><span class="br0">&#40;</span>temp.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                        <span class="kw1">else</span><span class="br0">&#123;</span>
+                            parent.<span class="me1">setLefTreeNode</span><span class="br0">&#40;</span>Node<span class="br0">&#41;</span><span class="sy0">;</span>
+                            Node.<span class="me1">setLefTreeNode</span><span class="br0">&#40;</span>temp.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            Node.<span class="me1">setRightTreeNode</span><span class="br0">&#40;</span>temp.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>temp.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">!=</span>null<span class="sy0">&amp;&amp;</span>temp.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span><span class="br0">&#40;</span>temp.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">&gt;</span>parent.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    parent.<span class="me1">setRightTreeNode</span><span class="br0">&#40;</span>temp.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>temp.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">&lt;</span>parent.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    parent.<span class="me1">setLefTreeNode</span><span class="br0">&#40;</span>temp.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>temp.<span class="me1">getLefTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span>null<span class="sy0">&amp;&amp;</span>temp.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span><span class="br0">&#40;</span>temp.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">&gt;</span>parent.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    parent.<span class="me1">setRightTreeNode</span><span class="br0">&#40;</span>temp.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>temp.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">&lt;</span>parent.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    parent.<span class="me1">setLefTreeNode</span><span class="br0">&#40;</span>temp.<span class="me1">getRightTreeNode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

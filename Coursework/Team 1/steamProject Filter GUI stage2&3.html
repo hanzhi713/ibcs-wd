@@ -1,0 +1,602 @@
+<html>
+  <head>
+    <title>IBCS1-WD - steamProject Filter GUI stage2&3</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>steamProject Filter GUI stage2&3<small> #steam </small></h1>PPT:<br />
+Could not upload color filter ppt... http error？ code：200<br />
+<br />
+Evidences(pictures)：<br />
+http error...<br />
+<br />
+Code:<br />
+1. Without using oop:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1"># -*- coding: utf-8 -*-</span>
+<span class="st0">&quot;&quot;&quot;
+Created on Thu Mar 16 23:27:59 2017
+&nbsp;
+@author: xueyuxin
+&quot;&quot;&quot;</span>
+<span class="kw1">from</span> matplotlib <span class="kw1">import</span> pyplot <span class="kw1">as</span> plt
+<span class="kw1">import</span> cv2
+<span class="kw1">import</span> tkinter <span class="kw1">as</span> tk
+<span class="kw1">from</span> PIL <span class="kw1">import</span> Image<span class="sy0">,</span> ImageTk
+<span class="kw1">from</span> tkinter.<span class="me1">filedialog</span> <span class="kw1">import</span> *
+<span class="kw1">import</span> <span class="kw3">random</span>
+<span class="kw1">import</span> numpy <span class="kw1">as</span> np
+<span class="kw1">import</span> <span class="kw3">math</span>
+&nbsp;
+root <span class="sy0">=</span> tk.<span class="me1">Tk</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+root.<span class="me1">geometry</span><span class="br0">&#40;</span><span class="st0">&quot;1000x700&quot;</span><span class="br0">&#41;</span>
+tk.<span class="me1">Label</span><span class="br0">&#40;</span>root<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;Filter For Jasper&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">50</span><span class="br0">&#41;</span><span class="br0">&#41;</span>.<span class="me1">pack</span><span class="br0">&#40;</span>pady<span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> nostalgia<span class="br0">&#40;</span>img_path<span class="br0">&#41;</span>:
+        img <span class="sy0">=</span> cv2.<span class="me1">imread</span><span class="br0">&#40;</span>img_path<span class="br0">&#41;</span>
+        b<span class="sy0">,</span> g<span class="sy0">,</span> r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+        nrows<span class="sy0">,</span> ncols<span class="sy0">,</span> a <span class="sy0">=</span> img.<span class="me1">shape</span>
+        <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>nrows<span class="br0">&#41;</span>:
+            <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>ncols<span class="br0">&#41;</span>:
+                red <span class="sy0">=</span> r<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>
+                green <span class="sy0">=</span> g<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>
+                blue <span class="sy0">=</span> b<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>
+                r<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="nu0">0.393</span> * red + <span class="nu0">0.769</span> * green + <span class="nu0">0.189</span> * blue<span class="br0">&#41;</span>
+                g<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="nu0">0.349</span> * red + <span class="nu0">0.686</span> * green + <span class="nu0">0.168</span> * blue<span class="br0">&#41;</span>
+                b<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="nu0">0.272</span> * red + <span class="nu0">0.534</span> * green + <span class="nu0">0.131</span> * blue<span class="br0">&#41;</span>
+                <span class="kw1">if</span> b<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                    b<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span>
+                <span class="kw1">if</span> b<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&gt;</span> <span class="nu0">255</span>:
+                    b<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">255</span>
+                <span class="kw1">if</span> g<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                    g<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span>
+                <span class="kw1">if</span> g<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&gt;</span> <span class="nu0">255</span>:
+                    g<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">255</span>
+                <span class="kw1">if</span> r<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                    r<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span>
+                <span class="kw1">if</span> r<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&gt;</span> <span class="nu0">255</span>:
+                    r<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">255</span>
+        img <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#40;</span>r<span class="sy0">,</span> g<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        plt.<span class="me1">imshow</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+        plt.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;result.png&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> salt<span class="br0">&#40;</span>img_orig_path<span class="br0">&#41;</span>:
+    img <span class="sy0">=</span> cv2.<span class="me1">imread</span><span class="br0">&#40;</span>img_orig_path<span class="br0">&#41;</span>
+    n <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span>img.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>*img.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>*<span class="nu0">0.1</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>n<span class="br0">&#41;</span>:
+        x <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span>np.<span class="kw3">random</span>.<span class="kw3">random</span><span class="br0">&#40;</span><span class="br0">&#41;</span> * img.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+        y <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span>np.<span class="kw3">random</span>.<span class="kw3">random</span><span class="br0">&#40;</span><span class="br0">&#41;</span> * img.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+        img<span class="br0">&#91;</span>x<span class="sy0">,</span>y<span class="br0">&#93;</span><span class="sy0">=</span><span class="br0">&#91;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#93;</span>
+    b<span class="sy0">,</span>g<span class="sy0">,</span>r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+    rgb_img <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#91;</span>r<span class="sy0">,</span>g<span class="sy0">,</span>b<span class="br0">&#93;</span><span class="br0">&#41;</span>
+    plt.<span class="me1">imshow</span><span class="br0">&#40;</span>rgb_img<span class="br0">&#41;</span>
+    plt.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;result.png&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> glass<span class="br0">&#40;</span>img_orig_path<span class="br0">&#41;</span>:
+    img_orig<span class="sy0">=</span>cv2.<span class="me1">imread</span><span class="br0">&#40;</span>img_orig_path<span class="br0">&#41;</span>
+    nrows<span class="sy0">,</span> ncols<span class="sy0">,</span> a <span class="sy0">=</span> img_orig.<span class="me1">shape</span>
+    b<span class="sy0">,</span> g<span class="sy0">,</span> r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>img_orig<span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> nrows - <span class="nu0">1</span><span class="br0">&#41;</span>:
+        <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> ncols - <span class="nu0">1</span><span class="br0">&#41;</span>:
+            tmp <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">9</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            resulti <span class="sy0">=</span> i - <span class="nu0">1</span> + tmp // <span class="nu0">3</span>
+            resultj <span class="sy0">=</span> j - <span class="nu0">1</span> + tmp % <span class="nu0">3</span>
+            <span class="kw1">if</span> resulti <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                resulti <span class="sy0">=</span> <span class="nu0">0</span>
+            <span class="kw1">if</span> resulti <span class="sy0">&gt;</span> nrows - <span class="nu0">2</span>:
+                resulti <span class="sy0">=</span> nrows - <span class="nu0">2</span>
+            <span class="kw1">if</span> resultj <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                resultj <span class="sy0">=</span> <span class="nu0">0</span>
+            <span class="kw1">if</span> resultj <span class="sy0">&gt;</span> ncols - <span class="nu0">2</span>:
+                resultj <span class="sy0">=</span> ncols - <span class="nu0">2</span>
+            b<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> b<span class="br0">&#91;</span>resulti<span class="br0">&#93;</span><span class="br0">&#91;</span>resultj<span class="br0">&#93;</span>
+            r<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> r<span class="br0">&#91;</span>resulti<span class="br0">&#93;</span><span class="br0">&#91;</span>resultj<span class="br0">&#93;</span>
+            g<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> g<span class="br0">&#91;</span>resulti<span class="br0">&#93;</span><span class="br0">&#91;</span>resultj<span class="br0">&#93;</span>
+    img <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#40;</span>r<span class="sy0">,</span> g<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    plt.<span class="me1">imshow</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+    plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;result.png&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> mask<span class="br0">&#40;</span>img_path<span class="br0">&#41;</span>:
+    img <span class="sy0">=</span> cv2.<span class="me1">imread</span><span class="br0">&#40;</span>img_path<span class="br0">&#41;</span>
+    nrows<span class="sy0">,</span> ncols<span class="sy0">,</span> a <span class="sy0">=</span> img.<span class="me1">shape</span>
+    row<span class="sy0">,</span> col <span class="sy0">=</span> np.<span class="me1">ogrid</span><span class="br0">&#91;</span>:nrows<span class="sy0">,</span> :ncols<span class="br0">&#93;</span>
+    cnt_row<span class="sy0">,</span> cnt_col <span class="sy0">=</span> nrows / <span class="nu0">2</span><span class="sy0">,</span> ncols / <span class="nu0">2</span>
+    outer_disk_mask <span class="sy0">=</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>row - cnt_row<span class="br0">&#41;</span> ** <span class="nu0">2</span> + <span class="br0">&#40;</span>col - cnt_col<span class="br0">&#41;</span> ** <span class="nu0">2</span> <span class="sy0">&gt;</span> <span class="br0">&#40;</span>ncols / <span class="nu0">2</span><span class="br0">&#41;</span> ** <span class="nu0">2</span><span class="br0">&#41;</span>
+    img<span class="br0">&#91;</span>outer_disk_mask<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span>
+&nbsp;
+    b<span class="sy0">,</span> g<span class="sy0">,</span> r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+    img <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#40;</span>r<span class="sy0">,</span> g<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    plt.<span class="me1">imshow</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+    plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;result.png&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> summer<span class="br0">&#40;</span>img_path<span class="br0">&#41;</span>:
+    img_orig<span class="sy0">=</span> cv2.<span class="me1">imread</span><span class="br0">&#40;</span>img_path<span class="br0">&#41;</span>
+    img <span class="sy0">=</span> cv2.<span class="me1">applyColorMap</span><span class="br0">&#40;</span>img_orig<span class="sy0">,</span> cv2.<span class="me1">COLORMAP_SUMMER</span><span class="br0">&#41;</span>
+    b<span class="sy0">,</span> g<span class="sy0">,</span> r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+    img <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#40;</span>r<span class="sy0">,</span> g<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    plt.<span class="me1">imshow</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+    plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;result.png&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> bone<span class="br0">&#40;</span>img_path<span class="br0">&#41;</span>:
+    img_orig<span class="sy0">=</span> cv2.<span class="me1">imread</span><span class="br0">&#40;</span>img_path<span class="br0">&#41;</span>
+    img <span class="sy0">=</span> cv2.<span class="me1">applyColorMap</span><span class="br0">&#40;</span>img_orig<span class="sy0">,</span> cv2.<span class="me1">COLORMAP_SUMMER</span><span class="br0">&#41;</span>
+    b<span class="sy0">,</span> g<span class="sy0">,</span> r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+    img <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#40;</span>r<span class="sy0">,</span> g<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    plt.<span class="me1">imshow</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+    plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;result.png&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> ocean<span class="br0">&#40;</span>img_path<span class="br0">&#41;</span>:
+    img_orig <span class="sy0">=</span> cv2.<span class="me1">imread</span><span class="br0">&#40;</span>img_path<span class="br0">&#41;</span>
+    img <span class="sy0">=</span> cv2.<span class="me1">applyColorMap</span><span class="br0">&#40;</span>img_orig<span class="sy0">,</span> cv2.<span class="me1">COLORMAP_OCEAN</span><span class="br0">&#41;</span>
+    b<span class="sy0">,</span> g<span class="sy0">,</span> r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+    img <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#40;</span>r<span class="sy0">,</span> g<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    plt.<span class="me1">imshow</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+    plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;result.png&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> pink<span class="br0">&#40;</span>img_orig_path<span class="br0">&#41;</span>:
+    img_orig <span class="sy0">=</span> cv2.<span class="me1">imread</span><span class="br0">&#40;</span>img_orig_path<span class="br0">&#41;</span>
+    img <span class="sy0">=</span> cv2.<span class="me1">applyColorMap</span><span class="br0">&#40;</span>img_orig<span class="sy0">,</span> cv2.<span class="me1">COLORMAP_PINK</span><span class="br0">&#41;</span>
+    b<span class="sy0">,</span> g<span class="sy0">,</span> r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+    img <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#40;</span>r<span class="sy0">,</span> g<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    plt.<span class="me1">imshow</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+    plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;result.png&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> hot<span class="br0">&#40;</span>img_orig_path<span class="br0">&#41;</span>:
+    img_orig <span class="sy0">=</span> cv2.<span class="me1">imread</span><span class="br0">&#40;</span>img_orig_path<span class="br0">&#41;</span>
+    img <span class="sy0">=</span> cv2.<span class="me1">applyColorMap</span><span class="br0">&#40;</span>img_orig<span class="sy0">,</span> cv2.<span class="me1">COLORMAP_HOT</span><span class="br0">&#41;</span>
+    b<span class="sy0">,</span> g<span class="sy0">,</span> r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+    img <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#40;</span>r<span class="sy0">,</span> g<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    plt.<span class="me1">imshow</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+<span class="kw1">def</span> File_path<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    filename <span class="sy0">=</span> askopenfilename<span class="br0">&#40;</span>initialdir <span class="sy0">=</span> <span class="st0">'/Users/xueyuxin/Desktop'</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> filename
+&nbsp;
+<span class="kw1">def</span> Show_File<span class="br0">&#40;</span>root<span class="br0">&#41;</span>:
+    im <span class="sy0">=</span> Image.<span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">&quot;result.png&quot;</span><span class="br0">&#41;</span>
+    photo <span class="sy0">=</span> ImageTk.<span class="me1">PhotoImage</span><span class="br0">&#40;</span>im<span class="br0">&#41;</span>
+    lable <span class="sy0">=</span> tk.<span class="me1">Label</span><span class="br0">&#40;</span>root<span class="sy0">,</span>image <span class="sy0">=</span> photo<span class="br0">&#41;</span>
+    lable.<span class="me1">pack</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+frame2 <span class="sy0">=</span> tk.<span class="me1">Frame</span><span class="br0">&#40;</span>root<span class="br0">&#41;</span>
+frame2.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">LEFT</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+frame6 <span class="sy0">=</span> tk.<span class="me1">Frame</span><span class="br0">&#40;</span>root<span class="br0">&#41;</span>
+frame6.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">LEFT</span><span class="br0">&#41;</span>
+frame7 <span class="sy0">=</span> tk.<span class="me1">Frame</span><span class="br0">&#40;</span>root<span class="br0">&#41;</span>
+frame7.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">LEFT</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+&nbsp;
+button3 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame2<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;nostalgia&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: nostalgia<span class="br0">&#40;</span>File_path<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button3.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button4 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame2<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;salt&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: salt<span class="br0">&#40;</span>File_path<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#41;</span>
+button4.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button5 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame2<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;glass&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: glass<span class="br0">&#40;</span>File_path<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button5.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button6 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame6<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;mask&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: mask<span class="br0">&#40;</span>File_path<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button6.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button7 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame6<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;summer&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>:summer<span class="br0">&#40;</span>File_path<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button7.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button8 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame6<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;bone&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: bone<span class="br0">&#40;</span>File_path<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button8.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button9 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame7<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;ocean&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: ocean<span class="br0">&#40;</span>File_path<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button9.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button10 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame7<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;pink&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: pink<span class="br0">&#40;</span>File_path<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button10.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button11 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame7<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;hot&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: hot<span class="br0">&#40;</span>File_path<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button11.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+r <span class="sy0">=</span> tk.<span class="me1">StringVar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+g <span class="sy0">=</span> tk.<span class="me1">StringVar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+b <span class="sy0">=</span> tk.<span class="me1">StringVar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+h <span class="sy0">=</span> tk.<span class="me1">StringVar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+s <span class="sy0">=</span> tk.<span class="me1">StringVar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+v <span class="sy0">=</span> tk.<span class="me1">StringVar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+frame3 <span class="sy0">=</span> tk.<span class="me1">Frame</span><span class="br0">&#40;</span>root<span class="br0">&#41;</span>
+frame3.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="br0">&#41;</span>
+frame4 <span class="sy0">=</span> tk.<span class="me1">Frame</span><span class="br0">&#40;</span>root<span class="br0">&#41;</span>
+frame4.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">RIGHT</span><span class="br0">&#41;</span>
+frame5 <span class="sy0">=</span> tk.<span class="me1">Frame</span><span class="br0">&#40;</span>root<span class="br0">&#41;</span>
+frame5.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">RIGHT</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+scale1 <span class="sy0">=</span> tk.<span class="me1">Scale</span><span class="br0">&#40;</span>frame4<span class="sy0">,</span>from_<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span>to_<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">,</span>resolution<span class="sy0">=</span><span class="nu0">0.1</span><span class="sy0">,</span>orient <span class="sy0">=</span> tk.<span class="me1">HORIZONTAL</span><span class="sy0">,</span>variable <span class="sy0">=</span> r<span class="br0">&#41;</span>
+scale1.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">30</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+label1 <span class="sy0">=</span> tk.<span class="me1">Label</span><span class="br0">&#40;</span>frame4<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;red&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+label1.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+scale2 <span class="sy0">=</span> tk.<span class="me1">Scale</span><span class="br0">&#40;</span>frame4<span class="sy0">,</span>from_<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span>to_<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">,</span>resolution<span class="sy0">=</span><span class="nu0">0.1</span><span class="sy0">,</span>orient <span class="sy0">=</span> tk.<span class="me1">HORIZONTAL</span><span class="sy0">,</span>variable <span class="sy0">=</span> g<span class="br0">&#41;</span>
+scale2.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">30</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+label2 <span class="sy0">=</span> tk.<span class="me1">Label</span><span class="br0">&#40;</span>frame4<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;green&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+label2.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+scale3 <span class="sy0">=</span> tk.<span class="me1">Scale</span><span class="br0">&#40;</span>frame4<span class="sy0">,</span>from_<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span>to_<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">,</span>resolution<span class="sy0">=</span><span class="nu0">0.1</span><span class="sy0">,</span>orient <span class="sy0">=</span> tk.<span class="me1">HORIZONTAL</span><span class="sy0">,</span>variable <span class="sy0">=</span> b<span class="br0">&#41;</span>
+scale3.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">30</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+label3 <span class="sy0">=</span> tk.<span class="me1">Label</span><span class="br0">&#40;</span>frame4<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;blue&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+label3.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+scale4 <span class="sy0">=</span> tk.<span class="me1">Scale</span><span class="br0">&#40;</span>frame5<span class="sy0">,</span>from_<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span>to_<span class="sy0">=</span><span class="nu0">255</span><span class="sy0">,</span>resolution<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">,</span>orient <span class="sy0">=</span> tk.<span class="me1">HORIZONTAL</span><span class="sy0">,</span>length <span class="sy0">=</span> <span class="nu0">200</span><span class="sy0">,</span>variable <span class="sy0">=</span> h<span class="br0">&#41;</span>
+scale4.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">30</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+label4 <span class="sy0">=</span> tk.<span class="me1">Label</span><span class="br0">&#40;</span>frame5<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;H&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+label4.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+scale5 <span class="sy0">=</span> tk.<span class="me1">Scale</span><span class="br0">&#40;</span>frame5<span class="sy0">,</span>from_<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span>to_<span class="sy0">=</span><span class="nu0">255</span><span class="sy0">,</span>resolution<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">,</span>orient <span class="sy0">=</span> tk.<span class="me1">HORIZONTAL</span><span class="sy0">,</span>length <span class="sy0">=</span> <span class="nu0">200</span><span class="sy0">,</span>variable <span class="sy0">=</span> s<span class="br0">&#41;</span>
+scale5.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">30</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+label5 <span class="sy0">=</span> tk.<span class="me1">Label</span><span class="br0">&#40;</span>frame5<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;S&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+label5.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+scale6 <span class="sy0">=</span> tk.<span class="me1">Scale</span><span class="br0">&#40;</span>frame5<span class="sy0">,</span>from_<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span>to_<span class="sy0">=</span><span class="nu0">255</span><span class="sy0">,</span>resolution<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">,</span>orient <span class="sy0">=</span> tk.<span class="me1">HORIZONTAL</span><span class="sy0">,</span>length <span class="sy0">=</span> <span class="nu0">200</span><span class="sy0">,</span>variable <span class="sy0">=</span> v<span class="br0">&#41;</span>
+scale6.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">30</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+label6 <span class="sy0">=</span> tk.<span class="me1">Label</span><span class="br0">&#40;</span>frame5<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;V&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+label6.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+button6 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame3<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;justify the HSV&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: Change_HSV<span class="br0">&#40;</span>h<span class="sy0">,</span>s<span class="sy0">,</span>v<span class="br0">&#41;</span><span class="br0">&#41;</span>
+button6.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button7 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame3<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;justify the RGB&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span><span class="kw1">lambda</span>: Change_RGB<span class="br0">&#40;</span>r<span class="sy0">,</span>g<span class="sy0">,</span>b<span class="br0">&#41;</span> <span class="br0">&#41;</span>
+button7.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> Check_Point<span class="br0">&#40;</span>image<span class="br0">&#41;</span>:
+        b<span class="sy0">,</span>g<span class="sy0">,</span>r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>image<span class="br0">&#41;</span>
+        <span class="kw1">for</span> i <span class="kw1">in</span> b:
+            <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+                <span class="kw1">if</span> i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                    i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span>
+                <span class="kw1">elif</span> i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&gt;</span> <span class="nu0">255</span>:
+                    i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">255</span>
+        <span class="kw1">for</span> i <span class="kw1">in</span> g :
+            <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+                <span class="kw1">if</span> i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                    i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span>
+                <span class="kw1">elif</span> i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&gt;</span> <span class="nu0">255</span>:
+                    i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">255</span>
+        <span class="kw1">for</span> i <span class="kw1">in</span> r:
+            <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+                <span class="kw1">if</span> i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                    i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span>
+                <span class="kw1">elif</span> i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&gt;</span><span class="nu0">255</span>:
+                    i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">255</span>
+        <span class="kw1">return</span> b<span class="sy0">,</span>g<span class="sy0">,</span>r
+&nbsp;
+<span class="kw1">def</span> Change_RGB<span class="br0">&#40;</span>r<span class="sy0">,</span>g<span class="sy0">,</span>b<span class="br0">&#41;</span>:
+    filename <span class="sy0">=</span> File_path<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    image <span class="sy0">=</span> cv2.<span class="me1">imread</span><span class="br0">&#40;</span>filename<span class="br0">&#41;</span>
+    b1<span class="sy0">,</span>g1<span class="sy0">,</span>r1<span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>image<span class="br0">&#41;</span>
+    dR <span class="sy0">=</span> <span class="kw2">float</span><span class="br0">&#40;</span>r.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    dG <span class="sy0">=</span> <span class="kw2">float</span><span class="br0">&#40;</span>g.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    dB <span class="sy0">=</span>  <span class="kw2">float</span><span class="br0">&#40;</span>b.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>dR<span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>dG<span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>dB<span class="br0">&#41;</span>
+    r2 <span class="sy0">=</span> dR * r1
+    g2 <span class="sy0">=</span> dG * g1
+    b2 <span class="sy0">=</span> dB * b1
+    FinalImage <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#91;</span>r2<span class="sy0">,</span>g2<span class="sy0">,</span>b2<span class="br0">&#93;</span><span class="br0">&#41;</span>
+    Check_Point<span class="br0">&#40;</span>FinalImage<span class="br0">&#41;</span>
+    plt.<span class="me1">imshow</span><span class="br0">&#40;</span>FinalImage<span class="br0">&#41;</span>
+    plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;result.png&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> Change_HSV<span class="br0">&#40;</span>h<span class="sy0">,</span>s<span class="sy0">,</span>v<span class="br0">&#41;</span>:
+    filename <span class="sy0">=</span> File_path<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    image <span class="sy0">=</span> cv2.<span class="me1">imread</span><span class="br0">&#40;</span>filename<span class="br0">&#41;</span>
+    img <span class="sy0">=</span> cv2.<span class="me1">cvtColor</span><span class="br0">&#40;</span>image<span class="sy0">,</span> cv2.<span class="me1">COLOR_BGR2HSV</span><span class="br0">&#41;</span>
+    h1<span class="sy0">,</span>s1<span class="sy0">,</span>v1<span class="sy0">=</span>cv2.<span class="me1">split</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+    h2 <span class="sy0">=</span> h1+<span class="kw2">int</span><span class="br0">&#40;</span>h.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    s2 <span class="sy0">=</span> s1+<span class="kw2">int</span><span class="br0">&#40;</span>s.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    v2 <span class="sy0">=</span> v1+<span class="kw2">int</span><span class="br0">&#40;</span>v.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    img2 <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#91;</span>h2<span class="sy0">,</span>s2<span class="sy0">,</span>v2<span class="br0">&#93;</span><span class="br0">&#41;</span>
+    finalimage <span class="sy0">=</span> cv2.<span class="me1">cvtColor</span><span class="br0">&#40;</span>img2<span class="sy0">,</span>cv2.<span class="me1">COLOR_HSV2BGR</span><span class="br0">&#41;</span>
+    plt.<span class="me1">imshow</span><span class="br0">&#40;</span>finalimage<span class="br0">&#41;</span>
+    plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;result.png&quot;</span><span class="br0">&#41;</span>
+root.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+Using OOP :<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1"># -*- coding: utf-8 -*-</span>
+<span class="st0">&quot;&quot;&quot;
+Created on Sun Mar 19 17:52:00 2017
+&nbsp;
+@author: xueyuxin
+&quot;&quot;&quot;</span>
+<span class="kw1">from</span> matplotlib <span class="kw1">import</span> pyplot <span class="kw1">as</span> plt
+<span class="kw1">import</span> cv2
+<span class="kw1">import</span> tkinter <span class="kw1">as</span> tk
+<span class="kw1">from</span> PIL <span class="kw1">import</span> Image<span class="sy0">,</span> ImageTk
+<span class="kw1">from</span> tkinter.<span class="me1">filedialog</span> <span class="kw1">import</span> *
+<span class="kw1">import</span> <span class="kw3">random</span>
+<span class="kw1">import</span> numpy <span class="kw1">as</span> np
+<span class="kw1">import</span> <span class="kw3">math</span>
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> ImageFilter:
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>img_path<span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">img_path</span> <span class="sy0">=</span> img_path
+        <span class="kw2">self</span>.<span class="me1">img</span> <span class="sy0">=</span> cv2.<span class="me1">imread</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">img_path</span><span class="br0">&#41;</span>
+    <span class="kw1">def</span> nostalgia<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        b<span class="sy0">,</span>g<span class="sy0">,</span>r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">img</span><span class="br0">&#41;</span>
+        nrows<span class="sy0">,</span> ncols<span class="sy0">,</span> a <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">img</span>.<span class="me1">shape</span>
+        <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>nrows<span class="br0">&#41;</span>:
+            <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>ncols<span class="br0">&#41;</span>:
+                red <span class="sy0">=</span> r<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>
+                green <span class="sy0">=</span> g<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>
+                blue <span class="sy0">=</span> b<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>
+                r<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="nu0">0.393</span> * red + <span class="nu0">0.769</span> * green + <span class="nu0">0.189</span> * blue<span class="br0">&#41;</span>
+                g<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="nu0">0.349</span> * red + <span class="nu0">0.686</span> * green + <span class="nu0">0.168</span> * blue<span class="br0">&#41;</span>
+                b<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="nu0">0.272</span> * red + <span class="nu0">0.534</span> * green + <span class="nu0">0.131</span> * blue<span class="br0">&#41;</span>
+                <span class="kw1">if</span> b<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                    b<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span>
+                <span class="kw1">if</span> b<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&gt;</span> <span class="nu0">255</span>:
+                    b<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">255</span>
+                <span class="kw1">if</span> g<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                    g<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span>
+                <span class="kw1">if</span> g<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&gt;</span> <span class="nu0">255</span>:
+                    g<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">255</span>
+                <span class="kw1">if</span> r<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                    r<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span>
+                <span class="kw1">if</span> r<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&gt;</span> <span class="nu0">255</span>:
+                    r<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">255</span>
+        <span class="kw2">self</span>.<span class="me1">new_image</span> <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#91;</span>r<span class="sy0">,</span>g<span class="sy0">,</span>b<span class="br0">&#93;</span><span class="br0">&#41;</span>
+        plt.<span class="me1">imshow</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">new_image</span><span class="br0">&#41;</span>
+        plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;FilterResult.png&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">def</span> salt<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        n <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">img</span>.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>*<span class="kw2">self</span>.<span class="me1">img</span>.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>*<span class="nu0">0.1</span><span class="br0">&#41;</span>
+        <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>n<span class="br0">&#41;</span>:
+            x <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span>np.<span class="kw3">random</span>.<span class="kw3">random</span><span class="br0">&#40;</span><span class="br0">&#41;</span> * <span class="kw2">self</span>.<span class="me1">img</span>.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+            y <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span>np.<span class="kw3">random</span>.<span class="kw3">random</span><span class="br0">&#40;</span><span class="br0">&#41;</span> * <span class="kw2">self</span>.<span class="me1">img</span>.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+            <span class="kw2">self</span>.<span class="me1">img</span><span class="br0">&#91;</span>x<span class="sy0">,</span>y<span class="br0">&#93;</span><span class="sy0">=</span><span class="br0">&#91;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#93;</span>
+            b<span class="sy0">,</span>g<span class="sy0">,</span>r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">img</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">new_image</span> <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#91;</span>r<span class="br0">&#93;</span><span class="br0">&#41;</span>
+        plt.<span class="me1">imshow</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">new_image</span><span class="br0">&#41;</span>
+        plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;FilterResult.png&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">def</span> glass<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        nrows<span class="sy0">,</span> ncols<span class="sy0">,</span> a <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">img</span>.<span class="me1">shape</span>
+        b<span class="sy0">,</span> g<span class="sy0">,</span> r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">img</span><span class="br0">&#41;</span>
+        <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> nrows - <span class="nu0">1</span><span class="br0">&#41;</span>:
+            <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> ncols - <span class="nu0">1</span><span class="br0">&#41;</span>:
+                tmp <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">9</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                resulti <span class="sy0">=</span> i - <span class="nu0">1</span> + tmp // <span class="nu0">3</span>
+                resultj <span class="sy0">=</span> j - <span class="nu0">1</span> + tmp % <span class="nu0">3</span>
+                <span class="kw1">if</span> resulti <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                    resulti <span class="sy0">=</span> <span class="nu0">0</span>
+                <span class="kw1">if</span> resulti <span class="sy0">&gt;</span> nrows - <span class="nu0">2</span>:
+                    resulti <span class="sy0">=</span> nrows - <span class="nu0">2</span>
+                <span class="kw1">if</span> resultj <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                    resultj <span class="sy0">=</span> <span class="nu0">0</span>
+                <span class="kw1">if</span> resultj <span class="sy0">&gt;</span> ncols - <span class="nu0">2</span>:
+                    resultj <span class="sy0">=</span> ncols - <span class="nu0">2</span>
+                b<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> b<span class="br0">&#91;</span>resulti<span class="br0">&#93;</span><span class="br0">&#91;</span>resultj<span class="br0">&#93;</span>
+                r<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> r<span class="br0">&#91;</span>resulti<span class="br0">&#93;</span><span class="br0">&#91;</span>resultj<span class="br0">&#93;</span>
+                g<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> g<span class="br0">&#91;</span>resulti<span class="br0">&#93;</span><span class="br0">&#91;</span>resultj<span class="br0">&#93;</span>
+        <span class="kw2">self</span>.<span class="me1">new_image</span> <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#40;</span>r<span class="sy0">,</span> g<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        plt.<span class="me1">imshow</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">new_image</span><span class="br0">&#41;</span>
+        plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;FilterResult.png&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">def</span> mask<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        nrows<span class="sy0">,</span> ncols<span class="sy0">,</span> a <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">img</span>.<span class="me1">shape</span>
+        row<span class="sy0">,</span> col <span class="sy0">=</span> np.<span class="me1">ogrid</span><span class="br0">&#91;</span>:nrows<span class="sy0">,</span> :ncols<span class="br0">&#93;</span>
+        cnt_row<span class="sy0">,</span> cnt_col <span class="sy0">=</span> nrows / <span class="nu0">2</span><span class="sy0">,</span> ncols / <span class="nu0">2</span>
+        outer_disk_mask <span class="sy0">=</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>row - cnt_row<span class="br0">&#41;</span> ** <span class="nu0">2</span> + <span class="br0">&#40;</span>col - cnt_col<span class="br0">&#41;</span> ** <span class="nu0">2</span> <span class="sy0">&gt;</span> <span class="br0">&#40;</span>ncols / <span class="nu0">2</span><span class="br0">&#41;</span> ** <span class="nu0">2</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">img</span><span class="br0">&#91;</span>outer_disk_mask<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span>
+        b<span class="sy0">,</span> g<span class="sy0">,</span> r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">img</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">new_image</span> <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#40;</span>r<span class="sy0">,</span> g<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        plt.<span class="me1">imshow</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">img_path</span><span class="br0">&#41;</span>
+        plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;FilterResult.png&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">def</span> summer<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        img2 <span class="sy0">=</span> cv2.<span class="me1">applyColorMap</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">img</span><span class="sy0">,</span> cv2.<span class="me1">COLORMAP_SUMMER</span><span class="br0">&#41;</span>
+        b<span class="sy0">,</span> g<span class="sy0">,</span> r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>img2<span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">new_image</span> <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#40;</span>r<span class="sy0">,</span> g<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        plt.<span class="me1">imshow</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">new_image</span><span class="br0">&#41;</span>
+        plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;FilterResult.png&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">def</span> bone<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        img2 <span class="sy0">=</span> cv2.<span class="me1">applyColorMap</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">img</span><span class="sy0">,</span> cv2.<span class="me1">COLORMAP_BONE</span><span class="br0">&#41;</span>
+        b<span class="sy0">,</span> g<span class="sy0">,</span> r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>img2<span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">new_image</span> <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#40;</span>r<span class="sy0">,</span> g<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        plt.<span class="me1">imshow</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">new_image</span><span class="br0">&#41;</span>
+        plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;FilterResult.png&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">def</span> ocean<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        img2 <span class="sy0">=</span> cv2.<span class="me1">applyColorMap</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">img</span><span class="sy0">,</span> cv2.<span class="me1">COLORMAP_OCEAN</span><span class="br0">&#41;</span>
+        b<span class="sy0">,</span> g<span class="sy0">,</span> r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>img2<span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">new_image</span> <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#40;</span>r<span class="sy0">,</span> g<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        plt.<span class="me1">imshow</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">new_image</span><span class="br0">&#41;</span>
+        plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;FilterResult.png&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">def</span> pink<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        img2 <span class="sy0">=</span> cv2.<span class="me1">applyColorMap</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">img</span><span class="sy0">,</span> cv2.<span class="me1">COLORMAP_PINK</span><span class="br0">&#41;</span>
+        b<span class="sy0">,</span> g<span class="sy0">,</span> r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>img2<span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">new_image</span> <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#40;</span>r<span class="sy0">,</span> g<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        plt.<span class="me1">imshow</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">new_image</span><span class="br0">&#41;</span>
+        plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;FilterResult.png&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">def</span> hot<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        img2 <span class="sy0">=</span> cv2.<span class="me1">applyColorMap</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">img</span><span class="sy0">,</span> cv2.<span class="me1">COLORMAP_HOT</span><span class="br0">&#41;</span>
+        b<span class="sy0">,</span> g<span class="sy0">,</span> r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>img2<span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">new_image</span> <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#40;</span>r<span class="sy0">,</span> g<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        plt.<span class="me1">imshow</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">new_image</span><span class="br0">&#41;</span>
+        plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;FilterResult.png&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> File_path<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    filename <span class="sy0">=</span> askopenfilename<span class="br0">&#40;</span>initialdir <span class="sy0">=</span> <span class="st0">'/Users/xueyuxin/Desktop'</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> filename
+&nbsp;
+<span class="kw1">def</span> Check_Point<span class="br0">&#40;</span>image<span class="br0">&#41;</span>:
+        b<span class="sy0">,</span>g<span class="sy0">,</span>r <span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>image<span class="br0">&#41;</span>
+        <span class="kw1">for</span> i <span class="kw1">in</span> b:
+            <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+                <span class="kw1">if</span> i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                    i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span>
+                <span class="kw1">elif</span> i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&gt;</span> <span class="nu0">255</span>:
+                    i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">255</span>
+        <span class="kw1">for</span> i <span class="kw1">in</span> g :
+            <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+                <span class="kw1">if</span> i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                    i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span>
+                <span class="kw1">elif</span> i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&gt;</span> <span class="nu0">255</span>:
+                    i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">255</span>
+        <span class="kw1">for</span> i <span class="kw1">in</span> r:
+            <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+                <span class="kw1">if</span> i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+                    i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span>
+                <span class="kw1">elif</span> i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&gt;</span><span class="nu0">255</span>:
+                    i<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">255</span>
+        <span class="kw1">return</span> b<span class="sy0">,</span>g<span class="sy0">,</span>r
+&nbsp;
+<span class="kw1">def</span> Change_RGB<span class="br0">&#40;</span>a<span class="sy0">,</span>r<span class="sy0">,</span>g<span class="sy0">,</span>b<span class="br0">&#41;</span>:
+    image <span class="sy0">=</span> a.<span class="me1">img</span>
+    b1<span class="sy0">,</span>g1<span class="sy0">,</span>r1<span class="sy0">=</span> cv2.<span class="me1">split</span><span class="br0">&#40;</span>image<span class="br0">&#41;</span>
+    dR <span class="sy0">=</span> <span class="kw2">float</span><span class="br0">&#40;</span>r.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    dG <span class="sy0">=</span> <span class="kw2">float</span><span class="br0">&#40;</span>g.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    dB <span class="sy0">=</span>  <span class="kw2">float</span><span class="br0">&#40;</span>b.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+    r2 <span class="sy0">=</span> dR * r1
+    g2 <span class="sy0">=</span> dG * g1
+    b2 <span class="sy0">=</span> dB * b1
+    FinalImage <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#91;</span>r2<span class="sy0">,</span>g2<span class="sy0">,</span>b2<span class="br0">&#93;</span><span class="br0">&#41;</span>
+    Check_Point<span class="br0">&#40;</span>FinalImage<span class="br0">&#41;</span>
+    plt.<span class="me1">imshow</span><span class="br0">&#40;</span>FinalImage<span class="br0">&#41;</span>
+    plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;result.png&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> Change_HSV<span class="br0">&#40;</span>a<span class="sy0">,</span>h<span class="sy0">,</span>s<span class="sy0">,</span>v<span class="br0">&#41;</span>:
+    img <span class="sy0">=</span> cv2.<span class="me1">cvtColor</span><span class="br0">&#40;</span>a.<span class="me1">img</span><span class="sy0">,</span> cv2.<span class="me1">COLOR_BGR2HSV</span><span class="br0">&#41;</span>
+    h1<span class="sy0">,</span>s1<span class="sy0">,</span>v1<span class="sy0">=</span>cv2.<span class="me1">split</span><span class="br0">&#40;</span>img<span class="br0">&#41;</span>
+    h2 <span class="sy0">=</span> h1+<span class="kw2">int</span><span class="br0">&#40;</span>h.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    s2 <span class="sy0">=</span> s1+<span class="kw2">int</span><span class="br0">&#40;</span>s.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    v2 <span class="sy0">=</span> v1+<span class="kw2">int</span><span class="br0">&#40;</span>v.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    img2 <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#91;</span>h2<span class="sy0">,</span>s2<span class="sy0">,</span>v2<span class="br0">&#93;</span><span class="br0">&#41;</span>
+    finalimage <span class="sy0">=</span> cv2.<span class="me1">cvtColor</span><span class="br0">&#40;</span>img2<span class="sy0">,</span>cv2.<span class="me1">COLOR_HSV2BGR</span><span class="br0">&#41;</span>
+    plt.<span class="me1">imshow</span><span class="br0">&#40;</span>finalimage<span class="br0">&#41;</span>
+    plt.<span class="me1">savefig</span><span class="br0">&#40;</span><span class="st0">&quot;result.png&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+root <span class="sy0">=</span> tk.<span class="me1">Tk</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+root.<span class="me1">geometry</span><span class="br0">&#40;</span><span class="st0">&quot;1000x700&quot;</span><span class="br0">&#41;</span>
+tk.<span class="me1">Label</span><span class="br0">&#40;</span>root<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;Filter For Jasper&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">50</span><span class="br0">&#41;</span><span class="br0">&#41;</span>.<span class="me1">pack</span><span class="br0">&#40;</span>pady<span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+&nbsp;
+file_path <span class="sy0">=</span> File_path<span class="br0">&#40;</span><span class="br0">&#41;</span>
+a <span class="sy0">=</span> ImageFilter<span class="br0">&#40;</span>file_path<span class="br0">&#41;</span>
+&nbsp;
+frame2 <span class="sy0">=</span> tk.<span class="me1">Frame</span><span class="br0">&#40;</span>root<span class="br0">&#41;</span>
+frame2.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">LEFT</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+frame6 <span class="sy0">=</span> tk.<span class="me1">Frame</span><span class="br0">&#40;</span>root<span class="br0">&#41;</span>
+frame6.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">LEFT</span><span class="br0">&#41;</span>
+frame7 <span class="sy0">=</span> tk.<span class="me1">Frame</span><span class="br0">&#40;</span>root<span class="br0">&#41;</span>
+frame7.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">LEFT</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+&nbsp;
+button3 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame2<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;nostalgia&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: a.<span class="me1">nostalgia</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button3.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button4 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame2<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;salt&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: a.<span class="me1">salt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button4.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button5 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame2<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;glass&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: a.<span class="me1">glass</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button5.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button6 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame6<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;mask&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: a.<span class="me1">mask</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button6.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button7 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame6<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;summer&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>:a.<span class="me1">summer</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button7.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button8 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame6<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;bone&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: a.<span class="me1">bone</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button8.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button9 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame7<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;ocean&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: a.<span class="me1">ocean</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button9.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button10 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame7<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;pink&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: a.<span class="me1">pink</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button10.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button11 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame7<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;hot&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: a.<span class="me1">hot</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+button11.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">60</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+r <span class="sy0">=</span> tk.<span class="me1">StringVar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+g <span class="sy0">=</span> tk.<span class="me1">StringVar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+b <span class="sy0">=</span> tk.<span class="me1">StringVar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+h <span class="sy0">=</span> tk.<span class="me1">StringVar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+s <span class="sy0">=</span> tk.<span class="me1">StringVar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+v <span class="sy0">=</span> tk.<span class="me1">StringVar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+frame3 <span class="sy0">=</span> tk.<span class="me1">Frame</span><span class="br0">&#40;</span>root<span class="br0">&#41;</span>
+frame3.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="br0">&#41;</span>
+frame4 <span class="sy0">=</span> tk.<span class="me1">Frame</span><span class="br0">&#40;</span>root<span class="br0">&#41;</span>
+frame4.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">RIGHT</span><span class="br0">&#41;</span>
+frame5 <span class="sy0">=</span> tk.<span class="me1">Frame</span><span class="br0">&#40;</span>root<span class="br0">&#41;</span>
+frame5.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">RIGHT</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+scale1 <span class="sy0">=</span> tk.<span class="me1">Scale</span><span class="br0">&#40;</span>frame4<span class="sy0">,</span>from_<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span>to_<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">,</span>resolution<span class="sy0">=</span><span class="nu0">0.1</span><span class="sy0">,</span>orient <span class="sy0">=</span> tk.<span class="me1">HORIZONTAL</span><span class="sy0">,</span>variable <span class="sy0">=</span> r<span class="br0">&#41;</span>
+scale1.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">30</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+label1 <span class="sy0">=</span> tk.<span class="me1">Label</span><span class="br0">&#40;</span>frame4<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;red&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+label1.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+scale2 <span class="sy0">=</span> tk.<span class="me1">Scale</span><span class="br0">&#40;</span>frame4<span class="sy0">,</span>from_<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span>to_<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">,</span>resolution<span class="sy0">=</span><span class="nu0">0.1</span><span class="sy0">,</span>orient <span class="sy0">=</span> tk.<span class="me1">HORIZONTAL</span><span class="sy0">,</span>variable <span class="sy0">=</span> g<span class="br0">&#41;</span>
+scale2.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">30</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+label2 <span class="sy0">=</span> tk.<span class="me1">Label</span><span class="br0">&#40;</span>frame4<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;green&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+label2.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+scale3 <span class="sy0">=</span> tk.<span class="me1">Scale</span><span class="br0">&#40;</span>frame4<span class="sy0">,</span>from_<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span>to_<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">,</span>resolution<span class="sy0">=</span><span class="nu0">0.1</span><span class="sy0">,</span>orient <span class="sy0">=</span> tk.<span class="me1">HORIZONTAL</span><span class="sy0">,</span>variable <span class="sy0">=</span> b<span class="br0">&#41;</span>
+scale3.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">30</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+label3 <span class="sy0">=</span> tk.<span class="me1">Label</span><span class="br0">&#40;</span>frame4<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;blue&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+label3.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+scale4 <span class="sy0">=</span> tk.<span class="me1">Scale</span><span class="br0">&#40;</span>frame5<span class="sy0">,</span>from_<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span>to_<span class="sy0">=</span><span class="nu0">255</span><span class="sy0">,</span>resolution<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">,</span>orient <span class="sy0">=</span> tk.<span class="me1">HORIZONTAL</span><span class="sy0">,</span>length <span class="sy0">=</span> <span class="nu0">200</span><span class="sy0">,</span>variable <span class="sy0">=</span> h<span class="br0">&#41;</span>
+scale4.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">30</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+label4 <span class="sy0">=</span> tk.<span class="me1">Label</span><span class="br0">&#40;</span>frame5<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;H&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+label4.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+scale5 <span class="sy0">=</span> tk.<span class="me1">Scale</span><span class="br0">&#40;</span>frame5<span class="sy0">,</span>from_<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span>to_<span class="sy0">=</span><span class="nu0">255</span><span class="sy0">,</span>resolution<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">,</span>orient <span class="sy0">=</span> tk.<span class="me1">HORIZONTAL</span><span class="sy0">,</span>length <span class="sy0">=</span> <span class="nu0">200</span><span class="sy0">,</span>variable <span class="sy0">=</span> s<span class="br0">&#41;</span>
+scale5.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">30</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+label5 <span class="sy0">=</span> tk.<span class="me1">Label</span><span class="br0">&#40;</span>frame5<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;S&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+label5.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+scale6 <span class="sy0">=</span> tk.<span class="me1">Scale</span><span class="br0">&#40;</span>frame5<span class="sy0">,</span>from_<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span>to_<span class="sy0">=</span><span class="nu0">255</span><span class="sy0">,</span>resolution<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">,</span>orient <span class="sy0">=</span> tk.<span class="me1">HORIZONTAL</span><span class="sy0">,</span>length <span class="sy0">=</span> <span class="nu0">200</span><span class="sy0">,</span>variable <span class="sy0">=</span> v<span class="br0">&#41;</span>
+scale6.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">30</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+label6 <span class="sy0">=</span> tk.<span class="me1">Label</span><span class="br0">&#40;</span>frame5<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;V&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+label6.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+button6 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame3<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;justify the HSV&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span> <span class="kw1">lambda</span>: Change_HSV<span class="br0">&#40;</span>a<span class="sy0">,</span>h<span class="sy0">,</span>s<span class="sy0">,</span>v<span class="br0">&#41;</span><span class="br0">&#41;</span>
+button6.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+button7 <span class="sy0">=</span> tk.<span class="me1">Button</span><span class="br0">&#40;</span>frame3<span class="sy0">,</span>text <span class="sy0">=</span> <span class="st0">&quot;justify the RGB&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">,</span>command <span class="sy0">=</span><span class="kw1">lambda</span>: Change_RGB<span class="br0">&#40;</span>a<span class="sy0">,</span>r<span class="sy0">,</span>g<span class="sy0">,</span>b<span class="br0">&#41;</span> <span class="br0">&#41;</span>
+button7.<span class="me1">pack</span><span class="br0">&#40;</span>side <span class="sy0">=</span> tk.<span class="me1">TOP</span><span class="sy0">,</span>pady <span class="sy0">=</span> <span class="nu0">5</span><span class="sy0">,</span>padx <span class="sy0">=</span> <span class="nu0">30</span><span class="br0">&#41;</span>
+&nbsp;
+root.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+<br />
+<br />
+还在写改进的版本...略多有一点...</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

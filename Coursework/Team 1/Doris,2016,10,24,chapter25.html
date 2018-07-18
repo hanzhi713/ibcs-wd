@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Doris,2016,10,24,chapter25</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>Doris,2016,10,24,chapter25<small> #pythonexercise </small></h1>
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">class Stack:
+    def __init__(self):
+        self.items = []
+    def push(self,item):
+        self.items.append(item)
+    def pop(self):
+        return self.items.pop()
+    def is_empty(self):
+        return (self.items == [])
+&nbsp;
+def eval_postfix(expr):
+    import re
+    token_list = re.split(&quot;([^0-9])&quot;, expr)
+    stack = Stack()
+    for token in token_list:
+        if token == &quot;&quot; or token == &quot; &quot;:
+            continue
+        if token == &quot;+&quot;:
+            sum = stack.pop() + stack.pop()
+            stack.push(sum)
+        elif token == &quot;*&quot;:
+            product = stack.pop() * stack.pop()
+            stack.push(product)
+        else:
+            stack.push(int(token))
+    return stack.pop()
+print(eval_postfix(&quot;1 2 + 3 *&quot;))
+print(eval_postfix(&quot;2 3 * 1+&quot;))
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,154 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 4.27JFF RadioactiveDecayDemonstration</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<h2 id="toc0"><a name="x-Introduction:"></a>Introduction:</h2>
+ In physics class, we study radio active decay. The concept of &quot;half life&quot; is demonstrated using the following program. It allows different input of the dose of the radioactive substance and its half life. It shows the relationship between the time and the remaining dose. It also shows the randomness of the process of radioactivity. Students can use this program to better understand what &quot;half life&quot; means (usually mistaken to be half of the substance suddenly decay together after one half life, this is WRONG. Instead, it's a continuous process!); teachers may also use this program to do demonstration in their teaching.<br />
+<br />
+<h2 id="toc1"><a name="x-Example screen shot:"></a>Example screen shot:</h2>
+ <img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-27%20%E4%B8%8B%E5%8D%8810.10.48.png" alt=" 2017-04-27 下午10.10.48.png" title=" 2017-04-27 下午10.10.48.png" style="height: 478px; width: 808px;" /><br />
+<br />
+<h2 id="toc2"><a name="x-Source code:"></a>Source code:</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">class</span> atom<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> halflife<span class="sy0">=</span><span class="nu0">1.0</span><span class="br0">&#41;</span>:
+        <span class="kw1">import</span> <span class="kw3">random</span>
+        <span class="kw2">self</span>.<span class="me1">hasdecayed</span> <span class="sy0">=</span> <span class="kw2">False</span>
+        <span class="kw2">self</span>.<span class="me1">halflife</span> <span class="sy0">=</span> halflife
+        <span class="kw2">self</span>.<span class="me1">xcor</span> <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">20</span><span class="sy0">,</span> <span class="nu0">620</span><span class="br0">&#41;</span> + <span class="nu0">0.5</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">ycor</span> <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">20</span><span class="sy0">,</span> <span class="nu0">460</span><span class="br0">&#41;</span> + <span class="nu0">0.5</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> decay<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">import</span> <span class="kw3">random</span>
+        <span class="kw1">if</span> <span class="kw1">not</span> <span class="kw2">self</span>.<span class="me1">hasdecayed</span>:
+            <span class="kw1">if</span> <span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="nu0">0.5</span> ** <span class="br0">&#40;</span><span class="nu0">1.0</span> / <span class="br0">&#40;</span><span class="nu0">24.0</span> * <span class="kw2">self</span>.<span class="me1">halflife</span><span class="br0">&#41;</span><span class="br0">&#41;</span>:
+                <span class="kw2">self</span>.<span class="me1">hasdecayed</span> <span class="sy0">=</span> <span class="kw2">True</span>
+                <span class="kw1">return</span> <span class="kw2">True</span>
+        <span class="kw1">return</span> <span class="kw2">False</span>
+&nbsp;
+    <span class="kw1">def</span> show<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">hasdecayed</span> <span class="sy0">==</span> <span class="kw2">False</span>:
+            screen.<span class="me1">blit</span><span class="br0">&#40;</span>alive<span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">xcor</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">ycor</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            screen.<span class="me1">blit</span><span class="br0">&#40;</span>decayed<span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">xcor</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">ycor</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> refresh<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">hasdecayed</span> <span class="sy0">=</span> <span class="kw2">False</span>
+&nbsp;
+    <span class="kw1">def</span> __print__<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> hasdecayed:
+            <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;This is has decayed.&quot;</span><span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;This is still present.&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> decayExperiment<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    atoms <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> dose<span class="sy0">=</span><span class="nu0">100</span><span class="sy0">,</span> halflife<span class="sy0">=</span><span class="nu0">10</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">dose</span> <span class="sy0">=</span> dose
+        <span class="kw2">self</span>.<span class="me1">remain</span> <span class="sy0">=</span> dose
+        <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>dose<span class="br0">&#41;</span>:
+            <span class="kw2">self</span>.<span class="me1">atoms</span>.<span class="me1">append</span><span class="br0">&#40;</span>atom<span class="br0">&#40;</span>halflife<span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> show<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">self</span>.<span class="me1">atoms</span>:
+            i.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> decay<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">import</span> <span class="kw3">sys</span>
+        counttime<span class="sy0">=</span><span class="nu0">0</span>
+        <span class="kw1">while</span> <span class="nu0">1</span>:
+            screen.<span class="me1">fill</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+            <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">self</span>.<span class="me1">atoms</span>:
+                <span class="kw1">if</span> i.<span class="me1">decay</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+                    <span class="kw2">self</span>.<span class="me1">remain</span> -<span class="sy0">=</span> <span class="nu0">1</span>
+            <span class="kw2">self</span>.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="kw3">time</span>.<span class="me1">sleep</span><span class="br0">&#40;</span><span class="nu0">1</span>/<span class="nu0">24</span><span class="br0">&#41;</span>
+            counttime+<span class="sy0">=</span><span class="nu0">1</span>/<span class="nu0">24</span>
+            text_screen <span class="sy0">=</span> my_font.<span class="me1">render</span><span class="br0">&#40;</span><span class="st0">&quot;Time lapse: &quot;</span>+<span class="kw2">str</span><span class="br0">&#40;</span>counttime<span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">True</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            screen.<span class="me1">blit</span><span class="br0">&#40;</span>text_screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            board2 <span class="sy0">=</span> <span class="st0">&quot;Remaining atoms: &quot;</span>+<span class="kw2">str</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">remain</span><span class="br0">&#41;</span>+<span class="st0">&quot; of &quot;</span>+<span class="kw2">str</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">dose</span><span class="br0">&#41;</span>
+            text_screen <span class="sy0">=</span> my_font.<span class="me1">render</span><span class="br0">&#40;</span>board2<span class="sy0">,</span> <span class="kw2">True</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            screen.<span class="me1">blit</span><span class="br0">&#40;</span>text_screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">320</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="kw1">for</span> event <span class="kw1">in</span> pygame.<span class="me1">event</span>.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+                <span class="kw1">if</span> event.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">QUIT</span>:
+                    <span class="kw3">sys</span>.<span class="me1">exit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">remain</span> <span class="sy0">&lt;=</span> <span class="kw2">self</span>.<span class="me1">dose</span>*<span class="nu0">0.01</span>:
+                <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;99% has already decayed!&quot;</span><span class="br0">&#41;</span>
+                <span class="kw1">break</span>
+&nbsp;
+    <span class="kw1">def</span> refresh<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">self</span>.<span class="me1">atoms</span>:
+            i.<span class="me1">refresh</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        screen.<span class="me1">fill</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+        pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">import</span> pygame
+<span class="kw1">import</span> <span class="kw3">time</span>
+<span class="kw1">from</span> pygame.<span class="kw2">locals</span> <span class="kw1">import</span> *
+&nbsp;
+pygame.<span class="me1">init</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+screen <span class="sy0">=</span> pygame.<span class="me1">display</span>.<span class="me1">set_mode</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">640</span><span class="sy0">,</span> <span class="nu0">480</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+screen.<span class="me1">fill</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+my_font <span class="sy0">=</span> pygame.<span class="me1">font</span>.<span class="me1">SysFont</span><span class="br0">&#40;</span><span class="kw2">None</span><span class="sy0">,</span> <span class="nu0">22</span><span class="br0">&#41;</span>
+pygame.<span class="me1">display</span>.<span class="me1">set_caption</span><span class="br0">&#40;</span><span class="st0">&quot;Halflife Demonstration&quot;</span><span class="br0">&#41;</span>
+alive <span class="sy0">=</span> pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">'red.gif'</span><span class="br0">&#41;</span>
+alive <span class="sy0">=</span> pygame.<span class="me1">transform</span>.<span class="me1">scale</span><span class="br0">&#40;</span>alive<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">20</span><span class="sy0">,</span> <span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+decayed <span class="sy0">=</span> pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">'black.gif'</span><span class="br0">&#41;</span>
+decayed <span class="sy0">=</span> pygame.<span class="me1">transform</span>.<span class="me1">scale</span><span class="br0">&#40;</span>decayed<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">20</span><span class="sy0">,</span> <span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+elenum<span class="sy0">=</span><span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;How many atoms? (100 to 1000 recommended)&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+elelife<span class="sy0">=</span><span class="kw2">float</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;How long is the halflife in seconds? (1.0 above recommended)&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+experiment <span class="sy0">=</span> decayExperiment<span class="br0">&#40;</span>elenum<span class="sy0">,</span>elelife<span class="br0">&#41;</span>
+<span class="kw1">while</span> <span class="nu0">1</span>:
+    experiment.<span class="me1">decay</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw3">time</span>.<span class="me1">sleep</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span>
+    experiment.<span class="me1">refresh</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    iscontinue <span class="sy0">=</span> <span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Again?&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> iscontinue <span class="sy0">==</span> <span class="st0">&quot;no&quot;</span>:
+        <span class="kw1">break</span>
+&nbsp;</pre>
+
+<h2 id="toc3"> </h2>
+ <h2 id="toc4"><a name="x-Resources:"></a>Resources:</h2>
+ <img src="files/black.gif" alt="black.gif" title="black.gif" /><img src="files/red.gif" alt="red.gif" title="red.gif" /><br />
+<h2 id="toc5"> </h2>
+ <h2 id="toc6"><a name="x-Packed program:"></a>Packed program:</h2>
+ <a href="files/halflifedemo.zip">halflifedemo.zip</a></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

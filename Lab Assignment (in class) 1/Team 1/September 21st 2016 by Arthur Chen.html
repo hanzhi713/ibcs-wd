@@ -1,0 +1,157 @@
+<html>
+  <head>
+    <title>IBCS1-WD - September 21st 2016 by Arthur Chen</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<h3 id="toc0"><a name="x--1.Test"></a>1.Test</h3>
+ <br />
+Today we had a test on Chapter 13 (see <a class="wiki_link" href="Files%20--%20coursework.html">test content</a>). It's supposed to be finished in 20 minutes' time, but actually took thirty or so. The first problem is about downloading files from website; the second one is about reversing every line in a file; the third one is about replacing keywords in a file. The first two are trivial, while the third is a bit challenging.<br />
+<br />
+<span style="color: #454545; font-family: Helvetica; font-size: 12px;">We had came up with a few approaches to the third question:</span><br />
+<br />
+1.Use the inbuilt function 'replace':<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">content.<span class="me1">replace</span><span class="br0">&#40;</span><span class="st0">'Alice'</span><span class="sy0">,</span><span class="st0">'YOURNAME'</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+Brief and efficient but not recommended.<br />
+<br />
+2. Use the 'split' and 'join' method:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">lst<span class="sy0">=</span><span class="st0">'Alice'</span>.<span class="me1">split</span><span class="br0">&#40;</span>content<span class="br0">&#41;</span>
+content<span class="sy0">=</span><span class="st0">'YOURNAME'</span>.<span class="me1">join</span><span class="br0">&#40;</span>lst<span class="br0">&#41;</span></pre>
+
+or<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">lst<span class="sy0">=</span><span class="st0">' '</span>.<span class="me1">split</span><span class="br0">&#40;</span>content<span class="br0">&#41;</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> lst:
+    <span class="kw1">if</span> i<span class="sy0">==</span><span class="st0">'Alice'</span>:
+        lst<span class="br0">&#91;</span>lst.<span class="me1">index</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#93;</span><span class="sy0">=</span><span class="st0">'YOURNAME'</span>
+content<span class="sy0">=</span><span class="st0">' '</span>.<span class="me1">join</span><span class="br0">&#40;</span>lst<span class="br0">&#41;</span></pre>
+
+However, the second piece of code needs some special treatment: 1) Punctuations need to be taken care of. 2)The '\n' need special attention<br />
+<br />
+3.Use 'find' method:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">while</span> <span class="kw2">True</span>: 
+    ind<span class="sy0">=</span>line.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">'Alice'</span><span class="br0">&#41;</span> 
+    <span class="kw1">if</span> ind<span class="sy0">==</span>-<span class="nu0">1</span>:
+         <span class="kw1">break</span> 
+    <span class="kw1">else</span>:
+         line<span class="sy0">=</span>line<span class="br0">&#91;</span>:ind<span class="br0">&#93;</span>+<span class="st0">'YOURNAME'</span>+line<span class="br0">&#91;</span>ind+<span class="nu0">5</span>:<span class="br0">&#93;</span> 
+&nbsp;</pre>
+
+<br />
+There may be more approaches other than these. However, no matter which one we use, we should always be aware of these:<br />
+<ol><li>Adaptable: When we want to apply the program to do similar but different things, we only have to make few changes. Like we want to replace, or replace to. another keyword, we shouldn't have to go through all the codes and make lots of changes.</li><li>Easy to read: We should make convenience for others to further our program.</li><li>As efficient as possible: Chose your algorithm wisely to make your program faster.</li></ol><br />
+<h3 id="toc1"><a name="x--2.Lists"></a>2.Lists</h3>
+ <br />
+After the test, we talked about some list methods.<br />
+<br />
+First, we discussed lists aliasing. We may encounter this problem when defining functions and assigning a list to a different name, like &quot;b=a&quot;.<br />
+In a function definition, the parameters are aliases of the arguments. If we make changes to the parameters, the arguments also change, then we have a modifier. Otherwise, we have a pure function.<br />
+When we are assigning a to be, we are actually making a alias, b, of a. This means that b and a refer to the same object. If we make changes to b, a will change accordingly. If we want b to be a new independent list, we can use b=a[:], which has the same effect as deepcopy.<br />
+<br />
+Then, we talked about nested lists. We usually use this to represent matrices. For example, lst=[[1,2,3],[2,3,4],[3,4,5]] is a 3*3 matrix. The elements in it are called by giving two indexes, like lst[2,2] for 5 as python counts from 0.<br />
+<br />
+Also, we learnt that the function range() only generates a &quot;lazy list&quot;, which means that there isn't actually a list, but a request for a list. This can make our program more efficient when we are finding the first element of some property in a large dataset. It is because we don't actually examine the rest elements as it is lazy.<br />
+<br />
+<h3 id="toc2"><a name="x--3.Homework"></a>3.Homework</h3>
+ <br />
+Finish coursework4.5, and self-study 4.6.</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

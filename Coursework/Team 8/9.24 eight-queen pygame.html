@@ -1,0 +1,252 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 9.24 eight-queen pygame</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<h2 id="toc0"><a name="x-permutations module:"></a>permutations module:</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">copy</span>
+<span class="kw1">def</span> unitpermutations<span class="br0">&#40;</span>n<span class="br0">&#41;</span>:
+    <span class="kw1">if</span> n<span class="sy0">==</span><span class="nu0">1</span>:
+        <span class="kw1">return</span> <span class="br0">&#91;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#93;</span>
+    <span class="kw1">else</span>:
+        result<span class="sy0">=</span>unitpermutations<span class="br0">&#40;</span>n-<span class="nu0">1</span><span class="br0">&#41;</span>
+        newresult<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+        k<span class="sy0">=</span><span class="kw2">len</span><span class="br0">&#40;</span>result<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+        <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>k+<span class="nu0">1</span><span class="br0">&#41;</span>:
+            <span class="kw1">for</span> i <span class="kw1">in</span> result:
+                add<span class="sy0">=</span><span class="kw3">copy</span>.<span class="me1">deepcopy</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+                add<span class="br0">&#91;</span>j:j<span class="br0">&#93;</span><span class="sy0">=</span><span class="br0">&#91;</span>n-<span class="nu0">1</span><span class="br0">&#93;</span>
+                newresult.<span class="me1">append</span><span class="br0">&#40;</span>add<span class="br0">&#41;</span>
+        newresult.<span class="me1">sort</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> newresult
+&nbsp;
+<span class="kw1">def</span> remove_adjacent_dups<span class="br0">&#40;</span>xs<span class="br0">&#41;</span>:
+    result <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    most_recent_elem <span class="sy0">=</span> <span class="kw2">None</span>
+    <span class="kw1">for</span> e <span class="kw1">in</span> xs:
+        <span class="kw1">if</span> e <span class="sy0">!=</span> most_recent_elem:
+            result.<span class="me1">append</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span>
+            most_recent_elem <span class="sy0">=</span> e
+    <span class="kw1">return</span> result
+&nbsp;
+<span class="kw1">def</span> permutations<span class="br0">&#40;</span>lst<span class="br0">&#41;</span>:
+    mod<span class="sy0">=</span>unitpermutations<span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>lst<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> mod:
+        <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+            i<span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">=</span>lst<span class="br0">&#91;</span>i<span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="br0">&#93;</span>
+    mod.<span class="me1">sort</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    result<span class="sy0">=</span>remove_adjacent_dups<span class="br0">&#40;</span>mod<span class="br0">&#41;</span>
+    <span class="kw1">return</span> result</pre>
+
+<br />
+<br />
+<h2 id="toc1"><a name="x-eight_queen module："></a>eight_queen module：</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">from</span> permutations <span class="kw1">import</span> unitpermutations
+&nbsp;
+x<span class="sy0">=</span><span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">'The scale of the board: '</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> ro_y<span class="br0">&#40;</span>bd<span class="br0">&#41;</span>:
+    newbd<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>bd<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        newbd.<span class="me1">append</span><span class="br0">&#40;</span>bd.<span class="me1">index</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> newbd
+&nbsp;
+<span class="kw1">def</span> ro_x<span class="br0">&#40;</span>bd<span class="br0">&#41;</span>:
+    newbd<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> bd:
+        newbd.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>bd<span class="br0">&#41;</span>-<span class="nu0">1</span>-i<span class="br0">&#41;</span>
+    <span class="kw1">return</span> newbd
+&nbsp;
+<span class="kw1">def</span> ro_anti90<span class="br0">&#40;</span>bd<span class="br0">&#41;</span>:
+    newbd<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>bd<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        newbd.<span class="me1">append</span><span class="br0">&#40;</span>bd.<span class="me1">index</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>bd<span class="br0">&#41;</span>-<span class="nu0">1</span>-i<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> newbd
+&nbsp;
+<span class="kw1">def</span> ro_anti180<span class="br0">&#40;</span>bd<span class="br0">&#41;</span>:
+    newbd<span class="sy0">=</span>ro_anti90<span class="br0">&#40;</span>ro_anti90<span class="br0">&#40;</span>bd<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> newbd
+&nbsp;
+<span class="kw1">def</span> ro_anti270<span class="br0">&#40;</span>bd<span class="br0">&#41;</span>:
+    newbd<span class="sy0">=</span>ro_anti90<span class="br0">&#40;</span>ro_anti180<span class="br0">&#40;</span>bd<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> newbd
+&nbsp;
+<span class="kw1">def</span> remove_adjacent_dups<span class="br0">&#40;</span>xs<span class="br0">&#41;</span>:
+    result <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    most_recent_elem <span class="sy0">=</span> <span class="kw2">None</span>
+    <span class="kw1">for</span> e <span class="kw1">in</span> xs:
+        <span class="kw1">if</span> e <span class="sy0">!=</span> most_recent_elem:
+            result.<span class="me1">append</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span>
+            most_recent_elem <span class="sy0">=</span> e
+    <span class="kw1">return</span> result
+&nbsp;
+<span class="kw1">def</span> family<span class="br0">&#40;</span>bd<span class="br0">&#41;</span>:
+    fam<span class="sy0">=</span><span class="br0">&#91;</span>bd<span class="sy0">,</span>ro_x<span class="br0">&#40;</span>bd<span class="br0">&#41;</span><span class="sy0">,</span>ro_y<span class="br0">&#40;</span>bd<span class="br0">&#41;</span><span class="sy0">,</span>ro_anti90<span class="br0">&#40;</span>bd<span class="br0">&#41;</span><span class="sy0">,</span>ro_x<span class="br0">&#40;</span>ro_anti90<span class="br0">&#40;</span>bd<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span>ro_y<span class="br0">&#40;</span>ro_anti90<span class="br0">&#40;</span>bd<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span>ro_anti180<span class="br0">&#40;</span>bd<span class="br0">&#41;</span><span class="sy0">,</span>ro_x<span class="br0">&#40;</span>ro_anti180<span class="br0">&#40;</span>bd<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span>ro_y<span class="br0">&#40;</span>ro_anti180<span class="br0">&#40;</span>bd<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span>ro_anti270<span class="br0">&#40;</span>bd<span class="br0">&#41;</span><span class="br0">&#93;</span>
+    fam.<span class="me1">sort</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    fam<span class="sy0">=</span>remove_adjacent_dups<span class="br0">&#40;</span>fam<span class="br0">&#41;</span>
+    <span class="kw1">return</span> fam
+&nbsp;
+<span class="kw1">def</span> share_diagonal<span class="br0">&#40;</span>x0<span class="sy0">,</span> y0<span class="sy0">,</span> x1<span class="sy0">,</span> y1<span class="br0">&#41;</span>:
+    dy <span class="sy0">=</span> <span class="kw2">abs</span><span class="br0">&#40;</span>y1 - y0<span class="br0">&#41;</span>
+    dx <span class="sy0">=</span> <span class="kw2">abs</span><span class="br0">&#40;</span>x1 - x0<span class="br0">&#41;</span>
+    <span class="kw1">return</span> dx <span class="sy0">==</span> dy
+&nbsp;
+<span class="kw1">def</span> col_clashes<span class="br0">&#40;</span>bs<span class="sy0">,</span> c<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>c<span class="br0">&#41;</span>:
+          <span class="kw1">if</span> share_diagonal<span class="br0">&#40;</span>i<span class="sy0">,</span> bs<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">,</span> c<span class="sy0">,</span> bs<span class="br0">&#91;</span>c<span class="br0">&#93;</span><span class="br0">&#41;</span>:
+              <span class="kw1">return</span> <span class="kw2">True</span>
+    <span class="kw1">return</span> <span class="kw2">False</span>
+&nbsp;
+<span class="kw1">def</span> has_clashes<span class="br0">&#40;</span>the_board<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> col <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="kw2">len</span><span class="br0">&#40;</span>the_board<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> col_clashes<span class="br0">&#40;</span>the_board<span class="sy0">,</span> col<span class="br0">&#41;</span>:
+            <span class="kw1">return</span> <span class="kw2">True</span>
+    <span class="kw1">return</span> <span class="kw2">False</span>
+&nbsp;
+<span class="kw1">def</span> main<span class="br0">&#40;</span>n<span class="br0">&#41;</span>:
+    <span class="kw1">global</span> result
+    done<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+    bds <span class="sy0">=</span> unitpermutations<span class="br0">&#40;</span>n<span class="br0">&#41;</span>
+&nbsp;
+    num_found <span class="sy0">=</span> <span class="nu0">0</span>
+    tries<span class="sy0">=</span><span class="nu0">0</span>
+    check<span class="sy0">=</span><span class="nu0">0</span>
+    <span class="kw1">for</span> bd <span class="kw1">in</span> bds:
+        <span class="kw1">if</span> bd <span class="kw1">in</span> done:
+            <span class="kw1">continue</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">if</span> <span class="kw1">not</span> has_clashes<span class="br0">&#40;</span>bd<span class="br0">&#41;</span>:
+                result.<span class="me1">append</span><span class="br0">&#40;</span>bd<span class="br0">&#41;</span>
+                num_found +<span class="sy0">=</span> <span class="nu0">1</span>
+                done+<span class="sy0">=</span>family<span class="br0">&#40;</span>bd<span class="br0">&#41;</span>
+result<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+main<span class="br0">&#40;</span>x<span class="br0">&#41;</span></pre>
+
+<h2 id="toc2"> </h2>
+ <h2 id="toc3"><a name="x-main program: eightqueen_pygame"></a>main program: eightqueen_pygame</h2>
+ <h2 id="toc4"> </h2>
+ Pictures：queeninwhite：<img src="files/queeninwhite.gif" alt="queeninwhite.gif" title="queeninwhite.gif" />queeninblack<img src="files/queeninblack.gif" alt="queeninblack.gif" title="queeninblack.gif" /><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> pygame
+<span class="kw1">from</span> pygame.<span class="kw2">locals</span> <span class="kw1">import</span> *
+<span class="kw1">import</span> eight_queen <span class="kw1">as</span> eq
+<span class="kw1">import</span> <span class="kw3">sys</span>
+scale<span class="sy0">=</span>eq.<span class="me1">x</span>
+result<span class="sy0">=</span>eq.<span class="me1">result</span>
+<span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>result<span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span>:
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'no result'</span><span class="br0">&#41;</span>
+    <span class="kw3">sys</span>.<span class="me1">exit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'Click to see next one.'</span><span class="br0">&#41;</span>
+ind<span class="sy0">=</span><span class="nu0">0</span>
+ckeck<span class="sy0">=</span><span class="nu0">1</span>
+pygame.<span class="me1">init</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+screen <span class="sy0">=</span> pygame.<span class="me1">display</span>.<span class="me1">set_mode</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">80</span>*scale<span class="sy0">,</span><span class="nu0">80</span>*scale<span class="br0">&#41;</span><span class="br0">&#41;</span>
+pygame.<span class="me1">display</span>.<span class="me1">set_caption</span><span class="br0">&#40;</span><span class="st0">&quot;1&quot;</span>+<span class="st0">&quot; / &quot;</span>+<span class="kw2">str</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>result<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+qw <span class="sy0">=</span> pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">'queeninwhite.gif'</span><span class="br0">&#41;</span>
+qb <span class="sy0">=</span> pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">'queeninblack.gif'</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">while</span> <span class="kw2">True</span>:
+    event <span class="sy0">=</span> pygame.<span class="me1">event</span>.<span class="me1">poll</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> event.<span class="kw2">type</span> <span class="sy0">==</span> MOUSEBUTTONDOWN:
+        ind+<span class="sy0">=</span><span class="nu0">1</span>
+        <span class="kw1">if</span> ind<span class="sy0">&gt;=</span><span class="kw2">len</span><span class="br0">&#40;</span>result<span class="br0">&#41;</span>:
+            pygame.<span class="me1">quit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="kw1">break</span>
+        pygame.<span class="me1">display</span>.<span class="me1">set_caption</span><span class="br0">&#40;</span><span class="kw2">str</span><span class="br0">&#40;</span>ind+<span class="nu0">1</span><span class="br0">&#41;</span>+<span class="st0">&quot; / &quot;</span>+<span class="kw2">str</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>result<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> event.<span class="kw2">type</span> <span class="sy0">==</span> QUIT:
+        pygame.<span class="me1">quit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">break</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>scale<span class="br0">&#41;</span>:
+        <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>scale<span class="br0">&#41;</span>:
+            <span class="kw1">if</span> <span class="br0">&#40;</span>i+j<span class="br0">&#41;</span>%<span class="nu0">2</span><span class="sy0">==</span><span class="nu0">0</span>:
+                <span class="kw1">if</span> <span class="br0">&#40;</span>i<span class="sy0">,</span>j<span class="br0">&#41;</span> <span class="kw1">in</span> <span class="kw2">enumerate</span><span class="br0">&#40;</span>result<span class="br0">&#91;</span>ind<span class="br0">&#93;</span><span class="br0">&#41;</span>:
+                    screen.<span class="me1">blit</span><span class="br0">&#40;</span>qb<span class="sy0">,</span><span class="br0">&#40;</span>i*<span class="nu0">80</span><span class="sy0">,</span>j*<span class="nu0">80</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                <span class="kw1">else</span>:
+                    pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="br0">&#91;</span>i*<span class="nu0">80</span><span class="sy0">,</span>j*<span class="nu0">80</span><span class="sy0">,</span><span class="nu0">80</span><span class="sy0">,</span><span class="nu0">80</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+            <span class="kw1">else</span>:
+                <span class="kw1">if</span> <span class="br0">&#40;</span>i<span class="sy0">,</span>j<span class="br0">&#41;</span> <span class="kw1">in</span> <span class="kw2">enumerate</span><span class="br0">&#40;</span>result<span class="br0">&#91;</span>ind<span class="br0">&#93;</span><span class="br0">&#41;</span>:
+                    screen.<span class="me1">blit</span><span class="br0">&#40;</span>qw<span class="sy0">,</span><span class="br0">&#40;</span>i*<span class="nu0">80</span><span class="sy0">,</span>j*<span class="nu0">80</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                <span class="kw1">else</span>:
+                    pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span><span class="br0">&#91;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="br0">&#91;</span>i*<span class="nu0">80</span><span class="sy0">,</span>j*<span class="nu0">80</span><span class="sy0">,</span><span class="nu0">80</span><span class="sy0">,</span><span class="nu0">80</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+<h3 id="toc5"><a name="x-main program: eightqueen_pygame-9.25 Update：The chess board is drew instead of loaded."></a>9.25 Update：The chess board is drew instead of loaded.</h3>
+ <h2 id="toc6"> </h2>
+ <h2 id="toc7"> </h2>
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

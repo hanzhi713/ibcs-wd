@@ -1,0 +1,169 @@
+<html>
+  <head>
+    <title>IBCS1-WD - BattleShip</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> battleShip <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> board <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> ships <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> shoot <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> attempts<span class="sy0">=</span><span class="nu0">0</span>,
+            shotHit<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+&nbsp;
+        initBoard<span class="br0">&#40;</span>board<span class="br0">&#41;</span><span class="sy0">;</span>
+        initShips<span class="br0">&#40;</span>ships<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">do</span><span class="br0">&#123;</span>
+            showBoard<span class="br0">&#40;</span>board<span class="br0">&#41;</span><span class="sy0">;</span>
+            shoot<span class="br0">&#40;</span>shoot<span class="br0">&#41;</span><span class="sy0">;</span>
+            attempts<span class="sy0">++;</span>
+&nbsp;
+            <span class="kw1">if</span><span class="br0">&#40;</span>hit<span class="br0">&#40;</span>shoot,ships<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                hint<span class="br0">&#40;</span>shoot,ships,attempts<span class="br0">&#41;</span><span class="sy0">;</span>
+                shotHit<span class="sy0">++;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span>
+                hint<span class="br0">&#40;</span>shoot,ships,attempts<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            changeboard<span class="br0">&#40;</span>shoot,ships,board<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+&nbsp;
+        <span class="br0">&#125;</span><span class="kw1">while</span><span class="br0">&#40;</span>shotHit<span class="sy0">!=</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;<span class="es0">\n</span><span class="es0">\n</span><span class="es0">\n</span>Battleship Java game finished! You hit 3 ships in &quot;</span><span class="sy0">+</span>attempts<span class="sy0">+</span><span class="st0">&quot; attempts&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        showBoard<span class="br0">&#40;</span>board<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> initBoard<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> board<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> row<span class="sy0">=</span><span class="nu0">0</span> <span class="sy0">;</span> row <span class="sy0">&lt;</span> <span class="nu0">5</span> <span class="sy0">;</span> row<span class="sy0">++</span> <span class="br0">&#41;</span>
+            <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> column<span class="sy0">=</span><span class="nu0">0</span> <span class="sy0">;</span> column <span class="sy0">&lt;</span> <span class="nu0">5</span> <span class="sy0">;</span> column<span class="sy0">++</span> <span class="br0">&#41;</span>
+                board<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>column<span class="br0">&#93;</span><span class="sy0">=-</span><span class="nu0">1</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> showBoard<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> board<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;<span class="es0">\t</span>1 <span class="es0">\t</span>2 <span class="es0">\t</span>3 <span class="es0">\t</span>4 <span class="es0">\t</span>5&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> row<span class="sy0">=</span><span class="nu0">0</span> <span class="sy0">;</span> row <span class="sy0">&lt;</span> <span class="nu0">5</span> <span class="sy0">;</span> row<span class="sy0">++</span> <span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span><span class="br0">&#40;</span>row<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> column<span class="sy0">=</span><span class="nu0">0</span> <span class="sy0">;</span> column <span class="sy0">&lt;</span> <span class="nu0">5</span> <span class="sy0">;</span> column<span class="sy0">++</span> <span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span><span class="br0">&#40;</span>board<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>column<span class="br0">&#93;</span><span class="sy0">==-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span><span class="st0">&quot;<span class="es0">\t</span>&quot;</span><span class="sy0">+</span><span class="st0">&quot;~&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span><span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>board<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>column<span class="br0">&#93;</span><span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span><span class="st0">&quot;<span class="es0">\t</span>&quot;</span><span class="sy0">+</span><span class="st0">&quot;*&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span><span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>board<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>column<span class="br0">&#93;</span><span class="sy0">==</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span><span class="st0">&quot;<span class="es0">\t</span>&quot;</span><span class="sy0">+</span><span class="st0">&quot;X&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> initShips<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> ships<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">Random</span> random <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Random</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> ship<span class="sy0">=</span><span class="nu0">0</span> <span class="sy0">;</span> ship <span class="sy0">&lt;</span> <span class="nu0">3</span> <span class="sy0">;</span> ship<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            ships<span class="br0">&#91;</span>ship<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">=</span>random.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            ships<span class="br0">&#91;</span>ship<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">=</span>random.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            <span class="co1">//let's check if that shot was already tried</span>
+            <span class="co1">//if it was, just finish the do...while when a new pair was randomly selected</span>
+            <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> last<span class="sy0">=</span><span class="nu0">0</span> <span class="sy0">;</span> last <span class="sy0">&lt;</span> ship <span class="sy0">;</span> last<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span><span class="br0">&#40;</span> <span class="br0">&#40;</span>ships<span class="br0">&#91;</span>ship<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">==</span> ships<span class="br0">&#91;</span>last<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">&amp;&amp;</span><span class="br0">&#40;</span>ships<span class="br0">&#91;</span>ship<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">==</span> ships<span class="br0">&#91;</span>last<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="br0">&#41;</span>
+                    <span class="kw1">do</span><span class="br0">&#123;</span>
+                        ships<span class="br0">&#91;</span>ship<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">=</span>random.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        ships<span class="br0">&#91;</span>ship<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">=</span>random.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span><span class="kw1">while</span><span class="br0">&#40;</span> <span class="br0">&#40;</span>ships<span class="br0">&#91;</span>ship<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">==</span> ships<span class="br0">&#91;</span>last<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">&amp;&amp;</span><span class="br0">&#40;</span>ships<span class="br0">&#91;</span>ship<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">==</span> ships<span class="br0">&#91;</span>last<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+&nbsp;
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> shoot<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> shoot<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        Scanner input <span class="sy0">=</span> <span class="kw1">new</span> Scanner<span class="br0">&#40;</span><span class="kw3">System</span>.<span class="me1">in</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span><span class="st0">&quot;Row: &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        shoot<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        shoot<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">--;</span>
+&nbsp;
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span><span class="st0">&quot;Column: &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        shoot<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        shoot<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">--;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">boolean</span> hit<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> shoot, <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> ships<span class="br0">&#41;</span><span class="br0">&#123;</span>
+&nbsp;
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> ship<span class="sy0">=</span><span class="nu0">0</span> <span class="sy0">;</span> ship<span class="sy0">&lt;</span>ships.<span class="me1">length</span> <span class="sy0">;</span> ship<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span> shoot<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">==</span>ships<span class="br0">&#91;</span>ship<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">&amp;&amp;</span> shoot<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">==</span>ships<span class="br0">&#91;</span>ship<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">printf</span><span class="br0">&#40;</span><span class="st0">&quot;You hit a ship located in (%d,%d)<span class="es0">\n</span>&quot;</span>,shoot<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">+</span><span class="nu0">1</span>,shoot<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> hint<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> shoot, <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> ships, <span class="kw4">int</span> attempt<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span> row<span class="sy0">=</span><span class="nu0">0</span>,
+            column<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> line<span class="sy0">=</span><span class="nu0">0</span> <span class="sy0">;</span> line <span class="sy0">&lt;</span> ships.<span class="me1">length</span> <span class="sy0">;</span> line<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>ships<span class="br0">&#91;</span>line<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">==</span>shoot<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+                row<span class="sy0">++;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>ships<span class="br0">&#91;</span>line<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">==</span>shoot<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+                column<span class="sy0">++;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">printf</span><span class="br0">&#40;</span><span class="st0">&quot;<span class="es0">\n</span>Hint %d: <span class="es0">\n</span>Row %d -&gt; %d ships<span class="es0">\n</span>&quot;</span> <span class="sy0">+</span>
+                                 <span class="st0">&quot;Column %d -&gt; %d ships<span class="es0">\n</span>&quot;</span>,attempt,shoot<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">+</span><span class="nu0">1</span>,row,shoot<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">+</span><span class="nu0">1</span>,column<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> changeboard<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> shoot, <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> ships, <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> board<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>hit<span class="br0">&#40;</span>shoot,ships<span class="br0">&#41;</span><span class="br0">&#41;</span>
+            board<span class="br0">&#91;</span>shoot<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="br0">&#91;</span>shoot<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">else</span>
+            board<span class="br0">&#91;</span>shoot<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="br0">&#91;</span>shoot<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

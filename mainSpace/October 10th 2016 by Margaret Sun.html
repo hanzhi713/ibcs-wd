@@ -1,0 +1,147 @@
+<html>
+  <head>
+    <title>IBCS1-WD - October 10th 2016 by Margaret Sun</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>October 10th 2016 by Margaret Sun<small> #Log </small></h1><span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">Today we talked bout Chapter 19 <strong>Exceptions</strong>.</span><br />
+<strong><span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">1. </span></strong><span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">Exception is an object, and according to the book, whenever it occurs, &quot;the program stops running at this point and Python prints out the traceback&quot;.</span><br />
+<span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">Then we talked bout three main types of exceptions.</span><br />
+<strong><span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">1. Logic error</span></strong><br />
+<span style="font-family: Arial,Helvetica,sans-serif;"><span style="font-size: 120%;">Feature: </span>T<span style="font-size: 120%;">he program can be run, but without getting a satisfying answer. This is </span>referred<span style="font-size: 120%;"> as the most terrible error since it was the algorithm that was being wrong. </span></span><br />
+<span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">Example:</span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">sumU<span class="sy0">=</span><span class="nu0">0</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">10</span><span class="br0">&#41;</span>:
+    sumU+<span class="sy0">=</span>i
+<span class="kw1">print</span><span class="br0">&#40;</span>sumU<span class="br0">&#41;</span></pre>
+
+<span style="font-family: Arial,Helvetica,sans-serif;"><span style="font-size: 120%;">You want to get the sum from 1 to 10, while the code returns 45, which is the sum from 0 to 9-- it is definitely not </span>the<span style="font-size: 120%;"> result you intended but it can be run.</span></span><br />
+<strong><span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">2. Rum-time error</span></strong><br />
+<span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">Feature: Errors will be traced back with a message.</span><br />
+<span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">Example:</span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">print</span><span class="br0">&#40;</span><span class="nu0">1</span>/<span class="nu0">0</span><span class="br0">&#41;</span></pre>
+
+<span style="font-family: Arial,Helvetica,sans-serif;"><span style="font-size: 120%;">You receive a </span>message<span style="font-size: 120%;"> saying &quot;ZeroDivisionError: integer division or modulo by zero&quot;.</span></span><br />
+<strong><span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">3. Syntax error</span></strong><br />
+<span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">Feature: Pycharm can highlight it for you to recognize it so it is the easiest to solve.</span><br />
+<span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">Example:</span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">prnt<span class="br0">&#40;</span><span class="st0">&quot;a&quot;</span><span class="br0">&#41;</span></pre>
+
+<span style="font-family: Arial,Helvetica,sans-serif;"><span style="font-size: 120%;">You receive a message saying &quot;NameError: name '</span>print<span style="font-size: 120%;">' is not defined&quot;, and the only thing you need to do is change </span></span><span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">&quot;prnt&quot; to the correct name &quot;print&quot;.</span><br />
+<span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;"><strong>Use of Try Statement</strong>:</span><br />
+<span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">It handles the exception.</span><br />
+<span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">If no exception occurred in the try clause, the except clause will be skipped.</span><br />
+<span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">If any exception occurred in the try clause, the except clause will be executed and then it is continued.</span><br />
+<br />
+<strong><span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">2. </span></strong><span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">To avoid the possible errors made by users to block the program, you might want to create your own exception object and raise it. We used the example from the book:</span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> get_age<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    age <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Please enter your age: &quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> age <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+        <span class="co1"># Create a new instance of an exception</span>
+        my_error <span class="sy0">=</span> <span class="kw2">ValueError</span><span class="br0">&#40;</span><span class="st0">&quot;{0} is not a valid age&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>age<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">raise</span> my_error
+    <span class="kw1">return</span> age</pre>
+
+<span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">If the function that called get_age has try statement to handle this, the program continues; otherwise, the error will be traced back.</span><br />
+<span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;">To remind, the ValueError here is a built-in exception in python, instead of a random named came up to your mind. There are other types of exceptions, you can find the list <a class="wiki_link_ext" href="https://docs.python.org/3/library/exceptions.html" rel="nofollow">here</a></span><strong>.</strong><br />
+<br />
+<span style="font-family: Arial,Helvetica,sans-serif; font-size: 120%;"><strong>3.</strong> The Finally clause in try statement is used to clean up the resources we used (or close the file). Whether or not the statement in try is executed, the Finally clause will always be executed. However, only the except clause can be used to handle exceptions.</span></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

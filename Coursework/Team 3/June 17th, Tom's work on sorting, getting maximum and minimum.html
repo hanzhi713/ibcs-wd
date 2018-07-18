@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <title>IBCS1-WD - June 17th, Tom's work on sorting, getting maximum and minimum</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>June 17th, Tom's work on sorting, getting maximum and minimum<small> #TomsProjects </small></h1><h3 id="toc0"><a name="x--Actually the function of this programme can be achieved using a built-in method of &quot;list&quot; and built-in functions &quot;max&quot; and &quot;min&quot;. However, I was managing to design an algorithm independently."></a>Actually the function of this programme can be achieved using a built-in method of &quot;list&quot; and built-in functions &quot;max&quot; and &quot;min&quot;. However, I was managing to design an algorithm independently.</h3>
+ <br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> SORT<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    i <span class="sy0">=</span> <span class="nu0">0</span>
+    a <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">while</span> <span class="nu0">1</span>:
+        b <span class="sy0">=</span> <span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Input a number, enter [stop] to stop&quot;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> b <span class="sy0">==</span> <span class="st0">&quot;stop&quot;</span>: <span class="kw1">break</span>
+        b <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span>
+        <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">0</span>:
+            a.<span class="me1">append</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">for</span> z <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="kw2">len</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>+<span class="nu0">1</span><span class="br0">&#41;</span>:
+                success<span class="sy0">=</span><span class="nu0">1</span>
+                <span class="kw1">if</span> b <span class="sy0">&gt;</span> a<span class="br0">&#91;</span>z<span class="br0">&#93;</span>:
+                    <span class="kw1">try</span>:
+                        a.<span class="me1">remove</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span>
+                        success <span class="sy0">=</span> <span class="nu0">0</span>
+                    <span class="kw1">except</span>: <span class="kw2">None</span>
+                    a.<span class="me1">insert</span><span class="br0">&#40;</span>z-<span class="nu0">1</span>+success<span class="sy0">,</span>b<span class="br0">&#41;</span>
+                    <span class="kw1">break</span>
+                <span class="kw1">elif</span> b <span class="sy0">==</span> a<span class="br0">&#91;</span>z<span class="br0">&#93;</span>:<span class="kw2">None</span>
+                <span class="kw1">else</span>:
+                    <span class="kw1">try</span>:
+                        a.<span class="me1">remove</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span>
+                        success <span class="sy0">=</span> <span class="nu0">0</span>
+                    <span class="kw1">except</span>: <span class="kw2">None</span>
+                    a.<span class="me1">insert</span><span class="br0">&#40;</span>z+success <span class="sy0">,</span>b<span class="br0">&#41;</span>
+    <span class="kw1">return</span> <span class="st0">&quot;The maximum is &quot;</span>+ <span class="kw2">str</span><span class="br0">&#40;</span>a<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span> + <span class="st0">&quot;. The minimum is &quot;</span>+ <span class="kw2">str</span><span class="br0">&#40;</span>a<span class="br0">&#91;</span><span class="kw2">len</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>-<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span> + <span class="st0">&quot;. The list is &quot;</span>+ <span class="kw2">str</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>SORT<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

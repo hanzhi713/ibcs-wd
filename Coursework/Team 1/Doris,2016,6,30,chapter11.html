@@ -1,0 +1,220 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Doris,2016,6,30,chapter11</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>Doris,2016,6,30,chapter11<small> #pythonexercise </small></h1>1.<br />
+[10, 8, 6, 4, 2]<br />
+if start &lt; stop, and step &lt; 0, the python interpreter's response is [].<br />
+the list start from 'start' and add the value of step every time till the 'stop'. but start is inclusive, stop is exclusive.<br />
+if start &lt; stop, and step &lt; 0, the python interpreter's response is [].<br />
+if start &lt; stop, and step &gt; 0, the python interpreter's response is start from 'start' and add the value of step every time till the 'stop'. but start is inclusive, stop is exclusive.<br />
+if start &gt; stop, and step &lt; 0, the python interpreter's response is start from 'start' and add the value of step every time till the 'stop'. but start is inclusive, stop is exclusive.<br />
+if start &gt; stop, and step &gt; 0, the python interpreter's response is [].<br />
+<br />
+2.<br />
+only one turtle is created. because alex = tess, they are same.<br />
+change the color of alex also change the color of tess.<br />
+<br />
+3.<br />
+before:<br />
+a=[1,2,3],b=[1,2,3]<br />
+after:<br />
+a=[1,2,3].b=[5,2,3]<br />
+<br />
+4.<br />
+output:<br />
+Test 1: False<br />
+Test 2: True<br />
+in test 1, this and that has same value but they are not same object.<br />
+in test 2, this and that are same object.<br />
+<br />
+5.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> add_vectors<span class="br0">&#40;</span>a<span class="sy0">,</span>b<span class="br0">&#41;</span>:
+    c<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        c.<span class="me1">append</span><span class="br0">&#40;</span>a<span class="br0">&#91;</span>i<span class="br0">&#93;</span>+b<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>c<span class="br0">&#41;</span>
+&nbsp;
+add_vectors<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+add_vectors<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">4</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+add_vectors<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">2</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">4</span><span class="sy0">,</span> <span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<br />
+6.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> scalar_mult<span class="br0">&#40;</span>v<span class="sy0">,</span>a<span class="br0">&#41;</span>:
+    c<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        c.<span class="me1">append</span><span class="br0">&#40;</span>v*a<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>c<span class="br0">&#41;</span>
+scalar_mult<span class="br0">&#40;</span><span class="nu0">5</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+scalar_mult<span class="br0">&#40;</span><span class="nu0">3</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> -<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+scalar_mult<span class="br0">&#40;</span><span class="nu0">7</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">3</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">5</span><span class="sy0">,</span> <span class="nu0">11</span><span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#93;</span><span class="br0">&#41;</span></pre>
+
+<br />
+7.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> dot_product<span class="br0">&#40;</span>v<span class="sy0">,</span>a<span class="br0">&#41;</span>:
+    c<span class="sy0">=</span><span class="nu0">0</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        c +<span class="sy0">=</span> v<span class="br0">&#91;</span>i<span class="br0">&#93;</span>*a<span class="br0">&#91;</span>i<span class="br0">&#93;</span>
+    <span class="kw1">print</span> <span class="br0">&#40;</span>c<span class="br0">&#41;</span>
+dot_product<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+dot_product<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">4</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+dot_product<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">2</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">4</span><span class="sy0">,</span> <span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#41;</span></pre>
+
+<br />
+8.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> cross<span class="br0">&#40;</span>a<span class="sy0">,</span> b<span class="br0">&#41;</span>:
+    c <span class="sy0">=</span> <span class="br0">&#91;</span>a<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>*b<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> - a<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span>*b<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span>a<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span>*b<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> - a<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>*b<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">,</span>a<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>*b<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> - a<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>*b<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#93;</span>
+    <span class="kw1">return</span> c
+&nbsp;</pre>
+
+<br />
+9.<br />
+if there is only one space between every word, they are same.<br />
+<br />
+10<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> replace<span class="br0">&#40;</span>s<span class="sy0">,</span> old<span class="sy0">,</span> <span class="kw3">new</span><span class="br0">&#41;</span>:
+    <span class="kw1">import</span> <span class="kw3">re</span>
+    output<span class="sy0">=</span><span class="kw3">re</span>.<span class="me1">sub</span><span class="br0">&#40;</span>old<span class="sy0">,</span><span class="kw3">new</span><span class="sy0">,</span>s<span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>output<span class="br0">&#41;</span>
+replace<span class="br0">&#40;</span><span class="st0">&quot;Mississippi&quot;</span><span class="sy0">,</span> <span class="st0">&quot;i&quot;</span><span class="sy0">,</span> <span class="st0">&quot;I&quot;</span><span class="br0">&#41;</span>
+s <span class="sy0">=</span> <span class="st0">&quot;I love spom! Spom is my favorite food. Spom, spom, yum!&quot;</span>
+replace<span class="br0">&#40;</span>s<span class="sy0">,</span> <span class="st0">&quot;om&quot;</span><span class="sy0">,</span> <span class="st0">&quot;am&quot;</span><span class="br0">&#41;</span>
+replace<span class="br0">&#40;</span>s<span class="sy0">,</span> <span class="st0">&quot;o&quot;</span><span class="sy0">,</span> <span class="st0">&quot;a&quot;</span><span class="br0">&#41;</span></pre>
+
+<br />
+11.<br />
+result:<br />
+before swap function call: a: ['This', 'is', 'fun'] b: [2, 3, 4]<br />
+<br />
+before swap statement: x: ['This', 'is', 'fun'] y: [2, 3, 4]<br />
+<br />
+after swap statement: x: [2, 3, 4] y: ['This', 'is', 'fun']<br />
+<br />
+after swap function call: a: ['This', 'is', 'fun'] b: [2, 3, 4]<br />
+it only change the place of two list but it does't change the values in two list. so after the function, the value of a, b does't change.</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

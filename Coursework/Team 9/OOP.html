@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <title>IBCS1-WD - OOP</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">class</span> Point3D:
+    <span class="st0">&quot;&quot;&quot; Create a new Point, at coordinates x, y &quot;&quot;&quot;</span>
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span> y<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span>z<span class="sy0">=</span><span class="nu0">0</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+        <span class="kw2">self</span>.<span class="me1">z</span> <span class="sy0">=</span> z
+    <span class="kw1">def</span> distance_from_origin<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+&nbsp;
+        s <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span>**<span class="nu0">2</span>+<span class="kw2">self</span>.<span class="me1">y</span>**<span class="nu0">2</span>+<span class="kw2">self</span>.<span class="me1">z</span>**<span class="nu0">2</span><span class="br0">&#41;</span>**<span class="nu0">0.5</span>
+        <span class="kw1">return</span> s
+    <span class="kw1">def</span> distance_to_other<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>target<span class="br0">&#41;</span>:
+        s <span class="sy0">=</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>target.<span class="me1">x</span>-<span class="kw2">self</span>.<span class="me1">x</span><span class="br0">&#41;</span>**<span class="nu0">2</span>+<span class="br0">&#40;</span>target.<span class="me1">y</span>-<span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span>**<span class="nu0">2</span>+<span class="br0">&#40;</span>target.<span class="me1">z</span>-<span class="kw2">self</span>.<span class="me1">z</span><span class="br0">&#41;</span>**<span class="nu0">2</span><span class="br0">&#41;</span>**<span class="nu0">0.5</span>
+        <span class="kw1">return</span> s
+    <span class="kw1">def</span> between<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>target<span class="br0">&#41;</span>:
+        coordx <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span> + target.<span class="me1">x</span><span class="br0">&#41;</span>/<span class="nu0">2</span>
+        coordy <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">y</span> + target.<span class="me1">y</span><span class="br0">&#41;</span>/<span class="nu0">2</span>
+        coordz <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">z</span> + target.<span class="me1">z</span><span class="br0">&#41;</span>/<span class="nu0">2</span>
+        <span class="kw1">return</span> Point3D<span class="br0">&#40;</span>coordx<span class="sy0">,</span>coordy<span class="sy0">,</span>coordz<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+a<span class="sy0">=</span>Point3D<span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span>
+b<span class="sy0">=</span>Point3D<span class="br0">&#40;</span><span class="nu0">3</span><span class="sy0">,</span><span class="nu0">3</span><span class="sy0">,</span><span class="nu0">3</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">print</span><span class="br0">&#40;</span>a.<span class="me1">mid</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

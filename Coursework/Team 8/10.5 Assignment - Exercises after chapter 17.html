@@ -1,0 +1,433 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 10.5 Assignment - Exercises after chapter 17</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+17.2<br />
+In the DukeSprite class line 22,there is:<br />
+<span style="display: block; text-align: center;">my_width = self.image.get_width()</span><br />
+However, the my_width gets the width of all the Duke spreadsheet instead of just one Duke's width. The my_with should set to 50 pixels directly.<br />
+<br />
+17.3<br />
+<img src="files/poke.gif" alt="poke.gif" title="poke.gif" /><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> pygame
+<span class="kw1">import</span> <span class="kw3">sys</span>
+<span class="kw1">import</span> <span class="kw3">random</span>
+&nbsp;
+pygame.<span class="me1">init</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+poke<span class="sy0">=</span>pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">'poke.gif'</span><span class="br0">&#41;</span>
+Surface<span class="sy0">=</span>pygame.<span class="me1">display</span>.<span class="me1">set_mode</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">600</span><span class="sy0">,</span><span class="nu0">600</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+deck<span class="sy0">=</span><span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">52</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+w<span class="sy0">=</span>poke.<span class="me1">get_width</span><span class="br0">&#40;</span><span class="br0">&#41;</span>/<span class="nu0">13</span>
+h<span class="sy0">=</span>poke.<span class="me1">get_height</span><span class="br0">&#40;</span><span class="br0">&#41;</span>/<span class="nu0">4</span>
+row<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+col<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+&nbsp;
+<span class="kw1">while</span> <span class="kw2">True</span>:
+    Surface.<span class="me1">fill</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    ev<span class="sy0">=</span>pygame.<span class="me1">event</span>.<span class="me1">poll</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> ev.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">QUIT</span>:
+        pygame.<span class="me1">quit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw3">sys</span>.<span class="me1">exit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">break</span>
+    <span class="kw1">if</span> ev.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">MOUSEBUTTONDOWN</span>:
+        row<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+        col<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+        <span class="kw3">random</span>.<span class="me1">shuffle</span><span class="br0">&#40;</span>deck<span class="br0">&#41;</span>
+        <span class="kw1">for</span> i <span class="kw1">in</span> deck<span class="br0">&#91;</span>:<span class="nu0">5</span><span class="br0">&#93;</span>:
+            row.<span class="me1">append</span><span class="br0">&#40;</span>i//<span class="nu0">13</span><span class="br0">&#41;</span>
+            col.<span class="me1">append</span><span class="br0">&#40;</span>i%<span class="nu0">13</span><span class="br0">&#41;</span>
+    <span class="kw1">try</span>:
+        <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span>:
+            Surface.<span class="me1">blit</span><span class="br0">&#40;</span>poke<span class="sy0">,</span><span class="br0">&#40;</span>i*w<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="br0">&#40;</span>w*col<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">,</span>h*row<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">,</span>w<span class="sy0">,</span>h<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">except</span>:
+        <span class="kw2">None</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+<br />
+17.4<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1">#!/usr/bin/env python</span>
+&nbsp;
+<span class="kw1">import</span> <span class="kw3">random</span><span class="sy0">,</span> <span class="kw3">os</span>.<span class="me1">path</span>
+&nbsp;
+<span class="co1">#import basic pygame modules</span>
+<span class="kw1">import</span> pygame
+<span class="kw1">from</span> pygame.<span class="kw2">locals</span> <span class="kw1">import</span> *
+&nbsp;
+<span class="co1">#see if we can load more than standard BMP</span>
+<span class="kw1">if</span> <span class="kw1">not</span> pygame.<span class="me1">image</span>.<span class="me1">get_extended</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="kw1">raise</span> <span class="kw2">SystemExit</span><span class="br0">&#40;</span><span class="st0">&quot;Sorry, extended image module required&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="co1">#game constants</span>
+MAX_SHOTS      <span class="sy0">=</span> <span class="nu0">4</span>      <span class="co1">#most player bullets onscreen</span>
+ALIEN_ODDS     <span class="sy0">=</span> <span class="nu0">22</span>     <span class="co1">#chances a new alien appears</span>
+BOMB_ODDS      <span class="sy0">=</span> <span class="nu0">60</span>    <span class="co1">#chances a new bomb will drop</span>
+ALIEN_RELOAD   <span class="sy0">=</span> <span class="nu0">12</span>     <span class="co1">#frames between new aliens</span>
+SCREENRECT     <span class="sy0">=</span> Rect<span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">640</span><span class="sy0">,</span> <span class="nu0">480</span><span class="br0">&#41;</span>
+SCORE          <span class="sy0">=</span> <span class="nu0">0</span>
+&nbsp;
+main_dir <span class="sy0">=</span> <span class="kw3">os</span>.<span class="me1">path</span>.<span class="me1">split</span><span class="br0">&#40;</span><span class="kw3">os</span>.<span class="me1">path</span>.<span class="me1">abspath</span><span class="br0">&#40;</span>__file__<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+&nbsp;
+<span class="kw1">def</span> load_image<span class="br0">&#40;</span><span class="kw2">file</span><span class="br0">&#41;</span>:
+    <span class="st0">&quot;loads an image, prepares it for play&quot;</span>
+    <span class="kw2">file</span> <span class="sy0">=</span> <span class="kw3">os</span>.<span class="me1">path</span>.<span class="me1">join</span><span class="br0">&#40;</span>main_dir<span class="sy0">,</span> <span class="st0">'data'</span><span class="sy0">,</span> <span class="kw2">file</span><span class="br0">&#41;</span>
+    <span class="kw1">try</span>:
+        surface <span class="sy0">=</span> pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="kw2">file</span><span class="br0">&#41;</span>
+    <span class="kw1">except</span> pygame.<span class="me1">error</span>:
+        <span class="kw1">raise</span> <span class="kw2">SystemExit</span><span class="br0">&#40;</span><span class="st0">'Could not load image &quot;%s&quot; %s'</span>%<span class="br0">&#40;</span><span class="kw2">file</span><span class="sy0">,</span> pygame.<span class="me1">get_error</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> surface.<span class="me1">convert</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> load_images<span class="br0">&#40;</span>*files<span class="br0">&#41;</span>:
+    imgs <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> <span class="kw2">file</span> <span class="kw1">in</span> files:
+        imgs.<span class="me1">append</span><span class="br0">&#40;</span>load_image<span class="br0">&#40;</span><span class="kw2">file</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> imgs
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> dummysound:
+    <span class="kw1">def</span> play<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>: <span class="kw1">pass</span>
+&nbsp;
+<span class="kw1">def</span> load_sound<span class="br0">&#40;</span><span class="kw2">file</span><span class="br0">&#41;</span>:
+    <span class="kw1">if</span> <span class="kw1">not</span> pygame.<span class="me1">mixer</span>: <span class="kw1">return</span> dummysound<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw2">file</span> <span class="sy0">=</span> <span class="kw3">os</span>.<span class="me1">path</span>.<span class="me1">join</span><span class="br0">&#40;</span>main_dir<span class="sy0">,</span> <span class="st0">'data'</span><span class="sy0">,</span> <span class="kw2">file</span><span class="br0">&#41;</span>
+    <span class="kw1">try</span>:
+        sound <span class="sy0">=</span> pygame.<span class="me1">mixer</span>.<span class="me1">Sound</span><span class="br0">&#40;</span><span class="kw2">file</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> sound
+    <span class="kw1">except</span> pygame.<span class="me1">error</span>:
+        <span class="kw1">print</span> <span class="br0">&#40;</span><span class="st0">'Warning, unable to load, %s'</span> % <span class="kw2">file</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> dummysound<span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="co1"># each type of game object gets an init and an</span>
+<span class="co1"># update function. the update function is called</span>
+<span class="co1"># once per frame, and it is when each object should</span>
+<span class="co1"># change it's current position and state. the Player</span>
+<span class="co1"># object actually gets a &quot;move&quot; function instead of</span>
+<span class="co1"># update, since it is passed extra information about</span>
+<span class="co1"># the keyboard</span>
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> Player<span class="br0">&#40;</span>pygame.<span class="me1">sprite</span>.<span class="me1">Sprite</span><span class="br0">&#41;</span>:
+    speed <span class="sy0">=</span> <span class="nu0">10</span>
+    bounce <span class="sy0">=</span> <span class="nu0">24</span>
+    gun_offset <span class="sy0">=</span> -<span class="nu0">11</span>
+    images <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        pygame.<span class="me1">sprite</span>.<span class="me1">Sprite</span>.<span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">containers</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">image</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">images</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+        <span class="kw2">self</span>.<span class="me1">rect</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">image</span>.<span class="me1">get_rect</span><span class="br0">&#40;</span>midbottom<span class="sy0">=</span>SCREENRECT.<span class="me1">midbottom</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">reloading</span> <span class="sy0">=</span> <span class="nu0">0</span>
+        <span class="kw2">self</span>.<span class="me1">origtop</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">top</span>
+        <span class="kw2">self</span>.<span class="me1">facing</span> <span class="sy0">=</span> -<span class="nu0">1</span>
+&nbsp;
+    <span class="kw1">def</span> move<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> direction<span class="br0">&#41;</span>:
+        <span class="kw1">if</span> direction: <span class="kw2">self</span>.<span class="me1">facing</span> <span class="sy0">=</span> direction
+        <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">move_ip</span><span class="br0">&#40;</span>direction*<span class="kw2">self</span>.<span class="me1">speed</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">rect</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">clamp</span><span class="br0">&#40;</span>SCREENRECT<span class="br0">&#41;</span>
+        <span class="kw1">if</span> direction <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+            <span class="kw2">self</span>.<span class="me1">image</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">images</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+        <span class="kw1">elif</span> direction <span class="sy0">&gt;</span> <span class="nu0">0</span>:
+            <span class="kw2">self</span>.<span class="me1">image</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">images</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>
+        <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">top</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">origtop</span> - <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">left</span>//<span class="kw2">self</span>.<span class="me1">bounce</span>%<span class="nu0">2</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> gunpos<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        pos <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">facing</span>*<span class="kw2">self</span>.<span class="me1">gun_offset</span> + <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">centerx</span>
+        <span class="kw1">return</span> pos<span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">top</span>
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> Alien<span class="br0">&#40;</span>pygame.<span class="me1">sprite</span>.<span class="me1">Sprite</span><span class="br0">&#41;</span>:
+    speed <span class="sy0">=</span> <span class="nu0">13</span>
+    animcycle <span class="sy0">=</span> <span class="nu0">12</span>
+    images <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        pygame.<span class="me1">sprite</span>.<span class="me1">Sprite</span>.<span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">containers</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">image</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">images</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+        <span class="kw2">self</span>.<span class="me1">rect</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">image</span>.<span class="me1">get_rect</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">facing</span> <span class="sy0">=</span> <span class="kw3">random</span>.<span class="me1">choice</span><span class="br0">&#40;</span><span class="br0">&#40;</span>-<span class="nu0">1</span><span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span> * Alien.<span class="me1">speed</span>
+        <span class="kw2">self</span>.<span class="me1">frame</span> <span class="sy0">=</span> <span class="nu0">0</span>
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">facing</span> <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+            <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">right</span> <span class="sy0">=</span> SCREENRECT.<span class="me1">right</span>
+&nbsp;
+    <span class="kw1">def</span> update<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">move_ip</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">facing</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> <span class="kw1">not</span> SCREENRECT.<span class="me1">contains</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">rect</span><span class="br0">&#41;</span>:
+            <span class="kw2">self</span>.<span class="me1">facing</span> <span class="sy0">=</span> -<span class="kw2">self</span>.<span class="me1">facing</span><span class="sy0">;</span>
+            <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">top</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">bottom</span> + <span class="nu0">1</span>
+            <span class="kw2">self</span>.<span class="me1">rect</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">clamp</span><span class="br0">&#40;</span>SCREENRECT<span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">frame</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">frame</span> + <span class="nu0">1</span>
+        <span class="kw2">self</span>.<span class="me1">image</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">images</span><span class="br0">&#91;</span><span class="kw2">self</span>.<span class="me1">frame</span>//<span class="kw2">self</span>.<span class="me1">animcycle</span>%<span class="nu0">3</span><span class="br0">&#93;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> Explosion<span class="br0">&#40;</span>pygame.<span class="me1">sprite</span>.<span class="me1">Sprite</span><span class="br0">&#41;</span>:
+    defaultlife <span class="sy0">=</span> <span class="nu0">12</span>
+    animcycle <span class="sy0">=</span> <span class="nu0">3</span>
+    images <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> actor<span class="br0">&#41;</span>:
+        pygame.<span class="me1">sprite</span>.<span class="me1">Sprite</span>.<span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">containers</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">image</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">images</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+        <span class="kw2">self</span>.<span class="me1">rect</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">image</span>.<span class="me1">get_rect</span><span class="br0">&#40;</span>center<span class="sy0">=</span>actor.<span class="me1">rect</span>.<span class="me1">center</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">life</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">defaultlife</span>
+&nbsp;
+    <span class="kw1">def</span> update<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">life</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">life</span> - <span class="nu0">1</span>
+        <span class="kw2">self</span>.<span class="me1">image</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">images</span><span class="br0">&#91;</span><span class="kw2">self</span>.<span class="me1">life</span>//<span class="kw2">self</span>.<span class="me1">animcycle</span>%<span class="nu0">2</span><span class="br0">&#93;</span>
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">life</span> <span class="sy0">&lt;=</span> <span class="nu0">0</span>: <span class="kw2">self</span>.<span class="me1">kill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> Shot<span class="br0">&#40;</span>pygame.<span class="me1">sprite</span>.<span class="me1">Sprite</span><span class="br0">&#41;</span>:
+    images <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> pos<span class="sy0">,</span>speed<span class="sy0">=</span>-<span class="nu0">18</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">speed</span><span class="sy0">=</span>speed
+        pygame.<span class="me1">sprite</span>.<span class="me1">Sprite</span>.<span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">containers</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">image</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">images</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+        <span class="kw2">self</span>.<span class="me1">rect</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">image</span>.<span class="me1">get_rect</span><span class="br0">&#40;</span>midbottom<span class="sy0">=</span>pos<span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> update<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">speed</span>+<span class="sy0">=</span><span class="nu0">0.5</span>
+        <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">move_ip</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">speed</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">top</span> <span class="sy0">&lt;=</span> <span class="nu0">0</span>:
+            <span class="kw2">self</span>.<span class="me1">kill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">bottom</span> <span class="sy0">&gt;=</span> <span class="nu0">470</span>:
+            Explosion<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>
+            <span class="kw2">self</span>.<span class="me1">kill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">class</span> Bomb<span class="br0">&#40;</span>pygame.<span class="me1">sprite</span>.<span class="me1">Sprite</span><span class="br0">&#41;</span>:
+    images <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> alien<span class="sy0">,</span>speed<span class="sy0">=</span><span class="nu0">1</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">speed</span><span class="sy0">=</span>speed
+        pygame.<span class="me1">sprite</span>.<span class="me1">Sprite</span>.<span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">containers</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">image</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">images</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+        <span class="kw2">self</span>.<span class="me1">rect</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">image</span>.<span class="me1">get_rect</span><span class="br0">&#40;</span>midbottom<span class="sy0">=</span>
+                    alien.<span class="me1">rect</span>.<span class="me1">move</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">5</span><span class="br0">&#41;</span>.<span class="me1">midbottom</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> update<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">speed</span>+<span class="sy0">=</span><span class="nu0">0.5</span>
+        <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">move_ip</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">speed</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">rect</span>.<span class="me1">bottom</span> <span class="sy0">&gt;=</span> <span class="nu0">470</span>:
+            Explosion<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>
+            <span class="kw2">self</span>.<span class="me1">kill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> Score<span class="br0">&#40;</span>pygame.<span class="me1">sprite</span>.<span class="me1">Sprite</span><span class="br0">&#41;</span>:
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        pygame.<span class="me1">sprite</span>.<span class="me1">Sprite</span>.<span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">font</span> <span class="sy0">=</span> pygame.<span class="me1">font</span>.<span class="me1">Font</span><span class="br0">&#40;</span><span class="kw2">None</span><span class="sy0">,</span> <span class="nu0">20</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">font</span>.<span class="me1">set_italic</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">color</span> <span class="sy0">=</span> Color<span class="br0">&#40;</span><span class="st0">'white'</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">lastscore</span> <span class="sy0">=</span> -<span class="nu0">1</span>
+        <span class="kw2">self</span>.<span class="me1">update</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">rect</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">image</span>.<span class="me1">get_rect</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">move</span><span class="br0">&#40;</span><span class="nu0">10</span><span class="sy0">,</span> <span class="nu0">450</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> update<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> SCORE <span class="sy0">!=</span> <span class="kw2">self</span>.<span class="me1">lastscore</span>:
+            <span class="kw2">self</span>.<span class="me1">lastscore</span> <span class="sy0">=</span> SCORE
+            msg <span class="sy0">=</span> <span class="st0">&quot;Score: %d&quot;</span> % SCORE
+            <span class="kw2">self</span>.<span class="me1">image</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">font</span>.<span class="me1">render</span><span class="br0">&#40;</span>msg<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">color</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> main<span class="br0">&#40;</span>winstyle <span class="sy0">=</span> <span class="nu0">0</span><span class="br0">&#41;</span>:
+    <span class="co1"># Initialize pygame</span>
+    pygame.<span class="me1">init</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> pygame.<span class="me1">mixer</span> <span class="kw1">and</span> <span class="kw1">not</span> pygame.<span class="me1">mixer</span>.<span class="me1">get_init</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+        <span class="kw1">print</span> <span class="br0">&#40;</span><span class="st0">'Warning, no sound'</span><span class="br0">&#41;</span>
+        pygame.<span class="me1">mixer</span> <span class="sy0">=</span> <span class="kw2">None</span>
+&nbsp;
+    <span class="co1"># Set the display mode</span>
+    winstyle <span class="sy0">=</span> <span class="nu0">0</span>  <span class="co1"># |FULLSCREEN</span>
+    bestdepth <span class="sy0">=</span> pygame.<span class="me1">display</span>.<span class="me1">mode_ok</span><span class="br0">&#40;</span>SCREENRECT.<span class="me1">size</span><span class="sy0">,</span> winstyle<span class="sy0">,</span> <span class="nu0">32</span><span class="br0">&#41;</span>
+    screen <span class="sy0">=</span> pygame.<span class="me1">display</span>.<span class="me1">set_mode</span><span class="br0">&#40;</span>SCREENRECT.<span class="me1">size</span><span class="sy0">,</span> winstyle<span class="sy0">,</span> bestdepth<span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1">#Load images, assign to sprite classes</span>
+    <span class="co1">#(do this before the classes are used, after screen setup)</span>
+    img <span class="sy0">=</span> load_image<span class="br0">&#40;</span><span class="st0">'player1.gif'</span><span class="br0">&#41;</span>
+    Player.<span class="me1">images</span> <span class="sy0">=</span> <span class="br0">&#91;</span>img<span class="sy0">,</span> pygame.<span class="me1">transform</span>.<span class="me1">flip</span><span class="br0">&#40;</span>img<span class="sy0">,</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+    img <span class="sy0">=</span> load_image<span class="br0">&#40;</span><span class="st0">'explosion1.gif'</span><span class="br0">&#41;</span>
+    Explosion.<span class="me1">images</span> <span class="sy0">=</span> <span class="br0">&#91;</span>img<span class="sy0">,</span> pygame.<span class="me1">transform</span>.<span class="me1">flip</span><span class="br0">&#40;</span>img<span class="sy0">,</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+    Alien.<span class="me1">images</span> <span class="sy0">=</span> load_images<span class="br0">&#40;</span><span class="st0">'alien1.gif'</span><span class="sy0">,</span> <span class="st0">'alien2.gif'</span><span class="sy0">,</span> <span class="st0">'alien3.gif'</span><span class="br0">&#41;</span>
+    Bomb.<span class="me1">images</span> <span class="sy0">=</span> <span class="br0">&#91;</span>load_image<span class="br0">&#40;</span><span class="st0">'bomb.gif'</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+    Shot.<span class="me1">images</span> <span class="sy0">=</span> <span class="br0">&#91;</span>load_image<span class="br0">&#40;</span><span class="st0">'shot.gif'</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+&nbsp;
+    <span class="co1">#decorate the game window</span>
+    icon <span class="sy0">=</span> pygame.<span class="me1">transform</span>.<span class="me1">scale</span><span class="br0">&#40;</span>Alien.<span class="me1">images</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">32</span><span class="sy0">,</span> <span class="nu0">32</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">set_icon</span><span class="br0">&#40;</span>icon<span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">set_caption</span><span class="br0">&#40;</span><span class="st0">'Pygame Aliens'</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">mouse</span>.<span class="me1">set_visible</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1">#create the background, tile the bgd image</span>
+    bgdtile <span class="sy0">=</span> load_image<span class="br0">&#40;</span><span class="st0">'background.gif'</span><span class="br0">&#41;</span>
+    background <span class="sy0">=</span> pygame.<span class="me1">Surface</span><span class="br0">&#40;</span>SCREENRECT.<span class="me1">size</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> x <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> SCREENRECT.<span class="me1">width</span><span class="sy0">,</span> bgdtile.<span class="me1">get_width</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        background.<span class="me1">blit</span><span class="br0">&#40;</span>bgdtile<span class="sy0">,</span> <span class="br0">&#40;</span>x<span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    screen.<span class="me1">blit</span><span class="br0">&#40;</span>background<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1">#load the sound effects</span>
+    boom_sound <span class="sy0">=</span> load_sound<span class="br0">&#40;</span><span class="st0">'boom.wav'</span><span class="br0">&#41;</span>
+    shoot_sound <span class="sy0">=</span> load_sound<span class="br0">&#40;</span><span class="st0">'car_door.wav'</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> pygame.<span class="me1">mixer</span>:
+        music <span class="sy0">=</span> <span class="kw3">os</span>.<span class="me1">path</span>.<span class="me1">join</span><span class="br0">&#40;</span>main_dir<span class="sy0">,</span> <span class="st0">'data'</span><span class="sy0">,</span> <span class="st0">'house_lo.wav'</span><span class="br0">&#41;</span>
+        pygame.<span class="me1">mixer</span>.<span class="me1">music</span>.<span class="me1">load</span><span class="br0">&#40;</span>music<span class="br0">&#41;</span>
+        pygame.<span class="me1">mixer</span>.<span class="me1">music</span>.<span class="me1">play</span><span class="br0">&#40;</span>-<span class="nu0">1</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1"># Initialize Game Groups</span>
+    aliens <span class="sy0">=</span> pygame.<span class="me1">sprite</span>.<span class="me1">Group</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    shots <span class="sy0">=</span> pygame.<span class="me1">sprite</span>.<span class="me1">Group</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    bombs <span class="sy0">=</span> pygame.<span class="me1">sprite</span>.<span class="me1">Group</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw2">all</span> <span class="sy0">=</span> pygame.<span class="me1">sprite</span>.<span class="me1">RenderUpdates</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    lastalien <span class="sy0">=</span> pygame.<span class="me1">sprite</span>.<span class="me1">GroupSingle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1">#assign default groups to each sprite class</span>
+    Player.<span class="me1">containers</span> <span class="sy0">=</span> <span class="kw2">all</span>
+    Alien.<span class="me1">containers</span> <span class="sy0">=</span> aliens<span class="sy0">,</span> <span class="kw2">all</span><span class="sy0">,</span> lastalien
+    Shot.<span class="me1">containers</span> <span class="sy0">=</span> shots<span class="sy0">,</span> <span class="kw2">all</span>
+    Bomb.<span class="me1">containers</span> <span class="sy0">=</span> bombs<span class="sy0">,</span> <span class="kw2">all</span>
+    Explosion.<span class="me1">containers</span> <span class="sy0">=</span> <span class="kw2">all</span>
+    Score.<span class="me1">containers</span> <span class="sy0">=</span> <span class="kw2">all</span>
+&nbsp;
+    <span class="co1">#Create Some Starting Values</span>
+    <span class="kw1">global</span> score
+    alienreload <span class="sy0">=</span> ALIEN_RELOAD
+    kills <span class="sy0">=</span> <span class="nu0">0</span>
+    clock <span class="sy0">=</span> pygame.<span class="kw3">time</span>.<span class="me1">Clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1">#initialize our starting sprites</span>
+    <span class="kw1">global</span> SCORE
+    player <span class="sy0">=</span> Player<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    Alien<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="co1">#note, this 'lives' because it goes into a sprite group</span>
+    <span class="kw1">if</span> pygame.<span class="me1">font</span>:
+        <span class="kw2">all</span>.<span class="me1">add</span><span class="br0">&#40;</span>Score<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+    <span class="kw1">while</span> player.<span class="me1">alive</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+&nbsp;
+        <span class="co1">#get input</span>
+        <span class="kw1">for</span> event <span class="kw1">in</span> pygame.<span class="me1">event</span>.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+            <span class="kw1">if</span> event.<span class="kw2">type</span> <span class="sy0">==</span> QUIT <span class="kw1">or</span> \
+                <span class="br0">&#40;</span>event.<span class="kw2">type</span> <span class="sy0">==</span> KEYDOWN <span class="kw1">and</span> event.<span class="me1">key</span> <span class="sy0">==</span> K_ESCAPE<span class="br0">&#41;</span>:
+                    <span class="kw1">return</span>
+        keystate <span class="sy0">=</span> pygame.<span class="me1">key</span>.<span class="me1">get_pressed</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+        <span class="co1"># clear/erase the last drawn sprites</span>
+        <span class="kw2">all</span>.<span class="me1">clear</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> background<span class="br0">&#41;</span>
+&nbsp;
+        <span class="co1">#update all the sprites</span>
+        <span class="kw2">all</span>.<span class="me1">update</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+        <span class="co1">#handle player input</span>
+        direction <span class="sy0">=</span> keystate<span class="br0">&#91;</span>K_RIGHT<span class="br0">&#93;</span> - keystate<span class="br0">&#91;</span>K_LEFT<span class="br0">&#93;</span>
+        player.<span class="me1">move</span><span class="br0">&#40;</span>direction<span class="br0">&#41;</span>
+        firing <span class="sy0">=</span> keystate<span class="br0">&#91;</span>K_SPACE<span class="br0">&#93;</span>
+        <span class="kw1">if</span> <span class="kw1">not</span> player.<span class="me1">reloading</span> <span class="kw1">and</span> firing <span class="kw1">and</span> <span class="kw2">len</span><span class="br0">&#40;</span>shots<span class="br0">&#41;</span> <span class="sy0">&lt;</span> MAX_SHOTS:
+            Shot<span class="br0">&#40;</span>player.<span class="me1">gunpos</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            shoot_sound.<span class="me1">play</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        player.<span class="me1">reloading</span> <span class="sy0">=</span> firing
+&nbsp;
+        <span class="co1"># Create new alien</span>
+        <span class="kw1">if</span> alienreload:
+            alienreload <span class="sy0">=</span> alienreload - <span class="nu0">1</span>
+        <span class="kw1">elif</span> <span class="kw1">not</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="kw3">random</span><span class="br0">&#40;</span><span class="br0">&#41;</span> * ALIEN_ODDS<span class="br0">&#41;</span>:
+            Alien<span class="br0">&#40;</span><span class="br0">&#41;</span>
+            alienreload <span class="sy0">=</span> ALIEN_RELOAD
+&nbsp;
+        <span class="co1"># Drop bombs</span>
+        <span class="kw1">if</span> lastalien <span class="kw1">and</span> <span class="kw1">not</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="kw3">random</span><span class="br0">&#40;</span><span class="br0">&#41;</span> * BOMB_ODDS<span class="br0">&#41;</span>:
+            Bomb<span class="br0">&#40;</span>lastalien.<span class="me1">sprite</span><span class="br0">&#41;</span>
+&nbsp;
+        <span class="co1"># Detect collisions</span>
+        <span class="kw1">for</span> alien <span class="kw1">in</span> pygame.<span class="me1">sprite</span>.<span class="me1">spritecollide</span><span class="br0">&#40;</span>player<span class="sy0">,</span> aliens<span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span>:
+            boom_sound.<span class="me1">play</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            Explosion<span class="br0">&#40;</span>alien<span class="br0">&#41;</span>
+            Explosion<span class="br0">&#40;</span>player<span class="br0">&#41;</span>
+            SCORE <span class="sy0">=</span> SCORE + <span class="nu0">1</span>
+            player.<span class="me1">kill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+        <span class="kw1">for</span> alien <span class="kw1">in</span> pygame.<span class="me1">sprite</span>.<span class="me1">groupcollide</span><span class="br0">&#40;</span>shots<span class="sy0">,</span> aliens<span class="sy0">,</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span>.<span class="me1">keys</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+            boom_sound.<span class="me1">play</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            Explosion<span class="br0">&#40;</span>alien<span class="br0">&#41;</span>
+            SCORE <span class="sy0">=</span> SCORE + <span class="nu0">1</span>
+&nbsp;
+        <span class="kw1">for</span> bomb <span class="kw1">in</span> pygame.<span class="me1">sprite</span>.<span class="me1">spritecollide</span><span class="br0">&#40;</span>player<span class="sy0">,</span> bombs<span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span>:
+            boom_sound.<span class="me1">play</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            Explosion<span class="br0">&#40;</span>player<span class="br0">&#41;</span>
+            Explosion<span class="br0">&#40;</span>bomb<span class="br0">&#41;</span>
+            player.<span class="me1">kill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">for</span> shot <span class="kw1">in</span> pygame.<span class="me1">sprite</span>.<span class="me1">spritecollide</span><span class="br0">&#40;</span>player<span class="sy0">,</span> shots<span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span>:
+            Explosion<span class="br0">&#40;</span>player<span class="br0">&#41;</span>
+            Explosion<span class="br0">&#40;</span>shot<span class="br0">&#41;</span>
+            player.<span class="me1">kill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+        <span class="co1">#draw the scene</span>
+        dirty <span class="sy0">=</span> <span class="kw2">all</span>.<span class="me1">draw</span><span class="br0">&#40;</span>screen<span class="br0">&#41;</span>
+        pygame.<span class="me1">display</span>.<span class="me1">update</span><span class="br0">&#40;</span>dirty<span class="br0">&#41;</span>
+&nbsp;
+        <span class="co1">#cap the framerate</span>
+        clock.<span class="me1">tick</span><span class="br0">&#40;</span><span class="nu0">40</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">if</span> pygame.<span class="me1">mixer</span>:
+        pygame.<span class="me1">mixer</span>.<span class="me1">music</span>.<span class="me1">fadeout</span><span class="br0">&#40;</span><span class="nu0">1000</span><span class="br0">&#41;</span>
+    pygame.<span class="kw3">time</span>.<span class="me1">wait</span><span class="br0">&#40;</span><span class="nu0">1000</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">quit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="co1">#call the &quot;main&quot; function if running this script</span>
+<span class="kw1">if</span> __name__ <span class="sy0">==</span> <span class="st0">'__main__'</span>: main<span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

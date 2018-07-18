@@ -1,0 +1,293 @@
+<html>
+  <head>
+    <title>IBCS1-WD - September 2nd 2016 by Charles Han</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>September 2nd 2016 by Charles Han<small> #Log </small></h1>1<br />
+Input -- BOX -- Output<br />
+Input: arguments, global variables<br />
+Output: return, print, file(file storage in hardware)<br />
+<br />
+2<br />
+Composition:<br />
+Call one function in another function<br />
+<br />
+3<br />
+Boolean:<br />
+True and False<br />
+ex: a==b<br />
+<br />
+4<br />
+Counting the digit of a number:<br />
+<br />
+1<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> num_digits<span class="br0">&#40;</span>n<span class="br0">&#41;</span>:
+    count <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">while</span> n <span class="sy0">!=</span> <span class="nu0">0</span>:
+        count <span class="sy0">=</span> count + <span class="nu0">1</span>
+        n <span class="sy0">=</span> n // <span class="nu0">10</span>
+    <span class="kw1">return</span> count</pre>
+
+<br />
+<br />
+2<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> num_digits<span class="br0">&#40;</span>thenumber<span class="br0">&#41;</span>:
+    tmpstring <span class="sy0">=</span> <span class="kw2">str</span><span class="br0">&#40;</span>thenumber<span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>tmpstring<span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<br />
+<br />
+5<br />
+To count how many 5 and 0 in the number<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> num_zero_and_five_digits<span class="br0">&#40;</span>n<span class="br0">&#41;</span>:
+    count <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">while</span> n <span class="sy0">&gt;</span> <span class="nu0">0</span>:
+        digit <span class="sy0">=</span> n % <span class="nu0">10</span>
+        <span class="kw1">if</span> digit <span class="sy0">==</span> <span class="nu0">0</span> <span class="kw1">or</span> digit <span class="sy0">==</span> <span class="nu0">5</span>:
+            count <span class="sy0">=</span> count + <span class="nu0">1</span>
+        n <span class="sy0">=</span> n // <span class="nu0">10</span>
+    <span class="kw1">return</span> count</pre>
+
+<br />
+<br />
+6<br />
+In 4.2, tmpstring = str(thenumber) so if we want to count count many words in a number there is an easy way for example:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">print</span><span class="br0">&#40;</span>tmpstring.<span class="me1">count</span><span class="br0">&#40;</span><span class="st0">&quot;3&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<br />
+<br />
+7<br />
+How to open python document:<br />
+For Mac: 应用程序－－python －－python documentation<br />
+<br />
+8<br />
+How to leave space for integer/string/float:<br />
+%d--integer<br />
+%f--float<br />
+%s--string<br />
+<br />
+ex:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;%d * %d = %d&quot;</span>%<span class="br0">&#40;</span>i<span class="sy0">,</span>j<span class="sy0">,</span>i*j<span class="br0">&#41;</span><span class="sy0">,</span>end<span class="sy0">=</span><span class="st0">&quot;<span class="es0">\t</span><span class="es0">\t</span>&quot;</span><span class="br0">&#41;</span></pre>
+
+<br />
+<br />
+9<br />
+tips:<br />
+\t = tab<br />
+\n = newline<br />
+<br />
+10<br />
+Print a multiplication table by using composition:<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> print_oneline<span class="br0">&#40;</span>i<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span>i+<span class="nu0">1</span><span class="br0">&#41;</span>:
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;%d * %d = %d&quot;</span>%<span class="br0">&#40;</span>i<span class="sy0">,</span>j<span class="sy0">,</span>i*j<span class="br0">&#41;</span><span class="sy0">,</span>end<span class="sy0">=</span><span class="st0">&quot;<span class="es0">\t</span><span class="es0">\t</span>&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> print_multiplicationTable<span class="br0">&#40;</span>n<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span>n+<span class="nu0">1</span><span class="br0">&#41;</span>:
+        print_oneline<span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;</pre>
+
+<br />
+11<br />
+<span style="color: #000000; font-family: 'Lucida Grande','Lucida Sans Unicode',Geneva,Verdana,sans-serif; font-size: 14px;">program implements a simple guessing game:</span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">random</span>                   <span class="co1"># We cover random numbers in the</span>
+rng <span class="sy0">=</span> <span class="kw3">random</span>.<span class="me1">Random</span><span class="br0">&#40;</span><span class="br0">&#41;</span>           <span class="co1">#  modules chapter, so peek ahead.</span>
+number <span class="sy0">=</span> rng.<span class="me1">randrange</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">1000</span><span class="br0">&#41;</span> <span class="co1"># Get random number between [1 and 1000).</span>
+&nbsp;
+guesses <span class="sy0">=</span> <span class="nu0">0</span>
+msg <span class="sy0">=</span> <span class="st0">&quot;&quot;</span>
+&nbsp;
+<span class="kw1">while</span> <span class="kw2">True</span>:
+    guess <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span>msg + <span class="st0">&quot;<span class="es0">\n</span>Guess my number between 1 and 1000: &quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    guesses +<span class="sy0">=</span> <span class="nu0">1</span>
+    <span class="kw1">if</span> guess <span class="sy0">&gt;</span> number:
+        msg +<span class="sy0">=</span> <span class="kw2">str</span><span class="br0">&#40;</span>guess<span class="br0">&#41;</span> + <span class="st0">&quot; is too high.<span class="es0">\n</span>&quot;</span>
+    <span class="kw1">elif</span> guess <span class="sy0">&lt;</span> number:
+        msg +<span class="sy0">=</span> <span class="kw2">str</span><span class="br0">&#40;</span>guess<span class="br0">&#41;</span> + <span class="st0">&quot; is too low.<span class="es0">\n</span>&quot;</span>
+    <span class="kw1">else</span>:
+        <span class="kw1">break</span>
+&nbsp;
+<span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;<span class="es0">\n</span><span class="es0">\n</span>Great, you got it in {0} guesses!<span class="es0">\n</span><span class="es0">\n</span>&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>guesses<span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<br />
+<br />
+12<br />
+<br />
+<h4 id="toc0"><a name="x---dichotomie："></a>dichotomie：</h4>
+ <h4 id="toc1"><a name="x---This divide the range in half and then divide the half into half and repeat this process until we get the number we want."></a>This divide the range in half and then divide the half into half and repeat this process until we get the number we want.</h4>
+ <h4 id="toc2"><a name="x---(the fastest way to find a number in a range)"></a>(the fastest way to find a number in a range)</h4>
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

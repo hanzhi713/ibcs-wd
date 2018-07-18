@@ -1,0 +1,156 @@
+<html>
+  <head>
+    <title>IBCS1-WD - June 4th, Tom's work on drawing functions</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>June 4th, Tom's work on drawing functions<small> #ProjectPage #TomsProjects </small></h1><h1 id="toc0"><a name="June 4th Tom's work on drawing functions"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">June 4<span style="vertical-align: super;">th </span>Tom's work on drawing functions</span></h1>
+ <br />
+<h3 id="toc1"><a name="June 4th Tom's work on drawing functions--The following method of drawing functions is ONLY suitable for continuous functions. To get started, you need to define the scale of cartesian coordinate, enter the first derivative, enter the coordinate of any point and define the domain. Please notice that the expression you would like to enter must be acceptable to the Python's internal module &quot;eval&quot;."></a><span style="color: #ff0000; font-family: arial,helvetica,sans-serif; font-size: 1.1em; line-height: 1.1;">The following method of drawing functions is ONLY suitable for continuous functions. To get started, you need to define the scale of cartesian coordinate, enter the first derivative, enter the coordinate of any point and define the domain. Please notice that the expression you would like to enter must be acceptable to the Python's internal module &quot;eval&quot;.</span></h3>
+ <br />
+<span style="color: #ff0000; font-family: arial,helvetica,sans-serif; font-size: 1.1em; line-height: 1.1;">To see another way of drawing functions (using the expression and plot all points directly), please click me.</span><br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+<span class="kw1">import</span> <span class="kw3">math</span>
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;black&quot;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">color</span><span class="br0">&#40;</span><span class="st0">&quot;white&quot;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span>
+Tom.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">1000</span><span class="br0">&#41;</span>
+Tom.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+scale <span class="sy0">=</span> <span class="kw2">float</span><span class="br0">&#40;</span><span class="kw2">input</span> <span class="br0">&#40;</span><span class="st0">&quot;Please define the length of one unit (in pixels)&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+xLength <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span> <span class="br0">&#40;</span><span class="st0">&quot;Please enter the length of x-axis, in pixels&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+yLength <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span> <span class="br0">&#40;</span><span class="st0">&quot;Please enter the length of y-axis, in pixels&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+function <span class="sy0">=</span> <span class="kw2">input</span> <span class="br0">&#40;</span><span class="st0">&quot;Please type the first derivative&quot;</span><span class="br0">&#41;</span>
+xcoor <span class="sy0">=</span> <span class="kw2">float</span><span class="br0">&#40;</span><span class="kw2">input</span> <span class="br0">&#40;</span><span class="st0">&quot;Please input the x-coordinate of any point on the function&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+ycoor <span class="sy0">=</span> <span class="kw2">float</span><span class="br0">&#40;</span><span class="kw2">input</span> <span class="br0">&#40;</span><span class="st0">&quot;Please input the y-coordinate of any point on the function&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+lowerlimit <span class="sy0">=</span> <span class="kw2">float</span><span class="br0">&#40;</span><span class="kw2">input</span> <span class="br0">&#40;</span><span class="st0">&quot;Please type the lower limit of domain (must be smaller than your given x-coordinate)&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+upperlimit <span class="sy0">=</span> <span class="kw2">float</span><span class="br0">&#40;</span><span class="kw2">input</span> <span class="br0">&#40;</span><span class="st0">&quot;Please type the upper limit of domain (must be greater than your given x-coordinate)&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+i <span class="sy0">=</span> <span class="nu0">0</span>
+Tom.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">16</span><span class="br0">&#41;</span>
+Tom.<span class="me1">write</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="kw2">False</span><span class="sy0">,</span> align<span class="sy0">=</span><span class="st0">&quot;right&quot;</span><span class="sy0">,</span> font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span><span class="sy0">,</span> <span class="nu0">9</span><span class="sy0">,</span> <span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+Tom.<span class="me1">goto</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+Tom.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> DrawAxes<span class="br0">&#40;</span>Scale<span class="sy0">,</span>Direction<span class="sy0">,</span>XorYaxis<span class="sy0">,</span>length<span class="br0">&#41;</span>:
+    howmany <span class="sy0">=</span> length // Scale
+    i <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">while</span> <span class="nu0">1</span>:
+        Tom.<span class="me1">forward</span><span class="br0">&#40;</span>Direction * Scale<span class="br0">&#41;</span>
+        Tom.<span class="me1">left</span><span class="br0">&#40;</span>Direction * <span class="nu0">90</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">forward</span><span class="br0">&#40;</span>Direction * <span class="nu0">5</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">forward</span><span class="br0">&#40;</span>Direction * -<span class="nu0">5</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">right</span><span class="br0">&#40;</span>Direction * <span class="nu0">90</span><span class="br0">&#41;</span>
+        i <span class="sy0">=</span> i + <span class="nu0">1</span>
+        <span class="kw1">if</span> i % <span class="nu0">5</span> <span class="sy0">==</span> <span class="nu0">0</span>:
+            <span class="kw1">if</span> XorYaxis<span class="sy0">==</span><span class="st0">&quot;X&quot;</span>:
+                Tom.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+                Tom.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+                Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">16</span><span class="br0">&#41;</span>
+                Tom.<span class="me1">write</span><span class="br0">&#40;</span>i<span class="sy0">,</span> <span class="kw2">False</span><span class="sy0">,</span> align<span class="sy0">=</span><span class="st0">&quot;center&quot;</span><span class="sy0">,</span> font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span><span class="sy0">,</span> <span class="nu0">9</span><span class="sy0">,</span> <span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                Tom.<span class="me1">forward</span><span class="br0">&#40;</span>-<span class="nu0">16</span><span class="br0">&#41;</span>
+                Tom.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+                Tom.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="kw1">else</span>:
+                Tom.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+                Tom.<span class="me1">right</span><span class="br0">&#40;</span>-<span class="nu0">90</span><span class="br0">&#41;</span>
+                Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span>
+                Tom.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+                Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">7</span><span class="br0">&#41;</span>
+                Tom.<span class="me1">write</span><span class="br0">&#40;</span>i<span class="sy0">,</span> <span class="kw2">False</span><span class="sy0">,</span> align<span class="sy0">=</span><span class="st0">&quot;right&quot;</span><span class="sy0">,</span> font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span><span class="sy0">,</span> <span class="nu0">9</span><span class="sy0">,</span> <span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                Tom.<span class="me1">forward</span><span class="br0">&#40;</span>-<span class="nu0">7</span><span class="br0">&#41;</span>
+                Tom.<span class="me1">left</span><span class="br0">&#40;</span>-<span class="nu0">90</span><span class="br0">&#41;</span>
+                Tom.<span class="me1">forward</span><span class="br0">&#40;</span>-<span class="nu0">5</span><span class="br0">&#41;</span>
+                Tom.<span class="me1">left</span><span class="br0">&#40;</span>-<span class="nu0">90</span><span class="br0">&#41;</span>
+                Tom.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> i <span class="sy0">&gt;</span> howmany:
+            <span class="kw1">break</span>
+DrawAxes<span class="br0">&#40;</span>scale<span class="sy0">,</span><span class="nu0">1</span><span class="sy0">,</span><span class="st0">&quot;X&quot;</span><span class="sy0">,</span>xLength / <span class="nu0">2</span><span class="br0">&#41;</span>
+Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">20</span><span class="br0">&#41;</span>
+Tom.<span class="me1">stamp</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">20</span><span class="br0">&#41;</span>
+Tom.<span class="me1">write</span><span class="br0">&#40;</span><span class="st0">&quot;x&quot;</span><span class="sy0">,</span><span class="kw2">False</span><span class="sy0">,</span>align<span class="sy0">=</span><span class="st0">&quot;right&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span><span class="sy0">,</span><span class="nu0">15</span><span class="sy0">,</span><span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">goto</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+Tom.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+Tom.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+DrawAxes<span class="br0">&#40;</span>scale<span class="sy0">,</span>-<span class="nu0">1</span><span class="sy0">,</span><span class="st0">&quot;X&quot;</span><span class="sy0">,</span>xLength / <span class="nu0">2</span><span class="br0">&#41;</span>
+Tom.<span class="me1">goto</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+Tom.<span class="me1">left</span> <span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+DrawAxes<span class="br0">&#40;</span>scale<span class="sy0">,</span><span class="nu0">1</span><span class="sy0">,</span><span class="st0">&quot;Y&quot;</span><span class="sy0">,</span>yLength / <span class="nu0">2</span><span class="br0">&#41;</span>
+Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">20</span><span class="br0">&#41;</span>
+Tom.<span class="me1">stamp</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">right</span><span class="br0">&#40;</span>-<span class="nu0">180</span><span class="br0">&#41;</span>
+Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">20</span><span class="br0">&#41;</span>
+Tom.<span class="me1">left</span><span class="br0">&#40;</span>-<span class="nu0">90</span><span class="br0">&#41;</span>
+Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span>
+Tom.<span class="me1">write</span><span class="br0">&#40;</span><span class="st0">&quot;y&quot;</span><span class="sy0">,</span><span class="kw2">False</span><span class="sy0">,</span>align<span class="sy0">=</span><span class="st0">&quot;right&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span><span class="sy0">,</span><span class="nu0">15</span><span class="sy0">,</span><span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">goto</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+Tom.<span class="me1">left</span><span class="br0">&#40;</span>-<span class="nu0">90</span><span class="br0">&#41;</span>
+Tom.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+DrawAxes<span class="br0">&#40;</span>scale<span class="sy0">,</span>-<span class="nu0">1</span><span class="sy0">,</span><span class="st0">&quot;Y&quot;</span><span class="sy0">,</span>yLength / <span class="nu0">2</span><span class="br0">&#41;</span>
+Tom.<span class="me1">goto</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+Tom.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">goto</span><span class="br0">&#40;</span>xcoor*scale<span class="sy0">,</span>ycoor*scale<span class="br0">&#41;</span>
+Tom.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> DrawingFunc<span class="br0">&#40;</span>Lowerlimit<span class="sy0">,</span>Upperlimit<span class="sy0">,</span>Direction<span class="br0">&#41;</span>:
+    angle <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">for</span> a <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>Lowerlimit<span class="sy0">,</span> Upperlimit<span class="sy0">,</span>Direction<span class="br0">&#41;</span>:
+        <span class="kw1">try</span>:
+            x <span class="sy0">=</span> a / scale
+            gradient <span class="sy0">=</span> <span class="kw2">eval</span><span class="br0">&#40;</span>function<span class="br0">&#41;</span>
+            oldangle <span class="sy0">=</span> angle
+            angle <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw3">math</span>.<span class="me1">atan</span><span class="br0">&#40;</span>gradient<span class="br0">&#41;</span> / <span class="kw3">math</span>.<span class="me1">pi</span><span class="br0">&#41;</span> * <span class="nu0">180</span>
+            Tom.<span class="me1">left</span><span class="br0">&#40;</span>angle - oldangle<span class="br0">&#41;</span>
+            Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">1</span> / <span class="kw3">math</span>.<span class="me1">cos</span><span class="br0">&#40;</span><span class="kw3">math</span>.<span class="me1">atan</span><span class="br0">&#40;</span>gradient<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">except</span>:
+            <span class="kw2">None</span>
+    <span class="kw1">return</span> angle
+angle <span class="sy0">=</span> DrawingFunc<span class="br0">&#40;</span><span class="kw2">round</span><span class="br0">&#40;</span>xcoor * scale<span class="br0">&#41;</span><span class="sy0">,</span><span class="kw2">round</span><span class="br0">&#40;</span>upperlimit * scale+<span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span>
+Tom.<span class="me1">stamp</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">goto</span> <span class="br0">&#40;</span>xcoor * scale<span class="sy0">,</span> ycoor * scale<span class="br0">&#41;</span>
+Tom.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">180</span> - angle<span class="br0">&#41;</span>
+DrawingFunc<span class="br0">&#40;</span><span class="kw2">round</span><span class="br0">&#40;</span>xcoor * scale<span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">round</span><span class="br0">&#40;</span>lowerlimit * scale - <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">,</span> -<span class="nu0">1</span><span class="br0">&#41;</span>
+Tom.<span class="me1">stamp</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

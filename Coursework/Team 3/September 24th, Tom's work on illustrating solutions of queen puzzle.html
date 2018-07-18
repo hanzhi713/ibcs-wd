@@ -1,0 +1,161 @@
+<html>
+  <head>
+    <title>IBCS1-WD - September 24th, Tom's work on illustrating solutions of queen puzzle</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>September 24th, Tom's work on illustrating solutions of queen puzzle<small> #TomsProjects </small></h1><h2 id="toc0"><a name="x-Support file : Queen.png"></a><a href="files/Queen.png">Support file : Queen.png</a></h2>
+ <br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> pygame
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> share_diagonal<span class="br0">&#40;</span>x0<span class="sy0">,</span> y0<span class="sy0">,</span> x1<span class="sy0">,</span> y1<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Is (x0, y0) on a shared diagonal with (x1, y1)? &quot;&quot;&quot;</span>
+    dy <span class="sy0">=</span> <span class="kw2">abs</span><span class="br0">&#40;</span>y1 - y0<span class="br0">&#41;</span>        <span class="co1"># Calc the absolute y distance</span>
+    dx <span class="sy0">=</span> <span class="kw2">abs</span><span class="br0">&#40;</span>x1 - x0<span class="br0">&#41;</span>        <span class="co1"># Calc the absolute x distance</span>
+    <span class="kw1">return</span> dx <span class="sy0">==</span> dy          <span class="co1"># They clash if dx == dy</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> col_clashes<span class="br0">&#40;</span>bs<span class="sy0">,</span> c<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Return True if the queen at column c clashes
+         with any queen to its left.
+    &quot;&quot;&quot;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>c<span class="br0">&#41;</span>:     <span class="co1"># Look at all columns to the left of c</span>
+        <span class="kw1">if</span> share_diagonal<span class="br0">&#40;</span>i<span class="sy0">,</span> bs<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">,</span> c<span class="sy0">,</span> bs<span class="br0">&#91;</span>c<span class="br0">&#93;</span><span class="br0">&#41;</span>:
+            <span class="kw1">return</span> <span class="kw2">True</span>
+    <span class="kw1">return</span> <span class="kw2">False</span>           <span class="co1"># No clashes - col c has a safe placement.</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> has_clashes<span class="br0">&#40;</span>the_board<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Determine whether we have any queens clashing on the diagonals.
+        We're assuming here that the_board is a permutation of column
+        numbers, so we're not explicitly checking row or column clashes.
+    &quot;&quot;&quot;</span>
+    <span class="kw1">for</span> col <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="kw2">len</span><span class="br0">&#40;</span>the_board<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> col_clashes<span class="br0">&#40;</span>the_board<span class="sy0">,</span> col<span class="br0">&#41;</span>:
+            <span class="kw1">return</span> <span class="kw2">True</span>
+    <span class="kw1">return</span> <span class="kw2">False</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> reflection_x<span class="br0">&#40;</span>s1<span class="br0">&#41;</span>:  <span class="co1"># return the symmetric solution about the x-axis</span>
+    s1_reflected <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> s1:
+        s1_reflected.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>s1<span class="br0">&#41;</span> - <span class="nu0">1</span> - i<span class="br0">&#41;</span>
+    <span class="kw1">return</span> s1_reflected
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> reflection_y<span class="br0">&#40;</span>s1<span class="br0">&#41;</span>:  <span class="co1"># return the symmetric solution about the y-axis</span>
+    s1_reflected <span class="sy0">=</span> <span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>s1<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> <span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="br0">&#41;</span> <span class="kw1">in</span> <span class="kw2">enumerate</span><span class="br0">&#40;</span>s1<span class="br0">&#41;</span>:
+        s1_reflected<span class="br0">&#91;</span><span class="kw2">len</span><span class="br0">&#40;</span>s1<span class="br0">&#41;</span> - <span class="nu0">1</span> - x<span class="br0">&#93;</span> <span class="sy0">=</span> y
+    <span class="kw1">return</span> s1_reflected
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> rotation_90<span class="br0">&#40;</span>s1<span class="br0">&#41;</span>:  <span class="co1"># return the 90 degrees rotated solution about the y-axis</span>
+    s1_rotated <span class="sy0">=</span> <span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>s1<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> <span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="br0">&#41;</span> <span class="kw1">in</span> <span class="kw2">enumerate</span><span class="br0">&#40;</span>s1<span class="br0">&#41;</span>:
+        s1_rotated<span class="br0">&#91;</span>y<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>s1<span class="br0">&#41;</span> - <span class="nu0">1</span> - x
+    <span class="kw1">return</span> s1_rotated
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> rotation_180<span class="br0">&#40;</span>s1<span class="br0">&#41;</span>:  <span class="co1"># return the 180 degrees rotated solution about the y-axis</span>
+    <span class="kw1">return</span> rotation_90<span class="br0">&#40;</span>rotation_90<span class="br0">&#40;</span>s1<span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> rotation_270<span class="br0">&#40;</span>s1<span class="br0">&#41;</span>:  <span class="co1"># return the 270 degrees rotated solution about the y-axis</span>
+    <span class="kw1">return</span> rotation_180<span class="br0">&#40;</span>rotation_90<span class="br0">&#40;</span>s1<span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> rotation_reflection_family<span class="br0">&#40;</span>s1<span class="br0">&#41;</span>:  <span class="co1"># return the group of all symmetric solutions</span>
+    family <span class="sy0">=</span> <span class="br0">&#91;</span>s1<span class="br0">&#91;</span>:<span class="br0">&#93;</span><span class="sy0">,</span> rotation_90<span class="br0">&#40;</span>s1<span class="br0">&#41;</span><span class="sy0">,</span> rotation_180<span class="br0">&#40;</span>s1<span class="br0">&#41;</span><span class="sy0">,</span> rotation_270<span class="br0">&#40;</span>s1<span class="br0">&#41;</span><span class="sy0">,</span> reflection_x<span class="br0">&#40;</span>s1<span class="br0">&#41;</span><span class="sy0">,</span>
+              reflection_y<span class="br0">&#40;</span>s1<span class="br0">&#41;</span><span class="sy0">,</span> reflection_x<span class="br0">&#40;</span>rotation_90<span class="br0">&#40;</span>s1<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> reflection_y<span class="br0">&#40;</span>rotation_90<span class="br0">&#40;</span>s1<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+    <span class="kw1">return</span> family
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> solutions_generator<span class="br0">&#40;</span>board_size<span class="br0">&#41;</span>:
+    <span class="kw1">import</span> <span class="kw3">random</span>
+    rng <span class="sy0">=</span> <span class="kw3">random</span>.<span class="me1">Random</span><span class="br0">&#40;</span><span class="br0">&#41;</span>   <span class="co1"># Instantiate a generator</span>
+    bd <span class="sy0">=</span> <span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span>board_size<span class="br0">&#41;</span><span class="br0">&#41;</span>     <span class="co1"># Generate the initial permutation</span>
+    num_found <span class="sy0">=</span> <span class="nu0">0</span>
+    tries <span class="sy0">=</span> <span class="nu0">0</span>
+    passed_solutions <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    unique_solutions <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">while</span> num_found <span class="sy0">&lt;</span> <span class="nu0">10</span>:  <span class="co1"># only generate the first 10 solutions</span>
+        rng.<span class="me1">shuffle</span><span class="br0">&#40;</span>bd<span class="br0">&#41;</span>
+        tries +<span class="sy0">=</span> <span class="nu0">1</span>
+        <span class="kw1">if</span> tries <span class="sy0">&gt;</span> <span class="nu0">0.5</span> * board_size ** <span class="nu0">6</span>:  <span class="co1"># breaks when too many trials,</span>
+            <span class="co1"># which means all fundamental solutions have been found</span>
+            <span class="kw1">break</span>
+        <span class="kw1">if</span> bd <span class="kw1">not</span> <span class="kw1">in</span> passed_solutions:
+            <span class="kw1">if</span> <span class="kw1">not</span> has_clashes<span class="br0">&#40;</span>bd<span class="br0">&#41;</span>:
+                passed_solutions.<span class="me1">extend</span><span class="br0">&#40;</span>rotation_reflection_family<span class="br0">&#40;</span>bd<span class="br0">&#41;</span><span class="br0">&#91;</span>:<span class="br0">&#93;</span><span class="br0">&#41;</span>  <span class="co1"># add all symmetric solutions to the list</span>
+                unique_solutions.<span class="me1">append</span><span class="br0">&#40;</span>bd<span class="br0">&#91;</span>:<span class="br0">&#93;</span><span class="br0">&#41;</span>
+                <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;Found solution {0}：{1} in {2} tries.&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>num_found + <span class="nu0">1</span><span class="sy0">,</span> bd<span class="sy0">,</span> tries<span class="br0">&#41;</span><span class="br0">&#41;</span>
+                tries <span class="sy0">=</span> <span class="nu0">0</span>
+                num_found +<span class="sy0">=</span> <span class="nu0">1</span>
+    <span class="kw1">return</span> unique_solutions
+&nbsp;
+pygame.<span class="me1">init</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> draw_board<span class="br0">&#40;</span>size<span class="sy0">,</span> size_per_block<span class="sy0">,</span> solutions<span class="sy0">,</span> solution_index<span class="br0">&#41;</span>:
+    pygame.<span class="me1">display</span>.<span class="me1">set_caption</span><span class="br0">&#40;</span><span class="st0">'Solution {0}/{1} of {2} Queen Puzzle'</span>  <span class="co1"># set the title</span>
+                               .<span class="me1">format</span><span class="br0">&#40;</span>solution_index<span class="sy0">,</span> <span class="kw2">len</span><span class="br0">&#40;</span>solutions<span class="br0">&#41;</span>+solution_index-<span class="nu0">1</span><span class="sy0">,</span> size<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    screen <span class="sy0">=</span> pygame.<span class="me1">display</span>.<span class="me1">set_mode</span><span class="br0">&#40;</span><span class="br0">&#91;</span>size_per_block * size<span class="sy0">,</span> size_per_block * size<span class="br0">&#93;</span><span class="br0">&#41;</span>
+    screen.<span class="me1">fill</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> y <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> size_per_block*size<span class="sy0">,</span> size_per_block<span class="br0">&#41;</span>:  <span class="co1"># draw the empty board</span>
+        <span class="kw1">for</span> x <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span><span class="br0">&#40;</span>y / size_per_block<span class="br0">&#41;</span> % <span class="nu0">2</span><span class="br0">&#41;</span> * size_per_block<span class="sy0">,</span> size_per_block * size +
+                       <span class="kw2">int</span><span class="br0">&#40;</span><span class="br0">&#40;</span>y / size_per_block<span class="br0">&#41;</span> % <span class="nu0">2</span><span class="br0">&#41;</span> * size_per_block<span class="sy0">,</span> size_per_block * <span class="nu0">2</span><span class="br0">&#41;</span>:
+            pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="br0">&#91;</span>x<span class="sy0">,</span> y<span class="sy0">,</span> size_per_block<span class="sy0">,</span> size_per_block<span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    queen <span class="sy0">=</span> pygame.<span class="me1">transform</span>.<span class="me1">smoothscale</span><span class="br0">&#40;</span>pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">&quot;Queen.png&quot;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span>size_per_block<span class="sy0">,</span> size_per_block<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> <span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="br0">&#41;</span> <span class="kw1">in</span> <span class="kw2">enumerate</span><span class="br0">&#40;</span>solutions<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>:  <span class="co1"># draw the queens on the board</span>
+        screen.<span class="me1">blit</span><span class="br0">&#40;</span>queen<span class="sy0">,</span> <span class="br0">&#91;</span>x * size_per_block<span class="sy0">,</span> y * size_per_block<span class="br0">&#93;</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">while</span> <span class="kw2">True</span>:
+        <span class="kw1">for</span> event <span class="kw1">in</span> pygame.<span class="me1">event</span>.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+            <span class="kw1">if</span> event.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">QUIT</span>:
+                <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>solutions<span class="br0">&#91;</span><span class="nu0">1</span>:<span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">0</span>:
+                    <span class="kw1">return</span>
+                <span class="kw1">return</span> draw_board<span class="br0">&#40;</span>size<span class="sy0">,</span> size_per_block<span class="sy0">,</span> solutions<span class="br0">&#91;</span><span class="nu0">1</span>:<span class="br0">&#93;</span><span class="sy0">,</span> solution_index + <span class="nu0">1</span><span class="br0">&#41;</span>
+                <span class="co1"># draw the next solution when clicking the exit button</span>
+&nbsp;
+board_size <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Please enter the board size (8 for example, stands for 8*8)&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+size_per_block <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Please enter the size length per block (in pixels)&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;Only the first ten solutions will be shown.&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;These solutions are unique, which means all rotations and reflections have been removed.&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;Note: Close the current solution to see the next solution&quot;</span><span class="br0">&#41;</span>
+draw_board<span class="br0">&#40;</span>board_size<span class="sy0">,</span> size_per_block<span class="sy0">,</span> solutions_generator<span class="br0">&#40;</span>board_size<span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

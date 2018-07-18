@@ -1,0 +1,183 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 8.26 Assignment - Exercises after chapter 15</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+1-5.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">class</span> Point:
+    <span class="st0">&quot;&quot;&quot; Create a new Point, at coordinates x, y &quot;&quot;&quot;</span>
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span> y<span class="sy0">=</span><span class="nu0">0</span><span class="br0">&#41;</span>:
+        <span class="st0">&quot;&quot;&quot; Create a new point at x, y &quot;&quot;&quot;</span>
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+&nbsp;
+    <span class="kw1">def</span> distance_from_origin<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="st0">&quot;&quot;&quot; Compute my distance from the origin &quot;&quot;&quot;</span>
+        <span class="kw1">return</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span> ** <span class="nu0">2</span><span class="br0">&#41;</span> + <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">y</span> ** <span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span> ** <span class="nu0">0.5</span>
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__str__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="st0">&quot;({0}, {1})&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> halfway<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> target<span class="br0">&#41;</span>:
+        <span class="st0">&quot;&quot;&quot; Return the halfway point between myself and the target &quot;&quot;&quot;</span>
+        mx <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span> + target.<span class="me1">x</span><span class="br0">&#41;</span>/<span class="nu0">2</span>
+        my <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">y</span> + target.<span class="me1">y</span><span class="br0">&#41;</span>/<span class="nu0">2</span>
+        <span class="kw1">return</span> Point<span class="br0">&#40;</span>mx<span class="sy0">,</span> my<span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1">##(2)</span>
+    <span class="kw1">def</span> reflect_x<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> Point<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span>-<span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1">##(3)</span>
+    <span class="kw1">def</span> slope_from_origin<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw2">self</span>.<span class="me1">y</span>/<span class="kw2">self</span>.<span class="me1">x</span>
+&nbsp;
+    <span class="co1">##(4)</span>
+    <span class="kw1">def</span> get_line_to<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>target<span class="br0">&#41;</span>:
+        m<span class="sy0">=</span><span class="br0">&#40;</span>target.<span class="me1">y</span>-<span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span>/<span class="br0">&#40;</span>target.<span class="me1">x</span>-<span class="kw2">self</span>.<span class="me1">x</span><span class="br0">&#41;</span>
+        c<span class="sy0">=</span>target.<span class="me1">y</span>-m*target.<span class="me1">x</span>
+        <span class="kw1">return</span> <span class="br0">&#40;</span>m<span class="sy0">,</span>c<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="co1">##(1)</span>
+<span class="kw1">def</span> distance<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>target<span class="br0">&#41;</span>:
+    dx<span class="sy0">=</span><span class="kw2">self</span>.<span class="me1">x</span>-target.<span class="me1">x</span>
+    dy<span class="sy0">=</span><span class="kw2">self</span>.<span class="me1">y</span>-target.<span class="me1">y</span>
+    <span class="kw1">return</span> <span class="br0">&#40;</span>dx**<span class="nu0">2</span>+dy**<span class="nu0">2</span><span class="br0">&#41;</span>**<span class="nu0">0.5</span>
+&nbsp;
+<span class="co1">##(5)</span>
+<span class="kw1">def</span> find_bisecperpen<span class="br0">&#40;</span>a<span class="sy0">,</span>b<span class="br0">&#41;</span>:
+    x<span class="sy0">=</span>a.<span class="me1">get_line_to</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span>
+    m<span class="sy0">=</span>x<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+    m<span class="sy0">=</span>-<span class="nu0">1</span>/m
+    p<span class="sy0">=</span>a.<span class="me1">halfway</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span>
+    c<span class="sy0">=</span>p.<span class="me1">y</span>-m*p.<span class="me1">x</span>
+    <span class="kw1">return</span> <span class="br0">&#40;</span>m<span class="sy0">,</span>c<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> find_intersection<span class="br0">&#40;</span>a<span class="sy0">,</span>b<span class="br0">&#41;</span>:
+    <span class="kw1">try</span>:
+        x<span class="sy0">=</span><span class="br0">&#40;</span>a<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>-b<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>/<span class="br0">&#40;</span>b<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>-a<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+        y<span class="sy0">=</span><span class="br0">&#40;</span>b<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>*a<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>-a<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>*b<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>/<span class="br0">&#40;</span>b<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>-a<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> Point<span class="br0">&#40;</span>x<span class="sy0">,</span>y<span class="br0">&#41;</span>
+    <span class="kw1">except</span>:
+        <span class="kw1">return</span> <span class="kw2">None</span>
+&nbsp;
+<span class="kw1">def</span> find_center<span class="br0">&#40;</span>a<span class="sy0">,</span>b<span class="sy0">,</span>c<span class="sy0">,</span>d<span class="br0">&#41;</span>:
+    l<span class="sy0">=</span>find_bisecperpen<span class="br0">&#40;</span>a<span class="sy0">,</span>b<span class="br0">&#41;</span>
+    k<span class="sy0">=</span>find_bisecperpen<span class="br0">&#40;</span>b<span class="sy0">,</span>c<span class="br0">&#41;</span>
+    j<span class="sy0">=</span>find_bisecperpen<span class="br0">&#40;</span>c<span class="sy0">,</span>d<span class="br0">&#41;</span>
+    h<span class="sy0">=</span>find_bisecperpen<span class="br0">&#40;</span>d<span class="sy0">,</span>a<span class="br0">&#41;</span>
+    o<span class="sy0">=</span>find_intersection<span class="br0">&#40;</span>l<span class="sy0">,</span>k<span class="br0">&#41;</span>
+    p<span class="sy0">=</span>find_intersection<span class="br0">&#40;</span>l<span class="sy0">,</span>j<span class="br0">&#41;</span>
+    q<span class="sy0">=</span>find_intersection<span class="br0">&#40;</span>l<span class="sy0">,</span>h<span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="br0">&#91;</span>o<span class="sy0">,</span>p<span class="sy0">,</span>q<span class="br0">&#93;</span>:
+        <span class="kw1">if</span> i <span class="sy0">!=</span> <span class="kw2">None</span>:
+            <span class="kw1">return</span> <span class="kw2">str</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+<span class="co1">##It fails when there is a vertical line!!!</span>
+<span class="co1">##&gt;&gt;&gt; find_center(Point(-2,5),Point(5,-2),Point(4,5),Point(-3,4))</span>
+<span class="co1">##'(1.0, 1.0)'</span></pre>
+
+6.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">from</span> <span class="kw3">unittest</span> <span class="kw1">import</span> <span class="kw3">test</span>
+&nbsp;
+<span class="kw1">class</span> SMS_store:
+    <span class="st0">'''The class will instantiate SMS_store objects,
+        similar to an inbox or outbox on a cellphone'''</span>
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>lst<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">message</span><span class="sy0">=</span>lst
+&nbsp;
+    <span class="kw1">def</span> add_new_arrival<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>from_number<span class="sy0">,</span> time_arrived<span class="sy0">,</span> text_of_SMS<span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">message</span>.<span class="me1">append</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw2">False</span><span class="sy0">,</span>from_number<span class="sy0">,</span> time_arrived<span class="sy0">,</span> text_of_SMS<span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> message_count<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw2">len</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">message</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> get_unread_indexes<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        result<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span>ind<span class="sy0">,</span>msg<span class="br0">&#41;</span> <span class="kw1">in</span> <span class="kw2">enumerate</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">message</span><span class="br0">&#41;</span>:
+            <span class="kw1">if</span> msg<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">==</span> <span class="kw2">False</span>:
+                result.<span class="me1">append</span><span class="br0">&#40;</span>ind<span class="br0">&#41;</span>
+        <span class="kw1">return</span> result
+&nbsp;
+    <span class="kw1">def</span> get_message<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>i<span class="br0">&#41;</span>:
+        <span class="kw1">try</span>:
+            <span class="kw2">self</span>.<span class="me1">message</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">=</span><span class="br0">&#40;</span><span class="kw2">True</span><span class="sy0">,</span><span class="kw2">self</span>.<span class="me1">message</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="kw2">self</span>.<span class="me1">message</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="kw2">self</span>.<span class="me1">message</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+            <span class="kw1">return</span> <span class="kw2">self</span>.<span class="me1">message</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span>:<span class="br0">&#93;</span>
+        <span class="kw1">except</span>:
+            <span class="kw1">return</span> <span class="kw2">None</span>
+&nbsp;
+    <span class="kw1">def</span> delete<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>i<span class="br0">&#41;</span>:
+        <span class="kw1">del</span> <span class="kw2">self</span>.<span class="me1">message</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span>
+&nbsp;
+    <span class="kw1">def</span> clear<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">message</span><span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+&nbsp;
+my_inbox <span class="sy0">=</span> SMS_store<span class="br0">&#40;</span><span class="br0">&#41;</span>
+my_inbox.<span class="me1">add_new_arrival</span><span class="br0">&#40;</span><span class="nu0">110</span><span class="sy0">,</span><span class="st0">'00:00'</span><span class="sy0">,</span> <span class="st0">'WANTED'</span><span class="br0">&#41;</span>
+my_inbox.<span class="me1">add_new_arrival</span><span class="br0">&#40;</span><span class="nu0">120</span><span class="sy0">,</span><span class="st0">'01:00'</span><span class="sy0">,</span> <span class="st0">'DEAD'</span><span class="br0">&#41;</span>
+my_inbox.<span class="me1">add_new_arrival</span><span class="br0">&#40;</span><span class="nu0">119</span><span class="sy0">,</span><span class="st0">'03:00'</span><span class="sy0">,</span> <span class="st0">'FIRED'</span><span class="br0">&#41;</span>
+my_inbox.<span class="me1">add_new_arrival</span><span class="br0">&#40;</span><span class="nu0">10086</span><span class="sy0">,</span><span class="st0">'12:00'</span><span class="sy0">,</span> <span class="st0">'BILL'</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>my_inbox.<span class="me1">message_count</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">4</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>my_inbox.<span class="me1">get_message</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="br0">&#40;</span><span class="nu0">119</span><span class="sy0">,</span><span class="st0">'03:00'</span><span class="sy0">,</span> <span class="st0">'FIRED'</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>my_inbox.<span class="me1">get_unread_indexes</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+my_inbox.<span class="me1">delete</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>my_inbox.<span class="me1">message_count</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">3</span><span class="br0">&#41;</span>
+my_inbox.<span class="me1">clear</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>my_inbox.<span class="me1">message_count</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

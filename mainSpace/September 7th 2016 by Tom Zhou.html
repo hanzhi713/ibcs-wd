@@ -1,0 +1,384 @@
+<html>
+  <head>
+    <title>IBCS1-WD - September 7th 2016 by Tom Zhou</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>September 7th 2016 by Tom Zhou<small> #Log </small></h1><h1 id="toc0"><a name="Brief summary"></a>Brief summary</h1>
+ <br />
+Today, we went through some key points in chapter 8 and chapter 9 in the first half of the lesson. These two chapters are about two data types, tuple and string, and their related operations, built-in functions and applications. You can refer to the book <em>How to Think Like a Computer Scientist</em> to view the complete content. In this lesson log, I will not mentioned much about what is already there in the book.<br />
+<br />
+In the second half, we proceeded further in recursive algorithm. Apart from recalling the recursive algorithm of binary search, we explored the extraction of elements in nested lists (tuples) based on recursion.<br />
+<br />
+<h1 id="toc1"><a name="Key points in chapter 7 and 8"></a>Key points in chapter 7 and 8</h1>
+ <br />
+<h2 id="toc2"><a name="Key points in chapter 7 and 8-String:"></a>String:</h2>
+ <br />
+<h3 id="toc3"><a name="Key points in chapter 7 and 8-String:-Introduction"></a>Introduction</h3>
+ <br />
+String is a kind of compound data type, which means it consists of smaller pieces called characters. When it comes to compound data type, we can treat it as a whole or access its components. But this does not mean that we can change every single item in string. For those data types that do not support item assignment, we say that they are <strong>immutable.</strong><br />
+<br />
+<h3 id="toc4"><a name="Key points in chapter 7 and 8-String:-Accessing its items:"></a>Accessing its items:</h3>
+ <br />
+For string, we can access its characters through this way:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">a <span class="sy0">=</span> <span class="st0">&quot;Hey man, what's up?&quot;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>a<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="br0">&#41;</span></pre>
+
+The result should be &quot;y&quot;. The number in the square parentheses acts as the index, which is a integer. To be a good computer scientist, you should know that the index of the first character is 0.<br />
+<br />
+You can actually have a negative index. That means, we count the index the other way around. For example:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">a <span class="sy0">=</span> <span class="st0">&quot;Hey man, what's up?&quot;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>a<span class="br0">&#91;</span>-<span class="nu0">2</span><span class="br0">&#93;</span><span class="br0">&#41;</span></pre>
+
+The result is &quot;u&quot;. Noticed that the last letter has the index of -1.<br />
+<br />
+<h3 id="toc5"><a name="Key points in chapter 7 and 8-String:-Slicing:"></a>Slicing:</h3>
+ <br />
+There is a useful way to acquire a part of a list. That is, list slicing. Here is the sample code:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">a <span class="sy0">=</span> <span class="st0">&quot;Hello, world!&quot;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>a<span class="br0">&#91;</span><span class="nu0">3</span>:<span class="nu0">7</span><span class="br0">&#93;</span><span class="br0">&#41;</span></pre>
+
+&quot;lo, &quot; is the result. [x:y] means we get the part of the string from index x inclusive to index y exclusive, and noticed that x must be smaller than y, otherwise you will get an empty result. In the above example, index 3 is the character &quot;l&quot;, and index 7 is the character &quot;w&quot;, so we will get from letter &quot;l&quot; to the letter before &quot;w&quot;. x and y are both optional parameter. If you skip typing one of them (or both), the default indices for x and y are the beginning and the end of the string, respectively.<br />
+<br />
+Still, we can do the negative index trick. For example:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">a <span class="sy0">=</span> <span class="st0">&quot;Hello, world!&quot;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>a<span class="br0">&#91;</span>-<span class="nu0">7</span>:-<span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#41;</span></pre>
+
+The result should be &quot; wor&quot; (there is a space prior to &quot;wor&quot;). It still satisfies the rule that we get a string from index x inclusive to index y exclusive, and x must be smaller than y.<br />
+<h3 id="toc6"> </h3>
+ <h3 id="toc7"><a name="Key points in chapter 7 and 8-String:-Format method:"></a>Format method:</h3>
+ <br />
+It is a very powerful tool. It helps you to construct a well-organized string with values filling in correct position. To begin with, you need to have some placeholders like {x}, where x represents the index, starting from 0. Obviously, you cannot have index 1 without having index 0.Then, you need to use .format(args) to replace your {x} with the value. The arguments are separated with commas and the position of the arguments are corresponded to the indices. The first argument replace the {0}, and the second argument replace {1}. For instance:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;Hello, {0} and {1}!&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="st0">&quot;Matt&quot;</span><span class="sy0">,</span> <span class="st0">&quot;David&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+The result is &quot;Hello, Matt and David&quot;. The position of {0} may not always come before {1}. Instead, we can have a string like &quot;{2} * {1} * {0}&quot;. But this is not recommended because the sequence of place holders is not the same as the arguments, so it's very easy to get confused.<br />
+<br />
+In addition, the format replacement field can has format specification. We can reserve space for the value in the holder and align it. For example, {0:^5} means reserve 5 spaces and align the text to the middle.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;Ha{0:^5}aH&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="st0">&quot;aaa&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+The result should be &quot;Ha aaa aH&quot;. Other examples:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;---{0:&lt;11}---&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="st0">&quot;Example&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="co1"># result is &quot;---Example  ---&quot;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;---{0:&gt;11}---&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="st0">&quot;Example&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="co1"># result is &quot;---  Example---&quot;</span></pre>
+
+&lt; means align to the left, while &gt; means align to the right.<br />
+<br />
+<br />
+<h2 id="toc8"><a name="Key points in chapter 7 and 8-Tuple:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Tuple:</span></h2>
+ <br />
+<h3 id="toc9"><a name="Key points in chapter 7 and 8-Tuple:-Introduction:"></a>Introduction:</h3>
+ <br />
+By using tuples, we can conveniently group data. A pair is a kind of tuple, yet a tuple can have unlimited amount of items. Tuples share similar characteristics with lists, except that tuple doesn't support item assignment. Operations like list slicing and accessing items can also be used in tuples. There are other unique features available, and I will only introduce some of them. You can refer to chapter 9 of the book <em>How to Think Like a Computer Scientist</em> to view the complete content.<br />
+<br />
+<h3 id="toc10"><a name="Key points in chapter 7 and 8-Tuple:-Tuple packing and unpacking"></a>Tuple packing and unpacking</h3>
+ <br />
+Tuple packing means assigning a tuple to a single variable. For instance:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">example_tuple <span class="sy0">=</span> <span class="br0">&#40;</span><span class="st0">&quot;E1&quot;</span><span class="sy0">,</span> <span class="st0">&quot;E2&quot;</span><span class="sy0">,</span> <span class="st0">&quot;E3&quot;</span><span class="br0">&#41;</span></pre>
+
+<br />
+Also, we can assign a tuple to a tuple of variables, and this assignment is equivalent to assigning variables for several times. This is called tuple unpacking.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="br0">&#40;</span>a<span class="sy0">,</span> b<span class="sy0">,</span> c<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="br0">&#40;</span><span class="nu0">2</span><span class="sy0">,</span> <span class="nu0">3</span><span class="sy0">,</span> <span class="nu0">5</span><span class="br0">&#41;</span></pre>
+
+Tuple unpacking can be used to swap value of two variables.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="br0">&#40;</span>a<span class="sy0">,</span> b<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="br0">&#40;</span>b<span class="sy0">,</span> a<span class="br0">&#41;</span></pre>
+
+<br />
+<h2 id="toc11"><a name="Key points in chapter 7 and 8-Recursion"></a>Recursion</h2>
+ <br />
+At the end of the lesson, we recalled the recursive algorithm of binary search. You can refer to the last lesson log written by Matt An.<br />
+<br />
+Why recursion not iteration? Iteration is suitable when the time of iterations is definite. But when we have no idea about the number of loops, we tend to use recursion.<br />
+<br />
+The recursive algorithm aims to cut a complicated thing to its smallest components. When it reaches the smallest component, it terminates and sends the values back. So, two essential components of a successful recursion are:<br />
+<br />
+<ol><li><strong><span style="color: #ff0000; line-height: 1.5;">A base case, which is a terminating scenario that does not need further recursion to produce an answer</span></strong></li><li><strong><span style="color: #ff0000; line-height: 1.5;">Operations that can reduce call other cases to the base case</span></strong></li></ol><br />
+In recursive algorithm, you must have a point of termination. In other words, a function cannot keep calling itself endlessly. The termination scenario can be either a return value or the situation in which every line of code is executed. In my case, the functions stop calling itself after it prints the i out when i is not a tuple or a list.<br />
+<br />
+When extracting elements from nested lists, we actually don't know how many items are there. Therefore, recursion is the best choice. Here is my code.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> print_all<span class="br0">&#40;</span>s<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> i <span class="kw1">in</span> s:
+        <span class="kw1">if</span> <span class="kw2">type</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw2">list</span> <span class="kw1">or</span> <span class="kw2">type</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw2">tuple</span>:
+            print_all<span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">print</span><span class="br0">&#40;</span>i<span class="sy0">,</span> end<span class="sy0">=</span><span class="st0">&quot;, &quot;</span><span class="br0">&#41;</span></pre>
+
+Here is the complete logic.<br />
+<br />
+The function receives a list or a tuple.<br />
+It begins traversing, accessing individual items.<br />
+If the item is a list or a tuple, the function will called itself using this list or tuple as the parameter.<br />
+If the item is not a list or a tuple (which means we have reached the smallest component), the item will be printed out immediately and the function terminates.<br />
+<br />
+For example, if the function received the list [1, 2, [3, 4, 5], 6, [7, [8, 9, [10]], 11], 12, [13]]<br />
+<br />
+A diagram which shows the process:<br />
+<br />
+↓ represents calling itself, and the parameter is the value on the top of that sign.<br />
+| represents termination.<br />
+Reading from left to right. The values in each row are the values of i after each iteration within current function.<br />
+<img src="files/Capture.PNG" alt="Capture.PNG" title="Capture.PNG" style="height: 310px; width: 808px;" /><br />
+<br />
+<br />
+<h1 id="toc12"> </h1>
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

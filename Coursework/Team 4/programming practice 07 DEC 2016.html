@@ -1,0 +1,297 @@
+<html>
+  <head>
+    <title>IBCS1-WD - programming practice 07 DEC 2016</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+1<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw3">String</span> withoutX<span class="br0">&#40;</span><span class="kw3">String</span> str<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw1">if</span> <span class="br0">&#40;</span>str.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="kw1">return</span> str<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>str.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>str.<span class="me1">compareTo</span><span class="br0">&#40;</span><span class="st0">&quot;x&quot;</span><span class="br0">&#41;</span><span class="sy0">&lt;</span> <span class="nu0">0</span><span class="sy0">||</span>str.<span class="me1">compareTo</span><span class="br0">&#40;</span><span class="st0">&quot;x&quot;</span><span class="br0">&#41;</span><span class="sy0">&gt;</span> <span class="nu0">0</span> <span class="br0">&#41;</span><span class="br0">&#123;</span>
+      <span class="kw1">return</span> str<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">else</span><span class="br0">&#123;</span>
+      <span class="kw1">return</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+  <span class="kw1">else</span>`<span class="br0">&#123;</span>
+  <span class="kw3">String</span> asd <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+  <span class="kw3">String</span> x<span class="sy0">=</span> str.<span class="me1">substring</span><span class="br0">&#40;</span><span class="nu0">0</span>,<span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw3">String</span> y <span class="sy0">=</span> str.<span class="me1">substring</span><span class="br0">&#40;</span><span class="nu0">1</span>,str.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw3">String</span> z <span class="sy0">=</span> str.<span class="me1">substring</span><span class="br0">&#40;</span>str.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span><span class="nu0">1</span>,str.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>x.<span class="me1">compareTo</span><span class="br0">&#40;</span><span class="st0">&quot;x&quot;</span><span class="br0">&#41;</span><span class="sy0">&lt;</span> <span class="nu0">0</span><span class="sy0">||</span>x.<span class="me1">compareTo</span><span class="br0">&#40;</span><span class="st0">&quot;x&quot;</span><span class="br0">&#41;</span><span class="sy0">&gt;</span> <span class="nu0">0</span> <span class="br0">&#41;</span><span class="br0">&#123;</span>
+    asd <span class="sy0">=</span> asd <span class="sy0">+</span> x<span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+  asd <span class="sy0">=</span> asd<span class="sy0">+</span>y<span class="sy0">;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>z.<span class="me1">compareTo</span><span class="br0">&#40;</span><span class="st0">&quot;x&quot;</span><span class="br0">&#41;</span><span class="sy0">&lt;</span> <span class="nu0">0</span><span class="sy0">||</span>z.<span class="me1">compareTo</span><span class="br0">&#40;</span><span class="st0">&quot;x&quot;</span><span class="br0">&#41;</span><span class="sy0">&gt;</span> <span class="nu0">0</span> <span class="br0">&#41;</span><span class="br0">&#123;</span>
+    asd <span class="sy0">=</span> asd<span class="sy0">+</span>z<span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+&nbsp;
+  <span class="kw1">return</span> asd<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-07%20%E4%B8%8B%E5%8D%886.36.17.png" alt=" 2016-12-07 下午6.36.17.png" title=" 2016-12-07 下午6.36.17.png" style="height: 547px; width: 872px;" /><br />
+<br />
+2<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw4">int</span> countHi<span class="br0">&#40;</span><span class="kw3">String</span> str<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw4">int</span> count <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+  <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span>str.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>str.<span class="me1">substring</span><span class="br0">&#40;</span>i,i<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span>.<span class="me1">compareTo</span><span class="br0">&#40;</span><span class="st0">&quot;h&quot;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+      <span class="kw1">if</span><span class="br0">&#40;</span>str.<span class="me1">substring</span><span class="br0">&#40;</span>i<span class="sy0">+</span><span class="nu0">1</span>,i<span class="sy0">+</span><span class="nu0">2</span><span class="br0">&#41;</span>.<span class="me1">compareTo</span><span class="br0">&#40;</span><span class="st0">&quot;i&quot;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        count <span class="sy0">=</span> count <span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+  <span class="br0">&#125;</span>
+  <span class="kw1">return</span> count<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-07%20%E4%B8%8B%E5%8D%886.36.21.png" alt=" 2016-12-07 下午6.36.21.png" title=" 2016-12-07 下午6.36.21.png" style="height: 548px; width: 872px;" /><br />
+<br />
+<br />
+<br />
+3<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw3">String</span> repeatSeparator<span class="br0">&#40;</span><span class="kw3">String</span> word, <span class="kw3">String</span> sep, <span class="kw4">int</span> count<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw3">String</span> str <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+  <span class="kw1">if</span><span class="br0">&#40;</span>count <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="kw1">return</span> str<span class="sy0">;</span>
+  <span class="br0">&#125;</span>
+  <span class="kw1">else</span><span class="br0">&#123;</span>
+    <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span>count<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>i<span class="sy0">++</span> <span class="br0">&#41;</span><span class="br0">&#123;</span>
+      str <span class="sy0">=</span> str<span class="sy0">+</span>word<span class="sy0">;</span>
+      str <span class="sy0">=</span> str <span class="sy0">+</span> sep<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+  str <span class="sy0">=</span> str <span class="sy0">+</span> word<span class="sy0">;</span>
+  <span class="kw1">return</span> str<span class="sy0">;</span>
+<span class="br0">&#125;</span></pre>
+
+<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-07%20%E4%B8%8B%E5%8D%886.36.23.png" alt=" 2016-12-07 下午6.36.23.png" title=" 2016-12-07 下午6.36.23.png" style="height: 548px; width: 872px;" /><br />
+<br />
+<br />
+<br />
+<br />
+4<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw4">boolean</span> linearIn<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> outer, <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> inner<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw4">boolean</span> c <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+  <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span>inner.<span class="me1">length</span><span class="sy0">;</span>i<span class="sy0">++</span> <span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="kw4">int</span> a <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> o <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> o<span class="sy0">&lt;</span>outer.<span class="me1">length</span><span class="sy0">;</span>o<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+      <span class="kw1">if</span><span class="br0">&#40;</span> outer<span class="br0">&#91;</span>o<span class="br0">&#93;</span><span class="sy0">==</span>inner<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="br0">&#41;</span><span class="br0">&#123;</span>
+        a <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>a <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+      c <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+  <span class="kw1">return</span> c<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-07%20%E4%B8%8B%E5%8D%886.36.24.png" alt=" 2016-12-07 下午6.36.24.png" title=" 2016-12-07 下午6.36.24.png" style="height: 548px; width: 872px;" /><br />
+<br />
+<br />
+5<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> seriesUp<span class="br0">&#40;</span><span class="kw4">int</span> n<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw4">int</span> num <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+  <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> a<span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>n<span class="sy0">*</span><span class="br0">&#40;</span>n <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">;</span>
+  <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>n<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> o <span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span>o<span class="sy0">&lt;</span>i<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>o<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+      a<span class="br0">&#91;</span>num<span class="br0">&#93;</span> <span class="sy0">=</span> o<span class="sy0">;</span>
+      num <span class="sy0">=</span> num <span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+  <span class="kw1">return</span> a<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-07%20%E4%B8%8B%E5%8D%886.36.26.png" alt=" 2016-12-07 下午6.36.26.png" title=" 2016-12-07 下午6.36.26.png" style="height: 548px; width: 872px;" /><br />
+<br />
+<br />
+6<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw4">int</span> matchUp<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> a, <span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> b<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+  <span class="kw4">int</span> num <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+  <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>a.<span class="me1">length</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="kw1">if</span><span class="br0">&#40;</span>a<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">!=</span><span class="st0">&quot;&quot;</span> <span class="sy0">&amp;&amp;</span> b<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">!=</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+      <span class="kw1">if</span> <span class="br0">&#40;</span>a<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">substring</span><span class="br0">&#40;</span><span class="nu0">0</span>,<span class="nu0">1</span><span class="br0">&#41;</span>.<span class="me1">compareTo</span><span class="br0">&#40;</span>b<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">substring</span><span class="br0">&#40;</span><span class="nu0">0</span>,<span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        num <span class="sy0">=</span> num<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+  <span class="br0">&#125;</span>
+  <span class="kw1">return</span> num<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-07%20%E4%B8%8B%E5%8D%886.36.28.png" alt=" 2016-12-07 下午6.36.28.png" title=" 2016-12-07 下午6.36.28.png" style="height: 548px; width: 872px;" /></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

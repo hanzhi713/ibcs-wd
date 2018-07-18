@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <title>IBCS1-WD - November 17th 2016 by Michael Qian</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>November 17th 2016 by Michael Qian<small> #Log </small></h1>Already,<br />
+let's just get to our new chapter for java!<br />
+<br />
+<h1 id="toc0"><a name="Classes and Objects"></a>Classes and Objects</h1>
+ <br />
+Components of the Class methods:<br />
+<br />
+<h2 id="toc1"><a name="Classes and Objects-Headers:"></a>Headers:</h2>
+ access specifier: public or private<br />
+return type: int void double<br />
+method name: blah<br />
+parameter list:(String password, blah)<br />
+<br />
+<h2 id="toc2"><a name="Classes and Objects-Constructor:"></a>Constructor:</h2>
+ <h3 id="toc3"><a name="Classes and Objects-Constructor:-1:default constructor"></a>1:default constructor</h3>
+ <span style="font-family: CMTT10; font-size: 10pt;">public BankAccount() { </span><br />
+<span style="font-family: CMTT10; font-size: 10pt;">password = &quot;&quot;; </span><br />
+<span style="font-family: CMTT10; font-size: 10pt;">balance = 0.0; } </span><br />
+<br />
+<span style="font-family: GaramondNo8; font-size: 11pt;">constructs a </span><span style="font-family: CMTT10; font-size: 10pt;">BankAccount </span><span style="font-family: GaramondNo8; font-size: 11pt;">object with a balance of zero and a password equal to the empty string. </span><br />
+<h2 id="toc4"><a name="Classes and Objects-2:normal constructor"></a><span style="font-family: GaramondNo8; font-size: 11pt;">2:normal constructor</span></h2>
+ <br />
+<span style="font-family: CMTT10; font-size: 10pt;">public BankAccount(String acctPassword, double acctBalance) { </span><br />
+<span style="font-family: CMTT10; font-size: 10pt;">password = acctPassword; </span><br />
+<span style="font-family: CMTT10; font-size: 10pt;">balance = acctBalance; } </span><br />
+<h2 id="toc5"><a name="Classes and Objects-Accessor:"></a>Accessor:</h2>
+ <span style="font-family: GaramondNo8; font-size: 11pt;">accesses a class object without altering the object. </span><br />
+<span style="font-family: CMTT10; font-size: 10pt;">public double getBalance()</span><br />
+<span style="font-family: CMTT10; font-size: 10pt;">{ return balance; } </span><br />
+<br />
+<br />
+<h2 id="toc6"><a name="Classes and Objects-Mutators:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Mutators:</span></h2>
+ access and change the variables in the class instance<br />
+<span style="font-family: CMTT10; font-size: 10pt;">public void deposit(String acctPassword, double amount) {</span><br />
+<span style="font-family: CMTT10; font-size: 10pt;">if (!acctPassword.equals(password)) /* throw an exception */</span><br />
+<span style="font-family: CMTT10; font-size: 10pt;">else {balance += amount;}</span><br />
+<br />
+<span style="font-family: CMTT10; font-size: 10pt;">Note that the difference between static method and instance method: </span><br />
+static method and variable are callable throughout the entire scope of the class,<br />
+the idea is similar to the global variable that we learned in previous python chapter<br />
+<br />
+<h1 id="toc7"><a name="METHOD OVERLOADING"></a>METHOD OVERLOADING</h1>
+ Though it might confuse you a little, but it is possible for different method to exist with the same method name, the<br />
+system will recognize the difference as long as it has the different reference.<br />
+for example in:<br />
+<span style="font-family: CMTT10; font-size: 10pt;">public class DoOperations { </span><br />
+<span style="font-family: CMTT10; font-size: 10pt;">public int product(int n) { return n * n; }</span><br />
+<span style="font-family: CMTT10; font-size: 10pt;"> public double product(double x) { return x * x; } public double product(int x, int y) { return x * y; } </span><br />
+<span style="font-family: CMTT10; font-size: 10pt;">... </span><br />
+<span style="font-family: CMTT10; font-size: 10pt;">will give the different results</span><br />
+<br />
+<h1 id="toc8"><a name="x&quot;This&quot; method"></a><span style="font-family: CMTT10; font-size: 10pt;">&quot;This&quot; method</span></h1>
+ <span style="font-family: CMTT10; font-size: 10pt;">this method allow us to clear the ambiguity of variables with identical names</span><br />
+<span style="font-family: CMTT10; font-size: 10pt;">for example:</span><br />
+<span style="font-family: CMTT10; font-size: 10pt;">if we have two variables both have the name balance,</span><br />
+<br />
+<span style="font-family: CMTT10; font-size: 10pt;">public void deposit(String acctPassword, double balance) { </span><br />
+<span style="font-family: CMTT10; font-size: 10pt;">this.balance += balance; } </span><br />
+<br />
+This .balance refers to the balance outside this method, is the current balance belongs to the instance<br />
+<br />
+<h3 id="toc9"><a name="x&quot;This&quot; method--Differentiate primitive and reference data types:"></a>Differentiate primitive and reference data types:</h3>
+ Say if we are writing new instances, <br />
+primitive data types creates an entirely new space for the data you input, while reference data types like <br />
+class and objects are merely create references instead of actual objects.<br />
+<br />
+<h2 id="toc10"><a name="x&quot;This&quot; method-Default value in class:"></a>Default value in class:</h2>
+ One amazing thing about class is that when initializing attributes it has a default value,<br />
+for int is 0 for string is &quot; &quot;</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

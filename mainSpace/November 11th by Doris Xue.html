@@ -1,0 +1,153 @@
+<html>
+  <head>
+    <title>IBCS1-WD - November 11th by Doris Xue</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>November 11th by Doris Xue<small> #Log </small></h1><h1 id="toc0"><a name="AP Computer Science A : Chapter 1"></a><span style="font-size: 15px;">AP Computer Science A : Chapter 1</span></h1>
+ <hr />
+<h2 id="toc1"><a name="AP Computer Science A : Chapter 1-Packges and Classes"></a><span style="font-size: 15px;">Packges and Classes</span></h2>
+ <ol><li><span style="font-size: 15px;">A Package can be defined as a <strong>grouping of related types</strong> (classes, interfaces, enumerations and annotations ) providing access protection and namespace management.</span></li><li><span style="font-size: 15px;">Packages are used in Java in order to prevent naming conflicts, to control access, to make searching/locating and usage of classes, interfaces, enumerations and annotations easier, etc.</span></li><li><span style="font-size: 15px;">Import a package；</span></li><li><span style="font-size: 15px;">If a class wants to use another class in the same package, the package name need not be used. Classes in the same package find each other without any special syntax.</span></li><li><span style="color: #f51b1b; font-size: 15px;">All java methods must be contained in a class</span><span style="font-size: 15px;">, and all program statements must be placed inside a method.</span></li><li><span style="font-size: 15px;">public: Public means a class or method is usable outside of the class, whereas private data members or methods.</span></li><li><span style="font-size: 15px;"><strong>Static</strong>: Static means that the variable or method marked as such is avaliable at the class level. In other words, you don't need to create a instatance of the class to access it.</span></li><li><span style="font-size: 15px;">Void: Void means the reaturn value of this is Null.</span></li></ol><hr />
+<h2 id="toc2"><a name="AP Computer Science A : Chapter 1-Identifiers"></a><span style="font-size: 15px;">Identifiers</span></h2>
+ <ol><li><span style="font-size: 15px;">Identifiers are the names of variables, methods, classes, packages and interfaces. Unlike literals they are not the things themselves, just ways of referring to them. In the HelloWorld program, HelloWorld, String, args, main and println are identifiers.</span></li><li><span style="font-size: 15px;">Identifiers must be composed of letters, numbers, the underscore _ and the dollar sign $. Identifiers may only begin with a letter, the underscore or a dollar sign.</span></li></ol><span style="font-size: 15px;"><img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-11-17%20%E4%B8%8B%E5%8D%887.05.45.png" alt=" 2016-11-17 下午7.05.45.png" title=" 2016-11-17 下午7.05.45.png" style="height: 345px; width: 859px;" /></span><br />
+<ol><li><span style="font-size: 15px;">Over flow error: try to store a value whose magnitude is too big in a variable.</span></li><li><span style="font-size: 15px;">A varuable is often initialized in its declarations</span></li></ol><hr />
+<span style="font-size: 15px;">Storage of numbers</span><br />
+<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-11-17%20%E4%B8%8B%E5%8D%887.26.35.png" alt=" 2016-11-17 下午7.26.35.png" title=" 2016-11-17 下午7.26.35.png" style="height: 634px; width: 858px;" /><br />
+<hr />
+<span style="font-size: 15px;">Hexadecimal and Octal Numbers</span><br />
+<ol><li><span style="font-size: 15px;">Decimal Number System: Decimal number system has ten symbols: 0, 1, 2, 3, 4, 5, 6, 7, 8, and 9, called digits. It uses positional notation. That is, the least-significant digit (right-most digit) is of the order of 10^0 (units or ones), the second right-most digit is of the order of 10^1(tens), the third right-most digit is of the order of 10^2 (hundreds), and so on.</span></li><li><span style="font-size: 15px;">Binary Number System: Binary number system has two symbols: 0 and 1, called bits. It is also a positional notation. binary digit is called a bit. Eight bits is called a byte.</span></li><li><span style="font-size: 15px;">Hexadecimal number system uses 16 symbols: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, and F, called hex digits. Each hexadecimal digit is also called a hex digit. Most programming languages accept lowercase 'a' to 'f' as well as uppercase 'A' to 'F'.Computers uses binary system in their internal operations, as they are built from binary digital electronic components. However, writing or reading a long sequence of binary bits is cumbersome and error-prone. Hexadecimal system is used as a compact form or shorthand for binary bits. Each hex digit is equivalent to 4 binary bits</span></li><li><span style="font-size: 15px;">A link about how to store a negative number in computer:</span></li><li><br />
+</li></ol><hr />
+<span style="font-size: 15px;">Operators</span><br />
+<span style="font-size: 15px;">Arithmetic Operators:</span><br />
+<ol><li><span style="font-size: 15px;">- Subtraction operator</span></li><li><span style="font-size: 15px;">* Multiplication operator</span></li><li><span style="font-size: 15px;">/ Division operator</span></li><li><span style="font-size: 15px;">% Remainder operator</span></li></ol><span style="font-size: 15px;">Relational Operators:</span><br />
+<ol><li><span style="font-size: 15px;">== Equal to</span></li><li><span style="font-size: 15px;">!= Not equal to</span></li><li><span style="font-size: 15px;">&gt; Greater than</span></li><li><span style="font-size: 15px;">&gt;= Greater than or equal to</span></li><li><span style="font-size: 15px;">&lt; Less than</span></li><li><span style="font-size: 15px;">&lt;= Less than or equal to</span></li></ol><span style="font-size: 15px;"> Logical Operators:</span><br />
+<ol><li><span style="font-size: 15px;">&amp;&amp; Conditional-AND</span></li><li><span style="font-size: 15px;">|| Conditional-OR</span></li><li><span style="font-size: 15px;">! Conditional-NOT</span></li></ol><span style="font-size: 15px;">Assignment Operators:</span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> Test <span class="br0">&#123;</span>
+&nbsp;
+   <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span> args<span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+      <span class="kw4">int</span> a <span class="sy0">=</span> <span class="nu0">10</span><span class="sy0">;</span>
+      <span class="kw4">int</span> b <span class="sy0">=</span> <span class="nu0">20</span><span class="sy0">;</span>
+      <span class="kw4">int</span> c <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+&nbsp;
+      c <span class="sy0">=</span> a <span class="sy0">+</span> b<span class="sy0">;</span>
+      <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;c = a + b = &quot;</span> <span class="sy0">+</span> c <span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+      c <span class="sy0">+=</span> a <span class="sy0">;</span>
+      <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;c += a  = &quot;</span> <span class="sy0">+</span> c <span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+      c <span class="sy0">-=</span> a <span class="sy0">;</span>
+      <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;c -= a = &quot;</span> <span class="sy0">+</span> c <span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+      c <span class="sy0">*=</span> a <span class="sy0">;</span>
+      <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;c *= a = &quot;</span> <span class="sy0">+</span> c <span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+      a <span class="sy0">=</span> <span class="nu0">10</span><span class="sy0">;</span>
+      c <span class="sy0">=</span> <span class="nu0">15</span><span class="sy0">;</span>
+      c <span class="sy0">/=</span> a <span class="sy0">;</span>
+      <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;c /= a = &quot;</span> <span class="sy0">+</span> c <span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+      a <span class="sy0">=</span> <span class="nu0">10</span><span class="sy0">;</span>
+      c <span class="sy0">=</span> <span class="nu0">15</span><span class="sy0">;</span>
+      c <span class="sy0">%=</span> a <span class="sy0">;</span>
+      <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;c %= a  = &quot;</span> <span class="sy0">+</span> c <span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+      c <span class="sy0">&lt;&lt;=</span> <span class="nu0">2</span> <span class="sy0">;</span>
+      <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;c &lt;&lt;= 2 = &quot;</span> <span class="sy0">+</span> c <span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+      c <span class="sy0">&gt;&gt;=</span> <span class="nu0">2</span> <span class="sy0">;</span>
+      <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;c &gt;&gt;= 2 = &quot;</span> <span class="sy0">+</span> c <span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+      c <span class="sy0">&gt;&gt;=</span> <span class="nu0">2</span> <span class="sy0">;</span>
+      <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;c &gt;&gt;= 2 = &quot;</span> <span class="sy0">+</span> c <span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+      c <span class="sy0">&amp;=</span> a <span class="sy0">;</span>
+      <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;c &amp;= a  = &quot;</span> <span class="sy0">+</span> c <span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+      c <span class="sy0">^=</span> a <span class="sy0">;</span>
+      <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;c ^= a   = &quot;</span> <span class="sy0">+</span> c <span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+      c <span class="sy0">|=</span> a <span class="sy0">;</span>
+      <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;c |= a   = &quot;</span> <span class="sy0">+</span> c <span class="br0">&#41;</span><span class="sy0">;</span>
+   <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+Output:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java">c <span class="sy0">=</span> a <span class="sy0">+</span> b <span class="sy0">=</span> <span class="nu0">30</span>
+c <span class="sy0">+=</span> a  <span class="sy0">=</span> <span class="nu0">40</span>
+c <span class="sy0">-=</span> a <span class="sy0">=</span> <span class="nu0">30</span>
+c <span class="sy0">*=</span> a <span class="sy0">=</span> <span class="nu0">300</span>
+c <span class="sy0">/=</span> a <span class="sy0">=</span> <span class="nu0">1</span>
+c <span class="sy0">%=</span> a  <span class="sy0">=</span> <span class="nu0">5</span>
+c <span class="sy0">&lt;&lt;=</span> <span class="nu0">2</span> <span class="sy0">=</span> <span class="nu0">20</span>
+c <span class="sy0">&gt;&gt;=</span> <span class="nu0">2</span> <span class="sy0">=</span> <span class="nu0">5</span>
+c <span class="sy0">&gt;&gt;=</span> <span class="nu0">2</span> <span class="sy0">=</span> <span class="nu0">1</span>
+c <span class="sy0">&amp;=</span> a  <span class="sy0">=</span> <span class="nu0">0</span>
+c <span class="sy0">^=</span> a   <span class="sy0">=</span> <span class="nu0">10</span>
+c <span class="sy0">|=</span> a   <span class="sy0">=</span> <span class="nu0">10</span></pre>
+
+<span style="font-size: 15px;">Increment and Decrement Operators:</span><br />
+<ol><li><span style="font-size: 15px;">++ i ++ i is incremented by 1</span></li><li><span style="font-size: 15px;">-- i -- i is decremented by 1</span></li></ol><br />
+<ul class="quotelist"><li><br />
+</li></ul><hr />
+<br />
+<h1 id="toc3"><a name="x(´･_･`) Have a good day~"></a>(´･_･`) Have a good day~</h1>
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

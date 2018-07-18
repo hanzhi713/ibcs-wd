@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <title>IBCS1-WD - RPN calculator submission page</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>RPN calculator submission page<small> #homework </small></h1>RPN calculator<br />
+Start date: 20170227<br />
+Submission due: 20170301 9:00am<br />
+Requirements:<br />
+1. Basic function: +, -, *, /, ^ are required. Please upload your code and run result screenshots.<br />
+2. further function: sin(), cos(), log(), etc. are encouraged. You will get bonus<br />
+3. further extension: RPN expression convertor --- postfix --&gt; infix . You will get more bonus<br />
+<br />
+<ul><li>Doris:<a class="wiki_link" href="RPN%20Calculator.html">Coursework/Team%201/RPN+Calculator</a></li><li>Alex: <a class="wiki_link" href="../Coursework/Team%202/2.27.html">2.27</a></li><li>Tom: <a class="wiki_link" href="../Coursework/Team%203/February%2027th%2C%20Tom%27s%20work%20on%20RPN%20calculator.html">Coursework/Team%203/February+27th%2C+Tom%27s+work+on+RPN+calculator</a></li><li>Charles: <a class="wiki_link" href="../Coursework/Team%204/RPN%20calculator.html">Coursework/Team%204/RPN+calculator</a></li><li>Matt: <a class="wiki_link" href="../Coursework/Team%205/RPN%20Calculator.html">Coursework/Team%205/RPN+Calculator</a></li><li>Michael: <a class="wiki_link" href="../Coursework/Team%206/RPN%20calculater.html">Coursework/Team%206/RPN+calculater</a></li><li>Enzo: <a class="wiki_link" href="../Coursework/Team%207/3.1%20HW%20RPNCalculator.html">Coursework/Team%207/3.1+HW+RPNCalculator</a></li><li>Arthur: <a class="wiki_link" href="../Coursework/Team%208/2.27%20Classwork%20%20-%20RPN%20calculator.html">Coursework/Team%208/2.27+Classwork++-+RPN+calculator</a></li><li>David:<a class="wiki_link" href="../Coursework/Team%209/RPN.html">Coursework/Team%209/RPN</a></li><li>Margaret: <a class="wiki_link" href="../Coursework/Team%2010/RPN%20Calculator.html">Coursework/Team%2010/RPN+Calculator</a></li></ul><br />
+<br />
+<span style="font-size: 13px;">References:</span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> postfix_evaluation<span class="br0">&#40;</span>s<span class="br0">&#41;</span>:
+    s<span class="sy0">=</span>s.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    n<span class="sy0">=</span><span class="kw2">len</span><span class="br0">&#40;</span>s<span class="br0">&#41;</span>
+    stack <span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>n<span class="br0">&#41;</span>:
+        <span class="kw1">if</span> s<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">isdigit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+          <span class="co1">#append function is equivalent to push</span>
+            stack.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span>s<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">elif</span> s<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">==</span><span class="st0">&quot;+&quot;</span>:
+            a<span class="sy0">=</span>stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            b<span class="sy0">=</span>stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            stack.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>+<span class="kw2">int</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">elif</span> s<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">==</span><span class="st0">&quot;*&quot;</span>:
+    **********
+        <span class="kw1">elif</span> s<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">==</span><span class="st0">&quot;/&quot;</span>:
+    **********
+        <span class="kw1">elif</span> s<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">==</span><span class="st0">&quot;-&quot;</span>:
+               **********
+    <span class="kw1">return</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#space separtor is required , for solving 2 or more digits .</span>
+s<span class="sy0">=</span><span class="st0">&quot;10 2 8 * + 3 -&quot;</span>
+val<span class="sy0">=</span>postfix_evaluation<span class="br0">&#40;</span>s<span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>val<span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<span style="font-size: 13px;">Openbook references of stack:</span><br />
+<a class="wiki_link_ext" href="http://openbookproject.net/thinkcs/python/english3e/stacks.html" rel="nofollow">http://openbookproject.net/thinkcs/python/english3e/stacks.html</a></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

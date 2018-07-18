@@ -1,0 +1,267 @@
+<html>
+  <head>
+    <title>IBCS1-WD - CS Chapter4</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1">#1</span>
+<span class="kw1">import</span> <span class="kw3">turtle</span>
+&nbsp;
+<span class="kw1">def</span> Draw_Square<span class="br0">&#40;</span>t<span class="sy0">,</span> l<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot;Make turtle t Draw_Square&quot;&quot;&quot;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span>:
+        t.<span class="me1">forward</span><span class="br0">&#40;</span>l<span class="br0">&#41;</span>
+        t.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    t.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    t.<span class="me1">fd</span><span class="br0">&#40;</span><span class="nu0">2</span>*l<span class="br0">&#41;</span>
+    t.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    t.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Exercise_1&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+A <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+A.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">40</span><span class="br0">&#41;</span>
+A.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">'black'</span><span class="br0">&#41;</span>
+A.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">7</span><span class="br0">&#41;</span>:
+    Draw_Square<span class="br0">&#40;</span>A<span class="sy0">,</span> <span class="nu0">20</span><span class="br0">&#41;</span>
+&nbsp;
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#2</span>
+<span class="kw1">import</span> <span class="kw3">turtle</span>
+&nbsp;
+<span class="kw1">def</span> Draw_Square<span class="br0">&#40;</span>t<span class="sy0">,</span> l<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot;Make turtle t draw a square&quot;&quot;&quot;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span>:
+        t.<span class="me1">forward</span><span class="br0">&#40;</span>l<span class="br0">&#41;</span>
+        t.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    t.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    t.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">180</span><span class="br0">&#41;</span>
+    t.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">10</span><span class="br0">&#41;</span>
+    t.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    t.<span class="me1">fd</span><span class="br0">&#40;</span><span class="nu0">10</span><span class="br0">&#41;</span>
+    t.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    t.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Exercise_2&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+B <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+B.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+B.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">&quot;black&quot;</span><span class="br0">&#41;</span>
+B.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+l<span class="sy0">=</span><span class="nu0">20</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span>:
+    Draw_Square<span class="br0">&#40;</span>B<span class="sy0">,</span> l+<span class="nu0">20</span>*i<span class="br0">&#41;</span>
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#3</span>
+<span class="kw1">import</span> <span class="kw3">turtle</span>
+<span class="kw1">def</span> draw_poly<span class="br0">&#40;</span>t<span class="sy0">,</span> n<span class="sy0">,</span> sz<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot;Make turtle t draw a square of sz. And move forward&quot;&quot;&quot;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>n<span class="br0">&#41;</span>:
+        t.<span class="me1">forward</span><span class="br0">&#40;</span>sz<span class="br0">&#41;</span>
+        t.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">360</span>/n<span class="br0">&#41;</span>
+&nbsp;
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Exercise_3&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+tess <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+tess.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+tess.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">&quot;black&quot;</span><span class="br0">&#41;</span>
+tess.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+draw_poly<span class="br0">&#40;</span>tess<span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> <span class="nu0">50</span><span class="br0">&#41;</span>
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#4</span>
+<span class="kw1">import</span> <span class="kw3">turtle</span>
+&nbsp;
+<span class="kw1">def</span> draw_square<span class="br0">&#40;</span>t<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot;Make turtle t draw square&quot;&quot;&quot;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span>:
+        <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span>:
+            t.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">60</span><span class="br0">&#41;</span>
+            t.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+        t.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+&nbsp;
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Exercise_4&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+C <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+C.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+C.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">&quot;black&quot;</span><span class="br0">&#41;</span>
+C.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span>:
+    draw_square<span class="br0">&#40;</span>C<span class="br0">&#41;</span>
+    C.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">18</span><span class="br0">&#41;</span>
+C.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#5.1</span>
+<span class="kw1">import</span> <span class="kw3">turtle</span>
+<span class="kw1">def</span> draw_poly<span class="br0">&#40;</span>t<span class="sy0">,</span>l<span class="sy0">,</span>n<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot;Make turtle t draw side&quot;&quot;&quot;</span>
+    t.<span class="me1">forward</span><span class="br0">&#40;</span>l<span class="br0">&#41;</span>
+    t.<span class="me1">right</span><span class="br0">&#40;</span>n<span class="br0">&#41;</span>
+&nbsp;
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Exercise_5.1&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+D <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+D.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+D.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">&quot;black&quot;</span><span class="br0">&#41;</span>
+D.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+D.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+l <span class="sy0">=</span> <span class="nu0">0</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">120</span><span class="br0">&#41;</span>:
+    l+<span class="sy0">=</span><span class="nu0">3</span>
+    draw_poly<span class="br0">&#40;</span>D<span class="sy0">,</span>l<span class="sy0">,</span><span class="nu0">90</span><span class="br0">&#41;</span>
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#5.2</span>
+<span class="kw1">import</span> <span class="kw3">turtle</span>
+<span class="kw1">def</span> Draw_Poly<span class="br0">&#40;</span>t<span class="sy0">,</span>l<span class="sy0">,</span>n<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot;Make turtle t draw side&quot;&quot;&quot;</span>
+    t.<span class="me1">forward</span><span class="br0">&#40;</span>l<span class="br0">&#41;</span>
+    t.<span class="me1">right</span><span class="br0">&#40;</span>n<span class="br0">&#41;</span>
+&nbsp;
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Execise_5.2&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+E <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+E.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+E.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">&quot;black&quot;</span><span class="br0">&#41;</span>
+E.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+E.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+l<span class="sy0">=</span><span class="nu0">0</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">120</span><span class="br0">&#41;</span>:
+    l+<span class="sy0">=</span><span class="nu0">3</span>
+    draw_poly<span class="br0">&#40;</span>E<span class="sy0">,</span>l<span class="sy0">,</span><span class="nu0">89</span><span class="br0">&#41;</span>
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#6</span>
+<span class="kw1">import</span> <span class="kw3">turtle</span>
+<span class="kw1">def</span> Draw_Triangle<span class="br0">&#40;</span>t<span class="sy0">,</span> l<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>:
+        t.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        t.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        t.<span class="me1">forward</span><span class="br0">&#40;</span>l<span class="br0">&#41;</span>
+        t.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">120</span><span class="br0">&#41;</span>
+&nbsp;
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Exercise_6&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+F <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+F.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+F.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">&quot;black&quot;</span><span class="br0">&#41;</span>
+F.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+&nbsp;
+Draw_Triangle<span class="br0">&#40;</span>F<span class="sy0">,</span> <span class="nu0">100</span><span class="br0">&#41;</span>
+&nbsp;
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#7</span>
+<span class="kw1">def</span> sum_to<span class="br0">&#40;</span>n<span class="br0">&#41;</span>:
+    SUM <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>n + <span class="nu0">1</span><span class="br0">&#41;</span>:
+       SUM <span class="sy0">=</span> SUM + i
+    <span class="kw1">return</span> SUM
+&nbsp;
+<span class="co1">#8</span>
+<span class="kw1">import</span> <span class="kw3">math</span>
+<span class="kw1">def</span> area_of_circle<span class="br0">&#40;</span>r<span class="br0">&#41;</span>:
+    A <span class="sy0">=</span> <span class="kw3">math</span>.<span class="me1">pi</span>*r**<span class="nu0">2</span>
+&nbsp;
+    <span class="kw1">return</span> A
+&nbsp;
+<span class="co1">#9</span>
+<span class="kw1">import</span> <span class="kw3">turtle</span>
+&nbsp;
+<span class="kw1">def</span> Draw_Star<span class="br0">&#40;</span>t<span class="sy0">,</span> l<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot;Make turtle t draw star&quot;&quot;&quot;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span>:
+        t.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        t.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        t.<span class="me1">forward</span><span class="br0">&#40;</span>l<span class="br0">&#41;</span>
+        t.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">144</span><span class="br0">&#41;</span>
+&nbsp;
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Exercise_9&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+G <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+G.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>
+G.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+&nbsp;
+Draw_Star<span class="br0">&#40;</span>G<span class="sy0">,</span> <span class="nu0">100</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#10</span>
+<span class="kw1">import</span> <span class="kw3">turtle</span>
+<span class="kw1">def</span> Draw_side<span class="br0">&#40;</span>t<span class="sy0">,</span> l<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot;Make turtle t draw side&quot;&quot;&quot;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span>:
+        t.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        t.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        t.<span class="me1">forward</span><span class="br0">&#40;</span>l<span class="br0">&#41;</span>
+        t.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">144</span><span class="br0">&#41;</span>
+&nbsp;
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Exercise_10&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+H <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+H.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+H.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">for</span> k <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span>:
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span>:
+        Draw_side<span class="br0">&#40;</span>H<span class="sy0">,</span><span class="nu0">100</span><span class="br0">&#41;</span>
+    H.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    H.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">350</span><span class="br0">&#41;</span>
+    H.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">144</span><span class="br0">&#41;</span>
+    H.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+H.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+wn.<span class="me1">mainloop</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

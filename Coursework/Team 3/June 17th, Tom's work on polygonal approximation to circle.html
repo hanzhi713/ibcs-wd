@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title>IBCS1-WD - June 17th, Tom's work on polygonal approximation to circle</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>June 17th, Tom's work on polygonal approximation to circle<small> #TomsProjects </small></h1>Approximation to circle by drawing polygons with increasing sides.<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+Window <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+xcorlist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+ycorlist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+index <span class="sy0">=</span> -<span class="nu0">1</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="sy0">,</span><span class="nu0">100</span><span class="br0">&#41;</span>:
+    Tom.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">300</span><span class="br0">&#41;</span>
+    xcorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">xcor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    ycorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">ycor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    index +<span class="sy0">=</span><span class="nu0">1</span>
+    Tom.<span class="me1">backward</span><span class="br0">&#40;</span><span class="nu0">300</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> sides <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span>i<span class="br0">&#41;</span>:
+        Tom.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">360</span> / i<span class="br0">&#41;</span>
+        Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">300</span><span class="br0">&#41;</span>
+        xcorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">xcor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        ycorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">ycor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">goto</span><span class="br0">&#40;</span>xcorlist<span class="br0">&#91;</span>index<span class="br0">&#93;</span><span class="sy0">,</span>ycorlist<span class="br0">&#91;</span>index<span class="br0">&#93;</span><span class="br0">&#41;</span>
+        index +<span class="sy0">=</span><span class="nu0">1</span>
+        Tom.<span class="me1">goto</span><span class="br0">&#40;</span>xcorlist<span class="br0">&#91;</span>index<span class="br0">&#93;</span><span class="sy0">,</span> ycorlist<span class="br0">&#91;</span>index<span class="br0">&#93;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">backward</span><span class="br0">&#40;</span><span class="nu0">300</span><span class="br0">&#41;</span>
+Window.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

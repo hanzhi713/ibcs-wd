@@ -1,0 +1,231 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Feb 27th 2017 by Margaret</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+Feb 27th 2017 by Margaret<br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 12px;">At the beginning, we had an overview about what postfix, infix and prefix are by a review about the construction of a tree. </span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 12px;">We practiced on drawing a tree in accordance to the simple code to visualize the differences among them: </span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 12px;">A. prefix: node + left + right</span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 12px;">B. infix: left + node +right</span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 12px;">C. postfix: left + right + node</span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 12px;">The code of the three different types of tree if posted below:</span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+&nbsp;
+<span class="kw1">def</span> tree<span class="br0">&#40;</span>branchlen<span class="sy0">,</span>t<span class="br0">&#41;</span>:
+    <span class="kw1">if</span> branchlen<span class="sy0">&gt;</span><span class="nu0">20</span>:
+        t.<span class="me1">forward</span><span class="br0">&#40;</span>branchlen<span class="br0">&#41;</span>
+        t.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">20</span><span class="br0">&#41;</span>
+        <span class="co1"># A</span>
+        <span class="co1"># t.circle(1, None, None)</span>
+        tree<span class="br0">&#40;</span>branchlen-<span class="nu0">15</span><span class="sy0">,</span>t<span class="br0">&#41;</span>
+        <span class="co1"># B</span>
+        <span class="co1"># t.circle(1, None, None)</span>
+        t.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">40</span><span class="br0">&#41;</span>
+        tree<span class="br0">&#40;</span>branchlen-<span class="nu0">15</span><span class="sy0">,</span>t<span class="br0">&#41;</span>
+        <span class="co1"># C</span>
+        <span class="co1"># t.circle(1, None, None)</span>
+        t.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">20</span><span class="br0">&#41;</span>
+        t.<span class="me1">backward</span><span class="br0">&#40;</span>branchlen<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    t<span class="sy0">=</span><span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    myWin <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    t.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    t.<span class="me1">up</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    t.<span class="me1">backward</span><span class="br0">&#40;</span><span class="nu0">100</span><span class="br0">&#41;</span>
+    t.<span class="me1">down</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    t.<span class="me1">color</span><span class="br0">&#40;</span><span class="st0">&quot;green&quot;</span><span class="br0">&#41;</span>
+    t.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">10</span><span class="br0">&#41;</span>
+    tree<span class="br0">&#40;</span><span class="nu0">75</span><span class="sy0">,</span>t<span class="br0">&#41;</span>
+    myWin.<span class="me1">exitonclick</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+main<span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 12px;">Apart from working hard to figure out the real sequence of output, we can also have an effortless method by drawing flags beside each node. For example, with infix, a little flag can be drawn on the left side of each node and the sequence is shown as we draw a line to link them up smoothly. Also, you can try to flatten the tree to get a result of infix.</span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 12px;"><img src="files/FullSizeRender%2018.jpg" alt="FullSizeRender 18.jpg" title="FullSizeRender 18.jpg" style="height: 257px; width: 267px;" /></span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 12px;">This method can also be utilized when we are expecting different outputs changed by different ways to traverse a tree. For example, when we have a tree as:</span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 12px;"><img src="files/FullSizeRender%2017.jpg" alt="FullSizeRender 17.jpg" title="FullSizeRender 17.jpg" style="height: 237px; width: 283px;" /></span><br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">class</span> Tree:
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> cargo<span class="sy0">,</span> left<span class="sy0">=</span><span class="kw2">None</span><span class="sy0">,</span> right<span class="sy0">=</span><span class="kw2">None</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">cargo</span> <span class="sy0">=</span> cargo
+        <span class="kw2">self</span>.<span class="me1">left</span> <span class="sy0">=</span> left
+        <span class="kw2">self</span>.<span class="me1">right</span> <span class="sy0">=</span> right
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__str__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw2">str</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">cargo</span><span class="br0">&#41;</span>
+&nbsp;
+tree <span class="sy0">=</span> Tree<span class="br0">&#40;</span><span class="st0">&quot;i&quot;</span><span class="sy0">,</span>Tree<span class="br0">&#40;</span><span class="st0">&quot;b&quot;</span><span class="br0">&#41;</span><span class="sy0">,</span>Tree<span class="br0">&#40;</span><span class="st0">&quot;c&quot;</span><span class="sy0">,</span>Tree<span class="br0">&#40;</span><span class="st0">&quot;s&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> print_tree1<span class="br0">&#40;</span>tree<span class="br0">&#41;</span>:
+    <span class="kw1">if</span> tree <span class="kw1">is</span> <span class="kw2">None</span>: <span class="kw1">return</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>tree.<span class="me1">cargo</span><span class="sy0">,</span> end<span class="sy0">=</span><span class="st0">&quot; &quot;</span><span class="br0">&#41;</span>
+    print_tree1<span class="br0">&#40;</span>tree.<span class="me1">left</span><span class="br0">&#41;</span>
+    print_tree1<span class="br0">&#40;</span>tree.<span class="me1">right</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> print_tree2<span class="br0">&#40;</span>tree<span class="br0">&#41;</span>:
+    <span class="kw1">if</span> tree <span class="kw1">is</span> <span class="kw2">None</span>: <span class="kw1">return</span>
+    print_tree2<span class="br0">&#40;</span>tree.<span class="me1">left</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>tree.<span class="me1">cargo</span><span class="sy0">,</span> end<span class="sy0">=</span><span class="st0">&quot; &quot;</span><span class="br0">&#41;</span>
+    print_tree2<span class="br0">&#40;</span>tree.<span class="me1">right</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> print_tree3<span class="br0">&#40;</span>tree<span class="br0">&#41;</span>:
+    <span class="kw1">if</span> tree <span class="kw1">is</span> <span class="kw2">None</span>: <span class="kw1">return</span>
+    print_tree3<span class="br0">&#40;</span>tree.<span class="me1">left</span><span class="br0">&#41;</span>
+    print_tree3<span class="br0">&#40;</span>tree.<span class="me1">right</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>tree.<span class="me1">cargo</span><span class="sy0">,</span> end<span class="sy0">=</span><span class="st0">&quot; &quot;</span><span class="br0">&#41;</span>
+&nbsp;
+print_tree1<span class="br0">&#40;</span>tree<span class="br0">&#41;</span>
+print_tree2<span class="br0">&#40;</span>tree<span class="br0">&#41;</span>
+print_tree3<span class="br0">&#40;</span>tree<span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<ul><li>With prefix Tree1, we get: i b c s</li><li>With infix Tree2, we get: b i s c</li><li>With postfix Tree3, we get: b s c i</li></ul><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 12px;">As we proceed on understanding prefix, infix and postfix well, we start to learn about the RPN calculator.</span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 12px;">First of all, we made a comparison between an ordinary calculator and a RPN calculator. It turned out that a RPN calculator need the user to press less buttons and therefore is more convenient and time-efficient to use. Meanwhile, as there is no ambiguous interpretation about the existence of parenthesis and the sequence of calculation in RPN, it is widely used in lots of circumstances where precise calculations are required.</span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 12px;">With an ordinary calculator using infix and a RPN calculator using postfix, samples ra given here:</span><br />
+
+
+<table class="wiki_table">
+    <tr>
+        <td>Infix<br />
+</td>
+        <td>2 * 3 + 5<br />
+</td>
+        <td>2 * (3 + 5)<br />
+</td>
+    </tr>
+    <tr>
+        <td>Postfix<br />
+</td>
+        <td>2 3 * 5 +<br />
+</td>
+        <td>2 3 5 + *<br />
+</td>
+    </tr>
+</table>
+
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 12px;">What actually happens here is that a stack is used in RPN: when a number is appended to the stack, it will accumulate in there, but when a notation such as “+” or “*” is appended, the last two numbers will be “popped” and be calculated. With this logic, a sample code is provided here:</span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"> <span class="kw1">import</span> <span class="kw3">math</span>
+&nbsp;
+<span class="kw1">def</span> postfix_evaluation<span class="br0">&#40;</span>s<span class="br0">&#41;</span>:
+    s <span class="sy0">=</span> s.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    n <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>s<span class="br0">&#41;</span>
+    stack <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+&nbsp;
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>n<span class="br0">&#41;</span>:
+        <span class="kw1">if</span> s<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">isdigit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+            stack.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span>s<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">elif</span> s<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">==</span><span class="st0">&quot;+&quot;</span>:
+            a <span class="sy0">=</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            b <span class="sy0">=</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            stack.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>+<span class="kw2">int</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">elif</span> s<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">==</span><span class="st0">&quot;*&quot;</span>:
+            a <span class="sy0">=</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            b <span class="sy0">=</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            stack.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>*<span class="kw2">int</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">elif</span> s<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">==</span><span class="st0">&quot;-&quot;</span>:
+            a <span class="sy0">=</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            b <span class="sy0">=</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            stack.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span> - <span class="kw2">int</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">elif</span> s<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">==</span><span class="st0">&quot;/&quot;</span>:
+            a <span class="sy0">=</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            b <span class="sy0">=</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            stack.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>/<span class="kw2">int</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">elif</span> s<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">==</span><span class="st0">&quot;%&quot;</span>:
+            a <span class="sy0">=</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            b <span class="sy0">=</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            stack.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span> % <span class="kw2">int</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">return</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+s <span class="sy0">=</span> <span class="st0">&quot;10 2 8 * + 3 -&quot;</span>
+val <span class="sy0">=</span> postfix_evaluation<span class="br0">&#40;</span>s<span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>val<span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<span style="color: #000000; font-family: Helvetica; font-size: 12px;">With the help of it, we can create a calculator with more functions, such as:</span><br />
+<ul><li>various methods including “-” “/ ” “%” “sin” “cos” etc.</li><li>change the postfix into a normal look by printing out the infix version of it</li></ul></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

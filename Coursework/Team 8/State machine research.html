@@ -1,0 +1,129 @@
+<html>
+  <head>
+    <title>IBCS1-WD - State machine research</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+(Finite) State machine (FSM) is an abstract mathematic modal that holds multiple states and can only be in one particular state (s) at one time. By people giving inputs (i), it can trigger some events, or outputs (o), and change into the next state by some calculations based on the current state and the input ( s'=f(s,i) ). Once there's no corresponding s', the FSM change into a False state and never change back.<br />
+<br />
+For example, the traffic light problem:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+<span class="kw1">import</span> <span class="kw3">time</span>
+&nbsp;
+<span class="co1">##initializing</span>
+state_num<span class="sy0">=</span><span class="nu0">0</span>
+wn<span class="sy0">=</span><span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Tess becomes a traffic light!&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">colormode</span><span class="br0">&#40;</span><span class="nu0">255</span><span class="br0">&#41;</span>
+tess  <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+tess1 <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+tess2 <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+tess3 <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+tess.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+tess1.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+tess2.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+tess3.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+tess.<span class="me1">setpos</span><span class="br0">&#40;</span>-<span class="nu0">40</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+tess1.<span class="me1">setpos</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">180</span><span class="br0">&#41;</span>
+tess2.<span class="me1">setpos</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">110</span><span class="br0">&#41;</span>
+tess3.<span class="me1">setpos</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">40</span><span class="br0">&#41;</span>
+tess.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+tess1.<span class="me1">shape</span><span class="br0">&#40;</span><span class="st0">'circle'</span><span class="br0">&#41;</span>
+tess1.<span class="me1">shapesize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+tess1.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="nu0">50</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+tess2.<span class="me1">shape</span><span class="br0">&#40;</span><span class="st0">'circle'</span><span class="br0">&#41;</span>
+tess2.<span class="me1">shapesize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+tess2.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="nu0">60</span><span class="sy0">,</span><span class="nu0">20</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+tess3.<span class="me1">shape</span><span class="br0">&#40;</span><span class="st0">'circle'</span><span class="br0">&#41;</span>
+tess3.<span class="me1">shapesize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+tess3.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">30</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+tess1.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="nu0">50</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+tess2.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="nu0">60</span><span class="sy0">,</span><span class="nu0">20</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+tess3.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'green'</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> draw_housing<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Draw a nice housing to hold the traffic lights &quot;&quot;&quot;</span>
+    tess.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+    tess.<span class="me1">color</span><span class="br0">&#40;</span><span class="st0">&quot;black&quot;</span><span class="sy0">,</span> <span class="st0">&quot;darkgrey&quot;</span><span class="br0">&#41;</span>
+    tess.<span class="me1">begin_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    tess.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">80</span><span class="br0">&#41;</span>
+    tess.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    tess.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">200</span><span class="br0">&#41;</span>
+    tess.<span class="me1">circle</span><span class="br0">&#40;</span><span class="nu0">40</span><span class="sy0">,</span> <span class="nu0">180</span><span class="br0">&#41;</span>
+    tess.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">200</span><span class="br0">&#41;</span>
+    tess.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    tess.<span class="me1">end_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+draw_housing<span class="br0">&#40;</span><span class="br0">&#41;</span>
+tess.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">while</span> <span class="kw2">True</span>:
+    <span class="kw1">if</span> state_num <span class="sy0">==</span> <span class="nu0">0</span>:
+        tess1.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="nu0">50</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+        tess2.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="nu0">60</span><span class="sy0">,</span><span class="nu0">20</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+        tess3.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'green'</span><span class="br0">&#41;</span>
+        state_num <span class="sy0">=</span> <span class="nu0">1</span>
+        <span class="kw3">time</span>.<span class="me1">sleep</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+        <span class="kw1">continue</span>
+    <span class="kw1">elif</span> state_num <span class="sy0">==</span> <span class="nu0">1</span>:
+        tess1.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="nu0">50</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+        tess2.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'orange'</span><span class="br0">&#41;</span>
+        tess3.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'green'</span><span class="br0">&#41;</span>
+        state_num<span class="sy0">=</span><span class="nu0">2</span>
+        <span class="kw3">time</span>.<span class="me1">sleep</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span>
+        <span class="kw1">continue</span>
+    <span class="kw1">elif</span> state_num <span class="sy0">==</span> <span class="nu0">2</span>:
+        tess1.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="nu0">50</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+        tess2.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'orange'</span><span class="br0">&#41;</span>
+        tess3.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">30</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+        state_num <span class="sy0">=</span> <span class="nu0">3</span>
+        <span class="kw3">time</span>.<span class="me1">sleep</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span>
+        <span class="kw1">continue</span>
+    <span class="kw1">else</span>:
+        tess1.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'red'</span><span class="br0">&#41;</span>
+        tess2.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="nu0">60</span><span class="sy0">,</span><span class="nu0">20</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+        tess3.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">30</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+        state_num <span class="sy0">=</span> <span class="nu0">0</span>
+        <span class="kw3">time</span>.<span class="me1">sleep</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>
+&nbsp;
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+<br />
+In this case,the timer is the automatic input (or you may say it's one of the events, then there would be no input) (i) ; the states are indicated by the variable &quot;state_num&quot;; the events, or outputs, are the movement of turtles. There is no False state as the program cannot fail. The &quot;0&quot; state means that the light should be &quot;green&quot;; The &quot;1&quot; state means that the light should be &quot;green and orange&quot;; the &quot;2&quot; state means that the light should be &quot;orange&quot;; the &quot;3&quot; state means that the light should be &quot;red&quot;. Ever since the timer is up, the loop restarts and the FSM enter the next corresponding state.<br />
+<br />
+The idea of this program is like the following:<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-09-17%20%E4%B8%8B%E5%8D%886.32.44.png" alt=" 2016-09-17 下午6.32.44.png" title=" 2016-09-17 下午6.32.44.png" /><br />
+<br />
+The red arrows shows the &quot;flow&quot; of states, and &quot;time's up&quot; is the condition to change states. <br />
+<br />
+By applying state machine, the program is packed in four packs. It's easy to read and edit(either add another state or add other events).</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

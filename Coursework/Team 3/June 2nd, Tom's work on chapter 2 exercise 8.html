@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>IBCS1-WD - June 2nd, Tom's work on chapter 2 exercise 8</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>June 2nd, Tom's work on chapter 2 exercise 8<small> #ProjectPage #TomsProjects </small></h1><h1 id="toc0"><a name="June 2rd Tom's work on chapter 2 exercise 8"></a><a name="Welcome to the  home page. Tom's project page-June 2rd Tom's work on exercise 8"></a>June 2<span style="vertical-align: super;">rd </span>Tom's work on chapter 2 exercise 8</h1>
+ <br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">Hours <span class="sy0">=</span> <span class="kw2">input</span> <span class="br0">&#40;</span><span class="st0">&quot;How many hours?&quot;</span><span class="br0">&#41;</span>
+Currenthours <span class="sy0">=</span> <span class="kw2">input</span> <span class="br0">&#40;</span><span class="st0">&quot;What times is it？&quot;</span><span class="br0">&#41;</span>
+Hours <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span>Hours<span class="br0">&#41;</span>
+Currenthours <span class="sy0">=</span> <span class="kw2">int</span> <span class="br0">&#40;</span>Currenthours<span class="br0">&#41;</span>
+<span class="kw1">if</span> <span class="br0">&#40;</span>Hours + Currenthours <span class="br0">&#41;</span><span class="sy0">&gt;</span> <span class="nu0">24</span>:
+    Days <span class="sy0">=</span> <span class="br0">&#40;</span> <span class="br0">&#40;</span> Hours - <span class="nu0">24</span> + Currenthours<span class="br0">&#41;</span> // <span class="nu0">24</span> <span class="br0">&#41;</span> + <span class="nu0">1</span>
+    CurrentDayHours <span class="sy0">=</span> <span class="br0">&#40;</span>Hours -<span class="nu0">24</span> + Currenthours<span class="br0">&#41;</span> % <span class="nu0">24</span>
+    <span class="kw1">if</span> CurrentDayHours <span class="sy0">&lt;</span> <span class="nu0">13</span>:
+        AMPM <span class="sy0">=</span> <span class="st0">&quot;am&quot;</span>
+    <span class="kw1">else</span>:
+        AMPM <span class="sy0">=</span> <span class="st0">&quot;pm&quot;</span>
+    <span class="kw1">print</span> <span class="br0">&#40;</span>CurrentDayHours<span class="sy0">,</span>AMPM<span class="sy0">,</span><span class="st0">&quot;,&quot;</span><span class="sy0">,</span>Days<span class="sy0">,</span><span class="st0">&quot;days after.&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">else</span>:
+    <span class="kw1">if</span> <span class="br0">&#40;</span>Currenthours + Hours<span class="br0">&#41;</span> <span class="sy0">&lt;</span> <span class="nu0">13</span>:
+        AMPM <span class="sy0">=</span> <span class="st0">&quot;am&quot;</span>
+    <span class="kw1">else</span>:
+        AMPM <span class="sy0">=</span> <span class="st0">&quot;pm&quot;</span>
+    <span class="kw1">print</span> <span class="br0">&#40;</span>Currenthours + Hours<span class="sy0">,</span> AMPM<span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

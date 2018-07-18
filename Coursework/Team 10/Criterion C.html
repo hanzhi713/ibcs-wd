@@ -1,0 +1,542 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Criterion C</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+Add image:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java">mport javax.<span class="me1">imageio</span>.<span class="me1">ImageIO</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.image.BufferedImage</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.io.File</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.io.IOException</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> addImage <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> pathway<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">JPanel</span> panel<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">BufferedImage</span> image<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> addImage<span class="br0">&#40;</span><span class="kw3">String</span> pathway, <span class="kw3">JPanel</span> panel<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">pathway</span> <span class="sy0">=</span> pathway<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">panel</span> <span class="sy0">=</span> panel<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">BufferedImage</span> load_image<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw1">throws</span> <span class="kw3">IOException</span> <span class="br0">&#123;</span>
+        image <span class="sy0">=</span> ImageIO.<span class="me1">read</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">File</span><span class="br0">&#40;</span>pathway<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> image<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+Slide block:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">javax.swing.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.event.ChangeEvent</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.event.ChangeListener</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> slide_fuction <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">JSlider</span> s <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JSlider</span><span class="br0">&#40;</span><span class="nu0">0</span>,<span class="nu0">50</span>,<span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">public</span> slide_fuction<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">JSlider</span> s <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JSlider</span><span class="br0">&#40;</span><span class="nu0">0</span>,<span class="nu0">50</span>,<span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">JSlider</span> add_function<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        s.<span class="me1">setMajorTickSpacing</span><span class="br0">&#40;</span><span class="nu0">10</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        s.<span class="me1">setMinorTickSpacing</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        s.<span class="me1">setPaintTicks</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        s.<span class="me1">setSnapToTicks</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        s.<span class="me1">setPaintLabels</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> s<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+Main:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">javax.imageio.ImageIO</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.border.Border</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.event.ChangeEvent</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.event.ChangeListener</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.event.ActionEvent</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.event.ActionListener</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.image.BufferedImage</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.io.File</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.io.IOException</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> cards <span class="kw1">extends</span> <span class="kw3">JFrame</span> <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">JPanel</span> pane <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">JPanel</span> p <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">CardLayout</span> card <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">JButton</span> button_p <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">JButton</span> button_n <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">JButton</span> button_r <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">JButton</span> button_remainder <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">JPanel</span> p_0 <span class="sy0">=</span> <span class="kw2">null</span>, p_1 <span class="sy0">=</span> <span class="kw2">null</span>, p_2 <span class="sy0">=</span> <span class="kw2">null</span>, p_3 <span class="sy0">=</span> <span class="kw2">null</span>, p_4 <span class="sy0">=</span> <span class="kw2">null</span>, p_5 <span class="sy0">=</span> <span class="kw2">null</span>, p_6 <span class="sy0">=</span> <span class="kw2">null</span>, p_7 <span class="sy0">=</span> <span class="kw2">null</span>, p_8 <span class="sy0">=</span> <span class="kw2">null</span>, p_9 <span class="sy0">=</span> <span class="kw2">null</span>, p_10 <span class="sy0">=</span> <span class="kw2">null</span>, p_11 <span class="sy0">=</span> <span class="kw2">null</span>, p_12 <span class="sy0">=</span> <span class="kw2">null</span>, p_13 <span class="sy0">=</span> <span class="kw2">null</span>, p_14 <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> cards<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="kw1">throws</span> <span class="kw3">IOException</span> <span class="br0">&#123;</span>
+        <span class="kw3">JFrame</span> jf <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JFrame</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        jf.<span class="me1">setTitle</span><span class="br0">&#40;</span><span class="st0">&quot;Experiment&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        card <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">CardLayout</span><span class="br0">&#40;</span><span class="nu0">5</span>, <span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pane <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span>card<span class="br0">&#41;</span><span class="sy0">;</span>
+        p <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">//        set buttons</span>
+        <span class="kw3">JButton</span> button_p <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JButton</span><span class="br0">&#40;</span><span class="st0">&quot;Previous&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JButton</span> button_n <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JButton</span><span class="br0">&#40;</span><span class="st0">&quot;Next&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JButton</span> button_r <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JButton</span><span class="br0">&#40;</span><span class="st0">&quot;Restart&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JButton</span> button_remainder <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JButton</span><span class="br0">&#40;</span><span class="st0">&quot;Remainder&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        p.<span class="me1">add</span><span class="br0">&#40;</span>button_p<span class="br0">&#41;</span><span class="sy0">;</span>
+        p.<span class="me1">add</span><span class="br0">&#40;</span>button_n<span class="br0">&#41;</span><span class="sy0">;</span>
+        p.<span class="me1">add</span><span class="br0">&#40;</span>button_r<span class="br0">&#41;</span><span class="sy0">;</span>
+        button_p.<span class="me1">setMargin</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Insets</span><span class="br0">&#40;</span><span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        button_n.<span class="me1">setMargin</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Insets</span><span class="br0">&#40;</span><span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        button_r.<span class="me1">setMargin</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Insets</span><span class="br0">&#40;</span><span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        button_remainder.<span class="me1">setMargin</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Insets</span><span class="br0">&#40;</span><span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">//        set slider</span>
+        <span class="kw3">JSlider</span> s <span class="sy0">=</span> <span class="kw1">new</span> slide_fuction<span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">add_function</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p.<span class="me1">add</span><span class="br0">&#40;</span>s<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">//        set panels</span>
+        p_0 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p_0.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span> p_1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p_1.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_2 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p_2.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span> p_3 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p_3.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_4 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p_4.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span> p_5 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p_5.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_6 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p_6.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span> p_7 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p_7.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_8 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p_8.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span> p_9 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p_9.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_10 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p_10.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span> p_11 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p_11.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_12 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p_12.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span> p_13 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p_13.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_14 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>p_14.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">//        set labels</span>
+        <span class="kw3">JLabel</span> label0 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="st0">&quot;This is the tutorial page of this virtual lab.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        label0.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Helvetica&quot;</span>, <span class="kw3">Font</span>.<span class="me1">PLAIN</span>, <span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        label0.<span class="me1">setForeground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">BLACK</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_0.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">BorderLayout</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_0.<span class="me1">add</span><span class="br0">&#40;</span>label0,<span class="st0">&quot;Center&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_0.<span class="me1">add</span><span class="br0">&#40;</span>button_remainder,<span class="st0">&quot;South&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> label1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="st0">&quot;&lt;html&gt;&lt;br&gt;Using a mortar and pestle, grind up fresh leaves,&lt;br&gt;producing as concentrated a pigment solution as possible. Filter the solution.&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/html&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        label1.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Helvetica&quot;</span>, <span class="kw3">Font</span>.<span class="me1">PLAIN</span>, <span class="nu0">18</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_1.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">BorderLayout</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_1.<span class="me1">add</span><span class="br0">&#40;</span>label1,<span class="st0">&quot;South&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> label2 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="st0">&quot;&lt;html&gt;Using a very thin capillary tube or the head of a pin, &lt;br&gt;place a drop of the pigment solution at the centre of the pencil line. &lt;br&gt;Allow it to dry and place a second drop on the first. &lt;br&gt;Repeat this until you have built up a small concentrated spot of pigment.&lt;br&gt;&lt;br&gt;&lt;/html&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        label2.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Helvetica&quot;</span>, <span class="kw3">Font</span>.<span class="me1">PLAIN</span>, <span class="nu0">18</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_2.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">BorderLayout</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_2.<span class="me1">add</span><span class="br0">&#40;</span>label2,<span class="st0">&quot;South&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> label3 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="st0">&quot;&lt;html&gt;Pour some solvent into the gas jar to a depth of approximately 1.5-2cm. &lt;br&gt;Place a lid over the gas jar so that the atmosphere inside becomes saturated with vapour. &lt;br&gt;Place the bottom edge of the chromatography paper into the solvent so that it is just touching. &lt;br&gt;Make sure that the pigment spot is not immersed. &lt;br&gt;This is the initial stage of this experiment.&lt;br&gt;&lt;br&gt;&lt;/html&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        label3.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Helvetica&quot;</span>, <span class="kw3">Font</span>.<span class="me1">PLAIN</span>, <span class="nu0">18</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_3.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">BorderLayout</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_3.<span class="me1">add</span><span class="br0">&#40;</span>label3,<span class="st0">&quot;South&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> labelp_4 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="st0">&quot;&lt;html&gt;This is the first phase of this experiment.&lt;br&gt;Time has passed for about 2 min.&lt;br&gt;&lt;br&gt;&lt;/html&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        labelp_4.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Helvetica&quot;</span>, <span class="kw3">Font</span>.<span class="me1">PLAIN</span>, <span class="nu0">18</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_4.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">BorderLayout</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_4.<span class="me1">add</span><span class="br0">&#40;</span>labelp_4,<span class="st0">&quot;South&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> labelp_5 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="st0">&quot;&lt;html&gt;This is the second phase of this experiment.&lt;br&gt;Time has passed for about 3 min.&lt;br&gt;&lt;br&gt;&lt;/html&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        labelp_5.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Helvetica&quot;</span>, <span class="kw3">Font</span>.<span class="me1">PLAIN</span>, <span class="nu0">18</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_5.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">BorderLayout</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_5.<span class="me1">add</span><span class="br0">&#40;</span>labelp_5,<span class="st0">&quot;South&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> labelp_6 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="st0">&quot;&lt;html&gt;This is the third phase of this experiment.&lt;br&gt;Time has passed for about 4 min.&lt;br&gt;&lt;br&gt;&lt;/html&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        labelp_6.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Helvetica&quot;</span>, <span class="kw3">Font</span>.<span class="me1">PLAIN</span>, <span class="nu0">18</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_6.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">BorderLayout</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_6.<span class="me1">add</span><span class="br0">&#40;</span>labelp_6,<span class="st0">&quot;South&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> labelp_7 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="st0">&quot;&lt;html&gt;This is the final stage of this experiment.&lt;br&gt;Time has passed for about 5 min.&lt;br&gt;The solvent front will rise up the paper and separate the pigments.&lt;br&gt;When the solvent is close to the top of the paper, remove the strip and rule a pencil line &lt;br&gt;to mark the distance travelled by the solvent. Dry the paper.&lt;br&gt;&lt;br&gt;&lt;/html&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        labelp_7.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Helvetica&quot;</span>, <span class="kw3">Font</span>.<span class="me1">PLAIN</span>, <span class="nu0">18</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_7.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">BorderLayout</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_7.<span class="me1">add</span><span class="br0">&#40;</span>labelp_7,<span class="st0">&quot;South&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> label8 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="st0">&quot;&lt;html&gt;This is the result of this experiment.&lt;br&gt;The right hand experiment shows real result in life. &lt;br&gt;&lt;br&gt;&lt;/html&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        label8.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Helvetica&quot;</span>, <span class="kw3">Font</span>.<span class="me1">PLAIN</span>, <span class="nu0">18</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_8.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">BorderLayout</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_8.<span class="me1">add</span><span class="br0">&#40;</span>label8,<span class="kw3">BorderLayout</span>.<span class="me1">SOUTH</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> label9 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="st0">&quot;&lt;html&gt;Rf value can be calculated as a retardation factor.&lt;br&gt;The formula to calculate Rf value is: &lt;br&gt;Rf value = distance component travels ÷ distance solvent travels &lt;br&gt;&lt;br&gt;&lt;br&gt;If you are curious about the features of any pigment, &lt;br&gt;please click Further Info in the menu bar and look it up.&lt;br&gt;Similarly, if you have any confusion about any term in this experiment,&lt;br&gt;you can search for an answer by the very end of this page.&lt;br&gt;Please remember to put all letters in a lower-case.&lt;br&gt;For example, type in chlorophyll a and its introduction page will show up.&lt;br&gt;You can simply type the term up in the text field.  &lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;/html&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        label9.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Helvetica&quot;</span>, <span class="kw3">Font</span>.<span class="me1">PLAIN</span>, <span class="nu0">18</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_9.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">BorderLayout</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_9.<span class="me1">add</span><span class="br0">&#40;</span>label9,<span class="kw3">BorderLayout</span>.<span class="me1">SOUTH</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        addImage pic_0 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/Users/Margaret/Desktop/p0.png&quot;</span>,p_0<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> picLabel_0 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ImageIcon</span><span class="br0">&#40;</span>pic_0.<span class="me1">load_image</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_0.<span class="me1">add</span><span class="br0">&#40;</span>picLabel_0<span class="br0">&#41;</span><span class="sy0">;</span>
+        addImage pic0 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/Users/Margaret/Desktop/step1.jpg&quot;</span>,p_1<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> picLabel0 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ImageIcon</span><span class="br0">&#40;</span>pic0.<span class="me1">load_image</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_1.<span class="me1">add</span><span class="br0">&#40;</span>picLabel0<span class="br0">&#41;</span><span class="sy0">;</span>
+        addImage pic1 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/Users/Margaret/Desktop/step2.png&quot;</span>,p_2<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> picLabel1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ImageIcon</span><span class="br0">&#40;</span>pic1.<span class="me1">load_image</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_2.<span class="me1">add</span><span class="br0">&#40;</span>picLabel1<span class="br0">&#41;</span><span class="sy0">;</span>
+        addImage pic2 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/Users/Margaret/Desktop/chromatography_step4.jpg&quot;</span>,p_3<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> picLabel2 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ImageIcon</span><span class="br0">&#40;</span>pic2.<span class="me1">load_image</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_3.<span class="me1">add</span><span class="br0">&#40;</span>picLabel2<span class="br0">&#41;</span><span class="sy0">;</span>
+        addImage pic3 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/Users/Margaret/Desktop/phase1.jpg&quot;</span>,p_4<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> picLabel3 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ImageIcon</span><span class="br0">&#40;</span>pic3.<span class="me1">load_image</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_4.<span class="me1">add</span><span class="br0">&#40;</span>picLabel3<span class="br0">&#41;</span><span class="sy0">;</span>
+        addImage pic4 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/Users/Margaret/Desktop/phase2.jpg&quot;</span>,p_5<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> picLabel4 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ImageIcon</span><span class="br0">&#40;</span>pic4.<span class="me1">load_image</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_5.<span class="me1">add</span><span class="br0">&#40;</span>picLabel4<span class="br0">&#41;</span><span class="sy0">;</span>
+        addImage pic5 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/Users/Margaret/Desktop/phase3.jpg&quot;</span>,p_6<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> picLabel5 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ImageIcon</span><span class="br0">&#40;</span>pic5.<span class="me1">load_image</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_6.<span class="me1">add</span><span class="br0">&#40;</span>picLabel5<span class="br0">&#41;</span><span class="sy0">;</span>
+        addImage pic6 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/Users/Margaret/Desktop/chromatography_step4.5.jpg&quot;</span>,p_7<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> picLabel6 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ImageIcon</span><span class="br0">&#40;</span>pic6.<span class="me1">load_image</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_7.<span class="me1">add</span><span class="br0">&#40;</span>picLabel6<span class="br0">&#41;</span><span class="sy0">;</span>
+        addImage pic7 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/Users/Margaret/Desktop/step5.png&quot;</span>,p_8<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> picLabel7 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ImageIcon</span><span class="br0">&#40;</span>pic7.<span class="me1">load_image</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        addImage pic71 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/Users/Margaret/Desktop/real.png&quot;</span>,p_8<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> picLabel71 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ImageIcon</span><span class="br0">&#40;</span>pic71.<span class="me1">load_image</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        addImage pic72 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/Users/Margaret/Desktop/p8.png&quot;</span>,p_8<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> picLabel72 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ImageIcon</span><span class="br0">&#40;</span>pic72.<span class="me1">load_image</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_8.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">BorderLayout</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_8.<span class="me1">add</span><span class="br0">&#40;</span>picLabel7,<span class="kw3">BorderLayout</span>.<span class="me1">WEST</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_8.<span class="me1">add</span><span class="br0">&#40;</span>picLabel71,<span class="kw3">BorderLayout</span>.<span class="me1">EAST</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_8.<span class="me1">add</span><span class="br0">&#40;</span>picLabel72,<span class="kw3">BorderLayout</span>.<span class="me1">SOUTH</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        addImage pic10 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/Users/Margaret/Desktop/p10.png&quot;</span>,p_10<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> picLabel10 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ImageIcon</span><span class="br0">&#40;</span>pic10.<span class="me1">load_image</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_10.<span class="me1">add</span><span class="br0">&#40;</span>picLabel10<span class="br0">&#41;</span><span class="sy0">;</span>
+        addImage pic11 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/Users/Margaret/Desktop/p11.png&quot;</span>,p_10<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> picLabel11 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ImageIcon</span><span class="br0">&#40;</span>pic11.<span class="me1">load_image</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_11.<span class="me1">add</span><span class="br0">&#40;</span>picLabel11<span class="br0">&#41;</span><span class="sy0">;</span>
+        addImage pic12 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/Users/Margaret/Desktop/p12.png&quot;</span>,p_12<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> picLabel12 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ImageIcon</span><span class="br0">&#40;</span>pic12.<span class="me1">load_image</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_12.<span class="me1">add</span><span class="br0">&#40;</span>picLabel12<span class="br0">&#41;</span><span class="sy0">;</span>
+        addImage pic13 <span class="sy0">=</span> <span class="kw1">new</span> addImage<span class="br0">&#40;</span><span class="st0">&quot;/Users/Margaret/Desktop/p13.png&quot;</span>,p_13<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JLabel</span> picLabel13 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ImageIcon</span><span class="br0">&#40;</span>pic13.<span class="me1">load_image</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_13.<span class="me1">add</span><span class="br0">&#40;</span>picLabel13<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">//        add panels</span>
+        pane.<span class="me1">add</span><span class="br0">&#40;</span>p_0, <span class="st0">&quot;p0&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>pane.<span class="me1">add</span><span class="br0">&#40;</span>p_1, <span class="st0">&quot;p1&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pane.<span class="me1">add</span><span class="br0">&#40;</span>p_2, <span class="st0">&quot;p2&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>pane.<span class="me1">add</span><span class="br0">&#40;</span>p_3, <span class="st0">&quot;p3&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pane.<span class="me1">add</span><span class="br0">&#40;</span>p_4, <span class="st0">&quot;p4&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>pane.<span class="me1">add</span><span class="br0">&#40;</span>p_5, <span class="st0">&quot;p5&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pane.<span class="me1">add</span><span class="br0">&#40;</span>p_6, <span class="st0">&quot;p6&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>pane.<span class="me1">add</span><span class="br0">&#40;</span>p_7, <span class="st0">&quot;p7&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pane.<span class="me1">add</span><span class="br0">&#40;</span>p_8, <span class="st0">&quot;p8&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>pane.<span class="me1">add</span><span class="br0">&#40;</span>p_9, <span class="st0">&quot;p9&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pane.<span class="me1">add</span><span class="br0">&#40;</span>p_10, <span class="st0">&quot;p10&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>pane.<span class="me1">add</span><span class="br0">&#40;</span>p_11, <span class="st0">&quot;p11&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pane.<span class="me1">add</span><span class="br0">&#40;</span>p_12, <span class="st0">&quot;p12&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>pane.<span class="me1">add</span><span class="br0">&#40;</span>p_13, <span class="st0">&quot;p13&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pane.<span class="me1">add</span><span class="br0">&#40;</span>p_14, <span class="st0">&quot;p14&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">//        set menu bar</span>
+        <span class="kw3">JMenuBar</span> menubar1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuBar</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        rootPane.<span class="me1">setJMenuBar</span><span class="br0">&#40;</span>menubar1<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenu</span> menu1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenu</span><span class="br0">&#40;</span><span class="st0">&quot;Tutorial&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenu</span> menu2 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenu</span><span class="br0">&#40;</span><span class="st0">&quot;Steps&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenu</span> menu3 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenu</span><span class="br0">&#40;</span><span class="st0">&quot;Reaction&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenu</span> menu4 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenu</span><span class="br0">&#40;</span><span class="st0">&quot;Result&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenu</span> menu5 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenu</span><span class="br0">&#40;</span><span class="st0">&quot;Further Info&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        menubar1.<span class="me1">add</span><span class="br0">&#40;</span>menu1<span class="br0">&#41;</span><span class="sy0">;</span>
+        menubar1.<span class="me1">add</span><span class="br0">&#40;</span>menu2<span class="br0">&#41;</span><span class="sy0">;</span>
+        menubar1.<span class="me1">add</span><span class="br0">&#40;</span>menu3<span class="br0">&#41;</span><span class="sy0">;</span>
+        menubar1.<span class="me1">add</span><span class="br0">&#40;</span>menu4<span class="br0">&#41;</span><span class="sy0">;</span>
+        menubar1.<span class="me1">add</span><span class="br0">&#40;</span>menu5<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item11 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Tutorial&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item21 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Grind leaves using mortar&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item22 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Place pigment&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item23 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Start experiment&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item31 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Initial stage&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item32 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Phase 1&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item33 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Phase 2&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item34 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Phase 3&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item35 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Final stage&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item41 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Result&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item42 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Rf Report&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item50 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Background Info&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item51 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Carotene&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item52 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Xanthophyll&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item53 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Chlorophyll a&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">JMenuItem</span> item54 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JMenuItem</span><span class="br0">&#40;</span><span class="st0">&quot;Chlorophyll b&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        menu1.<span class="me1">add</span><span class="br0">&#40;</span>item11<span class="br0">&#41;</span><span class="sy0">;</span>
+        menu1.<span class="me1">addSeparator</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        menu2.<span class="me1">add</span><span class="br0">&#40;</span>item21<span class="br0">&#41;</span><span class="sy0">;</span>
+        menu2.<span class="me1">add</span><span class="br0">&#40;</span>item22<span class="br0">&#41;</span><span class="sy0">;</span>
+        menu2.<span class="me1">add</span><span class="br0">&#40;</span>item23<span class="br0">&#41;</span><span class="sy0">;</span>
+        menu2.<span class="me1">addSeparator</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        menu3.<span class="me1">add</span><span class="br0">&#40;</span>item31<span class="br0">&#41;</span><span class="sy0">;</span>
+        menu3.<span class="me1">add</span><span class="br0">&#40;</span>item32<span class="br0">&#41;</span><span class="sy0">;</span>
+        menu3.<span class="me1">add</span><span class="br0">&#40;</span>item33<span class="br0">&#41;</span><span class="sy0">;</span>
+        menu3.<span class="me1">add</span><span class="br0">&#40;</span>item34<span class="br0">&#41;</span><span class="sy0">;</span>
+        menu3.<span class="me1">add</span><span class="br0">&#40;</span>item35<span class="br0">&#41;</span><span class="sy0">;</span>
+        menu3.<span class="me1">addSeparator</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        menu4.<span class="me1">add</span><span class="br0">&#40;</span>item41<span class="br0">&#41;</span><span class="sy0">;</span>
+        menu4.<span class="me1">add</span><span class="br0">&#40;</span>item42<span class="br0">&#41;</span><span class="sy0">;</span>
+        menu4.<span class="me1">addSeparator</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        menu5.<span class="me1">add</span><span class="br0">&#40;</span>item50<span class="br0">&#41;</span><span class="sy0">;</span>
+        menu5.<span class="me1">add</span><span class="br0">&#40;</span>item51<span class="br0">&#41;</span><span class="sy0">;</span>
+        menu5.<span class="me1">add</span><span class="br0">&#40;</span>item52<span class="br0">&#41;</span><span class="sy0">;</span>
+        menu5.<span class="me1">add</span><span class="br0">&#40;</span>item53<span class="br0">&#41;</span><span class="sy0">;</span>
+        menu5.<span class="me1">add</span><span class="br0">&#40;</span>item54<span class="br0">&#41;</span><span class="sy0">;</span>
+        menu5.<span class="me1">addSeparator</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">//        draw a table</span>
+        <span class="kw3">Object</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span>Rf <span class="sy0">=</span> <span class="br0">&#123;</span>
+                <span class="br0">&#123;</span><span class="st0">&quot;Carotene&quot;</span>,<span class="st0">&quot;light orange&quot;</span>,<span class="kw1">new</span> <span class="kw3">Double</span><span class="br0">&#40;</span><span class="nu0">0.95</span><span class="br0">&#41;</span><span class="br0">&#125;</span>,
+                <span class="br0">&#123;</span><span class="st0">&quot;Xanthophyll&quot;</span>,<span class="st0">&quot;light yellow&quot;</span>,<span class="kw1">new</span> <span class="kw3">Double</span><span class="br0">&#40;</span><span class="nu0">0.71</span><span class="br0">&#41;</span><span class="br0">&#125;</span>,
+                <span class="br0">&#123;</span><span class="st0">&quot;Chlorophyll a&quot;</span>,<span class="st0">&quot;blue-green&quot;</span>,<span class="kw1">new</span> <span class="kw3">Double</span><span class="br0">&#40;</span><span class="nu0">0.65</span><span class="br0">&#41;</span><span class="br0">&#125;</span>,
+                <span class="br0">&#123;</span><span class="st0">&quot;Chlorophyll b&quot;</span>,<span class="st0">&quot;yellow-green&quot;</span>,<span class="kw1">new</span> <span class="kw3">Double</span><span class="br0">&#40;</span><span class="nu0">0.45</span><span class="br0">&#41;</span><span class="br0">&#125;</span>,
+                <span class="br0">&#123;</span><span class="st0">&quot;Leaf Stain&quot;</span>,<span class="st0">&quot;grey&quot;</span>,<span class="st0">&quot;not included&quot;</span><span class="br0">&#125;</span>,
+        <span class="br0">&#125;</span><span class="sy0">;</span>
+        <span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span>Title <span class="sy0">=</span> <span class="br0">&#123;</span><span class="st0">&quot;Pigment name&quot;</span>,<span class="st0">&quot;Color&quot;</span>,<span class="st0">&quot;Rf value&quot;</span><span class="br0">&#125;</span><span class="sy0">;</span>
+        <span class="kw3">JTable</span> table <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JTable</span><span class="br0">&#40;</span>Rf,Title<span class="br0">&#41;</span><span class="sy0">;</span>
+        table.<span class="me1">setPreferredScrollableViewportSize</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Dimension</span><span class="br0">&#40;</span><span class="nu0">850</span>,<span class="nu0">900</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">//        p_9.setLayout(new BorderLayout());</span>
+        table.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Helvetica&quot;</span>,<span class="kw3">Font</span>.<span class="me1">PLAIN</span>,<span class="nu0">15</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_9.<span class="me1">add</span><span class="br0">&#40;</span>table.<span class="me1">getTableHeader</span><span class="br0">&#40;</span><span class="br0">&#41;</span>,<span class="kw3">BorderLayout</span>.<span class="me1">NORTH</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p_9.<span class="me1">add</span><span class="br0">&#40;</span>table,<span class="kw3">BorderLayout</span>.<span class="me1">CENTER</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+&nbsp;
+<span class="co1">//        set text field</span>
+        <span class="kw3">JTextField</span> search_field <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JTextField</span><span class="br0">&#40;</span><span class="nu0">15</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        p.<span class="me1">add</span><span class="br0">&#40;</span>search_field<span class="br0">&#41;</span><span class="sy0">;</span>
+        search_field.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw3">String</span> search_words <span class="sy0">=</span> search_field.<span class="me1">getText</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">if</span><span class="br0">&#40;</span>search_words.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;mortar&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p1&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>search_words.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;chromatography paper&quot;</span><span class="br0">&#41;</span><span class="sy0">||</span>search_words.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;pigment&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    card.<span class="me1">show</span><span class="br0">&#40;</span>pane, <span class="st0">&quot;p2&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>search_words.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;gas jar&quot;</span><span class="br0">&#41;</span><span class="sy0">||</span>search_words.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;1&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    card.<span class="me1">show</span><span class="br0">&#40;</span>pane, <span class="st0">&quot;p3&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>search_words.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;carotene&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    card.<span class="me1">show</span><span class="br0">&#40;</span>pane, <span class="st0">&quot;p10&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>search_words.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;xanthophyll&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    card.<span class="me1">show</span><span class="br0">&#40;</span>pane, <span class="st0">&quot;p11&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>search_words.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;chlorophyll a&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    card.<span class="me1">show</span><span class="br0">&#40;</span>pane, <span class="st0">&quot;p12&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>search_words.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;chlorophyll b&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    card.<span class="me1">show</span><span class="br0">&#40;</span>pane, <span class="st0">&quot;p12&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>search_words.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;Rf&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    card.<span class="me1">show</span><span class="br0">&#40;</span>pane, <span class="st0">&quot;p9&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>search_words.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;2&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    card.<span class="me1">show</span><span class="br0">&#40;</span>pane, <span class="st0">&quot;p4&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>search_words.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;3&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    card.<span class="me1">show</span><span class="br0">&#40;</span>pane, <span class="st0">&quot;p5&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>search_words.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;4&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    card.<span class="me1">show</span><span class="br0">&#40;</span>pane, <span class="st0">&quot;p6&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>search_words.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;5&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    card.<span class="me1">show</span><span class="br0">&#40;</span>pane, <span class="st0">&quot;p7&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">//        set actions and changes</span>
+        button_p.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                card.<span class="me1">previous</span><span class="br0">&#40;</span>pane<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        button_n.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                card.<span class="me1">next</span><span class="br0">&#40;</span>pane<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        button_r.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p0&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item11.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p0&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item21.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p1&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item22.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p2&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item23.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p3&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item31.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p3&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item32.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p4&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item33.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p5&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item34.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p6&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item35.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p7&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item41.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p8&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item42.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p9&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item50.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p13&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item51.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p10&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item52.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p11&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item53.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p12&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        item54.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p12&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        button_remainder.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> <span class="kw3">Event</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw3">JOptionPane</span>.<span class="me1">showMessageDialog</span><span class="br0">&#40;</span><span class="kw2">null</span>,<span class="st0">&quot;Remainder: <span class="es0">\n</span>&quot;</span> <span class="sy0">+</span>
+                        <span class="st0">&quot;1. Click “previous” / “next” button to go to the pervious / next page. Click “Restart” to start this experiment over.<span class="es0">\n</span>&quot;</span> <span class="sy0">+</span>
+                        <span class="st0">&quot;1. You can search any blue term in the above paragraphs in the search field by the end of this page.<span class="es0">\n</span>&quot;</span> <span class="sy0">+</span>
+                        <span class="st0">&quot;2. You can also click any item in the menu to enter different pages.<span class="es0">\n</span>&quot;</span> <span class="sy0">+</span>
+                        <span class="st0">&quot;3. After you see the chromatography paper is put into the gas jar, you can scroll the slide block by the end of this page to see the process of this experiment throughly and continuously. <span class="es0">\n</span>&quot;</span><span class="sy0">+</span>
+                        <span class="st0">&quot;4. To see what happens after x min of this experiment, you can type in any integer 1&lt;=x&lt;=5 in the search field and look it up.<span class="es0">\n</span>&quot;</span>
+                <span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        s.<span class="me1">addChangeListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ChangeListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> stateChanged<span class="br0">&#40;</span><span class="kw3">ChangeEvent</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw3">JSlider</span><span class="br0">&#41;</span>e.<span class="me1">getSource</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span>s<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    <span class="kw1">if</span><span class="br0">&#40;</span>s.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">10</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p3&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>s.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p4&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>s.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">30</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p5&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>s.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">40</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p6&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>s.<span class="me1">getValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">50</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        card.<span class="me1">show</span><span class="br0">&#40;</span>pane,<span class="st0">&quot;p7&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">this</span>.<span class="me1">getContentPane</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">add</span><span class="br0">&#40;</span>pane<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">getContentPane</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">add</span><span class="br0">&#40;</span>p,<span class="kw3">BorderLayout</span>.<span class="me1">SOUTH</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setDefaultCloseOperation</span><span class="br0">&#40;</span><span class="kw3">JFrame</span>.<span class="me1">EXIT_ON_CLOSE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setSize</span><span class="br0">&#40;</span><span class="nu0">700</span>,<span class="nu0">750</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setVisible</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span>args<span class="br0">&#41;</span> <span class="kw1">throws</span> <span class="kw3">IOException</span> <span class="br0">&#123;</span>
+        <span class="kw1">new</span> cards<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

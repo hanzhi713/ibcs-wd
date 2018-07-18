@@ -1,0 +1,589 @@
+<html>
+  <head>
+    <title>IBCS1-WD - December 13th, Tom's work on a battleship game</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>December 13th, Tom's work on a battleship game<small> #TomsProjects </small></h1><h1 id="toc0"><a name="UML diagram"></a><a href="files/BattleshipGame%20UML%20diagram.pdf">UML diagram</a></h1>
+ <h1 id="toc1"> </h1>
+ <h1 id="toc2"><a name="Runtime screenshots:"></a>Runtime screenshots:</h1>
+ <img src="files/rt%20ss.png" alt="rt ss.png" title="rt ss.png" /><br />
+<img src="files/rt%20ss1.png" alt="rt ss1.png" title="rt ss1.png" /><br />
+<h1 id="toc3"> </h1>
+ <h1 id="toc4"> </h1>
+ <h1 id="toc5"><a name="Class: Game (Includes main)"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Class: Game (Includes main)</span></h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">battleshipsGame</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">java.util.*</span><span class="sy0">;</span>
+<span class="kw1">public</span> <span class="kw1">class</span> Game <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> Board bd1<span class="sy0">=</span><span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> Board bd2<span class="sy0">=</span><span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span> locX <span class="sy0">=</span> <span class="nu0">20</span><span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span> locY <span class="sy0">=</span> <span class="nu0">40</span><span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> Scanner sc <span class="sy0">=</span> <span class="kw1">new</span> Scanner<span class="br0">&#40;</span><span class="kw3">System</span>.<span class="me1">in</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> print<span class="br0">&#40;</span><span class="kw3">Object</span> str<span class="br0">&#41;</span><span class="br0">&#123;</span><span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>str<span class="br0">&#41;</span><span class="sy0">;</span><span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> printInstructions<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        print<span class="br0">&#40;</span><span class="st0">&quot;Standard battleship game by Tom Zhou&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        print<span class="br0">&#40;</span><span class="st0">&quot;Instructions:&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        print<span class="br0">&#40;</span><span class="st0">&quot;Two players first need to place their ships on their own board, respectively&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        print<span class="br0">&#40;</span><span class="st0">&quot;After both of them have finished setting up their ships, they can drop a bomb on opponent grid&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        print<span class="br0">&#40;</span><span class="st0">&quot;Player cannot see his/her opponent's ship arrangement&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        print<span class="br0">&#40;</span><span class="st0">&quot;However, they will get a signal if their bomb hits a part of their opponent's ship&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        print<span class="br0">&#40;</span><span class="st0">&quot;The grid which has been bombarded is filled in red&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        print<span class="br0">&#40;</span><span class="st0">&quot;Player can see his/her own ship arrangement in his/her turn&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        print<span class="br0">&#40;</span><span class="st0">&quot;Press ENTER to continue&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> Board initializePlayer_Board<span class="br0">&#40;</span>Board bd<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">while</span> <span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>bd<span class="sy0">==</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                print<span class="br0">&#40;</span><span class="st0">&quot;Please enter your name:&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span><span class="st0">&quot;&gt;&gt;&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                bd <span class="sy0">=</span> <span class="kw1">new</span> Board<span class="br0">&#40;</span>sc.<span class="me1">nextLine</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, locX, locY<span class="br0">&#41;</span><span class="sy0">;</span>
+                locX <span class="sy0">+=</span> <span class="nu0">420</span><span class="sy0">;</span>
+                print<span class="br0">&#40;</span><span class="st0">&quot;Use <span class="es0">\&quot;</span>,<span class="es0">\&quot;</span> to separate x and y coordinate and use <span class="es0">\&quot;</span>;<span class="es0">\&quot;</span> to seperate each pair of coordinates&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                print<span class="br0">&#40;</span><span class="st0">&quot;i.e. '3,5;4,6;5,7' for a submarine on (3,5), (4,6), and (5,7)&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>bd.<span class="me1">ShipArray</span>.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">5</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">break</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            print<span class="br0">&#40;</span><span class="st0">&quot;Please enter your ship's position &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span><span class="st0">&quot;&gt;&gt;&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> user_input <span class="sy0">=</span> sc.<span class="me1">nextLine</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">replaceAll</span><span class="br0">&#40;</span><span class="st0">&quot; &quot;</span>, <span class="st0">&quot;&quot;</span><span class="br0">&#41;</span>.<span class="me1">split</span><span class="br0">&#40;</span><span class="st0">&quot;;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">try</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>user_input.<span class="me1">length</span><span class="sy0">&gt;</span><span class="nu0">5</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    print<span class="br0">&#40;</span><span class="st0">&quot;ship is longer than our expectation&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span><span class="br0">&#123;</span>
+                    ArrayList<span class="sy0">&lt;</span>Point<span class="sy0">&gt;</span> pts <span class="sy0">=</span> <span class="kw1">new</span> ArrayList<span class="sy0">&lt;</span>Point<span class="sy0">&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">String</span> s<span class="sy0">:</span> user_input<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        <span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> XandY <span class="sy0">=</span> s.<span class="me1">split</span><span class="br0">&#40;</span><span class="st0">&quot;,&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        pts.<span class="me1">add</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Point</span><span class="br0">&#40;</span><span class="kw3">Integer</span>.<span class="me1">parseInt</span><span class="br0">&#40;</span>XandY<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>, <span class="kw3">Integer</span>.<span class="me1">parseInt</span><span class="br0">&#40;</span>XandY<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">new</span> Ships<span class="br0">&#40;</span>bd, pts.<span class="me1">toArray</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="br0">&#125;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    bd.<span class="me1">drawAllShips</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">Exception</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                print<span class="br0">&#40;</span><span class="st0">&quot;Illegal input!!!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">continue</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> bd<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> waitENTER<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">while</span><span class="br0">&#40;</span><span class="sy0">!</span>sc.<span class="me1">nextLine</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">split</span><span class="br0">&#40;</span><span class="st0">&quot; &quot;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+&nbsp;
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        printInstructions<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        waitENTER<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        print<span class="br0">&#40;</span><span class="st0">&quot;Player 1:&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bd1<span class="sy0">=</span>initializePlayer_Board<span class="br0">&#40;</span>bd1<span class="br0">&#41;</span><span class="sy0">;</span>
+        print<span class="br0">&#40;</span>bd1.<span class="me1">getPlayerName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot;'s arrangement completed!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        print<span class="br0">&#40;</span><span class="st0">&quot;Press ENTER to continue&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        waitENTER<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        bd1.<span class="me1">setVisibility</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">200</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            print<span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        print<span class="br0">&#40;</span><span class="st0">&quot;Player 2:&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bd2<span class="sy0">=</span>initializePlayer_Board<span class="br0">&#40;</span>bd2<span class="br0">&#41;</span><span class="sy0">;</span>
+        print<span class="br0">&#40;</span>bd2.<span class="me1">getPlayerName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot;'s arrangement completed!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        print<span class="br0">&#40;</span><span class="st0">&quot;Press ENTER to continue&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        waitENTER<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        bd2.<span class="me1">setVisibility</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Board bd <span class="sy0">=</span> bd2<span class="sy0">;</span>
+        print<span class="br0">&#40;</span><span class="st0">&quot;Player &quot;</span><span class="sy0">+</span>bd1.<span class="me1">getPlayerName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot;, press ENTER to start your turn&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        waitENTER<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        bd1.<span class="me1">setVisibility</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">while</span> <span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw4">boolean</span> isShot <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+            <span class="kw4">boolean</span> isWon <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+            <span class="kw1">while</span> <span class="br0">&#40;</span><span class="sy0">!</span>isShot<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                print<span class="br0">&#40;</span><span class="st0">&quot;Enter a coordinate to shoot, use <span class="es0">\&quot;</span>,<span class="es0">\&quot;</span> to separate x and y coordinate&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span><span class="st0">&quot;&gt;&gt;&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> XandY<span class="sy0">=</span>sc.<span class="me1">nextLine</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">replaceAll</span><span class="br0">&#40;</span><span class="st0">&quot; &quot;</span>,<span class="st0">&quot;&quot;</span><span class="br0">&#41;</span>.<span class="me1">split</span><span class="br0">&#40;</span><span class="st0">&quot;,&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">try</span><span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>bd.<span class="me1">shoot</span><span class="br0">&#40;</span><span class="kw3">Integer</span>.<span class="me1">parseInt</span><span class="br0">&#40;</span>XandY<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>, <span class="kw3">Integer</span>.<span class="me1">parseInt</span><span class="br0">&#40;</span>XandY<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> isWon<span class="sy0">=</span><span class="kw2">true</span><span class="sy0">;</span>
+                    isShot<span class="sy0">=</span><span class="kw2">true</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">Exception</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Illegal input!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw1">continue</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>isWon<span class="br0">&#41;</span> <span class="kw1">break</span><span class="sy0">;</span>
+            print<span class="br0">&#40;</span><span class="st0">&quot;Press ENTER to continue&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            waitENTER<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            print<span class="br0">&#40;</span><span class="st0">&quot;---------------------------------------------&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            bd1.<span class="me1">setVisibility</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            bd2.<span class="me1">setVisibility</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            print<span class="br0">&#40;</span><span class="st0">&quot;Player &quot;</span><span class="sy0">+</span>bd.<span class="me1">getPlayerName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot;, press ENTER to start your turn&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            waitENTER<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            <span class="kw1">if</span> <span class="br0">&#40;</span>bd<span class="sy0">==</span>bd1<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                bd2.<span class="me1">setVisibility</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                bd1.<span class="me1">setVisibility</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                bd<span class="sy0">=</span>bd2<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span><span class="br0">&#123;</span>
+                bd2.<span class="me1">setVisibility</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                bd1.<span class="me1">setVisibility</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                bd<span class="sy0">=</span>bd1<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>bd<span class="sy0">==</span>bd1<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            bd<span class="sy0">=</span>bd2<span class="sy0">;</span>
+            bd2.<span class="me1">win</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            bd1.<span class="me1">lose</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span><span class="kw1">else</span><span class="br0">&#123;</span>
+            bd<span class="sy0">=</span>bd1<span class="sy0">;</span>
+            bd2.<span class="me1">lose</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            bd1.<span class="me1">win</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        print<span class="br0">&#40;</span><span class="st0">&quot;Player &quot;</span><span class="sy0">+</span>bd.<span class="me1">getPlayerName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot; wins!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bd1.<span class="me1">setVisibility</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bd2.<span class="me1">setVisibility</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+<h1 id="toc6"><a name="Class: Ships"></a>Class: Ships</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">battleshipsGame</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Ships <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> type<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span> coors<span class="sy0">;</span>
+    <span class="kw1">public</span> ArrayList<span class="sy0">&lt;</span>Point<span class="sy0">&gt;</span> survived <span class="sy0">=</span> <span class="kw1">new</span> ArrayList<span class="sy0">&lt;</span>Point<span class="sy0">&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">public</span> ArrayList<span class="sy0">&lt;</span>Point<span class="sy0">&gt;</span> destroyed <span class="sy0">=</span> <span class="kw1">new</span> ArrayList<span class="sy0">&lt;</span>Point<span class="sy0">&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw4">void</span> checkAndAdd<span class="br0">&#40;</span>Board bd<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>checkValidity<span class="br0">&#40;</span>coors, bd<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Illegal ship placement!!!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Point</span> p<span class="sy0">:</span> coors<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                survived.<span class="me1">add</span><span class="br0">&#40;</span>p<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            bd.<span class="me1">ShipArray</span>.<span class="me1">add</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Successfully added &quot;</span><span class="sy0">+</span><span class="kw1">this</span>.<span class="me1">type</span><span class="sy0">+</span><span class="st0">&quot; on &quot;</span><span class="sy0">+</span>bd.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> Ships<span class="br0">&#40;</span>Board bd, <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span> pts<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        coors <span class="sy0">=</span> pts.<span class="me1">clone</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>pts.<span class="me1">length</span><span class="sy0">==</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            type <span class="sy0">=</span> <span class="st0">&quot;frigate&quot;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>pts.<span class="me1">length</span><span class="sy0">==</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            type <span class="sy0">=</span> <span class="st0">&quot;destroyer&quot;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>pts.<span class="me1">length</span><span class="sy0">==</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            type <span class="sy0">=</span> <span class="st0">&quot;submarine&quot;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>pts.<span class="me1">length</span><span class="sy0">==</span><span class="nu0">4</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            type <span class="sy0">=</span> <span class="st0">&quot;cruiser&quot;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>pts.<span class="me1">length</span><span class="sy0">==</span><span class="nu0">5</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            type <span class="sy0">=</span> <span class="st0">&quot;battleship&quot;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        checkAndAdd<span class="br0">&#40;</span>bd<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getType<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span><span class="kw1">return</span> type<span class="sy0">;</span><span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span> getCoors<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span><span class="kw1">return</span> coors<span class="sy0">;</span><span class="br0">&#125;</span>
+    <span class="kw1">private</span> <span class="kw4">boolean</span> checkValidity<span class="br0">&#40;</span><span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span> pts, Board bd<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>pts.<span class="me1">length</span><span class="sy0">&gt;</span><span class="nu0">5</span><span class="br0">&#41;</span> <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>pts.<span class="me1">length</span><span class="sy0">&gt;</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw4">int</span> difX <span class="sy0">=</span> pts<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span>pts<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw4">int</span> difY <span class="sy0">=</span> pts<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span>pts<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw3">Math</span>.<span class="me1">abs</span><span class="br0">&#40;</span>difX<span class="br0">&#41;</span><span class="sy0">&gt;</span><span class="nu0">1</span> <span class="sy0">||</span> <span class="kw3">Math</span>.<span class="me1">abs</span><span class="br0">&#40;</span>difY<span class="br0">&#41;</span><span class="sy0">&gt;</span><span class="nu0">1</span><span class="br0">&#41;</span> <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>i<span class="sy0">&lt;</span>pts.<span class="me1">length</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>pts<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span>pts<span class="br0">&#91;</span>i<span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#93;</span>.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">!=</span>difX <span class="sy0">||</span> <span class="br0">&#40;</span>pts<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span>pts<span class="br0">&#91;</span>i<span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#93;</span>.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">!=</span>difY<span class="br0">&#41;</span>
+                    <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>bd.<span class="me1">ShipArray</span> <span class="sy0">!=</span> <span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span>Ships sp<span class="sy0">:</span> bd.<span class="me1">ShipArray</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>sp.<span class="me1">getCoors</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">length</span><span class="sy0">==</span>coors.<span class="me1">length</span><span class="br0">&#41;</span> <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Point</span> pt_sp<span class="sy0">:</span> sp.<span class="me1">getCoors</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Point</span> p<span class="sy0">:</span> coors<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        <span class="kw4">int</span> dx <span class="sy0">=</span> <span class="kw3">Math</span>.<span class="me1">abs</span><span class="br0">&#40;</span>pt_sp.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span>p.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw4">int</span> dy <span class="sy0">=</span> <span class="kw3">Math</span>.<span class="me1">abs</span><span class="br0">&#40;</span>pt_sp.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span>p.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>dx<span class="sy0">==</span><span class="nu0">0</span> <span class="sy0">&amp;&amp;</span> dy<span class="sy0">==</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">||</span><span class="br0">&#40;</span>dx<span class="sy0">==</span><span class="nu0">1</span> <span class="sy0">&amp;&amp;</span> dy<span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                            <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<h1 id="toc7"> </h1>
+ <h1 id="toc8"><a name="Class: Screen (Inherits JFrame)"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Class: Screen (Inherits JFrame)</span></h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">battleshipsGame</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">javax.swing.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.Color</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.Font</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.Graphics</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Screen <span class="kw1">extends</span> <span class="kw3">JFrame</span> <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">long</span> serialVersionUID <span class="sy0">=</span> 1L<span class="sy0">;</span>
+    <span class="kw1">private</span> ArrayList<span class="sy0">&lt;</span>Ships<span class="sy0">&gt;</span> sps <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw1">private</span> List<span class="sy0">&lt;</span>Point<span class="sy0">&gt;</span> shotArea<span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> winState <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw4">boolean</span> visibility <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Screen<span class="br0">&#40;</span><span class="kw3">String</span> name, <span class="kw4">int</span> wid, <span class="kw4">int</span> hei, <span class="kw4">int</span> locX, <span class="kw4">int</span> locY<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        setTitle<span class="br0">&#40;</span>name<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setLocation</span><span class="br0">&#40;</span>locX, locY<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setVisible</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setDefaultCloseOperation</span><span class="br0">&#40;</span><span class="kw3">JFrame</span>.<span class="me1">EXIT_ON_CLOSE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setSize</span><span class="br0">&#40;</span>wid, hei<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">getContentPane</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="nu0">255</span>, <span class="nu0">255</span>, <span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setAlwaysOnTop</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    @SuppressWarnings<span class="br0">&#40;</span><span class="st0">&quot;unchecked&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setShips<span class="br0">&#40;</span>ArrayList<span class="sy0">&lt;</span>Ships<span class="sy0">&gt;</span> sps<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">sps</span> <span class="sy0">=</span> <span class="br0">&#40;</span>ArrayList<span class="sy0">&lt;</span>Ships<span class="sy0">&gt;</span><span class="br0">&#41;</span> sps.<span class="me1">clone</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> setShotArea<span class="br0">&#40;</span>List<span class="sy0">&lt;</span>Point<span class="sy0">&gt;</span> pts<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">shotArea</span> <span class="sy0">=</span> pts<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> paint<span class="br0">&#40;</span><span class="kw3">Graphics</span> g<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">super</span>.<span class="me1">paint</span><span class="br0">&#40;</span>g<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1">// resize controller</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw1">this</span>.<span class="me1">getWidth</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="kw1">this</span>.<span class="me1">getHeight</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            <span class="kw1">this</span>.<span class="me1">setSize</span><span class="br0">&#40;</span>getHeight<span class="br0">&#40;</span><span class="br0">&#41;</span>, getHeight<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">else</span>
+            <span class="kw1">this</span>.<span class="me1">setSize</span><span class="br0">&#40;</span>getWidth<span class="br0">&#40;</span><span class="br0">&#41;</span>, getWidth<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1">//parameters set for drawing</span>
+        <span class="kw4">int</span> addPara <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="kw1">this</span>.<span class="me1">getWidth</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">*</span> <span class="nu0">0.02</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> leftBound <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span>getWidth<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">*</span> <span class="br0">&#40;</span><span class="nu0">1.0</span> <span class="sy0">/</span> <span class="nu0">9</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">-</span> addPara<span class="sy0">;</span>
+        <span class="kw4">int</span> topBound <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span>getHeight<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">*</span> <span class="br0">&#40;</span><span class="nu0">1.5</span> <span class="sy0">/</span> <span class="nu0">9</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">-</span> addPara<span class="sy0">;</span>
+        <span class="kw4">int</span> unit <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>getHeight<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">-</span> topBound <span class="sy0">-</span> addPara<span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">8.0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> unitShip <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span>unit <span class="sy0">*</span> <span class="nu0">0.75</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        g.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, <span class="kw3">Font</span>.<span class="me1">BOLD</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="br0">&#40;</span>getWidth<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">25</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1">//draw the grid</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">8</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> j <span class="sy0">&lt;</span> <span class="nu0">8</span><span class="sy0">;</span> j<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                g.<span class="me1">drawRect</span><span class="br0">&#40;</span>leftBound <span class="sy0">+</span> i <span class="sy0">*</span> <span class="br0">&#40;</span>unit<span class="br0">&#41;</span>, topBound <span class="sy0">+</span> j <span class="sy0">*</span> <span class="br0">&#40;</span>unit<span class="br0">&#41;</span>, unit, unit<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            g.<span class="me1">drawString</span><span class="br0">&#40;</span><span class="kw3">String</span>.<span class="me1">valueOf</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span>leftBound <span class="sy0">*</span> <span class="nu0">1.5</span> <span class="sy0">+</span> unit <span class="sy0">*</span> i<span class="br0">&#41;</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span>topBound <span class="sy0">*</span> <span class="nu0">0.85</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            g.<span class="me1">drawString</span><span class="br0">&#40;</span><span class="kw3">String</span>.<span class="me1">valueOf</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span>leftBound <span class="sy0">*</span> <span class="nu0">0.5</span><span class="br0">&#41;</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span>topBound <span class="sy0">*</span> <span class="nu0">1.45</span> <span class="sy0">+</span> unit <span class="sy0">*</span> i<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="co1">//draw the shot area (red blocks)</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>shotArea <span class="sy0">!=</span> <span class="kw2">null</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            g.<span class="me1">setColor</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">RED</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Point</span> pt <span class="sy0">:</span> shotArea<span class="br0">&#41;</span>
+                g.<span class="me1">fillRect</span><span class="br0">&#40;</span>leftBound <span class="sy0">+</span> pt.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">*</span> <span class="br0">&#40;</span>unit<span class="br0">&#41;</span>, topBound <span class="sy0">+</span> pt.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">*</span> <span class="br0">&#40;</span>unit<span class="br0">&#41;</span>, unit, unit<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="co1">//draw the ship survived if visibility is true</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>visibility<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>sps <span class="sy0">!=</span> <span class="kw2">null</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">for</span> <span class="br0">&#40;</span>Ships sp <span class="sy0">:</span> sps<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">setColor</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="nu0">125</span>, <span class="nu0">255</span>, <span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Point</span> p <span class="sy0">:</span> sp.<span class="me1">survived</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        g.<span class="me1">fillOval</span><span class="br0">&#40;</span>leftBound <span class="sy0">+</span> p.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">*</span> unit <span class="sy0">+</span> <span class="br0">&#40;</span>unit <span class="sy0">-</span> unitShip<span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">2</span>,
+                                topBound <span class="sy0">+</span> p.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">*</span> unit <span class="sy0">+</span> <span class="br0">&#40;</span>unit <span class="sy0">-</span> unitShip<span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">2</span>, unitShip, unitShip<span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="co1">//draw the destroyed ship</span>
+        g.<span class="me1">setColor</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">BLACK</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>sps <span class="sy0">!=</span> <span class="kw2">null</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span>Ships sp <span class="sy0">:</span> sps<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Point</span> p <span class="sy0">:</span> sp.<span class="me1">destroyed</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    g.<span class="me1">fillOval</span><span class="br0">&#40;</span>leftBound <span class="sy0">+</span> p.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">*</span> unit <span class="sy0">+</span> <span class="br0">&#40;</span>unit <span class="sy0">-</span> unitShip<span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">2</span>,
+                            topBound <span class="sy0">+</span> p.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">*</span> unit <span class="sy0">+</span> <span class="br0">&#40;</span>unit <span class="sy0">-</span> unitShip<span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">2</span>, unitShip, unitShip<span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="co1">//displays &quot;you win&quot; or &quot;you lose&quot; if one of the player wins</span>
+        g.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, <span class="kw3">Font</span>.<span class="me1">BOLD</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="br0">&#40;</span>getHeight<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">5</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        g.<span class="me1">setColor</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">ORANGE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>winState<span class="sy0">==</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            g.<span class="me1">drawString</span><span class="br0">&#40;</span><span class="st0">&quot;You win!&quot;</span>,getWidth<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">10</span>,getHeight<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>winState<span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            g.<span class="me1">drawString</span><span class="br0">&#40;</span><span class="st0">&quot;You lose!&quot;</span>,getWidth<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">10</span>,getHeight<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+<br />
+<h1 id="toc9"><a name="Class: Board"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Class: Board</span></h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">battleshipsGame</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Board <span class="br0">&#123;</span>
+    <span class="kw1">private</span> Screen sc<span class="sy0">;</span>
+    <span class="kw1">public</span> ArrayList<span class="sy0">&lt;</span>Ships<span class="sy0">&gt;</span> ShipArray<span class="sy0">=</span><span class="kw1">new</span> ArrayList<span class="sy0">&lt;</span>Ships<span class="sy0">&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">public</span> List<span class="sy0">&lt;</span>Point<span class="sy0">&gt;</span> shotArea<span class="sy0">=</span><span class="kw1">new</span> ArrayList<span class="sy0">&lt;</span>Point<span class="sy0">&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> name<span class="sy0">;</span>
+    <span class="kw1">public</span> Board<span class="br0">&#40;</span><span class="kw3">String</span> player, <span class="kw4">int</span> locX, <span class="kw4">int</span> locY<span class="br0">&#41;</span><span class="br0">&#123;</span>
+         sc <span class="sy0">=</span> <span class="kw1">new</span> Screen<span class="br0">&#40;</span>player,<span class="nu0">400</span>,<span class="nu0">400</span>, locX, locY<span class="br0">&#41;</span><span class="sy0">;</span>
+         name<span class="sy0">=</span>player<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getPlayerName<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span><span class="kw1">return</span> name<span class="sy0">;</span><span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> win<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        sc.<span class="me1">winState</span><span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span>
+        sc.<span class="me1">repaint</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> lose<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        sc.<span class="me1">winState</span><span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+        sc.<span class="me1">repaint</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> drawAllShips<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        sc.<span class="me1">setShips</span><span class="br0">&#40;</span>ShipArray<span class="br0">&#41;</span><span class="sy0">;</span>
+        sc.<span class="me1">repaint</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="st0">&quot;Board of &quot;</span><span class="sy0">+</span>sc.<span class="me1">getTitle</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">boolean</span> shoot<span class="br0">&#40;</span><span class="kw4">int</span> x, <span class="kw4">int</span> y<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>x<span class="sy0">&lt;</span><span class="nu0">8</span> <span class="sy0">&amp;&amp;</span> y<span class="sy0">&lt;</span><span class="nu0">8</span><span class="br0">&#41;</span> <span class="sy0">&amp;&amp;</span><span class="br0">&#40;</span>x<span class="sy0">&gt;=</span><span class="nu0">0</span> <span class="sy0">&amp;&amp;</span> y<span class="sy0">&gt;=</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw3">Point</span> shotPoint <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Point</span><span class="br0">&#40;</span>x,y<span class="br0">&#41;</span><span class="sy0">;</span>
+            shotArea.<span class="me1">add</span><span class="br0">&#40;</span>shotPoint<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw4">boolean</span> isHit <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+&nbsp;
+            <span class="kw1">for</span> <span class="br0">&#40;</span>Ships sp <span class="sy0">:</span> ShipArray<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span>sp.<span class="me1">survived</span>.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>sp.<span class="me1">survived</span>.<span class="me1">get</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>.<span class="me1">equals</span><span class="br0">&#40;</span>shotPoint<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        sp.<span class="me1">survived</span>.<span class="me1">remove</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="sy0">;</span>
+                        sp.<span class="me1">destroyed</span>.<span class="me1">add</span><span class="br0">&#40;</span>shotPoint<span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Hit!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        isHit <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>sp.<span class="me1">survived</span>.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;You sank &quot;</span><span class="sy0">+</span>sc.<span class="me1">getTitle</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot;'s &quot;</span><span class="sy0">+</span>sp.<span class="me1">getType</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+&nbsp;
+            <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>isHit<span class="br0">&#41;</span> <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Miss!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            sc.<span class="me1">setShotArea</span><span class="br0">&#40;</span>shotArea<span class="br0">&#41;</span><span class="sy0">;</span>
+            sc.<span class="me1">repaint</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            <span class="kw4">int</span> count <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span>Ships sp <span class="sy0">:</span> ShipArray<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                count<span class="sy0">+=</span>sp.<span class="me1">survived</span>.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>count<span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span> <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span>
+&nbsp;
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Out of range!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">throw</span> <span class="kw1">new</span> <span class="kw3">IllegalArgumentException</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setVisibility<span class="br0">&#40;</span><span class="kw4">boolean</span> vis<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        sc.<span class="me1">visibility</span><span class="sy0">=</span>vis<span class="sy0">;</span>
+        sc.<span class="me1">repaint</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+<br />
+<br />
+<h1 id="toc10"><a name="Class: Point"></a>Class: Point</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">battleshipsGame</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> <span class="kw3">Point</span><span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> x<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> y<span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw3">Point</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        x<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>y<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">Point</span><span class="br0">&#40;</span><span class="kw4">int</span> x1, <span class="kw4">int</span> y1<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        x<span class="sy0">=</span>x1<span class="sy0">;</span>y<span class="sy0">=</span>y1<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> getX<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> x<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> getY<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> y<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">boolean</span> equals<span class="br0">&#40;</span><span class="kw3">Object</span> another<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> x<span class="sy0">==</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw3">Point</span><span class="br0">&#41;</span>another<span class="br0">&#41;</span>.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&amp;&amp;</span> y<span class="sy0">==</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw3">Point</span><span class="br0">&#41;</span>another<span class="br0">&#41;</span>.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

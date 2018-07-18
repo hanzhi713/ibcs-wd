@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <title>IBCS1-WD - DartFigure-Accuracy-Precision</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>DartFigure-Accuracy-Precision<small> #Demo </small></h1><img src="files/Accuracy_PrecisionFigure.png" alt="Accuracy_PrecisionFigure.png" title="Accuracy_PrecisionFigure.png" style="height: 360px; width: 363px;" /><br />
+<br />
+<img src="files/Stat_Accuracy_Precision.jpg" alt="Stat_Accuracy_Precision.jpg" title="Stat_Accuracy_Precision.jpg" /><br />
+<br />
+<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">random</span>
+<span class="kw1">import</span> <span class="kw3">turtle</span>
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+alex <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+alex.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+interval <span class="sy0">=</span> <span class="nu0">30</span> <span class="co1"># the interval between neighboring rings in pixels</span>
+ringNum <span class="sy0">=</span> <span class="nu0">10</span>
+alex.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>ringNum<span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span>-<span class="nu0">1</span><span class="br0">&#41;</span>:
+    alex.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    alex.<span class="me1">goto</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span>-<span class="nu0">1</span>*interval*i<span class="br0">&#41;</span>
+    alex.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> i % <span class="nu0">2</span> <span class="sy0">==</span> <span class="nu0">1</span>:
+        alex.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'red'</span><span class="br0">&#41;</span>
+    <span class="kw1">else</span>:
+        alex.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'white'</span><span class="br0">&#41;</span>
+&nbsp;
+    alex.<span class="me1">begin_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    alex.<span class="me1">circle</span><span class="br0">&#40;</span>interval*i<span class="br0">&#41;</span>
+    alex.<span class="me1">write</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+    alex.<span class="me1">end_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="co1">#### throw darts</span>
+xlist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+ylist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wd <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wd.<span class="me1">shape</span><span class="br0">&#40;</span><span class="st0">&quot;classic&quot;</span><span class="br0">&#41;</span>
+wd.<span class="me1">color</span><span class="br0">&#40;</span><span class="st0">&quot;green&quot;</span><span class="br0">&#41;</span>
+wd.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1"># mux and muy are the mean value of 2D darts --- accuracy</span>
+<span class="co1"># sigmax and sigmay are the deviation of the darts -- precision</span>
+mux <span class="sy0">=</span> <span class="nu0">100</span>
+sigmax <span class="sy0">=</span> <span class="nu0">50</span>
+muy <span class="sy0">=</span> <span class="nu0">0</span>
+sigmay <span class="sy0">=</span> <span class="nu0">50</span>
+&nbsp;
+dartsNum <span class="sy0">=</span> <span class="nu0">10</span>  <span class="co1"># the number of darts on the figure</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>dartsNum<span class="br0">&#41;</span>:
+    xlist.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">normalvariate</span><span class="br0">&#40;</span>mux<span class="sy0">,</span> sigmax<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    ylist.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">normalvariate</span><span class="br0">&#40;</span>muy<span class="sy0">,</span> sigmay<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    wd.<span class="me1">goto</span><span class="br0">&#40;</span>xlist<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">,</span> ylist<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span>
+    wd.<span class="me1">stamp</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

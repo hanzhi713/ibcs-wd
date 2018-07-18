@@ -1,0 +1,138 @@
+<html>
+  <head>
+    <title>IBCS1-WD - September 21st, Tom's work on file operations</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>September 21st, Tom's work on file operations<small> #TomsProjects </small></h1><h2 id="toc0"><a name="x-Q1: Download files from the internet"></a>Q1: Download files from the internet</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">urllib</span>.<span class="me1">request</span>
+<span class="kw1">def</span> get_text<span class="br0">&#40;</span>url<span class="sy0">,</span>destination<span class="br0">&#41;</span>:
+    <span class="kw3">urllib</span>.<span class="me1">request</span>.<span class="me1">urlretrieve</span><span class="br0">&#40;</span>url<span class="sy0">,</span> destination<span class="br0">&#41;</span>
+&nbsp;
+url <span class="sy0">=</span> <span class="st0">'https://ibcs1-wd.wikispaces.com/file/view/vocab.txt/591053286/vocab.txt'</span>
+destination <span class="sy0">=</span> <span class="st0">&quot;vocab.txt&quot;</span>
+get_text<span class="br0">&#40;</span>url<span class="sy0">,</span>destination<span class="br0">&#41;</span>
+&nbsp;
+url <span class="sy0">=</span> <span class="st0">'https://ibcs1-wd.wikispaces.com/file/view/alice_in_wonderland.txt/591053270/alice_in_wonderland.txt'</span>
+destination <span class="sy0">=</span> <span class="st0">&quot;alice_in_wonderland.txt&quot;</span>
+get_text<span class="br0">&#40;</span>url<span class="sy0">,</span>destination<span class="br0">&#41;</span></pre>
+
+<h2 id="toc1"><a name="x-Q2: Reverse every word in a file"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Q2: Reverse every word in a file</span></h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> reverse_words<span class="br0">&#40;</span>file_path<span class="br0">&#41;</span>:
+    handler <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span>file_path<span class="sy0">,</span><span class="st0">&quot;r&quot;</span><span class="br0">&#41;</span>
+    new_list_words <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">while</span> <span class="nu0">1</span>:
+        tempstr <span class="sy0">=</span> handler.<span class="kw3">readline</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>tempstr<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">0</span>:
+            <span class="kw1">break</span>
+        tempstr <span class="sy0">=</span> tempstr<span class="br0">&#91;</span>::-<span class="nu0">1</span><span class="br0">&#93;</span>
+        new_list_words.<span class="me1">append</span><span class="br0">&#40;</span>tempstr<span class="br0">&#41;</span>
+    <span class="kw1">return</span> new_list_words
+&nbsp;
+<span class="kw1">def</span> write_lines<span class="br0">&#40;</span>lines<span class="sy0">,</span>destin<span class="br0">&#41;</span>:
+    handler <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span>destin<span class="sy0">,</span><span class="st0">&quot;w&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> line <span class="kw1">in</span> lines:
+        handler.<span class="me1">write</span><span class="br0">&#40;</span>line<span class="br0">&#41;</span>
+&nbsp;
+write_lines<span class="br0">&#40;</span>reverse_words<span class="br0">&#40;</span><span class="st0">&quot;vocab.txt&quot;</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="st0">&quot;reversed_vocab&quot;</span><span class="br0">&#41;</span></pre>
+
+<h2 id="toc2"><a name="x-Q3: Replace a particular word in the content with another word."></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Q3: Replace a particular word in the content with another word.</span></h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> read_all_words<span class="br0">&#40;</span>file_path<span class="br0">&#41;</span>:
+    handler <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span>file_path<span class="sy0">,</span><span class="st0">&quot;r&quot;</span><span class="br0">&#41;</span>
+    <span class="kw2">str</span> <span class="sy0">=</span> handler.<span class="me1">read</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> <span class="kw2">str</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> replace<span class="br0">&#40;</span>word<span class="sy0">,</span>target<span class="br0">&#41;</span>:
+    new_ <span class="sy0">=</span> target
+    <span class="kw1">while</span> <span class="nu0">1</span>:
+        index <span class="sy0">=</span> new_.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">&quot;Alice&quot;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> index <span class="sy0">&gt;</span> -<span class="nu0">1</span>:
+            new_ <span class="sy0">=</span> new_<span class="br0">&#91;</span>:index<span class="br0">&#93;</span> +word + new_<span class="br0">&#91;</span>index+<span class="nu0">5</span>:<span class="br0">&#93;</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">break</span>
+    <span class="kw1">return</span> new_
+&nbsp;
+&nbsp;
+replaced <span class="sy0">=</span> replace<span class="br0">&#40;</span><span class="st0">&quot;Tom&quot;</span><span class="sy0">,</span>read_all_words<span class="br0">&#40;</span><span class="st0">&quot;alice_in_wonderland.txt&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+handlerr <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">&quot;textfile_vocab_Tom.txt&quot;</span><span class="sy0">,</span><span class="st0">&quot;w&quot;</span><span class="br0">&#41;</span>
+handlerr.<span class="me1">write</span><span class="br0">&#40;</span>replaced<span class="br0">&#41;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

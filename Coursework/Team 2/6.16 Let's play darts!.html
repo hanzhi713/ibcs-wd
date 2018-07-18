@@ -1,0 +1,76 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 6.16 Let's play darts!</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>6.16 Let's play darts!<small> #alex </small></h1>
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+<span class="kw1">import</span> <span class="kw3">random</span>
+&nbsp;
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+alex <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+alex.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+alex.<span class="me1">goto</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">45</span><span class="br0">&#41;</span>
+alex.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+alex.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">&quot;white&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">7</span><span class="br0">&#41;</span>:
+    <span class="kw1">if</span><span class="br0">&#40;</span>i%<span class="nu0">2</span><span class="sy0">==</span><span class="nu0">1</span><span class="br0">&#41;</span>:
+        alex.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">else</span>: alex.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightblue&quot;</span><span class="br0">&#41;</span>
+    alex.<span class="me1">begin_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    alex.<span class="me1">circle</span><span class="br0">&#40;</span><span class="nu0">150</span>-<span class="nu0">20</span>*i<span class="br0">&#41;</span>
+    alex.<span class="me1">end_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    alex.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    alex.<span class="me1">goto</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">45</span>+<span class="nu0">20</span>*i<span class="br0">&#41;</span>
+    alex.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+emile <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+emile.<span class="me1">color</span><span class="br0">&#40;</span><span class="st0">&quot;pink&quot;</span><span class="br0">&#41;</span>
+l <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Left x:&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+r <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;right x:&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+u <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;up y:&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+d <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;dowb y:&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">for</span> n <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">10</span><span class="br0">&#41;</span>:
+    ax <span class="sy0">=</span> <span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span>l<span class="sy0">,</span> r<span class="br0">&#41;</span>
+    ay <span class="sy0">=</span> <span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span>u<span class="sy0">,</span> r<span class="br0">&#41;</span>
+    emile.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    emile.<span class="me1">goto</span><span class="br0">&#40;</span>ax<span class="sy0">,</span> ay<span class="br0">&#41;</span>
+    emile.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    emile.<span class="me1">stamp</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

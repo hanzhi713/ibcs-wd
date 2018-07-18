@@ -1,0 +1,249 @@
+<html>
+  <head>
+    <title>IBCS1-WD - backup code</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">jssc.SerialPort</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">jssc.SerialPortException</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">java.awt.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.Arrays</span><span class="sy0">;</span>
+&nbsp;
+<span class="co3">/**
+ * Created by margaret on 2017/11/17.
+ */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> test <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span>... <span class="me1">args</span><span class="br0">&#41;</span> <span class="kw1">throws</span> <span class="kw3">InterruptedException</span> <span class="br0">&#123;</span>
+        SerialPort serialPort <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+        <span class="kw1">try</span> <span class="br0">&#123;</span>
+            serialPort <span class="sy0">=</span> <span class="kw1">new</span> SerialPort<span class="br0">&#40;</span><span class="st0">&quot;/dev/cu.usbmodem1411&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            serialPort.<span class="me1">openPort</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            serialPort.<span class="me1">setParams</span><span class="br0">&#40;</span><span class="nu0">9600</span>, <span class="nu0">8</span>, <span class="nu0">1</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span>SerialPortException ex<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>ex<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">try</span> <span class="br0">&#123;</span>
+                <span class="kw3">Thread</span>.<span class="me1">sleep</span><span class="br0">&#40;</span><span class="nu0">1000</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">InterruptedException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">while</span> <span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">try</span> <span class="br0">&#123;</span>
+                <span class="co1">//serialPort.openPort()</span>
+                <span class="kw3">String</span> result <span class="sy0">=</span> serialPort.<span class="me1">readString</span><span class="br0">&#40;</span><span class="nu0">12</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+                <span class="kw1">if</span> <span class="br0">&#40;</span>result <span class="sy0">!=</span> <span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    <span class="kw1">try</span><span class="br0">&#123;</span>
+&nbsp;
+                        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>result.<span class="me1">split</span><span class="br0">&#40;</span><span class="st0">&quot;<span class="es0">\n</span>&quot;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">//                        int a = Integer.parseInt(result.split(&quot;\n&quot;)[0]);</span>
+<span class="co1">//                        if (a &gt; 10)</span>
+<span class="co1">//                            System.out.println(a);</span>
+                    <span class="br0">&#125;</span><span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">Exception</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+&nbsp;
+                    <span class="br0">&#125;</span>
+&nbsp;
+                <span class="br0">&#125;</span>
+                <span class="kw3">Thread</span>.<span class="me1">sleep</span><span class="br0">&#40;</span><span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">//                System.out.println(Arrays.toString(serialPort.readString(5).split(&quot;\n&quot;)));</span>
+            <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span>SerialPortException e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">//int sensorPin = A0;    // select the input pin for the potentiometer
+//int ledPin = 13;      // select the pin for the LED
+//int sensorValue = 0;  // variable to store the value coming from the sensor
+&nbsp;
+void setup() {
+  // initialize serial comms:
+  Serial.begin(9600);
+}
+&nbsp;
+void loop() {
+  // read AO
+  //int val1 = analogRead(0);
+  int val2 = analogRead(1);
+  // print to serial
+  //Serial.print(val1);
+ // Serial.print(&quot; &quot;);
+  //Serial.print(0xff);
+//  if (val2 &lt; 10){
+//    Serial.print(&quot;000&quot;);
+//    Serial.print(val2);
+//  }
+//  else if (val2 &lt; 100){
+//    Serial.print(&quot;00&quot;);
+//    Serial.print(val2);
+//  }
+//  else if (val2 &lt; 1000){
+//    Serial.print(&quot;0&quot;);
+//    Serial.print(val2);
+//  }
+//  else{
+//    Serial.print(val2);
+//  }
+Serial.println(val2);
+//  Serial.print(&quot;\n&quot;);
+//
+  //Serial.print(0xff);
+  // wait
+  delay(50);
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">&nbsp;
+<span class="kw1">import</span> <span class="kw3">sys</span><span class="sy0">,</span> serial<span class="sy0">,</span> argparse
+<span class="kw1">import</span> numpy <span class="kw1">as</span> np
+<span class="kw1">from</span> <span class="kw3">time</span> <span class="kw1">import</span> sleep
+<span class="kw1">from</span> <span class="kw3">collections</span> <span class="kw1">import</span> deque
+<span class="kw1">import</span> matplotlib.<span class="me1">pyplot</span> <span class="kw1">as</span> plt
+<span class="kw1">import</span> matplotlib.<span class="me1">animation</span> <span class="kw1">as</span> animation
+<span class="co1"># plot class</span>
+<span class="kw1">class</span> AnalogPlot:
+<span class="co1">#constr</span>
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> strPort<span class="sy0">,</span> maxLen<span class="br0">&#41;</span>:
+&nbsp;
+        <span class="kw2">self</span>.<span class="me1">ser</span> <span class="sy0">=</span> serial.<span class="me1">Serial</span><span class="br0">&#40;</span>strPort<span class="sy0">,</span> <span class="nu0">9600</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">ax</span> <span class="sy0">=</span> deque<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">0.0</span><span class="br0">&#93;</span>*maxLen<span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">ay</span> <span class="sy0">=</span> deque<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">0.0</span><span class="br0">&#93;</span>*maxLen<span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">maxLen</span> <span class="sy0">=</span> maxLen
+<span class="co1"># add to buffer</span>
+    <span class="kw1">def</span> addToBuf<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> buf<span class="sy0">,</span> val<span class="br0">&#41;</span>:
+        <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>buf<span class="br0">&#41;</span> <span class="sy0">&lt;</span> <span class="kw2">self</span>.<span class="me1">maxLen</span>:
+            buf.<span class="me1">append</span><span class="br0">&#40;</span>val<span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            buf.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            buf.<span class="me1">appendleft</span><span class="br0">&#40;</span>val<span class="br0">&#41;</span>
+<span class="co1"># add data</span>
+    <span class="kw1">def</span> add<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> data<span class="br0">&#41;</span>:
+        <span class="kw1">assert</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>data<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">2</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">addToBuf</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">ax</span><span class="sy0">,</span> data<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">addToBuf</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">ay</span><span class="sy0">,</span> data<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+<span class="co1"># update plot</span>
+    <span class="kw1">def</span> update<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> frameNum<span class="sy0">,</span> a0<span class="sy0">,</span> a1<span class="br0">&#41;</span>:
+        <span class="kw1">try</span>:
+            line <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">ser</span>.<span class="kw3">readline</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            data <span class="sy0">=</span> <span class="br0">&#91;</span><span class="kw2">float</span><span class="br0">&#40;</span>val<span class="br0">&#41;</span> <span class="kw1">for</span> val <span class="kw1">in</span> line.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>data<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">2</span><span class="br0">&#41;</span>:
+                <span class="kw2">self</span>.<span class="me1">add</span><span class="br0">&#40;</span>data<span class="br0">&#41;</span>
+                a0.<span class="me1">set_data</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">maxLen</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">ax</span><span class="br0">&#41;</span>
+                a1.<span class="me1">set_data</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">maxLen</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">ay</span><span class="br0">&#41;</span>
+        <span class="kw1">except</span> <span class="kw2">KeyboardInterrupt</span>:
+            <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'exiting'</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> a0<span class="sy0">,</span>
+&nbsp;
+<span class="co1"># clean up</span>
+    <span class="kw1">def</span> close<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+<span class="co1"># close serial</span>
+        <span class="kw2">self</span>.<span class="me1">ser</span>.<span class="me1">flush</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">ser</span>.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="co1"># # create parser</span>
+<span class="co1">#         parser = argparse.ArgumentParser(description=&quot;LDR serial&quot;)</span>
+<span class="co1"># # add expected arguments</span>
+<span class="co1">#         parser.add_argument('--port', dest='port', required=True)</span>
+<span class="co1"># # parse args</span>
+<span class="co1">#         args = parser.parse_args()</span>
+&nbsp;
+<span class="co1"># main() function</span>
+<span class="kw1">def</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+<span class="co1">#strPort = '/dev/tty.usbserial-A7006Yqh'</span>
+        strPort <span class="sy0">=</span> <span class="st0">&quot;/dev/cu.usbmodem1411&quot;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'reading from serial port %s...'</span> % strPort<span class="br0">&#41;</span>
+<span class="co1"># plot parameters</span>
+        analogPlot <span class="sy0">=</span> AnalogPlot<span class="br0">&#40;</span>strPort<span class="sy0">,</span> <span class="nu0">100</span><span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'plotting data...'</span><span class="br0">&#41;</span>
+<span class="co1"># set up animation</span>
+        fig <span class="sy0">=</span> plt.<span class="me1">figure</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        ax <span class="sy0">=</span> plt.<span class="me1">axes</span><span class="br0">&#40;</span>xlim<span class="sy0">=</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">,</span> ylim<span class="sy0">=</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">1023</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        a0<span class="sy0">,</span> <span class="sy0">=</span> ax.<span class="me1">plot</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+        a1<span class="sy0">,</span> <span class="sy0">=</span> ax.<span class="me1">plot</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+        anim <span class="sy0">=</span> animation.<span class="me1">FuncAnimation</span><span class="br0">&#40;</span>fig<span class="sy0">,</span> analogPlot.<span class="me1">update</span><span class="sy0">,</span>
+        fargs<span class="sy0">=</span><span class="br0">&#40;</span>a0<span class="sy0">,</span> a1<span class="br0">&#41;</span><span class="sy0">,</span>
+        interval<span class="sy0">=</span><span class="nu0">50</span><span class="br0">&#41;</span>
+<span class="co1"># show plot</span>
+        plt.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="co1"># clean up</span>
+        analogPlot.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'exiting.'</span><span class="br0">&#41;</span>
+<span class="co1"># call main</span>
+<span class="kw1">if</span> __name__ <span class="sy0">==</span> <span class="st0">'__main__'</span>:
+    main<span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

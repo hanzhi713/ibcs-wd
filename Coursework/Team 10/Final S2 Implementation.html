@@ -1,0 +1,339 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Final S2 Implementation</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<h4 id="toc0"><a name="x---Final S2 OOP Implementation"></a><span style="font-size: 150%;">Final S2 OOP Implementation</span></h4>
+ <br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">com.company</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Client <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> customerID<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> name<span class="sy0">;</span>
+    <span class="kw1">private</span> Dates arrive<span class="sy0">;</span>
+    <span class="kw1">private</span> Dates leave<span class="sy0">;</span>
+    <span class="kw1">private</span> Room bedroom<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Client<span class="br0">&#40;</span><span class="kw4">int</span> id,<span class="kw3">String</span> c,Dates dateIn,Dates dateOut,Room r<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        setCustomerID<span class="br0">&#40;</span>id<span class="br0">&#41;</span><span class="sy0">;</span>
+        setName<span class="br0">&#40;</span>c<span class="br0">&#41;</span><span class="sy0">;</span>
+        setArrive<span class="br0">&#40;</span>dateIn<span class="br0">&#41;</span><span class="sy0">;</span>
+        setLeave<span class="br0">&#40;</span>dateOut<span class="br0">&#41;</span><span class="sy0">;</span>
+        setBedroom<span class="br0">&#40;</span>r<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> setCustomerID<span class="br0">&#40;</span><span class="kw4">int</span> id<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        customerID <span class="sy0">=</span> id<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setName<span class="br0">&#40;</span><span class="kw3">String</span> c<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        name <span class="sy0">=</span> c<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setArrive<span class="br0">&#40;</span>Dates dateIn<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        arrive <span class="sy0">=</span> dateIn<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setLeave<span class="br0">&#40;</span>Dates dateOut<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        leave <span class="sy0">=</span> dateOut<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setBedroom<span class="br0">&#40;</span>Room r<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        bedroom <span class="sy0">=</span> r<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> getCustomerID<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> customerID<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getName<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> name<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> Dates getArrive<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> arrive<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> Dates getLeave<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> leave<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> Room getBedroom<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> bedroom<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> bill<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span> stay<span class="sy0">;</span>
+        stay <span class="sy0">=</span> Dates.<span class="me1">StayDays</span><span class="br0">&#40;</span>arrive,leave<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">double</span> cost <span class="sy0">=</span> getBedroom<span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getPrice</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">*</span>stay<span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Client&quot;</span><span class="sy0">+</span>name<span class="sy0">+</span><span class="st0">&quot;room&quot;</span><span class="sy0">+</span>getBedroom<span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getRoomNumber</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;date arrived&quot;</span><span class="sy0">+</span>arrive<span class="sy0">+</span><span class="st0">&quot;date booked out&quot;</span><span class="sy0">+</span>leave<span class="sy0">+</span><span class="st0">&quot;cost=&quot;</span><span class="sy0">+</span>cost<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">com.company</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Dates <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> day<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> month<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> year<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Dates<span class="br0">&#40;</span><span class="kw4">int</span> day,<span class="kw4">int</span> month,<span class="kw4">int</span> year<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">day</span> <span class="sy0">=</span> day<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">month</span> <span class="sy0">=</span> month<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">year</span> <span class="sy0">=</span> year<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getDay<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> day<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> getMonth<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> month<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> getYear<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> year<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span> StayDays<span class="br0">&#40;</span>Dates x, Dates y<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span> stay <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>x.<span class="me1">year</span> <span class="sy0">==</span> y.<span class="me1">year</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>x.<span class="me1">month</span> <span class="sy0">!=</span> y.<span class="me1">month</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                stay <span class="sy0">=</span> <span class="br0">&#40;</span>y.<span class="me1">month</span> <span class="sy0">-</span> x.<span class="me1">month</span> <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">*</span><span class="nu0">30</span> <span class="sy0">+</span> <span class="br0">&#40;</span><span class="nu0">30</span> <span class="sy0">-</span> x.<span class="me1">day</span><span class="br0">&#41;</span> <span class="sy0">+</span> y.<span class="me1">day</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span><span class="br0">&#123;</span>
+                stay <span class="sy0">=</span> y.<span class="me1">day</span> <span class="sy0">-</span> x.<span class="me1">day</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            stay <span class="sy0">=</span> StayDays<span class="br0">&#40;</span>x, <span class="kw1">new</span> Dates<span class="br0">&#40;</span><span class="nu0">30</span>,<span class="nu0">12</span>,x.<span class="me1">year</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">+</span>StayDays<span class="br0">&#40;</span><span class="kw1">new</span> Dates<span class="br0">&#40;</span><span class="nu0">1</span>,<span class="nu0">1</span>,y.<span class="me1">year</span><span class="br0">&#41;</span>,y<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> stay<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">com.company</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Room <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> roomNumber<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> beds<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">double</span> price<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">boolean</span> empty<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Room<span class="br0">&#40;</span><span class="kw4">int</span> roomNumber,<span class="kw4">int</span> beds,<span class="kw4">double</span> price,<span class="kw4">boolean</span> empty<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">roomNumber</span> <span class="sy0">=</span> roomNumber<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">beds</span> <span class="sy0">=</span> beds<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">price</span> <span class="sy0">=</span> price<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">empty</span> <span class="sy0">=</span> empty<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> setRoomNumber<span class="br0">&#40;</span><span class="kw4">int</span> n<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        roomNumber <span class="sy0">=</span> n<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setBeds<span class="br0">&#40;</span><span class="kw4">int</span> b<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        beds <span class="sy0">=</span> b<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setPrice<span class="br0">&#40;</span><span class="kw4">double</span> p<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        price <span class="sy0">=</span> p<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setEmpty<span class="br0">&#40;</span><span class="kw4">boolean</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        empty <span class="sy0">=</span> e<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> getRoomNumber<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> roomNumber<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> getBeds<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> beds<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> getPrice<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> price<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">boolean</span> getEmpty<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> empty<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">com.company</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> <span class="kw3">Group</span> <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> name<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> number<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">Group</span><span class="br0">&#40;</span><span class="kw3">String</span> name, <span class="kw4">int</span> number<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">name</span> <span class="sy0">=</span> name<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">number</span> <span class="sy0">=</span> number<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getname<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> name<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> getNumber<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> number<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> gRoom <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>number<span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> bill<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> gRooms<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">double</span> totalCost <span class="sy0">=</span> <span class="nu0">0.0</span><span class="sy0">;</span>
+        <span class="kw4">double</span> roomCost<span class="sy0">;</span>
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span>number<span class="sy0">;</span>i<span class="sy0">=</span>i<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> j<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>j<span class="sy0">&lt;</span><span class="nu0">100</span><span class="sy0">;</span>j<span class="sy0">=</span>j<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span><span class="br0">&#40;</span>gRooms<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">==</span>allRooms<span class="br0">&#91;</span>j<span class="br0">&#93;</span>.<span class="me1">getRoomNUmber</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    roomCost <span class="sy0">=</span> allRooms<span class="br0">&#91;</span>j<span class="br0">&#93;</span>.<span class="me1">getPrice</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        totalCost <span class="sy0">=</span> totalCost <span class="sy0">+</span> roomCost<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>totalCost<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">com.company</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> GClient <span class="kw1">extends</span> Client <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> groupName<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> GClient<span class="br0">&#40;</span><span class="kw4">int</span> id,<span class="kw3">String</span> c,Dates dateIn,Dates dateOut,Room r,<span class="kw3">String</span> g<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">super</span><span class="br0">&#40;</span>id,c,dateIn,dateOut,r<span class="br0">&#41;</span><span class="sy0">;</span>
+        groupName <span class="sy0">=</span> g<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setGroupName<span class="br0">&#40;</span><span class="kw3">String</span> groupName<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">groupName</span> <span class="sy0">=</span> groupName<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getGroupName<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> groupName<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 5.17 Major Revise</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">Classwork</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> BinaryTree<span class="br0">&#123;</span>
+&nbsp;
+        <span class="kw1">private</span> Node root<span class="sy0">;</span>
+        <span class="kw1">private</span> <span class="kw1">class</span> Node<span class="br0">&#123;</span>
+            <span class="kw1">private</span> Node left<span class="sy0">;</span>
+            <span class="kw1">private</span> Node right<span class="sy0">;</span>
+            <span class="kw1">private</span> <span class="kw4">int</span> data<span class="sy0">;</span>
+            <span class="kw1">public</span> Node<span class="br0">&#40;</span><span class="kw4">int</span> data<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">this</span>.<span class="me1">left</span> <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+                <span class="kw1">this</span>.<span class="me1">right</span> <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+                <span class="kw1">this</span>.<span class="me1">data</span> <span class="sy0">=</span> data<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="kw1">public</span> BinaryTree<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            root <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="kw1">public</span> <span class="kw4">void</span> buildTree<span class="br0">&#40;</span>Node node,<span class="kw4">int</span> data<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>root <span class="sy0">==</span> <span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                root <span class="sy0">=</span> <span class="kw1">new</span> Node<span class="br0">&#40;</span>data<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span><span class="br0">&#40;</span>data <span class="sy0">&lt;</span> node.<span class="me1">data</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    <span class="kw1">if</span><span class="br0">&#40;</span>node.<span class="me1">left</span> <span class="sy0">==</span> <span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        node.<span class="me1">left</span> <span class="sy0">=</span> <span class="kw1">new</span> Node<span class="br0">&#40;</span>data<span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">else</span><span class="br0">&#123;</span>
+                        buildTree<span class="br0">&#40;</span>node.<span class="me1">left</span>,data<span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span><span class="br0">&#125;</span>
+                <span class="kw1">else</span><span class="br0">&#123;</span>
+                    <span class="kw1">if</span><span class="br0">&#40;</span>node.<span class="me1">right</span> <span class="sy0">==</span> <span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        node.<span class="me1">right</span> <span class="sy0">=</span> <span class="kw1">new</span> Node<span class="br0">&#40;</span>data<span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">else</span><span class="br0">&#123;</span>
+                        buildTree<span class="br0">&#40;</span>node.<span class="me1">right</span>,data<span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="kw1">public</span> <span class="kw4">void</span> preOrder<span class="br0">&#40;</span>Node node<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>node <span class="sy0">!=</span> <span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>node.<span class="me1">data</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                preOrder<span class="br0">&#40;</span>node.<span class="me1">left</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                preOrder<span class="br0">&#40;</span>node.<span class="me1">right</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="kw1">public</span> <span class="kw4">void</span> remove<span class="br0">&#40;</span>Node node<span class="br0">&#41;</span>
+           <span class="br0">&#123;</span>
+               rootTree <span class="sy0">=</span> remove<span class="br0">&#40;</span>nide,rootTree<span class="br0">&#41;</span><span class="sy0">;</span>
+           <span class="br0">&#125;</span> <span class="co3">/**在某个位置开始判断删除某个结点*/</span>
+           <span class="kw1">public</span> BinaryNode<span class="sy0">&lt;</span>Node<span class="sy0">&gt;</span> remove<span class="br0">&#40;</span>Node node,BinaryNode<span class="sy0">&lt;</span>Node<span class="sy0">&gt;</span> node<span class="br0">&#41;</span>
+           <span class="br0">&#123;</span>
+               <span class="kw1">if</span><span class="br0">&#40;</span>node <span class="sy0">==</span> <span class="kw2">null</span><span class="br0">&#41;</span>
+                   <span class="kw1">return</span> node<span class="sy0">;</span><span class="co1">//没有找到,doNothing</span>
+               <span class="kw4">int</span> result <span class="sy0">=</span> node.<span class="me1">compareTo</span><span class="br0">&#40;</span>node.<span class="me1">data</span><span class="br0">&#41;</span><span class="sy0">;</span>
+               <span class="kw1">if</span><span class="br0">&#40;</span>result<span class="sy0">&gt;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+                   node.<span class="me1">right</span> <span class="sy0">=</span> remove<span class="br0">&#40;</span>node,node.<span class="me1">right</span><span class="br0">&#41;</span><span class="sy0">;</span>
+              <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>result<span class="sy0">&lt;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+                   node.<span class="me1">left</span> <span class="sy0">=</span> remove<span class="br0">&#40;</span>node,node.<span class="me1">left</span><span class="br0">&#41;</span><span class="sy0">;</span>
+               <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>node.<span class="me1">left</span><span class="sy0">!=</span>null<span class="sy0">&amp;&amp;</span>node.<span class="me1">right</span><span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span>
+               <span class="br0">&#123;</span>
+                   node.<span class="me1">data</span> <span class="sy0">=</span> findMin<span class="br0">&#40;</span>node.<span class="me1">right</span><span class="br0">&#41;</span>.<span class="me1">data</span><span class="sy0">;</span>
+                   node.<span class="me1">right</span> <span class="sy0">=</span> remove<span class="br0">&#40;</span>node.<span class="me1">data</span>,node.<span class="me1">right</span><span class="br0">&#41;</span><span class="sy0">;</span>
+               <span class="br0">&#125;</span>
+               <span class="kw1">else</span>
+                   node <span class="sy0">=</span> <span class="br0">&#40;</span>node.<span class="me1">left</span><span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">?</span>node.<span class="me1">left</span><span class="sy0">:</span>node.<span class="me1">right</span><span class="sy0">;</span>
+               <span class="kw1">return</span> node<span class="sy0">;</span>
+&nbsp;
+           <span class="br0">&#125;</span>
+&nbsp;
+        <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> a <span class="sy0">=</span> <span class="br0">&#123;</span><span class="nu0">3</span>,<span class="nu0">73</span>,<span class="nu0">34</span>,<span class="nu0">53</span>,<span class="nu0">17</span>,<span class="nu0">21</span>,<span class="nu0">1</span><span class="br0">&#125;</span><span class="sy0">;</span>
+            BinaryTree nTree <span class="sy0">=</span> <span class="kw1">new</span> BinaryTree<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> a.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                nTree.<span class="me1">buildTree</span><span class="br0">&#40;</span>nTree.<span class="me1">root</span>, a<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            nTree.<span class="me1">preOrder</span><span class="br0">&#40;</span>nTree.<span class="me1">root</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span></pre>
+
+<a href="files/5.17Major%20rewrite.docx">5.17Major rewrite.docx</a></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

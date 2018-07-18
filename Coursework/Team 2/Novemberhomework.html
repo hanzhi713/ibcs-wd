@@ -1,0 +1,331 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Novemberhomework</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>Novemberhomework<small> #homework </small></h1>1.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> BankAccountA <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>args<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        BankAccount b <span class="sy0">=</span> <span class="kw1">new</span> BankAccount<span class="br0">&#40;</span><span class="st0">&quot;BrianL&quot;</span>, <span class="nu0">10000</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        BankAccount c <span class="sy0">=</span> <span class="kw1">new</span> BankAccount<span class="br0">&#40;</span><span class="st0">&quot;KevinC&quot;</span>, <span class="nu0">800.00</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        BankAccount better<span class="sy0">;</span>
+        better <span class="sy0">=</span> chooseBetterone<span class="br0">&#40;</span>b, c<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>better.<span class="me1">getBalance</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b.<span class="me1">deposit</span><span class="br0">&#40;</span><span class="st0">&quot;BrianL&quot;</span>, <span class="nu0">30000</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>better.<span class="me1">getBalance</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        c.<span class="me1">deposit</span><span class="br0">&#40;</span><span class="st0">&quot;KevinC&quot;</span>, <span class="nu0">300000</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        better <span class="sy0">=</span> chooseBetterone<span class="br0">&#40;</span>b,c<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>better.<span class="me1">getBalance</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> BankAccount chooseBetterone<span class="br0">&#40;</span>BankAccount b1, BankAccount b2<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>b1.<span class="me1">getBalance</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&gt;=</span> b2.<span class="me1">getBalance</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">return</span> b1<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            <span class="kw1">return</span> b2<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+<span class="kw1">class</span> BankAccount<span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> password<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">double</span> balance<span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">double</span> OVERDRAWN_PENALTY <span class="sy0">=</span> <span class="nu0">20.0</span><span class="sy0">;</span>
+    <span class="kw1">public</span> BankAccount<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        password <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+        balance <span class="sy0">=</span> <span class="nu0">0.0</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> BankAccount<span class="br0">&#40;</span><span class="kw3">String</span> acctPassword, <span class="kw4">double</span> acctBalance<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        password <span class="sy0">=</span> acctPassword<span class="sy0">;</span>
+        balance <span class="sy0">=</span> acctBalance<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> getBalance<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> balance<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> deposit<span class="br0">&#40;</span><span class="kw3">String</span> acctPassword, <span class="kw4">double</span> amount<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>acctPassword.<span class="me1">equals</span><span class="br0">&#40;</span>password<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Access Denied&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            balance <span class="sy0">+=</span> amount<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> withdraw<span class="br0">&#40;</span><span class="kw3">String</span> acctPassword, <span class="kw4">double</span> amount<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span><span class="sy0">!</span>acctPassword.<span class="me1">equals</span><span class="br0">&#40;</span>password<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Access Denied&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            balance <span class="sy0">-=</span>amount<span class="sy0">;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>balance <span class="sy0">&lt;</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                balance <span class="sy0">-=</span> OVERDRAWN_PENALTY<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span></pre>
+
+2<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> StudentA <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>args<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>atest <span class="sy0">=</span> <span class="br0">&#123;</span><span class="nu0">23</span>, <span class="nu0">27</span>, <span class="nu0">90</span><span class="br0">&#125;</span><span class="sy0">;</span>
+        Students a <span class="sy0">=</span> <span class="kw1">new</span> Students<span class="br0">&#40;</span><span class="st0">&quot;A&quot;</span>, atest, <span class="st0">&quot;pass&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        a.<span class="me1">computeGrade</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>a.<span class="me1">getGrade</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        UnderGrad b <span class="sy0">=</span> <span class="kw1">new</span> UnderGrad<span class="br0">&#40;</span><span class="st0">&quot;B&quot;</span>, atest, <span class="st0">&quot;pass&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b.<span class="me1">computeGrade</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>b.<span class="me1">getGrade</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+<span class="kw1">class</span> Students<span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> name<span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">final</span> <span class="kw4">int</span> NUM_TESTS <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> tests<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> grade<span class="sy0">;</span>
+    <span class="kw1">public</span> Students<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        name <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+        tests <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>NUM_TESTS<span class="br0">&#93;</span><span class="sy0">;</span>
+        grade <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> Students<span class="br0">&#40;</span><span class="kw3">String</span> studName, <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> studTests, <span class="kw3">String</span> studGrade<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        name <span class="sy0">=</span> studName<span class="sy0">;</span>
+        tests <span class="sy0">=</span> studTests<span class="sy0">;</span>
+        grade <span class="sy0">=</span> studGrade<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getName<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> name<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getGrade<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> grade<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setGrade<span class="br0">&#40;</span><span class="kw3">String</span> newGrade<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        grade <span class="sy0">=</span> newGrade<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> computeGrade<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>name.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            grade <span class="sy0">=</span> <span class="st0">&quot;No grade&quot;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>getTestAverage<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&gt;=</span> <span class="nu0">65</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            grade <span class="sy0">=</span> <span class="st0">&quot;Pass&quot;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            grade <span class="sy0">=</span> <span class="st0">&quot;Fail&quot;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> getTestAverage<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">double</span> total <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> score <span class="sy0">:</span> tests<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            total <span class="sy0">+=</span> score<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> total<span class="sy0">/</span>NUM_TESTS<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="kw1">class</span> UnderGrad <span class="kw1">extends</span> Students<span class="br0">&#123;</span>
+    <span class="kw1">public</span> UnderGrad<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">super</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> UnderGrad<span class="br0">&#40;</span><span class="kw3">String</span> studName, <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> studTests, <span class="kw3">String</span> studGrade<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">super</span><span class="br0">&#40;</span>studName, studTests, studGrade<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> computeGrade<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>getTestAverage<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&gt;=</span> <span class="nu0">70</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            setGrade<span class="br0">&#40;</span><span class="st0">&quot;Pass&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            setGrade<span class="br0">&#40;</span><span class="st0">&quot;Fail&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+3<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">java.util.*</span><span class="sy0">;</span>
+<span class="kw1">public</span> <span class="kw1">class</span> DateA <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw3">Date</span> findBirthdate<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        Scanner sc <span class="sy0">=</span> <span class="kw1">new</span> Scanner<span class="br0">&#40;</span><span class="kw3">System</span>.<span class="me1">in</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Enter&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> day <span class="sy0">=</span> sc.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> month <span class="sy0">=</span> sc.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> year <span class="sy0">=</span> sc.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">Date</span> b <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Date</span><span class="br0">&#40;</span>month, day, year<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> b<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>args<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">Date</span> d <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Date</span><span class="br0">&#40;</span><span class="nu0">12</span>, <span class="nu0">24</span>, <span class="nu0">2006</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        d.<span class="me1">write</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">Date</span> c <span class="sy0">=</span> DateA.<span class="me1">findBirthdate</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        c.<span class="me1">write</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+<span class="kw1">class</span> <span class="kw3">Date</span><span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> day<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> month<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> year<span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw3">Date</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">Date</span><span class="br0">&#40;</span><span class="kw4">int</span> mo, <span class="kw4">int</span> da, <span class="kw4">int</span> yr<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        month <span class="sy0">=</span> mo<span class="sy0">;</span>
+        day <span class="sy0">=</span> da<span class="sy0">;</span>
+        year <span class="sy0">=</span> yr<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> month<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> month<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> day<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> day<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> year<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> year<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> month <span class="sy0">+</span> <span class="st0">&quot;/&quot;</span> <span class="sy0">+</span> day <span class="sy0">+</span> <span class="st0">&quot;/&quot;</span> <span class="sy0">+</span> year<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> write<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+4<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java">&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> TemperatureT <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>args<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        Temperature c <span class="sy0">=</span> <span class="kw1">new</span> Temperature<span class="br0">&#40;</span><span class="nu0">0</span>, <span class="st0">&quot;C&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        c.<span class="me1">toFahrenheit</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        c.<span class="me1">raise</span><span class="br0">&#40;</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>c.<span class="me1">scale</span> <span class="sy0">+</span> c.<span class="me1">degrees</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+<span class="kw1">class</span> Temperature<span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> scale<span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> degrees<span class="sy0">;</span>
+    <span class="kw1">public</span> Temperature<span class="br0">&#40;</span><span class="kw4">double</span> temp, <span class="kw3">String</span> scale2<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        scale <span class="sy0">=</span> scale2<span class="sy0">;</span>
+        degrees <span class="sy0">=</span> temp<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> toFahrenheit<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        degrees <span class="sy0">=</span> degrees <span class="sy0">*</span> <span class="nu0">1.8</span> <span class="sy0">+</span> <span class="nu0">32</span><span class="sy0">;</span>
+        scale <span class="sy0">=</span> <span class="st0">&quot;F&quot;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> raise<span class="br0">&#40;</span><span class="kw4">double</span> amt<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        degrees <span class="sy0">+=</span> amt<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,400 @@
+<html>
+  <head>
+    <title>IBCS1-WD - November 1st, Tom's work on link list implementation using Csharp and Java</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>November 1st, Tom's work on link list implementation using Csharp and Java<small> #TomsProjects </small></h1><h1 id="toc0"><a name="Notice how similar they are……"></a>Notice how similar they are……</h1>
+ <br />
+<h1 id="toc1"><a name="Java"></a><span style="color: #ff0000;">Java</span></h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">java.util.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">class</span> Rand
+<span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">Random</span> rng <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Random</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw3">Object</span><span class="br0">&#91;</span><span class="br0">&#93;</span> range<span class="br0">&#40;</span><span class="kw4">int</span> lower, <span class="kw4">int</span> upper, <span class="kw4">int</span> step<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="kw4">double</span> length <span class="sy0">=</span> <span class="br0">&#40;</span>upper <span class="sy0">-</span> lower<span class="br0">&#41;</span> <span class="sy0">/</span> step<span class="sy0">;</span>
+        <span class="kw4">int</span> len <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span>length<span class="sy0">;</span>
+        <span class="kw3">Object</span><span class="br0">&#91;</span><span class="br0">&#93;</span> list <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Object</span><span class="br0">&#91;</span>len<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> counter <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> counter <span class="sy0">&lt;</span> len<span class="sy0">;</span> counter <span class="sy0">+=</span> step<span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            list<span class="br0">&#91;</span>counter<span class="br0">&#93;</span> <span class="sy0">=</span> lower <span class="sy0">+</span> step<span class="sy0">*</span>counter<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> list<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> shuffle<span class="br0">&#40;</span><span class="kw3">Object</span><span class="br0">&#91;</span><span class="br0">&#93;</span> list<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="kw4">int</span> length <span class="sy0">=</span> list.<span class="me1">length</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> length<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            <span class="kw4">int</span> index1 <span class="sy0">=</span> rng.<span class="me1">nextInt</span><span class="br0">&#40;</span>length<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw4">int</span> index2 <span class="sy0">=</span> rng.<span class="me1">nextInt</span><span class="br0">&#40;</span>length<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw3">Object</span> temp <span class="sy0">=</span> list<span class="br0">&#91;</span>index1<span class="br0">&#93;</span><span class="sy0">;</span>
+            list<span class="br0">&#91;</span>index1<span class="br0">&#93;</span> <span class="sy0">=</span> list<span class="br0">&#91;</span>index2<span class="br0">&#93;</span><span class="sy0">;</span>
+            list<span class="br0">&#91;</span>index2<span class="br0">&#93;</span> <span class="sy0">=</span> temp<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">class</span> Node
+<span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw3">Object</span> cargo<span class="sy0">;</span>
+    <span class="kw1">public</span> Node next<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Node<span class="br0">&#40;</span><span class="kw3">Object</span> cg, Node nt<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        cargo <span class="sy0">=</span> cg<span class="sy0">;</span>
+        next <span class="sy0">=</span> nt<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">class</span> Linked_List
+<span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> length <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="kw1">public</span> Node head<span class="sy0">;</span>
+    <span class="kw1">public</span> Node last<span class="sy0">;</span>
+&nbsp;
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">boolean</span> is_empty<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="kw1">return</span> length <span class="sy0">==</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> append<span class="br0">&#40;</span><span class="kw3">Object</span> cargo<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>length <span class="sy0">&lt;=</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            Node new_head <span class="sy0">=</span> <span class="kw1">new</span> Node<span class="br0">&#40;</span>cargo, <span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            head <span class="sy0">=</span> new_head<span class="sy0">;</span>
+            last <span class="sy0">=</span> new_head<span class="sy0">;</span>
+            length <span class="sy0">+=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span>
+        <span class="br0">&#123;</span>
+            Node new_last <span class="sy0">=</span> <span class="kw1">new</span> Node<span class="br0">&#40;</span>cargo, <span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            last.<span class="me1">next</span> <span class="sy0">=</span> new_last<span class="sy0">;</span>
+            last <span class="sy0">=</span> new_last<span class="sy0">;</span>
+            length <span class="sy0">+=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> remove<span class="br0">&#40;</span><span class="kw3">Object</span> target<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>length <span class="sy0">&gt;</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            Node item <span class="sy0">=</span> head<span class="sy0">;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>target.<span class="me1">equals</span><span class="br0">&#40;</span>head.<span class="me1">cargo</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                head <span class="sy0">=</span> head.<span class="me1">next</span><span class="sy0">;</span>
+                length <span class="sy0">-=</span> <span class="nu0">1</span><span class="sy0">;</span>
+                <span class="co1">// %s will be substituted by following string arguments, and %n represents a new line</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">printf</span><span class="br0">&#40;</span><span class="st0">&quot;Successfully remove '%s' from the list%n&quot;</span>, target.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">while</span> <span class="br0">&#40;</span>item.<span class="me1">next</span> <span class="sy0">!=</span> <span class="kw2">null</span><span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>target.<span class="me1">equals</span><span class="br0">&#40;</span>item.<span class="me1">next</span>.<span class="me1">cargo</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                <span class="br0">&#123;</span>
+                    item.<span class="me1">next</span> <span class="sy0">=</span> item.<span class="me1">next</span>.<span class="me1">next</span><span class="sy0">;</span>
+                    length <span class="sy0">-=</span> <span class="nu0">1</span><span class="sy0">;</span>
+                    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">printf</span><span class="br0">&#40;</span><span class="st0">&quot;Successfully remove '%s' from the list%n&quot;</span>, target.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw1">break</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                item <span class="sy0">=</span> item.<span class="me1">next</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> print_all<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span><span class="st0">&quot;[&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>length <span class="sy0">&gt;</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            Node item <span class="sy0">=</span> head<span class="sy0">;</span>
+            <span class="kw1">while</span> <span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>item.<span class="me1">next</span> <span class="sy0">==</span> <span class="kw2">null</span><span class="br0">&#41;</span>
+                <span class="br0">&#123;</span>
+                    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">printf</span><span class="br0">&#40;</span><span class="st0">&quot;%s&quot;</span>, item.<span class="me1">cargo</span>.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw1">break</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">printf</span><span class="br0">&#40;</span><span class="st0">&quot;%s, &quot;</span>, item.<span class="me1">cargo</span>.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                item <span class="sy0">=</span> item.<span class="me1">next</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;]&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Test_Java <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">static</span> <span class="kw4">void</span> print_list<span class="br0">&#40;</span><span class="kw3">Object</span><span class="br0">&#91;</span><span class="br0">&#93;</span> list<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span><span class="st0">&quot;[&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>list<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">==</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;]&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">return</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span>list<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> list.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>list<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">==</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;]&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">return</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">printf</span><span class="br0">&#40;</span><span class="st0">&quot;, %s&quot;</span>, list<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;]&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+         Linked_List linklist1 <span class="sy0">=</span> <span class="kw1">new</span> Linked_List<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+         Rand rand1 <span class="sy0">=</span> <span class="kw1">new</span> Rand<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+         <span class="kw3">Object</span><span class="br0">&#91;</span><span class="br0">&#93;</span> list <span class="sy0">=</span> rand1.<span class="me1">range</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">10</span>, <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+         <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Object</span> i <span class="sy0">:</span> list<span class="br0">&#41;</span>
+         <span class="br0">&#123;</span>
+             linklist1.<span class="me1">append</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="sy0">;</span>
+         <span class="br0">&#125;</span>
+         linklist1.<span class="me1">print_all</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+         rand1.<span class="me1">shuffle</span><span class="br0">&#40;</span>list<span class="br0">&#41;</span><span class="sy0">;</span>
+         print_list<span class="br0">&#40;</span>list<span class="br0">&#41;</span><span class="sy0">;</span>
+         <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Object</span> i <span class="sy0">:</span> list<span class="br0">&#41;</span>
+         <span class="br0">&#123;</span>
+             linklist1.<span class="me1">remove</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="sy0">;</span>
+         <span class="br0">&#125;</span>
+         linklist1.<span class="me1">print_all</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+<h1 id="toc2"><a name="C#"></a><span style="color: #ff0000;">C#</span></h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.csharp  {font-family:monospace;}
+.csharp .imp {font-weight: bold; color: red;}
+.csharp .kw1 {color: #0600FF; font-weight: bold;}
+.csharp .kw2 {color: #FF8000; font-weight: bold;}
+.csharp .kw3 {color: #008000;}
+.csharp .kw4 {color: #6666cc; font-weight: bold;}
+.csharp .kw5 {color: #000000;}
+.csharp .co1 {color: #008080; font-style: italic;}
+.csharp .co2 {color: #008080;}
+.csharp .co3 {color: #008080;}
+.csharp .coMULTI {color: #008080; font-style: italic;}
+.csharp .es0 {color: #008080; font-weight: bold;}
+.csharp .es_h {color: #008080; font-weight: bold;}
+.csharp .br0 {color: #008000;}
+.csharp .sy0 {color: #008000;}
+.csharp .st0 {color: #666666;}
+.csharp .st_h {color: #666666;}
+.csharp .nu0 {color: #FF0000;}
+.csharp .me1 {color: #0000FF;}
+.csharp .me2 {color: #0000FF;}
+.csharp span.xtra { display:block; }
+
+-->
+</style><pre class="csharp"><span class="kw1">using</span> <span class="co3">System</span><span class="sy0">;</span>
+<span class="kw1">using</span> <span class="co3">System.Collections.Generic</span><span class="sy0">;</span>
+<span class="kw1">using</span> <span class="co3">System.Linq</span><span class="sy0">;</span>
+<span class="kw1">using</span> <span class="co3">System.Text</span><span class="sy0">;</span>
+<span class="kw1">using</span> <span class="co3">System.Threading.Tasks</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">namespace</span> Abstract_Data_Structures
+<span class="br0">&#123;</span>
+    <span class="kw4">class</span> Program
+    <span class="br0">&#123;</span>
+&nbsp;
+        <span class="kw4">class</span> Rand
+        <span class="br0">&#123;</span>
+            <span class="kw1">private</span> Random rng <span class="sy0">=</span> <span class="kw3">new</span> Random<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">public</span> <span class="kw4">object</span><span class="br0">&#91;</span><span class="br0">&#93;</span> range<span class="br0">&#40;</span><span class="kw4">int</span> lower, <span class="kw4">int</span> upper, <span class="kw4">int</span> step<span class="sy0">=</span><span class="nu0">1</span><span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                <span class="kw4">double</span> length <span class="sy0">=</span> <span class="br0">&#40;</span>upper <span class="sy0">-</span> lower<span class="br0">&#41;</span> <span class="sy0">/</span> step<span class="sy0">;</span>
+                <span class="kw4">int</span> len <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span>length<span class="sy0">;</span>
+                <span class="kw4">object</span><span class="br0">&#91;</span><span class="br0">&#93;</span> list <span class="sy0">=</span> <span class="kw3">new</span> <span class="kw4">object</span><span class="br0">&#91;</span>len<span class="br0">&#93;</span><span class="sy0">;</span>
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> counter <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> counter <span class="sy0">&lt;</span> len<span class="sy0">;</span> counter <span class="sy0">+=</span> step<span class="br0">&#41;</span>
+                <span class="br0">&#123;</span>
+                    list<span class="br0">&#91;</span>counter<span class="br0">&#93;</span> <span class="sy0">=</span> lower <span class="sy0">+</span> step<span class="sy0">*</span>counter<span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">return</span> list<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+&nbsp;
+            <span class="kw1">public</span> <span class="kw4">void</span> shuffle<span class="br0">&#40;</span><span class="kw4">object</span><span class="br0">&#91;</span><span class="br0">&#93;</span> list<span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                <span class="kw4">int</span> length <span class="sy0">=</span> list<span class="sy0">.</span><span class="me1">Length</span><span class="sy0">;</span>
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> length<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+                <span class="br0">&#123;</span>
+                    <span class="kw4">int</span> index1 <span class="sy0">=</span> rng<span class="sy0">.</span><span class="me1">Next</span><span class="br0">&#40;</span><span class="nu0">0</span>, length<span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw4">int</span> index2 <span class="sy0">=</span> rng<span class="sy0">.</span><span class="me1">Next</span><span class="br0">&#40;</span><span class="nu0">0</span>, length<span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw4">object</span> temp <span class="sy0">=</span> list<span class="br0">&#91;</span>index1<span class="br0">&#93;</span><span class="sy0">;</span>
+                    list<span class="br0">&#91;</span>index1<span class="br0">&#93;</span> <span class="sy0">=</span> list<span class="br0">&#91;</span>index2<span class="br0">&#93;</span><span class="sy0">;</span>
+                    list<span class="br0">&#91;</span>index2<span class="br0">&#93;</span> <span class="sy0">=</span> temp<span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="kw4">class</span> Node
+        <span class="br0">&#123;</span>
+            <span class="kw1">public</span> <span class="kw4">object</span> cargo<span class="sy0">;</span>
+            <span class="kw1">public</span> Node next<span class="sy0">;</span>
+&nbsp;
+            <span class="kw1">public</span> Node<span class="br0">&#40;</span><span class="kw4">object</span> cg, Node nt<span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                cargo <span class="sy0">=</span> cg<span class="sy0">;</span>
+                next <span class="sy0">=</span> nt<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw4">class</span> Linked_List
+        <span class="br0">&#123;</span>
+            <span class="kw1">private</span> <span class="kw4">int</span> length <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+            <span class="kw1">public</span> Node head<span class="sy0">;</span>
+            <span class="kw1">public</span> Node last<span class="sy0">;</span>
+&nbsp;
+            <span class="kw1">public</span> <span class="kw4">bool</span> is_empty<span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                <span class="kw1">return</span> length <span class="sy0">==</span> <span class="nu0">0</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+&nbsp;
+            <span class="kw1">public</span> <span class="kw4">void</span> append<span class="br0">&#40;</span><span class="kw4">object</span> cargo<span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>length <span class="sy0">&lt;=</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+                <span class="br0">&#123;</span>
+                    Node new_head <span class="sy0">=</span> <span class="kw3">new</span> Node<span class="br0">&#40;</span>cargo, <span class="kw1">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    head <span class="sy0">=</span> new_head<span class="sy0">;</span>
+                    last <span class="sy0">=</span> new_head<span class="sy0">;</span>
+                    length <span class="sy0">+=</span> <span class="nu0">1</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span>
+                <span class="br0">&#123;</span>
+                    Node new_last <span class="sy0">=</span> <span class="kw3">new</span> Node<span class="br0">&#40;</span>cargo, <span class="kw1">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    last<span class="sy0">.</span><span class="me1">next</span> <span class="sy0">=</span> new_last<span class="sy0">;</span>
+                    last <span class="sy0">=</span> new_last<span class="sy0">;</span>
+                    length <span class="sy0">+=</span> <span class="nu0">1</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+&nbsp;
+            <span class="kw1">public</span> <span class="kw4">void</span> remove<span class="br0">&#40;</span><span class="kw4">object</span> target<span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>length <span class="sy0">&gt;</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+                <span class="br0">&#123;</span>
+                    Node item <span class="sy0">=</span> head<span class="sy0">;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>target <span class="sy0">==</span> head<span class="sy0">.</span><span class="me1">cargo</span><span class="br0">&#41;</span>
+                    <span class="br0">&#123;</span>
+                        head <span class="sy0">=</span> head<span class="sy0">.</span><span class="me1">next</span><span class="sy0">;</span>
+                        length <span class="sy0">-=</span> <span class="nu0">1</span><span class="sy0">;</span>
+                        Console<span class="sy0">.</span><span class="me1">WriteLine</span><span class="br0">&#40;</span><span class="st0">&quot;Successfully remove '{0}' from the list&quot;</span>, target<span class="sy0">.</span><span class="me1">ToString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">while</span> <span class="br0">&#40;</span>item<span class="sy0">.</span><span class="me1">next</span> <span class="sy0">!=</span> <span class="kw1">null</span><span class="br0">&#41;</span>
+                    <span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>target <span class="sy0">==</span> item<span class="sy0">.</span><span class="me1">next</span><span class="sy0">.</span><span class="me1">cargo</span><span class="br0">&#41;</span>
+                        <span class="br0">&#123;</span>
+                            item<span class="sy0">.</span><span class="me1">next</span> <span class="sy0">=</span> item<span class="sy0">.</span><span class="me1">next</span><span class="sy0">.</span><span class="me1">next</span><span class="sy0">;</span>
+                            length <span class="sy0">-=</span> <span class="nu0">1</span><span class="sy0">;</span>
+                            Console<span class="sy0">.</span><span class="me1">WriteLine</span><span class="br0">&#40;</span><span class="st0">&quot;Successfully remove '{0}' from the list&quot;</span>, target<span class="sy0">.</span><span class="me1">ToString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            <span class="kw1">break</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                        item <span class="sy0">=</span> item<span class="sy0">.</span><span class="me1">next</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+&nbsp;
+            <span class="kw1">public</span> <span class="kw4">void</span> print_all<span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                Console<span class="sy0">.</span><span class="me1">Write</span><span class="br0">&#40;</span><span class="st0">&quot;[&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>length <span class="sy0">&gt;</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+                <span class="br0">&#123;</span>
+                    Node item <span class="sy0">=</span> head<span class="sy0">;</span>
+&nbsp;
+                    <span class="kw1">while</span> <span class="br0">&#40;</span><span class="kw1">true</span><span class="br0">&#41;</span>
+                    <span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>item<span class="sy0">.</span><span class="me1">next</span> <span class="sy0">==</span> <span class="kw1">null</span><span class="br0">&#41;</span>
+                        <span class="br0">&#123;</span>
+                            Console<span class="sy0">.</span><span class="me1">Write</span><span class="br0">&#40;</span><span class="st0">&quot;{0}&quot;</span>, item<span class="sy0">.</span><span class="me1">cargo</span><span class="sy0">.</span><span class="me1">ToString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            <span class="kw1">break</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                        Console<span class="sy0">.</span><span class="me1">Write</span><span class="br0">&#40;</span><span class="st0">&quot;{0}, &quot;</span>, item<span class="sy0">.</span><span class="me1">cargo</span><span class="sy0">.</span><span class="me1">ToString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        item <span class="sy0">=</span> item<span class="sy0">.</span><span class="me1">next</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+                Console<span class="sy0">.</span><span class="me1">WriteLine</span><span class="br0">&#40;</span><span class="st0">&quot;]&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+&nbsp;
+        <span class="kw1">static</span> <span class="kw4">void</span> print_list<span class="br0">&#40;</span><span class="kw4">object</span><span class="br0">&#91;</span><span class="br0">&#93;</span> list<span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            Console<span class="sy0">.</span><span class="me1">Write</span><span class="br0">&#40;</span><span class="st0">&quot;[&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> list<span class="sy0">.</span><span class="me1">Length</span> <span class="sy0">-</span> <span class="nu0">1</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                Console<span class="sy0">.</span><span class="me1">Write</span><span class="br0">&#40;</span><span class="st0">&quot;{0}, &quot;</span>, list<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">.</span><span class="me1">ToString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            Console<span class="sy0">.</span><span class="me1">Write</span><span class="br0">&#40;</span><span class="st0">&quot;{0}]&quot;</span>, list<span class="br0">&#91;</span>list<span class="sy0">.</span><span class="me1">Length</span> <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">.</span><span class="me1">ToString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            Console<span class="sy0">.</span><span class="me1">WriteLine</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">static</span> <span class="kw4">void</span> Main<span class="br0">&#40;</span><span class="kw4">string</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            Linked_List linklist1 <span class="sy0">=</span> <span class="kw3">new</span> Linked_List<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            Rand rand1 <span class="sy0">=</span> <span class="kw3">new</span> Rand<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw4">object</span><span class="br0">&#91;</span><span class="br0">&#93;</span> list <span class="sy0">=</span> rand1<span class="sy0">.</span><span class="me1">range</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">10</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">foreach</span> <span class="br0">&#40;</span><span class="kw4">object</span> i <span class="kw1">in</span> list<span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                linklist1<span class="sy0">.</span><span class="me1">append</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            linklist1<span class="sy0">.</span><span class="me1">print_all</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            rand1<span class="sy0">.</span><span class="me1">shuffle</span><span class="br0">&#40;</span>list<span class="br0">&#41;</span><span class="sy0">;</span>
+            print_list<span class="br0">&#40;</span>list<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">foreach</span> <span class="br0">&#40;</span><span class="kw4">object</span> i <span class="kw1">in</span> list<span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                linklist1<span class="sy0">.</span><span class="me1">remove</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            linklist1<span class="sy0">.</span><span class="me1">print_all</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            Console<span class="sy0">.</span><span class="me1">ReadKey</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

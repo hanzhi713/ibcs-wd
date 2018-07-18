@@ -1,0 +1,122 @@
+<html>
+  <head>
+    <title>IBCS1-WD - September 26th 2016 by Michael Qian</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>September 26th 2016 by Michael Qian<small> #Log </small></h1><h1 id="toc0"><a name="Lesson Log on Class:"></a><span style="color: #323333; font-family: Arial;">Lesson Log on Class:</span></h1>
+ <br />
+<span style="color: #323333; font-family: Arial;">REMEMBER THIS MY FELLOW CLASSMATES</span><br />
+<br />
+<span style="color: #323333; font-family: Arial;">DO NOT EVER WRITE ON WIKI</span><br />
+<br />
+<span style="color: #323333; font-family: Arial;">WITHOUT BACKUP STORAGE</span><br />
+<br />
+<span style="color: #323333; font-family: Arial;">ALRIGHT?</span><br />
+<br />
+<span style="color: #323333; font-family: Arial;">y'all bear this in mind OK?</span><br />
+<br />
+<br />
+<br />
+<span style="color: #323333; font-family: Arial;">Now let’s get started 😄</span><br />
+<br />
+<h2 id="toc1"><a name="Lesson Log on Class:-First of all let’s review three evolutionary thresholds of programming language:"></a><span style="color: #323333; font-family: Arial;">First of all let’s review three evolutionary thresholds of programming language:</span></h2>
+ <br />
+<span style="font-family: Times; font-size: 12px;">Low-level programming:machine code</span><br />
+<br />
+<span style="font-family: Times; font-size: 12px;">procedural paradigm </span><br />
+<br />
+<span style="font-family: Times; font-size: 12px;">object oriented paradigm</span><br />
+<br />
+<span style="font-family: Times; font-size: 12px;">(The programming mode we previously used in python was called procedural programming, )</span><br />
+<br />
+<h3 id="toc2"><a name="Lesson Log on Class:-First of all let’s review three evolutionary thresholds of programming language:-However, in object oriented paradigm:"></a><span style="font-family: Times; font-size: 12px;"><u><strong>However, in object oriented paradigm:</strong></u></span></h3>
+ <br />
+<span style="font-family: Times; font-size: 12px;">Object-oriented programming (OOP) is a <span style="color: #000000;"><a class="wiki_link_ext" href="https://en.wikipedia.org/wiki/Programming_paradigm" rel="nofollow">programming paradigm</a></span> based on the concept of &quot;<span style="color: #000000;"><a class="wiki_link_ext" href="https://en.wikipedia.org/wiki/Object_(computer_science)" rel="nofollow">objects</a></span>&quot;, which may contain <span style="color: #000000;"><a class="wiki_link_ext" href="https://en.wikipedia.org/wiki/Data" rel="nofollow">data</a></span>, in the form of <span style="color: #000000;"><a class="wiki_link_ext" href="https://en.wikipedia.org/wiki/Field_(computer_science)" rel="nofollow">fields</a></span>, often known as attributes; and code, in the form of procedures, often known as <span style="color: #000000;"><a class="wiki_link_ext" href="https://en.wikipedia.org/wiki/Method_(computer_science)" rel="nofollow">methods</a></span>. A feature of objects is that an object's procedures can access and often modify the data fields of the object with which they are associated (objects have a notion of &quot;<span style="color: #000000;"><a class="wiki_link_ext" href="https://en.wikipedia.org/wiki/This_(computer_programming)" rel="nofollow">this</a></span>&quot; or &quot;self&quot;). In OOP, computer programs are designed by making them out of objects that interact with one another.[1][2] There is significant diversity of OOP languages, but the most popular ones are <span style="color: #000000;"><a class="wiki_link_ext" href="https://en.wikipedia.org/wiki/Class-based_programming" rel="nofollow">class-based</a></span>, meaning that objects are <span style="color: #000000;"><a class="wiki_link_ext" href="https://en.wikipedia.org/wiki/Instance_(computer_science)" rel="nofollow">instances</a></span> of <span style="color: #000000;"><a class="wiki_link_ext" href="https://en.wikipedia.org/wiki/Class_(computer_science)" rel="nofollow">classes</a></span>, which typically also determine their <span style="color: #000000;"><a class="wiki_link_ext" href="https://en.wikipedia.org/wiki/Data_type" rel="nofollow">type</a></span>.(adapted from Wikipedia)</span><br />
+<br />
+<h2 id="toc3"><a name="Lesson Log on Class:-Let’s understand this by specific program:"></a><span style="font-family: Times; font-size: 12px;">Let’s understand this by specific program:</span></h2>
+ <br />
+<span style="background-color: #f8f8f8; color: #01701f; font-family: Consolas;"><strong>class</strong><span style="color: #0d84b5;"><strong>Point</strong></span><span style="color: #000000;">:</span></span><br />
+<span style="background-color: #f8f8f8; color: #4070a0; font-family: Consolas;"><em>&quot;&quot;&quot; Point class represents and manipulates x,y coords. &quot;&quot;&quot;</em></span><br />
+<br />
+<span style="background-color: #f8f8f8; font-family: Consolas;"><span style="color: #01701f;"><strong>def</strong></span><span style="color: #06287e;"><u>init</u></span>(<span style="color: #01701f;">self</span>):</span><br />
+<span style="background-color: #f8f8f8; color: #4070a0; font-family: Consolas;"><em>&quot;&quot;&quot; Create a new point at the origin &quot;&quot;&quot;</em></span><br />
+<span style="background-color: #f8f8f8; font-family: Consolas;"><span style="color: #01701f;">self</span><span style="color: #666666;">.</span>x <span style="color: #666666;">=</span><span style="color: #208050;">0</span></span><br />
+<span style="background-color: #f8f8f8; font-family: Consolas;"><span style="color: #01701f;">self</span><span style="color: #666666;">.</span>y <span style="color: #666666;">=</span> 0</span><br />
+<br />
+<span style="font-family: Times; font-size: 12px;">👆 This is how we define a class</span><br />
+<span style="font-family: Times; font-size: 12px;">There are few points:</span><br />
+<br />
+<span style="font-family: Times; font-size: 12px;">You may find it pretty confusing that what does “self” mean ？</span><br />
+<br />
+<span style="font-family: Times; font-size: 12px;">It will be representing the object which user provides, </span><br />
+<span style="font-family: Times; font-size: 12px;">as in </span><br />
+<br />
+<span style="background-color: #f8f8f8; font-family: Consolas;">p <span style="color: #666666;">=</span> Point()</span><br />
+<br />
+<span style="font-family: Times; font-size: 12px;">here for each self represents p</span><br />
+<br />
+<span style="font-family: Times; font-size: 12px;">Then if we want to know x, y coordinates of the point what do we do?</span><br />
+<br />
+<span style="font-family: Times; font-size: 12px;">p.x p.y</span><br />
+<br />
+<span style="font-family: Times; font-size: 12px;">is the correct way to get them</span><br />
+<br />
+<span style="font-family: Times; font-size: 12px;">x,y here is what we call attributes, it is one of the special characteristics of the class you defined</span><br />
+<br />
+<h1 id="toc4"><a name="The other special characteristic is the method, let’s see an example"></a><span style="font-family: Times; font-size: 12px;">The other special characteristic is the method, let’s see an example</span></h1>
+ <br />
+<span style="font-family: Times; font-size: 12px;">in the class point:</span><br />
+<br />
+<span style="background-color: #f8f8f8; color: #06287e; font-family: Consolas;"><span style="color: #01701f;"><strong>def</strong></span>distance_from_origin<span style="color: #000000;">(</span><span style="color: #01701f;">self</span><span style="color: #000000;">):</span></span><br />
+<span style="background-color: #f8f8f8; color: #4070a0; font-family: Consolas;"><em>&quot;&quot;&quot; Compute my distance from the origin &quot;&quot;&quot;</em></span><br />
+<span style="background-color: #f8f8f8; font-family: Consolas;"><span style="color: #01701f;"><strong>return</strong></span> ((<span style="color: #01701f;">self</span><span style="color: #666666;">.</span>x <strong><span style="color: #208050;">2</span>) <span style="color: #666666;">+</span> (<span style="color: #01701f;">self</span><span style="color: #666666;">.</span>y</strong> </span><span style="color: #208050;">2</span>)) <strong><span style="color: #208050;">0.5</span></strong><br />
+<br />
+<strong><span style="font-family: Times; font-size: 12px;">This is the function in which you can compute the distance from the point to the origin</span></strong><br />
+<br />
+<strong><span style="font-family: Times; font-size: 12px;">But can we add parameter to the function in class?</span></strong><br />
+<br />
+<strong><span style="font-family: Times; font-size: 12px;">the following function illustrate this</span></strong><br />
+def<strong><span style="color: #06287e;">halfway</span>(<span style="color: #01701f;">self</span>, target):</strong><br />
+<strong><span style="background-color: #f8f8f8; color: #4070a0; font-family: Consolas;"><em>&quot;&quot;&quot; Return the halfway point between myself and the target &quot;&quot;&quot;</em></span></strong><br />
+<strong><span style="background-color: #f8f8f8; font-family: Consolas;"> mx <span style="color: #666666;">=</span> (<span style="color: #01701f;">self</span><span style="color: #666666;">.</span>x <span style="color: #666666;">+</span> target<span style="color: #666666;">.</span>x)<span style="color: #666666;">/</span><span style="color: #208050;">2</span></span></strong><br />
+<strong><span style="background-color: #f8f8f8; font-family: Consolas;"> my <span style="color: #666666;">=</span> (<span style="color: #01701f;">self</span><span style="color: #666666;">.</span>y <span style="color: #666666;">+</span> target<span style="color: #666666;">.</span>y)<span style="color: #666666;">/</span><span style="color: #208050;">2</span></span></strong><br />
+return <strong>Point(mx, my)</strong><br />
+<br />
+<strong><span style="font-family: Times; font-size: 12px;">This is the function which we calculate the mid-point and we return a point value which includes two coordinates value after computation. It is worth noting that if we want our output to be Point(mx, my), we must alter our original definition in the class to be </span></strong><br />
+<br />
+classPoint<strong><span style="color: #000000;">:</span></strong><br />
+<strong><span style="background-color: #f8f8f8; color: #4070a0; font-family: Consolas;"><em>&quot;&quot;&quot; Point class represents and manipulates x,y coords. &quot;&quot;&quot;</em></span></strong><br />
+<br />
+def**<span style="color: #06287e;"><u>init</u></span><span style="color: #000000;">(</span>self,x,y<span style="color: #000000;">):</span><br />
+<span style="background-color: #f8f8f8; color: #4070a0; font-family: Consolas;"><em>&quot;&quot;&quot; Create a new point at the origin &quot;&quot;&quot;</em></span><br />
+<span style="background-color: #f8f8f8; font-family: Consolas;"><span style="color: #01701f;">self</span><span style="color: #666666;">.</span>x <span style="color: #666666;">=</span><span style="color: #208050;">x</span></span><br />
+<span style="background-color: #f8f8f8; font-family: Consolas;"><span style="color: #01701f;">self</span><span style="color: #666666;">.</span>y <span style="color: #666666;">=</span><span style="color: #208050;">y</span></span><br />
+<br />
+<span style="font-family: Times; font-size: 12px;">OK we know how to define a function in the class</span><br />
+<br />
+<span style="font-family: Times; font-size: 12px;">How do we call it then</span><br />
+<br />
+<span style="font-family: Times; font-size: 12px;">For these function which returns a point value things may get a little tricky</span><br />
+<br />
+<span style="font-family: Times; font-size: 12px;">you have to write like</span><br />
+<br />
+<span style="background-color: #f8f8f8; font-family: Consolas;">q <span style="color: #666666;">=</span> Point(<span style="color: #208050;">5</span>, <span style="color: #208050;">12</span>)</span><br />
+<span style="background-color: #f8f8f8; font-family: Consolas;">p <span style="color: #666666;">=</span> Point(<span style="color: #208050;">3</span>, <span style="color: #208050;">4</span>)</span><br />
+<span style="background-color: #f8f8f8; font-family: Consolas;">r <span style="color: #666666;">=</span> p<span style="color: #666666;">.</span>halfway(q)</span><br />
+<br />
+<br />
+<span style="background-color: #f8f8f8; font-family: Consolas;">should give you this result</span><br />
+<span style="background-color: #f8f8f8; color: #303030; font-family: Consolas;">(4.0, 8.0)</span><br />
+<br />
+<br />
+<span style="background-color: #f8f8f8; color: #303030; font-family: Consolas;">Homework:</span><br />
+<br />
+<span style="background-color: #f8f8f8; color: #303030; font-family: Consolas;">calculate 3D point using class point</span></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

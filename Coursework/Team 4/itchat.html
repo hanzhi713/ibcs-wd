@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <title>IBCS1-WD - itchat</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> requests
+<span class="kw1">import</span> itchat
+<span class="kw1">import</span> itchat<span class="sy0">,</span> <span class="kw3">time</span>
+<span class="kw1">from</span> itchat.<span class="me1">content</span> <span class="kw1">import</span> *
+&nbsp;
+KEY <span class="sy0">=</span> <span class="st0">'1107d5601866433dba9599fac1bc0083'</span>
+&nbsp;
+<span class="kw1">def</span> get_response<span class="br0">&#40;</span>msg<span class="br0">&#41;</span>:
+&nbsp;
+    apiUrl <span class="sy0">=</span> <span class="st0">'http://www.tuling123.com/openapi/api'</span>
+    data <span class="sy0">=</span> <span class="br0">&#123;</span>
+        <span class="st0">'key'</span>    : KEY<span class="sy0">,</span>
+        <span class="st0">'info'</span>   : msg<span class="sy0">,</span>
+        <span class="st0">'userid'</span> : <span class="st0">'wechat-robot'</span><span class="sy0">,</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">try</span>:
+        r <span class="sy0">=</span> requests.<span class="me1">post</span><span class="br0">&#40;</span>apiUrl<span class="sy0">,</span> data<span class="sy0">=</span>data<span class="br0">&#41;</span>.<span class="me1">json</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> r.<span class="me1">get</span><span class="br0">&#40;</span><span class="st0">'code'</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">100000</span>:
+            <span class="kw1">return</span> r.<span class="me1">get</span><span class="br0">&#40;</span><span class="st0">'text'</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> r.<span class="me1">get</span><span class="br0">&#40;</span><span class="st0">'code'</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">200000</span>:
+            <span class="kw1">return</span> r.<span class="me1">get</span><span class="br0">&#40;</span><span class="st0">'url'</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> r.<span class="me1">get</span><span class="br0">&#40;</span><span class="st0">'code'</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">302000</span>:
+            <span class="kw1">return</span> r.<span class="me1">get</span><span class="br0">&#40;</span><span class="st0">'detailurl'</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> r.<span class="me1">get</span><span class="br0">&#40;</span><span class="st0">'code'</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">308000</span>:
+            <span class="kw1">return</span> r.<span class="me1">get</span><span class="br0">&#40;</span><span class="st0">'detailurl'</span><span class="br0">&#41;</span>
+    <span class="kw1">except</span>:
+        <span class="kw1">return</span>
+&nbsp;
+<span class="sy0">@</span>itchat.<span class="me1">msg_register</span><span class="br0">&#40;</span>itchat.<span class="me1">content</span>.<span class="me1">TEXT</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> tuling_reply<span class="br0">&#40;</span>msg<span class="br0">&#41;</span>:
+    defaultReply <span class="sy0">=</span> <span class="st0">'I received: '</span> + msg<span class="br0">&#91;</span><span class="st0">'Text'</span><span class="br0">&#93;</span>
+    reply <span class="sy0">=</span> get_response<span class="br0">&#40;</span>msg<span class="br0">&#91;</span><span class="st0">'Text'</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> reply <span class="kw1">or</span> defaultReply
+&nbsp;
+&nbsp;
+<span class="sy0">@</span>itchat.<span class="me1">msg_register</span><span class="br0">&#40;</span><span class="br0">&#91;</span>PICTURE<span class="sy0">,</span> RECORDING<span class="sy0">,</span> ATTACHMENT<span class="sy0">,</span> VIDEO<span class="br0">&#93;</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> download_files<span class="br0">&#40;</span>msg<span class="br0">&#41;</span>:
+    msg.<span class="me1">download</span><span class="br0">&#40;</span>msg.<span class="me1">fileName</span><span class="br0">&#41;</span>
+    typeSymbol <span class="sy0">=</span> <span class="br0">&#123;</span>
+        PICTURE: <span class="st0">'img'</span><span class="sy0">,</span>
+        VIDEO: <span class="st0">'vid'</span><span class="sy0">,</span> <span class="br0">&#125;</span>.<span class="me1">get</span><span class="br0">&#40;</span>msg.<span class="kw2">type</span><span class="sy0">,</span> <span class="st0">'fil'</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> <span class="st0">'@%s@%s'</span> % <span class="br0">&#40;</span>typeSymbol<span class="sy0">,</span> msg.<span class="me1">fileName</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="sy0">@</span>itchat.<span class="me1">msg_register</span><span class="br0">&#40;</span>FRIENDS<span class="br0">&#41;</span>
+<span class="kw1">def</span> add_friend<span class="br0">&#40;</span>msg<span class="br0">&#41;</span>:
+    msg.<span class="kw3">user</span>.<span class="me1">verify</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    msg.<span class="kw3">user</span>.<span class="me1">send</span><span class="br0">&#40;</span><span class="st0">'Nice to meet you!'</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+itchat.<span class="me1">auto_login</span><span class="br0">&#40;</span>hotReload<span class="sy0">=</span><span class="kw2">True</span><span class="br0">&#41;</span>
+itchat.<span class="me1">run</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;</pre>
+
+<img src="files/171130-000123.png" alt="171130-000123.png" title="171130-000123.png" style="height: 688px; width: 392px;" /><br />
+<img src="files/171130-000125.png" alt="171130-000125.png" title="171130-000125.png" style="height: 688px; width: 392px;" /></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

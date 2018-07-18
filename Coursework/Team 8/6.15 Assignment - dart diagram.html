@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 6.15 Assignment - dart diagram</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+<span class="kw1">import</span> <span class="kw3">random</span>
+<span class="co1">#set up</span>
+wn<span class="sy0">=</span><span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">'white'</span><span class="br0">&#41;</span>
+ch<span class="sy0">=</span><span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+ch.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+ch.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+ch.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+ch.<span class="me1">setpos</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span>-<span class="nu0">100</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#draw target</span>
+x<span class="sy0">=</span><span class="nu0">18</span>
+<span class="kw1">while</span> x<span class="sy0">&gt;=</span><span class="nu0">0</span>:
+    <span class="kw1">if</span> x % <span class="nu0">4</span> <span class="sy0">==</span> <span class="nu0">2</span>:
+        ch.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'green'</span><span class="br0">&#41;</span>
+        ch.<span class="me1">begin_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        ch.<span class="me1">circle</span><span class="br0">&#40;</span>x*<span class="nu0">10</span>+<span class="nu0">2.5</span><span class="br0">&#41;</span>
+        ch.<span class="me1">end_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">else</span>:
+        ch.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'red'</span><span class="br0">&#41;</span>
+        ch.<span class="me1">begin_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        ch.<span class="me1">circle</span><span class="br0">&#40;</span>x*<span class="nu0">10</span>+<span class="nu0">2.5</span><span class="br0">&#41;</span>
+        ch.<span class="me1">end_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    x<span class="sy0">=</span>x-<span class="nu0">2</span>
+    ch.<span class="me1">write</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span><span class="nu0">10</span>-<span class="br0">&#40;</span>x/<span class="nu0">2</span>+<span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span>align<span class="sy0">=</span><span class="st0">&quot;center&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span> <span class="nu0">8</span><span class="sy0">,</span> <span class="st0">&quot;normal&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    ch.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    ch.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">20</span><span class="br0">&#41;</span>
+    ch.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#input</span>
+a<span class="sy0">=</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">'Are you precise?'</span><span class="br0">&#41;</span>
+b<span class="sy0">=</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">'Are you accurate?'</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#judge</span>
+<span class="kw1">if</span> a<span class="sy0">==</span><span class="st0">&quot;yes&quot;</span> <span class="kw1">and</span> b<span class="sy0">==</span><span class="st0">&quot;yes&quot;</span>:
+    <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span>:
+        ang<span class="sy0">=</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">360</span><span class="br0">&#41;</span>
+        dist<span class="sy0">=</span><span class="kw3">random</span>.<span class="me1">normalvariate</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">10</span><span class="br0">&#41;</span>
+        ch.<span class="me1">right</span><span class="br0">&#40;</span>ang<span class="br0">&#41;</span>
+        ch.<span class="me1">fd</span><span class="br0">&#40;</span>dist<span class="br0">&#41;</span>
+        ch.<span class="me1">write</span><span class="br0">&#40;</span><span class="st0">'x'</span><span class="sy0">,</span>align<span class="sy0">=</span><span class="st0">&quot;center&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span> <span class="nu0">18</span><span class="sy0">,</span> <span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        ch.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">180</span>-ang<span class="br0">&#41;</span>
+        ch.<span class="me1">back</span><span class="br0">&#40;</span>dist<span class="br0">&#41;</span>
+<span class="kw1">elif</span> a<span class="sy0">==</span><span class="st0">&quot;yes&quot;</span> <span class="kw1">and</span> b<span class="sy0">==</span><span class="st0">&quot;no&quot;</span>:
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'precise but not accurate'</span><span class="br0">&#41;</span>
+    ang<span class="sy0">=</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">360</span><span class="br0">&#41;</span>
+    dist<span class="sy0">=</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">100</span><span class="sy0">,</span><span class="nu0">180</span><span class="br0">&#41;</span>
+    ch.<span class="me1">right</span><span class="br0">&#40;</span>ang<span class="br0">&#41;</span>
+    ch.<span class="me1">fd</span><span class="br0">&#40;</span>dist<span class="br0">&#41;</span>
+    ch.<span class="me1">write</span><span class="br0">&#40;</span><span class="st0">'x'</span><span class="sy0">,</span>align<span class="sy0">=</span><span class="st0">&quot;center&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span> <span class="nu0">18</span><span class="sy0">,</span> <span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">19</span><span class="br0">&#41;</span>:
+        ang<span class="sy0">=</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">360</span><span class="br0">&#41;</span>
+        dist<span class="sy0">=</span><span class="kw3">random</span>.<span class="me1">normalvariate</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">10</span><span class="br0">&#41;</span>
+        ch.<span class="me1">right</span><span class="br0">&#40;</span>ang<span class="br0">&#41;</span>
+        ch.<span class="me1">fd</span><span class="br0">&#40;</span>dist<span class="br0">&#41;</span>
+        ch.<span class="me1">write</span><span class="br0">&#40;</span><span class="st0">'x'</span><span class="sy0">,</span>align<span class="sy0">=</span><span class="st0">&quot;center&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span> <span class="nu0">18</span><span class="sy0">,</span> <span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        ch.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">180</span>-ang<span class="br0">&#41;</span>
+        ch.<span class="me1">back</span><span class="br0">&#40;</span>dist<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">elif</span> a<span class="sy0">==</span><span class="st0">&quot;no&quot;</span> <span class="kw1">and</span> b<span class="sy0">==</span><span class="st0">&quot;no&quot;</span>:
+    ang<span class="sy0">=</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">360</span><span class="br0">&#41;</span>
+    dist<span class="sy0">=</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">100</span><span class="sy0">,</span><span class="nu0">180</span><span class="br0">&#41;</span>
+    ch.<span class="me1">right</span><span class="br0">&#40;</span>ang<span class="br0">&#41;</span>
+    ch.<span class="me1">fd</span><span class="br0">&#40;</span>dist<span class="br0">&#41;</span>
+    ch.<span class="me1">write</span><span class="br0">&#40;</span><span class="st0">'x'</span><span class="sy0">,</span>align<span class="sy0">=</span><span class="st0">&quot;center&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span> <span class="nu0">18</span><span class="sy0">,</span> <span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">19</span><span class="br0">&#41;</span>:
+        ang<span class="sy0">=</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">360</span><span class="br0">&#41;</span>
+        dist<span class="sy0">=</span><span class="kw3">random</span>.<span class="me1">normalvariate</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">100</span><span class="br0">&#41;</span>
+        ch.<span class="me1">right</span><span class="br0">&#40;</span>ang<span class="br0">&#41;</span>
+        ch.<span class="me1">fd</span><span class="br0">&#40;</span>dist<span class="br0">&#41;</span>
+        ch.<span class="me1">write</span><span class="br0">&#40;</span><span class="st0">'x'</span><span class="sy0">,</span>align<span class="sy0">=</span><span class="st0">&quot;center&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span> <span class="nu0">18</span><span class="sy0">,</span> <span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        ch.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">180</span>-ang<span class="br0">&#41;</span>
+        ch.<span class="me1">back</span><span class="br0">&#40;</span>dist<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">elif</span> a<span class="sy0">==</span><span class="st0">&quot;no&quot;</span> <span class="kw1">and</span> b<span class="sy0">==</span><span class="st0">&quot;yes&quot;</span>:
+    <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span>:
+        ang<span class="sy0">=</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">360</span><span class="br0">&#41;</span>
+        dist<span class="sy0">=</span><span class="kw3">random</span>.<span class="me1">normalvariate</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">100</span><span class="br0">&#41;</span>
+        ch.<span class="me1">right</span><span class="br0">&#40;</span>ang<span class="br0">&#41;</span>
+        ch.<span class="me1">fd</span><span class="br0">&#40;</span>dist<span class="br0">&#41;</span>
+        ch.<span class="me1">write</span><span class="br0">&#40;</span><span class="st0">'x'</span><span class="sy0">,</span>align<span class="sy0">=</span><span class="st0">&quot;center&quot;</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span> <span class="nu0">18</span><span class="sy0">,</span> <span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        ch.<span class="me1">setpos</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">100</span><span class="br0">&#41;</span>
+<span class="kw1">else</span>:
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'Just yes or no!'</span><span class="br0">&#41;</span>
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

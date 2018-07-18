@@ -1,0 +1,442 @@
+<html>
+  <head>
+    <title>IBCS1-WD - HW(7-22)chapter10</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+&nbsp;
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;I AM A FOOL&quot;</span><span class="br0">&#41;</span>
+t <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+t.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+t.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+t.<span class="me1">shape</span><span class="br0">&#40;</span><span class="st0">&quot;turtle&quot;</span><span class="br0">&#41;</span>
+t.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">&quot;orange&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> w<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    t.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">25</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> s<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    t.<span class="me1">forward</span><span class="br0">&#40;</span>-<span class="nu0">25</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> a<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    t.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">30</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> d<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    t.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">30</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> q<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    wn.<span class="me1">bye</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> r<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    t.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">&quot;red&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> g<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    t.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">&quot;green&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> b<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    t.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">&quot;blue&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>w<span class="sy0">,</span> <span class="st0">&quot;w&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>s<span class="sy0">,</span> <span class="st0">&quot;s&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>a<span class="sy0">,</span> <span class="st0">&quot;a&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>d<span class="sy0">,</span> <span class="st0">&quot;d&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>q<span class="sy0">,</span> <span class="st0">&quot;q&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>r<span class="sy0">,</span> <span class="st0">&quot;r&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>g<span class="sy0">,</span> <span class="st0">&quot;g&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>b<span class="sy0">,</span> <span class="st0">&quot;b&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">listen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+&nbsp;
+<span class="kw3">turtle</span>.<span class="me1">setup</span><span class="br0">&#40;</span><span class="nu0">400</span><span class="sy0">,</span><span class="nu0">500</span><span class="br0">&#41;</span>                <span class="co1"># Determine the window size</span>
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>                 <span class="co1"># Get a reference to the window</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Handling keypresses!&quot;</span><span class="br0">&#41;</span>     <span class="co1"># Change the window title</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>             <span class="co1"># Set the background color</span>
+tess <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="co1"># Create our favorite turtle</span>
+t <span class="sy0">=</span> <span class="nu0">1</span>
+<span class="co1"># The next four functions are our &quot;event handlers&quot;.</span>
+<span class="kw1">def</span> h1<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+   tess.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">30</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> h2<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+   tess.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">45</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> h3<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+   tess.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">45</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> h4<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    wn.<span class="me1">bye</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="co1"># Close down the turtle window</span>
+<span class="kw1">def</span> add<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="kw1">global</span> t
+    <span class="kw1">print</span><span class="br0">&#40;</span>t<span class="br0">&#41;</span>
+    <span class="kw1">if</span> t <span class="sy0">&lt;</span><span class="nu0">20</span>:
+        t <span class="sy0">=</span> t + <span class="nu0">1</span>
+        tess.<span class="me1">pensize</span><span class="br0">&#40;</span>t<span class="br0">&#41;</span>
+<span class="kw1">def</span> minus<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="kw1">global</span> t
+    <span class="kw1">print</span><span class="br0">&#40;</span>t<span class="br0">&#41;</span>
+    <span class="kw1">if</span> t <span class="sy0">&gt;</span> <span class="nu0">1</span>:
+        t <span class="sy0">=</span> t - <span class="nu0">1</span>
+        tess.<span class="me1">pensize</span><span class="br0">&#40;</span>t<span class="br0">&#41;</span>
+<span class="co1"># These lines &quot;wire up&quot; keypresses to the handlers we've defined.</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>h1<span class="sy0">,</span> <span class="st0">&quot;Up&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>h2<span class="sy0">,</span> <span class="st0">&quot;Left&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>h3<span class="sy0">,</span> <span class="st0">&quot;Right&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>h4<span class="sy0">,</span> <span class="st0">&quot;q&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>add<span class="sy0">,</span> <span class="st0">&quot;+&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>minus<span class="sy0">,</span> <span class="st0">&quot;-&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1"># Now we need to tell the window to start listening for events,</span>
+<span class="co1"># If any of the keys that we're monitoring is pressed, its</span>
+<span class="co1"># handler will be called.</span>
+wn.<span class="me1">listen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+&nbsp;
+<span class="kw3">turtle</span>.<span class="me1">setup</span><span class="br0">&#40;</span><span class="nu0">400</span><span class="sy0">,</span><span class="nu0">500</span><span class="br0">&#41;</span>                <span class="co1"># Determine the window size</span>
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>                 <span class="co1"># Get a reference to the window</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Handling keypresses!&quot;</span><span class="br0">&#41;</span>     <span class="co1"># Change the window title</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>             <span class="co1"># Set the background color</span>
+tess <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>               <span class="co1"># Create our favorite turtle</span>
+&nbsp;
+<span class="co1"># The next four functions are our &quot;event handlers&quot;.</span>
+<span class="kw1">def</span> h1<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+   tess.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">30</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> h2<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+   tess.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">45</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> h3<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+   tess.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">45</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> h4<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    wn.<span class="me1">bye</span><span class="br0">&#40;</span><span class="br0">&#41;</span>                        <span class="co1"># Close down the turtle window</span>
+<span class="kw1">def</span> h<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    tess.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> s<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    tess.<span class="me1">showturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="co1"># These lines &quot;wire up&quot; keypresses to the handlers we've defined.</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>h1<span class="sy0">,</span> <span class="st0">&quot;Up&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>h2<span class="sy0">,</span> <span class="st0">&quot;Left&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>h3<span class="sy0">,</span> <span class="st0">&quot;Right&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>h4<span class="sy0">,</span> <span class="st0">&quot;q&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>h<span class="sy0">,</span> <span class="st0">&quot;h&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">onkey</span><span class="br0">&#40;</span>s<span class="sy0">,</span> <span class="st0">&quot;s&quot;</span><span class="br0">&#41;</span>
+<span class="co1"># Now we need to tell the window to start listening for events,</span>
+<span class="co1"># If any of the keys that we're monitoring is pressed, its</span>
+<span class="co1"># handler will be called.</span>
+wn.<span class="me1">listen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>           <span class="co1"># Tess becomes a traffic light.</span>
+&nbsp;
+<span class="kw3">turtle</span>.<span class="me1">setup</span><span class="br0">&#40;</span><span class="nu0">400</span><span class="sy0">,</span><span class="nu0">500</span><span class="br0">&#41;</span>
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Tess becomes a traffic light!&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>
+tess <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> draw_housing<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Draw a nice housing to hold the traffic lights &quot;&quot;&quot;</span>
+    tess.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+    tess.<span class="me1">color</span><span class="br0">&#40;</span><span class="st0">&quot;black&quot;</span><span class="sy0">,</span> <span class="st0">&quot;darkgrey&quot;</span><span class="br0">&#41;</span>
+    tess.<span class="me1">begin_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    tess.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">80</span><span class="br0">&#41;</span>
+    tess.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    tess.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">200</span><span class="br0">&#41;</span>
+    tess.<span class="me1">circle</span><span class="br0">&#40;</span><span class="nu0">40</span><span class="sy0">,</span> <span class="nu0">180</span><span class="br0">&#41;</span>
+    tess.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">200</span><span class="br0">&#41;</span>
+    tess.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    tess.<span class="me1">end_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+draw_housing<span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+tess.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="co1"># Position tess onto the place where the green light should be</span>
+tess.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">40</span><span class="br0">&#41;</span>
+tess.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+tess.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">50</span><span class="br0">&#41;</span>
+<span class="co1"># Turn tess into a big green circle</span>
+tess.<span class="me1">shape</span><span class="br0">&#40;</span><span class="st0">&quot;circle&quot;</span><span class="br0">&#41;</span>
+tess.<span class="me1">shapesize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+tess.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">&quot;green&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1"># A traffic light is a kind of state machine with three states,</span>
+<span class="co1"># Green, Orange, Red.  We number these states  0, 1, 2</span>
+<span class="co1"># When the machine changes state, we change tess' position and</span>
+<span class="co1"># her fillcolor.</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+&nbsp;
+<span class="kw3">turtle</span>.<span class="me1">setup</span><span class="br0">&#40;</span><span class="nu0">400</span><span class="sy0">,</span><span class="nu0">500</span><span class="br0">&#41;</span>
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Tess becomes a traffic light!&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>
+tess <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+tess.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+red <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+green <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+orange <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> draw_housing<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Draw a nice housing to hold the traffic lights &quot;&quot;&quot;</span>
+    tess.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+    tess.<span class="me1">color</span><span class="br0">&#40;</span><span class="st0">&quot;black&quot;</span><span class="sy0">,</span> <span class="st0">&quot;darkgrey&quot;</span><span class="br0">&#41;</span>
+    tess.<span class="me1">begin_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    tess.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">80</span><span class="br0">&#41;</span>
+    tess.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    tess.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">200</span><span class="br0">&#41;</span>
+    tess.<span class="me1">circle</span><span class="br0">&#40;</span><span class="nu0">40</span><span class="sy0">,</span> <span class="nu0">180</span><span class="br0">&#41;</span>
+    tess.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">200</span><span class="br0">&#41;</span>
+    tess.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    tess.<span class="me1">end_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+draw_housing<span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> draw_turtles<span class="br0">&#40;</span>t<span class="sy0">,</span> l<span class="sy0">,</span> c<span class="br0">&#41;</span>:
+    t.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    t.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    t.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">40</span><span class="br0">&#41;</span>
+    t.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    t.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">50</span><span class="br0">&#41;</span>
+    t.<span class="me1">shape</span><span class="br0">&#40;</span><span class="st0">&quot;circle&quot;</span><span class="br0">&#41;</span>
+    t.<span class="me1">shapesize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+    t.<span class="me1">fillcolor</span><span class="br0">&#40;</span>c<span class="br0">&#41;</span>
+    t.<span class="me1">forward</span><span class="br0">&#40;</span>l<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;</pre>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<strong>4&amp;5</strong><br />
+<br />
+<br />
+<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+&nbsp;
+&nbsp;
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Tess becomes a traffic light!&quot;</span><span class="br0">&#41;</span>
+wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">&quot;lightgreen&quot;</span><span class="br0">&#41;</span>
+tess <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+tess.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+red <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+green <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+orange <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> draw_housing<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Draw a nice housing to hold the traffic lights &quot;&quot;&quot;</span>
+    tess.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+    tess.<span class="me1">color</span><span class="br0">&#40;</span><span class="st0">&quot;black&quot;</span><span class="sy0">,</span> <span class="st0">&quot;blue&quot;</span><span class="br0">&#41;</span>
+    tess.<span class="me1">begin_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    tess.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">80</span><span class="br0">&#41;</span>
+    tess.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    tess.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">200</span><span class="br0">&#41;</span>
+    tess.<span class="me1">circle</span><span class="br0">&#40;</span><span class="nu0">40</span><span class="sy0">,</span> <span class="nu0">180</span><span class="br0">&#41;</span>
+    tess.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">200</span><span class="br0">&#41;</span>
+    tess.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    tess.<span class="me1">end_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+draw_housing<span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> turtles<span class="br0">&#40;</span>t<span class="sy0">,</span> r<span class="sy0">,</span> c<span class="br0">&#41;</span>:
+&nbsp;
+    t.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    t.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">40</span><span class="br0">&#41;</span>
+    t.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    t.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">50</span><span class="br0">&#41;</span>
+    t.<span class="me1">shape</span><span class="br0">&#40;</span><span class="st0">&quot;circle&quot;</span><span class="br0">&#41;</span>
+    t.<span class="me1">shapesize</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+    t.<span class="me1">forward</span><span class="br0">&#40;</span>r<span class="br0">&#41;</span>
+    t.<span class="me1">fillcolor</span><span class="br0">&#40;</span>c<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+turtles<span class="br0">&#40;</span>green<span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="st0">&quot;blue&quot;</span><span class="br0">&#41;</span>
+turtles<span class="br0">&#40;</span>orange<span class="sy0">,</span> <span class="nu0">70</span><span class="sy0">,</span> <span class="st0">&quot;blue&quot;</span><span class="br0">&#41;</span>
+turtles<span class="br0">&#40;</span>red<span class="sy0">,</span> <span class="nu0">140</span><span class="sy0">,</span> <span class="st0">&quot;blue&quot;</span><span class="br0">&#41;</span>
+state_num <span class="sy0">=</span> <span class="nu0">0</span>
+wn.<span class="me1">listen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> advance_state_machine<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="kw1">global</span> state_num
+    <span class="kw1">if</span> state_num <span class="sy0">==</span> <span class="nu0">0</span>:
+        orange.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'orange'</span><span class="br0">&#41;</span>
+        green.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'blue'</span><span class="br0">&#41;</span>
+        wn.<span class="me1">ontimer</span><span class="br0">&#40;</span>advance_state_machine<span class="sy0">,</span> <span class="st0">'1000'</span><span class="br0">&#41;</span>
+        state_num <span class="sy0">=</span> <span class="nu0">1</span>
+    <span class="kw1">elif</span> state_num <span class="sy0">==</span> <span class="nu0">1</span>:
+        red.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'red'</span><span class="br0">&#41;</span>
+        orange.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'blue'</span><span class="br0">&#41;</span>
+        wn.<span class="me1">ontimer</span><span class="br0">&#40;</span>advance_state_machine<span class="sy0">,</span> <span class="st0">'2000'</span><span class="br0">&#41;</span>
+        state_num <span class="sy0">=</span> <span class="nu0">2</span>
+    <span class="kw1">elif</span> state_num <span class="sy0">==</span> <span class="nu0">2</span>:
+        green.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'green'</span><span class="br0">&#41;</span>
+        red.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'blue'</span><span class="br0">&#41;</span>
+        wn.<span class="me1">ontimer</span><span class="br0">&#40;</span>advance_state_machine<span class="sy0">,</span> <span class="st0">'3000'</span><span class="br0">&#41;</span>
+        state_num <span class="sy0">=</span> <span class="nu0">3</span>
+    <span class="kw1">else</span>:
+        orange.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'orange'</span><span class="br0">&#41;</span>
+        wn.<span class="me1">ontimer</span><span class="br0">&#40;</span>advance_state_machine<span class="sy0">,</span> <span class="st0">'1000'</span><span class="br0">&#41;</span>
+        state_num <span class="sy0">=</span> <span class="nu0">0</span>
+wn.<span class="me1">ontimer</span><span class="br0">&#40;</span>advance_state_machine<span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+green.<span class="me1">showturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

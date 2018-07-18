@@ -1,0 +1,167 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 20150105</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> Station <span class="br0">&#123;</span>
+    <span class="kw3">String</span> <span class="kw3">Line</span><span class="sy0">;</span>
+    <span class="kw4">int</span> Zone<span class="sy0">;</span>
+    <span class="kw3">String</span> <span class="kw3">Name</span><span class="sy0">;</span>
+    <span class="kw1">public</span> Station<span class="br0">&#40;</span><span class="kw3">String</span> line, <span class="kw4">int</span> zone, <span class="kw3">String</span> name<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">Line</span> <span class="sy0">=</span> line<span class="sy0">;</span>
+        Zone <span class="sy0">=</span> zone<span class="sy0">;</span>
+        <span class="kw3">Name</span> <span class="sy0">=</span> name<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getLine<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw3">Line</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> getZone<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> Zone<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getName<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw3">Name</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> fares <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> x<span class="sy0">;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> fares <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">12</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">12</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        Station<span class="br0">&#91;</span><span class="br0">&#93;</span> STATION<span class="sy0">=</span><span class="kw1">new</span> Station<span class="br0">&#91;</span><span class="nu0">12</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        STATION<span class="br0">&#91;</span><span class="nu0">8</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;L1&quot;</span>, <span class="nu0">4</span>, <span class="st0">&quot;Pizarra&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        STATION<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;L1&quot;</span>, <span class="nu0">3</span>, <span class="st0">&quot;Alora&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        STATION<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;L1&quot;</span>, <span class="nu0">3</span>, <span class="st0">&quot;Alamo&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        STATION<span class="br0">&#91;</span><span class="nu0">7</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;L1&quot;</span>, <span class="nu0">2</span>, <span class="st0">&quot;Lomas&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        STATION<span class="br0">&#91;</span><span class="nu0">11</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;L1&quot;</span>, <span class="nu0">1</span>, <span class="st0">&quot;Torrox&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        STATION<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;L1&quot;</span>, <span class="nu0">0</span>, <span class="st0">&quot;Centro&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        STATION<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;L2&quot;</span>, <span class="nu0">1</span>, <span class="st0">&quot;Col&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        STATION<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;L2&quot;</span>, <span class="nu0">2</span>, <span class="st0">&quot;David&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        STATION<span class="br0">&#91;</span><span class="nu0">9</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;L2&quot;</span>, <span class="nu0">3</span>, <span class="st0">&quot;Plaza Mayor&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        STATION<span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;L2&quot;</span>, <span class="nu0">3</span>, <span class="st0">&quot;Lima&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        STATION<span class="br0">&#91;</span><span class="nu0">10</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;L2&quot;</span>, <span class="nu0">4</span>, <span class="st0">&quot;Prados&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        STATION<span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;L2&quot;</span>, <span class="nu0">4</span>, <span class="st0">&quot;Fuengirola&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span><span class="nu0">11</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            Station station1 <span class="sy0">=</span> STATION<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="kw4">int</span> az <span class="sy0">=</span> station1.<span class="me1">getZone</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw3">String</span> al <span class="sy0">=</span> station1.<span class="me1">getLine</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> o <span class="sy0">=</span> i<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>o<span class="sy0">&lt;</span><span class="nu0">12</span><span class="sy0">;</span>o<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                Station station2 <span class="sy0">=</span> STATION<span class="br0">&#91;</span>o<span class="br0">&#93;</span><span class="sy0">;</span>
+                <span class="kw4">int</span> bz <span class="sy0">=</span> station2.<span class="me1">getZone</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw3">String</span> bl <span class="sy0">=</span> station2.<span class="me1">getLine</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">if</span><span class="br0">&#40;</span>al<span class="sy0">==</span>bl <span class="sy0">||</span>station1.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="st0">&quot;Centro&quot;</span> <span class="sy0">||</span>station2.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="st0">&quot;Centro&quot;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    x <span class="sy0">=</span> az<span class="sy0">-</span>bz<span class="sy0">;</span>
+                    <span class="kw1">if</span><span class="br0">&#40;</span>x<span class="sy0">&lt;</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        x <span class="sy0">=</span> <span class="sy0">-</span>x<span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                    x <span class="sy0">=</span> x<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+&nbsp;
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span><span class="br0">&#123;</span>
+                    x <span class="sy0">=</span> az <span class="sy0">+</span>bz<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                fares<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>o<span class="br0">&#93;</span><span class="sy0">=</span>x<span class="sy0">;</span>
+                fares<span class="br0">&#91;</span>o<span class="br0">&#93;</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">=</span>x<span class="sy0">;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+            fares<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+&nbsp;
+&nbsp;
+        <span class="br0">&#125;</span>
+        fares<span class="br0">&#91;</span><span class="nu0">11</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">11</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+&nbsp;
+&nbsp;
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> a <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>a<span class="sy0">&lt;</span><span class="nu0">12</span><span class="sy0">;</span>a<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> b <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>b<span class="sy0">&lt;</span><span class="nu0">12</span><span class="sy0">;</span>b<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span>fares<span class="br0">&#91;</span>a<span class="br0">&#93;</span><span class="br0">&#91;</span>b<span class="br0">&#93;</span><span class="sy0">+</span><span class="st0">&quot;  &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot; &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+<br />
+<span style="color: #000000; font-family: Times; font-size: 12px;">constructor</span><br />
+<span style="color: #000000; font-family: Times; font-size: 12px;">constructor create the object of class. By it, we can write many method in the class which is convenience.</span><br />
+<br />
+<span style="color: #000000; font-family: Times; font-size: 12px;">encapsulation </span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">encapsulation is combining an object’s data and methods into a single unit .</span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">It can protect the data from accidental changes and outside class</span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">inheritance</span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">Inheritance defines a relationship between objects that share characteristics.</span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">it can save work by let subclass to inherit the method in superclass.</span><br />
+<br />
+<span style="color: #000000; font-family: Times; font-size: 12px;">polymorphism</span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">polymorphism means method that has been overridden in at least one subclass</span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">It makes we can make it the select the correct method at run time</span><br />
+<span style="color: #000000; font-family: Times; font-size: 12px;">composition</span><br />
+<br />
+<span style="color: #000000; font-family: Times; font-size: 12px;">composition is a has method. It makes one of them contains an instance variable whose type is the other class.</span></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

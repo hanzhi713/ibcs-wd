@@ -1,0 +1,296 @@
+<html>
+  <head>
+    <title>IBCS1-WD - September 23rd 2016 by Doris Xue</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>September 23rd 2016 by Doris Xue<small> #Log </small></h1><span style="display: block; font-size: 14px;"><br />
+<h1 id="toc0"><a name="list algorithm"></a><span style="font-size: 24px;">list algorithm</span></h1>
+ <br />
+<hr />
+<h2 id="toc1"><a name="list algorithm-1. test function (the initial code can be found in chapter 6)"></a><a name="list algorithm-1. test function (the initial code can be found in chapter 6)"></a><span style="font-size: 20px;">1. test function (the initial code can be found in chapter 6)</span></h2>
+ <span style="color: #000000; font-family: 'Lucida Grande','Lucida Sans Unicode',Geneva,Verdana,sans-serif; font-size: 14px;">It takes a boolean argument and will either print a message telling us that the test passed, or it will print a message to inform us that the test failed. The first line of the body (after the function’s docstring) magically determines the line number in the script where the call was made from. This allows us to print the line number of the test, which will help when we want to identify which tests have passed or failed. (chapter 6)</span></span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">sys</span>
+&nbsp;
+<span class="kw1">def</span> <span class="kw3">test</span><span class="br0">&#40;</span>did_pass<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot;  Print the result of a test.  &quot;&quot;&quot;</span>
+    linenum <span class="sy0">=</span> <span class="kw3">sys</span>._getframe<span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span>.<span class="me1">f_lineno</span>   <span class="co1"># Get the caller's line number.</span>
+    <span class="kw1">if</span> did_pass:
+        msg <span class="sy0">=</span> <span class="st0">&quot;Test at line {0} ok.&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>linenum<span class="br0">&#41;</span>
+    <span class="kw1">else</span>:
+        msg <span class="sy0">=</span> <span class="br0">&#40;</span><span class="st0">&quot;Test at line {0} FAILED.&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>linenum<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>msg<span class="br0">&#41;</span></pre>
+
+<span style="display: block; font-size: 14px;"><span style="color: #000000; font-family: 'Lucida Grande','Lucida Sans Unicode',Geneva,Verdana,sans-serif; font-size: 14px; line-height: 0px; overflow: hidden;"><br />
+</span><br />
+linenum is line number of the carring function. If did_pass successfully carried, it will return the line number where expect result equal to function's result.<br />
+<br />
+<hr />
+<h2 id="toc2"><a name="list algorithm-2. linear search"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;"><a name="list algorithm-2. linear search"></a><span style="font-size: 20px;">2. linear search</span></span></h2>
+ <br />
+<span style="font-size: 14px;">linear search a method for finding a target value within a list. It sequentially checks each element of the list for the target value until a match is found or until all the elements have been searched. </span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> search_linear<span class="br0">&#40;</span>xs<span class="sy0">,</span>target<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>xs<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> xs<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">==</span> target:
+            <span class="kw1">return</span> i
+    <span class="kw1">return</span> -<span class="nu0">1</span></pre>
+
+<span style="font-size: 14px;"><br />
+Linear search runs in at worst linear time and makes at most n comparisons, where n is the length of the list. If each element is equally likely to be searched, then linear search has an average case of n/2 comparisons, but the average case can be affected if the search probabilities for each element vary.<br />
+<ul><li>for ( i , v ) in enumerate(a list): i is the index, v is the value list[index].</li></ul><img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-09-24%20%E4%B8%8B%E5%8D%8810.03.11.png" alt=" 2016-09-24 下午10.03.11.png" title=" 2016-09-24 下午10.03.11.png" style="height: 519px; width: 874px;" /></span><br />
+</span><br />
+==<br />
+<hr />
+==<br />
+<h2 id="toc3"><a name="list algorithm-3.binary search (sorted list)"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif; font-size: 20px;">3.binary search (sorted list)</span></h2>
+ <span style="font-size: 14px;">binary search is a search logrithm that finds the position of a target value within a sorted list. It compares the target value to the middle element of the array; if they are unequal, the half in which the target cannot lie is eliminated and the search continues on the remaining half until it is successful.</span><br />
+<span style="font-size: 14px;">Binary search runs in at worst logrithmic time, making Ologn comparisons, where n is the number of elements in the array and log is the binary logrithm; and using only constant (O(1)) space.</span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> search_linear<span class="br0">&#40;</span>xs<span class="sy0">,</span>target<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>xs<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> xs<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">==</span> target:
+            <span class="kw1">return</span> i
+    <span class="kw1">return</span> -<span class="nu0">1</span></pre>
+
+<br />
+<br />
+<span style="display: block; text-align: center;"><img src="files/Binary_search_into_array.png" alt="Binary_search_into_array.png" title="Binary_search_into_array.png" /><br />
+</span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> search_binary<span class="br0">&#40;</span>xs<span class="sy0">,</span> target<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Find and return the index of key in sequence xs &quot;&quot;&quot;</span>
+    lb <span class="sy0">=</span> <span class="nu0">0</span>
+    ub <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>xs<span class="br0">&#41;</span>
+    <span class="kw1">while</span> <span class="kw2">True</span>:
+        <span class="kw1">if</span> lb <span class="sy0">==</span> ub:   <span class="co1"># If region of interest (ROI) becomes empty</span>
+           <span class="kw1">return</span> -<span class="nu0">1</span>
+&nbsp;
+        <span class="co1"># Next probe should be in the middle of the ROI</span>
+        mid_index <span class="sy0">=</span> <span class="br0">&#40;</span>lb + ub<span class="br0">&#41;</span> // <span class="nu0">2</span>
+&nbsp;
+        <span class="co1"># Fetch the item at that position</span>
+        item_at_mid <span class="sy0">=</span> xs<span class="br0">&#91;</span>mid_index<span class="br0">&#93;</span>
+&nbsp;
+        <span class="co1"># print(&quot;ROI[{0}:{1}](size={2}), probed='{3}', target='{4}'&quot;</span>
+        <span class="co1">#       .format(lb, ub, ub-lb, item_at_mid, target))</span>
+&nbsp;
+        <span class="co1"># How does the probed item compare to the target?</span>
+        <span class="kw1">if</span> item_at_mid <span class="sy0">==</span> target:
+            <span class="kw1">return</span> mid_index      <span class="co1"># Found it!</span>
+        <span class="kw1">if</span> item_at_mid <span class="sy0">&lt;</span> target:
+            lb <span class="sy0">=</span> mid_index + <span class="nu0">1</span>    <span class="co1"># Use upper half of ROI next time</span>
+        <span class="kw1">else</span>:
+            ub <span class="sy0">=</span> mid_index        <span class="co1"># Use lower half of ROI next time</span></pre>
+
+<br />
+<br />
+<span style="font-size: 14px;">the complexity of binary search is log2N, because binary search only concern the rigion of interset so that every time this region is divided by 2 every time.</span><br />
+<span style="font-size: 14px;">if the len of list is a even numver, the mid should be calculated in either int way or ceil way every time.</span><br />
+<span style="font-size: 14px;">the probe compares mid[xs] and target</span><br />
+<span style="display: block; font-family: 'Helvetica Light'; font-size: 12px; text-align: center;"><br />
+</span><br />
+<hr />
+<span style="font-size: 17px;"><strong>3. if _name_==_‘main’_:</strong></span><br />
+<span style="font-size: 14px;">if we carry a file in cmd, the _&quot;main&quot;_ equal to _name_, because every module has an attribute about _name_, this atribute decided by the function of this module. So, if this file is imported, it is will inculde some extra imfronation but the name of this file. At that time, the _name_ doesn't equal to _&quot;main&quot;_.</span><br />
+<br />
+<span style="font-size: 14px;">So, If _name_ == _&quot;main&quot;_ can heip us test the modules or classes and it can prevent us carring a function or a class two times when we importing modules.</span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1"># file one.py</span>
+<span class="kw1">def</span> func<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;func() in one.py&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;top-level in one.py&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">if</span> __name__ <span class="sy0">==</span> <span class="st0">&quot;__main__&quot;</span>:
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;one.py is being run directly&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">else</span>:
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;one.py is being imported into another module&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1"># file two.py</span>
+<span class="kw1">import</span> one
+&nbsp;
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;top-level in two.py&quot;</span><span class="br0">&#41;</span>
+one.<span class="me1">func</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">if</span> __name__ <span class="sy0">==</span> <span class="st0">&quot;__main__&quot;</span>:
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;two.py is being run directly&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">else</span>:
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;two.py is being imported into another module&quot;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<br />
+<br />
+<hr />
+<h3 id="toc4"><a name="list algorithm-3.binary search (sorted list)-4. merge algorithms"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif; font-size: 17px;">4. merge algorithms</span></h3>
+ <span style="font-size: 14px;">Merging two sorted lists into one can be done in linear time and linear space .The complexity of merge algorithms is logN. </span><br />
+<span style="font-size: 14px;">Some important application of merge algorithms (that means it may present in exam) :</span><br />
+<span style="font-size: 14px;">1.return only other items that are present in both items</span><br />
+<span style="font-size: 14px;">2.bag diff ( remove duplicates)</span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> search_binary<span class="br0">&#40;</span>xs<span class="sy0">,</span> target<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Find and return the index of key in sequence xs &quot;&quot;&quot;</span>
+    lb <span class="sy0">=</span> <span class="nu0">0</span>
+    ub <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>xs<span class="br0">&#41;</span>
+    <span class="kw1">while</span> <span class="kw2">True</span>:
+        <span class="kw1">if</span> lb <span class="sy0">==</span> ub:   <span class="co1"># If region of interest (ROI) becomes empty</span>
+           <span class="kw1">return</span> -<span class="nu0">1</span>
+&nbsp;
+        <span class="co1"># Next probe should be in the middle of the ROI</span>
+        mid_index <span class="sy0">=</span> <span class="br0">&#40;</span>lb + ub<span class="br0">&#41;</span> // <span class="nu0">2</span>
+&nbsp;
+        <span class="co1"># Fetch the item at that position</span>
+        item_at_mid <span class="sy0">=</span> xs<span class="br0">&#91;</span>mid_index<span class="br0">&#93;</span>
+&nbsp;
+        <span class="co1"># print(&quot;ROI[{0}:{1}](size={2}), probed='{3}', target='{4}'&quot;</span>
+        <span class="co1">#       .format(lb, ub, ub-lb, item_at_mid, target))</span>
+&nbsp;
+        <span class="co1"># How does the probed item compare to the target?</span>
+        <span class="kw1">if</span> item_at_mid <span class="sy0">==</span> target:
+            <span class="kw1">return</span> mid_index      <span class="co1"># Found it!</span>
+        <span class="kw1">if</span> item_at_mid <span class="sy0">&lt;</span> target:
+            lb <span class="sy0">=</span> mid_index + <span class="nu0">1</span>    <span class="co1"># Use upper half of ROI next time</span>
+        <span class="kw1">else</span>:
+            ub <span class="sy0">=</span> mid_index        <span class="co1"># Use lower half of ROI next time</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

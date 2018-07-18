@@ -1,0 +1,799 @@
+<html>
+  <head>
+    <title>IBCS1-WD - June 22nd 2016 by Tom</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>June 22nd 2016 by Tom<small> #Log </small></h1><h1 id="toc0"><a name="Agenda for June 22,2016:"></a>Agenda for June 22,2016:</h1>
+ <h3 id="toc1"> </h3>
+ <h2 id="toc2"><a name="Agenda for June 22,2016:--- Get the solution of the 8 following questions in class time:"></a>-- Get the solution of the 8 following questions in class time:</h2>
+ <br />
+<span style="color: #000000; font-family: Arial,sans-serif; font-size: 10.5pt;">Hint: Python list operation:</span><br />
+<span style="color: #000000; font-family: Wingdings; font-size: 10.5pt;">l</span> <span style="color: #000000; font-family: Arial,sans-serif; font-size: 10.5pt;">String to list </span><br />
+<span style="color: #000000; font-family: Wingdings; font-size: 10.5pt;">l</span> <span style="color: #000000; font-family: Arial,sans-serif; font-size: 10.5pt;">List to string </span><br />
+<span style="color: #000000; font-family: Wingdings; font-size: 10.5pt;">l</span> <span style="color: #000000; font-family: Arial,sans-serif; font-size: 10.5pt;">List how to iterate </span><br />
+<br />
+Reference<br />
+<a class="wiki_link_ext" href="http://codingbat.com/doc/python-lists.html" rel="nofollow">http://codingbat.com/doc/python-lists.html</a><br />
+<a class="wiki_link_ext" href="https://docs.python.org/3/library/turtle.html" rel="nofollow">https://docs.python.org/3/library/turtle.html</a><br />
+<a class="wiki_link_ext" href="http://openbookproject.net/thinkcs/python/english3e/conditionals.html" rel="nofollow">http://openbookproject.net/thinkcs/python/english3e/conditionals.html</a><br />
+<br />
+1. Define a function sum() and a function multiply() that sums and multiplies (respectively) all the numbers in a list of numbers. For example, sum([1, 2, 3, 4]) should return 10, and multiply([1, 2, 3, 4]) should return 24.<br />
+<br />
+2. Define a function reverse() that computes the reversal of a string. For example, reverse(&quot;I am testing&quot;) should return the string &quot;gnitset ma I&quot;.<br />
+<br />
+3. Define a function is_palindrome() that recognizes palindromes (i.e. words that look the same written backwards). For example, is_palindrome(&quot;radar&quot;) should return True.<br />
+<br />
+4. Write a function is_member() that takes a value (i.e. a number, string, etc) x and a list of values a, and returns True if x is a member of a, False otherwise. (Note that this is exactly what the in operator does, but for the sake of the exercise you should pretend Python did not have this operator.)<br />
+<br />
+5. Define a function overlapping() that takes two lists and returns True if they have at least one member in common, False otherwise. You may use your is_member() function, or the in operator, but for the sake of the exercise, you should (also) write it using two nested for-loops.<br />
+<br />
+6. Define a function generate_n_chars() that takes an integer n and a character c and returns a string, n characters long, consisting only of c:s. For example, generate_n_chars(5,&quot;x&quot;) should return the string &quot;xxxxx&quot;. (Python is unusual in that you can actually write an expression 5 * &quot;x&quot; that will evaluate to &quot;xxxxx&quot;. For the sake of the exercise you should ignore that the problem can be solved in this manner.)<br />
+<br />
+7. Define a procedure histogram() that takes a list of integers and prints a histogram to the screen. For example,histogram([4, 9, 7]) should print the following:<br />
+<br />
+<br />
+*<br />
+***<br />
+8. Plot a pie graph for a list of numerical inputs, better with fill colors and labels.<br />
+<br />
+<h2 id="toc3"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):"></a>Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):</h2>
+ <br />
+If you have seen these codes and optimized versions, you will probably find that there is no difference between their functionality. However, optimizations do somehow make the codes more understandable and intuitive, or improve the algorithm and thus reduce the workload of computer.**<br />
+<h3 id="toc4"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Q1:"></a>Q1:</h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> Sum<span class="br0">&#40;</span>a<span class="br0">&#41;</span>:
+    summ <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="kw2">len</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        summ +<span class="sy0">=</span> a<span class="br0">&#91;</span>i<span class="br0">&#93;</span>
+    <span class="kw1">return</span> summ
+<span class="kw1">def</span> multiply<span class="br0">&#40;</span>a<span class="br0">&#41;</span>:
+    resultt <span class="sy0">=</span> <span class="nu0">1</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="kw2">len</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        resultt <span class="sy0">=</span> resultt * a<span class="br0">&#91;</span>i<span class="br0">&#93;</span>
+    <span class="kw1">return</span> resultt
+a <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">2</span><span class="sy0">,</span><span class="nu0">3</span><span class="sy0">,</span><span class="nu0">4</span><span class="br0">&#93;</span>
+<span class="kw1">print</span> <span class="br0">&#40;</span>Sum<span class="br0">&#40;</span>a<span class="br0">&#41;</span><span class="sy0">,</span>multiply<span class="br0">&#40;</span>a<span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<h3 id="toc5"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Optimization:"></a><span style="color: #ff0000;">Optimization:</span></h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1"># &lt;&gt;: to be replaced by specific variables</span>
+<span class="co1"># for &lt;loop variable&gt; in &lt;list&gt;:</span>
+<span class="co1"># for each loop &lt;loop variable&gt;  is going to take one element from &lt;list&gt; in the order of left to right.</span>
+<span class="co1"># Q1: Opt Version</span>
+<span class="kw1">def</span> Sum<span class="br0">&#40;</span>a<span class="br0">&#41;</span>:
+    summ <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> a:   <span class="co1"># for i in a:</span>
+        summ +<span class="sy0">=</span> i            <span class="co1">#   summ += i</span>
+    <span class="kw1">return</span> summ
+<span class="kw1">def</span> multiply<span class="br0">&#40;</span>a<span class="br0">&#41;</span>:
+    resultt <span class="sy0">=</span> <span class="nu0">1</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> a:   <span class="co1"># the same as above</span>
+        resultt <span class="sy0">=</span> resultt * i
+    <span class="kw1">return</span> resultt
+&nbsp;
+a <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">2</span><span class="sy0">,</span><span class="nu0">3</span><span class="sy0">,</span><span class="nu0">4</span><span class="br0">&#93;</span>
+<span class="kw1">print</span> <span class="br0">&#40;</span>Sum<span class="br0">&#40;</span>a<span class="br0">&#41;</span><span class="sy0">,</span>multiply<span class="br0">&#40;</span>a<span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<h3 id="toc6"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Q2:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Q2:</span></h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> reverse<span class="br0">&#40;</span>a<span class="br0">&#41;</span>:
+    a <span class="sy0">=</span> a<span class="br0">&#91;</span>::-<span class="nu0">1</span><span class="br0">&#93;</span>
+    <span class="kw1">return</span> a
+a <span class="sy0">=</span> <span class="st0">&quot;Roll out!&quot;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>reverse<span class="br0">&#40;</span>a<span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<h3 id="toc7"> </h3>
+ <h3 id="toc8"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Optimization:"></a><span style="color: #ff0000; font-family: arial,helvetica,sans-serif;">Optimization:</span></h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1"># using a[:,:,-1] is almost no difference to a.reverse....</span>
+<span class="co1"># sample code below:</span>
+<span class="co1">### Q2 : opt Version</span>
+<span class="kw1">def</span> reverse<span class="br0">&#40;</span>a<span class="br0">&#41;</span>:
+    b <span class="sy0">=</span> <span class="st0">''</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> a:
+        b <span class="sy0">=</span> i + b
+    <span class="kw1">return</span> b
+InputStr <span class="sy0">=</span> <span class="st0">&quot;Roll out!&quot;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>reverse<span class="br0">&#40;</span>InputStr<span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<h3 id="toc9"> </h3>
+ <h3 id="toc10"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Q3:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Q3:</span></h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> is_palindrome<span class="br0">&#40;</span>a<span class="br0">&#41;</span>:
+    <span class="kw1">if</span> a<span class="br0">&#91;</span>::-<span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">==</span> a:
+        <span class="kw1">return</span> <span class="kw2">True</span>
+    <span class="kw1">else</span>:
+        <span class="kw1">return</span> <span class="kw2">False</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>is_palindrome<span class="br0">&#40;</span><span class="st0">&quot;dad&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<h3 id="toc11"> </h3>
+ <h3 id="toc12"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Optimization:"></a><span style="color: #ff0000; font-family: arial,helvetica,sans-serif;">Optimization:</span></h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1"># Well, you can use the function you've defined above....</span>
+<span class="co1">### Q3 : opt Version</span>
+<span class="kw1">def</span> is_palindrome<span class="br0">&#40;</span>a<span class="br0">&#41;</span>:
+    <span class="kw1">if</span> a <span class="sy0">==</span> reverse<span class="br0">&#40;</span>a<span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw2">True</span>
+    <span class="kw1">else</span>:
+        <span class="kw1">return</span> <span class="kw2">False</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>is_palindrome<span class="br0">&#40;</span><span class="st0">&quot;dad&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<h3 id="toc13"> </h3>
+ <h3 id="toc14"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Q4:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Q4:</span></h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> is_member<span class="br0">&#40;</span>a<span class="sy0">,</span><span class="kw2">list</span><span class="br0">&#41;</span>:
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="kw2">len</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> <span class="kw2">list</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">==</span> a:
+            tf <span class="sy0">=</span> <span class="kw2">True</span>
+            <span class="kw1">break</span>
+        <span class="kw1">else</span>:
+            tf <span class="sy0">=</span> <span class="kw2">False</span>
+    <span class="kw1">return</span> tf
+<span class="kw2">list</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">2</span><span class="sy0">,</span><span class="nu0">3</span><span class="sy0">,</span><span class="nu0">4</span><span class="sy0">,</span><span class="nu0">5</span><span class="br0">&#93;</span>
+a <span class="sy0">=</span> <span class="nu0">4</span>
+<span class="kw1">print</span> <span class="br0">&#40;</span>is_member<span class="br0">&#40;</span>a<span class="sy0">,</span><span class="kw2">list</span><span class="br0">&#41;</span> <span class="br0">&#41;</span></pre>
+
+<h3 id="toc15"> </h3>
+ <h3 id="toc16"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Optimization:"></a><span style="color: #ff0000; font-family: arial,helvetica,sans-serif;">Optimization:</span></h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1"># again: to visit every element of the list, no need to use index</span>
+<span class="co1"># also you can use a boolean flag variable for return</span>
+<span class="co1"># Also list is not suitable for a variable name!</span>
+<span class="co1">### Q4 : opt Version</span>
+<span class="kw1">def</span> is_member<span class="br0">&#40;</span>x<span class="sy0">,</span>a<span class="br0">&#41;</span>:
+    flag <span class="sy0">=</span> <span class="kw2">False</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> a:
+        <span class="kw1">if</span> x <span class="sy0">==</span> i:
+            flag <span class="sy0">=</span> <span class="kw2">True</span>
+    <span class="kw1">return</span> flag
+&nbsp;
+a <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">2</span><span class="sy0">,</span><span class="nu0">3</span><span class="sy0">,</span><span class="nu0">4</span><span class="sy0">,</span><span class="nu0">5</span><span class="br0">&#93;</span>
+x <span class="sy0">=</span> <span class="nu0">4</span>
+<span class="kw1">print</span> <span class="br0">&#40;</span>is_member<span class="br0">&#40;</span>x<span class="sy0">,</span>a<span class="br0">&#41;</span> <span class="br0">&#41;</span></pre>
+
+<h3 id="toc17"> </h3>
+ <h3 id="toc18"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Q5:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Q5:</span></h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> overlapping<span class="br0">&#40;</span>list1<span class="sy0">,</span>list2<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> i1 <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="kw2">len</span><span class="br0">&#40;</span>list1<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        <span class="kw1">for</span> i2 <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="kw2">len</span><span class="br0">&#40;</span>list2<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+            <span class="kw1">if</span> list1<span class="br0">&#91;</span>i1<span class="br0">&#93;</span> <span class="sy0">==</span> list2<span class="br0">&#91;</span>i2<span class="br0">&#93;</span>:
+                tf <span class="sy0">=</span> <span class="kw2">True</span>
+                <span class="kw1">break</span>
+            <span class="kw1">else</span>:
+                tf <span class="sy0">=</span> <span class="kw2">False</span>
+        <span class="kw1">if</span> tf <span class="sy0">==</span> <span class="kw2">True</span>:
+            <span class="kw1">break</span>
+    <span class="kw1">return</span> tf
+list1 <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">5</span><span class="sy0">,</span><span class="nu0">6</span><span class="sy0">,</span><span class="nu0">7</span><span class="sy0">,</span><span class="nu0">8</span><span class="sy0">,</span><span class="nu0">9</span><span class="br0">&#93;</span>
+list2 <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">3</span><span class="sy0">,</span><span class="nu0">4</span><span class="sy0">,</span><span class="nu0">5</span><span class="sy0">,</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">2</span><span class="br0">&#93;</span>
+<span class="kw1">print</span> <span class="br0">&#40;</span>overlapping<span class="br0">&#40;</span>list1<span class="sy0">,</span>list2<span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<h3 id="toc19"> </h3>
+ <h3 id="toc20"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Optimization:"></a><span style="color: #ff0000; font-family: arial,helvetica,sans-serif;">Optimization:</span></h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1"># guys, you can make full use of your own code!</span>
+<span class="co1">## Q5 -- Opt Version</span>
+<span class="kw1">def</span> is_member<span class="br0">&#40;</span>x<span class="sy0">,</span>a<span class="br0">&#41;</span>:
+    flag <span class="sy0">=</span> <span class="kw2">False</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> a:
+        <span class="kw1">if</span> x <span class="sy0">==</span> i:
+            flag <span class="sy0">=</span> <span class="kw2">True</span>
+    <span class="kw1">return</span> flag
+<span class="kw1">def</span> overlapping<span class="br0">&#40;</span>list1<span class="sy0">,</span>list2<span class="br0">&#41;</span>:
+    flag <span class="sy0">=</span> <span class="kw2">False</span>
+    <span class="kw1">for</span> i1 <span class="kw1">in</span> list1:
+        <span class="kw1">if</span> is_member<span class="br0">&#40;</span>i1<span class="sy0">,</span>list2<span class="br0">&#41;</span>:
+            flag <span class="sy0">=</span> <span class="kw2">True</span>
+    <span class="kw1">return</span> flag
+list1 <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">5</span><span class="sy0">,</span><span class="nu0">6</span><span class="sy0">,</span><span class="nu0">7</span><span class="sy0">,</span><span class="nu0">8</span><span class="sy0">,</span><span class="nu0">9</span><span class="br0">&#93;</span>
+list2 <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">3</span><span class="sy0">,</span><span class="nu0">4</span><span class="sy0">,</span><span class="nu0">5</span><span class="sy0">,</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">2</span><span class="br0">&#93;</span>
+<span class="kw1">print</span> <span class="br0">&#40;</span>overlapping<span class="br0">&#40;</span>list1<span class="sy0">,</span>list2<span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<h3 id="toc21"> </h3>
+ <h3 id="toc22"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Q6:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Q6:</span></h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> generate_n_chars<span class="br0">&#40;</span>number<span class="sy0">,</span>char<span class="br0">&#41;</span>:
+    chars <span class="sy0">=</span> char
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span>number-<span class="nu0">1</span><span class="br0">&#41;</span>:
+        chars +<span class="sy0">=</span> char
+    <span class="kw1">return</span> chars
+number <span class="sy0">=</span> <span class="nu0">99</span>
+char <span class="sy0">=</span> <span class="st0">&quot;6&quot;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>generate_n_chars<span class="br0">&#40;</span>number<span class="sy0">,</span>char<span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<h3 id="toc23"> </h3>
+ <h3 id="toc24"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Optimization:"></a><span style="color: #ff0000; font-family: arial,helvetica,sans-serif;">Optimization:</span></h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1"># The following is a bit more intuitive?</span>
+<span class="co1">## Q6 Opt Version</span>
+<span class="kw1">def</span> generate_n_chars<span class="br0">&#40;</span>number<span class="sy0">,</span>char<span class="br0">&#41;</span>:
+    chars <span class="sy0">=</span> <span class="st0">''</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span> <span class="br0">&#40;</span>number<span class="br0">&#41;</span>:
+        chars +<span class="sy0">=</span> char
+    <span class="kw1">return</span> chars
+number <span class="sy0">=</span> <span class="nu0">99</span>
+char <span class="sy0">=</span> <span class="st0">&quot;6&quot;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>generate_n_chars<span class="br0">&#40;</span>number<span class="sy0">,</span>char<span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<h3 id="toc25"> </h3>
+ <h3 id="toc26"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Q7:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Q7:</span></h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> histogram<span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#41;</span>:
+    <span class="kw1">for</span> x <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="kw2">len</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        bar <span class="sy0">=</span> <span class="st0">&quot;&quot;</span>
+        <span class="kw1">for</span> y <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="kw2">list</span><span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#41;</span>:
+            bar +<span class="sy0">=</span> <span class="st0">&quot;*&quot;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span>bar<span class="br0">&#41;</span>
+<span class="kw2">list</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">5</span><span class="sy0">,</span><span class="nu0">7</span><span class="sy0">,</span><span class="nu0">2</span><span class="sy0">,</span><span class="nu0">4</span><span class="br0">&#93;</span>
+histogram<span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#41;</span></pre>
+
+<h3 id="toc27"> </h3>
+ <h3 id="toc28"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Optimization:"></a><span style="color: #ff0000; font-family: arial,helvetica,sans-serif;">Optimization:</span></h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1"># again, same list iteration problem</span>
+<span class="co1"># use your own defined function</span>
+<span class="co1"># reasonable variable name</span>
+<span class="co1">### Q7 -- Opt Version</span>
+<span class="kw1">def</span> generate_n_chars<span class="br0">&#40;</span>number<span class="sy0">,</span>char<span class="br0">&#41;</span>:
+    chars <span class="sy0">=</span> char
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span>number-<span class="nu0">1</span><span class="br0">&#41;</span>:
+        chars +<span class="sy0">=</span> char
+    <span class="kw1">return</span> chars
+&nbsp;
+<span class="kw1">def</span> histogram<span class="br0">&#40;</span>lista<span class="sy0">,</span><span class="kw3">symbol</span><span class="br0">&#41;</span>:
+    <span class="kw1">for</span> x <span class="kw1">in</span> lista:
+        <span class="kw1">print</span><span class="br0">&#40;</span>generate_n_chars<span class="br0">&#40;</span>x<span class="sy0">,</span><span class="kw3">symbol</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+Input_list <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">5</span><span class="sy0">,</span><span class="nu0">7</span><span class="sy0">,</span><span class="nu0">2</span><span class="sy0">,</span><span class="nu0">4</span><span class="br0">&#93;</span>
+histogram<span class="br0">&#40;</span>Input_list<span class="sy0">,</span><span class="st0">'@'</span><span class="br0">&#41;</span></pre>
+
+<h3 id="toc29"> </h3>
+ <h3 id="toc30"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Q8:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Q8:</span></h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+<span class="kw1">import</span> <span class="kw3">random</span>
+Window <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Window.<span class="me1">colormode</span><span class="br0">&#40;</span><span class="nu0">255</span><span class="br0">&#41;</span>
+Tom.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> piegraph<span class="br0">&#40;</span><span class="kw2">list</span><span class="sy0">,</span>radius<span class="sy0">,</span>label<span class="br0">&#41;</span>:
+    Tom.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="kw2">len</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        Tom.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">begin_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">forward</span><span class="br0">&#40;</span>radius<span class="br0">&#41;</span>
+        Tom.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">circle</span><span class="br0">&#40;</span>-radius<span class="sy0">,</span><span class="nu0">180</span> * <span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span>/<span class="kw2">sum</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        xcor <span class="sy0">=</span> Tom.<span class="me1">xcor</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        ycor <span class="sy0">=</span> Tom.<span class="me1">ycor</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+        angle  <span class="sy0">=</span> Tom.<span class="me1">heading</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">circle</span><span class="br0">&#40;</span>-radius<span class="sy0">,</span> <span class="nu0">180</span> * <span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span> / <span class="kw2">sum</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">forward</span><span class="br0">&#40;</span>radius<span class="br0">&#41;</span>
+        Tom.<span class="me1">end_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">180</span><span class="br0">&#41;</span>
+        xcor1 <span class="sy0">=</span> Tom.<span class="me1">xcor</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        ycor1 <span class="sy0">=</span> Tom.<span class="me1">ycor</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">goto</span><span class="br0">&#40;</span>xcor<span class="sy0">,</span>ycor<span class="br0">&#41;</span>
+        Tom.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        oldangle <span class="sy0">=</span> Tom.<span class="me1">heading</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> angle <span class="sy0">&lt;=</span> <span class="nu0">90</span> <span class="kw1">or</span> angle <span class="sy0">&gt;=</span><span class="nu0">270</span>:
+            Tom.<span class="me1">setheading</span><span class="br0">&#40;</span>angle<span class="br0">&#41;</span>
+            Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">40</span><span class="br0">&#41;</span>
+            Tom.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">20</span><span class="br0">&#41;</span>
+            Tom.<span class="me1">write</span><span class="br0">&#40;</span>label<span class="br0">&#91;</span>i<span class="br0">&#93;</span> + <span class="st0">&quot; &quot;</span> + <span class="kw2">str</span><span class="br0">&#40;</span><span class="kw2">round</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span> / <span class="kw2">sum</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#41;</span> * <span class="nu0">100</span><span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span> + <span class="st0">&quot;%&quot;</span><span class="sy0">,</span><span class="kw2">False</span><span class="sy0">,</span>align <span class="sy0">=</span> <span class="st0">&quot;left&quot;</span><span class="sy0">,</span>font <span class="sy0">=</span> <span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span><span class="sy0">,</span><span class="nu0">14</span><span class="sy0">,</span><span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            Tom.<span class="me1">goto</span><span class="br0">&#40;</span>xcor1<span class="sy0">,</span>ycor1<span class="br0">&#41;</span>
+            Tom.<span class="me1">setheading</span><span class="br0">&#40;</span>oldangle<span class="br0">&#41;</span>
+            Tom.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            Tom.<span class="me1">setheading</span><span class="br0">&#40;</span>angle<span class="br0">&#41;</span>
+            Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">40</span><span class="br0">&#41;</span>
+            Tom.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">10</span><span class="br0">&#41;</span>
+            Tom.<span class="me1">write</span><span class="br0">&#40;</span>label<span class="br0">&#91;</span>i<span class="br0">&#93;</span> + <span class="st0">&quot; &quot;</span> + <span class="kw2">str</span><span class="br0">&#40;</span><span class="kw2">round</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span> / <span class="kw2">sum</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#41;</span> * <span class="nu0">100</span><span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span> + <span class="st0">&quot;%&quot;</span><span class="sy0">,</span> <span class="kw2">False</span><span class="sy0">,</span> align<span class="sy0">=</span><span class="st0">&quot;right&quot;</span><span class="sy0">,</span> font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span><span class="sy0">,</span> <span class="nu0">14</span><span class="sy0">,</span> <span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            Tom.<span class="me1">goto</span><span class="br0">&#40;</span>xcor1<span class="sy0">,</span> ycor1<span class="br0">&#41;</span>
+            Tom.<span class="me1">setheading</span><span class="br0">&#40;</span>oldangle<span class="br0">&#41;</span>
+            Tom.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw2">list</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+label <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+radius <span class="sy0">=</span> <span class="nu0">0</span>
+<span class="kw1">while</span> <span class="nu0">1</span>:
+    appendix <span class="sy0">=</span> <span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Please enter your data, one at a time. Type 'stop' to stop.&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> appendix <span class="sy0">==</span> <span class="st0">&quot;stop&quot;</span>:
+        <span class="kw1">break</span>
+    <span class="kw2">list</span>.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span>appendix<span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw1">while</span> <span class="nu0">1</span>:
+    appendix <span class="sy0">=</span> <span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Please enter your label corresponding to your data, one at a time. Type 'stop' to stop.&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> appendix <span class="sy0">==</span> <span class="st0">&quot;stop&quot;</span>:
+        <span class="kw1">break</span>
+    label.<span class="me1">append</span><span class="br0">&#40;</span>appendix<span class="br0">&#41;</span>
+radius <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Please enter the radius of the pie.&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+piegraph<span class="br0">&#40;</span><span class="kw2">list</span><span class="sy0">,</span>radius<span class="sy0">,</span>label<span class="br0">&#41;</span>
+Window.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+<h3 id="toc31"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Because I like to draw short lines pointing outward to label each segment and have a separated list of labels, so I optimized my own code. In addition, my version has the instructions for user interactions. Mrs. Wudi's optimized and more concise version was shown at the bottom."></a><span style="color: #ff0000; font-family: arial,helvetica,sans-serif;">Because I like to draw short lines pointing outward to label each segment and have a separated list of labels, so I optimized my own code. In addition, my version has the instructions for user interactions. Mrs. Wudi's optimized and more concise version was shown at the bottom. </span></h3>
+ <h3 id="toc32"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Optimization by Tom:"></a><span style="color: #ff0000; font-family: arial,helvetica,sans-serif;">Optimization by Tom:</span></h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+<span class="kw1">import</span> <span class="kw3">random</span>
+Window <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Window.<span class="me1">colormode</span><span class="br0">&#40;</span><span class="nu0">255</span><span class="br0">&#41;</span>
+Tom.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> piegraph<span class="br0">&#40;</span>list1<span class="sy0">,</span> radius<span class="sy0">,</span> label<span class="br0">&#41;</span>:
+    Tom.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    <span class="co1"># pre-calculation of sum can avoid repetitive calculation inside the loop.</span>
+    list_sum <span class="sy0">=</span> <span class="kw2">sum</span><span class="br0">&#40;</span>list1<span class="br0">&#41;</span>
+    <span class="co1"># because there're two bijective lists, one index can acquire members of both lists correctly.</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="kw2">len</span><span class="br0">&#40;</span>list1<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        Tom.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">begin_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">forward</span><span class="br0">&#40;</span>radius<span class="br0">&#41;</span>
+        Tom.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">circle</span><span class="br0">&#40;</span>-radius<span class="sy0">,</span> <span class="nu0">180</span> * <span class="br0">&#40;</span>list1<span class="br0">&#91;</span>i<span class="br0">&#93;</span>/list_sum<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="co1"># draw a line outside and perpendicular to the arc</span>
+        Tom.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">40</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">20</span><span class="br0">&#41;</span>
+        <span class="co1"># adjust the position of text</span>
+        <span class="kw1">if</span> <span class="nu0">90</span> <span class="sy0">&lt;=</span> Tom.<span class="me1">heading</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&lt;=</span> <span class="nu0">270</span>:
+            ali <span class="sy0">=</span> <span class="st0">&quot;right&quot;</span>
+        <span class="kw1">else</span>:
+            ali <span class="sy0">=</span> <span class="st0">&quot;left&quot;</span>
+        Tom.<span class="me1">write</span><span class="br0">&#40;</span>label<span class="br0">&#91;</span>i<span class="br0">&#93;</span> + <span class="st0">&quot;: &quot;</span> + <span class="kw2">str</span><span class="br0">&#40;</span><span class="kw2">round</span><span class="br0">&#40;</span>list1<span class="br0">&#91;</span>i<span class="br0">&#93;</span> / list_sum * <span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span> + <span class="st0">&quot;%&quot;</span><span class="sy0">,</span> <span class="kw2">False</span><span class="sy0">,</span> align<span class="sy0">=</span>ali<span class="sy0">,</span> font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span><span class="sy0">,</span> <span class="nu0">14</span><span class="sy0">,</span> <span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="co1"># go back to original position and continue drawing other half of the arc</span>
+        Tom.<span class="me1">backward</span><span class="br0">&#40;</span><span class="nu0">60</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">circle</span><span class="br0">&#40;</span>-radius<span class="sy0">,</span> <span class="nu0">180</span> * <span class="br0">&#40;</span>list1<span class="br0">&#91;</span>i<span class="br0">&#93;</span> / list_sum<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">forward</span><span class="br0">&#40;</span>radius<span class="br0">&#41;</span>
+        Tom.<span class="me1">end_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">180</span><span class="br0">&#41;</span>
+list1 <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+label <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+<span class="kw1">while</span> <span class="nu0">1</span>:
+    appendix <span class="sy0">=</span> <span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Please enter your data, one at a time. Type 'stop' to stop.&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> appendix <span class="sy0">==</span> <span class="st0">&quot;stop&quot;</span>:
+        <span class="kw1">break</span>
+    list1.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span>appendix<span class="br0">&#41;</span><span class="br0">&#41;</span>
+list1.<span class="me1">sort</span><span class="br0">&#40;</span>reverse<span class="sy0">=</span><span class="kw2">True</span><span class="br0">&#41;</span>
+<span class="kw1">while</span> <span class="nu0">1</span>:
+    appendix <span class="sy0">=</span> <span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Please enter your labels corresponding to your data, one at a time. Type 'stop' to stop.&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> appendix <span class="sy0">==</span> <span class="st0">&quot;stop&quot;</span>:
+        <span class="kw1">break</span>
+    label.<span class="me1">append</span><span class="br0">&#40;</span>appendix<span class="br0">&#41;</span>
+radius <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Please enter the radius of the pie.&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+piegraph<span class="br0">&#40;</span>list1<span class="sy0">,</span> radius<span class="sy0">,</span> label<span class="br0">&#41;</span>
+Window.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+<h3 id="toc33"><a name="Agenda for June 22,2016:-Sample codes and optimized version(programmed by Tom Zhou and optimized by Mrs. Wudi):-Optimization by Mrs. Wudi:"></a><span style="color: #ff0000; font-family: arial,helvetica,sans-serif;">Optimization by Mrs. Wudi:</span></h3>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1">### A more concise version which combines the implementation of Doris' and Tom's</span>
+<span class="co1">### Q8 -- Opt Version</span>
+<span class="kw1">import</span> <span class="kw3">turtle</span>
+<span class="kw1">import</span> <span class="kw3">random</span>
+Window <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Window.<span class="me1">colormode</span><span class="br0">&#40;</span><span class="nu0">255</span><span class="br0">&#41;</span>  <span class="co1">### Use the R,G,B color ocmponent color mode is very good.</span>
+Tom.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">10</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> pie_chart<span class="br0">&#40;</span>list1<span class="sy0">,</span>radius<span class="br0">&#41;</span>:
+    list_sum <span class="sy0">=</span> <span class="kw2">sum</span><span class="br0">&#40;</span>list1<span class="br0">&#41;</span>
+    <span class="kw1">for</span> i0 <span class="kw1">in</span> list1:
+        i <span class="sy0">=</span> <span class="kw2">round</span><span class="br0">&#40;</span>i0 / list_sum<span class="sy0">,</span><span class="nu0">2</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">begin_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">forward</span><span class="br0">&#40;</span>radius<span class="br0">&#41;</span>
+        Tom.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">circle</span><span class="br0">&#40;</span>radius<span class="sy0">,</span><span class="nu0">360</span>*i<span class="br0">&#41;</span>
+        Tom.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">goto</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">end_fill</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+        <span class="co1">### write labels</span>
+        Tom.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">180</span>*i<span class="br0">&#41;</span>
+        Tom.<span class="me1">forward</span><span class="br0">&#40;</span>radius + <span class="nu0">30</span><span class="br0">&#41;</span>
+        labelText <span class="sy0">=</span> <span class="kw2">str</span><span class="br0">&#40;</span>i0<span class="br0">&#41;</span> + <span class="st0">&quot;: &quot;</span> + <span class="kw2">str</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+        Tom.<span class="me1">write</span><span class="br0">&#40;</span>labelText<span class="sy0">,</span> <span class="kw2">True</span><span class="sy0">,</span> align<span class="sy0">=</span><span class="st0">&quot;center&quot;</span><span class="sy0">,</span> font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span><span class="sy0">,</span> <span class="nu0">12</span><span class="sy0">,</span> <span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">goto</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+        Tom.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">180</span>*i<span class="br0">&#41;</span>
+        Tom.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+    Window.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+pie_chart<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">30</span><span class="sy0">,</span><span class="nu0">20</span><span class="sy0">,</span><span class="nu0">40</span><span class="sy0">,</span><span class="nu0">50</span><span class="sy0">,</span><span class="nu0">15</span><span class="br0">&#93;</span><span class="sy0">,</span><span class="nu0">200</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

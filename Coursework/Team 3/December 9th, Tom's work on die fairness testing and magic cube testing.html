@@ -1,0 +1,309 @@
+<html>
+  <head>
+    <title>IBCS1-WD - December 9th, Tom's work on die fairness testing and magic cube testing</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>December 9th, Tom's work on die fairness testing and magic cube testing<small> #TomsProjects </small></h1><h1 id="toc0"><a name="Q1: Die testing"></a>Q1: Die testing</h1>
+ <br />
+<h2 id="toc1"><a name="Q1: Die testing-Pseudocode"></a>Pseudocode</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">//input 600 readings
+//RESULT initially is a empty collection
+loop N from 0 to 599
+    input ITEM
+    RESULT.addItem(ITEM)
+end loop
+&nbsp;
+//STATISTIC is an array which stores the frequency of each number appeared on the die
+loop while RESULT.hasNext()
+    NUM = RESULT.getNext()
+    if NUM = 1
+        STATISTIC[0] = STATISTIC[0] + 1
+    if NUM = 2
+        STATISTIC[1] = STATISTIC[1] + 1
+    if NUM = 3
+        STATISTIC[2] = STATISTIC[2] + 1
+    if NUM = 4
+        STATISTIC[3] = STATISTIC[3] + 1
+    if NUM = 5
+        STATISTIC[4] = STATISTIC[4] + 1
+    if NUM = 6
+        STATISTIC[5] = STATISTIC[5] + 1
+end loop
+&nbsp;
+//output the frequency of each number and calculate the standard diviation
+SD = 0
+AVERAGE = 600/6.0
+loop N from 0 to 5
+    output STATISTIC[N]
+    SD = SD + Abs(STATISTIC[N] - AVERAGE) // Abs(NUM) returns the absolute value of NUM
+end loop
+&nbsp;
+STANDARD = 600*(5/100)  // upper limit for standard diviation is 5% of the total value
+if SD &gt; STANDARD
+    output &quot;This die is biased&quot;
+else
+    output &quot;This die is not biased&quot;
+end if
+&nbsp;
+&nbsp;</pre>
+
+<h2 id="toc2"><a name="Q1: Die testing-Java"></a>Java</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> Main <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> generateRandomNumbers<span class="br0">&#40;</span><span class="kw4">int</span> n<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> result <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>n<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> n<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+            result<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="kw3">Math</span>.<span class="me1">random</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">*</span> <span class="nu0">6</span> <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> result<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="co1">// TODO Auto-generated method stub</span>
+        <span class="kw4">int</span> trials <span class="sy0">=</span> <span class="nu0">6000</span><span class="sy0">;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> result <span class="sy0">=</span> generateRandomNumbers<span class="br0">&#40;</span>trials<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> statistics <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> num <span class="sy0">:</span> result<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>num <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">&#41;</span>
+                statistics<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">+=</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>num <span class="sy0">==</span> <span class="nu0">2</span><span class="br0">&#41;</span>
+                statistics<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">+=</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>num <span class="sy0">==</span> <span class="nu0">3</span><span class="br0">&#41;</span>
+                statistics<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">+=</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>num <span class="sy0">==</span> <span class="nu0">4</span><span class="br0">&#41;</span>
+                statistics<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">+=</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>num <span class="sy0">==</span> <span class="nu0">5</span><span class="br0">&#41;</span>
+                statistics<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">+=</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>num <span class="sy0">==</span> <span class="nu0">6</span><span class="br0">&#41;</span>
+                statistics<span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span> <span class="sy0">+=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw4">double</span> average <span class="sy0">=</span> trials <span class="sy0">/</span> <span class="nu0">6.0</span><span class="sy0">;</span>
+        <span class="kw4">double</span> sd <span class="sy0">=</span> <span class="nu0">0.0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> statistics.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Number &quot;</span> <span class="sy0">+</span> <span class="br0">&#40;</span>i <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">+</span> <span class="st0">&quot;: &quot;</span> <span class="sy0">+</span> statistics<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            sd <span class="sy0">+=</span> <span class="kw3">Math</span>.<span class="me1">abs</span><span class="br0">&#40;</span>statistics<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">-</span> average<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        sd <span class="sy0">/=</span> <span class="nu0">6.0</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>sd <span class="sy0">&gt;</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>trials <span class="sy0">/</span> <span class="nu0">6.0</span><span class="br0">&#41;</span> <span class="sy0">*</span> <span class="nu0">0.1</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;This die is biased&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">else</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;This die is not biased&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span></pre>
+
+<h1 id="toc3"><a name="Q2: Magic Cube"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Q2: Magic Cube</span></h1>
+ <h2 id="toc4"> </h2>
+ <h2 id="toc5"><a name="Q2: Magic Cube-Pseudocode"></a>Pseudocode</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">//RESULT is an two dimensional array of size 7*7
+//Magic cude generator
+SIZE = 7
+RESULT[(SIZE - 1) / 2, 0] = 1
+X = (SIZE - 1) / 2
+Y = 0
+loop N from 2 to SIZE ^ 2
+    X += 1
+    Y -= 1
+    if Y = -1 and X = SIZE
+        X -= 1
+        Y += 2
+        If Y = SIZE Then Y = 0
+        RESULT[X, Y] = N
+        Continue For
+    end if
+    if Y = -1 Y = SIZE - 1
+    if X = SIZE X = 0
+    if RESULT[X, Y] = 0
+        RESULT[X, Y] = N
+    else
+        X -= 1
+        Y += 2
+        if Y = SIZE Y = 0
+        RESULT[X, Y] = N
+    end if
+end loop
+&nbsp;
+&nbsp;
+SUM = SIZE*(SIZE^2+1)/2
+SUMX = 0
+SUMY = 0
+SUMMAJOR = 0
+SUMMINOR = 0
+&nbsp;
+// major and minor diagonal sum testing
+loop D from 0 to SIZE - 1
+    SUMMAJOR = SUMMAJOR + RESULT[D, D]
+    SUMMINOR = SUMMINOR + RESULT[D, SIZE - 1 - D]
+end loop
+&nbsp;
+if SUMMAJOR = SUM AND SUMMINOR = SUM
+    output &quot;Diagonals are all correct&quot;
+else
+    output &quot;Incorrect diagonal(s)&quot;
+end if
+&nbsp;
+//columns and rows testing
+loop X from 0 to SIZE - 1
+    loop Y from 0 to SIZE - 1
+        SUMX = SUMX + RESULT[Y, X]
+        SUMY = SUMY + RESULT[X, Y]
+    end loop
+    if SUMX = SUM AND SUMY = SUM
+        output &quot;Correct row or column&quot;
+    else
+        output &quot;Incorrect row or column&quot;
+    end if
+end loop
+&nbsp;
+&nbsp;</pre>
+
+<br />
+<h2 id="toc6"><a name="Q2: Magic Cube-Java"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Java</span></h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> MagicSquare <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> generateMagicSquare<span class="br0">&#40;</span><span class="kw4">int</span> n<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> result <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>n<span class="br0">&#93;</span><span class="br0">&#91;</span>n<span class="br0">&#93;</span><span class="sy0">;</span>
+        result<span class="br0">&#91;</span><span class="br0">&#40;</span>n <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">2</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw4">int</span> x <span class="sy0">=</span> <span class="br0">&#40;</span>n <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">2</span><span class="sy0">;</span>
+        <span class="kw4">int</span> y <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> N <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span> N <span class="sy0">&lt;</span> n <span class="sy0">*</span> n <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span> N<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            x <span class="sy0">+=</span> <span class="nu0">1</span><span class="sy0">;</span>
+            y <span class="sy0">-=</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>y <span class="sy0">==</span> <span class="sy0">-</span><span class="nu0">1</span> <span class="sy0">&amp;&amp;</span> x <span class="sy0">==</span> n<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                x <span class="sy0">-=</span> <span class="nu0">1</span><span class="sy0">;</span>
+                y <span class="sy0">+=</span> <span class="nu0">2</span><span class="sy0">;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>y <span class="sy0">==</span> n<span class="br0">&#41;</span>
+                    y <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+                result<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>y<span class="br0">&#93;</span> <span class="sy0">=</span> N<span class="sy0">;</span>
+                <span class="kw1">continue</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>y <span class="sy0">==</span> <span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span>
+                y <span class="sy0">=</span> n <span class="sy0">-</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>x <span class="sy0">==</span> n<span class="br0">&#41;</span>
+                x <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>result<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>y<span class="br0">&#93;</span> <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+                result<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>y<span class="br0">&#93;</span> <span class="sy0">=</span> N<span class="sy0">;</span>
+            <span class="kw1">else</span> <span class="br0">&#123;</span>
+                x <span class="sy0">-=</span> <span class="nu0">1</span><span class="sy0">;</span>
+                y <span class="sy0">+=</span> <span class="nu0">2</span><span class="sy0">;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>y <span class="sy0">==</span> n<span class="br0">&#41;</span>
+                    y <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+                result<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>y<span class="br0">&#93;</span> <span class="sy0">=</span> N<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> result<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="co1">// TODO Auto-generated method stub</span>
+        <span class="kw4">int</span> size <span class="sy0">=</span> <span class="nu0">9</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sumC <span class="sy0">=</span> size <span class="sy0">*</span> <span class="br0">&#40;</span>size <span class="sy0">*</span> size <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">2</span><span class="sy0">;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> result <span class="sy0">=</span> generateMagicSquare<span class="br0">&#40;</span>size<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sumX <span class="sy0">=</span> <span class="nu0">0</span>, sumY <span class="sy0">=</span> <span class="nu0">0</span>, sumMajorD <span class="sy0">=</span> <span class="nu0">0</span>, sumMinorD <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> digits <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Integer</span><span class="br0">&#40;</span>size <span class="sy0">*</span> size<span class="br0">&#41;</span><span class="br0">&#41;</span>.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> d <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> d <span class="sy0">&lt;</span> size<span class="sy0">;</span> d<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            sumMajorD <span class="sy0">+=</span> result<span class="br0">&#91;</span>d<span class="br0">&#93;</span><span class="br0">&#91;</span>d<span class="br0">&#93;</span><span class="sy0">;</span>
+            sumMinorD <span class="sy0">+=</span> result<span class="br0">&#91;</span>d<span class="br0">&#93;</span><span class="br0">&#91;</span>size <span class="sy0">-</span> <span class="nu0">1</span> <span class="sy0">-</span> d<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>sumMajorD <span class="sy0">!=</span> sumC <span class="sy0">||</span> sumMinorD <span class="sy0">!=</span> sumC<span class="br0">&#41;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;!!!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> x <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> x <span class="sy0">&lt;</span> size<span class="sy0">;</span> x<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span><span class="st0">&quot;|&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> y <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> y <span class="sy0">&lt;</span> size<span class="sy0">;</span> y<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">printf</span><span class="br0">&#40;</span><span class="st0">&quot;%-&quot;</span> <span class="sy0">+</span> digits <span class="sy0">+</span> <span class="st0">&quot;d|&quot;</span>, result<span class="br0">&#91;</span>y<span class="br0">&#93;</span><span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                sumX <span class="sy0">+=</span> result<span class="br0">&#91;</span>y<span class="br0">&#93;</span><span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="sy0">;</span>
+                sumY <span class="sy0">+=</span> result<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>y<span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>sumX <span class="sy0">!=</span> sumC <span class="sy0">||</span> sumY <span class="sy0">!=</span> sumC<span class="br0">&#41;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;!!!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">printf</span><span class="br0">&#40;</span><span class="st0">&quot;%n&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            sumX <span class="sy0">=</span> sumY <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

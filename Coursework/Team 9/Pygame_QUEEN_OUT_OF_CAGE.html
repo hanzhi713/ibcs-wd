@@ -1,0 +1,211 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Pygame_QUEEN_OUT_OF_CAGE</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> pygame
+<span class="kw1">import</span> pygame.<span class="me1">transform</span>
+<span class="kw1">import</span> <span class="kw3">random</span>
+<span class="co1"># import random, os.path</span>
+&nbsp;
+<span class="co1"># main_dir = os.path.split(os.path.abspath(__file__))[0]</span>
+&nbsp;
+<span class="kw1">class</span> Point:
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span> y<span class="sy0">=</span><span class="nu0">0</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__str__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="st0">&quot;({0}, {1})&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> distance_from_origin<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span> ** <span class="nu0">2</span><span class="br0">&#41;</span> + <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">y</span> ** <span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span> ** <span class="nu0">0.5</span>
+&nbsp;
+    <span class="kw1">def</span> midpoint<span class="br0">&#40;</span>p1<span class="sy0">,</span> p2<span class="br0">&#41;</span>:
+        mx <span class="sy0">=</span> <span class="br0">&#40;</span>p1.<span class="me1">x</span> + p2.<span class="me1">x</span><span class="br0">&#41;</span> / <span class="nu0">2</span>
+        my <span class="sy0">=</span> <span class="br0">&#40;</span>p1.<span class="me1">y</span> + p2.<span class="me1">y</span><span class="br0">&#41;</span> / <span class="nu0">2</span>
+        <span class="kw1">return</span> Point<span class="br0">&#40;</span>mx<span class="sy0">,</span> my<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">class</span> Rectangle:
+    <span class="st0">&quot;&quot;&quot; A class to manufacture rectangle objects &quot;&quot;&quot;</span>
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> posn<span class="sy0">,</span> w<span class="sy0">,</span> h<span class="br0">&#41;</span>:
+        <span class="st0">&quot;&quot;&quot; Initialize rectangle at posn, with width w, height h &quot;&quot;&quot;</span>
+        <span class="kw2">self</span>.<span class="me1">corner</span> <span class="sy0">=</span> posn
+        <span class="kw2">self</span>.<span class="me1">width</span> <span class="sy0">=</span> w
+        <span class="kw2">self</span>.<span class="me1">height</span> <span class="sy0">=</span> h
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__str__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span>  <span class="st0">&quot;({0}, {1}, {2})&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">corner</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">width</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">height</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> grow<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> delta_width<span class="sy0">,</span> delta_height<span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">width</span> +<span class="sy0">=</span> delta_width
+        <span class="kw2">self</span>.<span class="me1">height</span> +<span class="sy0">=</span> delta_height
+&nbsp;
+    <span class="kw1">def</span> move<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> dx<span class="sy0">,</span> dy<span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">corner</span>.<span class="me1">x</span> +<span class="sy0">=</span> dx
+        <span class="kw2">self</span>.<span class="me1">corner</span>.<span class="me1">y</span> +<span class="sy0">=</span> dy
+&nbsp;
+<span class="co1"># def load_image(file):</span>
+<span class="co1">#     &quot;loads an image, prepares it for play&quot;</span>
+<span class="co1">#     file = os.path.join(main_dir, 'data', file)</span>
+<span class="co1">#     try:</span>
+<span class="co1">#         surface = pygame.image.load(file)</span>
+<span class="co1">#     except pygame.error:</span>
+<span class="co1">#         raise SystemExit('Could not load image &quot;%s&quot; %s'%(file, pygame.get_error()))</span>
+<span class="co1">#     return surface.convert()</span>
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    rect_width <span class="sy0">=</span> <span class="nu0">100</span>
+    rect_height <span class="sy0">=</span> <span class="nu0">100</span>
+    rect_x <span class="sy0">=</span> <span class="nu0">450</span>
+    rect_y <span class="sy0">=</span> <span class="nu0">350</span>
+&nbsp;
+    <span class="st0">&quot;&quot;&quot; Set up the game and run the main game loop &quot;&quot;&quot;</span>
+    pygame.<span class="me1">init</span><span class="br0">&#40;</span><span class="br0">&#41;</span>      <span class="co1"># Prepare the pygame module for use</span>
+    <span class="co1"># surface_sz = 480   # Desired physical surface size, in pixels.</span>
+    <span class="co1"># Create surface of (width, height), and its window.</span>
+    main_surface <span class="sy0">=</span> pygame.<span class="me1">display</span>.<span class="me1">set_mode</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">1000</span><span class="sy0">,</span><span class="nu0">800</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">set_caption</span><span class="br0">&#40;</span><span class="st0">&quot;Queen_Out_of_Cage&quot;</span><span class="br0">&#41;</span>
+    <span class="co1"># Set up some data to describe a small rectangle and its color</span>
+    rect <span class="sy0">=</span> <span class="br0">&#40;</span>rect_x<span class="sy0">,</span>rect_y<span class="sy0">,</span>rect_width<span class="sy0">,</span>rect_height<span class="br0">&#41;</span>
+    rect_color <span class="sy0">=</span> <span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span>        <span class="co1"># A color is a mix of (Red, Green, Blue)</span>
+&nbsp;
+    queen <span class="sy0">=</span> pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">&quot;Queen.png&quot;</span><span class="br0">&#41;</span>
+    queen <span class="sy0">=</span> pygame.<span class="me1">transform</span>.<span class="me1">smoothscale</span><span class="br0">&#40;</span>pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">&quot;Queen.png&quot;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span>rect_width<span class="sy0">,</span> rect_height<span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">while</span> <span class="kw2">True</span>:
+        ev <span class="sy0">=</span> pygame.<span class="me1">event</span>.<span class="me1">poll</span><span class="br0">&#40;</span><span class="br0">&#41;</span>    <span class="co1"># Look for any event</span>
+        <span class="kw1">if</span> ev.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">QUIT</span>:  <span class="co1"># Window close button clicked?</span>
+            <span class="kw1">break</span>                   <span class="co1">#   ... leave game loop</span>
+&nbsp;
+        <span class="kw1">elif</span> ev.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">KEYDOWN</span>:
+            key <span class="sy0">=</span> ev.<span class="kw2">dict</span><span class="br0">&#91;</span><span class="st0">&quot;key&quot;</span><span class="br0">&#93;</span>
+            <span class="co1"># if key == 27:  # On Escape key ...</span>
+            <span class="co1">#     break  # leave the game loop.</span>
+            <span class="kw1">if</span> key <span class="sy0">==</span> <span class="kw2">ord</span><span class="br0">&#40;</span><span class="st0">&quot;x&quot;</span><span class="br0">&#41;</span>:
+                rect_x <span class="sy0">=</span> <span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">800</span><span class="br0">&#41;</span>
+            <span class="kw1">elif</span> key <span class="sy0">==</span> <span class="kw2">ord</span><span class="br0">&#40;</span><span class="st0">&quot;y&quot;</span><span class="br0">&#41;</span>:
+                rect_y <span class="sy0">=</span> <span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">600</span><span class="br0">&#41;</span>
+            <span class="kw1">elif</span> key <span class="sy0">==</span> <span class="kw2">ord</span><span class="br0">&#40;</span><span class="st0">&quot;r&quot;</span><span class="br0">&#41;</span>:
+                rect_x <span class="sy0">=</span> <span class="nu0">450</span>
+                rect_y <span class="sy0">=</span> <span class="nu0">350</span>
+&nbsp;
+        main_surface.<span class="me1">fill</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">200</span><span class="sy0">,</span> <span class="nu0">200</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+        main_surface.<span class="me1">fill</span><span class="br0">&#40;</span>rect_color<span class="sy0">,</span> rect<span class="br0">&#41;</span>
+&nbsp;
+        main_surface.<span class="me1">blit</span><span class="br0">&#40;</span>queen<span class="sy0">,</span> <span class="br0">&#40;</span>rect_x<span class="sy0">,</span> rect_y<span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+        <span class="co1"># Now the surface is ready, tell pygame to display it!</span>
+        pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+    pygame.<span class="me1">quit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>     <span class="co1"># Once we leave the loop, close the window.</span>
+&nbsp;
+<span class="co1"># class Explosion(pygame.sprite.Sprite):</span>
+<span class="co1">#</span>
+<span class="co1">#     def __init__(self, actor):</span>
+<span class="co1">#         pygame.sprite.Sprite.__init__(self, self.containers)</span>
+<span class="co1">#         self.image = self.images[0]</span>
+<span class="co1">#         self.rect = self.image.get_rect(center=actor.rect.center)</span>
+<span class="co1">#         self.life = self.defaultlife</span>
+&nbsp;
+<span class="kw1">def</span> mouse<span class="br0">&#40;</span>x<span class="sy0">,</span>y<span class="br0">&#41;</span>:
+    rect_x <span class="sy0">=</span> x
+    rect_y <span class="sy0">=</span> y
+&nbsp;
+main<span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">第二个鼠标随图片动的不知道为什么不对，代码先粘上来
+<span class="kw1">import</span> pygame
+&nbsp;
+<span class="kw1">from</span> pygame.<span class="kw2">locals</span> <span class="kw1">import</span> *
+<span class="kw1">from</span> <span class="kw3">sys</span> <span class="kw1">import</span> exit
+&nbsp;
+&nbsp;
+MOUSE_IMAGE<span class="sy0">=</span> pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">&quot;Queen.png&quot;</span><span class="br0">&#41;</span>
+MOUSE_IMAGE<span class="sy0">=</span> pygame.<span class="me1">transform</span>.<span class="me1">smoothscale</span><span class="br0">&#40;</span>pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">&quot;Queen.png&quot;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">100</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+pygame.<span class="me1">init</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+screen <span class="sy0">=</span> pygame.<span class="me1">display</span>.<span class="me1">set_mode</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">800</span><span class="sy0">,</span> <span class="nu0">600</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">32</span><span class="br0">&#41;</span>
+pygame.<span class="me1">display</span>.<span class="me1">set_caption</span><span class="br0">&#40;</span><span class="st0">&quot;OUR_PYGAME&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+mouse_cursor <span class="sy0">=</span> pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">&quot;Queen.png&quot;</span><span class="br0">&#41;</span>.<span class="me1">convert_alpha</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">while</span> <span class="kw2">True</span>:
+    <span class="kw1">for</span> event <span class="kw1">in</span> pygame.<span class="me1">event</span>.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> event.<span class="kw2">type</span> <span class="sy0">==</span> QUIT:
+            exit<span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+x<span class="sy0">,</span> y <span class="sy0">=</span> pygame.<span class="me1">mouse</span>.<span class="me1">get_pos</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+pygame.<span class="me1">mouse</span>.<span class="me1">set_visible</span><span class="br0">&#40;</span><span class="kw2">False</span><span class="br0">&#41;</span>
+&nbsp;
+x -<span class="sy0">=</span> mouse_cursor.<span class="me1">get_width</span><span class="br0">&#40;</span><span class="br0">&#41;</span> / <span class="nu0">2</span>
+y -<span class="sy0">=</span> mouse_cursor.<span class="me1">get_height</span><span class="br0">&#40;</span><span class="br0">&#41;</span> / <span class="nu0">2</span>
+screen.<span class="me1">blit</span><span class="br0">&#40;</span>mouse_cursor<span class="sy0">,</span> <span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="br0">&#41;</span><span class="br0">&#41;</span>
+pygame.<span class="me1">display</span>.<span class="me1">update</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,179 @@
+<html>
+  <head>
+    <title>IBCS1-WD - March 5th, Tom's work on salt and pepper noise</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>March 5th, Tom's work on salt and pepper noise<small> #TomsProjects </small></h1><h2 id="toc0"><a name="x-Python:"></a>Python:</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> cv2<span class="sy0">,</span> <span class="kw3">random</span>
+img <span class="sy0">=</span> cv2.<span class="me1">imread</span><span class="br0">&#40;</span><span class="st0">'1.png'</span><span class="br0">&#41;</span>
+<span class="kw1">import</span> matplotlib.<span class="me1">pyplot</span> <span class="kw1">as</span> plt
+<span class="kw1">import</span> numpy <span class="kw1">as</span> np
+cv2.<span class="me1">imshow</span><span class="br0">&#40;</span><span class="st0">'cv2.imshow'</span><span class="sy0">,</span> img<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> saltPepper<span class="br0">&#40;</span>img<span class="sy0">,</span> t<span class="br0">&#41;</span>:
+    wid <span class="sy0">=</span> img.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+    hei <span class="sy0">=</span> img.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>t<span class="br0">&#41;</span>:
+        x <span class="sy0">=</span> <span class="kw3">random</span>.<span class="me1">randint</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> wid-<span class="nu0">1</span><span class="br0">&#41;</span>
+        y <span class="sy0">=</span> <span class="kw3">random</span>.<span class="me1">randint</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> hei-<span class="nu0">1</span><span class="br0">&#41;</span>
+        img<span class="br0">&#91;</span>x<span class="sy0">,</span> y<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="kw3">random</span>.<span class="me1">randint</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw3">random</span>.<span class="me1">randint</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw3">random</span>.<span class="me1">randint</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+&nbsp;
+saltPepper<span class="br0">&#40;</span>img<span class="sy0">,</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="br0">&#40;</span>img.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>*img.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>**<span class="nu0">0.9</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="co1"># (img[:,:,0], img[:,:,1], img[:,:,2]) = (img[:,:,2], img[:,:,1], img[:,:,0])</span>
+img_rgb <span class="sy0">=</span> np.<span class="me1">zeros</span><span class="br0">&#40;</span>img.<span class="me1">shape</span><span class="sy0">,</span> img.<span class="me1">dtype</span><span class="br0">&#41;</span>
+img_rgb<span class="br0">&#91;</span>:<span class="sy0">,</span>:<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> img<span class="br0">&#91;</span>:<span class="sy0">,</span>:<span class="sy0">,</span><span class="nu0">2</span><span class="br0">&#93;</span>
+img_rgb<span class="br0">&#91;</span>:<span class="sy0">,</span>:<span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> img<span class="br0">&#91;</span>:<span class="sy0">,</span>:<span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#93;</span>
+img_rgb<span class="br0">&#91;</span>:<span class="sy0">,</span>:<span class="sy0">,</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> img<span class="br0">&#91;</span>:<span class="sy0">,</span>:<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#93;</span>
+<span class="co1"># b, g, r = cv2.split(img)</span>
+<span class="co1"># img_rgb = cv2.merge((r, g, b))</span>
+plt.<span class="me1">figure</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+plt.<span class="me1">imshow</span><span class="br0">&#40;</span>img_rgb<span class="br0">&#41;</span>
+plt.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;</pre>
+
+<h2 id="toc1"><a name="x-Noticed that the PHP validation code generator also uses similar method:"></a>Noticed that the PHP validation code generator also uses similar method:</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.php  {font-family:monospace;}
+.php .imp {font-weight: bold; color: red;}
+.php .kw1 {color: #b1b100;}
+.php .kw2 {color: #000000; font-weight: bold;}
+.php .kw3 {color: #990000;}
+.php .kw4 {color: #009900; font-weight: bold;}
+.php .co1 {color: #666666; font-style: italic;}
+.php .co2 {color: #666666; font-style: italic;}
+.php .co3 {color: #0000cc; font-style: italic;}
+.php .co4 {color: #009933; font-style: italic;}
+.php .coMULTI {color: #666666; font-style: italic;}
+.php .es0 {color: #000099; font-weight: bold;}
+.php .es1 {color: #000099; font-weight: bold;}
+.php .es2 {color: #660099; font-weight: bold;}
+.php .es3 {color: #660099; font-weight: bold;}
+.php .es4 {color: #006699; font-weight: bold;}
+.php .es5 {color: #006699; font-weight: bold; font-style: italic;}
+.php .es6 {color: #009933; font-weight: bold;}
+.php .es_h {color: #000099; font-weight: bold;}
+.php .br0 {color: #009900;}
+.php .sy0 {color: #339933;}
+.php .sy1 {color: #000000; font-weight: bold;}
+.php .st0 {color: #0000ff;}
+.php .st_h {color: #0000ff;}
+.php .nu0 {color: #cc66cc;}
+.php .nu8 {color: #208080;}
+.php .nu12 {color: #208080;}
+.php .nu19 {color:#800080;}
+.php .me1 {color: #004000;}
+.php .me2 {color: #004000;}
+.php .re0 {color: #000088;}
+.php span.xtra { display:block; }
+
+-->
+</style><pre class="php"><span class="kw2">&lt;?php</span>
+<span class="co1">//generate beautiful validation code</span>
+<span class="co1">//source: http://www.jb51.net/article/40341.htm</span>
+<span class="kw2">class</span> ValidateCode <span class="br0">&#123;</span>
+    <span class="kw2">private</span> <span class="re0">$charset</span> <span class="sy0">=</span> <span class="st_h">'abcdefghkmnprstuvwxyzABCDEFGHKMNPRSTUVWXYZ123456789'</span><span class="sy0">;</span>
+    <span class="kw2">private</span> <span class="re0">$code</span><span class="sy0">;</span>
+    <span class="kw2">private</span> <span class="re0">$codelen</span> <span class="sy0">=</span> <span class="nu0">4</span><span class="sy0">;</span>
+    <span class="kw2">private</span> <span class="re0">$width</span> <span class="sy0">=</span> <span class="nu0">80</span><span class="sy0">;</span>
+    <span class="kw2">private</span> <span class="re0">$height</span> <span class="sy0">=</span> <span class="nu0">26</span><span class="sy0">;</span>
+    <span class="kw2">private</span> <span class="re0">$img</span><span class="sy0">;</span>
+    <span class="kw2">private</span> <span class="re0">$font</span><span class="sy0">;</span>
+    <span class="kw2">private</span> <span class="re0">$fontsize</span> <span class="sy0">=</span> <span class="nu0">18</span><span class="sy0">;</span>
+     <span class="kw2">private</span> <span class="re0">$fontcolor</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw2">public</span> <span class="kw2">function</span> __construct<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">font</span> <span class="sy0">=</span> <span class="st_h">'../font/calibri.ttf'</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw2">private</span> <span class="kw2">function</span> createCode<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+          <span class="re0">$_len</span> <span class="sy0">=</span> <span class="kw3">strlen</span><span class="br0">&#40;</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">charset</span><span class="br0">&#41;</span><span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="re0">$i</span><span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span><span class="re0">$i</span><span class="sy0">&lt;</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">codelen</span><span class="sy0">;</span><span class="re0">$i</span><span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">code</span> <span class="sy0">.=</span> <span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">charset</span><span class="br0">&#91;</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="re0">$_len</span><span class="br0">&#41;</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+     <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw2">private</span> <span class="kw2">function</span> createBg<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+          <span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">img</span> <span class="sy0">=</span> <span class="kw3">imagecreatetruecolor</span><span class="br0">&#40;</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">width</span><span class="sy0">,</span> <span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">height</span><span class="br0">&#41;</span><span class="sy0">;</span>
+          <span class="re0">$color</span> <span class="sy0">=</span> <span class="kw3">imagecolorallocate</span><span class="br0">&#40;</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">img</span><span class="sy0">,</span> <span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">157</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">157</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">157</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+          <span class="kw3">imagefilledrectangle</span><span class="br0">&#40;</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">img</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">height</span><span class="sy0">,</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">width</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="re0">$color</span><span class="br0">&#41;</span><span class="sy0">;</span>
+     <span class="br0">&#125;</span>
+&nbsp;
+     <span class="kw2">private</span> <span class="kw2">function</span> createFont<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+          <span class="re0">$_x</span> <span class="sy0">=</span> <span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">width</span> <span class="sy0">/</span> <span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">codelen</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="re0">$i</span><span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span><span class="re0">$i</span><span class="sy0">&lt;</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">codelen</span><span class="sy0">;</span><span class="re0">$i</span><span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+           <span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">fontcolor</span> <span class="sy0">=</span> <span class="kw3">imagecolorallocate</span><span class="br0">&#40;</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">img</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">156</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">156</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">156</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+           <span class="kw3">imagettftext</span><span class="br0">&#40;</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">img</span><span class="sy0">,</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">fontsize</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">30</span><span class="sy0">,</span><span class="nu0">30</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="re0">$_x</span><span class="sy0">*</span><span class="re0">$i</span><span class="sy0">+</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">height</span> <span class="sy0">/</span> <span class="nu19">1.4</span><span class="sy0">,</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">fontcolor</span><span class="sy0">,</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">font</span><span class="sy0">,</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">code</span><span class="br0">&#91;</span><span class="re0">$i</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+     <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw2">private</span> <span class="kw2">function</span> createLine<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="re0">$i</span><span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span><span class="re0">$i</span><span class="sy0">&lt;</span><span class="nu0">6</span><span class="sy0">;</span><span class="re0">$i</span><span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+           <span class="re0">$color</span> <span class="sy0">=</span> <span class="kw3">imagecolorallocate</span><span class="br0">&#40;</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">img</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">156</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">156</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">156</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+           <span class="kw3">imageline</span><span class="br0">&#40;</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">img</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">width</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">height</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">width</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">height</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="re0">$color</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="re0">$i</span><span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span><span class="re0">$i</span><span class="sy0">&lt;</span><span class="nu0">100</span><span class="sy0">;</span><span class="re0">$i</span><span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+           <span class="re0">$color</span> <span class="sy0">=</span> <span class="kw3">imagecolorallocate</span><span class="br0">&#40;</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">img</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">200</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">200</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">200</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+           <span class="kw3">imagestring</span><span class="br0">&#40;</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">img</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">width</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="kw3">mt_rand</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">height</span><span class="br0">&#41;</span><span class="sy0">,</span><span class="st_h">'*'</span><span class="sy0">,</span><span class="re0">$color</span><span class="br0">&#41;</span><span class="sy0">;</span>
+      <span class="br0">&#125;</span>
+     <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw2">private</span> <span class="kw2">function</span> outPut<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+          <span class="kw3">header</span><span class="br0">&#40;</span><span class="st_h">'Content-type:image/png'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+          <span class="kw3">imagepng</span><span class="br0">&#40;</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">img</span><span class="br0">&#41;</span><span class="sy0">;</span>
+          <span class="kw3">imagedestroy</span><span class="br0">&#40;</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">img</span><span class="br0">&#41;</span><span class="sy0">;</span>
+     <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw2">public</span> <span class="kw2">function</span> doimg<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+          <span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">createBg</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+          <span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">createCode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+          <span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">createLine</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+          <span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">createFont</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+          <span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">outPut</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+     <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw2">public</span> <span class="kw2">function</span> getCode<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+          <span class="kw1">return</span> <span class="kw3">strtolower</span><span class="br0">&#40;</span><span class="re0">$this</span><span class="sy0">-&gt;</span><span class="me1">code</span><span class="br0">&#41;</span><span class="sy0">;</span>
+     <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+<span class="sy1">?&gt;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,155 @@
+<html>
+  <head>
+    <title>IBCS1-WD - March 24nd 2017 by Michael</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<span style="color: #000000; font-family: Helvetica; font-size: 30px;"><strong>Von Neumann Architecture</strong></span><br />
+<span style="color: #000000; font-family: Arial; font-size: 19px;">Von Neumann: data and programs are indistinguishable and can therefore use the same memory </span><br />
+<br />
+<span style="color: #000000; font-family: 'Helvetica Light'; font-size: 14px;">How to describe Von Neumann processor architecture?</span><br />
+<span style="color: #000000; font-family: Helvetica;"><span style="font-size: 18px;">-</span><strong>Stored-program concept,</strong> Storage of instructions in computer memory to enable it to perform a variety of tasks in sequence or intermittently.</span><br />
+<span style="color: #000000; font-family: Helvetica;">-Instructions and data use the primary memory(in a continuous block)</span><br />
+<span style="color: #000000; font-family: Helvetica;">-use of single processor </span><br />
+<span style="color: #000000; font-family: Helvetica;">-Follow the sequential set of instructions(instruction are executed in sequence)</span><br />
+<span style="color: #000000; font-family: Helvetica;">-program consists of a sequence of stored instruction</span><br />
+<br />
+<br />
+<span style="color: #000000; font-family: Arial; font-size: 19px;">speed-cost sequence:</span><br />
+<span style="color: #000000; font-family: Arial; font-size: 19px;">speed ++ cost++</span><br />
+<span style="color: #000000; font-family: Helvetica;">off-line storage, hard disk, RAM, cache, CPU Register</span><br />
+<br />
+<br />
+<span style="color: #000000; font-family: 'Helvetica Light'; font-size: 14px;">Describe what does it meant by register?</span><br />
+<span style="color: #000000; font-family: Helvetica;">Temporary storage location inside the (micro) processor</span><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 30px;"><strong>functions of components</strong></span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 14px; text-align: center;"><strong>Processor = ALU + CU + registers</strong></span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px; text-align: center;"><strong>ALU:</strong></span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;"><strong>Accumulator</strong>: a register inside the ALU. It is a single general-purpose register where all values are held when processed by arithmetic and logical operations.</span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica;">Do logical and arithmetic operations </span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px; text-align: center;"><strong>CU:</strong></span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;"><strong>Program counter (PC)</strong>: A program counter is a register in a computer processor that contains the address (location) of the instruction being executed at the current time. As each instruction gets fetched, the program counter increases its stored value by 1. After each instruction is fetched, the program counter points to the next instruction in the sequence. When the computer restarts or is reset, the program counter normally reverts to 0.</span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">Current Instruction Register (CIR):Instruction Register is where the instruction bit pattern is loaded for execution. Instruction Decoder is triggered by the instruction bit pattern during execution.</span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px; text-align: center;"><strong>Register:</strong></span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">(MDR) Used to temporarily store data read from or written to memory. All transfers from memory to the CPU go via the Memory Data Register.</span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">MAR holds the memory location of data that needs to be accessed. When reading from memory, data addressed by MAR is fed into the MDR (memory data register) and then used by the CPU. When writing to memory, the CPU writes data from MDR to the memory location whose address is stored in MAR.The Memory Address Register is half of a minimal interface between a microprogram and computer storage. The other half is a memory data register.Far more complex memory interfaces exist, but this is the least that can work.</span><br />
+<br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 30px;"><strong>The fetch-decode-execute cycle</strong></span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 17px; text-align: center;"><strong>fetch</strong></span><br />
+<span style="color: #000000; font-family: Helvetica;">The program counter (PC) stores the address of the next instruction to be fetched. Then the contents of the Program Counter are incremented</span><br />
+<span style="color: #000000; font-family: Helvetica;">When the next instruction is needed, its address is copied from the PC and placed in the memory address register (MAR) This location, or address, is found and the contents are placed in the memory data register (MDR) The contents of the MDR are then copied to the current instruction register (CIR)</span><br />
+<span style="color: #000000; font-family: Helvetica;">The CIR holds the instruction that is about to be executed.</span><br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 17px; text-align: center;"><strong>decode</strong></span><br />
+<span style="color: #000000; font-family: Helvetica;">The instruction in the CIR is split into its individual parts. (operation code and operand)</span><br />
+<span style="color: #000000; font-family: Helvetica;">Operation: + , Operand: a, b</span><br />
+<span style="color: #000000; font-family: Helvetica;">If the operand is an address, the address is copied to the MAR and the data are fetched and placed in the MDR</span><br />
+<span style="color: #000000; font-family: Helvetica;">a and b are addresses</span><br />
+<span style="color: #000000; font-family: Helvetica;">The operation is decoded by referring to a lookup table which gives the control unit the instructions about what needs to be done.</span><br />
+<br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 17px; text-align: center;"><strong>execute</strong></span><br />
+<span style="color: #000000; font-family: Arial;">The execute phase depends on the nature of the instruction, e.g., arithmetic, accessing a value (or storing) in main memory</span><br />
+<br />
+<br />
+<br />
+<span style="color: #000000; font-family: Helvetica;">Explain what the accumulator holds and how the contents change during the fetch-execute cycle.</span><br />
+<span style="color: #000000; font-family: Helvetica;">-Hold the data currently being processed or(result of calculation is held in accumulator)</span><br />
+<span style="color: #ff2d21; font-family: Helvetica;">-before being passed to memory unit</span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica;">Explain what the program counter(PC) holds and how the content change during the fetch-execute cycle</span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica;">-The address of the next instruction</span><br />
+<span style="color: #000000; font-family: Helvetica;">-Contents incremented </span><br />
+<span style="color: #000000; font-family: Helvetica;">-Contents changed by a<span style="color: #ff2d21;"> jump instruction</span></span><br />
+<br />
+<br />
+<br />
+<br />
+<span style="color: #000000; font-family: Helvetica;">State what is stored in each of the following special purpose registers in a computer and explain how the contents are altered during the fetch/execute cycle</span><br />
+<br />
+<ol><li><span style="color: #000000; font-family: Helvetica;">MAR: -The address in memory of the data/ instruction to be accessed</span></li></ol><span style="color: #000000; font-family: Helvetica;"> -Can be changed by contents of PC being copied into it</span><br />
+<span style="color: #000000; font-family: Helvetica;"> -Can be changed by memory address being copied to it from CIR</span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica;">ii) MDR:</span><br />
+<span style="color: #000000; font-family: Helvetica;">-The data/instruction to be used </span><br />
+<span style="color: #000000; font-family: Helvetica;"> -Is changed every time an address in MAR is accessed </span><br />
+<span style="color: #ff2d21; font-family: Helvetica;"> -Stores data from Accumulator on its way to being stored in memory</span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica;">iii)CIR:</span><br />
+<span style="color: #000000; font-family: Helvetica;">-Stores an instruction</span><br />
+<span style="color: #000000; font-family: Helvetica;">-while it is being decoded/executed/carried out</span><br />
+<span style="color: #000000; font-family: Helvetica;">-Contents change when an instruction from memory has been placed in MDR, and then it is copied from MDR to CIR</span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica;">(iv)PC:</span><br />
+<span style="color: #000000; font-family: Helvetica;">- The address of the next instruction </span><br />
+<span style="color: #000000; font-family: Helvetica;">- Content is incremented after the address is read</span><br />
+<span style="color: #000000; font-family: Helvetica;">-Content is altered to specific address if instruction is a jump instruction </span><br />
+<br />
+<span style="color: #ff2d21; font-family: Helvetica;">(v)IR:</span><br />
+<span style="color: #ff2d21; font-family: Helvetica;">-Stores an integer value </span><br />
+<span style="color: #ff2d21; font-family: Helvetica;">-Which is added to the base address in the instruction </span><br />
+<span style="color: #ff2d21; font-family: Helvetica;">-Used for the successive reading of values from memory locations </span><br />
+<span style="color: #ff2d21; font-family: Helvetica;">-Can be incremented after use</span><br />
+<br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 30px;"><strong>Using buses to convey data</strong></span><br />
+<span style="color: #000000; font-family: Arial; font-size: 20px; text-align: center;"><strong>Data bus</strong></span><br />
+<span style="color: #000000; font-family: Helvetica;">Carry data needs to be transferred from one hardware component to another. </span><br />
+<span style="color: #000000; font-family: Helvetica;">MDR is at one end of the data bus. The processor has instructions to read values from main memory and store values in memory. ➔ bi-directional</span><br />
+<br />
+<br />
+<span style="color: #000000; font-family: Arial; font-size: 20px; text-align: center;"><strong>Control Bus</strong></span><br />
+<span style="color: #000000; font-family: Helvetica;">Send control signals from the control unit to the other components of the system. </span><br />
+<span style="color: #000000; font-family: Helvetica;">A separate wire is dedicated to a particular control signal, e.g.:A completed data transfer (r/w) operation Reset button pressed Interrupt request Interrupt acknowledgement</span><br />
+<br />
+<br />
+<span style="color: #000000; font-family: Arial; font-size: 20px; text-align: center;"><strong>Address Bus</strong></span><br />
+<span style="color: #000000; font-family: Helvetica;">Carry the address of the main memory location or I/O device which is about to be used. Send address values only in one direction, e.g. from the processor to the MAR </span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 30px;"><strong>Parallel processing system</strong></span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">Parallel processor:</span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">-More than one processor</span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">-to perform a single job</span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">-Each processor is used to perform a task which is a part of the entire problem </span><br />
+<br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">Math co-processor:</span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">-an additional processor which works alongside the main processor</span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">-Processor capable of processing large representations/ many bytes <em> used large size registers</span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">-Particularly used for floating point calculations</span><br />
+<br />
+<br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">Array processor:</span><br />
+<br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">-Allows a single instruction to be carried out… </span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">-simultaneously on a number of data locations </em> processor has several ALUs</span><br />
+<span style="color: #000000; font-family: Helvetica; font-size: 11px;">-Used to process all the values in an array at the same time</span></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

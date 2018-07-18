@@ -1,0 +1,136 @@
+<html>
+  <head>
+    <title>IBCS1-WD - August 31st 2016 by Enzo Yang</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>August 31st 2016 by Enzo Yang<small> #Log </small></h1><span style="color: #000000; font-family: 宋体; font-size: 14px;">1. “ <span style="font-family: Calibri;">= </span><span style="font-family: 宋体;">”符号是赋值符号。</span></span><br />
+<span style="color: #000000; font-family: 宋体; font-size: 14px;"><span style="font-family: 宋体;">如</span>a=5, <span style="font-family: 宋体;">便是给</span><span style="font-family: Calibri;">a</span><span style="font-family: 宋体;">赋值。接下来我们打</span><span style="font-family: Calibri;">b=a</span><span style="font-family: 宋体;">，那么</span><span style="font-family: Calibri;">a</span><span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">b</span><span style="font-family: 宋体;">都指向了同一个值。</span></span><br />
+<span style="color: #000000; font-family: 宋体; font-size: 14px;"><span style="font-family: 宋体;">另一种情况，若初始</span>n=5<span style="font-family: 宋体;">，那么</span><span style="font-family: Calibri;">n=3n+1</span><span style="font-family: 宋体;">便是将上一个</span><span style="font-family: Calibri;">n</span><span style="font-family: 宋体;">的值代入计算并更新了</span><span style="font-family: Calibri;">n</span><span style="font-family: 宋体;">的值。</span></span><br />
+<br />
+<span style="color: #000000; font-family: 宋体; font-size: 14px;">2. <span style="font-family: 宋体;">在</span>PyCharm<span style="font-family: 宋体;">里如何进行调试？</span></span><br />
+<span style="color: #000000; font-family: 宋体; font-size: 14px;"><span style="font-family: 宋体;">点击</span>Run -&gt; debug <span style="font-family: 宋体;">这时下方会显示程序的初始信息。然后把鼠标移动到主界面左边浅灰色的部分，单击一下在该行的左边就会出现一个红点，这就是一个断点，程序运行到次就会停止。除非在点击下方的绿点，那么程序就会继续运行直到下一个断点。</span></span><br />
+<span style="color: #000000; font-family: 宋体; font-size: 14px;"><span style="font-family: 宋体;">除此之外还有一个小功能，就是每行末端可以有灰色字显示程序运行到此的当前的值。这就涉及到对函数的两种操作，如果对一个函数采用</span>step into<span style="font-family: 宋体;">，那么程序运行就会进入函数的内部，并逐一显示函数内每一步的运行结果</span><span style="font-family: Calibri;">; </span><span style="font-family: 宋体;">而</span><span style="font-family: Calibri;">step over</span><span style="font-family: 宋体;">将允许程序直接显示程序的最终结果。大家可以根据自己调试的需要选择。</span></span><br />
+<br />
+<span style="color: #000000; font-family: Calibri; font-size: 14px;">3. ‘</span><span style="color: #000000; font-family: 宋体; font-size: 14px;">for</span><span style="color: #000000; font-family: Calibri; font-size: 14px;">’</span><span style="color: #000000; font-family: 宋体; font-size: 14px;">循环</span><br />
+<span style="color: #000000; font-family: 宋体; font-size: 14px;">for loop<span style="font-family: 宋体;">会不断循环，直到</span><span style="font-family: Calibri;">list</span><span style="font-family: 宋体;">里的全部元素都被访问过了，也就是所谓的遍历：</span><span style="font-family: Calibri;">traversal</span><span style="font-family: 宋体;">。每一次运行它都会取一个</span><span style="font-family: Calibri;">list</span><span style="font-family: 宋体;">里的元素。比如：</span></span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">totalvalue <span class="sy0">=</span> <span class="nu0">0</span>
+For i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">10</span><span class="br0">&#41;</span>:
+   totalvalue +<span class="sy0">=</span> i
+&nbsp;
+Print<span class="br0">&#40;</span>“<span class="kw2">iter</span>”<span class="sy0">,</span>i<span class="sy0">,</span>”the total value <span class="kw1">is</span>:”<span class="sy0">,</span> totalvalue<span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<span style="color: #000000; font-family: 宋体; font-size: 14px;"><span style="font-family: 宋体;">此处我们关于变量</span>i<span style="font-family: 宋体;">应该注意两点，</span><span style="font-family: Calibri;">1.i</span><span style="font-family: 宋体;">是在循环里不断变化的 </span><span style="font-family: Calibri;">2.</span><span style="font-family: 宋体;">在函数中只是形式参数，实际参数是在运行中体现的</span></span><br />
+<br />
+<span style="color: #000000; font-family: Calibri; font-size: 14px;">4. ‘</span><span style="color: #000000; font-family: 宋体; font-size: 14px;">while</span><span style="color: #000000; font-family: Calibri; font-size: 14px;">’</span><span style="color: #000000; font-family: 宋体; font-size: 14px;">循环</span><br />
+<span style="color: #000000; font-family: 宋体; font-size: 14px;">while<span style="font-family: 宋体;">后面跟的是</span><span style="font-family: Calibri;">conditions</span><span style="font-family: 宋体;">，即程序将一直执行循环一直到不符合这个条件。所以它更适合被用于无法在一开始确定终止时间的函数。一定要多加注意运用</span><span style="font-family: Calibri;">while</span><span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">for</span><span style="font-family: 宋体;">的不同时机。</span></span><br />
+<br />
+<span style="color: #000000; font-family: 宋体; font-size: 14px;">5. <span style="font-family: 宋体;">杨辉三角</span></span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> test_yield<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+   <span class="kw1">yield</span> <span class="nu0">1</span>
+   <span class="kw1">yield</span> <span class="nu0">2</span>
+   <span class="kw1">yield</span> <span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">2</span><span class="br0">&#41;</span>
+&nbsp;
+a <span class="sy0">=</span> test_yield<span class="br0">&#40;</span><span class="br0">&#41;</span>
+a.<span class="me1">next</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<br />
+<span style="display: block; text-align: justify;"><br />
+</span><br />
+<span style="display: block; text-align: justify;"><span style="color: #000000; display: block; font-family: 宋体; font-size: 14px; text-align: justify;">6.yield</span></span><br />
+<span style="display: block; text-align: justify;"><span style="color: #000000; display: block; font-family: 宋体; font-size: 14px; text-align: justify;">yield<span style="font-family: 宋体;">与</span><span style="font-family: Calibri;">return</span><span style="font-family: 宋体;">功能相似，但是函数不会就此结束。而且要用next来找到yield对应的值。</span></span></span><br />
+<span style="display: block; text-align: justify;"><br />
+</span><br />
+<span style="display: block; text-align: justify;"><span style="color: #000000; display: block; font-family: 宋体; font-size: 14px; text-align: justify;">7.zip</span><br />
+</span><br />
+<span style="display: block; text-align: justify;"><span style="color: #000000; display: block; font-family: 宋体; font-size: 14px; text-align: justify;">zip的作用便是将对应的元素打包，使用方法如下（注意：如不使用list结果只会指向一个内存地址）：</span><br />
+</span><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">x <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">2</span><span class="sy0">,</span><span class="nu0">3</span><span class="br0">&#93;</span>
+y <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">4</span><span class="sy0">,</span><span class="nu0">5</span><span class="sy0">,</span><span class="nu0">6</span><span class="br0">&#93;</span>
+z <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">7</span><span class="sy0">,</span><span class="nu0">8</span><span class="sy0">,</span><span class="nu0">9</span><span class="br0">&#93;</span>
+&nbsp;
+xyz <span class="sy0">=</span> <span class="kw2">zip</span><span class="br0">&#40;</span>x<span class="sy0">,</span>y<span class="sy0">,</span>z<span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#40;</span>xyz<span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<span style="display: block; text-align: justify;"><br />
+</span><span style="display: block; text-align: justify;"><br />
+</span></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,98 @@
+<html>
+  <head>
+    <title>IBCS1-WD - chapter 16 ex</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">class</span> Point:
+    <span class="st0">&quot;&quot;&quot; Point class represents and manipulates x,y coords. &quot;&quot;&quot;</span>
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span> y<span class="sy0">=</span><span class="nu0">0</span><span class="br0">&#41;</span>:
+        <span class="st0">&quot;&quot;&quot; Create a new point at x, y &quot;&quot;&quot;</span>
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> Rectangle:
+    <span class="st0">&quot;&quot;&quot; A class to manufacture rectangle objects &quot;&quot;&quot;</span>
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> posn<span class="sy0">,</span> w<span class="sy0">,</span> h<span class="br0">&#41;</span>:
+        <span class="st0">&quot;&quot;&quot; Initialize rectangle at posn, with width w, height h &quot;&quot;&quot;</span>
+        <span class="kw2">self</span>.<span class="me1">corner</span> <span class="sy0">=</span> posn
+        <span class="kw2">self</span>.<span class="me1">width</span> <span class="sy0">=</span> w
+        <span class="kw2">self</span>.<span class="me1">height</span> <span class="sy0">=</span> h
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__str__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="st0">&quot;({0}, {1}, {2})&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">corner</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">width</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">height</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> grow<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> delta_width<span class="sy0">,</span> delta_height<span class="br0">&#41;</span>:
+        <span class="st0">&quot;&quot;&quot; Grow (or shrink) this object by the deltas &quot;&quot;&quot;</span>
+        <span class="kw2">self</span>.<span class="me1">width</span> +<span class="sy0">=</span> delta_width
+        <span class="kw2">self</span>.<span class="me1">height</span> +<span class="sy0">=</span> delta_height
+&nbsp;
+    <span class="kw1">def</span> move<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> dx<span class="sy0">,</span> dy<span class="br0">&#41;</span>:
+        <span class="st0">&quot;&quot;&quot; Move this object by the deltas &quot;&quot;&quot;</span>
+        <span class="kw2">self</span>.<span class="me1">corner</span>.<span class="me1">x</span> +<span class="sy0">=</span> dx
+        <span class="kw2">self</span>.<span class="me1">corner</span>.<span class="me1">y</span> +<span class="sy0">=</span> dy
+&nbsp;
+    <span class="kw1">def</span> same_coordinates<span class="br0">&#40;</span>p1<span class="sy0">,</span> p2<span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="br0">&#40;</span>p1.<span class="me1">x</span> <span class="sy0">==</span> p2.<span class="me1">x</span><span class="br0">&#41;</span> <span class="kw1">and</span> <span class="br0">&#40;</span>p1.<span class="me1">y</span> <span class="sy0">==</span> p2.<span class="me1">y</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> area<span class="br0">&#40;</span>r<span class="br0">&#41;</span>:
+        area <span class="sy0">=</span> r.<span class="me1">width</span> * r.<span class="me1">height</span>
+        <span class="kw1">return</span> area
+&nbsp;
+    <span class="kw1">def</span> perimeter<span class="br0">&#40;</span>r<span class="br0">&#41;</span>:
+        perimeter <span class="sy0">=</span> <span class="nu0">2</span> * r.<span class="me1">width</span> + <span class="nu0">2</span> * r.<span class="me1">height</span>
+        <span class="kw1">return</span> perimeter
+&nbsp;
+    <span class="kw1">def</span> flip<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        tem <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">width</span>
+        <span class="kw2">self</span>.<span class="me1">width</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">height</span>
+        <span class="kw2">self</span>.<span class="me1">height</span> <span class="sy0">=</span> tem
+&nbsp;
+    <span class="kw1">def</span> contains<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> target<span class="br0">&#41;</span>:
+        <span class="kw1">if</span> target.<span class="me1">x</span> <span class="sy0">&gt;=</span> <span class="kw2">self</span>.<span class="me1">corner</span>.<span class="me1">x</span>:
+            <span class="kw1">if</span> target.<span class="me1">x</span> <span class="sy0">&lt;</span> <span class="kw2">self</span>.<span class="me1">width</span>:
+                <span class="kw1">if</span> target.<span class="me1">y</span> <span class="sy0">&gt;=</span> <span class="kw2">self</span>.<span class="me1">corner</span>.<span class="me1">y</span>:
+                    <span class="kw1">if</span> target.<span class="me1">y</span> <span class="sy0">&lt;</span> <span class="kw2">self</span>.<span class="me1">height</span>:
+                        <span class="kw1">return</span> <span class="kw2">True</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">return</span> <span class="kw2">False</span>
+    <span class="kw1">def</span> collide<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>target<span class="br0">&#41;</span>:
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">contains</span><span class="br0">&#40;</span>target.<span class="me1">corner</span><span class="br0">&#41;</span> <span class="kw1">or</span> <span class="kw2">self</span>.<span class="me1">contains</span><span class="br0">&#40;</span>Point<span class="br0">&#40;</span>target.<span class="me1">corner</span>.<span class="me1">x</span>+target.<span class="me1">width</span><span class="sy0">,</span>target.<span class="me1">corner</span>.<span class="me1">y</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw1">or</span> <span class="kw2">self</span>.<span class="me1">contains</span><span class="br0">&#40;</span>Point<span class="br0">&#40;</span>target.<span class="me1">corner</span>.<span class="me1">x</span>+target.<span class="me1">width</span><span class="sy0">,</span>target.<span class="me1">corner</span>.<span class="me1">y</span> - target.<span class="me1">leight</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw1">or</span> <span class="kw2">self</span>.<span class="me1">contains</span><span class="br0">&#40;</span>Point<span class="br0">&#40;</span>target.<span class="me1">corner</span>.<span class="me1">x</span><span class="sy0">,</span>target.<span class="me1">corner</span>.<span class="me1">y</span>-target.<span class="me1">height</span><span class="br0">&#41;</span><span class="br0">&#41;</span>:
+            <span class="kw1">return</span> <span class="kw2">True</span>
+&nbsp;
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

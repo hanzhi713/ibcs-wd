@@ -1,0 +1,161 @@
+<html>
+  <head>
+    <title>IBCS1-WD - CourseTest</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> Deck <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> deck<span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">int</span> NUMCARDS <span class="sy0">=</span> <span class="nu0">52</span><span class="sy0">;</span>
+&nbsp;
+    <span class="co3">/** constructor */</span>
+    <span class="kw1">public</span> Deck<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        deck <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>NUMCARDS<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> NUMCARDS<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+            deck<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> i<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co3">/** Write contents of Deck. */</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> writeDeck<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> card <span class="sy0">:</span> deck<span class="br0">&#41;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span>card <span class="sy0">+</span> <span class="st0">&quot; &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="co3">/** Swap arr[i] and arr[j] in array arr. */</span>
+    <span class="kw1">private</span> <span class="kw4">void</span> swap<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> arr, <span class="kw4">int</span> i, <span class="kw4">int</span> j<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> temp <span class="sy0">=</span> arr<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+        arr<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> arr<span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+        arr<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> temp<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> shuffle<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> index<span class="sy0">;</span> <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> NUMCARDS <span class="sy0">-</span> <span class="nu0">1</span><span class="sy0">;</span> i <span class="sy0">&gt;</span> <span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">--</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="co1">//generate an int from 0 to i</span>
+            index <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="kw3">Math</span>.<span class="me1">random</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">*</span> <span class="br0">&#40;</span>i <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span> swap<span class="br0">&#40;</span>deck, i, index<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> Deckmain <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span> args<span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        Deck d <span class="sy0">=</span> <span class="kw1">new</span> Deck<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        d.<span class="me1">writeDeck</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        d.<span class="me1">shuffle</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        d.<span class="me1">writeDeck</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        d.<span class="me1">shuffle</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        d.<span class="me1">writeDeck</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> ManyDecks <span class="br0">&#123;</span>
+    <span class="kw1">private</span> Deck<span class="br0">&#91;</span><span class="br0">&#93;</span> allDecks<span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">int</span> NUMDECKS <span class="sy0">=</span> <span class="nu0">500</span><span class="sy0">;</span>
+&nbsp;
+    <span class="co3">/** constructor */</span>
+    <span class="kw1">public</span> ManyDecks<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        allDecks <span class="sy0">=</span> <span class="kw1">new</span> Deck<span class="br0">&#91;</span>NUMDECKS<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> NUMDECKS<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+            allDecks<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> Deck<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="co3">/** Shuffle the Decks. */</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> shuffleAll<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span>Deck d <span class="sy0">:</span> allDecks<span class="br0">&#41;</span>
+            d.<span class="me1">shuffle</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> printDecks<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span>Deck d <span class="sy0">:</span> allDecks<span class="br0">&#41;</span> d.<span class="me1">writeDeck</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<img src="files/CourseTest%281%29.PNG" alt="CourseTest(1).PNG" title="CourseTest(1).PNG" /><br />
+<img src="files/CourseTest%282%29.PNG" alt="CourseTest(2).PNG" title="CourseTest(2).PNG" /></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

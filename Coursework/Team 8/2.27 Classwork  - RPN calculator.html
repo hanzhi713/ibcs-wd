@@ -1,0 +1,117 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 2.27 Classwork  - RPN calculator</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-01%20%E4%B8%8A%E5%8D%888.09.26.png" alt=" 2017-03-01 上午8.09.26.png" title=" 2017-03-01 上午8.09.26.png" style="height: 504px; width: 808px;" /><br />
+<h2 id="toc0"> </h2>
+ <h2 id="toc1"><a name="x-Analysis:"></a><span style="color: #ff0000;">Analysis:</span></h2>
+ <br />
+<span style="color: #ff0000;">Strength:</span><br />
+<span style="font-size: 150%;"> The program supports </span><span style="color: #ff0000; font-size: 150%;">trigonometric and logarithmic</span><span style="font-size: 150%;"> calculations!</span><br />
+<span style="font-size: 150%;">I constructed a function called </span><span style="font-family: 'Palatino Linotype','Book Antiqua',Palatino,serif; font-size: 150%;">printlist(lst)</span><span style="font-size: 150%;"> which can print the elements in nested lists recursively. This simplifies my code significantly.</span><br />
+<br />
+<span style="color: #ff0000;">Weakness:</span><br />
+<span style="font-size: 150%;">However, after changing into in-post, the operator ** causes some ambiguity since it would be too messy if we add parenthesis next to multiplications and divisions.</span><br />
+<span style="font-size: 150%;">Also, if the user incorrectly input the data (e.g. attempting to take arcsin(2) or begin the RPN with an operator), exceptions will be made instead of dealt with.</span><br />
+<br />
+<h2 id="toc2"><a name="x-source code:"></a>source code:</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">from</span> <span class="kw3">math</span> <span class="kw1">import</span> *
+&nbsp;
+<span class="kw1">def</span> RPNcalc<span class="br0">&#40;</span>lst<span class="br0">&#41;</span>:
+    stack<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> cur <span class="kw1">in</span> lst:
+        <span class="kw1">if</span> cur <span class="kw1">in</span> <span class="br0">&#91;</span><span class="st0">&quot;sin&quot;</span><span class="sy0">,</span><span class="st0">&quot;cos&quot;</span><span class="sy0">,</span><span class="st0">&quot;tan&quot;</span><span class="sy0">,</span><span class="st0">&quot;asin&quot;</span><span class="sy0">,</span><span class="st0">&quot;acos&quot;</span><span class="sy0">,</span><span class="st0">&quot;atan&quot;</span><span class="br0">&#93;</span>:
+                a<span class="sy0">=</span>stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+                stack.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">eval</span><span class="br0">&#40;</span>cur+<span class="st0">&quot;(&quot;</span>+<span class="kw2">str</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>+<span class="st0">&quot;)&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">elif</span> cur <span class="sy0">==</span> <span class="st0">&quot;log&quot;</span>:
+                    b<span class="sy0">=</span>stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+                    a<span class="sy0">=</span>stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>   <span class="co1">## This is the base</span>
+                    stack.<span class="me1">append</span><span class="br0">&#40;</span>log<span class="br0">&#40;</span>b<span class="sy0">,</span>a<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">try</span>:
+                stack.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">eval</span><span class="br0">&#40;</span>cur<span class="br0">&#41;</span><span class="br0">&#41;</span>
+            <span class="kw1">except</span>:
+                    b<span class="sy0">=</span>stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>  <span class="co1">## In division, this is the divisor</span>
+                    a<span class="sy0">=</span>stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+                    stack.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">eval</span><span class="br0">&#40;</span><span class="kw2">str</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>+cur+<span class="kw2">str</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> printlist<span class="br0">&#40;</span>lst<span class="br0">&#41;</span>:
+    <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>lst<span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">1</span>:
+        <span class="kw1">print</span><span class="br0">&#40;</span>lst<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> lst:
+        <span class="kw1">if</span> <span class="kw2">type</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="sy0">==</span><span class="kw2">list</span>:
+            printlist<span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">print</span><span class="br0">&#40;</span>i<span class="sy0">,</span>end<span class="sy0">=</span><span class="st0">&quot; &quot;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> toInFix<span class="br0">&#40;</span>lst<span class="br0">&#41;</span>:
+    stack <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> cur <span class="kw1">in</span> lst:
+        <span class="kw1">if</span> cur <span class="kw1">in</span> <span class="br0">&#91;</span><span class="st0">&quot;sin&quot;</span><span class="sy0">,</span><span class="st0">&quot;cos&quot;</span><span class="sy0">,</span><span class="st0">&quot;tan&quot;</span><span class="sy0">,</span><span class="st0">&quot;asin&quot;</span><span class="sy0">,</span><span class="st0">&quot;acos&quot;</span><span class="sy0">,</span><span class="st0">&quot;atan&quot;</span><span class="br0">&#93;</span>:
+                a<span class="sy0">=</span>stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+                add<span class="sy0">=</span><span class="br0">&#91;</span>cur<span class="sy0">,</span><span class="st0">&quot;(&quot;</span><span class="sy0">,</span>a<span class="sy0">,</span><span class="st0">&quot;)&quot;</span><span class="br0">&#93;</span>
+                stack.<span class="me1">append</span><span class="br0">&#40;</span>add<span class="br0">&#41;</span>
+        <span class="kw1">elif</span> cur <span class="sy0">==</span> <span class="st0">&quot;log&quot;</span>:
+            b<span class="sy0">=</span>stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            a<span class="sy0">=</span>stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>   <span class="co1">## This is the base</span>
+            add<span class="sy0">=</span><span class="br0">&#91;</span><span class="st0">&quot;log&quot;</span><span class="sy0">,</span><span class="st0">&quot;(&quot;</span><span class="sy0">,</span>b<span class="sy0">,</span><span class="st0">&quot;,&quot;</span><span class="sy0">,</span>a<span class="sy0">,</span><span class="st0">&quot;)&quot;</span><span class="br0">&#93;</span>
+            stack.<span class="me1">append</span><span class="br0">&#40;</span>add<span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">try</span>:
+                stack.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">str</span><span class="br0">&#40;</span><span class="kw2">eval</span><span class="br0">&#40;</span>cur<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            <span class="kw1">except</span>:
+                b<span class="sy0">=</span>stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>  <span class="co1">## In division, this is the divisor</span>
+                a<span class="sy0">=</span>stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+                <span class="kw1">if</span> cur <span class="kw1">in</span> <span class="br0">&#91;</span><span class="st0">&quot;+&quot;</span><span class="sy0">,</span><span class="st0">&quot;-&quot;</span><span class="br0">&#93;</span>:
+                    add<span class="sy0">=</span><span class="br0">&#91;</span><span class="st0">&quot;(&quot;</span><span class="sy0">,</span>a<span class="sy0">,</span>cur<span class="sy0">,</span>b<span class="sy0">,</span><span class="st0">&quot;)&quot;</span><span class="br0">&#93;</span>
+                <span class="kw1">else</span>:
+                    add<span class="sy0">=</span><span class="br0">&#91;</span>a<span class="sy0">,</span>cur<span class="sy0">,</span>b<span class="br0">&#93;</span>
+                stack.<span class="me1">append</span><span class="br0">&#40;</span>add<span class="br0">&#41;</span>
+    printlist<span class="br0">&#40;</span>stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    s<span class="sy0">=</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Your RPN: &quot;</span><span class="br0">&#41;</span>
+    lst<span class="sy0">=</span>s.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;The result is:&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>RPNcalc<span class="br0">&#40;</span>lst<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;In in-fix, it is:&quot;</span><span class="br0">&#41;</span>
+    toInFix<span class="br0">&#40;</span>lst<span class="br0">&#41;</span>
+&nbsp;
+main<span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+<h2 id="toc3"><a name="x-All code is original."></a>All code is original.</h2>
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

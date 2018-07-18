@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <title>IBCS1-WD - August 16th, Tom's work on projectile motion tracer</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>August 16th, Tom's work on projectile motion tracer<small> #TomsProjects </small></h1>
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+<span class="kw1">import</span> <span class="kw3">math</span>
+Projectile <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+veloSet <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+veloSet.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Projectile.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+wn.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Projectile Motion Tracer&quot;</span><span class="br0">&#41;</span>
+projectile_x <span class="sy0">=</span> <span class="nu0">0</span>
+projectile_y <span class="sy0">=</span> <span class="nu0">0</span>
+vector_x <span class="sy0">=</span> <span class="nu0">0</span>
+vector_y <span class="sy0">=</span> <span class="nu0">0</span>
+vec_mag <span class="sy0">=</span> <span class="nu0">0</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;Click on any point to define the origin&quot;</span><span class="br0">&#41;</span>
+scale <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Please enter an integer as the length of one unit (in pixels)&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="co1"># avoid repetitive code...</span>
+<span class="kw1">def</span> turtle_reposition<span class="br0">&#40;</span>obj<span class="sy0">,</span> x<span class="sy0">,</span> y<span class="br0">&#41;</span>:
+    obj.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    obj.<span class="me1">goto</span><span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="br0">&#41;</span>
+    obj.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="co1"># start to draw axes, extending from the point where the user have clicked</span>
+<span class="kw1">def</span> acquire_mouse_position<span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="br0">&#41;</span>:
+    <span class="kw1">global</span> projectile_x
+    <span class="kw1">global</span> projectile_y
+    turtle_reposition<span class="br0">&#40;</span>Projectile<span class="sy0">,</span> x<span class="sy0">,</span> y<span class="br0">&#41;</span>
+    Projectile.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    DrawAxes<span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="st0">&quot;X&quot;</span><span class="sy0">,</span>Projectile<span class="sy0">,</span> x<span class="sy0">,</span> y<span class="sy0">,</span><span class="nu0">1000</span> <span class="sy0">,</span>scale<span class="br0">&#41;</span>
+    Projectile.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    DrawAxes<span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="st0">&quot;Y&quot;</span><span class="sy0">,</span> Projectile<span class="sy0">,</span> x<span class="sy0">,</span> y <span class="sy0">,</span><span class="nu0">1000</span><span class="sy0">,</span>scale<span class="br0">&#41;</span>
+    Projectile.<span class="me1">showturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    Projectile.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+    projectile_x <span class="sy0">=</span> x / scale
+    projectile_y <span class="sy0">=</span> y / scale
+    wn.<span class="me1">onclick</span><span class="br0">&#40;</span>set_velocity<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> set_velocity<span class="br0">&#40;</span>x<span class="sy0">,</span>y<span class="br0">&#41;</span>:
+    veloSet.<span class="me1">showturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    turtle_reposition<span class="br0">&#40;</span>veloSet<span class="sy0">,</span> projectile_x * scale<span class="sy0">,</span> projectile_y * scale<span class="br0">&#41;</span>
+    <span class="kw1">global</span> vector_x
+    <span class="kw1">global</span> vector_y
+    veloSet.<span class="me1">goto</span><span class="br0">&#40;</span>x<span class="sy0">,</span>y<span class="br0">&#41;</span>
+    veloSet.<span class="me1">stamp</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    vector_x <span class="sy0">=</span> <span class="br0">&#40;</span>x - projectile_x * scale<span class="br0">&#41;</span> / scale
+    vector_y <span class="sy0">=</span> <span class="br0">&#40;</span>y - projectile_y * scale<span class="br0">&#41;</span> / scale
+    <span class="kw1">global</span> vec_mag
+    vec_mag <span class="sy0">=</span> <span class="kw3">math</span>.<span class="me1">sqrt</span><span class="br0">&#40;</span>vector_x ** <span class="nu0">2</span> + vector_y ** <span class="nu0">2</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;The magnitude of current velocity vector is &quot;</span> + <span class="kw2">str</span><span class="br0">&#40;</span>vec_mag<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;Press 'a' to draw&quot;</span><span class="br0">&#41;</span>
+    wn.<span class="me1">listen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    wn.<span class="me1">onkey</span><span class="br0">&#40;</span>draw_motion<span class="sy0">,</span><span class="st0">&quot;a&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> draw_motion<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    angle <span class="sy0">=</span> <span class="kw3">math</span>.<span class="me1">acos</span><span class="br0">&#40;</span>vector_x / vec_mag<span class="br0">&#41;</span>
+    <span class="kw1">for</span> a <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">1500</span><span class="br0">&#41;</span>:
+        x <span class="sy0">=</span> a / <span class="nu0">5</span>
+        xc <span class="sy0">=</span> x + projectile_x
+        yc <span class="sy0">=</span> x * <span class="kw3">math</span>.<span class="me1">tan</span><span class="br0">&#40;</span>angle<span class="br0">&#41;</span> - <span class="nu0">4.905</span> * x ** <span class="nu0">2</span> / <span class="br0">&#40;</span><span class="br0">&#40;</span>vec_mag * <span class="kw3">math</span>.<span class="me1">cos</span><span class="br0">&#40;</span>angle<span class="br0">&#41;</span><span class="br0">&#41;</span> ** <span class="nu0">2</span><span class="br0">&#41;</span> + projectile_y
+        Projectile.<span class="me1">goto</span><span class="br0">&#40;</span>xc * scale<span class="sy0">,</span> yc * scale<span class="br0">&#41;</span>
+    turtle_reposition<span class="br0">&#40;</span>Projectile<span class="sy0">,</span> projectile_x * scale<span class="sy0">,</span> projectile_y * scale<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="co1"># My function copied from my previous work on drawing functions</span>
+<span class="kw1">def</span> DrawAxes<span class="br0">&#40;</span>Direction<span class="sy0">,</span> XorYaxis<span class="sy0">,</span> obj<span class="sy0">,</span> x<span class="sy0">,</span> y<span class="sy0">,</span> length<span class="sy0">=</span><span class="nu0">100</span><span class="sy0">,</span> Scale<span class="sy0">=</span><span class="nu0">10</span><span class="br0">&#41;</span>:
+    howmany <span class="sy0">=</span> length // Scale
+    i <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">while</span> <span class="nu0">1</span>:
+        obj.<span class="me1">forward</span><span class="br0">&#40;</span>Direction * Scale<span class="br0">&#41;</span>
+        obj.<span class="me1">left</span><span class="br0">&#40;</span>Direction * <span class="nu0">90</span><span class="br0">&#41;</span>
+        obj.<span class="me1">forward</span><span class="br0">&#40;</span>Direction * <span class="nu0">5</span><span class="br0">&#41;</span>
+        obj.<span class="me1">forward</span><span class="br0">&#40;</span>Direction * -<span class="nu0">5</span><span class="br0">&#41;</span>
+        obj.<span class="me1">right</span><span class="br0">&#40;</span>Direction * <span class="nu0">90</span><span class="br0">&#41;</span>
+        i <span class="sy0">=</span> i + <span class="nu0">1</span>
+        <span class="kw1">if</span> i % <span class="nu0">5</span> <span class="sy0">==</span> <span class="nu0">0</span>:
+            <span class="kw1">if</span> XorYaxis<span class="sy0">==</span><span class="st0">&quot;X&quot;</span>:
+                obj.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+                obj.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+                obj.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">16</span><span class="br0">&#41;</span>
+                obj.<span class="me1">write</span><span class="br0">&#40;</span>i<span class="sy0">,</span> <span class="kw2">False</span><span class="sy0">,</span> align<span class="sy0">=</span><span class="st0">&quot;center&quot;</span><span class="sy0">,</span> font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span><span class="sy0">,</span> <span class="nu0">9</span><span class="sy0">,</span> <span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                obj.<span class="me1">forward</span><span class="br0">&#40;</span>-<span class="nu0">16</span><span class="br0">&#41;</span>
+                obj.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+                obj.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="kw1">else</span>:
+                obj.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+                obj.<span class="me1">right</span><span class="br0">&#40;</span>-<span class="nu0">90</span><span class="br0">&#41;</span>
+                obj.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span>
+                obj.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+                obj.<span class="me1">forward</span><span class="br0">&#40;</span><span class="nu0">7</span><span class="br0">&#41;</span>
+                obj.<span class="me1">write</span><span class="br0">&#40;</span>i<span class="sy0">,</span> <span class="kw2">False</span><span class="sy0">,</span> align<span class="sy0">=</span><span class="st0">&quot;right&quot;</span><span class="sy0">,</span> font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span><span class="sy0">,</span> <span class="nu0">9</span><span class="sy0">,</span> <span class="st0">&quot;bold&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                obj.<span class="me1">forward</span><span class="br0">&#40;</span>-<span class="nu0">7</span><span class="br0">&#41;</span>
+                obj.<span class="me1">left</span><span class="br0">&#40;</span>-<span class="nu0">90</span><span class="br0">&#41;</span>
+                obj.<span class="me1">forward</span><span class="br0">&#40;</span>-<span class="nu0">5</span><span class="br0">&#41;</span>
+                obj.<span class="me1">left</span><span class="br0">&#40;</span>-<span class="nu0">90</span><span class="br0">&#41;</span>
+                obj.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> i <span class="sy0">&gt;</span> howmany:
+            turtle_reposition<span class="br0">&#40;</span>obj<span class="sy0">,</span>x<span class="sy0">,</span>y<span class="br0">&#41;</span>
+            <span class="kw1">break</span>
+wn.<span class="me1">onclick</span><span class="br0">&#40;</span>acquire_mouse_position<span class="br0">&#41;</span>
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

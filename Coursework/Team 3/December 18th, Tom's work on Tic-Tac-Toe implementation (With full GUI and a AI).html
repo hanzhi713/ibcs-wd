@@ -1,0 +1,775 @@
+<html>
+  <head>
+    <title>IBCS1-WD - December 18th, Tom's work on Tic-Tac-Toe implementation (With full GUI and a AI)</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>December 18th, Tom's work on Tic-Tac-Toe implementation (With full GUI and a AI)<small> #TomsProjects </small></h1><h1 id="toc0"><a name="Executable jar file: Tic-Tac-Toe.jar"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Executable jar file: <a href="files/Tic_Tac_Toe.jar">Tic-Tac-Toe.jar</a></span></h1>
+ <h1 id="toc1"> </h1>
+ <h1 id="toc2"><a name="Class Test (Main class)"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Class Test (Main class)</span></h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">Tic_Tac_Toe</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Test <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">new</span> Welcome<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span></pre>
+
+<h1 id="toc3"> </h1>
+ <h1 id="toc4"><a name="Class Grid (extends javax.swing.JFrame)"></a>Class Grid (extends javax.swing.JFrame)</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">Tic_Tac_Toe</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">javax.swing.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.event.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Grid <span class="kw1">extends</span> <span class="kw3">JFrame</span> <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">long</span> serialVersionUID <span class="sy0">=</span> 1L<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw3">Font</span> Font_in_Grid <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, <span class="kw3">Font</span>.<span class="me1">BOLD</span>, <span class="nu0">180</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw3">Font</span> Font_at_Side <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, <span class="kw3">Font</span>.<span class="me1">BOLD</span>, <span class="nu0">60</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw3">Font</span> Font_Next <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, <span class="kw3">Font</span>.<span class="me1">BOLD</span>, <span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw3">Font</span> Font_Small <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, <span class="kw3">Font</span>.<span class="me1">BOLD</span>, <span class="nu0">30</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">private</span> Welcome wl <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw1">private</span> TTT_AI AI <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">boolean</span> isAI <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> placement <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> whoGoFirst <span class="sy0">=</span> <span class="st0">&quot;×&quot;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw3">Rectangle</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> Cells <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Rectangle</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">Rectangle</span><span class="br0">&#91;</span><span class="br0">&#93;</span> GridLine<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">Rectangle</span> GridBound<span class="sy0">;</span>
+&nbsp;
+&nbsp;
+    <span class="kw1">private</span> <span class="kw3">Rectangle</span> currentCell <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">Point</span> currentPoint <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Point</span><span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">1</span>,<span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> currentTurn <span class="sy0">=</span> <span class="st0">&quot;×&quot;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw4">int</span> topBound<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> unitDistance<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Grid<span class="br0">&#40;</span>TTT_AI ai, Welcome wl<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        setTitle<span class="br0">&#40;</span><span class="st0">&quot;Tic-Tac-Toe&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">AI</span> <span class="sy0">=</span> ai<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">wl</span> <span class="sy0">=</span> wl<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setVisible</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setDefaultCloseOperation</span><span class="br0">&#40;</span><span class="kw3">JFrame</span>.<span class="me1">DO_NOTHING_ON_CLOSE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setSize</span><span class="br0">&#40;</span><span class="nu0">600</span>, <span class="nu0">400</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setLocation</span><span class="br0">&#40;</span><span class="nu0">200</span>, <span class="nu0">200</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">getContentPane</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="nu0">255</span>, <span class="nu0">255</span>, <span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setResizable</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setLocationRelativeTo</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        topBound <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">getHeight</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">20</span><span class="sy0">;</span>
+        unitDistance <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw1">this</span>.<span class="me1">getHeight</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">-</span> <span class="nu0">20</span> <span class="sy0">-</span> topBound<span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">3</span><span class="sy0">;</span>
+&nbsp;
+        initializeGrid<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        initialize_Radio_Buttons<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        initialize_Reset_Button<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        initialize_Back_Button<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        addListeners<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+    <span class="kw1">private</span> <span class="kw4">void</span> initialize_Radio_Buttons<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">JRadioButton</span> b1, b2<span class="sy0">;</span>
+        <span class="kw3">ButtonGroup</span> g <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">ButtonGroup</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>AI<span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span>
+            b1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JRadioButton</span><span class="br0">&#40;</span><span class="st0">&quot;○(AI)&quot;</span>,<span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">else</span>
+            b1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JRadioButton</span><span class="br0">&#40;</span><span class="st0">&quot;○&quot;</span>,<span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b1.<span class="me1">setBounds</span><span class="br0">&#40;</span><span class="nu0">415</span>, <span class="nu0">180</span>, <span class="nu0">100</span>, <span class="nu0">25</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b1.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b2 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JRadioButton</span><span class="br0">&#40;</span><span class="st0">&quot;×&quot;</span>,<span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b2.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">WHITE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b2.<span class="me1">setBounds</span><span class="br0">&#40;</span><span class="nu0">525</span>, <span class="nu0">180</span>, <span class="nu0">75</span>, <span class="nu0">25</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b1.<span class="me1">setFont</span><span class="br0">&#40;</span>Font_Small<span class="br0">&#41;</span><span class="sy0">;</span>
+        b2.<span class="me1">setFont</span><span class="br0">&#40;</span>Font_Small<span class="br0">&#41;</span><span class="sy0">;</span>
+        g.<span class="me1">add</span><span class="br0">&#40;</span>b1<span class="br0">&#41;</span><span class="sy0">;</span>
+        g.<span class="me1">add</span><span class="br0">&#40;</span>b2<span class="br0">&#41;</span><span class="sy0">;</span>
+        add<span class="br0">&#40;</span>b1<span class="br0">&#41;</span><span class="sy0">;</span>
+        add<span class="br0">&#40;</span>b2<span class="br0">&#41;</span><span class="sy0">;</span>
+        b1.<span class="me1">addItemListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ItemListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> itemStateChanged<span class="br0">&#40;</span><span class="kw3">ItemEvent</span> arg0<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>arg0.<span class="me1">getStateChange</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw3">ItemEvent</span>.<span class="me1">SELECTED</span><span class="br0">&#41;</span>
+                    whoGoFirst <span class="sy0">=</span> <span class="st0">&quot;○&quot;</span><span class="sy0">;</span>
+                <span class="kw1">else</span>
+                    whoGoFirst <span class="sy0">=</span> <span class="st0">&quot;×&quot;</span><span class="sy0">;</span>
+                reset<span class="br0">&#40;</span>whoGoFirst<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+&nbsp;
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">private</span> <span class="kw4">void</span> initialize_Reset_Button<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">Button</span> bt <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Button</span><span class="br0">&#40;</span><span class="st0">&quot;Reset&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">setBounds</span><span class="br0">&#40;</span><span class="nu0">425</span>, <span class="nu0">225</span>, <span class="nu0">100</span>, <span class="nu0">50</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, <span class="kw3">Font</span>.<span class="me1">PLAIN</span>, <span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                reset<span class="br0">&#40;</span>whoGoFirst<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">add</span><span class="br0">&#40;</span>bt<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">private</span> <span class="kw4">void</span> initialize_Back_Button<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">Button</span> bt <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Button</span><span class="br0">&#40;</span><span class="st0">&quot;Back&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">setBounds</span><span class="br0">&#40;</span><span class="nu0">425</span>, <span class="nu0">300</span>, <span class="nu0">100</span>, <span class="nu0">50</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, <span class="kw3">Font</span>.<span class="me1">PLAIN</span>, <span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                wl.<span class="me1">setVisible</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                dispose<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">add</span><span class="br0">&#40;</span>bt<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">private</span> <span class="kw4">void</span> initializeGrid<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        GridBound <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Rectangle</span><span class="br0">&#40;</span><span class="nu0">0</span>, topBound, getWidth<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">3</span> <span class="sy0">*</span> <span class="nu0">2</span> <span class="sy0">-</span> topBound, getHeight<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">-</span> topBound<span class="br0">&#41;</span><span class="sy0">;</span>
+        GridLine <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Rectangle</span><span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="br0">&#123;</span> <span class="kw1">new</span> <span class="kw3">Rectangle</span><span class="br0">&#40;</span><span class="nu0">0</span>, topBound <span class="sy0">+</span> unitDistance, getWidth<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">3</span> <span class="sy0">*</span> <span class="nu0">2</span> <span class="sy0">-</span> topBound, <span class="nu0">10</span><span class="br0">&#41;</span>,
+                <span class="kw1">new</span> <span class="kw3">Rectangle</span><span class="br0">&#40;</span><span class="nu0">0</span>, topBound <span class="sy0">+</span> <span class="nu0">2</span> <span class="sy0">*</span> unitDistance <span class="sy0">+</span> <span class="nu0">10</span>, getWidth<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">3</span> <span class="sy0">*</span> <span class="nu0">2</span> <span class="sy0">-</span> topBound, <span class="nu0">10</span><span class="br0">&#41;</span>,
+                <span class="kw1">new</span> <span class="kw3">Rectangle</span><span class="br0">&#40;</span>unitDistance, <span class="nu0">0</span>, <span class="nu0">10</span>, getHeight<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>,
+                <span class="kw1">new</span> <span class="kw3">Rectangle</span><span class="br0">&#40;</span>unitDistance <span class="sy0">*</span> <span class="nu0">2</span> <span class="sy0">+</span> <span class="nu0">10</span>, <span class="nu0">0</span>, <span class="nu0">10</span>, getHeight<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">3</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> j <span class="sy0">&lt;</span> <span class="nu0">3</span><span class="sy0">;</span> j<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                Cells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Rectangle</span><span class="br0">&#40;</span>j <span class="sy0">*</span> unitDistance <span class="sy0">+</span> j <span class="sy0">*</span> <span class="nu0">10</span>, topBound <span class="sy0">+</span> i <span class="sy0">*</span> unitDistance <span class="sy0">+</span> i <span class="sy0">*</span> <span class="nu0">10</span>,
+                        unitDistance, unitDistance<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">private</span> <span class="kw4">void</span> reset<span class="br0">&#40;</span><span class="kw3">String</span> whoFirst<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        placement <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        currentTurn <span class="sy0">=</span> whoFirst<span class="sy0">;</span>
+&nbsp;
+        currentCell <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+        currentPoint <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Point</span><span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">1</span>,<span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>AI<span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>whoFirst.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;○&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                isAI <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+                currentTurn <span class="sy0">=</span> <span class="st0">&quot;×&quot;</span><span class="sy0">;</span>
+                next<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span><span class="br0">&#123;</span>
+                isAI <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span>
+            isAI <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+        repaint<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> next<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span> sumRow <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sumColumn <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sumMjDiagonal <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sumMnDiagonal <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">boolean</span> isFulfilled <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>j<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>j<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span> isFulfilled <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+                sumRow <span class="sy0">+=</span> placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+                sumColumn <span class="sy0">+=</span> placement<span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>i<span class="sy0">==</span>j<span class="br0">&#41;</span> sumMjDiagonal <span class="sy0">+=</span> placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>i<span class="sy0">==</span><span class="kw3">Math</span>.<span class="me1">abs</span><span class="br0">&#40;</span>j<span class="sy0">-</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span> sumMnDiagonal <span class="sy0">+=</span> placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>sumRow <span class="sy0">==</span> <span class="nu0">3</span> <span class="sy0">||</span> sumColumn<span class="sy0">==</span> <span class="nu0">3</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                currentTurn <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+                repaint<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw3">JOptionPane</span>.<span class="me1">showMessageDialog</span><span class="br0">&#40;</span>Grid.<span class="kw1">this</span>, <span class="st0">&quot;○ wins!&quot;</span>, <span class="st0">&quot;Tic-Tac-Toe&quot;</span>, <span class="kw3">JOptionPane</span>.<span class="me1">INFORMATION_MESSAGE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">return</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>sumRow <span class="sy0">==</span> <span class="sy0">-</span><span class="nu0">3</span> <span class="sy0">||</span> sumColumn <span class="sy0">==</span> <span class="sy0">-</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                currentTurn <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+                repaint<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw3">JOptionPane</span>.<span class="me1">showMessageDialog</span><span class="br0">&#40;</span>Grid.<span class="kw1">this</span>, <span class="st0">&quot;× wins!&quot;</span>,<span class="st0">&quot;Tic-Tac-Toe&quot;</span>, <span class="kw3">JOptionPane</span>.<span class="me1">INFORMATION_MESSAGE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">return</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            sumRow <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+            sumColumn <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>sumMjDiagonal <span class="sy0">==</span> <span class="sy0">-</span><span class="nu0">3</span> <span class="sy0">||</span> sumMnDiagonal <span class="sy0">==</span> <span class="sy0">-</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            currentTurn <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+            repaint<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw3">JOptionPane</span>.<span class="me1">showMessageDialog</span><span class="br0">&#40;</span>Grid.<span class="kw1">this</span>, <span class="st0">&quot;× wins!&quot;</span>, <span class="st0">&quot;Tic-Tac-Toe&quot;</span>, <span class="kw3">JOptionPane</span>.<span class="me1">INFORMATION_MESSAGE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">return</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>sumMjDiagonal <span class="sy0">==</span> <span class="nu0">3</span> <span class="sy0">||</span> sumMnDiagonal <span class="sy0">==</span> <span class="nu0">3</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            currentTurn <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+            repaint<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw3">JOptionPane</span>.<span class="me1">showMessageDialog</span><span class="br0">&#40;</span>Grid.<span class="kw1">this</span>, <span class="st0">&quot;○ wins!&quot;</span>, <span class="st0">&quot;Tic-Tac-Toe&quot;</span>, <span class="kw3">JOptionPane</span>.<span class="me1">INFORMATION_MESSAGE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">return</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>isFulfilled<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            currentTurn <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+            repaint<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw3">JOptionPane</span>.<span class="me1">showMessageDialog</span><span class="br0">&#40;</span>Grid.<span class="kw1">this</span>, <span class="st0">&quot;draw!&quot;</span>, <span class="st0">&quot;Tic-Tac-Toe&quot;</span>, <span class="kw3">JOptionPane</span>.<span class="me1">INFORMATION_MESSAGE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">return</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="kw1">if</span> <span class="br0">&#40;</span>currentTurn.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;×&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            currentTurn <span class="sy0">=</span> <span class="st0">&quot;○&quot;</span><span class="sy0">;</span>
+        <span class="kw1">else</span>
+            currentTurn <span class="sy0">=</span> <span class="st0">&quot;×&quot;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>AI <span class="sy0">!=</span> <span class="kw2">null</span> <span class="sy0">&amp;&amp;</span> isAI <span class="sy0">==</span> <span class="kw2">true</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                isAI <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+                <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> AIplacement<span class="sy0">;</span>
+                AIplacement <span class="sy0">=</span> AI.<span class="me1">place</span><span class="br0">&#40;</span>placement, <span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                currentPoint.<span class="me1">x</span> <span class="sy0">=</span> AIplacement<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span>
+                currentPoint.<span class="me1">y</span> <span class="sy0">=</span> AIplacement<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">;</span>
+                currentCell<span class="sy0">=</span><span class="kw2">null</span><span class="sy0">;</span>
+                place<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> place<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>currentPoint.<span class="me1">x</span><span class="sy0">&gt;-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>currentTurn.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;×&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                placement<span class="br0">&#91;</span>currentPoint.<span class="me1">x</span><span class="br0">&#93;</span><span class="br0">&#91;</span>currentPoint.<span class="me1">y</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">else</span>
+                placement<span class="br0">&#91;</span>currentPoint.<span class="me1">x</span><span class="br0">&#93;</span><span class="br0">&#91;</span>currentPoint.<span class="me1">y</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+            currentCell<span class="sy0">=</span><span class="kw2">null</span><span class="sy0">;</span>
+            currentPoint.<span class="me1">x</span><span class="sy0">=-</span><span class="nu0">1</span><span class="sy0">;</span>
+            next<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            repaint<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">private</span> <span class="kw4">void</span> addListeners<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">addWindowListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">WindowListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> windowActivated<span class="br0">&#40;</span><span class="kw3">WindowEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> windowClosed<span class="br0">&#40;</span><span class="kw3">WindowEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> windowClosing<span class="br0">&#40;</span><span class="kw3">WindowEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                wl.<span class="me1">setVisible</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                dispose<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> windowDeactivated<span class="br0">&#40;</span><span class="kw3">WindowEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> windowDeiconified<span class="br0">&#40;</span><span class="kw3">WindowEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> windowIconified<span class="br0">&#40;</span><span class="kw3">WindowEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> windowOpened<span class="br0">&#40;</span><span class="kw3">WindowEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+&nbsp;
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">addMouseListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">MouseListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> mouseClicked<span class="br0">&#40;</span><span class="kw3">MouseEvent</span> arg0<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>currentCell<span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>AI<span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>isAI<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                            isAI <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+                            place<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">else</span>
+                        place<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> mouseEntered<span class="br0">&#40;</span><span class="kw3">MouseEvent</span> arg0<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> mouseExited<span class="br0">&#40;</span><span class="kw3">MouseEvent</span> arg0<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> mousePressed<span class="br0">&#40;</span><span class="kw3">MouseEvent</span> arg0<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> mouseReleased<span class="br0">&#40;</span><span class="kw3">MouseEvent</span> arg0<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">this</span>.<span class="me1">addMouseMotionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">MouseMotionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> mouseDragged<span class="br0">&#40;</span><span class="kw3">MouseEvent</span> arg0<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> mouseMoved<span class="br0">&#40;</span><span class="kw3">MouseEvent</span> arg0<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+                <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>isAI<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    <span class="kw3">Point</span> p <span class="sy0">=</span> arg0.<span class="me1">getPoint</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>GridBound.<span class="me1">contains</span><span class="br0">&#40;</span>p<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+&nbsp;
+                        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Rectangle</span> gl<span class="sy0">:</span>GridLine<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                            <span class="kw1">if</span> <span class="br0">&#40;</span>gl.<span class="me1">contains</span><span class="br0">&#40;</span>p<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                <span class="kw1">if</span> <span class="br0">&#40;</span>currentCell<span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                    currentCell <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+                                    currentPoint.<span class="me1">x</span> <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+                                    arg0.<span class="me1">getComponent</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">repaint</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                <span class="br0">&#125;</span>
+                                <span class="kw1">return</span><span class="sy0">;</span>
+                            <span class="br0">&#125;</span>
+                        <span class="br0">&#125;</span>
+&nbsp;
+                        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span><span class="nu0">3</span> <span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> j<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>j<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                <span class="kw1">if</span> <span class="br0">&#40;</span>Cells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>.<span class="me1">contains</span><span class="br0">&#40;</span>p<span class="br0">&#41;</span> <span class="sy0">&amp;&amp;</span> placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                    <span class="kw1">if</span> <span class="br0">&#40;</span>currentCell<span class="sy0">!=</span> Cells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                        currentCell <span class="sy0">=</span> Cells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+                                        arg0.<span class="me1">getComponent</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">repaint</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                        currentPoint.<span class="me1">x</span><span class="sy0">=</span>i<span class="sy0">;</span>
+                                        currentPoint.<span class="me1">y</span><span class="sy0">=</span>j<span class="sy0">;</span>
+                                    <span class="br0">&#125;</span>
+                                    <span class="kw1">return</span><span class="sy0">;</span>
+                                <span class="br0">&#125;</span>
+                            <span class="br0">&#125;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">else</span><span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>currentCell<span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                            currentCell <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+                            currentPoint.<span class="me1">x</span> <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+                            arg0.<span class="me1">getComponent</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">repaint</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                        <span class="kw1">return</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> paint<span class="br0">&#40;</span><span class="kw3">Graphics</span> g<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">super</span>.<span class="me1">paint</span><span class="br0">&#40;</span>g<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        g.<span class="me1">setColor</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">BLACK</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Rectangle</span> r <span class="sy0">:</span> GridLine<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            g.<span class="me1">fillRect</span><span class="br0">&#40;</span>r.<span class="me1">x</span>, r.<span class="me1">y</span>, r.<span class="me1">width</span>, r.<span class="me1">height</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        g.<span class="me1">setFont</span><span class="br0">&#40;</span>Font_in_Grid<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>j<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>j<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">&#41;</span>
+                    g.<span class="me1">drawString</span><span class="br0">&#40;</span><span class="st0">&quot;○&quot;</span>, Cells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>.<span class="me1">x</span><span class="sy0">+</span><span class="nu0">10</span>, Cells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>.<span class="me1">y</span><span class="sy0">+</span>Cells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>.<span class="me1">height</span><span class="sy0">-</span><span class="nu0">10</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">==</span> <span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span>
+                    g.<span class="me1">drawString</span><span class="br0">&#40;</span><span class="st0">&quot;×&quot;</span>, Cells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>.<span class="me1">x</span><span class="sy0">+</span><span class="nu0">10</span>, Cells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>.<span class="me1">y</span><span class="sy0">+</span>Cells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>.<span class="me1">height</span><span class="sy0">-</span><span class="nu0">10</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        g.<span class="me1">setColor</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">lightGray</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>currentCell<span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            g.<span class="me1">drawString</span><span class="br0">&#40;</span>currentTurn, currentCell.<span class="me1">x</span><span class="sy0">+</span><span class="nu0">10</span>, currentCell.<span class="me1">y</span><span class="sy0">+</span>currentCell.<span class="me1">height</span><span class="sy0">-</span><span class="nu0">10</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        g.<span class="me1">setColor</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">BLACK</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        g.<span class="me1">setFont</span><span class="br0">&#40;</span>Font_at_Side<span class="br0">&#41;</span><span class="sy0">;</span>
+        g.<span class="me1">drawString</span><span class="br0">&#40;</span><span class="st0">&quot;Next:&quot;</span>, getWidth<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">10</span> <span class="sy0">*</span> <span class="nu0">7</span>, getHeight<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">40</span> <span class="sy0">*</span> <span class="nu0">9</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        g.<span class="me1">setFont</span><span class="br0">&#40;</span>Font_Next<span class="br0">&#41;</span><span class="sy0">;</span>
+        g.<span class="me1">drawString</span><span class="br0">&#40;</span>currentTurn, getWidth<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">10</span> <span class="sy0">*</span> <span class="nu0">7</span>, getHeight<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">18</span><span class="sy0">*</span><span class="nu0">7</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        g.<span class="me1">setFont</span><span class="br0">&#40;</span>Font_Small<span class="br0">&#41;</span><span class="sy0">;</span>
+        g.<span class="me1">drawString</span><span class="br0">&#40;</span><span class="st0">&quot;who go first&quot;</span>, <span class="nu0">415</span>, <span class="nu0">195</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+<h1 id="toc5"><a name="Class Welcome"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Class Welcome</span></h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">Tic_Tac_Toe</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.event.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Welcome <span class="kw1">extends</span> <span class="kw3">JFrame</span><span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">long</span> serialVersionUID <span class="sy0">=</span> 1L<span class="sy0">;</span>
+    <span class="kw1">private</span> Grid gd<span class="sy0">;</span>
+    <span class="kw1">private</span> TTT_AI ai<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Welcome<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        setTitle<span class="br0">&#40;</span><span class="st0">&quot;Tic-Tac-Toe&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setVisible</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setDefaultCloseOperation</span><span class="br0">&#40;</span><span class="kw3">JFrame</span>.<span class="me1">EXIT_ON_CLOSE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setSize</span><span class="br0">&#40;</span><span class="nu0">400</span>, <span class="nu0">400</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setLocation</span><span class="br0">&#40;</span><span class="nu0">200</span>, <span class="nu0">200</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">getContentPane</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="nu0">255</span>, <span class="nu0">255</span>, <span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setResizable</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setLocationRelativeTo</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        initialize_Buttons<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        ai <span class="sy0">=</span> <span class="kw1">new</span> TTT_AI<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw4">void</span> initialize_Buttons<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">Button</span> bt <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Button</span><span class="br0">&#40;</span><span class="st0">&quot;Single Player&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">setBounds</span><span class="br0">&#40;</span><span class="nu0">75</span>, <span class="nu0">75</span>, <span class="nu0">250</span>, <span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, <span class="kw3">Font</span>.<span class="me1">BOLD</span>, <span class="nu0">30</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                gd <span class="sy0">=</span> <span class="kw1">new</span> Grid<span class="br0">&#40;</span>ai, Welcome.<span class="kw1">this</span>, <span class="st0">&quot;Tic-Tac-Toe Single Player&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                setVisible<span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                gd.<span class="me1">setVisible</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">add</span><span class="br0">&#40;</span>bt<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        bt <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Button</span><span class="br0">&#40;</span><span class="st0">&quot;Double Players&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">setBounds</span><span class="br0">&#40;</span><span class="nu0">75</span>, <span class="nu0">225</span>, <span class="nu0">250</span>, <span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, <span class="kw3">Font</span>.<span class="me1">BOLD</span>, <span class="nu0">30</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                gd <span class="sy0">=</span> <span class="kw1">new</span> Grid<span class="br0">&#40;</span><span class="kw2">null</span>, Welcome.<span class="kw1">this</span>, <span class="st0">&quot;Tic-Tac-Toe Double Player&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                gd.<span class="me1">setVisible</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                setVisible<span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">add</span><span class="br0">&#40;</span>bt<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+<br />
+<h1 id="toc6"><a name="Class TTT_AI —— Using Game Rule (Perfect and unbeatable)"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Class TTT_AI —— Using Game Rule (Perfect and unbeatable)</span></h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">Tic_Tac_Toe</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> TTT_AI <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> evaluate<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> placement, <span class="kw4">int</span> i, <span class="kw4">int</span> j, <span class="kw4">int</span> who<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> sums <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> num<span class="sy0">:</span> placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span>
+            sums<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">+=</span> num<span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> x <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>x<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>x<span class="sy0">++</span> <span class="br0">&#41;</span>
+            sums<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">+=</span> placement<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">if</span> <span class="br0">&#40;</span>i<span class="sy0">==</span>j<span class="br0">&#41;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> x <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> x<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>x<span class="sy0">++</span><span class="br0">&#41;</span>
+                sums<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">+=</span> placement<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>i<span class="sy0">==</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="sy0">-</span>j<span class="br0">&#41;</span><span class="br0">&#41;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> x <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> x<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>x<span class="sy0">++</span><span class="br0">&#41;</span>
+                sums<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">+=</span> placement<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="sy0">-</span>x<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> weight <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> num<span class="sy0">:</span> sums<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>num<span class="sy0">==</span><span class="nu0">2</span> <span class="sy0">*</span> who<span class="br0">&#41;</span> weight <span class="sy0">+=</span> <span class="nu0">1000</span><span class="sy0">;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>num<span class="sy0">==-</span><span class="nu0">2</span><span class="sy0">*</span> who<span class="br0">&#41;</span> weight <span class="sy0">+=</span> <span class="nu0">10000</span><span class="sy0">;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>num<span class="sy0">==</span><span class="nu0">1</span><span class="sy0">*</span> who<span class="br0">&#41;</span> weight <span class="sy0">+=</span> <span class="nu0">10</span><span class="sy0">;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>num<span class="sy0">==-</span><span class="nu0">1</span><span class="sy0">*</span> who<span class="br0">&#41;</span> weight <span class="sy0">+=</span> <span class="nu0">6</span><span class="sy0">;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>num<span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span> weight <span class="sy0">+=</span> <span class="nu0">4</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>i<span class="sy0">==</span><span class="nu0">1</span> <span class="sy0">&amp;&amp;</span> j<span class="sy0">==</span> <span class="nu0">1</span><span class="br0">&#41;</span>
+            weight <span class="sy0">+=</span> <span class="nu0">3</span><span class="sy0">;</span>
+        <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>i<span class="sy0">==</span>j <span class="sy0">||</span> i<span class="sy0">==</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="sy0">-</span>j<span class="br0">&#41;</span><span class="br0">&#41;</span>
+            weight <span class="sy0">+=</span> <span class="nu0">2</span><span class="sy0">;</span>
+        <span class="kw1">else</span>
+            weight <span class="sy0">+=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">return</span> weight<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> place<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> placement, <span class="kw4">int</span> who<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> emptyCells <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>j<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>j<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    emptyCells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> evaluate<span class="br0">&#40;</span>placement, i, j, who<span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> result <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> max <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>j<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>j<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>emptyCells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">&gt;</span><span class="nu0">0</span> <span class="sy0">&amp;&amp;</span> emptyCells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">&gt;</span>max<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    max <span class="sy0">=</span> emptyCells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+                    result <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span>i,j<span class="br0">&#125;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="kw1">return</span> result<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+<br />
+<h1 id="toc7"><a name="Class TTT_AI —— Using Minimax Algorithm (Imperfect and beatable, probably due to the imperfections in my recursive structure)"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Class TTT_AI —— Using Minimax Algorithm (Imperfect and beatable, probably due to the imperfections in my recursive structure)</span></h1>
+ <br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">Tic_Tac_Toe</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> TTT_AI <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw1">final</span> <span class="kw4">int</span> depth <span class="sy0">=</span> <span class="nu0">9</span><span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> statistic<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> placement, <span class="kw4">int</span> num<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span> sumRow <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sumColumn <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sumMjDiagonal <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sumMnDiagonal <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> stat <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>j<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>j<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                sumRow <span class="sy0">+=</span> placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+                sumColumn <span class="sy0">+=</span> placement<span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>i<span class="sy0">==</span>j<span class="br0">&#41;</span> sumMjDiagonal <span class="sy0">+=</span> placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>i<span class="sy0">==</span><span class="kw3">Math</span>.<span class="me1">abs</span><span class="br0">&#40;</span>j<span class="sy0">-</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span> sumMnDiagonal <span class="sy0">+=</span> placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>sumRow <span class="sy0">==</span> num<span class="br0">&#41;</span>
+                stat<span class="sy0">+=</span><span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>sumColumn<span class="sy0">==</span> num<span class="br0">&#41;</span>
+                stat<span class="sy0">+=</span><span class="nu0">1</span><span class="sy0">;</span>
+            sumRow <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+            sumColumn <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>sumMjDiagonal <span class="sy0">==</span> num<span class="br0">&#41;</span> stat <span class="sy0">+=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>sumMnDiagonal <span class="sy0">==</span> num<span class="br0">&#41;</span> stat <span class="sy0">+=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">return</span> stat<span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> clone<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> placement<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> newPlacement <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>placement.<span class="me1">length</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> row <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> row<span class="sy0">&lt;</span>placement.<span class="me1">length</span><span class="sy0">;</span>row<span class="sy0">++</span><span class="br0">&#41;</span>
+            newPlacement<span class="br0">&#91;</span>row<span class="br0">&#93;</span> <span class="sy0">=</span> placement<span class="br0">&#91;</span>row<span class="br0">&#93;</span>.<span class="me1">clone</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> newPlacement<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> fillWith<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> placement ,<span class="kw4">int</span> num<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> newPlacement <span class="sy0">=</span> clone<span class="br0">&#40;</span>placement<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>j<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>j<span class="sy0">++</span><span class="br0">&#41;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span> newPlacement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> num<span class="sy0">;</span>
+        <span class="kw1">return</span> newPlacement<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> evaluate<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> placement<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> placementO <span class="sy0">=</span> fillWith<span class="br0">&#40;</span>placement, <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> placementX <span class="sy0">=</span> fillWith<span class="br0">&#40;</span>placement, <span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> <span class="br0">&#40;</span>statistic<span class="br0">&#40;</span>placementX, <span class="sy0">-</span><span class="nu0">3</span><span class="br0">&#41;</span> <span class="sy0">-</span> statistic<span class="br0">&#40;</span>placementO, <span class="nu0">3</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">boolean</span> isFull<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> placement<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span> count <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>j<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>j<span class="sy0">++</span><span class="br0">&#41;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span> count <span class="sy0">+=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">return</span> <span class="sy0">!</span><span class="br0">&#40;</span>count<span class="sy0">&gt;</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> calculate<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> placement, <span class="kw4">int</span> recursionDepth, <span class="kw4">int</span> who<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> newPlacement<span class="sy0">;</span>
+        ArrayList<span class="sy0">&lt;</span>Integer<span class="sy0">&gt;</span> numC <span class="sy0">=</span> <span class="kw1">new</span> ArrayList<span class="sy0">&lt;</span>Integer<span class="sy0">&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>j<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>j<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    newPlacement <span class="sy0">=</span> clone<span class="br0">&#40;</span>placement<span class="br0">&#41;</span><span class="sy0">;</span>
+                    newPlacement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> who<span class="sy0">;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>recursionDepth <span class="sy0">==</span> <span class="nu0">0</span> <span class="sy0">||</span> isFull<span class="br0">&#40;</span>newPlacement<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        <span class="kw1">return</span> evaluate<span class="br0">&#40;</span>newPlacement<span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">else</span>
+                        numC.<span class="me1">add</span><span class="br0">&#40;</span>calculate<span class="br0">&#40;</span>newPlacement, recursionDepth<span class="sy0">-</span><span class="nu0">1</span>, <span class="sy0">-</span>who<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="kw1">if</span> <span class="br0">&#40;</span>who <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw4">int</span> min <span class="sy0">=</span> <span class="nu0">100</span><span class="sy0">;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Integer</span> num<span class="sy0">:</span> numC<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>num.<span class="me1">intValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">&lt;</span>min<span class="br0">&#41;</span> min <span class="sy0">=</span> num.<span class="me1">intValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">return</span> min<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            <span class="kw4">int</span> max <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">100</span><span class="sy0">;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Integer</span> num<span class="sy0">:</span> numC<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>num.<span class="me1">intValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">&gt;</span>max<span class="br0">&#41;</span> max <span class="sy0">=</span> num.<span class="me1">intValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">return</span> max<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> place<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> placement, <span class="kw4">int</span> who<span class="br0">&#41;</span><span class="br0">&#123;</span>
+&nbsp;
+        ArrayList<span class="sy0">&lt;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">&gt;</span> ways <span class="sy0">=</span> <span class="kw1">new</span> ArrayList<span class="sy0">&lt;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>j<span class="sy0">&lt;</span><span class="nu0">3</span><span class="sy0">;</span>j<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> newPlacement <span class="sy0">=</span> clone<span class="br0">&#40;</span>placement<span class="br0">&#41;</span><span class="sy0">;</span>
+                    newPlacement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> who<span class="sy0">;</span>
+                    ways.<span class="me1">add</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span>i,j,calculate<span class="br0">&#40;</span>newPlacement, depth<span class="sy0">-</span><span class="nu0">1</span>, <span class="sy0">-</span>who<span class="br0">&#41;</span><span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> maxPos <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="sy0">-</span><span class="nu0">1</span>,<span class="sy0">-</span><span class="nu0">1</span>,<span class="sy0">-</span><span class="nu0">100</span><span class="br0">&#125;</span><span class="sy0">;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> a <span class="sy0">:</span> ways<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>a<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">&gt;</span>maxPos<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    maxPos<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> a<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">;</span>
+                    maxPos<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> a<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span>
+                    maxPos<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> a<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> maxPos<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Grade List (Java)</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+Python:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    count <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>*<span class="nu0">7</span>
+    data <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">'/Users/Margaret/Desktop/data.txt'</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">for</span> line <span class="kw1">in</span> data:
+        <span class="kw1">if</span> <span class="nu0">90</span> <span class="sy0">&lt;</span> <span class="kw2">int</span><span class="br0">&#40;</span>line<span class="br0">&#41;</span> <span class="sy0">&lt;</span> <span class="nu0">100</span>:
+            count<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> count<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> + <span class="nu0">1</span>
+        <span class="kw1">elif</span> <span class="nu0">80</span> <span class="sy0">&lt;</span> <span class="kw2">int</span><span class="br0">&#40;</span>line<span class="br0">&#41;</span> <span class="sy0">&lt;</span> <span class="nu0">90</span>:
+            count<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> count<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> + <span class="nu0">1</span>
+        <span class="kw1">elif</span> <span class="nu0">70</span> <span class="sy0">&lt;</span> <span class="kw2">int</span><span class="br0">&#40;</span>line<span class="br0">&#41;</span> <span class="sy0">&lt;</span> <span class="nu0">80</span>:
+            count<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> count<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> + <span class="nu0">1</span>
+        <span class="kw1">elif</span> <span class="nu0">60</span> <span class="sy0">&lt;</span> <span class="kw2">int</span><span class="br0">&#40;</span>line<span class="br0">&#41;</span> <span class="sy0">&lt;</span> <span class="nu0">70</span>:
+            count<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> count<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span> + <span class="nu0">1</span>
+        <span class="kw1">elif</span> <span class="nu0">50</span> <span class="sy0">&lt;</span> <span class="kw2">int</span><span class="br0">&#40;</span>line<span class="br0">&#41;</span> <span class="sy0">&lt;</span> <span class="nu0">60</span>:
+            count<span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span> <span class="sy0">=</span> count<span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span> + <span class="nu0">1</span>
+        <span class="kw1">else</span>:
+            count<span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span> <span class="sy0">=</span> count<span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span> + <span class="nu0">1</span>
+&nbsp;
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;THere are&quot;</span><span class="sy0">,</span> count<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="st0">&quot;students who got A&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;THere are&quot;</span><span class="sy0">,</span> count<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="st0">&quot;students who got B&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;There are&quot;</span><span class="sy0">,</span> count<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="st0">&quot;students who got C&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;There are&quot;</span><span class="sy0">,</span> count<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="st0">&quot;students who got D&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;There are&quot;</span><span class="sy0">,</span> count<span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="st0">&quot;students who got E&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;There are&quot;</span><span class="sy0">,</span> count<span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="st0">&quot;students who got F&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+main<span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+Java:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">java.util.Scanner</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.ArrayList</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.io.File</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.io.IOException</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Histo <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        Scanner data <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+        <span class="kw4">int</span> a<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> <span class="kw4">int</span> b<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> <span class="kw4">int</span> c<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> <span class="kw4">int</span> d<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span> <span class="kw4">int</span> f<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> idx<span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">try</span> <span class="br0">&#123;</span>
+                data <span class="sy0">=</span> <span class="kw1">new</span> Scanner<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">File</span><span class="br0">&#40;</span><span class="st0">&quot;/Users/Margaret/Desktop/data.txt&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">catch</span> <span class="br0">&#40;</span> <span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Sorry but I was unable to open your data file&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw3">System</span>.<span class="me1">exit</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+&nbsp;
+        <span class="kw1">while</span><span class="br0">&#40;</span>data.<span class="me1">hasNextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            idx <span class="sy0">=</span> data.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span> idx <span class="sy0">&gt;</span> <span class="nu0">90</span> <span class="sy0">&amp;</span> idx <span class="sy0">&lt;=</span> <span class="nu0">100</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    a <span class="sy0">=</span> a<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>idx <span class="sy0">&gt;</span> <span class="nu0">80</span> <span class="sy0">&amp;</span> idx <span class="sy0">&lt;=</span> <span class="nu0">90</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                b <span class="sy0">=</span> b<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>idx <span class="sy0">&gt;</span> <span class="nu0">70</span> <span class="sy0">&amp;</span> idx <span class="sy0">&lt;=</span> <span class="nu0">80</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                c <span class="sy0">=</span> c<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>idx <span class="sy0">&gt;</span> <span class="nu0">60</span> <span class="sy0">&amp;</span> idx <span class="sy0">&lt;=</span> <span class="nu0">70</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                d <span class="sy0">=</span> d<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span> idx <span class="sy0">&lt;</span> <span class="nu0">60</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                f <span class="sy0">=</span> f<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;There are&quot;</span><span class="sy0">+</span>a<span class="sy0">+</span><span class="st0">&quot;students who got A&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;There are&quot;</span><span class="sy0">+</span>b<span class="sy0">+</span><span class="st0">&quot;students who got B&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;There are&quot;</span><span class="sy0">+</span>c<span class="sy0">+</span><span class="st0">&quot;students who got C&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;There are&quot;</span><span class="sy0">+</span>d<span class="sy0">+</span><span class="st0">&quot;students who got D&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;There are&quot;</span><span class="sy0">+</span>f<span class="sy0">+</span><span class="st0">&quot;students who got E&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

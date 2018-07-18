@@ -1,0 +1,137 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 11.29 Assignment - itchat tuling robot extension</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+Source Code:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1">#coding=utf8</span>
+<span class="kw1">import</span> requests
+<span class="kw1">import</span> itchat
+<span class="kw1">from</span> json <span class="kw1">import</span> JSONDecoder
+&nbsp;
+KEY <span class="sy0">=</span> <span class="st0">'eb720a8970964f3f855d863d24406576'</span>
+key <span class="sy0">=</span> <span class="st0">&quot;2pf3fTPxGdBXiDQWg851YE5hdHWC7xkF&quot;</span>
+secret <span class="sy0">=</span> <span class="st0">&quot;Qg4v2klgvuWwGRYExXUOFUEcGzmVpn_H&quot;</span>
+<span class="kw1">def</span> get_response<span class="br0">&#40;</span>msg<span class="br0">&#41;</span>:
+    apiUrl <span class="sy0">=</span> <span class="st0">'http://www.tuling123.com/openapi/api'</span>
+    data <span class="sy0">=</span> <span class="br0">&#123;</span>
+        <span class="st0">'key'</span>    : KEY<span class="sy0">,</span>
+        <span class="st0">'info'</span>   : msg<span class="sy0">,</span>
+        <span class="st0">'userid'</span> : <span class="st0">'Arthur_cfc'</span><span class="sy0">,</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">try</span>:
+        r <span class="sy0">=</span> requests.<span class="me1">post</span><span class="br0">&#40;</span>apiUrl<span class="sy0">,</span> data<span class="sy0">=</span>data<span class="br0">&#41;</span>.<span class="me1">json</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span>r<span class="br0">&#41;</span>
+        <span class="kw1">if</span> r.<span class="me1">get</span><span class="br0">&#40;</span><span class="st0">'code'</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">100000</span>:<span class="co1">##is a text</span>
+            <span class="kw1">return</span> r.<span class="me1">get</span><span class="br0">&#40;</span><span class="st0">'text'</span><span class="br0">&#41;</span>
+        <span class="kw1">elif</span> r.<span class="me1">get</span><span class="br0">&#40;</span><span class="st0">'code'</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">200000</span>:<span class="co1">##is a url</span>
+            <span class="kw1">return</span> r.<span class="me1">get</span><span class="br0">&#40;</span><span class="st0">'text'</span><span class="br0">&#41;</span>+r.<span class="me1">get</span><span class="br0">&#40;</span><span class="st0">'url'</span><span class="br0">&#41;</span>
+        <span class="kw1">elif</span> r.<span class="me1">get</span><span class="br0">&#40;</span><span class="st0">'code'</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">302000</span>:<span class="co1">##is a news</span>
+            <span class="kw1">return</span> r.<span class="me1">get</span><span class="br0">&#40;</span><span class="st0">'list'</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="st0">&quot;detailurl&quot;</span><span class="br0">&#93;</span>
+    <span class="kw1">except</span>:
+        <span class="kw1">return</span>
+&nbsp;
+<span class="kw1">def</span> get_response1<span class="br0">&#40;</span>msg<span class="br0">&#41;</span>:
+    http_url <span class="sy0">=</span> <span class="st0">'https://api-cn.faceplusplus.com/facepp/v3/detect'</span>
+    filepath <span class="sy0">=</span> msg<span class="br0">&#91;</span><span class="st0">&quot;FileName&quot;</span><span class="br0">&#93;</span>
+    data <span class="sy0">=</span> <span class="br0">&#123;</span>
+        <span class="st0">&quot;api_key&quot;</span>: key<span class="sy0">,</span>
+        <span class="st0">&quot;api_secret&quot;</span>: secret<span class="sy0">,</span>
+        <span class="st0">&quot;return_landmark&quot;</span>: <span class="st0">&quot;0&quot;</span><span class="sy0">,</span>
+        <span class="st0">&quot;return_attributes&quot;</span>: <span class="st0">&quot;gender,age,emotion,ethnicity,beauty,skinstatus&quot;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw2">file</span> <span class="sy0">=</span> <span class="br0">&#123;</span><span class="st0">&quot;image_file&quot;</span>: <span class="kw2">open</span><span class="br0">&#40;</span>filepath<span class="sy0">,</span> <span class="st0">&quot;rb&quot;</span><span class="br0">&#41;</span><span class="br0">&#125;</span>
+    response <span class="sy0">=</span> requests.<span class="me1">post</span><span class="br0">&#40;</span>http_url<span class="sy0">,</span> data<span class="sy0">=</span>data<span class="sy0">,</span> files<span class="sy0">=</span><span class="kw2">file</span><span class="br0">&#41;</span>
+    req_con <span class="sy0">=</span> response.<span class="me1">content</span>.<span class="me1">decode</span><span class="br0">&#40;</span><span class="st0">'utf-8'</span><span class="br0">&#41;</span>
+    req_dict <span class="sy0">=</span> JSONDecoder<span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">decode</span><span class="br0">&#40;</span>req_con<span class="br0">&#41;</span>
+    <span class="kw1">return</span> req_dict
+&nbsp;
+<span class="sy0">@</span>itchat.<span class="me1">msg_register</span><span class="br0">&#40;</span>itchat.<span class="me1">content</span>.<span class="me1">TEXT</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> tuling_reply<span class="br0">&#40;</span>msg<span class="br0">&#41;</span>:
+    defaultReply <span class="sy0">=</span> <span class="st0">'I received: '</span> + msg<span class="br0">&#91;</span><span class="st0">'Text'</span><span class="br0">&#93;</span>
+    reply <span class="sy0">=</span> get_response<span class="br0">&#40;</span>msg<span class="br0">&#91;</span><span class="st0">'Text'</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    msg.<span class="kw3">user</span>.<span class="me1">send</span><span class="br0">&#40;</span> reply <span class="kw1">or</span> defaultReply<span class="br0">&#41;</span>
+&nbsp;
+<span class="sy0">@</span>itchat.<span class="me1">msg_register</span><span class="br0">&#40;</span>itchat.<span class="me1">content</span>.<span class="me1">PICTURE</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> tuling_reply<span class="br0">&#40;</span>msg<span class="br0">&#41;</span>:
+    msg<span class="br0">&#91;</span><span class="st0">'Text'</span><span class="br0">&#93;</span><span class="br0">&#40;</span>msg<span class="br0">&#91;</span><span class="st0">'FileName'</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    <span class="kw1">import</span> cv2
+    <span class="kw1">import</span> matplotlib.<span class="me1">pyplot</span> <span class="kw1">as</span> plt
+    <span class="kw1">from</span> matplotlib <span class="kw1">import</span> cm
+    reply <span class="sy0">=</span> get_response1<span class="br0">&#40;</span>msg<span class="br0">&#41;</span>
+    img_bgr <span class="sy0">=</span> cv2.<span class="me1">imread</span><span class="br0">&#40;</span>msg<span class="br0">&#91;</span><span class="st0">'FileName'</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    gray <span class="sy0">=</span> cv2.<span class="me1">cvtColor</span><span class="br0">&#40;</span>img_bgr<span class="sy0">,</span>cv2.<span class="me1">COLOR_BGR2GRAY</span><span class="br0">&#41;</span>
+    plt.<span class="me1">axis</span><span class="br0">&#40;</span><span class="st0">'off'</span><span class="br0">&#41;</span>
+    plt.<span class="me1">imsave</span><span class="br0">&#40;</span>msg<span class="br0">&#91;</span><span class="st0">'FileName'</span><span class="br0">&#93;</span><span class="sy0">,</span>gray<span class="sy0">,</span>cmap <span class="sy0">=</span> cm.<span class="me1">gray</span><span class="br0">&#41;</span>
+    itchat.<span class="me1">send_image</span><span class="br0">&#40;</span>msg<span class="br0">&#91;</span><span class="st0">'FileName'</span><span class="br0">&#93;</span><span class="sy0">,</span>toUserName<span class="sy0">=</span><span class="st0">'filehelper'</span><span class="br0">&#41;</span>
+    defaultReply <span class="sy0">=</span> <span class="st0">'I received a picture '</span>
+    <span class="kw1">import</span> <span class="kw3">os</span>
+    <span class="kw3">os</span>.<span class="me1">remove</span><span class="br0">&#40;</span>msg<span class="br0">&#91;</span><span class="st0">'FileName'</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    itchat.<span class="me1">send</span><span class="br0">&#40;</span><span class="kw2">str</span><span class="br0">&#40;</span>reply<span class="br0">&#41;</span><span class="sy0">,</span> toUserName<span class="sy0">=</span><span class="st0">&quot;filehelper&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="sy0">@</span>itchat.<span class="me1">msg_register</span><span class="br0">&#40;</span>itchat.<span class="me1">content</span>.<span class="me1">VIDEO</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> tuling_reply<span class="br0">&#40;</span>msg<span class="br0">&#41;</span>:
+    msg.<span class="kw3">user</span>.<span class="me1">send</span><span class="br0">&#40;</span> <span class="st0">&quot;This is a video&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="sy0">@</span>itchat.<span class="me1">msg_register</span><span class="br0">&#40;</span>itchat.<span class="me1">content</span>.<span class="me1">RECORDING</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> tuling_reply<span class="br0">&#40;</span>msg<span class="br0">&#41;</span>:
+    msg.<span class="kw3">user</span>.<span class="me1">send</span><span class="br0">&#40;</span> <span class="st0">&quot;This is a recording&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+itchat.<span class="me1">auto_login</span><span class="br0">&#40;</span>hotReload<span class="sy0">=</span><span class="kw2">True</span><span class="br0">&#41;</span>
+itchat.<span class="me1">run</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+<br />
+<br />
+<br />
+Functions:<br />
+1. Able to reply differently when receiving different input. If input plain text, the tuling robot will chat with you. If input a picture, it will convert it to grayscale image and send it to you. If input is a recording or video, it will respond &quot;It's a recording&quot; or &quot;it's a video&quot; respectively.<br />
+2. Able to give links base on the user's input. This includes news, train and airlines.<br />
+<br />
+evidence:<br />
+Because I don't have another device at my hand tonight, I redirect all the reply to filehelper to run the test.<br />
+<img src="files/WechatIMG498.png" alt="WechatIMG498.png" title="WechatIMG498.png" style="height: 970px; width: 548px;" /><br />
+<img src="files/WechatIMG499.png" alt="WechatIMG499.png" title="WechatIMG499.png" style="height: 972px; width: 549px;" /><br />
+<br />
+Flowchart:<br />
+<img src="files/Untitled%20Diagram.png" alt="Untitled Diagram.png" title="Untitled Diagram.png" /><br />
+document:<a href="files/bot.docx">bot.docx</a><br />
+Reflection:<br />
+<br />
+<span style="font-family: Arial;">When doing this project, I realize the importance of using the 3rd-party api(s) to help me achieve desired function. In broader scale, It is the importance of doing open-source and build the programs cooperatively. For example, when I was asked to implement a function that can return a url for booking tickets or searching news, I only thought about the web-spider programs. I struggled a lot to implement that. However, the tuling api can actually do it for me. In fact, using the tuling api, it only takes a few line of codes to implement this function. In the future, I will read the docs of api(s) more carefully and benefit from them to the maximum extent. </span><br />
+<br />
+<span style="font-family: Arial;">Besides, I learned a lot about how the api(s) can be requested. I learned that in order to use an api, we need the api’s url, it’s “key”, and our data. The data should be presented in the format of a dictionary. Depending on different apis, the requirements on the content of the dictionary may vary, but essentially they need to have your ID, what function you are asking for, and the parameters. In python, there is a package called “request” that handles the posting and receiving of the communication between you can d the api really well. In the process, the dictionary of data need to be transcoded to “json.” </span><br />
+<br />
+<span style="font-family: Arial;">At last, doing this project also reminds me of many python grammar, data types, and useful function and packages. When doing the grayscale convergence, I recalled that we have used the package “opencv” to do this before, so I reviewed the works I’ve done that time. The os operations, the matplotlib’s functions are also used in the process. </span><br />
+<br />
+<span style="font-family: Arial;">After doing this project, I think my ability to learn new things improved. When exploring another module in the future, I will read the documentation more carefully.</span></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

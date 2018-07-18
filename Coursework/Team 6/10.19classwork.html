@@ -1,0 +1,218 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 10.19classwork</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> matplotlib.<span class="me1">pyplot</span> <span class="kw1">as</span> plt
+<span class="kw1">import</span> <span class="kw3">random</span>
+<span class="kw1">import</span> <span class="kw3">time</span>
+&nbsp;
+<span class="kw1">def</span> sub_sort<span class="br0">&#40;</span><span class="kw3">array</span><span class="sy0">,</span>low<span class="sy0">,</span>high<span class="br0">&#41;</span>:
+    key <span class="sy0">=</span> <span class="kw3">array</span><span class="br0">&#91;</span>low<span class="br0">&#93;</span>
+    <span class="kw1">while</span> low <span class="sy0">&lt;</span> high:
+        <span class="kw1">while</span> low <span class="sy0">&lt;</span> high <span class="kw1">and</span> <span class="kw3">array</span><span class="br0">&#91;</span>high<span class="br0">&#93;</span> <span class="sy0">&gt;=</span> key:
+            high -<span class="sy0">=</span> <span class="nu0">1</span>
+        <span class="kw1">while</span> low <span class="sy0">&lt;</span> high <span class="kw1">and</span> <span class="kw3">array</span><span class="br0">&#91;</span>high<span class="br0">&#93;</span> <span class="sy0">&lt;</span> key:
+            <span class="kw3">array</span><span class="br0">&#91;</span>low<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw3">array</span><span class="br0">&#91;</span>high<span class="br0">&#93;</span>
+            low +<span class="sy0">=</span> <span class="nu0">1</span>
+            <span class="kw3">array</span><span class="br0">&#91;</span>high<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw3">array</span><span class="br0">&#91;</span>low<span class="br0">&#93;</span>
+    <span class="kw3">array</span><span class="br0">&#91;</span>low<span class="br0">&#93;</span> <span class="sy0">=</span> key
+    <span class="kw1">return</span> low
+&nbsp;
+<span class="kw1">def</span> quick_sort<span class="br0">&#40;</span><span class="kw3">array</span><span class="sy0">,</span>low<span class="sy0">,</span>high<span class="br0">&#41;</span>:
+     <span class="kw1">if</span> low <span class="sy0">&lt;</span> high:
+        key_index <span class="sy0">=</span> sub_sort<span class="br0">&#40;</span><span class="kw3">array</span><span class="sy0">,</span>low<span class="sy0">,</span>high<span class="br0">&#41;</span>
+        quick_sort<span class="br0">&#40;</span><span class="kw3">array</span><span class="sy0">,</span>low<span class="sy0">,</span>key_index<span class="br0">&#41;</span>
+        quick_sort<span class="br0">&#40;</span><span class="kw3">array</span><span class="sy0">,</span>key_index+<span class="nu0">1</span><span class="sy0">,</span>high<span class="br0">&#41;</span>
+     <span class="kw1">return</span> <span class="kw3">array</span>
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> mergeSort<span class="br0">&#40;</span>alist<span class="br0">&#41;</span>:
+    <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>alist<span class="br0">&#41;</span><span class="sy0">&gt;</span><span class="nu0">1</span>:
+        mid <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>alist<span class="br0">&#41;</span>//<span class="nu0">2</span>
+        lefthalf <span class="sy0">=</span> alist<span class="br0">&#91;</span>:mid<span class="br0">&#93;</span>
+        righthalf <span class="sy0">=</span> alist<span class="br0">&#91;</span>mid:<span class="br0">&#93;</span>
+        mergeSort<span class="br0">&#40;</span>lefthalf<span class="br0">&#41;</span>
+        mergeSort<span class="br0">&#40;</span>righthalf<span class="br0">&#41;</span>
+        alist<span class="br0">&#91;</span>:<span class="br0">&#93;</span> <span class="sy0">=</span> merge<span class="br0">&#40;</span>lefthalf<span class="sy0">,</span>righthalf<span class="br0">&#41;</span>
+    <span class="kw1">return</span> alist
+<span class="kw1">def</span> merge<span class="br0">&#40;</span>xs<span class="sy0">,</span> ys<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; merge sorted lists xs and ys. Return a sorted result &quot;&quot;&quot;</span>
+    result <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    xi <span class="sy0">=</span> <span class="nu0">0</span>
+    yi <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">while</span> <span class="kw2">True</span>:
+        <span class="kw1">if</span> xi <span class="sy0">&gt;=</span> <span class="kw2">len</span><span class="br0">&#40;</span>xs<span class="br0">&#41;</span>:          <span class="co1"># If xs list is finished,</span>
+            result.<span class="me1">extend</span><span class="br0">&#40;</span>ys<span class="br0">&#91;</span>yi:<span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="co1"># Add remaining items from ys</span>
+            <span class="kw1">return</span> result          <span class="co1"># And we're done.</span>
+        <span class="kw1">if</span> yi <span class="sy0">&gt;=</span> <span class="kw2">len</span><span class="br0">&#40;</span>ys<span class="br0">&#41;</span>:          <span class="co1"># Same again, but swap roles</span>
+            result.<span class="me1">extend</span><span class="br0">&#40;</span>xs<span class="br0">&#91;</span>xi:<span class="br0">&#93;</span><span class="br0">&#41;</span>
+            <span class="kw1">return</span> result
+        <span class="co1"># Both lists still have items, copy smaller item to result.</span>
+        <span class="kw1">if</span> xs<span class="br0">&#91;</span>xi<span class="br0">&#93;</span> <span class="sy0">&lt;=</span> ys<span class="br0">&#91;</span>yi<span class="br0">&#93;</span>:
+            result.<span class="me1">append</span><span class="br0">&#40;</span>xs<span class="br0">&#91;</span>xi<span class="br0">&#93;</span><span class="br0">&#41;</span>
+            xi +<span class="sy0">=</span> <span class="nu0">1</span>
+        <span class="kw1">else</span>:
+            result.<span class="me1">append</span><span class="br0">&#40;</span>ys<span class="br0">&#91;</span>yi<span class="br0">&#93;</span><span class="br0">&#41;</span>
+            yi +<span class="sy0">=</span> <span class="nu0">1</span>
+&nbsp;
+<span class="kw1">def</span> insertionSort<span class="br0">&#40;</span>alist<span class="br0">&#41;</span>:
+    N <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>alist<span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> N<span class="br0">&#41;</span>:
+        Curvalue <span class="sy0">=</span> alist<span class="br0">&#91;</span>i<span class="br0">&#93;</span>
+        j <span class="sy0">=</span> i
+        <span class="kw1">while</span> j <span class="sy0">&gt;</span> <span class="nu0">1</span> <span class="kw1">and</span> Curvalue <span class="sy0">&lt;</span> alist<span class="br0">&#91;</span>j - <span class="nu0">1</span><span class="br0">&#93;</span>:
+            alist<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> alist<span class="br0">&#91;</span>j - <span class="nu0">1</span><span class="br0">&#93;</span>
+            j <span class="sy0">=</span> j - <span class="nu0">1</span>
+        alist<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> Curvalue
+    <span class="kw1">return</span> alist
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> selectionSort<span class="br0">&#40;</span>alist<span class="br0">&#41;</span>:
+    N <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>alist<span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> N-<span class="nu0">1</span><span class="br0">&#41;</span>:
+        MinSub <span class="sy0">=</span> i
+        <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>i<span class="sy0">,</span> N<span class="br0">&#41;</span>:
+            <span class="kw1">if</span> alist<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&lt;</span> alist<span class="br0">&#91;</span>MinSub<span class="br0">&#93;</span>:
+                MinSub <span class="sy0">=</span> j
+        Temp <span class="sy0">=</span> alist<span class="br0">&#91;</span>i<span class="br0">&#93;</span>
+        alist<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> alist<span class="br0">&#91;</span>MinSub<span class="br0">&#93;</span>
+        alist<span class="br0">&#91;</span>MinSub<span class="br0">&#93;</span> <span class="sy0">=</span> Temp
+&nbsp;
+    <span class="kw1">return</span> alist
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> bubbleSort<span class="br0">&#40;</span>alist<span class="br0">&#41;</span>:
+    N <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>alist<span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> N-<span class="nu0">1</span><span class="br0">&#41;</span>:
+        <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> N - i<span class="br0">&#41;</span>:
+            <span class="kw1">if</span> alist<span class="br0">&#91;</span>j-<span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">&gt;</span> alist<span class="br0">&#91;</span>j<span class="br0">&#93;</span>:
+                Temp <span class="sy0">=</span> alist<span class="br0">&#91;</span>j-<span class="nu0">1</span><span class="br0">&#93;</span>
+                alist<span class="br0">&#91;</span>j-<span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> alist<span class="br0">&#91;</span>j<span class="br0">&#93;</span>
+                alist<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> Temp
+&nbsp;
+    <span class="kw1">return</span> alist
+&nbsp;
+&nbsp;
+<span class="co1">## simple test</span>
+alist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">54</span><span class="sy0">,</span> <span class="nu0">26</span><span class="sy0">,</span> <span class="nu0">93</span><span class="sy0">,</span> <span class="nu0">17</span><span class="sy0">,</span> <span class="nu0">77</span><span class="sy0">,</span> <span class="nu0">31</span><span class="sy0">,</span> <span class="nu0">44</span><span class="sy0">,</span> <span class="nu0">55</span><span class="sy0">,</span> <span class="nu0">20</span><span class="br0">&#93;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;original List:&quot;</span><span class="sy0">,</span> alist<span class="br0">&#41;</span>
+insertionSort<span class="br0">&#40;</span>alist<span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;insertion sort result:&quot;</span><span class="sy0">,</span> alist<span class="br0">&#41;</span>
+&nbsp;
+alist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">54</span><span class="sy0">,</span> <span class="nu0">26</span><span class="sy0">,</span> <span class="nu0">93</span><span class="sy0">,</span> <span class="nu0">17</span><span class="sy0">,</span> <span class="nu0">77</span><span class="sy0">,</span> <span class="nu0">31</span><span class="sy0">,</span> <span class="nu0">44</span><span class="sy0">,</span> <span class="nu0">55</span><span class="sy0">,</span> <span class="nu0">20</span><span class="br0">&#93;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;original List:&quot;</span><span class="sy0">,</span> alist<span class="br0">&#41;</span>
+selectionSort<span class="br0">&#40;</span>alist<span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;selection sort result:&quot;</span><span class="sy0">,</span> alist<span class="br0">&#41;</span>
+&nbsp;
+alist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">54</span><span class="sy0">,</span> <span class="nu0">26</span><span class="sy0">,</span> <span class="nu0">93</span><span class="sy0">,</span> <span class="nu0">17</span><span class="sy0">,</span> <span class="nu0">77</span><span class="sy0">,</span> <span class="nu0">31</span><span class="sy0">,</span> <span class="nu0">44</span><span class="sy0">,</span> <span class="nu0">55</span><span class="sy0">,</span> <span class="nu0">20</span><span class="br0">&#93;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;original List:&quot;</span><span class="sy0">,</span> alist<span class="br0">&#41;</span>
+bubbleSort<span class="br0">&#40;</span>alist<span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;bubblesort result:&quot;</span><span class="sy0">,</span> alist<span class="br0">&#41;</span>
+&nbsp;
+alist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">54</span><span class="sy0">,</span> <span class="nu0">26</span><span class="sy0">,</span> <span class="nu0">93</span><span class="sy0">,</span> <span class="nu0">17</span><span class="sy0">,</span> <span class="nu0">77</span><span class="sy0">,</span> <span class="nu0">31</span><span class="sy0">,</span> <span class="nu0">44</span><span class="sy0">,</span> <span class="nu0">55</span><span class="sy0">,</span> <span class="nu0">20</span><span class="br0">&#93;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;original List:&quot;</span><span class="sy0">,</span> alist<span class="br0">&#41;</span>
+quick_sort<span class="br0">&#40;</span>alist<span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="kw2">len</span><span class="br0">&#40;</span>alist<span class="br0">&#41;</span>-<span class="nu0">1</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;quicksort sort result:&quot;</span><span class="sy0">,</span> alist<span class="br0">&#41;</span>
+&nbsp;
+alist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">54</span><span class="sy0">,</span> <span class="nu0">26</span><span class="sy0">,</span> <span class="nu0">93</span><span class="sy0">,</span> <span class="nu0">17</span><span class="sy0">,</span> <span class="nu0">77</span><span class="sy0">,</span> <span class="nu0">31</span><span class="sy0">,</span> <span class="nu0">44</span><span class="sy0">,</span> <span class="nu0">55</span><span class="sy0">,</span> <span class="nu0">20</span><span class="br0">&#93;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;original List:&quot;</span><span class="sy0">,</span> alist<span class="br0">&#41;</span>
+mergeSort<span class="br0">&#40;</span>alist<span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;mergesort result:&quot;</span><span class="sy0">,</span> alist<span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">## We compare the running time of the 3 basic algorithms.</span>
+&nbsp;
+<span class="kw1">def</span> CompRunningTimeWithPlot<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    rng <span class="sy0">=</span> <span class="kw3">random</span>.<span class="me1">Random</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    itemNum <span class="sy0">=</span> <span class="nu0">10</span>
+    base <span class="sy0">=</span> <span class="nu0">2</span>
+    timeSeqInsertion <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    timeSeqSelection <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    timeSeqBubble <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    timeSeqquick <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    timeSeqmerge <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+&nbsp;
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>itemNum // <span class="nu0">2</span><span class="sy0">,</span> itemNum<span class="br0">&#41;</span>:
+        alist <span class="sy0">=</span> <span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span>base ** i<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        rng.<span class="me1">shuffle</span><span class="br0">&#40;</span>alist<span class="br0">&#41;</span>
+        t0 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        insertionSort<span class="br0">&#40;</span>alist<span class="br0">&#41;</span>
+        t1 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;The list has {} items, it takes {} seconds by insertion sort.&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>base ** i<span class="sy0">,</span> t1 - t0<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        timeSeqInsertion.<span class="me1">append</span><span class="br0">&#40;</span>t1 - t0<span class="br0">&#41;</span>
+&nbsp;
+        rng.<span class="me1">shuffle</span><span class="br0">&#40;</span>alist<span class="br0">&#41;</span>
+        t0 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        selectionSort<span class="br0">&#40;</span>alist<span class="br0">&#41;</span>
+        t1 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;The list has {} items, it takes {} seconds by Selection sort.&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>base ** i<span class="sy0">,</span> t1 - t0<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        timeSeqSelection.<span class="me1">append</span><span class="br0">&#40;</span>t1 - t0<span class="br0">&#41;</span>
+&nbsp;
+        rng.<span class="me1">shuffle</span><span class="br0">&#40;</span>alist<span class="br0">&#41;</span>
+        t0 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        bubbleSort<span class="br0">&#40;</span>alist<span class="br0">&#41;</span>
+        t1 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;The list has {} items, it takes {} seconds by Bubble sort.&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>base ** i<span class="sy0">,</span> t1 - t0<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        timeSeqBubble.<span class="me1">append</span><span class="br0">&#40;</span>t1 - t0<span class="br0">&#41;</span>
+&nbsp;
+        rng.<span class="me1">shuffle</span><span class="br0">&#40;</span>alist<span class="br0">&#41;</span>
+        t0 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        quick_sort<span class="br0">&#40;</span>alist<span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="kw2">len</span><span class="br0">&#40;</span>alist<span class="br0">&#41;</span>-<span class="nu0">1</span><span class="br0">&#41;</span>
+        t1 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;The list has {} items, it takes {} seconds by Selection sort.&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>base ** i<span class="sy0">,</span> t1 - t0<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        timeSeqquick.<span class="me1">append</span><span class="br0">&#40;</span>t1 - t0<span class="br0">&#41;</span>
+&nbsp;
+        rng.<span class="me1">shuffle</span><span class="br0">&#40;</span>alist<span class="br0">&#41;</span>
+        t0 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        mergeSort<span class="br0">&#40;</span>alist<span class="br0">&#41;</span>
+        t1 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;The list has {} items, it takes {} seconds by Selection sort.&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>base ** i<span class="sy0">,</span> t1 - t0<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        timeSeqmerge.<span class="me1">append</span><span class="br0">&#40;</span>t1 - t0<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+    plt.<span class="me1">figure</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    plt.<span class="me1">hold</span><span class="br0">&#40;</span><span class="kw2">True</span><span class="br0">&#41;</span>
+    plt.<span class="me1">plot</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span>itemNum // <span class="nu0">2</span><span class="sy0">,</span> itemNum<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> timeSeqInsertion<span class="sy0">,</span> <span class="st0">'r'</span><span class="br0">&#41;</span>
+    plt.<span class="me1">plot</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span>itemNum // <span class="nu0">2</span><span class="sy0">,</span> itemNum<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> timeSeqSelection<span class="sy0">,</span> <span class="st0">'g'</span><span class="br0">&#41;</span>
+    plt.<span class="me1">plot</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span>itemNum // <span class="nu0">2</span><span class="sy0">,</span> itemNum<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> timeSeqquick<span class="sy0">,</span> <span class="st0">'r'</span><span class="br0">&#41;</span>
+    plt.<span class="me1">plot</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span>itemNum // <span class="nu0">2</span><span class="sy0">,</span> itemNum<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> timeSeqmerge<span class="sy0">,</span> <span class="st0">'g'</span><span class="br0">&#41;</span>
+    plt.<span class="me1">plot</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span>itemNum // <span class="nu0">2</span><span class="sy0">,</span> itemNum<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> timeSeqBubble<span class="sy0">,</span> <span class="st0">'b'</span><span class="br0">&#41;</span>
+    plt.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="co1">### if your 3 basic sorting algorithms are ready, please uncomment the following statement</span>
+    <span class="co1">### to compare their running-time</span>
+CompRunningTimeWithPlot<span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-10-19%20%E4%B8%8B%E5%8D%8811.15.24.png" alt=" 2016-10-19 下午11.15.24.png" title=" 2016-10-19 下午11.15.24.png" style="height: 557px; width: 663px;" /><br />
+result shown above</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

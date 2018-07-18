@@ -1,0 +1,31 @@
+a = 0
+b = 0
+c = 0
+d = 0
+e = 0
+f = 0
+loop 1 to 600:
+	RESULTS.addItem(PersonResult)
+end loop
+loop while RESULTS.hasNext()
+	Item = RESULTS.getNext()
+	if Item = 1:
+		a = a + 1
+	else if Item = 2:
+		b = b + 1
+	else if Item = 3:
+		c = c + 1
+	else if Item = 4:
+		d = d + 1
+	else if Item = 5:
+		e = e + 1
+	else:
+		f = f + 1
+end loop
+Output ("one:" + a, " two:" + b, " three" + c, " four" + d, " five" + e, " six" + f)
+
+if a > 18 OR a <14 OR b > 18 OR b <14 OR c > 18 OR c <14 OR d > 18 OR d <14 OR e > 18 OR e <14 OR f > 18 OR f <14 then
+	Ouput ("Unbiased")
+else:
+	Output ("biased")
+end if

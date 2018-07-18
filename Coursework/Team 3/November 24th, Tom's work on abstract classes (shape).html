@@ -1,0 +1,839 @@
+<html>
+  <head>
+    <title>IBCS1-WD - November 24th, Tom's work on abstract classes (shape)</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>November 24th, Tom's work on abstract classes (shape)<small> #TomsProjects </small></h1><h1 id="toc0"><a name="JAR file: test.jar"></a>JAR file: <a class="wiki_link" href="test.jar.html">test.jar</a></h1>
+ <h1 id="toc1"><a name="Class Diagram: UML notation"></a><a href="files/Shape%20Class%20UML%20notation.pdf">Class Diagram: UML notation</a></h1>
+ <br />
+<h1 id="toc2"><a name="Class Test(Main class)"></a>Class Test(Main class)</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">shapes</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.lang.reflect.*</span><span class="sy0">;</span>
+<span class="kw1">public</span> <span class="kw1">class</span> Test <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> printInstructions<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;Shape class implementation and simple CLI by Tom Zhou&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;Commands available are:&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;/addshape [shape type] &lt;sub-type&gt; [shape name] {parameters}&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;/addscreen [screen name] {width, height}&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;/[shape name||screen name] &lt;method&gt; {parameters}&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;/shapelist&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;/screenlist&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;/help&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;/exit&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> pt<span class="br0">&#40;</span><span class="kw3">Object</span> obj<span class="br0">&#41;</span><span class="br0">&#123;</span><span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>obj<span class="br0">&#41;</span><span class="sy0">;</span><span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        ArrayList<span class="sy0">&lt;</span>Shape<span class="sy0">&gt;</span> s <span class="sy0">=</span> <span class="kw1">new</span> ArrayList<span class="sy0">&lt;</span>Shape<span class="sy0">&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        ArrayList<span class="sy0">&lt;</span>Screen<span class="sy0">&gt;</span> sn <span class="sy0">=</span> <span class="kw1">new</span> ArrayList<span class="sy0">&lt;</span>Screen<span class="sy0">&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Scanner in <span class="sy0">=</span> <span class="kw1">new</span> Scanner<span class="br0">&#40;</span><span class="kw3">System</span>.<span class="me1">in</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        printInstructions<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span><span class="st0">&quot;&gt;&gt;&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> user_com <span class="sy0">=</span> in.<span class="me1">nextLine</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">split</span><span class="br0">&#40;</span><span class="st0">&quot; &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">while</span> <span class="br0">&#40;</span><span class="sy0">!</span>user_com<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;/exit&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;/addshape&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">try</span><span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;polygon&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;ir&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                            <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span> pts <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#40;</span>user_com.<span class="me1">length</span><span class="sy0">-</span><span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">;</span>
+                            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">4</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>user_com.<span class="me1">length</span><span class="sy0">;</span>i<span class="sy0">+=</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                pts<span class="br0">&#91;</span><span class="br0">&#40;</span>i<span class="sy0">-</span><span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">=</span><span class="kw1">new</span> <span class="kw3">Point</span><span class="br0">&#40;</span><span class="kw3">Double</span>.<span class="me1">parseDouble</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span>, <span class="kw3">Double</span>.<span class="me1">parseDouble</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span>i<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            <span class="br0">&#125;</span>
+                            s.<span class="me1">add</span><span class="br0">&#40;</span><span class="kw1">new</span> Irregular_Polygon<span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span>, pts<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            pt<span class="br0">&#40;</span><span class="st0">&quot;Successfully added &quot;</span><span class="sy0">+</span>s.<span class="me1">get</span><span class="br0">&#40;</span>s.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                        <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;re&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                            s.<span class="me1">add</span><span class="br0">&#40;</span><span class="kw1">new</span> Regular_Polygon<span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span>, <span class="kw1">new</span> <span class="kw3">Point</span><span class="br0">&#40;</span><span class="kw3">Double</span>.<span class="me1">parseDouble</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+                                    ,<span class="kw3">Double</span>.<span class="me1">parseDouble</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>, <span class="kw3">Integer</span>.<span class="me1">parseInt</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span><span class="br0">&#41;</span>,
+                                    <span class="kw3">Double</span>.<span class="me1">parseDouble</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">7</span><span class="br0">&#93;</span><span class="br0">&#41;</span>,<span class="kw3">Double</span>.<span class="me1">parseDouble</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">8</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            pt<span class="br0">&#40;</span><span class="st0">&quot;Successfully added &quot;</span><span class="sy0">+</span>s.<span class="me1">get</span><span class="br0">&#40;</span>s.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+&nbsp;
+                        <span class="kw1">else</span><span class="br0">&#123;</span>
+                            pt<span class="br0">&#40;</span><span class="st0">&quot;Command not found&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;circle&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        s.<span class="me1">add</span><span class="br0">&#40;</span><span class="kw1">new</span> Circle<span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span>,<span class="kw1">new</span> <span class="kw3">Point</span><span class="br0">&#40;</span><span class="kw3">Double</span>.<span class="me1">parseDouble</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+                                ,<span class="kw3">Double</span>.<span class="me1">parseDouble</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>, <span class="kw3">Double</span>.<span class="me1">parseDouble</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        pt<span class="br0">&#40;</span><span class="st0">&quot;Successfully added &quot;</span><span class="sy0">+</span>s.<span class="me1">get</span><span class="br0">&#40;</span>s.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;line&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        s.<span class="me1">add</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Line</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span>,<span class="kw1">new</span> <span class="kw3">Point</span><span class="br0">&#40;</span><span class="kw3">Double</span>.<span class="me1">parseDouble</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+                                ,<span class="kw3">Double</span>.<span class="me1">parseDouble</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>, <span class="kw1">new</span> <span class="kw3">Point</span><span class="br0">&#40;</span><span class="kw3">Double</span>.<span class="me1">parseDouble</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+                                        ,<span class="kw3">Double</span>.<span class="me1">parseDouble</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        pt<span class="br0">&#40;</span><span class="st0">&quot;Successfully added &quot;</span><span class="sy0">+</span>s.<span class="me1">get</span><span class="br0">&#40;</span>s.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">else</span> <span class="br0">&#123;</span>
+                        pt<span class="br0">&#40;</span><span class="st0">&quot;Command not found&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">Exception</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    pt<span class="br0">&#40;</span><span class="st0">&quot;Invalid parameters!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;/addscreen&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">try</span><span class="br0">&#123;</span>
+                    sn.<span class="me1">add</span><span class="br0">&#40;</span><span class="kw1">new</span> Screen<span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>, <span class="kw3">Integer</span>.<span class="me1">parseInt</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="br0">&#41;</span>, <span class="kw3">Integer</span>.<span class="me1">parseInt</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    pt<span class="br0">&#40;</span><span class="st0">&quot;Successfully added &quot;</span><span class="sy0">+</span>sn.<span class="me1">get</span><span class="br0">&#40;</span>sn.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="br0">&#125;</span>
+                <span class="kw1">catch</span><span class="br0">&#40;</span><span class="kw3">Exception</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    pt<span class="br0">&#40;</span><span class="st0">&quot;Invalid parameters!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;/shapelist&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Shape</span> sp <span class="sy0">:</span> s<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    pt<span class="br0">&#40;</span>sp.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot;: &quot;</span><span class="sy0">+</span>sp.<span class="me1">getType</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;/screenlist&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">for</span> <span class="br0">&#40;</span>Screen sc <span class="sy0">:</span> sn<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    pt<span class="br0">&#40;</span><span class="st0">&quot;Screen: &quot;</span><span class="sy0">+</span>sc.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;/help&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                printHelp<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span><span class="br0">&#123;</span>
+                <span class="kw4">boolean</span> isFound<span class="sy0">=</span><span class="kw2">false</span><span class="sy0">;</span>
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Shape</span> sp <span class="sy0">:</span> s<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="st0">&quot;/&quot;</span><span class="sy0">+</span>sp.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>.<span class="me1">equals</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        <span class="kw3">Method</span><span class="br0">&#91;</span><span class="br0">&#93;</span> mds <span class="sy0">=</span> sp.<span class="me1">getClass</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getDeclaredMethods</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>user_com.<span class="me1">length</span><span class="sy0">==</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                            isFound<span class="sy0">=</span><span class="kw2">true</span><span class="sy0">;</span>
+                            pt<span class="br0">&#40;</span><span class="st0">&quot;Methods available for &quot;</span><span class="sy0">+</span>sp.<span class="me1">getType</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot; named &quot;</span><span class="sy0">+</span>sp.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot; are:&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Method</span> md <span class="sy0">:</span> mds<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                <span class="kw3">String</span> parameterList<span class="sy0">=</span><span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+                                <span class="kw1">for</span> <span class="br0">&#40;</span>Parameter pr<span class="sy0">:</span> md.<span class="me1">getParameters</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> parameterList<span class="sy0">+=</span>pr.<span class="me1">getType</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot;,&quot;</span><span class="sy0">;</span>
+                                <span class="kw1">if</span> <span class="br0">&#40;</span>parameterList.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">&gt;</span><span class="nu0">0</span><span class="br0">&#41;</span> parameterList<span class="sy0">=</span>parameterList.<span class="me1">substring</span><span class="br0">&#40;</span><span class="nu0">0</span>,parameterList.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                pt<span class="br0">&#40;</span>md.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot; {&quot;</span><span class="sy0">+</span>parameterList<span class="sy0">+</span><span class="st0">&quot;}&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            <span class="br0">&#125;</span>
+                        <span class="br0">&#125;</span>
+                        <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>user_com.<span class="me1">length</span><span class="sy0">==</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Method</span> md <span class="sy0">:</span> mds<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                <span class="kw1">if</span> <span class="br0">&#40;</span>md.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">equals</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                    <span class="kw1">try</span> <span class="br0">&#123;</span>
+                                        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>md.<span class="me1">getReturnType</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;void&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                            <span class="kw1">if</span> <span class="br0">&#40;</span>md.<span class="me1">getReturnType</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">isArray</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                                                <span class="kw1">try</span><span class="br0">&#123;</span>
+                                                    pt<span class="br0">&#40;</span><span class="kw3">Arrays</span>.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw3">Object</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> md.<span class="me1">invoke</span><span class="br0">&#40;</span>sp<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                                <span class="br0">&#125;</span>
+                                                <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">ClassCastException</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                                    pt<span class="br0">&#40;</span><span class="kw3">Arrays</span>.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> md.<span class="me1">invoke</span><span class="br0">&#40;</span>sp<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                                <span class="br0">&#125;</span>
+                                            <span class="kw1">else</span>
+                                                pt<span class="br0">&#40;</span>md.<span class="me1">invoke</span><span class="br0">&#40;</span>sp<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                        <span class="br0">&#125;</span>
+                                        <span class="kw1">else</span> md.<span class="me1">invoke</span><span class="br0">&#40;</span>sp<span class="br0">&#41;</span><span class="sy0">;</span>
+                                        isFound<span class="sy0">=</span><span class="kw2">true</span><span class="sy0">;</span>
+                                    <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">Exception</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                                        pt<span class="br0">&#40;</span><span class="st0">&quot;Error! Please check your command!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                    <span class="br0">&#125;</span>
+                                    <span class="kw1">break</span><span class="sy0">;</span>
+                                <span class="br0">&#125;</span>
+                            <span class="br0">&#125;</span>
+                        <span class="br0">&#125;</span>
+                        <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>user_com.<span class="me1">length</span><span class="sy0">&gt;=</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                            <span class="kw4">boolean</span> isDrawn<span class="sy0">=</span><span class="kw2">false</span><span class="sy0">;</span>
+                            <span class="kw1">if</span> <span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;draw&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                isFound<span class="sy0">=</span><span class="kw2">true</span><span class="sy0">;</span>
+                                <span class="kw1">for</span> <span class="br0">&#40;</span>Screen n<span class="sy0">:</span>sn<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                    <span class="kw1">if</span> <span class="br0">&#40;</span>n.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">equals</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                                        sp.<span class="me1">draw</span><span class="br0">&#40;</span>n<span class="br0">&#41;</span><span class="sy0">;</span>
+                                        isDrawn<span class="sy0">=</span><span class="kw2">true</span><span class="sy0">;</span>
+                                        pt<span class="br0">&#40;</span><span class="st0">&quot;Successfully drew &quot;</span><span class="sy0">+</span>sp.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot; on screen &quot;</span><span class="sy0">+</span>n.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                        <span class="kw1">break</span><span class="sy0">;</span>
+                                    <span class="br0">&#125;</span>
+                                <span class="br0">&#125;</span>
+                            <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>isDrawn<span class="br0">&#41;</span> pt<span class="br0">&#40;</span><span class="st0">&quot;Screen not found!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            <span class="br0">&#125;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>isFound<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw1">for</span> <span class="br0">&#40;</span>Screen screen <span class="sy0">:</span> sn<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="st0">&quot;/&quot;</span><span class="sy0">+</span>screen.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>.<span class="me1">equals</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                            <span class="kw1">if</span> <span class="br0">&#40;</span>user_com.<span class="me1">length</span><span class="sy0">==</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                pt<span class="br0">&#40;</span><span class="st0">&quot;Methods available for &quot;</span><span class="sy0">+</span>screen.<span class="me1">getType</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot; named &quot;</span><span class="sy0">+</span>screen.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot; are:&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                pt<span class="br0">&#40;</span><span class="st0">&quot;getName&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                pt<span class="br0">&#40;</span><span class="st0">&quot;changeName {String}&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                pt<span class="br0">&#40;</span><span class="st0">&quot;toString&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                pt<span class="br0">&#40;</span><span class="st0">&quot;show&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                isFound<span class="sy0">=</span><span class="kw2">true</span><span class="sy0">;</span>
+                            <span class="br0">&#125;</span>
+                            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>user_com.<span class="me1">length</span><span class="sy0">==</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                <span class="kw3">Method</span><span class="br0">&#91;</span><span class="br0">&#93;</span> mds <span class="sy0">=</span> screen.<span class="me1">getClass</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getDeclaredMethods</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Method</span> md <span class="sy0">:</span> mds<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                    <span class="kw1">if</span> <span class="br0">&#40;</span>md.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">equals</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                        <span class="kw1">try</span><span class="br0">&#123;</span>
+                                            <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>md.<span class="me1">getReturnType</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;void&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                                                pt<span class="br0">&#40;</span>md.<span class="me1">invoke</span><span class="br0">&#40;</span>screen<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                            <span class="kw1">else</span> md.<span class="me1">invoke</span><span class="br0">&#40;</span>screen<span class="br0">&#41;</span><span class="sy0">;</span>
+                                            isFound<span class="sy0">=</span><span class="kw2">true</span><span class="sy0">;</span>
+                                        <span class="br0">&#125;</span>
+                                        <span class="kw1">catch</span><span class="br0">&#40;</span><span class="kw3">Exception</span> e<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                            pt<span class="br0">&#40;</span><span class="st0">&quot;Error! Please check your command!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                        <span class="br0">&#125;</span>
+                                        <span class="kw1">break</span><span class="sy0">;</span>
+                                    <span class="br0">&#125;</span>
+                                <span class="br0">&#125;</span>
+                            <span class="br0">&#125;</span>
+                            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>user_com.<span class="me1">length</span><span class="sy0">&gt;=</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                <span class="kw1">if</span> <span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;changeName&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                                    screen.<span class="me1">changeName</span><span class="br0">&#40;</span>user_com<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                                <span class="br0">&#125;</span>
+                            <span class="br0">&#125;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>isFound<span class="br0">&#41;</span> pt<span class="br0">&#40;</span><span class="st0">&quot;Command or object not found&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span><span class="st0">&quot;&gt;&gt;&gt;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            user_com<span class="sy0">=</span>in.<span class="me1">nextLine</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">split</span><span class="br0">&#40;</span><span class="st0">&quot; &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        in.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">exit</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> printHelp<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;/addshape:&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;[shape type]: polygon|circle|line&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;&lt;sub-type&gt; (only for type polygon):<span class="es0">\n</span>ir (regular polyogn)|re (regular polygon)&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;[shape name]: your customized name&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;{parameters}: parameters for correspond commmand&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;For regular polygon: centerX centerY NumberofSides radius rotations(in degrees)&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;Example: /addshape polygon re 300 300 6 100 0&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;For irregular polygon: vertex1X vertex1Y vertex2X vertex2Y vertex3X vertex3Y ......&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;Example: /addshape polygon ir ire1 10 50 20 80 10 100 40 400&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;For line: startPointX startPointY endPointX endPointY&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;Example: /addshape line line1 100 100 500 500&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;For circle: centerX centerY radius&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;Example: /addshape circle cir1 400 400 200<span class="es0">\n</span>&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        pt<span class="br0">&#40;</span><span class="st0">&quot;/addscreen:&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;[screen name]: your customized name&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;{parameters}: width and height of the screen&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;Example: /addscreen screen1 800 600<span class="es0">\n</span>&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        pt<span class="br0">&#40;</span><span class="st0">&quot;/[shape name||screen name] &lt;method&gt; {parameters}:&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;Invoke methods of this specific shape or screen object&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;If only the name is provided, then all methods for this object, together with types of parameters, will be shown&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        pt<span class="br0">&#40;</span><span class="st0">&quot;Parameters must be provided if the method requires them&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+<h1 id="toc3"><a name="Abstract class Shape"></a>Abstract class Shape</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">shapes</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">abstract</span> <span class="kw1">class</span> <span class="kw3">Shape</span> <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">String</span> name<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> type<span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw3">Shape</span><span class="br0">&#40;</span><span class="kw3">String</span> shapeName, <span class="kw3">String</span> typeName<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        name<span class="sy0">=</span>shapeName<span class="sy0">;</span>
+        type<span class="sy0">=</span>typeName<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">String</span> getName<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> name<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> changeName<span class="br0">&#40;</span><span class="kw3">String</span> newName<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        name<span class="sy0">=</span>newName<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getType<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> type<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">abstract</span> <span class="kw4">double</span> getPerimeter<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">abstract</span> <span class="kw4">void</span> draw<span class="br0">&#40;</span>Screen sc<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">abstract</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">abstract</span> <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span> getVertices<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+<h1 id="toc4"><a name="Abstract subclass Polygons"></a>Abstract subclass Polygons</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">shapes</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">abstract</span> <span class="kw1">class</span> Polygons <span class="kw1">extends</span> <span class="kw3">Shape</span><span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> sides<span class="sy0">;</span>
+    <span class="kw1">public</span> Polygons<span class="br0">&#40;</span><span class="kw4">int</span> s, <span class="kw3">String</span> name, <span class="kw3">String</span> type<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">super</span><span class="br0">&#40;</span>name, type<span class="br0">&#41;</span><span class="sy0">;</span>
+        sides<span class="sy0">=</span>s<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getSides<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> sides<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">abstract</span> <span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span> getSidelength<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="br0">&#125;</span></pre>
+
+<br />
+<h1 id="toc5"><a name="Subclass Regular_Polygon"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Subclass Regular_Polygon</span></h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">shapes</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Regular_Polygon <span class="kw1">extends</span> Polygons<span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">double</span> sidelength<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">double</span> radius<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">double</span> internalAngle<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">double</span> rotation<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">Point</span> center<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span> vertices<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Regular_Polygon<span class="br0">&#40;</span><span class="kw3">String</span> name,<span class="kw3">Point</span> center, <span class="kw4">int</span> sides, <span class="kw4">double</span> rad, <span class="kw4">double</span> rt<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">super</span><span class="br0">&#40;</span>sides, name, <span class="st0">&quot;Regular_Polygon&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        rotation <span class="sy0">=</span> <span class="kw3">Math</span>.<span class="me1">toRadians</span><span class="br0">&#40;</span>rt<span class="br0">&#41;</span><span class="sy0">;</span>
+        internalAngle <span class="sy0">=</span> <span class="kw3">Math</span>.<span class="me1">toRadians</span><span class="br0">&#40;</span><span class="nu0">360</span><span class="sy0">/</span>sides<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">center</span><span class="sy0">=</span>center<span class="sy0">;</span>
+        radius <span class="sy0">=</span> rad<span class="sy0">;</span>
+        vertices <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Point</span><span class="br0">&#91;</span>sides<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span>sides<span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            vertices<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Point</span><span class="br0">&#40;</span>center.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span>rad<span class="sy0">*</span><span class="kw3">Math</span>.<span class="me1">cos</span><span class="br0">&#40;</span>i<span class="sy0">*</span>internalAngle<span class="sy0">+</span>rotation<span class="br0">&#41;</span>,
+                    center.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span>rad<span class="sy0">*</span><span class="kw3">Math</span>.<span class="me1">sin</span><span class="br0">&#40;</span>i<span class="sy0">*</span>internalAngle<span class="sy0">+</span>rotation<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        sidelength <span class="sy0">=</span> vertices<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">getDistance</span><span class="br0">&#40;</span>vertices<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> getPerimeter<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">super</span>.<span class="me1">getSides</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">*</span>sidelength<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> draw<span class="br0">&#40;</span>Screen sc<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> x <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>vertices.<span class="me1">length</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> y <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>vertices.<span class="me1">length</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>vertices.<span class="me1">length</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            x<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">=</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="kw3">Math</span>.<span class="me1">round</span><span class="br0">&#40;</span>vertices<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            y<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">=</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="kw3">Math</span>.<span class="me1">round</span><span class="br0">&#40;</span>vertices<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        sc.<span class="me1">addPolygon</span><span class="br0">&#40;</span>x,y,vertices.<span class="me1">length</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        sc.<span class="me1">repaint</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span> getSidelength<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">new</span> <span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="br0">&#123;</span>sidelength<span class="br0">&#125;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span> getVertices<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> vertices<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> getArea<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> sidelength<span class="sy0">*</span>radius<span class="sy0">*</span>vertices.<span class="me1">length</span><span class="sy0">/</span><span class="nu0">2</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> getInternalAngle<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> internalAngle<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">Point</span> getCenter<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> center<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw3">String</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="st0">&quot;Regular polygon named %s of %d sides, center %s, radius %.1f and rotation %.1f degrees&quot;</span>,
+                <span class="kw1">super</span>.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, vertices.<span class="me1">length</span>,center.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, radius, <span class="kw3">Math</span>.<span class="me1">toDegrees</span><span class="br0">&#40;</span>rotation<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;
+&nbsp;
+&nbsp;</pre>
+
+<br />
+<h1 id="toc6"><a name="Subclass Irregular_Polygon"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Subclass Irregular_Polygon</span></h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">shapes</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Irregular_Polygon <span class="kw1">extends</span> Polygons<span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span> sidelength<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span> vertices<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Irregular_Polygon<span class="br0">&#40;</span><span class="kw3">String</span> name, <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span> pts<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">super</span><span class="br0">&#40;</span>pts.<span class="me1">length</span>, name, <span class="st0">&quot;Irregular_Polygon&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        sidelength <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">double</span><span class="br0">&#91;</span>pts.<span class="me1">length</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>pts.<span class="me1">length</span><span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            sidelength<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">=</span>pts<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">getDistance</span><span class="br0">&#40;</span>pts<span class="br0">&#91;</span>i<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        sidelength<span class="br0">&#91;</span>sidelength.<span class="me1">length</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">=</span>pts<span class="br0">&#91;</span>pts.<span class="me1">length</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#93;</span>.<span class="me1">getDistance</span><span class="br0">&#40;</span>pts<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        vertices <span class="sy0">=</span> pts<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> getPerimeter<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">double</span> peri <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">double</span> sl <span class="sy0">:</span> sidelength<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            peri<span class="sy0">+=</span> sl<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> peri<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> draw<span class="br0">&#40;</span>Screen sc<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> x <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>vertices.<span class="me1">length</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> y <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>vertices.<span class="me1">length</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>vertices.<span class="me1">length</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            x<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">=</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="kw3">Math</span>.<span class="me1">round</span><span class="br0">&#40;</span>vertices<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            y<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">=</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="kw3">Math</span>.<span class="me1">round</span><span class="br0">&#40;</span>vertices<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        sc.<span class="me1">addPolygon</span><span class="br0">&#40;</span>x,y,vertices.<span class="me1">length</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        sc.<span class="me1">repaint</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span> getSidelength<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> sidelength<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span> getVertices<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> vertices<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">String</span> vertiStr <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Point</span> v <span class="sy0">:</span> vertices<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            vertiStr<span class="sy0">+=</span> v.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot; &quot;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> <span class="kw3">String</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="st0">&quot;Irregular polygon named %s of %d sides and vertices %s&quot;</span>,
+                <span class="kw1">super</span>.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, vertices.<span class="me1">length</span>, vertiStr<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;
+&nbsp;</pre>
+
+<br />
+<h1 id="toc7"><a name="Subclass Line"></a>Subclass Line</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">shapes</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> <span class="kw3">Line</span> <span class="kw1">extends</span> <span class="kw3">Shape</span> <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">Point</span> start<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">Point</span> end<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">double</span> length<span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw3">Line</span><span class="br0">&#40;</span><span class="kw3">String</span> name, <span class="kw3">Point</span> st, <span class="kw3">Point</span> ed<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">super</span><span class="br0">&#40;</span>name, <span class="st0">&quot;Line&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        start<span class="sy0">=</span>st<span class="sy0">;</span>
+        end<span class="sy0">=</span>ed<span class="sy0">;</span>
+        length <span class="sy0">=</span> <span class="kw3">Point</span>.<span class="me1">getDistance</span><span class="br0">&#40;</span>start, end<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> draw<span class="br0">&#40;</span>Screen sc<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        sc.<span class="me1">addLine</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        sc.<span class="me1">repaint</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span> getVertices<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">new</span> <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="br0">&#123;</span>start, end<span class="br0">&#125;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> getPerimeter<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> length<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw3">String</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="st0">&quot;Line between %s and %s of length %.1f&quot;</span>, start.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, end.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, length<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+<h1 id="toc8"><a name="Subclass Circle"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Subclass Circle</span></h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">shapes</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Irregular_Polygon <span class="kw1">extends</span> Polygons<span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span> sidelength<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span> vertices<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Irregular_Polygon<span class="br0">&#40;</span><span class="kw3">String</span> name, <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span> pts<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">super</span><span class="br0">&#40;</span>pts.<span class="me1">length</span>, name, <span class="st0">&quot;Irregular_Polygon&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        sidelength <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">double</span><span class="br0">&#91;</span>pts.<span class="me1">length</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>pts.<span class="me1">length</span><span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            sidelength<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">=</span>pts<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">getDistance</span><span class="br0">&#40;</span>pts<span class="br0">&#91;</span>i<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        sidelength<span class="br0">&#91;</span>sidelength.<span class="me1">length</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">=</span>pts<span class="br0">&#91;</span>pts.<span class="me1">length</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#93;</span>.<span class="me1">getDistance</span><span class="br0">&#40;</span>pts<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        vertices <span class="sy0">=</span> pts<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> getPerimeter<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">double</span> peri <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">double</span> sl <span class="sy0">:</span> sidelength<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            peri<span class="sy0">+=</span> sl<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> peri<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> draw<span class="br0">&#40;</span>Screen sc<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> x <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>vertices.<span class="me1">length</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> y <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>vertices.<span class="me1">length</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>vertices.<span class="me1">length</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            x<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">=</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="kw3">Math</span>.<span class="me1">round</span><span class="br0">&#40;</span>vertices<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            y<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">=</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="kw3">Math</span>.<span class="me1">round</span><span class="br0">&#40;</span>vertices<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        sc.<span class="me1">addPolygon</span><span class="br0">&#40;</span>x,y,vertices.<span class="me1">length</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        sc.<span class="me1">repaint</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span> getSidelength<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> sidelength<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">Point</span><span class="br0">&#91;</span><span class="br0">&#93;</span> getVertices<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> vertices<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">String</span> vertiStr <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Point</span> v <span class="sy0">:</span> vertices<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            vertiStr<span class="sy0">+=</span> v.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot; &quot;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> <span class="kw3">String</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="st0">&quot;Irregular polygon named %s of %d sides and vertices %s&quot;</span>,
+                <span class="kw1">super</span>.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, vertices.<span class="me1">length</span>, vertiStr<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;
+&nbsp;</pre>
+
+<br />
+<h1 id="toc9"><a name="Class Point"></a>Class Point</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">shapes</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> <span class="kw3">Point</span> <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">double</span> x<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">double</span> y<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">double</span> z<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> type<span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw3">Point</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        x<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>y<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>z<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+        type<span class="sy0">=</span><span class="st0">&quot;3D&quot;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">Point</span><span class="br0">&#40;</span><span class="kw4">double</span> x1, <span class="kw4">double</span> y1<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        x<span class="sy0">=</span>x1<span class="sy0">;</span>y<span class="sy0">=</span>y1<span class="sy0">;</span>z<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+        type<span class="sy0">=</span><span class="st0">&quot;2D&quot;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">Point</span><span class="br0">&#40;</span><span class="kw4">double</span> x1, <span class="kw4">double</span> y1, <span class="kw4">double</span> z1<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        x<span class="sy0">=</span>x1<span class="sy0">;</span>y<span class="sy0">=</span>y1<span class="sy0">;</span>z<span class="sy0">=</span>z1<span class="sy0">;</span>
+        type<span class="sy0">=</span><span class="st0">&quot;3D&quot;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">double</span> getX<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> x<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> getY<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> y<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> getZ<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> z<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">double</span> getDistance<span class="br0">&#40;</span><span class="kw3">Point</span> p, <span class="kw3">Point</span> q<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw3">Math</span>.<span class="me1">sqrt</span><span class="br0">&#40;</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span>p.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span>q.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span>,<span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span>p.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span>q.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span>,<span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span>p.<span class="me1">getZ</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span>q.<span class="me1">getZ</span><span class="br0">&#40;</span><span class="br0">&#41;</span>,<span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">double</span> getDistance<span class="br0">&#40;</span><span class="kw3">Point</span> p<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw3">Math</span>.<span class="me1">sqrt</span><span class="br0">&#40;</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span>p.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span>x,<span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span>p.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span>y,<span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span>p.<span class="me1">getZ</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span>z,<span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">double</span> getDistance<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw3">Math</span>.<span class="me1">sqrt</span><span class="br0">&#40;</span>x<span class="sy0">*</span>x<span class="sy0">+</span>y<span class="sy0">*</span>y<span class="sy0">+</span>z<span class="sy0">*</span>z<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>type.<span class="me1">equals</span><span class="br0">&#40;</span><span class="st0">&quot;2D&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            <span class="kw1">return</span> <span class="kw3">String</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="st0">&quot;(%.1f,%.1f)&quot;</span>, x,y<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">else</span>
+            <span class="kw1">return</span> <span class="kw3">String</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="st0">&quot;(%.1f,%.1f,%.1f)&quot;</span>, x,y,z<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+<h1 id="toc10"><a name="Class Screen"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Class Screen</span></h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">shapes</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.Graphics</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.Polygon</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Screen <span class="kw1">extends</span> <span class="kw3">JFrame</span><span class="br0">&#123;</span>
+    <span class="kw1">private</span> ArrayList<span class="sy0">&lt;</span>Polygon<span class="sy0">&gt;</span> PolygonList <span class="sy0">=</span> <span class="kw1">new</span> ArrayList<span class="sy0">&lt;</span>Polygon<span class="sy0">&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">private</span> ArrayList<span class="sy0">&lt;</span>Circle<span class="sy0">&gt;</span> CircleList <span class="sy0">=</span> <span class="kw1">new</span> ArrayList<span class="sy0">&lt;</span>Circle<span class="sy0">&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">private</span> ArrayList<span class="sy0">&lt;</span>Line<span class="sy0">&gt;</span> LineList <span class="sy0">=</span> <span class="kw1">new</span> ArrayList<span class="sy0">&lt;</span>Line<span class="sy0">&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> name<span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> addPolygon <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> x, <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> y, <span class="kw4">int</span> s<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        PolygonList.<span class="me1">add</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Polygon</span><span class="br0">&#40;</span>x, y, s<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> addCircle<span class="br0">&#40;</span>Circle c<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        CircleList.<span class="me1">add</span><span class="br0">&#40;</span>c<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> addLine<span class="br0">&#40;</span><span class="kw3">Line</span> c<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        LineList.<span class="me1">add</span><span class="br0">&#40;</span>c<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> Screen<span class="br0">&#40;</span><span class="kw3">String</span> n, <span class="kw4">int</span> wid, <span class="kw4">int</span> hei<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        name<span class="sy0">=</span>n<span class="sy0">;</span>
+        setTitle<span class="br0">&#40;</span>n<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setVisible</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setDefaultCloseOperation</span><span class="br0">&#40;</span><span class="kw3">JFrame</span>.<span class="me1">HIDE_ON_CLOSE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setSize</span><span class="br0">&#40;</span>wid, hei<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getName<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> name<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> changeName<span class="br0">&#40;</span><span class="kw3">String</span> newName<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        name<span class="sy0">=</span>newName<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> paint<span class="br0">&#40;</span><span class="kw3">Graphics</span> g<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">super</span>.<span class="me1">paint</span><span class="br0">&#40;</span>g<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Polygon</span> py <span class="sy0">:</span> PolygonList<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            g.<span class="me1">drawPolygon</span><span class="br0">&#40;</span>py<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Line</span> l <span class="sy0">:</span> LineList<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            g.<span class="me1">drawLine</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="kw3">Math</span>.<span class="me1">round</span><span class="br0">&#40;</span>l.<span class="me1">getVertices</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="kw3">Math</span>.<span class="me1">round</span><span class="br0">&#40;</span>l.<span class="me1">getVertices</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>,
+                    <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="kw3">Math</span>.<span class="me1">round</span><span class="br0">&#40;</span>l.<span class="me1">getVertices</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="kw3">Math</span>.<span class="me1">round</span><span class="br0">&#40;</span>l.<span class="me1">getVertices</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span>Circle c <span class="sy0">:</span> CircleList<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            g.<span class="me1">drawOval</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="kw3">Math</span>.<span class="me1">round</span><span class="br0">&#40;</span>c.<span class="me1">getVertices</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">getX</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span>c.<span class="me1">getRadius</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>,
+                    <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="kw3">Math</span>.<span class="me1">round</span><span class="br0">&#40;</span>c.<span class="me1">getVertices</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">getY</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span>c.<span class="me1">getRadius</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                    , <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="kw3">Math</span>.<span class="me1">round</span><span class="br0">&#40;</span>c.<span class="me1">getRadius</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">*</span><span class="nu0">2</span><span class="br0">&#41;</span>, <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="kw3">Math</span>.<span class="me1">round</span><span class="br0">&#40;</span>c.<span class="me1">getRadius</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">*</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="st0">&quot;Screen named &quot;</span><span class="sy0">+</span>getName<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot; of width &quot;</span><span class="sy0">+</span><span class="kw1">this</span>.<span class="me1">getWidth</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot; and height &quot;</span><span class="sy0">+</span><span class="kw1">this</span>.<span class="me1">getHeight</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> show<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">super</span>.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

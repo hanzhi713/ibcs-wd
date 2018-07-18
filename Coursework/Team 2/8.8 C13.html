@@ -1,0 +1,178 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 8.8 C13</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>8.8 C13<small> #homework </small></h1>1<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">string</span>
+old <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">&quot;Zen.txt&quot;</span><span class="sy0">,</span> <span class="st0">&quot;r&quot;</span><span class="br0">&#41;</span>
+<span class="kw3">new</span> <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">&quot;new1.txt&quot;</span><span class="sy0">,</span> <span class="st0">&quot;w&quot;</span><span class="br0">&#41;</span>
+xs <span class="sy0">=</span> old.<span class="me1">readlines</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+xs.<span class="me1">reverse</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">for</span> v <span class="kw1">in</span> xs:
+    <span class="kw3">new</span>.<span class="me1">write</span><span class="br0">&#40;</span>v<span class="br0">&#41;</span>
+old.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw3">new</span>.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+The file that will be needed when running the code of question 1<br />
+<a href="files/Zen.txt">Zen.txt</a><br />
+<br />
+2<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">infile <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">'reptiles.txt'</span><span class="sy0">,</span> <span class="st0">&quot;r&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">while</span> <span class="nu0">1</span>:
+    text <span class="sy0">=</span> infile.<span class="kw3">readline</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>text<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">0</span>:
+        <span class="kw1">break</span>
+    <span class="kw1">if</span> <span class="st0">'snake'</span> <span class="kw1">in</span> text:
+        <span class="kw1">print</span><span class="br0">&#40;</span>text<span class="br0">&#41;</span>
+&nbsp;
+infile.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+The file that will be needed when running the code of question 2<br />
+<a href="files/reptiles.txt">reptiles.txt</a><br />
+<br />
+3<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">old <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">&quot;Zen.txt&quot;</span><span class="sy0">,</span> <span class="st0">&quot;r&quot;</span><span class="br0">&#41;</span>
+<span class="kw3">new</span> <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">&quot;newZen.txt&quot;</span><span class="sy0">,</span> <span class="st0">&quot;w&quot;</span><span class="br0">&#41;</span>
+i <span class="sy0">=</span> <span class="nu0">0</span>
+<span class="kw1">while</span> <span class="nu0">1</span>:
+    text <span class="sy0">=</span> old.<span class="kw3">readline</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    i <span class="sy0">=</span> i + <span class="nu0">1</span>
+    <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>text<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">0</span>:
+        <span class="kw1">break</span>
+    <span class="kw3">new</span>.<span class="me1">write</span><span class="br0">&#40;</span><span class="kw2">str</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw3">new</span>.<span class="me1">write</span><span class="br0">&#40;</span><span class="st0">' '</span><span class="br0">&#41;</span>
+    <span class="kw3">new</span>.<span class="me1">write</span><span class="br0">&#40;</span>text<span class="br0">&#41;</span>
+old.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw3">new</span>.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+The file that will be needed when running the code of question 3 is the same as the one in question 1<br />
+<br />
+4<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">string</span>
+old <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">'newZen.txt'</span><span class="sy0">,</span> <span class="st0">'r'</span><span class="br0">&#41;</span>
+<span class="kw3">new</span> <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">'newerZen.txt'</span><span class="sy0">,</span> <span class="st0">'w'</span><span class="br0">&#41;</span>
+<span class="kw1">while</span> <span class="nu0">1</span>:
+    text <span class="sy0">=</span> old.<span class="kw3">readline</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>text<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">0</span>:
+        <span class="kw1">break</span>
+    l <span class="sy0">=</span> text<span class="br0">&#91;</span>:<span class="br0">&#93;</span>
+    k <span class="sy0">=</span> l.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    i <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">while</span> <span class="nu0">1</span>:
+        <span class="kw1">if</span> k<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="kw1">in</span> <span class="kw3">string</span>.<span class="me1">digits</span>:
+            k<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="st0">''</span>
+        <span class="kw1">elif</span> k<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">==</span> <span class="st0">' '</span>:
+            k<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="st0">''</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">break</span>
+        i <span class="sy0">=</span> i + <span class="nu0">1</span>
+    txt <span class="sy0">=</span> <span class="st0">' '</span>.<span class="me1">join</span><span class="br0">&#40;</span>k<span class="br0">&#41;</span>
+    <span class="kw3">new</span>.<span class="me1">write</span><span class="br0">&#40;</span>txt<span class="br0">&#41;</span>
+    <span class="kw3">new</span>.<span class="me1">write</span><span class="br0">&#40;</span><span class="st0">'<span class="es0">\n</span>'</span><span class="br0">&#41;</span>
+old.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw3">new</span>.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+The file that will be needed when running the code of question 4 is the same as the one generated by the code of question 3</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

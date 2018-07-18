@@ -1,0 +1,322 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Paper 2 study</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> Patient <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> id<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> name<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> priority<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> doctor<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Patient<span class="br0">&#40;</span><span class="kw4">int</span> i, <span class="kw3">String</span> n, <span class="kw4">int</span> p<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        id<span class="sy0">=</span>i<span class="sy0">;</span>
+        name<span class="sy0">=</span>n<span class="sy0">;</span>
+        priority<span class="sy0">=</span>p<span class="sy0">;</span>
+        doctor<span class="sy0">=</span><span class="kw2">null</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> setId<span class="br0">&#40;</span><span class="kw4">int</span> i<span class="br0">&#41;</span><span class="br0">&#123;</span>id<span class="sy0">=</span>i<span class="sy0">;</span><span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setName<span class="br0">&#40;</span><span class="kw3">String</span> n<span class="br0">&#41;</span><span class="br0">&#123;</span>name <span class="sy0">=</span> n<span class="sy0">;</span><span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setPriority<span class="br0">&#40;</span><span class="kw4">int</span> p<span class="br0">&#41;</span><span class="br0">&#123;</span>priority <span class="sy0">=</span> p<span class="sy0">;</span><span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> getId<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span><span class="kw1">return</span> id<span class="sy0">;</span><span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getName<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span><span class="kw1">return</span> name<span class="sy0">;</span><span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> getPiroirty<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span><span class="kw1">return</span> priority<span class="sy0">;</span><span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getDoctor<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span><span class="kw1">return</span> doctor<span class="sy0">;</span><span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span><span class="kw1">return</span> id <span class="sy0">+</span> <span class="st0">&quot; &quot;</span> <span class="sy0">+</span> name <span class="sy0">+</span> <span class="st0">&quot; &quot;</span> <span class="sy0">+</span> priority <span class="sy0">+</span> <span class="st0">&quot; &quot;</span> <span class="sy0">+</span> doctor<span class="sy0">;</span><span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> WaitingRoom <span class="br0">&#123;</span>
+    <span class="kw1">private</span> Patient<span class="br0">&#91;</span><span class="br0">&#93;</span> patients <span class="sy0">=</span> <span class="kw1">new</span> Patient <span class="br0">&#91;</span><span class="nu0">10</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> WaitingRoom<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> add<span class="br0">&#40;</span>Patient newPatient<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">while</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="br0">&#40;</span>patients<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">&amp;&amp;</span><span class="br0">&#40;</span>i<span class="sy0">&lt;</span><span class="nu0">10</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            i <span class="sy0">=</span> i<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>i<span class="sy0">==</span><span class="nu0">10</span><span class="br0">&#41;</span><span class="br0">&#123;</span><span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;No moew space in the waiting room.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>patients<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">=</span>newPatient<span class="sy0">;</span><span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> callNextPatient<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span> index <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>patients<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">==</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;The waiting room is empty.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            index <span class="sy0">=</span> findNextPatientIndex<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            remove<span class="br0">&#40;</span>index<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw4">int</span> findNextPatientIndex<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw4">int</span> max<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">while</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>i<span class="sy0">&lt;</span><span class="nu0">10</span><span class="br0">&#41;</span><span class="sy0">&amp;&amp;</span><span class="br0">&#40;</span>patients<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>patients<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">getPiroirty</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&gt;</span> patients<span class="br0">&#91;</span>max<span class="br0">&#93;</span>.<span class="me1">getPiroirty</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                max <span class="sy0">=</span> i<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            i <span class="sy0">=</span> i<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> max<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> remove<span class="br0">&#40;</span><span class="kw4">int</span> n<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>patients<span class="br0">&#91;</span>n<span class="br0">&#93;</span>.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span>n<span class="sy0">;</span> i<span class="sy0">&lt;</span><span class="nu0">9</span><span class="sy0">;</span> i<span class="sy0">=</span>i<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            patients<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> patients<span class="br0">&#91;</span>i<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        patients<span class="br0">&#91;</span><span class="nu0">9</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java">&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Treatment <span class="br0">&#123;</span>
+    <span class="kw3">String</span> date<span class="sy0">;</span>
+    <span class="kw3">Integer</span> patientId<span class="sy0">;</span>
+    <span class="kw3">String</span> doctor<span class="sy0">;</span>
+    <span class="kw3">String</span> actions<span class="sy0">;</span>
+    <span class="kw3">String</span> medication<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Treatment<span class="br0">&#40;</span><span class="kw3">String</span> date, <span class="kw4">int</span> id, <span class="kw3">String</span> d, <span class="kw3">String</span> a, <span class="kw3">String</span> m<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">date</span> <span class="sy0">=</span> date<span class="sy0">;</span>
+        patientId <span class="sy0">=</span> id<span class="sy0">;</span>
+        doctor <span class="sy0">=</span> d<span class="sy0">;</span>
+        actions <span class="sy0">=</span> a<span class="sy0">;</span>
+        medication <span class="sy0">=</span> m<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> Treatment<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setDate<span class="br0">&#40;</span><span class="kw3">String</span> date<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">date</span> <span class="sy0">=</span> date<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setPatientId<span class="br0">&#40;</span><span class="kw3">Integer</span> id<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        patientId <span class="sy0">=</span> id<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setDoctor<span class="br0">&#40;</span><span class="kw3">String</span> doctor<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">doctor</span> <span class="sy0">=</span> doctor<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setMedication<span class="br0">&#40;</span><span class="kw3">String</span> medication<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">medication</span> <span class="sy0">=</span> medication<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getdate<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> date<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">Integer</span> getPatientID<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> patientId<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getDoctor<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> doctor<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getMedication<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> medication<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> date<span class="sy0">+</span><span class="st0">&quot; &quot;</span><span class="sy0">+</span>patientId<span class="sy0">+</span><span class="st0">&quot; &quot;</span><span class="sy0">+</span>doctor<span class="sy0">+</span><span class="st0">&quot; &quot;</span><span class="sy0">+</span>actions<span class="sy0">+</span><span class="st0">&quot; &quot;</span><span class="sy0">+</span>medication<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> Ambulatory <span class="kw1">extends</span> Treatment <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> medication<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Ambulatory<span class="br0">&#40;</span><span class="kw3">String</span> med<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">super</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        medication <span class="sy0">=</span> med<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> Referral <span class="kw1">extends</span> Treatment<span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> hospital<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">Boolean</span> ambulance<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Referral<span class="br0">&#40;</span><span class="kw3">String</span> hos, <span class="kw3">Boolean</span> amb<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">super</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        hospital <span class="sy0">=</span> hos<span class="sy0">;</span>
+        ambulance <span class="sy0">=</span> amb<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> InPatient <span class="kw1">extends</span> Treatment <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> medication<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> roomNumber<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> InPatient<span class="br0">&#40;</span><span class="kw3">String</span> med, <span class="kw3">String</span> rn<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">super</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        medication <span class="sy0">=</span> med<span class="sy0">;</span>
+        roomNumber <span class="sy0">=</span> rn<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,794 @@
+<html>
+  <head>
+    <title>IBCS1-WD - work done before summer exercise 1-6</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<h2 id="toc0"><a name="x-Turtle course work"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;"><strong>Turtle course work</strong></span></h2>
+ 1:<br />
+<ul><li>
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">a =[int(input('a1= ')),int(input('a2= ')),int(input('a3= ')),int(input('a4= ')),int(input('a5= '))]
+def s(a):
+    s = 0
+    for i in a:
+        s = s + i
+    print (s)
+def multiply(a):
+    s = 1
+    for i in a:
+        s = s * i
+    print (s)
+&nbsp;
+s(a)
+multiply(a)</pre>
+
+</li></ul>2:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">a = ('I am testing')
+def reverse(a):
+    a = a[::-1]
+    print (a)
+&nbsp;
+reverse(a)</pre>
+
+3:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">a = &quot;radar&quot;
+def is_palindrome(a):
+    if a == a[::-1]:
+        print(&quot;yes it is&quot;)
+        return True
+is_palindrome(a)</pre>
+
+4:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">x = int(input(&quot;give a number&quot;))
+a = [1,2,3,4,5,6]
+def is_number():
+    l = 0
+    for i in a:
+        if x == i:
+            print(&quot;True&quot;)
+        else:
+            l = l + 1
+    if l == 6:
+        print (&quot;false&quot;)
+is_number()</pre>
+
+5:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">a = [1,2,3,4,5,6]
+b = [7,8,9,10,11,6]
+&nbsp;
+def overlapping(a,b):
+    l = 0
+    for k in b:
+        for i in a:
+            if k != i:
+                l = l + 1
+    print(l)
+    if l &gt; 35:
+        print (&quot;False&quot;)
+&nbsp;
+    else:
+        print(&quot;True&quot;)
+&nbsp;
+&nbsp;
+overlapping(a,b)
+&nbsp;
+&nbsp;</pre>
+
+6:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">def generate_n_chars(n,c):
+    for i in range (0,n):
+        print (c,end='')
+&nbsp;
+generate_n_chars(5,&quot;P&quot;)</pre>
+
+7:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">def generate_n_chars(n,c):
+    for i in range (0,n):
+        print (c,end='')
+&nbsp;
+def histogram(a):
+    n = 5
+    c = &quot;P&quot;
+    for i in a:
+        generate_n_chars(i,c)
+        print()
+&nbsp;
+a = [2,5,7,4,6]
+histogram(a)</pre>
+
+8:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import turtle
+a1 = int(input(&quot;first percentage&quot;))
+a2 = int(input(&quot;second percentage&quot;))
+a3 = int(input(&quot;third percentage&quot;))
+window = turtle.Screen()
+ttl = turtle.Turtle()
+ttl.right(90)
+ttl.forward(100)
+ttl.fillcolor(&quot;brown&quot;)
+ttl.begin_fill()
+ttl.pendown()
+ttl.left(90)
+ttl.circle(100,a1*360/100)
+xcor = ttl.xcor()
+ycor = ttl.ycor()
+ttl.goto(0,0)
+ttl.end_fill()
+ttl.fillcolor(&quot;Yellow&quot;)
+ttl.begin_fill()
+ttl.pendown()
+ttl.goto(xcor,ycor)
+ttl.circle(100,a2*360/100)
+xcor = ttl.xcor()
+ycor = ttl.ycor()
+ttl.goto(0,0)
+ttl.end_fill()
+ttl.fillcolor(&quot;Red&quot;)
+ttl.begin_fill()
+ttl.pendown()
+ttl.goto(xcor,ycor)
+ttl.circle(100,a3*360/100)
+xcor = ttl.xcor()
+ycor = ttl.ycor()
+ttl.goto(0,0)
+ttl.end_fill()
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;</pre>
+
+12:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import turtle
+ttl = turtle.Turtle()
+wn = turtle.Screen()
+wn.bgcolor(&quot;lightgreen&quot;)
+ttl.shape(&quot;turtle&quot;)
+ttl.color(&quot;blue&quot;)
+ttl.stamp()
+for i in range (0,12):
+    ttl.penup()
+    ttl.forward(200)
+    ttl.pendown()
+    ttl.forward(30)
+    ttl.penup()
+    ttl.forward(30)
+    ttl.stamp()
+    ttl.penup()
+    ttl.forward(-260)
+    ttl.right(30)
+&nbsp;
+&nbsp;
+&nbsp;</pre>
+
+11:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import turtle
+ttl = turtle.Turtle()
+turtle.setup (800, 800, 0, 0)
+for i in range(0,5):
+    ttl.forward(100)
+    ttl.right(144)
+&nbsp;
+&nbsp;</pre>
+
+3.9<br />
+20 degrees<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">&nbsp;
+&nbsp;
+&nbsp;</pre>
+
+3.7&amp;3.8<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import turtle
+ttl = turtle.Turtle()
+turtle.setup (800, 800, 0, 0)
+angle = [160, -43, 270, -97, -43, 200, -940, 17, -86]
+for i in range (0,9):
+    ttl.right(angle[i])
+    ttl.forward(100)
+print(ttl.heading())</pre>
+
+3.9<br />
+20 degrees<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">&nbsp;
+&nbsp;
+&nbsp;</pre>
+
+3.7&amp;3.8<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import turtle
+ttl = turtle.Turtle()
+turtle.setup (800, 800, 0, 0)
+angle = [160, -43, 270, -97, -43, 200, -940, 17, -86]
+for i in range (0,9):
+    ttl.right(angle[i])
+    ttl.forward(100)
+print(ttl.heading())
+&nbsp;
+&nbsp;</pre>
+
+3.6普适程序<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import turtle
+length = int(input(&quot;side length&quot;))
+side = int(input(&quot;how many sides&quot;))
+ttl = turtle.Turtle()
+turtle.setup (800, 800, 0, 0)
+for i in range (0,side):
+    ttl.forward(length)
+    ttl.left(360/side)
+&nbsp;
+&nbsp;
+&nbsp;</pre>
+
+3.5<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import math
+i = [12, 10, 32, 3, 66, 17, 42, 99, 20]
+for j in range (0,9):
+    print(i[j])
+&nbsp;
+for j in range (0,9):
+    a = math.sqrt(i[j])
+    print(&quot;original value&quot;,&quot; &quot;,i[j], &quot; &quot;,&quot;squared value&quot;,&quot; &quot;,a)
+&nbsp;
+total = 0
+for j in range (0,9):
+    total = total + i[j]
+&nbsp;
+print(total)
+&nbsp;
+total = i[1]
+for j in range (1,9):
+    total = total * i[j]
+&nbsp;
+print(total)
+&nbsp;
+&nbsp;
+&nbsp;</pre>
+
+3.4<br />
+facing north east<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">&nbsp;
+[[code]]
+3.3</pre>
+
+i = [&quot;January&quot;, &quot;Feburary&quot;, &quot;March&quot;,&quot;too tired to write anymore&quot;]<br />
+for j in range (0,4):<br />
+    print(i[j])<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">3.2
+dial; call; check voicemail</pre>
+
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">3.1</pre>
+
+for i in range (1,1000):<br />
+    print(&quot;We like Python's turtles!&quot;)<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">dart figure</pre>
+
+import turtle<br />
+import random<br />
+#draw a colored circle<br />
+<br />
+def DrawRedColoredCircle(ttl,size):<br />
+    ttl.penup()<br />
+    ttl.goto(0,-size)<br />
+    ttl.fillcolor(&quot;Red&quot;)<br />
+    ttl.begin_fill()<br />
+    ttl.pendown()<br />
+    ttl.circle(size)<br />
+    ttl.end_fill()<br />
+    ttl.penup()<br />
+#white circle<br />
+def DrawWhiteColoredCircle(ttl,size):<br />
+    ttl.penup()<br />
+    ttl.goto(0,-size)<br />
+    ttl.fillcolor(&quot;White&quot;)<br />
+    ttl.begin_fill()<br />
+    ttl.pendown()<br />
+    ttl.circle(size)<br />
+    ttl.end_fill()<br />
+    ttl.penup()<br />
+<br />
+def main():<br />
+    size = int(input(&quot;the size of the dart&quot;))<br />
+    Size = size# back up value<br />
+    while 1:<br />
+        try:<br />
+            distance = int(input(&quot;distance between bars&quot;))<br />
+            if (distance/10)%2 == 1:break<br />
+        except:<br />
+            print(&quot;please enter gain&quot;)  #get two value from user<br />
+    a = int( size / distance )<br />
+    b = 1<br />
+<br />
+    turtle.title(&quot;graph of fuctions&quot;)<br />
+    ttl = turtle.Turtle()<br />
+    turtle.setup (800, 800, 0, 0)<br />
+    ttl.speed(0)<br />
+<br />
+    while size &gt;= 20:<br />
+        scaledSize = size/10<br />
+        if scaledSize % 2 == 1:<br />
+            DrawWhiteColoredCircle(ttl,size)<br />
+            if b != a:<br />
+                ttl.write(b)<br />
+                b = b + 1<br />
+        else:<br />
+            DrawRedColoredCircle(ttl,size)<br />
+            if b != a:<br />
+                ttl.write(b)<br />
+                b = b + 1<br />
+        size = size - distance<br />
+<br />
+    ttl.write(&quot;bull's eye&quot;) #draw the figure<br />
+    for n in range (0,7):<br />
+        ttl.penup()<br />
+        m = random.uniform(-Size,Size)<br />
+        n = random.uniform(Size,-Size)<br />
+        ttl.goto(m,n)<br />
+        ttl.stamp()#draw the dart<br />
+<br />
+if <u>name</u> == &quot;<u>main</u>&quot;:<br />
+    main()<br />
+<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">[[code]]
+import turtle
+import random
+#draw a colored circle
+&nbsp;
+def DrawRedColoredCircle(ttl,size):
+    ttl.penup()
+    ttl.goto(0,-size)
+    ttl.fillcolor(&quot;Red&quot;)
+    ttl.begin_fill()
+    ttl.pendown()
+    ttl.circle(size)
+    ttl.end_fill()
+    ttl.penup()
+#white circle
+def DrawWhiteColoredCircle(ttl,size):
+    ttl.penup()
+    ttl.goto(0,-size)
+    ttl.fillcolor(&quot;White&quot;)
+    ttl.begin_fill()
+    ttl.pendown()
+    ttl.circle(size)
+    ttl.end_fill()
+    ttl.penup()
+&nbsp;
+def main():
+    size = int(input(&quot;the size of the dart&quot;))
+    Size = size# back up value
+    while 1:
+        try:
+            distance = int(input(&quot;distance between bars&quot;))
+            if (distance/10)%2 == 1:break
+        except:
+            print(&quot;please enter gain&quot;)  #get two value from user
+    a = int( size / distance )
+    b = 1
+&nbsp;
+    turtle.title(&quot;graph of fuctions&quot;)
+    ttl = turtle.Turtle()
+    turtle.setup (800, 800, 0, 0)
+    ttl.speed(0)
+&nbsp;
+    while size &gt;= 30:
+        scaledSize = size/10
+        if scaledSize % 2 == 1:
+            DrawWhiteColoredCircle(ttl,size)
+            if b != a:
+                ttl.write(b)
+                b = b + 1
+        else:
+            DrawRedColoredCircle(ttl,size)
+            if b != a:
+                ttl.write(b)
+                b = b + 1
+        size = size - distance
+&nbsp;
+    ttl.write(a) #draw the figure
+    for n in range (0,7):
+        ttl.penup()
+        m = random.uniform(-Size,Size)
+        n = random.uniform(Size,-Size)
+        ttl.goto(m,n)
+        ttl.stamp()#draw the dart
+&nbsp;
+if __name__ == &quot;__main__&quot;:
+    main()
+&nbsp;
+&nbsp;</pre>
+
+Christmas Tree<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import math
+import turtle
+&nbsp;
+def drawLine (ttl, x1, y1, x2, y2):
+    ttl.penup()
+    ttl.goto (x1, y1)
+    ttl.pendown()
+    ttl.goto (x2, y2)
+    ttl.penup()
+&nbsp;
+def drawtriangle(ttl, x1, y1, sideright):
+    ttl.pendown()
+    ttl.goto(x1,y1)
+    if sideright:
+        ttl.goto(x1-100, y1+70)
+    else:
+        ttl.goto(x1+100, y1+70)
+&nbsp;
+def ball(ttl, x1, y1):
+    ttl.penup()
+    ttl.goto(x1, y1)
+    ttl.pendown()
+    ttl.fillcolor('Yellow')
+    ttl.begin_fill()
+    ttl.circle(10, 360)
+    ttl.end_fill()
+    ttl.penup()
+def  main():
+    turtle.title(&quot;graph of fuctions&quot;)
+    ttl = turtle.Turtle()
+    turtle.setup (800, 800, 0, 0)
+    ttl.fillcolor('Green')
+    ttl.begin_fill()
+    drawtriangle(ttl,-200, 0, False)
+    drawtriangle(ttl, -150, 70, False)
+    drawtriangle(ttl, -100, 140, False)
+    ttl.penup()
+    ttl.goto(0,0)
+    ttl.pendown
+    drawtriangle(ttl,200, 0, True)
+    drawtriangle(ttl, 150, 70, True)
+    drawtriangle(ttl, 100, 140, True)
+    ttl.end_fill()
+    ttl.fillcolor('Brown')
+    ttl.begin_fill()
+    drawLine(ttl, -50, 0, -50, -100)
+    ttl.pendown()
+    ttl.goto(50, -100)
+    ttl.goto(50, 0)
+    ttl.goto(-50, 0)
+    ttl.end_fill()
+    ball(ttl, -200, 0)
+    ball(ttl, -150, 70)
+    ball(ttl, -100, 140)
+    ball(ttl, 0, 210)
+    ball(ttl, 200, 0)
+    ball(ttl, 150, 70)
+    ball(ttl, 100, 140)
+if __name__ == &quot;__main__&quot;:
+    main()</pre>
+
+Sin function:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import math
+import turtle
+&nbsp;
+def drawLine (ttl, x1, y1, x2, y2):
+    ttl.penup()
+    ttl.goto (x1, y1)
+    ttl.pendown()
+    ttl.goto (x2, y2)
+    ttl.penup()
+&nbsp;
+def labelPoint (ttl, x, y, label):
+    ttl.penup()
+    ttl.goto (x, y)
+    ttl.pendown()
+    ttl.write (label)
+    ttl.penup()
+&nbsp;
+def drawGridMark (ttl, x, y, isVertical):
+    if isVertical :
+        drawLine (ttl, x, y + 5, x, y - 5)
+    else:
+        drawLine (ttl, x - 5, y, x + 5, y)
+&nbsp;
+def labelGridPoint (ttl, x, y, isVertical, text):
+    if isVertical:
+        labelPoint (ttl, x - 20, y - 20, text)
+    else:
+        labelPoint (ttl, x + 20, y, text)
+&nbsp;
+def drawGridScaled (ttl):
+    drawLine (ttl, -400, 0, 400, 0)
+    drawLine (ttl, 0, 400, 0, -400)
+    for x in [-300, -200, -100, 100, 200, 300]:
+        drawGridMark (ttl, x, 0, True)
+        labelGridPoint (ttl, x, 0, True, (x/100, 0))
+    for y in [-300, -200, -100, 100, 200, 300]:
+        drawGridMark (ttl, 0, y, False)
+        labelGridPoint (ttl, 0, y, False, (0, y/100))
+&nbsp;
+def drawFnScaled (ttl, fn, lower, upper, step):
+    ttl.penup()
+    x = lower
+    y = fn (x)
+    scaledX = x * 100
+    scaledY = y * 100
+    ttl.goto (scaledX, scaledY)
+    ttl.pendown()
+    while x &lt; upper:
+        x = x + step
+        y = fn ( x )
+        scaledX, scaledY = x * 100, y * 100
+        ttl.goto (scaledX, scaledY)
+    ttl.penup()
+&nbsp;
+def myFunc (x):
+    return (x ** 2 - 4)
+&nbsp;
+def  main():
+    turtle.title ('Graphs of Functions')
+    turtle.setup (800, 800, 0, 0)
+    ttl = turtle.Turtle()
+    drawGridScaled (ttl)
+    ttl.pencolor ('red')
+    drawFnScaled (ttl, math.sin, -math.pi, math.pi, 0.01)
+&nbsp;
+&nbsp;
+    # persist drawing
+    turtle.done()
+&nbsp;
+if __name__ == &quot;__main__&quot;:
+    main()</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

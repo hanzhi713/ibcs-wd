@@ -1,0 +1,160 @@
+<html>
+  <head>
+    <title>IBCS1-WD - November 14th 2016 by Margaret Sun</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>November 14th 2016 by Margaret Sun<small> #Log </small></h1><span style="font-family: Arial,Helvetica,sans-serif;">Today we did some revision of Chapter 1 first and then stepped to the Chapter 2 of java.</span><br />
+<br />
+<span style="font-family: Arial,Helvetica,sans-serif;">Contents in Chapter 1:</span><br />
+<br />
+<span style="font-family: Arial,Helvetica,sans-serif;">1. Storage of numbers</span><br />
+<span style="font-family: Arial,Helvetica,sans-serif;">Intergers: -2^31 ~ 2^31-1</span><br />
+<span style="font-family: Arial,Helvetica,sans-serif;">Floating-point numbers: sign mantissa*2^exponent</span><br />
+<span style="font-family: Arial,Helvetica,sans-serif;"> e.g. double 1 52 11</span><br />
+<span style="font-family: Arial,Helvetica,sans-serif;">Because of the rounding error, which happens constantly, between the conversion between the binary system used by the computer and the decimal system we human are used to use, we don't use == or != to compare floating-point numbers. Instead, we use the formula: |x − y| ≤ εmax(|x|,|y|) .</span><br />
+<br />
+<span style="font-family: Arial,Helvetica,sans-serif;">2. Cast</span><br />
+<span style="font-family: Arial,Helvetica,sans-serif;">Sometimes your want to change the type of your answer, and there are several ways:</span><br />
+<span style="font-family: Arial,Helvetica,sans-serif;">For example, the original version is that you get an integer answer 0:</span><br />
+3/4 → int 0<br />
+Below there are two valid ways to change your answer into double: whenever one of the numbers is changed to double type, the other will change accordingly so that the final answer is in double:<br />
+3.0/4 or 3/4.0 → double 0.75<br />
+But watch out, when you turn the whole formula into double, you are turning the answer 0 into 0.0 instead of 0.75, which you are expecting:<br />
+(double) (3/4) → double 0.0<br />
+<br />
+3. Operators<br />
+There are several types of operators and let's list those below:<br />
+a. arithmetic operators: + - * / %<br />
+b. relational operatiors: == != &gt; &lt; &gt;= &lt;=<br />
+c. logical operators: ! %% ||<br />
+d. assignment operators: = += -= *=/= %=<br />
+e. Increment and decrement operators: ++ -- (often used in a loop)<br />
+Also be aware that there is a precedence of the operators and you may have a look of it in the book.<br />
+For the increment and decrement operators specifically, there are some subtle differences between ++a and a++, same as for --. We implemented the operators and had a test of the differences.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import java.util.Scanner;
+public class test_increment {
+    public static void main(String[]args){
+        int a=0;
+        ++a;
+        System.out.println(a);
+        a=0;
+        a++;
+        System.out.println(a);
+        a=0;
+        System.out.println(++a);
+        a=0;
+        System.out.println(a++);
+        a=0;
+        while(a&lt;6){
+            System.out.println(a++);
+        }
+        a=0;
+        while(a&lt;6){
+            System.out.println(++a);
+        }
+    }
+}
+&nbsp;</pre>
+
+There will be no difference when you do ++a or a++ before printing it, but if you insert it in the line of print, things get complicated:<br />
+<br />
+++a means add first, then print;<br />
+a++ means print first, then add;<br />
+Especially, be careful when you are using loops: the first loop gives output 0~5 while the second gives 1~6.<br />
+<br />
+4. Selection<br />
+if (boolean expression){<br />
+}<br />
+else if (boolean expression){<br />
+}<br />
+else{<br />
+}<br />
+<br />
+5. Loop<br />
+There are three types of ways to write a loop (for/while):<br />
+a. for (initiation; terminated condition; update statement)<br />
+e.g. for (int i=0; i&lt;10; i++)<br />
+b. for (some type element : collection)<br />
+e.g. for (int element : arr)<br />
+It means we iterate each element in the collection.<br />
+c. while (boolean conditions)<br />
+<br />
+Content in Chapter 2:<br />
+Objects have both states and behaviors.<br />
+Class: very abstract, more like a blueprint, collecting same properties in its objects.<br />
+Object = an instance in class<br />
+<br />
+1. Constructor<br />
+A constructor always has the same name as the class.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">BankAccount n = new BankAccount();</pre>
+
+↓<br />
+a. a new space of memory is opened<br />
+b. n is like a pointer, pointing to the reference of this memory<br />
+Overloading:<br />
+A default constructor: BankAccount()<br />
+Another constructor can be written in same name, but different parameter: BankAccount(parameter)<br />
+<br />
+2. Accessor<br />
+Since the static variables are private, we need a method to get the parameters. For example:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">public double getBalance(){
+        return balance;
+    }</pre>
+
+<br />
+3. Scope<br />
+Public:<br />
+public class: used in any package<br />
+public method: used in any class<br />
+public variable: used in any class<br />
+Private:<br />
+private class: used only within this specific packaged<br />
+private method: used only within the specific class<br />
+private variable: used only within the specific class<br />
+Static:<br />
+static variable: space of memory is created once each, and it can be used for all objects. They work in a way similar to &quot;global&quot; in python.<br />
+static method: uses the class name to call<br />
+Instance:<br />
+instance variable: only being used while instantiated<br />
+instance method: use objects(when instantiated) to call</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

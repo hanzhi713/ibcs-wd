@@ -1,0 +1,124 @@
+<html>
+  <head>
+    <title>IBCS1-WD - October 19th, Tom's work on merge sort</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>October 19th, Tom's work on merge sort<small> #TomsProjects </small></h1><h1 id="toc0"><a name="Code for comparison of the time complexity of iterative merge sort and recursive merge sort"></a>Code for comparison of the time complexity of iterative merge sort and recursive merge sort</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> split_and_merge<span class="br0">&#40;</span>xs<span class="br0">&#41;</span>:
+    xs<span class="br0">&#91;</span>:<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#91;</span>item<span class="br0">&#93;</span> <span class="kw1">for</span> item <span class="kw1">in</span> xs<span class="br0">&#93;</span>
+    <span class="kw1">while</span> <span class="nu0">1</span>:
+        index <span class="sy0">=</span> <span class="nu0">0</span>
+        <span class="kw1">while</span> <span class="nu0">1</span>:
+            xs<span class="br0">&#91;</span>index<span class="br0">&#93;</span> <span class="sy0">=</span> merge<span class="br0">&#40;</span>xs<span class="br0">&#91;</span>index<span class="br0">&#93;</span><span class="sy0">,</span> xs<span class="br0">&#91;</span>index + <span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+            <span class="kw1">del</span> xs<span class="br0">&#91;</span>index+<span class="nu0">1</span><span class="br0">&#93;</span>
+            index +<span class="sy0">=</span> <span class="nu0">1</span>
+            <span class="kw1">if</span> index <span class="sy0">&gt;=</span> <span class="kw2">len</span><span class="br0">&#40;</span>xs<span class="br0">&#41;</span>-<span class="nu0">1</span>:
+                <span class="kw1">break</span>
+        <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>xs<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">1</span>:
+            xs<span class="br0">&#91;</span>:<span class="br0">&#93;</span> <span class="sy0">=</span> xs<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+            <span class="kw1">return</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> mergeSort<span class="br0">&#40;</span>alist<span class="br0">&#41;</span>:
+    <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>alist<span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="nu0">1</span>:
+        mid <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>alist<span class="br0">&#41;</span>//<span class="nu0">2</span>
+        lefthalf <span class="sy0">=</span> alist<span class="br0">&#91;</span>:mid<span class="br0">&#93;</span>
+        righthalf <span class="sy0">=</span> alist<span class="br0">&#91;</span>mid:<span class="br0">&#93;</span>
+        mergeSort<span class="br0">&#40;</span>lefthalf<span class="br0">&#41;</span>
+        mergeSort<span class="br0">&#40;</span>righthalf<span class="br0">&#41;</span>
+        alist<span class="br0">&#91;</span>:<span class="br0">&#93;</span> <span class="sy0">=</span> merge<span class="br0">&#40;</span>lefthalf<span class="sy0">,</span> righthalf<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> merge<span class="br0">&#40;</span>xs<span class="sy0">,</span> ys<span class="br0">&#41;</span>:
+    result <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    xi <span class="sy0">=</span> <span class="nu0">0</span>
+    yi <span class="sy0">=</span> <span class="nu0">0</span>
+&nbsp;
+    <span class="kw1">while</span> <span class="kw2">True</span>:
+        <span class="kw1">if</span> xi <span class="sy0">&gt;=</span> <span class="kw2">len</span><span class="br0">&#40;</span>xs<span class="br0">&#41;</span>:
+            result.<span class="me1">extend</span><span class="br0">&#40;</span>ys<span class="br0">&#91;</span>yi:<span class="br0">&#93;</span><span class="br0">&#41;</span>
+            <span class="kw1">return</span> result
+&nbsp;
+        <span class="kw1">if</span> yi <span class="sy0">&gt;=</span> <span class="kw2">len</span><span class="br0">&#40;</span>ys<span class="br0">&#41;</span>:
+            result.<span class="me1">extend</span><span class="br0">&#40;</span>xs<span class="br0">&#91;</span>xi:<span class="br0">&#93;</span><span class="br0">&#41;</span>
+            <span class="kw1">return</span> result
+&nbsp;
+        <span class="kw1">if</span> xs<span class="br0">&#91;</span>xi<span class="br0">&#93;</span> <span class="sy0">&lt;=</span> ys<span class="br0">&#91;</span>yi<span class="br0">&#93;</span>:
+            result.<span class="me1">append</span><span class="br0">&#40;</span>xs<span class="br0">&#91;</span>xi<span class="br0">&#93;</span><span class="br0">&#41;</span>
+            xi +<span class="sy0">=</span> <span class="nu0">1</span>
+        <span class="kw1">else</span>:
+            result.<span class="me1">append</span><span class="br0">&#40;</span>ys<span class="br0">&#91;</span>yi<span class="br0">&#93;</span><span class="br0">&#41;</span>
+            yi +<span class="sy0">=</span> <span class="nu0">1</span>
+&nbsp;
+&nbsp;
+<span class="kw1">import</span> <span class="kw3">random</span>
+<span class="kw1">import</span> <span class="kw3">time</span>
+start <span class="sy0">=</span> <span class="nu0">10000</span>
+end <span class="sy0">=</span> <span class="nu0">100000</span>
+step <span class="sy0">=</span> <span class="nu0">1000</span>
+sample_num <span class="sy0">=</span> <span class="nu0">3</span>
+time_iter <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+time_recur <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>start<span class="sy0">,</span> end+step<span class="sy0">,</span> step<span class="br0">&#41;</span>:
+    test_sample <span class="sy0">=</span> <span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    time_samples_recur <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    time_samples_iter <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> a <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>sample_num<span class="br0">&#41;</span>:
+        <span class="kw3">random</span>.<span class="me1">shuffle</span><span class="br0">&#40;</span>test_sample<span class="br0">&#41;</span>
+&nbsp;
+        t0 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        split_and_merge<span class="br0">&#40;</span>test_sample<span class="br0">&#91;</span>:<span class="br0">&#93;</span><span class="br0">&#41;</span>
+        time_samples_iter.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span> - t0<span class="br0">&#41;</span>
+&nbsp;
+        t0 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        mergeSort<span class="br0">&#40;</span>test_sample<span class="br0">&#91;</span>:<span class="br0">&#93;</span><span class="br0">&#41;</span>
+        time_samples_recur.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span> - t0<span class="br0">&#41;</span>
+&nbsp;
+    average_iter <span class="sy0">=</span> <span class="kw2">round</span><span class="br0">&#40;</span><span class="kw2">sum</span><span class="br0">&#40;</span>time_samples_iter<span class="br0">&#41;</span> / sample_num<span class="sy0">,</span> <span class="nu0">5</span><span class="br0">&#41;</span>
+    average_recur <span class="sy0">=</span> <span class="kw2">round</span><span class="br0">&#40;</span><span class="kw2">sum</span><span class="br0">&#40;</span>time_samples_recur<span class="br0">&#41;</span> / sample_num<span class="sy0">,</span> <span class="nu0">5</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;The list has {} items, it takes {} seconds in average by iterative merge sort.&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>i<span class="sy0">,</span> average_iter<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    time_iter.<span class="me1">append</span><span class="br0">&#40;</span>average_iter<span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;The list has {} items, it takes {} seconds in average by recursive merge sort.&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>i<span class="sy0">,</span> average_recur<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    time_recur.<span class="me1">append</span><span class="br0">&#40;</span>average_recur<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">import</span> matplotlib.<span class="me1">pyplot</span> <span class="kw1">as</span> plt
+plt.<span class="me1">figure</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+plt.<span class="me1">hold</span><span class="br0">&#40;</span><span class="kw2">True</span><span class="br0">&#41;</span>
+iter_graph<span class="sy0">,</span> <span class="sy0">=</span> plt.<span class="me1">plot</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span>start<span class="sy0">,</span> end+step<span class="sy0">,</span> step<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> time_iter<span class="sy0">,</span><span class="st0">'b'</span><span class="sy0">,</span> label<span class="sy0">=</span><span class="st0">'Iterative'</span><span class="br0">&#41;</span>
+recur_graph<span class="sy0">,</span> <span class="sy0">=</span> plt.<span class="me1">plot</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span>start<span class="sy0">,</span> end+step<span class="sy0">,</span> step<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> time_recur<span class="sy0">,</span> <span class="st0">'y'</span><span class="sy0">,</span> label<span class="sy0">=</span><span class="st0">'Recursive'</span><span class="br0">&#41;</span>
+plt.<span class="me1">legend</span><span class="br0">&#40;</span>handles<span class="sy0">=</span><span class="br0">&#91;</span>iter_graph<span class="sy0">,</span> recur_graph<span class="br0">&#93;</span><span class="br0">&#41;</span>
+plt.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

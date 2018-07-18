@@ -1,0 +1,167 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 8.13 C15</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>8.13 C15<small> #homework </small></h1>1, 2, 3, 4, 5<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">class</span> Point:
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">,</span> y <span class="sy0">=</span> <span class="nu0">0</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+    <span class="kw1">def</span> reflect_x<span class="br0">&#40;</span>p1<span class="br0">&#41;</span>:
+        y <span class="sy0">=</span> -p1.<span class="me1">y</span>
+        <span class="kw1">return</span> Point<span class="br0">&#40;</span>p1.<span class="me1">x</span><span class="sy0">,</span> y<span class="br0">&#41;</span>
+    <span class="kw1">def</span> slope_from_origin<span class="br0">&#40;</span>p2<span class="br0">&#41;</span>:
+        slope <span class="sy0">=</span> p2.<span class="me1">y</span> / p2.<span class="me1">x</span>
+        <span class="kw1">return</span> slope
+    <span class="kw1">def</span> get_line_to<span class="br0">&#40;</span>p3<span class="sy0">,</span> p4<span class="br0">&#41;</span>:
+        m <span class="sy0">=</span> <span class="br0">&#40;</span>p4.<span class="me1">y</span> - p3.<span class="me1">y</span><span class="br0">&#41;</span> / <span class="br0">&#40;</span>p4.<span class="me1">x</span> - p3.<span class="me1">x</span><span class="br0">&#41;</span>
+        b <span class="sy0">=</span> p3.<span class="me1">y</span> - m * p3.<span class="me1">x</span>
+        <span class="kw1">return</span> <span class="br0">&#40;</span>m<span class="sy0">,</span> b<span class="br0">&#41;</span>
+    <span class="kw1">def</span> midpoint<span class="br0">&#40;</span>q1<span class="sy0">,</span> q2<span class="br0">&#41;</span>:
+        midpointx <span class="sy0">=</span> <span class="br0">&#40;</span>q1.<span class="me1">x</span> + q2.<span class="me1">x</span><span class="br0">&#41;</span> / <span class="nu0">2</span>
+        midpointy <span class="sy0">=</span> <span class="br0">&#40;</span>q1.<span class="me1">y</span> + q2.<span class="me1">y</span><span class="br0">&#41;</span> / <span class="nu0">2</span>
+        <span class="kw1">return</span> Point<span class="br0">&#40;</span>midpointx<span class="sy0">,</span> midpointy<span class="br0">&#41;</span>
+    <span class="kw1">def</span> onacircleorwhat<span class="br0">&#40;</span>q1<span class="sy0">,</span> q2<span class="sy0">,</span> q3<span class="sy0">,</span> q4<span class="br0">&#41;</span>:
+        <span class="br0">&#40;</span>a1<span class="sy0">,</span> a2<span class="br0">&#41;</span> <span class="sy0">=</span> Point.<span class="me1">get_line_to</span><span class="br0">&#40;</span>q1<span class="sy0">,</span> q2<span class="br0">&#41;</span>
+        <span class="br0">&#40;</span>a3<span class="sy0">,</span> a4<span class="br0">&#41;</span> <span class="sy0">=</span> Point.<span class="me1">get_line_to</span><span class="br0">&#40;</span>q2<span class="sy0">,</span> q3<span class="br0">&#41;</span>
+        b1 <span class="sy0">=</span> -<span class="nu0">1</span> / a1
+        b3 <span class="sy0">=</span> -<span class="nu0">1</span> / a3
+        c1 <span class="sy0">=</span> Point.<span class="me1">midpoint</span><span class="br0">&#40;</span>q1<span class="sy0">,</span> q2<span class="br0">&#41;</span>
+        b2 <span class="sy0">=</span> c1.<span class="me1">y</span> - b1 * c1.<span class="me1">x</span>
+        c2 <span class="sy0">=</span> Point.<span class="me1">midpoint</span><span class="br0">&#40;</span>q2<span class="sy0">,</span> q3<span class="br0">&#41;</span>
+        b4 <span class="sy0">=</span> c2.<span class="me1">y</span> - b3 * c2.<span class="me1">x</span>
+        circlex <span class="sy0">=</span> <span class="br0">&#40;</span>b4 - b2<span class="br0">&#41;</span> / <span class="br0">&#40;</span>b1 - b3<span class="br0">&#41;</span>
+        circley <span class="sy0">=</span> b1 * circlex + b2
+        <span class="kw1">if</span> <span class="br0">&#40;</span>q4.<span class="me1">x</span> - circlex<span class="br0">&#41;</span> ** <span class="nu0">2</span> + <span class="br0">&#40;</span>q4.<span class="me1">y</span> - circley<span class="br0">&#41;</span> ** <span class="nu0">2</span> <span class="sy0">==</span> <span class="br0">&#40;</span>q1.<span class="me1">x</span> - circlex<span class="br0">&#41;</span>**<span class="nu0">2</span> + <span class="br0">&#40;</span>q1.<span class="me1">y</span> - circley<span class="br0">&#41;</span> ** <span class="nu0">2</span>:
+            <span class="kw1">return</span> <span class="br0">&#40;</span>circlex<span class="sy0">,</span> circley<span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">return</span> <span class="st0">&quot;Those 4 points are not on the circle&quot;</span>
+&nbsp;
+<span class="kw1">def</span> distances<span class="br0">&#40;</span>p<span class="sy0">,</span> q<span class="br0">&#41;</span>:
+    dy <span class="sy0">=</span> <span class="kw2">abs</span><span class="br0">&#40;</span>p.<span class="me1">y</span> - q.<span class="me1">y</span><span class="br0">&#41;</span>
+    dx <span class="sy0">=</span> <span class="kw2">abs</span><span class="br0">&#40;</span>p.<span class="me1">x</span> - q.<span class="me1">x</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> <span class="br0">&#40;</span>dx ** <span class="nu0">2</span> + dy ** <span class="nu0">2</span><span class="br0">&#41;</span> ** <span class="nu0">0.5</span>
+a <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="nu0">10</span><span class="sy0">,</span> <span class="nu0">3</span><span class="br0">&#41;</span>
+b <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="nu0">3</span><span class="sy0">,</span> <span class="nu0">10</span><span class="br0">&#41;</span>
+c <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>distances<span class="br0">&#40;</span>a<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>c.<span class="me1">x</span><span class="sy0">,</span> c.<span class="me1">y</span><span class="br0">&#41;</span>
+d <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="nu0">3</span><span class="sy0">,</span> <span class="nu0">5</span><span class="br0">&#41;</span>.<span class="me1">reflect_x</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>d.<span class="me1">x</span><span class="sy0">,</span> d.<span class="me1">y</span><span class="br0">&#41;</span>
+e <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="nu0">4</span><span class="sy0">,</span> <span class="nu0">10</span><span class="br0">&#41;</span>.<span class="me1">slope_from_origin</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span>
+when the first argument <span class="kw1">is</span> <span class="nu0">0</span>
+f <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="nu0">4</span><span class="sy0">,</span> <span class="nu0">11</span><span class="br0">&#41;</span>.<span class="me1">get_line_to</span><span class="br0">&#40;</span>Point<span class="br0">&#40;</span><span class="nu0">6</span><span class="sy0">,</span> <span class="nu0">15</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>f<span class="br0">&#41;</span>
+The same <span class="kw1">as</span> above
+g <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="nu0">13</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span>
+h <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">43</span><span class="br0">&#41;</span>
+i <span class="sy0">=</span> Point<span class="br0">&#40;</span>-<span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">41</span><span class="br0">&#41;</span>
+j <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">34</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>Point.<span class="me1">onacircleorwhat</span><span class="br0">&#40;</span>g<span class="sy0">,</span> h<span class="sy0">,</span> i<span class="sy0">,</span> j<span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+6<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">class</span> SMS_store:
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">messages</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">def</span> add_new_arrival<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> from_number<span class="sy0">,</span> time_arrived<span class="sy0">,</span> text_of_SMS<span class="br0">&#41;</span>:
+        has_been_viewed <span class="sy0">=</span> <span class="kw2">False</span>
+        <span class="kw2">self</span>.<span class="me1">messages</span>.<span class="me1">append</span><span class="br0">&#40;</span><span class="br0">&#40;</span>has_been_viewed<span class="sy0">,</span> from_number<span class="sy0">,</span> time_arrived<span class="sy0">,</span> text_of_SMS<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">def</span> message_count<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw2">len</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">messages</span><span class="br0">&#41;</span>
+    <span class="kw1">def</span> get_unread_indexes<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        unread <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+        <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">self</span>.<span class="me1">messages</span>:
+            <span class="kw1">if</span> i<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">==</span> <span class="kw2">False</span>:
+                unread.<span class="me1">append</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+        <span class="kw1">return</span> unread
+    <span class="kw1">def</span> get_message<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> i<span class="br0">&#41;</span>:
+        <span class="kw1">if</span> i - <span class="nu0">1</span> <span class="sy0">&gt;=</span> <span class="kw2">self</span>.<span class="me1">message_count</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+            <span class="kw1">return</span> <span class="st0">&quot;You don't have this piece of message&quot;</span>
+        <span class="kw1">else</span>:
+            c <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">messages</span><span class="br0">&#91;</span>i - <span class="nu0">1</span><span class="br0">&#93;</span>
+            <span class="br0">&#40;</span>a<span class="sy0">,</span> b<span class="sy0">,</span> s<span class="br0">&#41;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>c<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> c<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">,</span> c<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+            a <span class="sy0">=</span> <span class="kw2">True</span>
+            <span class="kw2">self</span>.<span class="me1">messages</span><span class="br0">&#91;</span>i - <span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>a<span class="sy0">,</span> b<span class="sy0">,</span> s<span class="br0">&#41;</span>
+            <span class="kw1">return</span> <span class="br0">&#40;</span>a<span class="sy0">,</span> b<span class="sy0">,</span> s<span class="br0">&#41;</span>
+    <span class="kw1">def</span> delete<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> i<span class="br0">&#41;</span>:
+        <span class="kw1">if</span> i - <span class="nu0">1</span> <span class="sy0">&gt;=</span> <span class="kw2">self</span>.<span class="me1">message_count</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+            <span class="kw1">return</span> <span class="st0">&quot;You don't have this piece of message&quot;</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">del</span> <span class="kw2">self</span>.<span class="me1">messages</span><span class="br0">&#91;</span>i - <span class="nu0">1</span><span class="br0">&#93;</span>
+    <span class="kw1">def</span> clear<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">del</span> <span class="kw2">self</span>.<span class="me1">messages</span><span class="br0">&#91;</span>:<span class="kw2">self</span>.<span class="me1">message_count</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+&nbsp;
+&nbsp;
+inbox <span class="sy0">=</span> SMS_store<span class="br0">&#40;</span><span class="br0">&#41;</span>
+inbox.<span class="me1">add_new_arrival</span><span class="br0">&#40;</span><span class="nu0">123</span><span class="sy0">,</span> <span class="st0">'0225'</span> <span class="sy0">,</span> <span class="st0">'I love You'</span><span class="br0">&#41;</span>
+inbox.<span class="me1">add_new_arrival</span><span class="br0">&#40;</span><span class="nu0">123</span><span class="sy0">,</span> <span class="st0">'0335'</span><span class="sy0">,</span> <span class="st0">'Why do you do this to me?'</span><span class="br0">&#41;</span>
+a <span class="sy0">=</span> inbox.<span class="me1">message_count</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>inbox.<span class="me1">messages</span><span class="sy0">,</span> a<span class="br0">&#41;</span>
+inbox.<span class="me1">get_message</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>inbox.<span class="me1">messages</span><span class="br0">&#41;</span>
+inbox.<span class="me1">add_new_arrival</span><span class="br0">&#40;</span><span class="nu0">123</span><span class="sy0">,</span> <span class="st0">'0435'</span><span class="sy0">,</span> <span class="st0">'I love you so much! Why did you ever do this to me !!!!'</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>inbox.<span class="me1">messages</span><span class="br0">&#41;</span>
+inbox.<span class="me1">get_message</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>inbox.<span class="me1">messages</span><span class="br0">&#41;</span>
+inbox.<span class="me1">delete</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>inbox.<span class="me1">messages</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

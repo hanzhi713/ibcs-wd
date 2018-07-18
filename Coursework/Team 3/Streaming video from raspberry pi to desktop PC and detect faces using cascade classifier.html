@@ -1,0 +1,285 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Streaming video from raspberry pi to desktop PC and detect faces using cascade classifier</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>Streaming video from raspberry pi to desktop PC and detect faces using cascade classifier<small> #TomsProjects </small></h1><h1 id="toc0"><a name="Preparation: you need UV4L and its corresponding driver, then run the following command:"></a>Preparation: you need UV4L and its corresponding driver, then run the following command:</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.cil  {font-family:monospace;}
+.cil .imp {font-weight: bold; color: red;}
+.cil .kw1 {color:maroon;font-weight:bold;}
+.cil .kw2 {color:blue;font-weight:bold;}
+.cil .kw3 {color:purple;font-weight:bold;}
+.cil .kw4 {color:teal;}
+.cil .kw5 {color:blue;}
+.cil .kw6 {color:blue;}
+.cil .kw7 {color:blue;}
+.cil .kw8 {color:blue;}
+.cil .kw9 {color:00008B}
+.cil .kw10 {color:gray}
+.cil .co0 {color:gray;font-style:italic;}
+.cil .es0 {color: #008000; font-weight: bold;}
+.cil .br0 {color: #006400;}
+.cil .sy0 {color: #006400;}
+.cil .st0 {color: #008000;}
+.cil .nu0 {color: #00008B;}
+.cil .me1 {color: #000033;}
+.cil .re0 {color:blue;}
+.cil span.xtra { display:block; }
+
+-->
+</style><pre class="cil">sudo uv4l -nopreview --auto-video_nr --driver raspicam --encoding mjpeg --width <span class="nu0">640</span> --height <span class="nu0">480</span> --framerate <span class="nu0">25</span> --server-option '--port=<span class="nu0">9090</span>' --server-option '--max-queued-connections=<span class="nu0">10</span>' --server-option '--max-streams=<span class="nu0">10</span>' --server-option '--max-threads=<span class="nu0">20</span>'</pre>
+
+<br />
+<h1 id="toc1"><a name="FaceDetection Class"></a>FaceDetection Class</h1>
+ <br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">tests</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">org.bytedeco.javacpp.opencv_core.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">org.bytedeco.javacpp.opencv_objdetect.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">org.bytedeco.javacpp.opencv_videoio.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">org.bytedeco.javacv.Frame</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">org.bytedeco.javacv.Java2DFrameConverter</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">org.bytedeco.javacv.OpenCVFrameConverter</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">javax.imageio.ImageIO</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.image.BufferedImage</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.io.ByteArrayOutputStream</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.io.File</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.io.IOException</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.net.URL</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">static</span> org.<span class="me1">bytedeco</span>.<span class="me1">javacpp</span>.<span class="me1">opencv_core</span>.<span class="me1">FONT_HERSHEY_PLAIN</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">static</span> org.<span class="me1">bytedeco</span>.<span class="me1">javacpp</span>.<span class="me1">opencv_imgproc</span>.<span class="sy0">*;</span>
+<span class="kw1">import</span> <span class="co2">static</span> org.<span class="me1">bytedeco</span>.<span class="me1">javacpp</span>.<span class="me1">opencv_imgproc</span>.<span class="me1">putText</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> FaceDetection <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw1">static</span> OpenCVFrameConverter toMat <span class="sy0">=</span> <span class="kw1">new</span> OpenCVFrameConverter.<span class="me1">ToMat</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> Java2DFrameConverter toBuffImg <span class="sy0">=</span> <span class="kw1">new</span> Java2DFrameConverter<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">private</span> CascadeClassifier cascade<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> FaceDetection<span class="br0">&#40;</span>CascadeClassifier  cascade<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">cascade</span> <span class="sy0">=</span> cascade<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> FaceDetection<span class="br0">&#40;</span><span class="kw3">String</span> cascadeName, <span class="kw3">String</span> relativePath<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">cascade</span> <span class="sy0">=</span> loadCascade<span class="br0">&#40;</span>cascadeName, relativePath<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> CascadeClassifier loadCascade<span class="br0">&#40;</span><span class="kw3">String</span> name, <span class="kw3">String</span> relativePath<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw3">URL</span> base <span class="sy0">=</span> FaceRecognizerInVideo2.<span class="kw1">class</span>.<span class="me1">getResource</span><span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">String</span> path <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+        <span class="kw1">try</span> <span class="br0">&#123;</span>
+            path <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">File</span><span class="br0">&#40;</span>base.<span class="me1">getFile</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, relativePath <span class="sy0">+</span> name<span class="br0">&#41;</span>.<span class="me1">getCanonicalPath</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">return</span> <span class="kw2">null</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> <span class="kw1">new</span> CascadeClassifier<span class="br0">&#40;</span>path<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> Mat frameToMat<span class="br0">&#40;</span><span class="kw3">Frame</span> frame<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> toMat.<span class="me1">convertToMat</span><span class="br0">&#40;</span>frame<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw3">BufferedImage</span> frameToBuff<span class="br0">&#40;</span><span class="kw3">Frame</span> frame<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> toBuffImg.<span class="me1">convert</span><span class="br0">&#40;</span>frame<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw3">Frame</span> matToFrame<span class="br0">&#40;</span>Mat mat<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> toMat.<span class="me1">convert</span><span class="br0">&#40;</span>mat<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">byte</span><span class="br0">&#91;</span><span class="br0">&#93;</span> buffedImgToBytes<span class="br0">&#40;</span><span class="kw3">BufferedImage</span> img<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">byte</span><span class="br0">&#91;</span><span class="br0">&#93;</span> barr <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+        <span class="kw1">try</span> <span class="br0">&#123;</span>
+            <span class="kw3">ByteArrayOutputStream</span> baos <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">ByteArrayOutputStream</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            ImageIO.<span class="me1">write</span><span class="br0">&#40;</span>img, <span class="st0">&quot;jpg&quot;</span>, baos<span class="br0">&#41;</span><span class="sy0">;</span>
+            baos.<span class="me1">flush</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            barr <span class="sy0">=</span> baos.<span class="me1">toByteArray</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            baos.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> barr<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">boolean</span> detect<span class="br0">&#40;</span><span class="kw3">Frame</span> frame, <span class="kw4">boolean</span> addRectangle<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        Mat frameMat <span class="sy0">=</span> toMat.<span class="me1">convertToMat</span><span class="br0">&#40;</span>frame<span class="br0">&#41;</span><span class="sy0">;</span>
+       <span class="kw1">return</span> detect<span class="br0">&#40;</span>frameMat, addRectangle<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">boolean</span> detect<span class="br0">&#40;</span>Mat frameMat, <span class="kw4">boolean</span> addRectangle<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        Mat frameGray <span class="sy0">=</span> <span class="kw1">new</span> Mat<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="co1">// Convert the current frame to grayscale:</span>
+        cvtColor<span class="br0">&#40;</span>frameMat, frameGray, COLOR_BGRA2GRAY<span class="br0">&#41;</span><span class="sy0">;</span>
+        equalizeHist<span class="br0">&#40;</span>frameGray, frameGray<span class="br0">&#41;</span><span class="sy0">;</span>
+        RectVector faces <span class="sy0">=</span> <span class="kw1">new</span> RectVector<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        cascade.<span class="me1">detectMultiScale</span><span class="br0">&#40;</span>frameMat, faces<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>addRectangle<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> faces.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                Rect face_i <span class="sy0">=</span> faces.<span class="me1">get</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="sy0">;</span>
+                rectangle<span class="br0">&#40;</span>frameMat, face_i, <span class="kw1">new</span> Scalar<span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">255</span>, <span class="nu0">0</span>, <span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw3">String</span> box_text <span class="sy0">=</span> <span class="st0">&quot;Caught!&quot;</span><span class="sy0">;</span>
+                <span class="kw4">int</span> pos_x <span class="sy0">=</span> <span class="kw3">Math</span>.<span class="me1">max</span><span class="br0">&#40;</span>face_i.<span class="me1">tl</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">x</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">-</span> <span class="nu0">10</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw4">int</span> pos_y <span class="sy0">=</span> <span class="kw3">Math</span>.<span class="me1">max</span><span class="br0">&#40;</span>face_i.<span class="me1">tl</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">y</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">-</span> <span class="nu0">10</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                putText<span class="br0">&#40;</span>frameMat, box_text, <span class="kw1">new</span> <span class="kw3">Point</span><span class="br0">&#40;</span>pos_x, pos_y<span class="br0">&#41;</span>,
+                        FONT_HERSHEY_PLAIN, <span class="nu0">1.0</span>, <span class="kw1">new</span> Scalar<span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">255</span>, <span class="nu0">0</span>, <span class="nu0">2.0</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">return</span> faces.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> faces.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<h1 id="toc2"><a name="ImShow Class"></a>ImShow Class</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">tests</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">javax.swing.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.image.BufferedImage</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> ImShow <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">JFrame</span> frame<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw1">final</span> <span class="kw3">JLabel</span> imageLabel <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> ImShow<span class="br0">&#40;</span><span class="kw4">int</span> w, <span class="kw4">int</span> h<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">frame</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JFrame</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">frame</span>.<span class="me1">setBounds</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">0</span>, w, h<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">frame</span>.<span class="me1">setDefaultCloseOperation</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">frame</span>.<span class="me1">getContentPane</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw3">LayoutManager</span><span class="br0">&#41;</span> <span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">imageLabel</span>.<span class="me1">setBounds</span><span class="br0">&#40;</span><span class="nu0">1</span>, <span class="nu0">1</span>, w <span class="sy0">-</span> <span class="nu0">5</span>, h <span class="sy0">-</span> <span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">frame</span>.<span class="me1">getContentPane</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">add</span><span class="br0">&#40;</span>imageLabel<span class="br0">&#41;</span><span class="sy0">;</span>
+        frame.<span class="me1">setVisible</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> show<span class="br0">&#40;</span><span class="kw3">BufferedImage</span> buffImg<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        imageLabel.<span class="me1">setIcon</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ImageIcon</span><span class="br0">&#40;</span>buffImg<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+<h1 id="toc3"><a name="Main Class"></a>Main Class</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">tests</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">java.io.IOException</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">org.bytedeco.javacv.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> FaceRecognizerInVideo2 <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="kw1">throws</span> <span class="kw3">IOException</span> <span class="br0">&#123;</span>
+        FFmpegFrameGrabber f <span class="sy0">=</span> <span class="kw1">new</span> FFmpegFrameGrabber<span class="br0">&#40;</span><span class="st0">&quot;http://192.168.1.200:9090/stream/video.mjpeg&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        f.<span class="me1">setFrameRate</span><span class="br0">&#40;</span><span class="nu0">25</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        f.<span class="me1">setImageHeight</span><span class="br0">&#40;</span><span class="nu0">480</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        f.<span class="me1">setImageWidth</span><span class="br0">&#40;</span><span class="nu0">640</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        f.<span class="me1">setFormat</span><span class="br0">&#40;</span><span class="st0">&quot;mjpeg&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        f.<span class="me1">start</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        ImShow im <span class="sy0">=</span> <span class="kw1">new</span> ImShow<span class="br0">&#40;</span><span class="nu0">800</span>, <span class="nu0">600</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">Frame</span> frame<span class="sy0">;</span>
+        FaceDetection face <span class="sy0">=</span> <span class="kw1">new</span> FaceDetection<span class="br0">&#40;</span><span class="st0">&quot;lbpcascade_frontalface_improved.xml&quot;</span>, <span class="st0">&quot;../data/&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">while</span> <span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            frame <span class="sy0">=</span> f.<span class="me1">grabFrame</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            face.<span class="me1">detect</span><span class="br0">&#40;</span>frame, <span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            im.<span class="me1">show</span><span class="br0">&#40;</span>FaceDetection.<span class="me1">frameToBuff</span><span class="br0">&#40;</span>frame<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

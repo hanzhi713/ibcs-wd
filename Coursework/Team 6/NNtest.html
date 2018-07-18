@@ -1,0 +1,132 @@
+<html>
+  <head>
+    <title>IBCS1-WD - NNtest</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> tensorflow <span class="kw1">as</span> tf
+<span class="kw1">import</span> numpy <span class="kw1">as</span> np
+&nbsp;
+trX <span class="sy0">=</span> np.<span class="me1">linspace</span><span class="br0">&#40;</span>-<span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">101</span><span class="br0">&#41;</span>
+trY <span class="sy0">=</span> <span class="nu0">2</span> * trX + np.<span class="kw3">random</span>.<span class="me1">randn</span><span class="br0">&#40;</span>*trX.<span class="me1">shape</span><span class="br0">&#41;</span> * <span class="nu0">0.33</span> <span class="co1"># create a y value which is approximately linear but with some random noise</span>
+&nbsp;
+X <span class="sy0">=</span> tf.<span class="me1">placeholder</span><span class="br0">&#40;</span><span class="st0">&quot;float&quot;</span><span class="br0">&#41;</span> <span class="co1"># create symbolic variables</span>
+Y <span class="sy0">=</span> tf.<span class="me1">placeholder</span><span class="br0">&#40;</span><span class="st0">&quot;float&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> model<span class="br0">&#40;</span>X<span class="sy0">,</span> w<span class="br0">&#41;</span>:
+    <span class="kw1">return</span> tf.<span class="me1">mul</span><span class="br0">&#40;</span>X<span class="sy0">,</span> w<span class="br0">&#41;</span> <span class="co1"># lr is just X*w so this model line is pretty simple</span>
+&nbsp;
+&nbsp;
+w <span class="sy0">=</span> tf.<span class="me1">Variable</span><span class="br0">&#40;</span><span class="nu0">0.0</span><span class="sy0">,</span> name<span class="sy0">=</span><span class="st0">&quot;weights&quot;</span><span class="br0">&#41;</span> <span class="co1"># create a shared variable (like theano.shared) for the weight matrix</span>
+y_model <span class="sy0">=</span> model<span class="br0">&#40;</span>X<span class="sy0">,</span> w<span class="br0">&#41;</span>
+&nbsp;
+cost <span class="sy0">=</span> <span class="br0">&#40;</span>tf.<span class="kw2">pow</span><span class="br0">&#40;</span>Y-y_model<span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="co1"># use sqr error for cost function</span>
+&nbsp;
+train_op <span class="sy0">=</span> tf.<span class="me1">train</span>.<span class="me1">GradientDescentOptimizer</span><span class="br0">&#40;</span><span class="nu0">0.01</span><span class="br0">&#41;</span>.<span class="me1">minimize</span><span class="br0">&#40;</span>cost<span class="br0">&#41;</span> <span class="co1"># construct an optimizer to minimize cost and fit line to my data</span>
+&nbsp;
+sess <span class="sy0">=</span> tf.<span class="me1">Session</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+init <span class="sy0">=</span> tf.<span class="me1">initialize_all_variables</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="co1"># you need to initialize variables (in this case just variable W)</span>
+sess.<span class="me1">run</span><span class="br0">&#40;</span>init<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">100</span><span class="br0">&#41;</span>:
+    <span class="kw1">for</span> <span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="br0">&#41;</span> <span class="kw1">in</span> <span class="kw2">zip</span><span class="br0">&#40;</span>trX<span class="sy0">,</span> trY<span class="br0">&#41;</span>:
+        sess.<span class="me1">run</span><span class="br0">&#40;</span>train_op<span class="sy0">,</span> feed_dict<span class="sy0">=</span><span class="br0">&#123;</span>X: x<span class="sy0">,</span> Y: y<span class="br0">&#125;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">print</span><span class="br0">&#40;</span>sess.<span class="me1">run</span><span class="br0">&#40;</span>w<span class="br0">&#41;</span><span class="br0">&#41;</span>  <span class="co1"># something around 2</span>
+&nbsp;</pre>
+
+linear regression<br />
+<br />
+<img src="files/Screen%20Shot%202017-09-17%20at%2012.03.51%20PM.png" alt="Screen Shot 2017-09-17 at 12.03.51 PM.png" title="Screen Shot 2017-09-17 at 12.03.51 PM.png" style="height: 323px; width: 788px;" /><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> tensorflow <span class="kw1">as</span> tf
+<span class="kw1">import</span> numpy <span class="kw1">as</span> np
+<span class="kw1">import</span> input_data
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> init_weights<span class="br0">&#40;</span>shape<span class="br0">&#41;</span>:
+    <span class="kw1">return</span> tf.<span class="me1">Variable</span><span class="br0">&#40;</span>tf.<span class="me1">random_normal</span><span class="br0">&#40;</span>shape<span class="sy0">,</span> stddev<span class="sy0">=</span><span class="nu0">0.01</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> model<span class="br0">&#40;</span>X<span class="sy0">,</span> w<span class="br0">&#41;</span>:
+    <span class="kw1">return</span> tf.<span class="me1">matmul</span><span class="br0">&#40;</span>X<span class="sy0">,</span> w<span class="br0">&#41;</span> <span class="co1"># notice we use the same model as linear regression, this is because there is a baked in cost function which performs softmax and cross entropy</span>
+&nbsp;
+&nbsp;
+mnist <span class="sy0">=</span> input_data.<span class="me1">read_data_sets</span><span class="br0">&#40;</span><span class="st0">&quot;MNIST_data/&quot;</span><span class="sy0">,</span> one_hot<span class="sy0">=</span><span class="kw2">True</span><span class="br0">&#41;</span>
+trX<span class="sy0">,</span> trY<span class="sy0">,</span> teX<span class="sy0">,</span> teY <span class="sy0">=</span> mnist.<span class="me1">train</span>.<span class="me1">images</span><span class="sy0">,</span> mnist.<span class="me1">train</span>.<span class="me1">labels</span><span class="sy0">,</span> mnist.<span class="kw3">test</span>.<span class="me1">images</span><span class="sy0">,</span> mnist.<span class="kw3">test</span>.<span class="me1">labels</span>
+&nbsp;
+X <span class="sy0">=</span> tf.<span class="me1">placeholder</span><span class="br0">&#40;</span><span class="st0">&quot;float&quot;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw2">None</span><span class="sy0">,</span> <span class="nu0">784</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="co1"># create symbolic variables</span>
+Y <span class="sy0">=</span> tf.<span class="me1">placeholder</span><span class="br0">&#40;</span><span class="st0">&quot;float&quot;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="kw2">None</span><span class="sy0">,</span> <span class="nu0">10</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+&nbsp;
+w <span class="sy0">=</span> init_weights<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">784</span><span class="sy0">,</span> <span class="nu0">10</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="co1"># like in linear regression, we need a shared variable weight matrix for logistic regression</span>
+&nbsp;
+py_x <span class="sy0">=</span> model<span class="br0">&#40;</span>X<span class="sy0">,</span> w<span class="br0">&#41;</span>
+&nbsp;
+cost <span class="sy0">=</span> tf.<span class="me1">reduce_mean</span><span class="br0">&#40;</span>tf.<span class="me1">nn</span>.<span class="me1">softmax_cross_entropy_with_logits</span><span class="br0">&#40;</span>py_x<span class="sy0">,</span> Y<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="co1"># compute mean cross entropy (softmax is applied internally)</span>
+train_op <span class="sy0">=</span> tf.<span class="me1">train</span>.<span class="me1">GradientDescentOptimizer</span><span class="br0">&#40;</span><span class="nu0">0.05</span><span class="br0">&#41;</span>.<span class="me1">minimize</span><span class="br0">&#40;</span>cost<span class="br0">&#41;</span> <span class="co1"># construct optimizer</span>
+predict_op <span class="sy0">=</span> tf.<span class="me1">argmax</span><span class="br0">&#40;</span>py_x<span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="co1"># at predict time, evaluate the argmax of the logistic regression</span>
+&nbsp;
+sess <span class="sy0">=</span> tf.<span class="me1">Session</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+init <span class="sy0">=</span> tf.<span class="me1">initialize_all_variables</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+sess.<span class="me1">run</span><span class="br0">&#40;</span>init<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">100</span><span class="br0">&#41;</span>:
+    <span class="kw1">for</span> start<span class="sy0">,</span> end <span class="kw1">in</span> <span class="kw2">zip</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="kw2">len</span><span class="br0">&#40;</span>trX<span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu0">128</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">128</span><span class="sy0">,</span> <span class="kw2">len</span><span class="br0">&#40;</span>trX<span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu0">128</span><span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        sess.<span class="me1">run</span><span class="br0">&#40;</span>train_op<span class="sy0">,</span> feed_dict<span class="sy0">=</span><span class="br0">&#123;</span>X: trX<span class="br0">&#91;</span>start:end<span class="br0">&#93;</span><span class="sy0">,</span> Y: trY<span class="br0">&#91;</span>start:end<span class="br0">&#93;</span><span class="br0">&#125;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span> i<span class="sy0">,</span> np.<span class="me1">mean</span><span class="br0">&#40;</span>np.<span class="me1">argmax</span><span class="br0">&#40;</span>teY<span class="sy0">,</span> axis<span class="sy0">=</span><span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">==</span>
+                     sess.<span class="me1">run</span><span class="br0">&#40;</span>predict_op<span class="sy0">,</span> feed_dict<span class="sy0">=</span><span class="br0">&#123;</span>X: teX<span class="sy0">,</span> Y: teY<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

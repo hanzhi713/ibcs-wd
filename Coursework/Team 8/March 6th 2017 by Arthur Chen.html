@@ -1,0 +1,256 @@
+<html>
+  <head>
+    <title>IBCS1-WD - March 6th 2017 by Arthur Chen</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+Today we start our project of &quot;CV meets ART&quot;.<br />
+<br />
+Project study: CV meets Art<br />
+Study by doing a project is claimed to be more motivated and interesting than lectures.<br />
+<br />
+This project is a STEAM learning.<br />
+STEAM: Science Technology Engineering Art Mathematics<br />
+<br />
+First, we all install opencv in our python.<br />
+How to install opencv in Mac?<br />
+<ol><li>In pycharm, go to preference, find &quot;interpreter&quot;, click &quot;+&quot;.</li><li>Search and download numpy</li><li>Search and download matplotlib</li><li>search opencv, download &quot;opencv - python&quot;.</li></ol>opencv: An open-source computer vision program<br />
+<br />
+The first task is to convert the BGR color matrix to RGB, since the opencv read in the image as this unusual format. One possible implementation of the code is as following:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">img_bgr <span class="sy0">=</span> cv2.<span class="me1">imread</span><span class="br0">&#40;</span><span class="st0">'testimg.jpg'</span><span class="br0">&#41;</span>
+img_rgb <span class="sy0">=</span> np.<span class="me1">zeros</span><span class="br0">&#40;</span>img_bgr.<span class="me1">shape</span><span class="sy0">,</span> img_bgr.<span class="me1">dtype</span><span class="br0">&#41;</span>
+img_rgb<span class="br0">&#91;</span>:<span class="sy0">,</span>:<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> img_bgr<span class="br0">&#91;</span>:<span class="sy0">,</span>:<span class="sy0">,</span><span class="nu0">2</span><span class="br0">&#93;</span>
+img_rgb<span class="br0">&#91;</span>:<span class="sy0">,</span>:<span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> img_bgr<span class="br0">&#91;</span>:<span class="sy0">,</span>:<span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#93;</span>
+img_rgb<span class="br0">&#91;</span>:<span class="sy0">,</span>:<span class="sy0">,</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> img_bgr<span class="br0">&#91;</span>:<span class="sy0">,</span>:<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#93;</span></pre>
+
+We can see that the color matrix has two attributes, shape and dtype. The shape attribute stores the dimensions of the color matrix. We need to know that the color matrix is a two dimensional matrix, where in each unit is a three dimensional vector representing the color. Normally, the color consists of RGB, each have value of 0 to 255. The combinations of these three colors create all sorts of colors. <br />
+<br />
+Another possible implementation is as shown:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">b<span class="sy0">,</span>g<span class="sy0">,</span>r <span class="sy0">=</span> img_bgr.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+ img_rgb <span class="sy0">=</span> cv2.<span class="me1">merge</span><span class="br0">&#40;</span><span class="br0">&#91;</span>r<span class="sy0">,</span>g<span class="sy0">,</span>b<span class="br0">&#93;</span><span class="br0">&#41;</span></pre>
+
+<br />
+If we want to save an image, we can use imwrite:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">cv2.<span class="me1">imwrite</span><span class="br0">&#40;</span>“saveimg.<span class="me1">png</span>”<span class="sy0">,</span>img<span class="br0">&#91;</span><span class="nu0">0</span>:<span class="nu0">500</span><span class="sy0">,</span><span class="nu0">0</span>:<span class="nu0">500</span><span class="sy0">,</span><span class="nu0">0</span>:<span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#41;</span></pre>
+
+Be careful that the number after the &quot;:&quot; is not included as convention. <br />
+<br />
+Another task is to convert RGB colorspace to HSV colorspace. This can be done by inbuilt function rgb2hsv.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">img_rgb <span class="sy0">=</span> imread<span class="br0">&#40;</span><span class="st0">'mypicture.jpg'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+HSV <span class="sy0">=</span> cv2.<span class="me1">rgb2hsv</span><span class="br0">&#40;</span>img_rgb<span class="br0">&#41;</span><span class="sy0">;</span></pre>
+
+<br />
+The third task is to make false color map. The false color means every pixel in the image is replaced by a certain color in the color map according to their intensity. This function also has a implementation already done in matplotlib. The following program can test this function:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> numpy <span class="kw1">as</span> np
+<span class="kw1">import</span> matplotlib.<span class="me1">pyplot</span> <span class="kw1">as</span> plt
+&nbsp;
+&nbsp;
+<span class="co1"># Have colormaps separated into categories:</span>
+<span class="co1"># http://matplotlib.org/examples/color/colormaps_reference.html</span>
+cmaps <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#40;</span><span class="st0">'Perceptually Uniform Sequential'</span><span class="sy0">,</span>
+                            <span class="br0">&#91;</span><span class="st0">'viridis'</span><span class="sy0">,</span> <span class="st0">'inferno'</span><span class="sy0">,</span> <span class="st0">'plasma'</span><span class="sy0">,</span> <span class="st0">'magma'</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">,</span>
+         <span class="br0">&#40;</span><span class="st0">'Sequential'</span><span class="sy0">,</span>     <span class="br0">&#91;</span><span class="st0">'Blues'</span><span class="sy0">,</span> <span class="st0">'BuGn'</span><span class="sy0">,</span> <span class="st0">'BuPu'</span><span class="sy0">,</span>
+                             <span class="st0">'GnBu'</span><span class="sy0">,</span> <span class="st0">'Greens'</span><span class="sy0">,</span> <span class="st0">'Greys'</span><span class="sy0">,</span> <span class="st0">'Oranges'</span><span class="sy0">,</span> <span class="st0">'OrRd'</span><span class="sy0">,</span>
+                             <span class="st0">'PuBu'</span><span class="sy0">,</span> <span class="st0">'PuBuGn'</span><span class="sy0">,</span> <span class="st0">'PuRd'</span><span class="sy0">,</span> <span class="st0">'Purples'</span><span class="sy0">,</span> <span class="st0">'RdPu'</span><span class="sy0">,</span>
+                             <span class="st0">'Reds'</span><span class="sy0">,</span> <span class="st0">'YlGn'</span><span class="sy0">,</span> <span class="st0">'YlGnBu'</span><span class="sy0">,</span> <span class="st0">'YlOrBr'</span><span class="sy0">,</span> <span class="st0">'YlOrRd'</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">,</span>
+         <span class="br0">&#40;</span><span class="st0">'Sequential (2)'</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="st0">'afmhot'</span><span class="sy0">,</span> <span class="st0">'autumn'</span><span class="sy0">,</span> <span class="st0">'bone'</span><span class="sy0">,</span> <span class="st0">'cool'</span><span class="sy0">,</span>
+                             <span class="st0">'copper'</span><span class="sy0">,</span> <span class="st0">'gist_heat'</span><span class="sy0">,</span> <span class="st0">'gray'</span><span class="sy0">,</span> <span class="st0">'hot'</span><span class="sy0">,</span>
+                             <span class="st0">'pink'</span><span class="sy0">,</span> <span class="st0">'spring'</span><span class="sy0">,</span> <span class="st0">'summer'</span><span class="sy0">,</span> <span class="st0">'winter'</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">,</span>
+         <span class="br0">&#40;</span><span class="st0">'Diverging'</span><span class="sy0">,</span>      <span class="br0">&#91;</span><span class="st0">'BrBG'</span><span class="sy0">,</span> <span class="st0">'bwr'</span><span class="sy0">,</span> <span class="st0">'coolwarm'</span><span class="sy0">,</span> <span class="st0">'PiYG'</span><span class="sy0">,</span> <span class="st0">'PRGn'</span><span class="sy0">,</span> <span class="st0">'PuOr'</span><span class="sy0">,</span>
+                             <span class="st0">'RdBu'</span><span class="sy0">,</span> <span class="st0">'RdGy'</span><span class="sy0">,</span> <span class="st0">'RdYlBu'</span><span class="sy0">,</span> <span class="st0">'RdYlGn'</span><span class="sy0">,</span> <span class="st0">'Spectral'</span><span class="sy0">,</span>
+                             <span class="st0">'seismic'</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">,</span>
+         <span class="br0">&#40;</span><span class="st0">'Qualitative'</span><span class="sy0">,</span>    <span class="br0">&#91;</span><span class="st0">'Accent'</span><span class="sy0">,</span> <span class="st0">'Dark2'</span><span class="sy0">,</span> <span class="st0">'Paired'</span><span class="sy0">,</span> <span class="st0">'Pastel1'</span><span class="sy0">,</span>
+                             <span class="st0">'Pastel2'</span><span class="sy0">,</span> <span class="st0">'Set1'</span><span class="sy0">,</span> <span class="st0">'Set2'</span><span class="sy0">,</span> <span class="st0">'Set3'</span><span class="sy0">,</span> <span class="st0">'Vega10'</span><span class="sy0">,</span>
+                             <span class="st0">'Vega20'</span><span class="sy0">,</span> <span class="st0">'Vega20b'</span><span class="sy0">,</span> <span class="st0">'Vega20c'</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">,</span>
+         <span class="br0">&#40;</span><span class="st0">'Miscellaneous'</span><span class="sy0">,</span>  <span class="br0">&#91;</span><span class="st0">'gist_earth'</span><span class="sy0">,</span> <span class="st0">'terrain'</span><span class="sy0">,</span> <span class="st0">'ocean'</span><span class="sy0">,</span> <span class="st0">'gist_stern'</span><span class="sy0">,</span>
+                             <span class="st0">'brg'</span><span class="sy0">,</span> <span class="st0">'CMRmap'</span><span class="sy0">,</span> <span class="st0">'cubehelix'</span><span class="sy0">,</span>
+                             <span class="st0">'gnuplot'</span><span class="sy0">,</span> <span class="st0">'gnuplot2'</span><span class="sy0">,</span> <span class="st0">'gist_ncar'</span><span class="sy0">,</span>
+                             <span class="st0">'nipy_spectral'</span><span class="sy0">,</span> <span class="st0">'jet'</span><span class="sy0">,</span> <span class="st0">'rainbow'</span><span class="sy0">,</span>
+                             <span class="st0">'gist_rainbow'</span><span class="sy0">,</span> <span class="st0">'hsv'</span><span class="sy0">,</span> <span class="st0">'flag'</span><span class="sy0">,</span> <span class="st0">'prism'</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+&nbsp;
+&nbsp;
+nrows <span class="sy0">=</span> <span class="kw2">max</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>cmap_list<span class="br0">&#41;</span> <span class="kw1">for</span> cmap_category<span class="sy0">,</span> cmap_list <span class="kw1">in</span> cmaps<span class="br0">&#41;</span>
+gradient <span class="sy0">=</span> np.<span class="me1">linspace</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">256</span><span class="br0">&#41;</span>
+gradient <span class="sy0">=</span> np.<span class="me1">vstack</span><span class="br0">&#40;</span><span class="br0">&#40;</span>gradient<span class="sy0">,</span> gradient<span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> plot_color_gradients<span class="br0">&#40;</span>cmap_category<span class="sy0">,</span> cmap_list<span class="sy0">,</span> nrows<span class="br0">&#41;</span>:
+    fig<span class="sy0">,</span> axes <span class="sy0">=</span> plt.<span class="me1">subplots</span><span class="br0">&#40;</span>nrows<span class="sy0">=</span>nrows<span class="br0">&#41;</span>
+    fig.<span class="me1">subplots_adjust</span><span class="br0">&#40;</span>top<span class="sy0">=</span><span class="nu0">0.95</span><span class="sy0">,</span> bottom<span class="sy0">=</span><span class="nu0">0.01</span><span class="sy0">,</span> left<span class="sy0">=</span><span class="nu0">0.2</span><span class="sy0">,</span> right<span class="sy0">=</span><span class="nu0">0.99</span><span class="br0">&#41;</span>
+    axes<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>.<span class="me1">set_title</span><span class="br0">&#40;</span>cmap_category + <span class="st0">' colormaps'</span><span class="sy0">,</span> fontsize<span class="sy0">=</span><span class="nu0">14</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">for</span> ax<span class="sy0">,</span> name <span class="kw1">in</span> <span class="kw2">zip</span><span class="br0">&#40;</span>axes<span class="sy0">,</span> cmap_list<span class="br0">&#41;</span>:
+        ax.<span class="me1">imshow</span><span class="br0">&#40;</span>gradient<span class="sy0">,</span> aspect<span class="sy0">=</span><span class="st0">'auto'</span><span class="sy0">,</span> cmap<span class="sy0">=</span>plt.<span class="me1">get_cmap</span><span class="br0">&#40;</span>name<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        pos <span class="sy0">=</span> <span class="kw2">list</span><span class="br0">&#40;</span>ax.<span class="me1">get_position</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">bounds</span><span class="br0">&#41;</span>
+        x_text <span class="sy0">=</span> pos<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> - <span class="nu0">0.01</span>
+        y_text <span class="sy0">=</span> pos<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> + pos<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span>/<span class="nu0">2</span>.
+        <span class="me1">fig</span>.<span class="me1">text</span><span class="br0">&#40;</span>x_text<span class="sy0">,</span> y_text<span class="sy0">,</span> name<span class="sy0">,</span> va<span class="sy0">=</span><span class="st0">'center'</span><span class="sy0">,</span> ha<span class="sy0">=</span><span class="st0">'right'</span><span class="sy0">,</span> fontsize<span class="sy0">=</span><span class="nu0">10</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1"># Turn off *all* ticks &amp; spines, not just the ones with colormaps.</span>
+    <span class="kw1">for</span> ax <span class="kw1">in</span> axes:
+        ax.<span class="me1">set_axis_off</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">for</span> cmap_category<span class="sy0">,</span> cmap_list <span class="kw1">in</span> cmaps:
+    plot_color_gradients<span class="br0">&#40;</span>cmap_category<span class="sy0">,</span> cmap_list<span class="sy0">,</span> nrows<span class="br0">&#41;</span>
+&nbsp;
+plt.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+If we want to design our own false color map, the idea is to first convert the image to gray scale, and then use the intensity as index to access the target map. For example:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">for</span> x <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>pic.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>:
+    <span class="kw1">for</span> y <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>pic.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>:
+        value <span class="sy0">=</span> <span class="nu0">0.2989</span> * pic<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>y<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> + <span class="nu0">0.5870</span> * pic<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>y<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> + <span class="nu0">0.1140</span> * pic<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>y<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+        <span class="kw1">if</span> value <span class="sy0">&gt;</span> <span class="nu0">255</span>:
+            value <span class="sy0">=</span> <span class="nu0">255</span>
+        pic<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>y<span class="br0">&#93;</span> <span class="sy0">=</span> falseexp<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="kw2">int</span><span class="br0">&#40;</span>value / <span class="nu0">255</span> * falseexp.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> * falsecolorrange + falseexp.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> * <span class="br0">&#40;</span><span class="nu0">1</span> - falsecolorrange<span class="br0">&#41;</span> / <span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+&nbsp;</pre>
+
+where falseexp is a picture of the false color stripe.<br />
+<br />
+<h2 id="toc0"><a name="x-Homework:"></a>Homework:</h2>
+ Add &quot;salt noise&quot; to an image: This means that we need to make randomly chosen 1% pixels to black or white.</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

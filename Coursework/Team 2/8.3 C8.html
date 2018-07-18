@@ -1,0 +1,368 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 8.3 C8</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>8.3 C8<small> #homework </small></h1><h1 id="toc0"><a name="x2."></a>2.</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">prefixes <span class="sy0">=</span> <span class="st0">&quot;JKLMNOPQ&quot;</span>
+suffix <span class="sy0">=</span> <span class="st0">&quot;ack&quot;</span>
+&nbsp;
+<span class="kw1">for</span> letter <span class="kw1">in</span> prefixes:
+    <span class="kw1">if</span> letter <span class="sy0">==</span> <span class="st0">'O'</span>:
+        <span class="kw1">print</span><span class="br0">&#40;</span>letter + <span class="st0">&quot;u&quot;</span> + suffix<span class="br0">&#41;</span>
+    <span class="kw1">elif</span> letter <span class="sy0">==</span> <span class="st0">'Q'</span>:
+        <span class="kw1">print</span><span class="br0">&#40;</span>letter + <span class="st0">&quot;u&quot;</span> + suffix<span class="br0">&#41;</span>
+    <span class="kw1">else</span>:
+        <span class="kw1">print</span><span class="br0">&#40;</span>letter + suffix<span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<h1 id="toc1"><a name="x3."></a>3.</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> count_letters<span class="br0">&#40;</span><span class="kw3">test</span><span class="br0">&#41;</span>:
+    fruit <span class="sy0">=</span> <span class="st0">&quot;banana&quot;</span>
+    count <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">for</span> char <span class="kw1">in</span> fruit:
+        <span class="kw1">if</span> char <span class="sy0">==</span> <span class="kw3">test</span>:
+            count +<span class="sy0">=</span> <span class="nu0">1</span>
+    <span class="kw1">return</span> count
+<span class="kw1">print</span><span class="br0">&#40;</span>count_letters<span class="br0">&#40;</span><span class="st0">'b'</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<h1 id="toc2"><a name="x5."></a>5.</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">string</span>
+text <span class="sy0">=</span> <span class="st0">&quot;Assign to rergadfgafsd ewjl,asdfl,/.?q@ajdsl esdjflk ewjkj&quot;</span>
+<span class="kw1">def</span> count_e<span class="br0">&#40;</span>lsp<span class="br0">&#41;</span>:
+    new_lsp <span class="sy0">=</span> <span class="st0">&quot;&quot;</span>
+    count <span class="sy0">=</span> <span class="nu0">0</span>
+    words <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">for</span> letter <span class="kw1">in</span> lsp:
+        <span class="kw1">if</span> letter <span class="kw1">not</span> <span class="kw1">in</span> <span class="kw3">string</span>.<span class="me1">punctuation</span>:
+            new_lsp <span class="sy0">=</span> new_lsp + letter
+    split_words <span class="sy0">=</span> new_lsp.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> split_words:
+        <span class="kw1">for</span> char <span class="kw1">in</span> i:
+            <span class="kw1">if</span> char <span class="sy0">==</span> <span class="st0">'e'</span>:
+                count <span class="sy0">=</span> count + <span class="nu0">1</span>
+    <span class="kw1">return</span> count
+<span class="kw1">def</span> howmanywords<span class="br0">&#40;</span>lsp<span class="br0">&#41;</span>:
+    new_lsp <span class="sy0">=</span> <span class="st0">&quot;&quot;</span>
+    <span class="kw1">for</span> letter <span class="kw1">in</span> lsp:
+        <span class="kw1">if</span> letter <span class="kw1">not</span> <span class="kw1">in</span> <span class="kw3">string</span>.<span class="me1">punctuation</span>:
+            new_lsp <span class="sy0">=</span> new_lsp + letter
+    split_words <span class="sy0">=</span> new_lsp.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    x <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>split_words<span class="br0">&#41;</span>
+    <span class="kw1">return</span> x
+perc <span class="sy0">=</span> count_e<span class="br0">&#40;</span>text<span class="br0">&#41;</span> / howmanywords<span class="br0">&#40;</span>text<span class="br0">&#41;</span> * <span class="nu0">100</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;Your text contains&quot;</span><span class="sy0">,</span> howmanywords<span class="br0">&#40;</span>text<span class="br0">&#41;</span><span class="sy0">,</span> <span class="st0">&quot;words, of which&quot;</span><span class="sy0">,</span> count_e<span class="br0">&#40;</span>text<span class="br0">&#41;</span><span class="sy0">,</span>  <span class="st0">&quot;(&quot;</span><span class="sy0">,</span> perc<span class="sy0">,</span> <span class="st0">&quot;%) contain an 'e'.&quot;</span><span class="br0">&#41;</span></pre>
+
+<h1 id="toc3"><a name="x7."></a>7.</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">d <span class="sy0">=</span> <span class="st0">&quot;hp&quot;</span>
+<span class="kw1">def</span> revers<span class="br0">&#40;</span>s<span class="br0">&#41;</span>:
+    c <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>s<span class="br0">&#41;</span>
+    l <span class="sy0">=</span> <span class="st0">&quot;&quot;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> c<span class="br0">&#41;</span>:
+        l <span class="sy0">=</span> l + s<span class="br0">&#91;</span>c-i-<span class="nu0">1</span><span class="br0">&#93;</span>
+    <span class="kw1">return</span> l
+&nbsp;
+<span class="kw1">print</span><span class="br0">&#40;</span>revers<span class="br0">&#40;</span>d<span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<h1 id="toc4"><a name="x8."></a>8.</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">d <span class="sy0">=</span> <span class="st0">&quot;hp&quot;</span>
+<span class="kw1">def</span> revers<span class="br0">&#40;</span>s<span class="br0">&#41;</span>:
+    c <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>s<span class="br0">&#41;</span>
+    l <span class="sy0">=</span> <span class="st0">&quot;&quot;</span>
+    p <span class="sy0">=</span> <span class="st0">&quot;&quot;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> c<span class="br0">&#41;</span>:
+        l <span class="sy0">=</span> l + s<span class="br0">&#91;</span>c-i-<span class="nu0">1</span><span class="br0">&#93;</span>
+    p <span class="sy0">=</span> s + l
+    <span class="kw1">return</span> p
+&nbsp;
+<span class="kw1">print</span><span class="br0">&#40;</span>revers<span class="br0">&#40;</span>d<span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;</pre>
+
+<h1 id="toc5"><a name="x9."></a>9.</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> remove_letter<span class="br0">&#40;</span>char<span class="sy0">,</span> word<span class="br0">&#41;</span>:
+    newword <span class="sy0">=</span> <span class="st0">''</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> word:
+        <span class="kw1">if</span> char <span class="sy0">!=</span> i:
+            newword <span class="sy0">=</span> newword + i
+    <span class="kw1">return</span> newword
+<span class="kw1">print</span><span class="br0">&#40;</span>remove_letter<span class="br0">&#40;</span><span class="st0">&quot;b&quot;</span><span class="sy0">,</span> <span class="st0">&quot;c&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<h1 id="toc6"><a name="x10."></a>10.</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">e <span class="sy0">=</span> <span class="st0">&quot;asdfdsa&quot;</span>
+<span class="kw1">def</span> is_palindrome<span class="br0">&#40;</span>d<span class="br0">&#41;</span>:
+    c <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>d<span class="br0">&#41;</span>
+    a <span class="sy0">=</span> <span class="kw2">True</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> c//<span class="nu0">2</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> d<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">!=</span> d<span class="br0">&#91;</span>c-i-<span class="nu0">1</span><span class="br0">&#93;</span>:
+            a <span class="sy0">=</span> <span class="kw2">False</span>
+    <span class="kw1">if</span> a <span class="sy0">==</span> <span class="kw2">False</span>:
+        <span class="kw1">return</span> <span class="st0">'no'</span>
+    <span class="kw1">else</span>:
+        <span class="kw1">return</span> <span class="st0">'yes'</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>is_palindrome<span class="br0">&#40;</span>e<span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<h1 id="toc7"><a name="x11."></a>11.</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> count<span class="br0">&#40;</span>sub<span class="sy0">,</span> word<span class="br0">&#41;</span>:
+    sublen <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>sub<span class="br0">&#41;</span>
+    wordlen <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>word<span class="br0">&#41;</span>
+    sec <span class="sy0">=</span> <span class="st0">''</span>
+    count <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> wordlen - sublen + <span class="nu0">1</span><span class="br0">&#41;</span>:
+        <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>i<span class="sy0">,</span> i + sublen<span class="br0">&#41;</span>:
+            sec <span class="sy0">=</span> sec + word<span class="br0">&#91;</span>j<span class="br0">&#93;</span>
+        <span class="kw1">if</span> sub <span class="sy0">==</span> sec:
+            count <span class="sy0">=</span> count + <span class="nu0">1</span>
+        sec <span class="sy0">=</span> <span class="st0">''</span>
+    <span class="kw1">return</span> count
+<span class="kw1">print</span><span class="br0">&#40;</span>count<span class="br0">&#40;</span><span class="st0">&quot;aaa&quot;</span><span class="sy0">,</span> <span class="st0">&quot;aaaaaa&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<h1 id="toc8"><a name="x12."></a>12.</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> count<span class="br0">&#40;</span>sub<span class="sy0">,</span> word<span class="br0">&#41;</span>:
+    sublen <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>sub<span class="br0">&#41;</span>
+    wordlen <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>word<span class="br0">&#41;</span>
+    sec <span class="sy0">=</span> <span class="st0">''</span>
+    count <span class="sy0">=</span> <span class="nu0">0</span>
+    newword <span class="sy0">=</span> <span class="st0">''</span>
+    l <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> wordlen - sublen + <span class="nu0">1</span><span class="br0">&#41;</span>:
+        <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>i<span class="sy0">,</span> i + sublen<span class="br0">&#41;</span>:
+            sec <span class="sy0">=</span> sec + word<span class="br0">&#91;</span>j<span class="br0">&#93;</span>
+        <span class="kw1">if</span> sub <span class="sy0">==</span> sec:
+            l <span class="sy0">=</span> i
+            l <span class="sy0">=</span> l + sublen - <span class="nu0">1</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">if</span> i <span class="sy0">&lt;</span> l + <span class="nu0">1</span>:
+                <span class="kw1">if</span> l <span class="sy0">==</span> <span class="nu0">0</span>:
+                    newword <span class="sy0">=</span> newword + word<span class="br0">&#91;</span>i<span class="br0">&#93;</span>
+                <span class="kw1">continue</span>
+            <span class="kw1">else</span>:
+                newword <span class="sy0">=</span> newword + word<span class="br0">&#91;</span>i<span class="br0">&#93;</span>
+        sec <span class="sy0">=</span> <span class="st0">''</span>
+    <span class="kw1">for</span> k <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>wordlen - sublen + <span class="nu0">1</span><span class="sy0">,</span> wordlen<span class="br0">&#41;</span>:
+        newword <span class="sy0">=</span> newword + word<span class="br0">&#91;</span>k<span class="br0">&#93;</span>
+    <span class="kw1">return</span> newword
+<span class="kw1">print</span><span class="br0">&#40;</span>count<span class="br0">&#40;</span><span class="st0">&quot;ap&quot;</span><span class="sy0">,</span> <span class="st0">&quot;applape&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

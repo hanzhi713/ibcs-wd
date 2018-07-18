@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title>IBCS1-WD - auto guess number program</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">random</span>
+rng <span class="sy0">=</span> <span class="kw3">random</span>.<span class="me1">Random</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+lowerrange <span class="sy0">=</span> <span class="nu0">1</span>
+upperrange <span class="sy0">=</span> <span class="nu0">1000</span>
+number <span class="sy0">=</span> rng.<span class="me1">randrange</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">1000</span><span class="br0">&#41;</span>
+guesses <span class="sy0">=</span> <span class="nu0">0</span>
+msg <span class="sy0">=</span> <span class="st0">&quot;&quot;</span>
+<span class="kw1">while</span> <span class="kw2">True</span>:
+    guess <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="br0">&#40;</span>lowerrange + upperrange<span class="br0">&#41;</span>/<span class="nu0">2</span><span class="br0">&#41;</span> <span class="co1">#int(input(msg + &quot;\nGuess my number between 1 and 1000&quot;))</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>guess<span class="br0">&#41;</span>
+    guesses +<span class="sy0">=</span> <span class="nu0">1</span>
+    <span class="kw1">if</span> guess <span class="sy0">&gt;</span> number:
+        msg <span class="sy0">=</span> <span class="st0">&quot;your &quot;</span>+<span class="kw2">str</span><span class="br0">&#40;</span>guesses<span class="br0">&#41;</span>+<span class="st0">&quot; guess is too big&quot;</span>
+        upperrange <span class="sy0">=</span> guess
+        <span class="kw1">print</span><span class="br0">&#40;</span>msg<span class="br0">&#41;</span>
+    <span class="kw1">elif</span> guess <span class="sy0">&lt;</span> number:
+        msg <span class="sy0">=</span> <span class="st0">&quot;your &quot;</span>+<span class="kw2">str</span><span class="br0">&#40;</span>guesses<span class="br0">&#41;</span>+<span class="st0">&quot; guess is too small&quot;</span>
+        lowerrange <span class="sy0">=</span> guess
+        <span class="kw1">print</span><span class="br0">&#40;</span>msg<span class="br0">&#41;</span>
+    <span class="kw1">else</span>:
+        <span class="kw1">break</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;you guessed it in&quot;</span><span class="sy0">,</span> guesses<span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

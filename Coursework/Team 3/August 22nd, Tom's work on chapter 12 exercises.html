@@ -1,0 +1,412 @@
+<html>
+  <head>
+    <title>IBCS1-WD - August 22nd, Tom's work on chapter 12 exercises</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>August 22nd, Tom's work on chapter 12 exercises<small> #TomsProjects </small></h1><h2 id="toc0"><a name="x-E1:"></a>E1:</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1">#(b)</span>
+<span class="kw1">import</span> <span class="kw3">calendar</span>
+cal <span class="sy0">=</span> <span class="kw3">calendar</span>.<span class="me1">TextCalendar</span><span class="br0">&#40;</span>firstweekday<span class="sy0">=</span><span class="nu0">3</span><span class="br0">&#41;</span>
+cal.<span class="me1">pryear</span><span class="br0">&#40;</span><span class="nu0">2012</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#(c)</span>
+<span class="co1"># July 13rd is my birthday</span>
+cal <span class="sy0">=</span> <span class="kw3">calendar</span>.<span class="me1">TextCalendar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+cal.<span class="me1">prmonth</span><span class="br0">&#40;</span><span class="nu0">2016</span><span class="sy0">,</span><span class="nu0">7</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#(d)</span>
+<span class="co1"># it works</span>
+cal <span class="sy0">=</span> <span class="kw3">calendar</span>.<span class="me1">LocaleTextCalendar</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="st0">&quot;GERMAN&quot;</span><span class="br0">&#41;</span>
+cal.<span class="me1">pryear</span><span class="br0">&#40;</span><span class="nu0">2016</span><span class="br0">&#41;</span>
+<span class="co1"># it works</span>
+cal <span class="sy0">=</span> <span class="kw3">calendar</span>.<span class="me1">LocaleTextCalendar</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="st0">&quot;ITALIAN&quot;</span><span class="br0">&#41;</span>
+cal.<span class="me1">pryear</span><span class="br0">&#40;</span><span class="nu0">2016</span><span class="br0">&#41;</span>
+<span class="co1"># eccentric display</span>
+cal <span class="sy0">=</span> <span class="kw3">calendar</span>.<span class="me1">LocaleTextCalendar</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="st0">&quot;JAPANESE&quot;</span><span class="br0">&#41;</span>
+cal.<span class="me1">pryear</span><span class="br0">&#40;</span><span class="nu0">2016</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#(f) calendar.isleap (a year as integer) returns a boolean</span></pre>
+
+<br />
+<h2 id="toc1"><a name="x-E2:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">E2:</span></h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">math</span>
+<span class="kw2">help</span><span class="br0">&#40;</span><span class="kw3">math</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#(a)</span>
+<span class="co1">#44</span>
+&nbsp;
+<span class="co1">#(b)</span>
+<span class="co1"># math.ceil(x)</span>
+<span class="st0">''' Return the ceiling of x as an Integral
+This is the smallest integer &gt;= x.'''</span>
+&nbsp;
+<span class="co1"># math.floor(x)</span>
+<span class="st0">'''Return the floor of x as an Integral
+This is the largest integer &lt;=x '''</span>
+&nbsp;
+<span class="co1">#(c) By using Newton's algorithm</span>
+<span class="st0">'''def sqrt(n):
+    approx = n/2.0
+    while True:
+        better = (approx + n/approx)/2.0
+        if abs(approx - better) &lt; 0.001:
+            return better
+        approx = better'''</span>
+&nbsp;
+<span class="co1">#(d)</span>
+<span class="kw3">math</span>.<span class="me1">pi</span>
+<span class="kw3">math</span>.<span class="me1">e</span></pre>
+
+<br />
+<h2 id="toc2"><a name="x-E3:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">E3:</span></h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">copy</span>
+&nbsp;
+<span class="co1"># the following example comes from http://greybeard.iteye.com/blog/1442259</span>
+a <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">2</span><span class="sy0">,</span> <span class="nu0">3</span><span class="sy0">,</span> <span class="nu0">4</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="st0">'a'</span><span class="sy0">,</span> <span class="st0">'b'</span><span class="br0">&#93;</span><span class="br0">&#93;</span>
+&nbsp;
+b <span class="sy0">=</span> a
+c <span class="sy0">=</span> <span class="kw3">copy</span>.<span class="kw3">copy</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>  <span class="co1"># shallow copy</span>
+d <span class="sy0">=</span> <span class="kw3">copy</span>.<span class="me1">deepcopy</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span> <span class="co1"># deep copy</span>
+&nbsp;
+a.<span class="me1">append</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span>
+a<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span>.<span class="me1">append</span><span class="br0">&#40;</span><span class="st0">'c'</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">print</span> <span class="br0">&#40;</span><span class="st0">'a = '</span><span class="sy0">,</span> a<span class="br0">&#41;</span>
+<span class="kw1">print</span> <span class="br0">&#40;</span><span class="st0">'b = '</span><span class="sy0">,</span> b<span class="br0">&#41;</span>
+<span class="kw1">print</span> <span class="br0">&#40;</span><span class="st0">'c = '</span><span class="sy0">,</span> c<span class="br0">&#41;</span>
+<span class="kw1">print</span> <span class="br0">&#40;</span><span class="st0">'d = '</span><span class="sy0">,</span> d<span class="br0">&#41;</span>
+&nbsp;
+<span class="co1"># the result should be:</span>
+<span class="st0">'''a = [1, 2, 3, 4, ['a', 'b', 'c'], 5]
+b = [1, 2, 3, 4, ['a', 'b', 'c'], 5]
+c = [1, 2, 3, 4, ['a', 'b', 'c']]
+d = [1, 2, 3, 4, ['a', 'b']]'''</span>
+&nbsp;
+<span class="co1"># In exercise 4, though I am not sure.</span>
+<span class="co1"># Using &quot;that = copy.deepcopy(this)&quot; rather than &quot;that = this&quot; will return a false in &quot;this is that&quot;.</span></pre>
+
+<br />
+<h2 id="toc3"><a name="x-E4 &amp; E5 &amp; E6:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">E4 &amp; E5 &amp; E6:</span></h2>
+ <br />
+mymodule1.py:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> myage<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="kw1">return</span> <span class="nu0">16</span>
+<span class="kw1">def</span> year<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="kw1">return</span> <span class="nu0">2016</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;My name is&quot;</span><span class="sy0">,</span> __name__<span class="br0">&#41;</span>
+<span class="kw1">if</span> __name__ <span class="sy0">==</span> <span class="st0">&quot;__main__&quot;</span>:
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;This won't run if I'm  imported.&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;</pre>
+
+<br />
+mymodule2.py:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> myage<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="kw1">return</span> <span class="nu0">0</span>
+<span class="kw1">def</span> year<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="kw1">return</span> <span class="nu0">2000</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;My name is&quot;</span><span class="sy0">,</span> __name__<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;</pre>
+
+<br />
+namespace_test.py<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1"># copy modules to python lib prior to importing modules</span>
+<span class="kw1">import</span> mymodule1
+<span class="kw1">import</span> mymodule2
+<span class="co1"># !!!Error will occur in following triple-quoted code because of missing parentheses!!!</span>
+<span class="st0">'''print( (mymodule2.myage - mymodule1.myage) ==
+       (mymodule2.year - mymodule1.year)  )
+'''</span>
+&nbsp;
+<span class="co1"># correct version</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="br0">&#40;</span>mymodule2.<span class="me1">myage</span><span class="br0">&#40;</span><span class="br0">&#41;</span> - mymodule1.<span class="me1">myage</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">==</span>
+      <span class="br0">&#40;</span>mymodule2.<span class="me1">year</span><span class="br0">&#40;</span><span class="br0">&#41;</span> - mymodule1.<span class="me1">year</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="co1"># return True since my birthday is on July 13th.</span>
+&nbsp;
+&nbsp;</pre>
+
+<h2 id="toc4"><a name="x-E7:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">E7:</span></h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> myreplace<span class="br0">&#40;</span>old<span class="sy0">,</span> <span class="kw3">new</span><span class="sy0">,</span> s<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Replace all occurrences of old with new in s. &quot;&quot;&quot;</span>
+    <span class="kw1">return</span> <span class="kw3">new</span>.<span class="me1">join</span><span class="br0">&#40;</span>s.<span class="me1">split</span><span class="br0">&#40;</span>old<span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<h2 id="toc5"><a name="x-E8:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">E8:</span></h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">string</span>
+<span class="kw1">from</span> unit_tester <span class="kw1">import</span> <span class="kw3">test</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> cleanword<span class="br0">&#40;</span>text<span class="sy0">,</span> ifaddspace <span class="sy0">=</span> <span class="kw2">False</span><span class="br0">&#41;</span>:
+    cleaned <span class="sy0">=</span> <span class="st0">&quot;&quot;</span>
+    <span class="kw1">for</span> let <span class="kw1">in</span> text:
+        <span class="kw1">if</span> let <span class="kw1">not</span> <span class="kw1">in</span> <span class="kw3">string</span>.<span class="me1">punctuation</span>:
+            cleaned +<span class="sy0">=</span> let
+        <span class="kw1">else</span>:
+            <span class="kw1">if</span> ifaddspace <span class="sy0">==</span> <span class="kw2">True</span>:
+                cleaned +<span class="sy0">=</span> <span class="st0">&quot; &quot;</span>
+    <span class="kw1">return</span> cleaned
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> has_dashdash<span class="br0">&#40;</span>text<span class="br0">&#41;</span>:
+    <span class="kw1">if</span> text.<span class="me1">find</span><span class="br0">&#40;</span><span class="st0">&quot;--&quot;</span><span class="br0">&#41;</span> <span class="sy0">&gt;</span> -<span class="nu0">1</span>:
+        <span class="kw1">return</span> <span class="kw2">True</span>
+    <span class="kw1">else</span>:
+        <span class="kw1">return</span> <span class="kw2">False</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> extract_words<span class="br0">&#40;</span>text<span class="br0">&#41;</span>:
+    cleaned <span class="sy0">=</span> cleanword<span class="br0">&#40;</span>text<span class="sy0">,</span><span class="kw2">True</span><span class="br0">&#41;</span>
+    cleaned <span class="sy0">=</span> cleaned.<span class="me1">lower</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> cleaned.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> wordcount<span class="br0">&#40;</span>word<span class="sy0">,</span>text<span class="br0">&#41;</span>:
+    count <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">for</span> wd <span class="kw1">in</span> text:
+        <span class="kw1">if</span> wd <span class="sy0">==</span> word:
+            count +<span class="sy0">=</span> <span class="nu0">1</span>
+    <span class="kw1">return</span> count
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> wordset<span class="br0">&#40;</span>text<span class="br0">&#41;</span>:
+    result <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> text:
+        <span class="kw1">if</span> <span class="kw1">not</span> i <span class="kw1">in</span> result:
+            result.<span class="me1">append</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+    result.<span class="me1">sort</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> result
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> longestword<span class="br0">&#40;</span>words<span class="br0">&#41;</span>:
+    tempnum <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">for</span> word <span class="kw1">in</span> words:
+        <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>word<span class="br0">&#41;</span> <span class="sy0">&gt;</span> tempnum:
+            tempnum <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>word<span class="br0">&#41;</span>
+    <span class="kw1">return</span> tempnum
+&nbsp;
+<span class="kw3">test</span><span class="br0">&#40;</span>cleanword<span class="br0">&#40;</span><span class="st0">&quot;what?&quot;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="st0">&quot;what&quot;</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>cleanword<span class="br0">&#40;</span><span class="st0">&quot;'now!'&quot;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="st0">&quot;now&quot;</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>cleanword<span class="br0">&#40;</span><span class="st0">&quot;?+='w-o-r-d!,@$()'&quot;</span><span class="br0">&#41;</span> <span class="sy0">==</span>  <span class="st0">&quot;word&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw3">test</span><span class="br0">&#40;</span>has_dashdash<span class="br0">&#40;</span><span class="st0">&quot;distance--but&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span><span class="kw1">not</span> has_dashdash<span class="br0">&#40;</span><span class="st0">&quot;several&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>has_dashdash<span class="br0">&#40;</span><span class="st0">&quot;spoke--&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>has_dashdash<span class="br0">&#40;</span><span class="st0">&quot;distance--but&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span><span class="kw1">not</span> has_dashdash<span class="br0">&#40;</span><span class="st0">&quot;-yo-yo-&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw3">test</span><span class="br0">&#40;</span>extract_words<span class="br0">&#40;</span><span class="st0">&quot;Now is the time!  'Now', is the time? Yes, now.&quot;</span><span class="br0">&#41;</span> <span class="sy0">==</span>
+      <span class="br0">&#91;</span><span class="st0">'now'</span><span class="sy0">,</span><span class="st0">'is'</span><span class="sy0">,</span><span class="st0">'the'</span><span class="sy0">,</span><span class="st0">'time'</span><span class="sy0">,</span><span class="st0">'now'</span><span class="sy0">,</span><span class="st0">'is'</span><span class="sy0">,</span><span class="st0">'the'</span><span class="sy0">,</span><span class="st0">'time'</span><span class="sy0">,</span><span class="st0">'yes'</span><span class="sy0">,</span><span class="st0">'now'</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>extract_words<span class="br0">&#40;</span><span class="st0">&quot;she tried to curtsey as she spoke--fancy&quot;</span><span class="br0">&#41;</span> <span class="sy0">==</span>
+      <span class="br0">&#91;</span><span class="st0">'she'</span><span class="sy0">,</span><span class="st0">'tried'</span><span class="sy0">,</span><span class="st0">'to'</span><span class="sy0">,</span><span class="st0">'curtsey'</span><span class="sy0">,</span><span class="st0">'as'</span><span class="sy0">,</span><span class="st0">'she'</span><span class="sy0">,</span><span class="st0">'spoke'</span><span class="sy0">,</span><span class="st0">'fancy'</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw3">test</span><span class="br0">&#40;</span>wordcount<span class="br0">&#40;</span><span class="st0">&quot;now&quot;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="st0">&quot;now&quot;</span><span class="sy0">,</span><span class="st0">&quot;is&quot;</span><span class="sy0">,</span><span class="st0">&quot;time&quot;</span><span class="sy0">,</span><span class="st0">&quot;is&quot;</span><span class="sy0">,</span><span class="st0">&quot;now&quot;</span><span class="sy0">,</span><span class="st0">&quot;is&quot;</span><span class="sy0">,</span><span class="st0">&quot;is&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">2</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>wordcount<span class="br0">&#40;</span><span class="st0">&quot;is&quot;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="st0">&quot;now&quot;</span><span class="sy0">,</span><span class="st0">&quot;is&quot;</span><span class="sy0">,</span><span class="st0">&quot;time&quot;</span><span class="sy0">,</span><span class="st0">&quot;is&quot;</span><span class="sy0">,</span><span class="st0">&quot;now&quot;</span><span class="sy0">,</span><span class="st0">&quot;the&quot;</span><span class="sy0">,</span><span class="st0">&quot;is&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">3</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>wordcount<span class="br0">&#40;</span><span class="st0">&quot;time&quot;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="st0">&quot;now&quot;</span><span class="sy0">,</span><span class="st0">&quot;is&quot;</span><span class="sy0">,</span><span class="st0">&quot;time&quot;</span><span class="sy0">,</span><span class="st0">&quot;is&quot;</span><span class="sy0">,</span><span class="st0">&quot;now&quot;</span><span class="sy0">,</span><span class="st0">&quot;is&quot;</span><span class="sy0">,</span><span class="st0">&quot;is&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>wordcount<span class="br0">&#40;</span><span class="st0">&quot;frog&quot;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="st0">&quot;now&quot;</span><span class="sy0">,</span><span class="st0">&quot;is&quot;</span><span class="sy0">,</span><span class="st0">&quot;time&quot;</span><span class="sy0">,</span><span class="st0">&quot;is&quot;</span><span class="sy0">,</span><span class="st0">&quot;now&quot;</span><span class="sy0">,</span><span class="st0">&quot;is&quot;</span><span class="sy0">,</span><span class="st0">&quot;is&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw3">test</span><span class="br0">&#40;</span>wordset<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="st0">&quot;now&quot;</span><span class="sy0">,</span> <span class="st0">&quot;is&quot;</span><span class="sy0">,</span> <span class="st0">&quot;time&quot;</span><span class="sy0">,</span> <span class="st0">&quot;is&quot;</span><span class="sy0">,</span> <span class="st0">&quot;now&quot;</span><span class="sy0">,</span> <span class="st0">&quot;is&quot;</span><span class="sy0">,</span> <span class="st0">&quot;is&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="sy0">==</span>
+      <span class="br0">&#91;</span><span class="st0">&quot;is&quot;</span><span class="sy0">,</span> <span class="st0">&quot;now&quot;</span><span class="sy0">,</span> <span class="st0">&quot;time&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>wordset<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="st0">&quot;I&quot;</span><span class="sy0">,</span> <span class="st0">&quot;a&quot;</span><span class="sy0">,</span> <span class="st0">&quot;a&quot;</span><span class="sy0">,</span> <span class="st0">&quot;is&quot;</span><span class="sy0">,</span> <span class="st0">&quot;a&quot;</span><span class="sy0">,</span> <span class="st0">&quot;is&quot;</span><span class="sy0">,</span> <span class="st0">&quot;I&quot;</span><span class="sy0">,</span> <span class="st0">&quot;am&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="sy0">==</span>
+      <span class="br0">&#91;</span><span class="st0">&quot;I&quot;</span><span class="sy0">,</span> <span class="st0">&quot;a&quot;</span><span class="sy0">,</span> <span class="st0">&quot;am&quot;</span><span class="sy0">,</span> <span class="st0">&quot;is&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>wordset<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="st0">&quot;or&quot;</span><span class="sy0">,</span> <span class="st0">&quot;a&quot;</span><span class="sy0">,</span> <span class="st0">&quot;am&quot;</span><span class="sy0">,</span> <span class="st0">&quot;is&quot;</span><span class="sy0">,</span> <span class="st0">&quot;are&quot;</span><span class="sy0">,</span> <span class="st0">&quot;be&quot;</span><span class="sy0">,</span> <span class="st0">&quot;but&quot;</span><span class="sy0">,</span> <span class="st0">&quot;am&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="sy0">==</span>
+      <span class="br0">&#91;</span><span class="st0">&quot;a&quot;</span><span class="sy0">,</span> <span class="st0">&quot;am&quot;</span><span class="sy0">,</span> <span class="st0">&quot;are&quot;</span><span class="sy0">,</span> <span class="st0">&quot;be&quot;</span><span class="sy0">,</span> <span class="st0">&quot;but&quot;</span><span class="sy0">,</span> <span class="st0">&quot;is&quot;</span><span class="sy0">,</span> <span class="st0">&quot;or&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw3">test</span><span class="br0">&#40;</span>longestword<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="st0">&quot;a&quot;</span><span class="sy0">,</span> <span class="st0">&quot;apple&quot;</span><span class="sy0">,</span> <span class="st0">&quot;pear&quot;</span><span class="sy0">,</span> <span class="st0">&quot;grape&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">5</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>longestword<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="st0">&quot;a&quot;</span><span class="sy0">,</span> <span class="st0">&quot;am&quot;</span><span class="sy0">,</span> <span class="st0">&quot;I&quot;</span><span class="sy0">,</span> <span class="st0">&quot;be&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">2</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>longestword<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="st0">&quot;this&quot;</span><span class="sy0">,</span><span class="st0">&quot;supercalifragilisticexpialidocious&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">34</span><span class="br0">&#41;</span>
+<span class="kw3">test</span><span class="br0">&#40;</span>longestword<span class="br0">&#40;</span><span class="br0">&#91;</span> <span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

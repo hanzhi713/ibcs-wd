@@ -1,0 +1,905 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Tic-Tac-Toe improved version</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>Tic-Tac-Toe improved version<small> #TomsProjects </small></h1><h2 id="toc0"><a name="x-Compared to my previous implementation, this version"></a>Compared to my <a class="wiki_link" href="../Coursework/Team%203/December%2018th%2C%20Tom%27s%20work%20on%20Tic-Tac-Toe%20implementation%20%28With%20full%20GUI%20and%20a%20AI%29.html">previous implementation</a>, this version</h2>
+ <ul><li><h3 id="toc1"><a name="x-Compared to my previous implementation, this version-improved UI"></a>improved UI</h3>
+</li><li><h3 id="toc2"><a name="x-Compared to my previous implementation, this version-reduced redraws"></a>reduced redraws</h3>
+</li><li><h3 id="toc3"><a name="x-Compared to my previous implementation, this version-added a choice about whether the you can defeat the AI"></a>added a choice about whether the you can defeat the AI</h3>
+</li></ul><br />
+<h2 id="toc4"><a name="x-Executable Jar File:"></a>Executable Jar File:</h2>
+ <a href="files/Tic_Tac_Toe_improved.jar">Tic_Tac_Toe_improved.jar</a><br />
+<br />
+<h2 id="toc5"><a name="x-Class Main"></a>Class Main</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">tic_tac_toe</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Main <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span>... <span class="me1">args</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">new</span> Welcome<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<h2 id="toc6"><a name="x-Class Welcome"></a>Class Welcome</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">tic_tac_toe</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">java.awt.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.event.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">javax.swing.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Welcome <span class="kw1">extends</span> <span class="kw3">JFrame</span> <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">long</span> serialVersionUID <span class="sy0">=</span> 1L<span class="sy0">;</span>
+    <span class="kw1">private</span> Grid gd<span class="sy0">;</span>
+    <span class="kw1">private</span> AI ai<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Welcome<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        setTitle<span class="br0">&#40;</span><span class="st0">&quot;Tic-Tac-Toe&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setVisible</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setDefaultCloseOperation</span><span class="br0">&#40;</span><span class="kw3">JFrame</span>.<span class="me1">EXIT_ON_CLOSE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setSize</span><span class="br0">&#40;</span><span class="nu0">400</span>, <span class="nu0">400</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setLocation</span><span class="br0">&#40;</span><span class="nu0">200</span>, <span class="nu0">200</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">getContentPane</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="nu0">255</span>, <span class="nu0">255</span>, <span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setResizable</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">setLocationRelativeTo</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        initialize_Buttons<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        ai <span class="sy0">=</span> <span class="kw1">new</span> AI<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw4">void</span> initialize_Buttons<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw3">Button</span> bt <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Button</span><span class="br0">&#40;</span><span class="st0">&quot;Single Player&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">setBounds</span><span class="br0">&#40;</span><span class="nu0">75</span>, <span class="nu0">75</span>, <span class="nu0">250</span>, <span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, <span class="kw3">Font</span>.<span class="me1">BOLD</span>, <span class="nu0">30</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                gd <span class="sy0">=</span> <span class="kw1">new</span> Grid<span class="br0">&#40;</span>ai, Welcome.<span class="kw1">this</span>, <span class="st0">&quot;Tic-Tac-Toe Single Player&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                setVisible<span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">add</span><span class="br0">&#40;</span>bt<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        bt <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Button</span><span class="br0">&#40;</span><span class="st0">&quot;Double Players&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">setBounds</span><span class="br0">&#40;</span><span class="nu0">75</span>, <span class="nu0">225</span>, <span class="nu0">250</span>, <span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, <span class="kw3">Font</span>.<span class="me1">BOLD</span>, <span class="nu0">30</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        bt.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                gd <span class="sy0">=</span> <span class="kw1">new</span> Grid<span class="br0">&#40;</span><span class="kw2">null</span>, Welcome.<span class="kw1">this</span>, <span class="st0">&quot;Tic-Tac-Toe Double Player&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                setVisible<span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">add</span><span class="br0">&#40;</span>bt<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<h2 id="toc7"><a name="x-Class AI"></a>Class AI</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">tic_tac_toe</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">java.util.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> AI <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">boolean</span> winnable<span class="sy0">;</span>
+&nbsp;
+    <span class="co3">/**
+     * evaluate the weight of a cell (a potential placement)
+     *
+     * @param placement The placement array
+     * @param i         row number
+     * @param j         column number
+     * @param who       Indicate whether 1 or -1 is the AI
+     * @return weight
+     */</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> evaluate<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> placement, <span class="kw4">int</span> i, <span class="kw4">int</span> j, <span class="kw4">int</span> who<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> sums <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> num <span class="sy0">:</span> placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span>
+            sums<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">+=</span> num<span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> x <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> x <span class="sy0">&lt;</span> <span class="nu0">3</span><span class="sy0">;</span> x<span class="sy0">++</span><span class="br0">&#41;</span>
+            sums<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">+=</span> placement<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">if</span> <span class="br0">&#40;</span>i <span class="sy0">==</span> j<span class="br0">&#41;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> x <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> x <span class="sy0">&lt;</span> <span class="nu0">3</span><span class="sy0">;</span> x<span class="sy0">++</span><span class="br0">&#41;</span>
+                sums<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">+=</span> placement<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>i <span class="sy0">==</span> <span class="br0">&#40;</span><span class="nu0">2</span> <span class="sy0">-</span> j<span class="br0">&#41;</span><span class="br0">&#41;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> x <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> x <span class="sy0">&lt;</span> <span class="nu0">3</span><span class="sy0">;</span> x<span class="sy0">++</span><span class="br0">&#41;</span>
+                sums<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">+=</span> placement<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">2</span> <span class="sy0">-</span> x<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> weight <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> num <span class="sy0">:</span> sums<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>num <span class="sy0">==</span> <span class="nu0">2</span> <span class="sy0">*</span> who<span class="br0">&#41;</span> weight <span class="sy0">+=</span> <span class="nu0">10000</span><span class="sy0">;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>num <span class="sy0">==</span> <span class="sy0">-</span><span class="nu0">2</span> <span class="sy0">*</span> who<span class="br0">&#41;</span> weight <span class="sy0">+=</span> <span class="nu0">1000</span><span class="sy0">;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>num <span class="sy0">==</span> who<span class="br0">&#41;</span> weight <span class="sy0">+=</span> <span class="nu0">10</span><span class="sy0">;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>num <span class="sy0">==</span> <span class="sy0">-</span>who<span class="br0">&#41;</span> weight <span class="sy0">+=</span> <span class="nu0">6</span><span class="sy0">;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>num <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span> weight <span class="sy0">+=</span> <span class="nu0">4</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>i <span class="sy0">==</span> <span class="nu0">1</span> <span class="sy0">&amp;&amp;</span> j <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">&#41;</span>
+            weight <span class="sy0">+=</span> winnable <span class="sy0">?</span> <span class="nu0">2</span> <span class="sy0">:</span> <span class="nu0">4</span><span class="sy0">;</span>
+        <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>i <span class="sy0">==</span> j <span class="sy0">||</span> i <span class="sy0">==</span> <span class="br0">&#40;</span><span class="nu0">2</span> <span class="sy0">-</span> j<span class="br0">&#41;</span><span class="br0">&#41;</span>
+            weight <span class="sy0">+=</span> <span class="nu0">2</span><span class="sy0">;</span>
+        <span class="kw1">else</span>
+            weight <span class="sy0">+=</span> winnable <span class="sy0">?</span> <span class="nu0">2</span> <span class="sy0">:</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">return</span> weight<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co3">/**
+     * @param placement The placement array
+     * @param who       Indicate whether 1 or -1 is the AI
+     * @return {rowNumber, columnNumber}, the next placement calculated by the AI
+     */</span>
+    <span class="kw1">public</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> place<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> placement, <span class="kw4">int</span> who<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> emptyCells <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">3</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> j <span class="sy0">&lt;</span> <span class="nu0">3</span><span class="sy0">;</span> j<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    emptyCells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> evaluate<span class="br0">&#40;</span>placement, i, j, who<span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        ArrayList<span class="sy0">&lt;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="sy0">&gt;</span> maxWeights <span class="sy0">=</span> <span class="kw1">new</span> ArrayList<span class="sy0">&lt;&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> max <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">3</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> j <span class="sy0">&lt;</span> <span class="nu0">3</span><span class="sy0">;</span> j<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>emptyCells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&gt;</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>emptyCells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&gt;</span> max<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        max <span class="sy0">=</span> emptyCells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+                        maxWeights <span class="sy0">=</span> <span class="kw1">new</span> ArrayList<span class="sy0">&lt;&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        maxWeights.<span class="me1">add</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span>i, j<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>emptyCells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">==</span> max<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        max <span class="sy0">=</span> emptyCells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+                        maxWeights.<span class="me1">add</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span>i, j<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="kw1">return</span> maxWeights.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span> <span class="br0">&#40;</span><span class="kw3">Math</span>.<span class="me1">random</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">*</span> maxWeights.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">boolean</span> isWinnable<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> winnable<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> setWinnable<span class="br0">&#40;</span><span class="kw4">boolean</span> winnable<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">winnable</span> <span class="sy0">=</span> winnable<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<h2 id="toc8"><a name="x-Class Grid"></a>Class Grid</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">tic_tac_toe</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">javax.swing.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.awt.event.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Grid <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">int</span> boardLength <span class="sy0">=</span> <span class="nu0">400</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw3">JRadioButton</span> AIFirst<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">JRadioButton</span> playerFirst<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">JButton</span> resetButton<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">JButton</span> backButton<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">JPanel</span> window<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">JPanel</span> grid<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">JPanel</span> ui<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">JLabel</span> nextLabel<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">JCheckBox</span> winnableCheckBox<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">JLabel</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> cells <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw3">String</span> CROSS <span class="sy0">=</span> <span class="st0">&quot;×&quot;</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw3">String</span> CIRCLE <span class="sy0">=</span> <span class="st0">&quot;○&quot;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw3">JFrame</span> main<span class="sy0">;</span>
+    <span class="kw1">private</span> tic_tac_toe.<span class="me1">AI</span> AI <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">boolean</span> isAI <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> currentTurn <span class="sy0">=</span> CIRCLE<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> placement <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Grid<span class="br0">&#40;</span>tic_tac_toe.<span class="me1">AI</span> ai, Welcome wl, <span class="kw3">String</span> title<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">AI</span> <span class="sy0">=</span> ai<span class="sy0">;</span>
+        $$$setupUI$$$<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw1">this</span>.<span class="me1">AI</span> <span class="sy0">==</span> <span class="kw2">null</span><span class="br0">&#41;</span>
+            winnableCheckBox.<span class="me1">setVisible</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        AIFirst.<span class="me1">addItemListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ItemListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> itemStateChanged<span class="br0">&#40;</span><span class="kw3">ItemEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>e.<span class="me1">getStateChange</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw3">ItemEvent</span>.<span class="me1">SELECTED</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    playerFirst.<span class="me1">setSelected</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    reset<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        playerFirst.<span class="me1">addItemListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ItemListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> itemStateChanged<span class="br0">&#40;</span><span class="kw3">ItemEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>e.<span class="me1">getStateChange</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw3">ItemEvent</span>.<span class="me1">SELECTED</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    AIFirst.<span class="me1">setSelected</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    reset<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        playerFirst.<span class="me1">setSelected</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        main <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JFrame</span><span class="br0">&#40;</span>title<span class="br0">&#41;</span><span class="sy0">;</span>
+        main.<span class="me1">setContentPane</span><span class="br0">&#40;</span>window<span class="br0">&#41;</span><span class="sy0">;</span>
+        main.<span class="me1">addWindowListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">WindowListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> windowOpened<span class="br0">&#40;</span><span class="kw3">WindowEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> windowClosing<span class="br0">&#40;</span><span class="kw3">WindowEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                wl.<span class="me1">setVisible</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                main.<span class="me1">dispose</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> windowClosed<span class="br0">&#40;</span><span class="kw3">WindowEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> windowIconified<span class="br0">&#40;</span><span class="kw3">WindowEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> windowDeiconified<span class="br0">&#40;</span><span class="kw3">WindowEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> windowActivated<span class="br0">&#40;</span><span class="kw3">WindowEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+&nbsp;
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> windowDeactivated<span class="br0">&#40;</span><span class="kw3">WindowEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        main.<span class="me1">setResizable</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        main.<span class="me1">pack</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        main.<span class="me1">setLocationRelativeTo</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        main.<span class="me1">setVisible</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        resetButton.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                reset<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        backButton.<span class="me1">addActionListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ActionListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> actionPerformed<span class="br0">&#40;</span><span class="kw3">ActionEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                wl.<span class="me1">setVisible</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                main.<span class="me1">dispose</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        winnableCheckBox.<span class="me1">addItemListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">ItemListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> itemStateChanged<span class="br0">&#40;</span><span class="kw3">ItemEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>e.<span class="me1">getStateChange</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw3">ItemEvent</span>.<span class="me1">SELECTED</span><span class="br0">&#41;</span>
+                    AI.<span class="me1">setWinnable</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">else</span>
+                    AI.<span class="me1">setWinnable</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>AI <span class="sy0">==</span> <span class="kw2">null</span><span class="br0">&#41;</span>
+            AIFirst.<span class="me1">setText</span><span class="br0">&#40;</span>CROSS<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">else</span>
+            AIFirst.<span class="me1">setText</span><span class="br0">&#40;</span>CROSS <span class="sy0">+</span> <span class="st0">&quot; (AI)&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw4">void</span> reset<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        placement <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">JLabel</span> cellss<span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="sy0">:</span> cells<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">JLabel</span> cell <span class="sy0">:</span> cellss<span class="br0">&#41;</span>
+                cell.<span class="me1">setText</span><span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="co1">// Determine who goes first...</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>AI <span class="sy0">!=</span> <span class="kw2">null</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>AIFirst.<span class="me1">isSelected</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                currentTurn <span class="sy0">=</span> CIRCLE<span class="sy0">;</span>
+                isAI <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+                next<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+                currentTurn <span class="sy0">=</span> CIRCLE<span class="sy0">;</span>
+                isAI <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>AIFirst.<span class="me1">isSelected</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                currentTurn <span class="sy0">=</span> CROSS<span class="sy0">;</span>
+            <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+                currentTurn <span class="sy0">=</span> CIRCLE<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw4">void</span> createUIComponents<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        winnableCheckBox <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JCheckBox</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        window <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        window.<span class="me1">setBounds</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">0</span>, boardLength <span class="sy0">+</span> <span class="nu0">200</span>, boardLength<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> unitDistance <span class="sy0">=</span> <span class="br0">&#40;</span>boardLength <span class="sy0">-</span> <span class="nu0">20</span><span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">3</span><span class="sy0">;</span>
+        <span class="kw1">final</span> <span class="kw4">int</span> padding <span class="sy0">=</span> <span class="nu0">4</span><span class="sy0">;</span>
+        <span class="co1">// draw the grid</span>
+        grid <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">private</span> <span class="kw3">Rectangle</span><span class="br0">&#91;</span><span class="br0">&#93;</span> gridLines <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Rectangle</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span>
+                    <span class="kw1">new</span> <span class="kw3">Rectangle</span><span class="br0">&#40;</span><span class="nu0">0</span>, unitDistance, boardLength, <span class="nu0">10</span><span class="br0">&#41;</span>,
+                    <span class="kw1">new</span> <span class="kw3">Rectangle</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">2</span> <span class="sy0">*</span> unitDistance <span class="sy0">+</span> <span class="nu0">10</span>, boardLength, <span class="nu0">10</span><span class="br0">&#41;</span>,
+                    <span class="kw1">new</span> <span class="kw3">Rectangle</span><span class="br0">&#40;</span>unitDistance, <span class="nu0">0</span>, <span class="nu0">10</span>, boardLength<span class="br0">&#41;</span>,
+                    <span class="kw1">new</span> <span class="kw3">Rectangle</span><span class="br0">&#40;</span>unitDistance <span class="sy0">*</span> <span class="nu0">2</span> <span class="sy0">+</span> <span class="nu0">10</span>, <span class="nu0">0</span>, <span class="nu0">10</span>, boardLength<span class="br0">&#41;</span><span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+            <span class="kw1">public</span> <span class="kw4">void</span> paintComponent<span class="br0">&#40;</span><span class="kw3">Graphics</span> g<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">super</span>.<span class="me1">paintComponent</span><span class="br0">&#40;</span>g<span class="br0">&#41;</span><span class="sy0">;</span>
+                g.<span class="me1">setColor</span><span class="br0">&#40;</span><span class="kw3">Color</span>.<span class="me1">BLACK</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Rectangle</span> r <span class="sy0">:</span> gridLines<span class="br0">&#41;</span> g.<span class="me1">fillRect</span><span class="br0">&#40;</span>r.<span class="me1">x</span>, r.<span class="me1">y</span>, r.<span class="me1">width</span>, r.<span class="me1">height</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="sy0">;</span>
+        grid.<span class="me1">setBounds</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">0</span>, boardLength, boardLength<span class="br0">&#41;</span><span class="sy0">;</span>
+        grid.<span class="me1">setPreferredSize</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Dimension</span><span class="br0">&#40;</span>boardLength, boardLength<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        grid.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="co1">// initialize the cells</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">3</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> j <span class="sy0">&lt;</span> <span class="nu0">3</span><span class="sy0">;</span> j<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">final</span> <span class="kw3">JLabel</span> cell <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">final</span> <span class="kw4">int</span> _i <span class="sy0">=</span> i<span class="sy0">;</span>
+                <span class="kw1">final</span> <span class="kw4">int</span> _j <span class="sy0">=</span> j<span class="sy0">;</span>
+                cell.<span class="me1">setBounds</span><span class="br0">&#40;</span>j <span class="sy0">*</span> unitDistance <span class="sy0">+</span> j <span class="sy0">*</span> <span class="nu0">10</span> <span class="sy0">+</span> padding, i <span class="sy0">*</span> unitDistance <span class="sy0">+</span> i <span class="sy0">*</span> <span class="nu0">10</span> <span class="sy0">+</span> padding, unitDistance <span class="sy0">-</span> padding, unitDistance <span class="sy0">-</span> padding<span class="br0">&#41;</span><span class="sy0">;</span>
+                cell.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, <span class="kw3">Font</span>.<span class="me1">BOLD</span>, <span class="nu0">210</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                cell.<span class="me1">setText</span><span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                cell.<span class="me1">setHorizontalTextPosition</span><span class="br0">&#40;</span><span class="kw3">SwingConstants</span>.<span class="me1">CENTER</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                cell.<span class="me1">addMouseListener</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">MouseListener</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    @Override
+                    <span class="kw1">public</span> <span class="kw4">void</span> mouseClicked<span class="br0">&#40;</span><span class="kw3">MouseEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>placement<span class="br0">&#91;</span>_i<span class="br0">&#93;</span><span class="br0">&#91;</span>_j<span class="br0">&#93;</span> <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                            <span class="kw1">if</span> <span class="br0">&#40;</span>AI <span class="sy0">!=</span> <span class="kw2">null</span> <span class="sy0">&amp;&amp;</span> <span class="br0">&#40;</span><span class="sy0">!</span>isAI<span class="br0">&#41;</span><span class="br0">&#41;</span>
+                                isAI <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+                            place<span class="br0">&#40;</span>_i, _j<span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+&nbsp;
+                    @Override
+                    <span class="kw1">public</span> <span class="kw4">void</span> mousePressed<span class="br0">&#40;</span><span class="kw3">MouseEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+                    <span class="br0">&#125;</span>
+&nbsp;
+                    @Override
+                    <span class="kw1">public</span> <span class="kw4">void</span> mouseReleased<span class="br0">&#40;</span><span class="kw3">MouseEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+                    <span class="br0">&#125;</span>
+&nbsp;
+                    @Override
+                    <span class="kw1">public</span> <span class="kw4">void</span> mouseEntered<span class="br0">&#40;</span><span class="kw3">MouseEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>placement<span class="br0">&#91;</span>_i<span class="br0">&#93;</span><span class="br0">&#91;</span>_j<span class="br0">&#93;</span> <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                            cell.<span class="me1">setForeground</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="nu0">200</span>, <span class="nu0">200</span>, <span class="nu0">200</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            cell.<span class="me1">setText</span><span class="br0">&#40;</span>currentTurn<span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+&nbsp;
+                    @Override
+                    <span class="kw1">public</span> <span class="kw4">void</span> mouseExited<span class="br0">&#40;</span><span class="kw3">MouseEvent</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>placement<span class="br0">&#91;</span>_i<span class="br0">&#93;</span><span class="br0">&#91;</span>_j<span class="br0">&#93;</span> <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span> cell.<span class="me1">setText</span><span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                cells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> cell<span class="sy0">;</span>
+                grid.<span class="me1">add</span><span class="br0">&#40;</span>cell<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co3">/**
+     * check if one wins
+     * if not, switch turn
+     */</span>
+    <span class="kw1">private</span> <span class="kw4">void</span> next<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> sumRow <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sumColumn <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sumMjDiagonal <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sumMnDiagonal <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">boolean</span> isFulfilled <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">3</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> j <span class="sy0">&lt;</span> <span class="nu0">3</span><span class="sy0">;</span> j<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">==</span> <span class="nu0">0</span><span class="br0">&#41;</span> isFulfilled <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+                sumRow <span class="sy0">+=</span> placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+                sumColumn <span class="sy0">+=</span> placement<span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>i <span class="sy0">==</span> j<span class="br0">&#41;</span> sumMjDiagonal <span class="sy0">+=</span> placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>i <span class="sy0">==</span> <span class="kw3">Math</span>.<span class="me1">abs</span><span class="br0">&#40;</span>j <span class="sy0">-</span> <span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span> sumMnDiagonal <span class="sy0">+=</span> placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>sumRow <span class="sy0">==</span> <span class="nu0">3</span> <span class="sy0">||</span> sumColumn <span class="sy0">==</span> <span class="nu0">3</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                winOperation<span class="br0">&#40;</span>CIRCLE<span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">return</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>sumRow <span class="sy0">==</span> <span class="sy0">-</span><span class="nu0">3</span> <span class="sy0">||</span> sumColumn <span class="sy0">==</span> <span class="sy0">-</span><span class="nu0">3</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                winOperation<span class="br0">&#40;</span>CROSS<span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">return</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            sumRow <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+            sumColumn <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>sumMjDiagonal <span class="sy0">==</span> <span class="sy0">-</span><span class="nu0">3</span> <span class="sy0">||</span> sumMnDiagonal <span class="sy0">==</span> <span class="sy0">-</span><span class="nu0">3</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            winOperation<span class="br0">&#40;</span>CROSS<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">return</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>sumMjDiagonal <span class="sy0">==</span> <span class="nu0">3</span> <span class="sy0">||</span> sumMnDiagonal <span class="sy0">==</span> <span class="nu0">3</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            winOperation<span class="br0">&#40;</span>CIRCLE<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">return</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>isFulfilled<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            currentTurn <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+            <span class="kw3">JOptionPane</span>.<span class="me1">showMessageDialog</span><span class="br0">&#40;</span>main, <span class="st0">&quot;draw!&quot;</span>, <span class="st0">&quot;Tic-Tac-Toe&quot;</span>, <span class="kw3">JOptionPane</span>.<span class="me1">INFORMATION_MESSAGE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> row <span class="sy0">:</span> placement<span class="br0">&#41;</span>
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> row.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+                    row<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">return</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>currentTurn.<span class="me1">equals</span><span class="br0">&#40;</span>CROSS<span class="br0">&#41;</span><span class="br0">&#41;</span>
+            currentTurn <span class="sy0">=</span> CIRCLE<span class="sy0">;</span>
+        <span class="kw1">else</span>
+            currentTurn <span class="sy0">=</span> CROSS<span class="sy0">;</span>
+        nextLabel.<span class="me1">setText</span><span class="br0">&#40;</span><span class="st0">&quot;Next: &quot;</span> <span class="sy0">+</span> currentTurn<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>AI <span class="sy0">!=</span> <span class="kw2">null</span> <span class="sy0">&amp;&amp;</span> isAI<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            isAI <span class="sy0">=</span> <span class="kw2">false</span><span class="sy0">;</span>
+            <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> AIplacement <span class="sy0">=</span> AI.<span class="me1">place</span><span class="br0">&#40;</span>placement, <span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            place<span class="br0">&#40;</span>AIplacement<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>, AIplacement<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">while</span> <span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span> <span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw3">System</span>.<span class="me1">currentTimeMillis</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw3">System</span>.<span class="me1">currentTimeMillis</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw1">break</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co3">/**
+     * fill the board to prevent further operation
+     *
+     * @param who Either cross or circle, the one who wins the game
+     */</span>
+    <span class="kw1">private</span> <span class="kw4">void</span> winOperation<span class="br0">&#40;</span><span class="kw3">String</span> who<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        currentTurn <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+        <span class="kw3">JOptionPane</span>.<span class="me1">showMessageDialog</span><span class="br0">&#40;</span>main, who <span class="sy0">+</span> <span class="st0">&quot; win!&quot;</span>, <span class="st0">&quot;Tic-Tac-Toe&quot;</span>, <span class="kw3">JOptionPane</span>.<span class="me1">INFORMATION_MESSAGE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> row <span class="sy0">:</span> placement<span class="br0">&#41;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> row.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+                row<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co3">/**
+     * @param i row number
+     * @param j column number
+     */</span>
+    <span class="kw1">private</span> <span class="kw4">void</span> place<span class="br0">&#40;</span><span class="kw4">int</span> i, <span class="kw4">int</span> j<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>currentTurn.<span class="me1">equals</span><span class="br0">&#40;</span>CROSS<span class="br0">&#41;</span><span class="br0">&#41;</span>
+            placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">else</span>
+            placement<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        cells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>.<span class="me1">setForeground</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">0</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        cells<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span>.<span class="me1">setText</span><span class="br0">&#40;</span>currentTurn<span class="br0">&#41;</span><span class="sy0">;</span>
+        next<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co3">/**
+     * Method generated by IntelliJ IDEA GUI Designer
+     * &gt;&gt;&gt; IMPORTANT!! &lt;&lt;&lt;
+     * DO NOT edit this method OR call it in your code!
+     *
+     * @noinspection ALL
+     */</span>
+    <span class="kw1">private</span> <span class="kw4">void</span> $$$setupUI$$$<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        createUIComponents<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        window.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">GridBagLayout</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        grid.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">1114125</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">GridBagConstraints</span> gbc<span class="sy0">;</span>
+        gbc <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">GridBagConstraints</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        gbc.<span class="me1">gridx</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        gbc.<span class="me1">gridy</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        gbc.<span class="me1">gridheight</span> <span class="sy0">=</span> <span class="nu0">4</span><span class="sy0">;</span>
+        gbc.<span class="me1">weightx</span> <span class="sy0">=</span> <span class="nu0">1.0</span><span class="sy0">;</span>
+        gbc.<span class="me1">weighty</span> <span class="sy0">=</span> <span class="nu0">1.0</span><span class="sy0">;</span>
+        gbc.<span class="me1">fill</span> <span class="sy0">=</span> <span class="kw3">GridBagConstraints</span>.<span class="me1">BOTH</span><span class="sy0">;</span>
+        window.<span class="me1">add</span><span class="br0">&#40;</span>grid, gbc<span class="br0">&#41;</span><span class="sy0">;</span>
+        ui <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        ui.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">GridBagLayout</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        ui.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">1900801</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        gbc <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">GridBagConstraints</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        gbc.<span class="me1">gridx</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        gbc.<span class="me1">gridy</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        gbc.<span class="me1">gridheight</span> <span class="sy0">=</span> <span class="nu0">4</span><span class="sy0">;</span>
+        gbc.<span class="me1">fill</span> <span class="sy0">=</span> <span class="kw3">GridBagConstraints</span>.<span class="me1">BOTH</span><span class="sy0">;</span>
+        window.<span class="me1">add</span><span class="br0">&#40;</span>ui, gbc<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">final</span> <span class="kw3">JPanel</span> panel1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel1.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridLayoutManager</span><span class="br0">&#40;</span><span class="nu0">1</span>, <span class="nu0">1</span>, <span class="kw1">new</span> <span class="kw3">Insets</span><span class="br0">&#40;</span><span class="nu0">10</span>, <span class="nu0">10</span>, <span class="nu0">10</span>, <span class="nu0">10</span><span class="br0">&#41;</span>, <span class="sy0">-</span><span class="nu0">1</span>, <span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel1.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">1900801</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel1.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span>panel1.<span class="me1">getFont</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, panel1.<span class="me1">getFont</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getStyle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, panel1.<span class="me1">getFont</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getSize</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        gbc <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">GridBagConstraints</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        gbc.<span class="me1">gridx</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        gbc.<span class="me1">gridy</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        gbc.<span class="me1">weightx</span> <span class="sy0">=</span> <span class="nu0">1.0</span><span class="sy0">;</span>
+        gbc.<span class="me1">weighty</span> <span class="sy0">=</span> <span class="nu0">1.0</span><span class="sy0">;</span>
+        gbc.<span class="me1">fill</span> <span class="sy0">=</span> <span class="kw3">GridBagConstraints</span>.<span class="me1">VERTICAL</span><span class="sy0">;</span>
+        ui.<span class="me1">add</span><span class="br0">&#40;</span>panel1, gbc<span class="br0">&#41;</span><span class="sy0">;</span>
+        nextLabel <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        nextLabel.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, <span class="kw3">Font</span>.<span class="me1">BOLD</span>, <span class="nu0">60</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        nextLabel.<span class="me1">setText</span><span class="br0">&#40;</span><span class="st0">&quot;Next: ○&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel1.<span class="me1">add</span><span class="br0">&#40;</span>nextLabel, <span class="kw1">new</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">0</span>, <span class="nu0">1</span>, <span class="nu0">1</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">ANCHOR_WEST</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">FILL_NONE</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_FIXED</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_FIXED</span>, <span class="kw2">null</span>, <span class="kw2">null</span>, <span class="kw2">null</span>, <span class="nu0">0</span>, <span class="kw2">false</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">final</span> <span class="kw3">JPanel</span> panel2 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel2.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridLayoutManager</span><span class="br0">&#40;</span><span class="nu0">1</span>, <span class="nu0">1</span>, <span class="kw1">new</span> <span class="kw3">Insets</span><span class="br0">&#40;</span><span class="nu0">10</span>, <span class="nu0">10</span>, <span class="nu0">0</span>, <span class="nu0">10</span><span class="br0">&#41;</span>, <span class="sy0">-</span><span class="nu0">1</span>, <span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel2.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">1900801</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel2.<span class="me1">setEnabled</span><span class="br0">&#40;</span><span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        gbc <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">GridBagConstraints</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        gbc.<span class="me1">gridx</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        gbc.<span class="me1">gridy</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        gbc.<span class="me1">weighty</span> <span class="sy0">=</span> <span class="nu0">0.5</span><span class="sy0">;</span>
+        gbc.<span class="me1">fill</span> <span class="sy0">=</span> <span class="kw3">GridBagConstraints</span>.<span class="me1">VERTICAL</span><span class="sy0">;</span>
+        ui.<span class="me1">add</span><span class="br0">&#40;</span>panel2, gbc<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">final</span> <span class="kw3">JLabel</span> label1 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JLabel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        label1.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, <span class="kw3">Font</span>.<span class="me1">BOLD</span>, <span class="nu0">30</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        label1.<span class="me1">setText</span><span class="br0">&#40;</span><span class="st0">&quot; Who goes next &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel2.<span class="me1">add</span><span class="br0">&#40;</span>label1, <span class="kw1">new</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">0</span>, <span class="nu0">1</span>, <span class="nu0">1</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">ANCHOR_CENTER</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">FILL_NONE</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_FIXED</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_FIXED</span>, <span class="kw2">null</span>, <span class="kw2">null</span>, <span class="kw2">null</span>, <span class="nu0">0</span>, <span class="kw2">false</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">final</span> <span class="kw3">JPanel</span> panel3 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel3.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridLayoutManager</span><span class="br0">&#40;</span><span class="nu0">1</span>, <span class="nu0">2</span>, <span class="kw1">new</span> <span class="kw3">Insets</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">10</span>, <span class="nu0">0</span>, <span class="nu0">10</span><span class="br0">&#41;</span>, <span class="sy0">-</span><span class="nu0">1</span>, <span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel3.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">1900801</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        gbc <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">GridBagConstraints</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        gbc.<span class="me1">gridx</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        gbc.<span class="me1">gridy</span> <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+        gbc.<span class="me1">fill</span> <span class="sy0">=</span> <span class="kw3">GridBagConstraints</span>.<span class="me1">VERTICAL</span><span class="sy0">;</span>
+        ui.<span class="me1">add</span><span class="br0">&#40;</span>panel3, gbc<span class="br0">&#41;</span><span class="sy0">;</span>
+        playerFirst <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JRadioButton</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        playerFirst.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">1900801</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        playerFirst.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, playerFirst.<span class="me1">getFont</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getStyle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">26</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        playerFirst.<span class="me1">setText</span><span class="br0">&#40;</span><span class="st0">&quot;○&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel3.<span class="me1">add</span><span class="br0">&#40;</span>playerFirst, <span class="kw1">new</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">0</span>, <span class="nu0">1</span>, <span class="nu0">1</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">ANCHOR_WEST</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">FILL_NONE</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_CAN_SHRINK</span> <span class="sy0">|</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_CAN_GROW</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_FIXED</span>, <span class="kw2">null</span>, <span class="kw2">null</span>, <span class="kw2">null</span>, <span class="nu0">0</span>, <span class="kw2">false</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        AIFirst <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JRadioButton</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        AIFirst.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">1900801</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        AIFirst.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, AIFirst.<span class="me1">getFont</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getStyle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">26</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        AIFirst.<span class="me1">setText</span><span class="br0">&#40;</span><span class="st0">&quot;× (AI)&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel3.<span class="me1">add</span><span class="br0">&#40;</span>AIFirst, <span class="kw1">new</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">1</span>, <span class="nu0">1</span>, <span class="nu0">1</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">ANCHOR_WEST</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">FILL_NONE</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_CAN_SHRINK</span> <span class="sy0">|</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_CAN_GROW</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_FIXED</span>, <span class="kw2">null</span>, <span class="kw2">null</span>, <span class="kw2">null</span>, <span class="nu0">0</span>, <span class="kw2">false</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">final</span> <span class="kw3">JPanel</span> panel4 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel4.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridLayoutManager</span><span class="br0">&#40;</span><span class="nu0">2</span>, <span class="nu0">1</span>, <span class="kw1">new</span> <span class="kw3">Insets</span><span class="br0">&#40;</span><span class="nu0">10</span>, <span class="nu0">10</span>, <span class="nu0">10</span>, <span class="nu0">10</span><span class="br0">&#41;</span>, <span class="sy0">-</span><span class="nu0">1</span>, <span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel4.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">1900801</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        gbc <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">GridBagConstraints</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        gbc.<span class="me1">gridx</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        gbc.<span class="me1">gridy</span> <span class="sy0">=</span> <span class="nu0">4</span><span class="sy0">;</span>
+        gbc.<span class="me1">weightx</span> <span class="sy0">=</span> <span class="nu0">1.0</span><span class="sy0">;</span>
+        gbc.<span class="me1">weighty</span> <span class="sy0">=</span> <span class="nu0">1.0</span><span class="sy0">;</span>
+        gbc.<span class="me1">fill</span> <span class="sy0">=</span> <span class="kw3">GridBagConstraints</span>.<span class="me1">VERTICAL</span><span class="sy0">;</span>
+        ui.<span class="me1">add</span><span class="br0">&#40;</span>panel4, gbc<span class="br0">&#41;</span><span class="sy0">;</span>
+        resetButton <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JButton</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        resetButton.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, resetButton.<span class="me1">getFont</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getStyle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">30</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        resetButton.<span class="me1">setText</span><span class="br0">&#40;</span><span class="st0">&quot;Reset&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel4.<span class="me1">add</span><span class="br0">&#40;</span>resetButton, <span class="kw1">new</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">0</span>, <span class="nu0">1</span>, <span class="nu0">1</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">ANCHOR_CENTER</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">FILL_NONE</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_CAN_SHRINK</span> <span class="sy0">|</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_CAN_GROW</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_FIXED</span>, <span class="kw2">null</span>, <span class="kw2">null</span>, <span class="kw2">null</span>, <span class="nu0">0</span>, <span class="kw2">false</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        backButton <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JButton</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        backButton.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, backButton.<span class="me1">getFont</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getStyle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">30</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        backButton.<span class="me1">setText</span><span class="br0">&#40;</span><span class="st0">&quot;Back&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel4.<span class="me1">add</span><span class="br0">&#40;</span>backButton, <span class="kw1">new</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span><span class="br0">&#40;</span><span class="nu0">1</span>, <span class="nu0">0</span>, <span class="nu0">1</span>, <span class="nu0">1</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">ANCHOR_CENTER</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">FILL_NONE</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_CAN_SHRINK</span> <span class="sy0">|</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_CAN_GROW</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_FIXED</span>, <span class="kw2">null</span>, <span class="kw2">null</span>, <span class="kw2">null</span>, <span class="nu0">0</span>, <span class="kw2">false</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">final</span> <span class="kw3">JPanel</span> panel5 <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">JPanel</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel5.<span class="me1">setLayout</span><span class="br0">&#40;</span><span class="kw1">new</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridLayoutManager</span><span class="br0">&#40;</span><span class="nu0">1</span>, <span class="nu0">1</span>, <span class="kw1">new</span> <span class="kw3">Insets</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">0</span>, <span class="nu0">10</span>, <span class="nu0">0</span><span class="br0">&#41;</span>, <span class="sy0">-</span><span class="nu0">1</span>, <span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel5.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">1900801</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        gbc <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">GridBagConstraints</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        gbc.<span class="me1">gridx</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        gbc.<span class="me1">gridy</span> <span class="sy0">=</span> <span class="nu0">3</span><span class="sy0">;</span>
+        gbc.<span class="me1">fill</span> <span class="sy0">=</span> <span class="kw3">GridBagConstraints</span>.<span class="me1">BOTH</span><span class="sy0">;</span>
+        ui.<span class="me1">add</span><span class="br0">&#40;</span>panel5, gbc<span class="br0">&#41;</span><span class="sy0">;</span>
+        winnableCheckBox.<span class="me1">setBackground</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Color</span><span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">1900801</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        winnableCheckBox.<span class="me1">setFont</span><span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw3">Font</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span>, winnableCheckBox.<span class="me1">getFont</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">getStyle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, <span class="nu0">24</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        winnableCheckBox.<span class="me1">setHideActionText</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        winnableCheckBox.<span class="me1">setText</span><span class="br0">&#40;</span><span class="st0">&quot;Winnable&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        panel5.<span class="me1">add</span><span class="br0">&#40;</span>winnableCheckBox, <span class="kw1">new</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">0</span>, <span class="nu0">1</span>, <span class="nu0">1</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">ANCHOR_CENTER</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">FILL_NONE</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_CAN_SHRINK</span> <span class="sy0">|</span> com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_CAN_GROW</span>, com.<span class="me1">intellij</span>.<span class="me1">uiDesigner</span>.<span class="me1">core</span>.<span class="me1">GridConstraints</span>.<span class="me1">SIZEPOLICY_FIXED</span>, <span class="kw2">null</span>, <span class="kw2">null</span>, <span class="kw2">null</span>, <span class="nu0">0</span>, <span class="kw2">false</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co3">/**
+     * @noinspection ALL
+     */</span>
+    <span class="kw1">public</span> <span class="kw3">JComponent</span> $$$getRootComponent$$$<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> window<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<h2 id="toc9"><a name="x-Intellij GUI Designer Source"></a>Intellij GUI Designer Source</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.xml  {font-family:monospace;}
+.xml .imp {font-weight: bold; color: red;}
+.xml .es0 {color: #000099; font-weight: bold;}
+.xml .br0 {color: #66cc66;}
+.xml .sy0 {color: #66cc66;}
+.xml .st0 {color: #ff0000;}
+.xml .sc-1 {color: #808080; font-style: italic;}
+.xml .sc0 {color: #00bbdd;}
+.xml .sc1 {color: #ddbb00;}
+.xml .sc2 {color: #339933;}
+.xml .sc3 {color: #009900;}
+.xml .re0 {color: #000066;}
+.xml .re1 {color: #000000; font-weight: bold;}
+.xml .re2 {color: #000000; font-weight: bold;}
+.xml span.xtra { display:block; }
+
+-->
+</style><pre class="xml"><span class="sc3"><span class="re1">&lt;?xml</span> <span class="re0">version</span>=<span class="st0">&quot;1.0&quot;</span> <span class="re0">encoding</span>=<span class="st0">&quot;UTF-8&quot;</span><span class="re2">?&gt;</span></span>
+<span class="sc3"><span class="re1">&lt;form</span> <span class="re0">xmlns</span>=<span class="st0">&quot;http://www.intellij.com/uidesigner/form/&quot;</span> <span class="re0">version</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">bind-to-class</span>=<span class="st0">&quot;tic_tac_toe.Grid&quot;</span><span class="re2">&gt;</span></span>
+  <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">id</span>=<span class="st0">&quot;27dc6&quot;</span> <span class="re0">binding</span>=<span class="st0">&quot;window&quot;</span> <span class="re0">custom-create</span>=<span class="st0">&quot;true&quot;</span> <span class="re0">layout-manager</span>=<span class="st0">&quot;GridBagLayout&quot;</span><span class="re2">&gt;</span></span>
+    <span class="sc3"><span class="re1">&lt;constraints<span class="re2">&gt;</span></span></span>
+      <span class="sc3"><span class="re1">&lt;xy</span> <span class="re0">x</span>=<span class="st0">&quot;20&quot;</span> <span class="re0">y</span>=<span class="st0">&quot;20&quot;</span> <span class="re0">width</span>=<span class="st0">&quot;500&quot;</span> <span class="re0">height</span>=<span class="st0">&quot;452&quot;</span><span class="re2">/&gt;</span></span>
+    <span class="sc3"><span class="re1">&lt;/constraints<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;properties</span><span class="re2">/&gt;</span></span>
+    <span class="sc3"><span class="re1">&lt;border</span> <span class="re0">type</span>=<span class="st0">&quot;none&quot;</span><span class="re2">/&gt;</span></span>
+    <span class="sc3"><span class="re1">&lt;children<span class="re2">&gt;</span></span></span>
+      <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">id</span>=<span class="st0">&quot;d7a76&quot;</span> <span class="re0">binding</span>=<span class="st0">&quot;grid&quot;</span> <span class="re0">custom-create</span>=<span class="st0">&quot;true&quot;</span> <span class="re0">layout-manager</span>=<span class="st0">&quot;GridLayoutManager&quot;</span> <span class="re0">row-count</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">column-count</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">same-size-horizontally</span>=<span class="st0">&quot;false&quot;</span> <span class="re0">same-size-vertically</span>=<span class="st0">&quot;false&quot;</span> <span class="re0">hgap</span>=<span class="st0">&quot;-1&quot;</span> <span class="re0">vgap</span>=<span class="st0">&quot;-1&quot;</span><span class="re2">&gt;</span></span>
+        <span class="sc3"><span class="re1">&lt;margin</span> <span class="re0">top</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">left</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">bottom</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">right</span>=<span class="st0">&quot;0&quot;</span><span class="re2">/&gt;</span></span>
+        <span class="sc3"><span class="re1">&lt;constraints<span class="re2">&gt;</span></span></span>
+          <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">row</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">column</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">row-span</span>=<span class="st0">&quot;4&quot;</span> <span class="re0">col-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">vsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">hsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">anchor</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">fill</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">indent</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">use-parent-layout</span>=<span class="st0">&quot;false&quot;</span><span class="re2">/&gt;</span></span>
+          <span class="sc3"><span class="re1">&lt;gridbag</span> <span class="re0">weightx</span>=<span class="st0">&quot;1.0&quot;</span> <span class="re0">weighty</span>=<span class="st0">&quot;1.0&quot;</span><span class="re2">/&gt;</span></span>
+        <span class="sc3"><span class="re1">&lt;/constraints<span class="re2">&gt;</span></span></span>
+        <span class="sc3"><span class="re1">&lt;properties<span class="re2">&gt;</span></span></span>
+          <span class="sc3"><span class="re1">&lt;background</span> <span class="re0">color</span>=<span class="st0">&quot;-1114125&quot;</span><span class="re2">/&gt;</span></span>
+        <span class="sc3"><span class="re1">&lt;/properties<span class="re2">&gt;</span></span></span>
+        <span class="sc3"><span class="re1">&lt;border</span> <span class="re0">type</span>=<span class="st0">&quot;none&quot;</span><span class="re2">/&gt;</span></span>
+        <span class="sc3"><span class="re1">&lt;children</span><span class="re2">/&gt;</span></span>
+      <span class="sc3"><span class="re1">&lt;/grid<span class="re2">&gt;</span></span></span>
+      <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">id</span>=<span class="st0">&quot;c7ce&quot;</span> <span class="re0">binding</span>=<span class="st0">&quot;ui&quot;</span> <span class="re0">layout-manager</span>=<span class="st0">&quot;GridBagLayout&quot;</span><span class="re2">&gt;</span></span>
+        <span class="sc3"><span class="re1">&lt;constraints<span class="re2">&gt;</span></span></span>
+          <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">row</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">column</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">row-span</span>=<span class="st0">&quot;4&quot;</span> <span class="re0">col-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">vsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">hsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">anchor</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">fill</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">indent</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">use-parent-layout</span>=<span class="st0">&quot;false&quot;</span><span class="re2">/&gt;</span></span>
+          <span class="sc3"><span class="re1">&lt;gridbag</span> <span class="re0">weightx</span>=<span class="st0">&quot;0.0&quot;</span> <span class="re0">weighty</span>=<span class="st0">&quot;0.0&quot;</span><span class="re2">/&gt;</span></span>
+        <span class="sc3"><span class="re1">&lt;/constraints<span class="re2">&gt;</span></span></span>
+        <span class="sc3"><span class="re1">&lt;properties<span class="re2">&gt;</span></span></span>
+          <span class="sc3"><span class="re1">&lt;background</span> <span class="re0">color</span>=<span class="st0">&quot;-1900801&quot;</span><span class="re2">/&gt;</span></span>
+        <span class="sc3"><span class="re1">&lt;/properties<span class="re2">&gt;</span></span></span>
+        <span class="sc3"><span class="re1">&lt;border</span> <span class="re0">type</span>=<span class="st0">&quot;none&quot;</span><span class="re2">/&gt;</span></span>
+        <span class="sc3"><span class="re1">&lt;children<span class="re2">&gt;</span></span></span>
+          <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">id</span>=<span class="st0">&quot;96a7f&quot;</span> <span class="re0">layout-manager</span>=<span class="st0">&quot;GridLayoutManager&quot;</span> <span class="re0">row-count</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">column-count</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">same-size-horizontally</span>=<span class="st0">&quot;false&quot;</span> <span class="re0">same-size-vertically</span>=<span class="st0">&quot;false&quot;</span> <span class="re0">hgap</span>=<span class="st0">&quot;-1&quot;</span> <span class="re0">vgap</span>=<span class="st0">&quot;-1&quot;</span><span class="re2">&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;margin</span> <span class="re0">top</span>=<span class="st0">&quot;10&quot;</span> <span class="re0">left</span>=<span class="st0">&quot;10&quot;</span> <span class="re0">bottom</span>=<span class="st0">&quot;10&quot;</span> <span class="re0">right</span>=<span class="st0">&quot;10&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;constraints<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">row</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">column</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">row-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">col-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">vsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">hsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">anchor</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">fill</span>=<span class="st0">&quot;2&quot;</span> <span class="re0">indent</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">use-parent-layout</span>=<span class="st0">&quot;false&quot;</span><span class="re2">/&gt;</span></span>
+              <span class="sc3"><span class="re1">&lt;gridbag</span> <span class="re0">weightx</span>=<span class="st0">&quot;1.0&quot;</span> <span class="re0">weighty</span>=<span class="st0">&quot;1.0&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;/constraints<span class="re2">&gt;</span></span></span>
+            <span class="sc3"><span class="re1">&lt;properties<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;background</span> <span class="re0">color</span>=<span class="st0">&quot;-1900801&quot;</span><span class="re2">/&gt;</span></span>
+              <span class="sc3"><span class="re1">&lt;font</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;/properties<span class="re2">&gt;</span></span></span>
+            <span class="sc3"><span class="re1">&lt;border</span> <span class="re0">type</span>=<span class="st0">&quot;none&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;children<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;component</span> <span class="re0">id</span>=<span class="st0">&quot;45e96&quot;</span> <span class="re0">class</span>=<span class="st0">&quot;javax.swing.JLabel&quot;</span> <span class="re0">binding</span>=<span class="st0">&quot;nextLabel&quot;</span><span class="re2">&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;constraints<span class="re2">&gt;</span></span></span>
+                  <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">row</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">column</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">row-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">col-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">vsize-policy</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">hsize-policy</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">anchor</span>=<span class="st0">&quot;8&quot;</span> <span class="re0">fill</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">indent</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">use-parent-layout</span>=<span class="st0">&quot;false&quot;</span><span class="re2">/&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;/constraints<span class="re2">&gt;</span></span></span>
+                <span class="sc3"><span class="re1">&lt;properties<span class="re2">&gt;</span></span></span>
+                  <span class="sc3"><span class="re1">&lt;font</span> <span class="re0">name</span>=<span class="st0">&quot;Calibri&quot;</span> <span class="re0">size</span>=<span class="st0">&quot;60&quot;</span> <span class="re0">style</span>=<span class="st0">&quot;1&quot;</span><span class="re2">/&gt;</span></span>
+                  <span class="sc3"><span class="re1">&lt;text</span> <span class="re0">value</span>=<span class="st0">&quot;Next: ○&quot;</span><span class="re2">/&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;/properties<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;/component<span class="re2">&gt;</span></span></span>
+            <span class="sc3"><span class="re1">&lt;/children<span class="re2">&gt;</span></span></span>
+          <span class="sc3"><span class="re1">&lt;/grid<span class="re2">&gt;</span></span></span>
+          <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">id</span>=<span class="st0">&quot;30e4&quot;</span> <span class="re0">layout-manager</span>=<span class="st0">&quot;GridLayoutManager&quot;</span> <span class="re0">row-count</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">column-count</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">same-size-horizontally</span>=<span class="st0">&quot;false&quot;</span> <span class="re0">same-size-vertically</span>=<span class="st0">&quot;false&quot;</span> <span class="re0">hgap</span>=<span class="st0">&quot;-1&quot;</span> <span class="re0">vgap</span>=<span class="st0">&quot;-1&quot;</span><span class="re2">&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;margin</span> <span class="re0">top</span>=<span class="st0">&quot;10&quot;</span> <span class="re0">left</span>=<span class="st0">&quot;10&quot;</span> <span class="re0">bottom</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">right</span>=<span class="st0">&quot;10&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;constraints<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">row</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">column</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">row-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">col-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">vsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">hsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">anchor</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">fill</span>=<span class="st0">&quot;2&quot;</span> <span class="re0">indent</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">use-parent-layout</span>=<span class="st0">&quot;false&quot;</span><span class="re2">/&gt;</span></span>
+              <span class="sc3"><span class="re1">&lt;gridbag</span> <span class="re0">weightx</span>=<span class="st0">&quot;0.0&quot;</span> <span class="re0">weighty</span>=<span class="st0">&quot;0.5&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;/constraints<span class="re2">&gt;</span></span></span>
+            <span class="sc3"><span class="re1">&lt;properties<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;background</span> <span class="re0">color</span>=<span class="st0">&quot;-1900801&quot;</span><span class="re2">/&gt;</span></span>
+              <span class="sc3"><span class="re1">&lt;enabled</span> <span class="re0">value</span>=<span class="st0">&quot;false&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;/properties<span class="re2">&gt;</span></span></span>
+            <span class="sc3"><span class="re1">&lt;border</span> <span class="re0">type</span>=<span class="st0">&quot;none&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;children<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;component</span> <span class="re0">id</span>=<span class="st0">&quot;17de&quot;</span> <span class="re0">class</span>=<span class="st0">&quot;javax.swing.JLabel&quot;</span><span class="re2">&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;constraints<span class="re2">&gt;</span></span></span>
+                  <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">row</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">column</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">row-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">col-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">vsize-policy</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">hsize-policy</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">anchor</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">fill</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">indent</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">use-parent-layout</span>=<span class="st0">&quot;false&quot;</span><span class="re2">/&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;/constraints<span class="re2">&gt;</span></span></span>
+                <span class="sc3"><span class="re1">&lt;properties<span class="re2">&gt;</span></span></span>
+                  <span class="sc3"><span class="re1">&lt;font</span> <span class="re0">name</span>=<span class="st0">&quot;Calibri&quot;</span> <span class="re0">size</span>=<span class="st0">&quot;30&quot;</span> <span class="re0">style</span>=<span class="st0">&quot;1&quot;</span><span class="re2">/&gt;</span></span>
+                  <span class="sc3"><span class="re1">&lt;text</span> <span class="re0">value</span>=<span class="st0">&quot; Who goes next &quot;</span><span class="re2">/&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;/properties<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;/component<span class="re2">&gt;</span></span></span>
+            <span class="sc3"><span class="re1">&lt;/children<span class="re2">&gt;</span></span></span>
+          <span class="sc3"><span class="re1">&lt;/grid<span class="re2">&gt;</span></span></span>
+          <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">id</span>=<span class="st0">&quot;5e211&quot;</span> <span class="re0">layout-manager</span>=<span class="st0">&quot;GridLayoutManager&quot;</span> <span class="re0">row-count</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">column-count</span>=<span class="st0">&quot;2&quot;</span> <span class="re0">same-size-horizontally</span>=<span class="st0">&quot;false&quot;</span> <span class="re0">same-size-vertically</span>=<span class="st0">&quot;false&quot;</span> <span class="re0">hgap</span>=<span class="st0">&quot;-1&quot;</span> <span class="re0">vgap</span>=<span class="st0">&quot;-1&quot;</span><span class="re2">&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;margin</span> <span class="re0">top</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">left</span>=<span class="st0">&quot;10&quot;</span> <span class="re0">bottom</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">right</span>=<span class="st0">&quot;10&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;constraints<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">row</span>=<span class="st0">&quot;2&quot;</span> <span class="re0">column</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">row-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">col-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">vsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">hsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">anchor</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">fill</span>=<span class="st0">&quot;2&quot;</span> <span class="re0">indent</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">use-parent-layout</span>=<span class="st0">&quot;false&quot;</span><span class="re2">/&gt;</span></span>
+              <span class="sc3"><span class="re1">&lt;gridbag</span> <span class="re0">weightx</span>=<span class="st0">&quot;0.0&quot;</span> <span class="re0">weighty</span>=<span class="st0">&quot;0.0&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;/constraints<span class="re2">&gt;</span></span></span>
+            <span class="sc3"><span class="re1">&lt;properties<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;background</span> <span class="re0">color</span>=<span class="st0">&quot;-1900801&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;/properties<span class="re2">&gt;</span></span></span>
+            <span class="sc3"><span class="re1">&lt;border</span> <span class="re0">type</span>=<span class="st0">&quot;none&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;children<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;component</span> <span class="re0">id</span>=<span class="st0">&quot;5c98e&quot;</span> <span class="re0">class</span>=<span class="st0">&quot;javax.swing.JRadioButton&quot;</span> <span class="re0">binding</span>=<span class="st0">&quot;playerFirst&quot;</span><span class="re2">&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;constraints<span class="re2">&gt;</span></span></span>
+                  <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">row</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">column</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">row-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">col-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">vsize-policy</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">hsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">anchor</span>=<span class="st0">&quot;8&quot;</span> <span class="re0">fill</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">indent</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">use-parent-layout</span>=<span class="st0">&quot;false&quot;</span><span class="re2">/&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;/constraints<span class="re2">&gt;</span></span></span>
+                <span class="sc3"><span class="re1">&lt;properties<span class="re2">&gt;</span></span></span>
+                  <span class="sc3"><span class="re1">&lt;background</span> <span class="re0">color</span>=<span class="st0">&quot;-1900801&quot;</span><span class="re2">/&gt;</span></span>
+                  <span class="sc3"><span class="re1">&lt;font</span> <span class="re0">name</span>=<span class="st0">&quot;Calibri&quot;</span> <span class="re0">size</span>=<span class="st0">&quot;26&quot;</span><span class="re2">/&gt;</span></span>
+                  <span class="sc3"><span class="re1">&lt;text</span> <span class="re0">value</span>=<span class="st0">&quot;○&quot;</span><span class="re2">/&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;/properties<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;/component<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;component</span> <span class="re0">id</span>=<span class="st0">&quot;45efe&quot;</span> <span class="re0">class</span>=<span class="st0">&quot;javax.swing.JRadioButton&quot;</span> <span class="re0">binding</span>=<span class="st0">&quot;AIFirst&quot;</span><span class="re2">&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;constraints<span class="re2">&gt;</span></span></span>
+                  <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">row</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">column</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">row-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">col-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">vsize-policy</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">hsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">anchor</span>=<span class="st0">&quot;8&quot;</span> <span class="re0">fill</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">indent</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">use-parent-layout</span>=<span class="st0">&quot;false&quot;</span><span class="re2">/&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;/constraints<span class="re2">&gt;</span></span></span>
+                <span class="sc3"><span class="re1">&lt;properties<span class="re2">&gt;</span></span></span>
+                  <span class="sc3"><span class="re1">&lt;background</span> <span class="re0">color</span>=<span class="st0">&quot;-1900801&quot;</span><span class="re2">/&gt;</span></span>
+                  <span class="sc3"><span class="re1">&lt;font</span> <span class="re0">name</span>=<span class="st0">&quot;Calibri&quot;</span> <span class="re0">size</span>=<span class="st0">&quot;26&quot;</span><span class="re2">/&gt;</span></span>
+                  <span class="sc3"><span class="re1">&lt;text</span> <span class="re0">value</span>=<span class="st0">&quot;× (AI)&quot;</span><span class="re2">/&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;/properties<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;/component<span class="re2">&gt;</span></span></span>
+            <span class="sc3"><span class="re1">&lt;/children<span class="re2">&gt;</span></span></span>
+          <span class="sc3"><span class="re1">&lt;/grid<span class="re2">&gt;</span></span></span>
+          <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">id</span>=<span class="st0">&quot;66e56&quot;</span> <span class="re0">layout-manager</span>=<span class="st0">&quot;GridLayoutManager&quot;</span> <span class="re0">row-count</span>=<span class="st0">&quot;2&quot;</span> <span class="re0">column-count</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">same-size-horizontally</span>=<span class="st0">&quot;false&quot;</span> <span class="re0">same-size-vertically</span>=<span class="st0">&quot;false&quot;</span> <span class="re0">hgap</span>=<span class="st0">&quot;-1&quot;</span> <span class="re0">vgap</span>=<span class="st0">&quot;-1&quot;</span><span class="re2">&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;margin</span> <span class="re0">top</span>=<span class="st0">&quot;10&quot;</span> <span class="re0">left</span>=<span class="st0">&quot;10&quot;</span> <span class="re0">bottom</span>=<span class="st0">&quot;10&quot;</span> <span class="re0">right</span>=<span class="st0">&quot;10&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;constraints<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">row</span>=<span class="st0">&quot;4&quot;</span> <span class="re0">column</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">row-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">col-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">vsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">hsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">anchor</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">fill</span>=<span class="st0">&quot;2&quot;</span> <span class="re0">indent</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">use-parent-layout</span>=<span class="st0">&quot;false&quot;</span><span class="re2">/&gt;</span></span>
+              <span class="sc3"><span class="re1">&lt;gridbag</span> <span class="re0">weightx</span>=<span class="st0">&quot;1.0&quot;</span> <span class="re0">weighty</span>=<span class="st0">&quot;1.0&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;/constraints<span class="re2">&gt;</span></span></span>
+            <span class="sc3"><span class="re1">&lt;properties<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;background</span> <span class="re0">color</span>=<span class="st0">&quot;-1900801&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;/properties<span class="re2">&gt;</span></span></span>
+            <span class="sc3"><span class="re1">&lt;border</span> <span class="re0">type</span>=<span class="st0">&quot;none&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;children<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;component</span> <span class="re0">id</span>=<span class="st0">&quot;7bb48&quot;</span> <span class="re0">class</span>=<span class="st0">&quot;javax.swing.JButton&quot;</span> <span class="re0">binding</span>=<span class="st0">&quot;resetButton&quot;</span> <span class="re0">default-binding</span>=<span class="st0">&quot;true&quot;</span><span class="re2">&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;constraints<span class="re2">&gt;</span></span></span>
+                  <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">row</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">column</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">row-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">col-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">vsize-policy</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">hsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">anchor</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">fill</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">indent</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">use-parent-layout</span>=<span class="st0">&quot;false&quot;</span><span class="re2">/&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;/constraints<span class="re2">&gt;</span></span></span>
+                <span class="sc3"><span class="re1">&lt;properties<span class="re2">&gt;</span></span></span>
+                  <span class="sc3"><span class="re1">&lt;font</span> <span class="re0">name</span>=<span class="st0">&quot;Calibri&quot;</span> <span class="re0">size</span>=<span class="st0">&quot;30&quot;</span><span class="re2">/&gt;</span></span>
+                  <span class="sc3"><span class="re1">&lt;text</span> <span class="re0">value</span>=<span class="st0">&quot;Reset&quot;</span><span class="re2">/&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;/properties<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;/component<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;component</span> <span class="re0">id</span>=<span class="st0">&quot;4d41b&quot;</span> <span class="re0">class</span>=<span class="st0">&quot;javax.swing.JButton&quot;</span> <span class="re0">binding</span>=<span class="st0">&quot;backButton&quot;</span> <span class="re0">default-binding</span>=<span class="st0">&quot;true&quot;</span><span class="re2">&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;constraints<span class="re2">&gt;</span></span></span>
+                  <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">row</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">column</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">row-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">col-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">vsize-policy</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">hsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">anchor</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">fill</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">indent</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">use-parent-layout</span>=<span class="st0">&quot;false&quot;</span><span class="re2">/&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;/constraints<span class="re2">&gt;</span></span></span>
+                <span class="sc3"><span class="re1">&lt;properties<span class="re2">&gt;</span></span></span>
+                  <span class="sc3"><span class="re1">&lt;font</span> <span class="re0">name</span>=<span class="st0">&quot;Calibri&quot;</span> <span class="re0">size</span>=<span class="st0">&quot;30&quot;</span><span class="re2">/&gt;</span></span>
+                  <span class="sc3"><span class="re1">&lt;text</span> <span class="re0">value</span>=<span class="st0">&quot;Back&quot;</span><span class="re2">/&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;/properties<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;/component<span class="re2">&gt;</span></span></span>
+            <span class="sc3"><span class="re1">&lt;/children<span class="re2">&gt;</span></span></span>
+          <span class="sc3"><span class="re1">&lt;/grid<span class="re2">&gt;</span></span></span>
+          <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">id</span>=<span class="st0">&quot;b9054&quot;</span> <span class="re0">layout-manager</span>=<span class="st0">&quot;GridLayoutManager&quot;</span> <span class="re0">row-count</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">column-count</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">same-size-horizontally</span>=<span class="st0">&quot;false&quot;</span> <span class="re0">same-size-vertically</span>=<span class="st0">&quot;false&quot;</span> <span class="re0">hgap</span>=<span class="st0">&quot;-1&quot;</span> <span class="re0">vgap</span>=<span class="st0">&quot;-1&quot;</span><span class="re2">&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;margin</span> <span class="re0">top</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">left</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">bottom</span>=<span class="st0">&quot;10&quot;</span> <span class="re0">right</span>=<span class="st0">&quot;0&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;constraints<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">row</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">column</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">row-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">col-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">vsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">hsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">anchor</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">fill</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">indent</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">use-parent-layout</span>=<span class="st0">&quot;false&quot;</span><span class="re2">/&gt;</span></span>
+              <span class="sc3"><span class="re1">&lt;gridbag</span> <span class="re0">weightx</span>=<span class="st0">&quot;0.0&quot;</span> <span class="re0">weighty</span>=<span class="st0">&quot;0.0&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;/constraints<span class="re2">&gt;</span></span></span>
+            <span class="sc3"><span class="re1">&lt;properties<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;background</span> <span class="re0">color</span>=<span class="st0">&quot;-1900801&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;/properties<span class="re2">&gt;</span></span></span>
+            <span class="sc3"><span class="re1">&lt;border</span> <span class="re0">type</span>=<span class="st0">&quot;none&quot;</span><span class="re2">/&gt;</span></span>
+            <span class="sc3"><span class="re1">&lt;children<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;component</span> <span class="re0">id</span>=<span class="st0">&quot;eb887&quot;</span> <span class="re0">class</span>=<span class="st0">&quot;javax.swing.JCheckBox&quot;</span> <span class="re0">binding</span>=<span class="st0">&quot;winnableCheckBox&quot;</span> <span class="re0">custom-create</span>=<span class="st0">&quot;true&quot;</span><span class="re2">&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;constraints<span class="re2">&gt;</span></span></span>
+                  <span class="sc3"><span class="re1">&lt;grid</span> <span class="re0">row</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">column</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">row-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">col-span</span>=<span class="st0">&quot;1&quot;</span> <span class="re0">vsize-policy</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">hsize-policy</span>=<span class="st0">&quot;3&quot;</span> <span class="re0">anchor</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">fill</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">indent</span>=<span class="st0">&quot;0&quot;</span> <span class="re0">use-parent-layout</span>=<span class="st0">&quot;false&quot;</span><span class="re2">/&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;/constraints<span class="re2">&gt;</span></span></span>
+                <span class="sc3"><span class="re1">&lt;properties<span class="re2">&gt;</span></span></span>
+                  <span class="sc3"><span class="re1">&lt;background</span> <span class="re0">color</span>=<span class="st0">&quot;-1900801&quot;</span><span class="re2">/&gt;</span></span>
+                  <span class="sc3"><span class="re1">&lt;font</span> <span class="re0">name</span>=<span class="st0">&quot;Calibri&quot;</span> <span class="re0">size</span>=<span class="st0">&quot;24&quot;</span><span class="re2">/&gt;</span></span>
+                  <span class="sc3"><span class="re1">&lt;hideActionText</span> <span class="re0">value</span>=<span class="st0">&quot;true&quot;</span><span class="re2">/&gt;</span></span>
+                  <span class="sc3"><span class="re1">&lt;text</span> <span class="re0">value</span>=<span class="st0">&quot;Winnable&quot;</span><span class="re2">/&gt;</span></span>
+                <span class="sc3"><span class="re1">&lt;/properties<span class="re2">&gt;</span></span></span>
+              <span class="sc3"><span class="re1">&lt;/component<span class="re2">&gt;</span></span></span>
+            <span class="sc3"><span class="re1">&lt;/children<span class="re2">&gt;</span></span></span>
+          <span class="sc3"><span class="re1">&lt;/grid<span class="re2">&gt;</span></span></span>
+        <span class="sc3"><span class="re1">&lt;/children<span class="re2">&gt;</span></span></span>
+      <span class="sc3"><span class="re1">&lt;/grid<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;/children<span class="re2">&gt;</span></span></span>
+  <span class="sc3"><span class="re1">&lt;/grid<span class="re2">&gt;</span></span></span>
+<span class="sc3"><span class="re1">&lt;/form<span class="re2">&gt;</span></span></span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

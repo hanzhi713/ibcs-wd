@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>IBCS1-WD - September 7th, Tom's work on extracting elements from nested lists</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>September 7th, Tom's work on extracting elements from nested lists<small> #TomsProjects </small></h1>
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> print_all<span class="br0">&#40;</span>s<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> i <span class="kw1">in</span> s:
+        <span class="kw1">if</span> <span class="kw2">type</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw2">list</span> <span class="kw1">or</span> <span class="kw2">type</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw2">tuple</span>:
+            print_all<span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">print</span><span class="br0">&#40;</span>i<span class="sy0">,</span> end<span class="sy0">=</span><span class="st0">&quot;, &quot;</span><span class="br0">&#41;</span>
+&nbsp;
+print_all<span class="br0">&#40;</span><span class="br0">&#91;</span>
+    <span class="br0">&#40;</span><span class="st0">&quot;John&quot;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="st0">&quot;CompSci&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Physics&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">,</span>
+    <span class="br0">&#40;</span><span class="st0">&quot;Vusi&quot;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="st0">&quot;Maths&quot;</span><span class="sy0">,</span> <span class="st0">&quot;CompSci&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Stats&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">,</span>
+    <span class="br0">&#40;</span><span class="st0">&quot;Jess&quot;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="st0">&quot;CompSci&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Accounting&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Economics&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Management&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">,</span>
+    <span class="br0">&#40;</span><span class="st0">&quot;Sarah&quot;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="st0">&quot;InfSys&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Accounting&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Economics&quot;</span><span class="sy0">,</span> <span class="st0">&quot;CommLaw&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">,</span>
+    <span class="br0">&#40;</span><span class="st0">&quot;Zuki&quot;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="st0">&quot;Sociology&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Economics&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Law&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Stats&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Music&quot;</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+print_all<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">2</span><span class="sy0">,</span> <span class="nu0">3</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">4</span><span class="sy0">,</span> <span class="nu0">5</span><span class="sy0">,</span> <span class="nu0">6</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">7</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">8</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">8.1</span><span class="sy0">,</span> <span class="nu0">8.2</span><span class="sy0">,</span> <span class="nu0">8.3</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">8.31</span><span class="sy0">,</span> <span class="nu0">8.32</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">8.4</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">9</span><span class="sy0">,</span> <span class="nu0">10</span><span class="sy0">,</span><span class="nu0">11</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">12</span><span class="sy0">,</span> <span class="nu0">13</span><span class="sy0">,</span> <span class="nu0">14</span><span class="sy0">,</span> <span class="nu0">14.25</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">14.5</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">15</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">22</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+print_all<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">2</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">3</span><span class="sy0">,</span> <span class="nu0">4</span><span class="sy0">,</span> <span class="nu0">5</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">6</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">7</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">8</span><span class="sy0">,</span> <span class="nu0">9</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">10</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">11</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">12</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">13</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

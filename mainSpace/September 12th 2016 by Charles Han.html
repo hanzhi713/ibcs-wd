@@ -1,0 +1,155 @@
+<html>
+  <head>
+    <title>IBCS1-WD - September 12th 2016 by Charles Han</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>September 12th 2016 by Charles Han<small> #Log </small></h1>1 How to read the strings/integers in the list.<br />
+<br />
+This is the basic code. type(i)==list is one way which is really strong to help us make judgement<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> find<span class="br0">&#40;</span>n<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> i <span class="kw1">in</span> n:
+&nbsp;
+        <span class="kw1">if</span> <span class="kw2">type</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="sy0">==</span><span class="kw2">list</span> <span class="kw1">or</span> <span class="kw2">type</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="sy0">==</span><span class="kw2">tuple</span>:
+&nbsp;
+            find<span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">print</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+find<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="st0">&quot;b&quot;</span><span class="sy0">,</span><span class="br0">&#91;</span><span class="st0">&quot;asdf&quot;</span><span class="sy0">,</span><span class="br0">&#91;</span><span class="st0">&quot;c&quot;</span><span class="sy0">,</span><span class="br0">&#91;</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">2</span><span class="sy0">,</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;</pre>
+
+We can do more on this code, we can print out every letters in string which also use type(i)==str:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> find<span class="br0">&#40;</span>n<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> i <span class="kw1">in</span> n:
+&nbsp;
+        <span class="kw1">if</span> <span class="kw2">type</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="sy0">==</span><span class="kw2">list</span> <span class="kw1">or</span> <span class="kw2">type</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="sy0">==</span><span class="kw2">tuple</span>:
+&nbsp;
+            find<span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">if</span> <span class="kw2">type</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="sy0">==</span><span class="kw2">str</span>:
+                <span class="kw1">for</span> n <span class="kw1">in</span> i:
+                    <span class="kw1">print</span><span class="br0">&#40;</span>n<span class="br0">&#41;</span>
+&nbsp;
+            <span class="kw1">else</span>:
+                <span class="kw1">print</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+find<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="st0">&quot;b&quot;</span><span class="sy0">,</span><span class="br0">&#91;</span><span class="st0">&quot;asdf&quot;</span><span class="sy0">,</span><span class="br0">&#91;</span><span class="st0">&quot;c&quot;</span><span class="sy0">,</span><span class="br0">&#91;</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">2</span><span class="sy0">,</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;</pre>
+
+2.chapter 10<br />
+After we learn chapter 10, we know some basic of user alternation that our program can respond to events. In this chapter we learnt three events: First, keypress events. Second,mouse events. Third, Automatic events.<br />
+<br />
+1 wn:<br />
+wn is the window net it means at any where of the window can trigger the event. The place of &quot;wn&quot;In keypress events and mouse events it tells where our action will be response. For example, we can change it to let only click at the cusp can trigger the events.<br />
+<br />
+2 onclock <br />
+For onclock there is no need to provide the location of mouse but it will automatically run the program. It can only run once or using recursion to repeat.<br />
+<br />
+3 global<br />
+Global is define at the outer space so that every functions can use it. All functions can operate it at the same time. It not like local value only exist in one function.<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">totalvalue1 <span class="sy0">=</span> <span class="nu0">0</span>
+<span class="kw1">def</span> increment<span class="br0">&#40;</span>interval<span class="br0">&#41;</span>:
+    <span class="kw1">global</span> totalvalue1
+    totalvalue1 +<span class="sy0">=</span> interval
+<span class="kw1">def</span> decrement<span class="br0">&#40;</span>interval<span class="br0">&#41;</span>:
+    <span class="kw1">global</span> totalvalue1
+    totalvalue1 -<span class="sy0">=</span> interval
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">100</span><span class="br0">&#41;</span>:
+    increment<span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>
+decrement<span class="br0">&#40;</span><span class="nu0">100</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>totalvalue1<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+totalvalue2 <span class="sy0">=</span> <span class="nu0">0</span>
+<span class="kw1">def</span> increment<span class="br0">&#40;</span>interval<span class="br0">&#41;</span>:
+    totalvalue2 <span class="sy0">=</span> <span class="nu0">0</span>
+    totalvalue2 +<span class="sy0">=</span> interval
+<span class="kw1">def</span> decrement<span class="br0">&#40;</span>interval<span class="br0">&#41;</span>:
+    <span class="kw1">global</span> totalvalue2
+    totalvalue2 -<span class="sy0">=</span> interval
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">100</span><span class="br0">&#41;</span>:
+    increment<span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>
+decrement<span class="br0">&#40;</span><span class="nu0">100</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>totalvalue2<span class="br0">&#41;</span>
+&nbsp;</pre>
+
+The first one global the totalvalue for both functions so both of them can change it. So what we got is100.The second one os different that actually the total value in two functions is deferent , they only have the same name. So what we got is -100</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

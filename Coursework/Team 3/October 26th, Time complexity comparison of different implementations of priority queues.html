@@ -1,0 +1,230 @@
+<html>
+  <head>
+    <title>IBCS1-WD - October 26th, Time complexity comparison of different implementations of priority queues</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>October 26th, Time complexity comparison of different implementations of priority queues<small> #TomsProjects </small></h1>
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">class</span> Node:
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> cargo<span class="sy0">=</span><span class="kw2">None</span><span class="sy0">,</span> next<span class="sy0">=</span><span class="kw2">None</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">cargo</span> <span class="sy0">=</span> cargo
+        <span class="kw2">self</span>.<span class="me1">next</span> <span class="sy0">=</span> next
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__str__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw2">str</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">cargo</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1"># sorted priority queue using a linked list</span>
+<span class="co1"># removal is constant time operation</span>
+<span class="kw1">class</span> LinkedListPriQueue:
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">head</span> <span class="sy0">=</span> <span class="kw2">None</span>
+        <span class="kw2">self</span>.<span class="me1">last</span> <span class="sy0">=</span> <span class="kw2">None</span>
+        <span class="kw2">self</span>.<span class="me1">length</span> <span class="sy0">=</span> <span class="nu0">0</span>
+&nbsp;
+    <span class="kw1">def</span> is_empty<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw2">self</span>.<span class="me1">length</span> <span class="sy0">==</span> <span class="nu0">0</span>
+&nbsp;
+    <span class="kw1">def</span> insert<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> cargo<span class="br0">&#41;</span>:
+        node <span class="sy0">=</span> Node<span class="br0">&#40;</span>cargo<span class="br0">&#41;</span>
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">is_empty</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+            <span class="kw2">self</span>.<span class="me1">head</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">last</span> <span class="sy0">=</span> node
+            <span class="kw2">self</span>.<span class="me1">length</span> +<span class="sy0">=</span> <span class="nu0">1</span>
+        <span class="kw1">else</span>:
+            item <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">head</span>
+            <span class="kw1">if</span> node.<span class="me1">cargo</span> <span class="sy0">&gt;=</span> <span class="kw2">self</span>.<span class="me1">head</span>.<span class="me1">cargo</span>:
+                <span class="kw2">self</span>.<span class="me1">head</span> <span class="sy0">=</span> node
+                <span class="kw2">self</span>.<span class="me1">head</span>.<span class="me1">next</span> <span class="sy0">=</span> item
+                <span class="kw1">return</span>
+            <span class="kw1">while</span> item.<span class="me1">next</span> <span class="kw1">is</span> <span class="kw1">not</span> <span class="kw2">None</span>:
+                <span class="kw1">if</span> node.<span class="me1">cargo</span> <span class="sy0">&gt;=</span> item.<span class="me1">next</span>.<span class="me1">cargo</span>:
+                    node.<span class="me1">next</span> <span class="sy0">=</span> item.<span class="me1">next</span>
+                    item.<span class="me1">next</span> <span class="sy0">=</span> node
+                    <span class="kw2">self</span>.<span class="me1">length</span> +<span class="sy0">=</span> <span class="nu0">1</span>
+                    <span class="kw1">return</span>
+                item <span class="sy0">=</span> item.<span class="me1">next</span>
+            last <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">last</span>
+            last.<span class="me1">next</span> <span class="sy0">=</span> node
+            <span class="kw2">self</span>.<span class="me1">last</span> <span class="sy0">=</span> node
+            <span class="kw2">self</span>.<span class="me1">length</span> +<span class="sy0">=</span> <span class="nu0">1</span>
+&nbsp;
+    <span class="kw1">def</span> remove<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        cargo <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">head</span>.<span class="me1">cargo</span>
+        <span class="kw2">self</span>.<span class="me1">head</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">head</span>.<span class="me1">next</span>
+        <span class="kw2">self</span>.<span class="me1">length</span> -<span class="sy0">=</span> <span class="nu0">1</span>
+        <span class="kw1">return</span> cargo
+&nbsp;
+&nbsp;
+<span class="co1"># unsorted priority queue -- python list</span>
+<span class="co1"># remove highest item with highest priority using linear search</span>
+<span class="kw1">class</span> PriorityQueue:
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">items</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+&nbsp;
+    <span class="kw1">def</span> is_empty<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw1">not</span> <span class="kw2">self</span>.<span class="me1">items</span>
+&nbsp;
+    <span class="kw1">def</span> insert<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> item<span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">items</span>.<span class="me1">append</span><span class="br0">&#40;</span>item<span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> remove<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        maxi <span class="sy0">=</span> <span class="nu0">0</span>
+        <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="kw2">len</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">items</span><span class="br0">&#41;</span><span class="br0">&#41;</span>:
+            <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">items</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">&gt;</span> <span class="kw2">self</span>.<span class="me1">items</span><span class="br0">&#91;</span>maxi<span class="br0">&#93;</span>:
+                maxi <span class="sy0">=</span> i
+        item <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">items</span><span class="br0">&#91;</span>maxi<span class="br0">&#93;</span>
+        <span class="kw1">del</span> <span class="kw2">self</span>.<span class="me1">items</span><span class="br0">&#91;</span>maxi<span class="br0">&#93;</span>
+        <span class="kw1">return</span> item
+&nbsp;
+&nbsp;
+<span class="co1"># sorted priority queue using python list and binary search</span>
+<span class="co1"># removal is a constant time operation</span>
+<span class="kw1">class</span> PriorityQueueModified:
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">items</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+&nbsp;
+    <span class="kw1">def</span> is_empty<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw1">not</span> <span class="kw2">self</span>.<span class="me1">items</span>
+&nbsp;
+    <span class="kw1">def</span> insert<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> item<span class="br0">&#41;</span>:
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">is_empty</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+            <span class="kw2">self</span>.<span class="me1">items</span>.<span class="me1">append</span><span class="br0">&#40;</span>item<span class="br0">&#41;</span>
+            <span class="kw1">return</span>
+        <span class="kw1">if</span> item <span class="sy0">&gt;=</span> <span class="kw2">self</span>.<span class="me1">items</span><span class="br0">&#91;</span><span class="kw2">len</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">items</span><span class="br0">&#41;</span>-<span class="nu0">1</span><span class="br0">&#93;</span>:
+            <span class="kw2">self</span>.<span class="me1">items</span>.<span class="me1">append</span><span class="br0">&#40;</span>item<span class="br0">&#41;</span>
+            <span class="kw1">return</span>
+        <span class="kw2">self</span>.<span class="me1">items</span>.<span class="me1">insert</span><span class="br0">&#40;</span>search_binary_iter<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">items</span><span class="sy0">,</span> item<span class="br0">&#41;</span><span class="sy0">,</span> item<span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> remove<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw2">self</span>.<span class="me1">items</span>.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> search_binary_iter<span class="br0">&#40;</span>xs<span class="sy0">,</span> target<span class="br0">&#41;</span>:
+    ub <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>xs<span class="br0">&#41;</span> - <span class="nu0">1</span>
+    lb <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">while</span> <span class="nu0">1</span>:
+        <span class="kw1">if</span> ub-lb <span class="sy0">&lt;=</span><span class="nu0">0</span>:
+            <span class="kw1">return</span> ub
+        mid_index <span class="sy0">=</span> <span class="br0">&#40;</span>lb + ub<span class="br0">&#41;</span> // <span class="nu0">2</span>
+        <span class="kw1">if</span> target <span class="sy0">&gt;</span> xs<span class="br0">&#91;</span>mid_index<span class="br0">&#93;</span>:
+            lb <span class="sy0">=</span> mid_index + <span class="nu0">1</span>
+        <span class="kw1">elif</span> target <span class="sy0">&lt;</span> xs<span class="br0">&#91;</span>mid_index<span class="br0">&#93;</span>:
+            ub <span class="sy0">=</span> mid_index
+        <span class="kw1">else</span>:
+            <span class="kw1">return</span> mid_index
+&nbsp;
+&nbsp;
+<span class="co1"># unsorted priority queue -- linked list</span>
+<span class="co1"># search for highest priority using linear search when removing</span>
+<span class="kw1">class</span> PriorityQueueNotKeepSorted:
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">length</span> <span class="sy0">=</span> <span class="nu0">0</span>
+        <span class="kw2">self</span>.<span class="me1">head</span> <span class="sy0">=</span> <span class="kw2">None</span>
+        <span class="kw2">self</span>.<span class="me1">last</span> <span class="sy0">=</span> <span class="kw2">None</span>
+&nbsp;
+    <span class="kw1">def</span> is_empty<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw2">self</span>.<span class="me1">length</span> <span class="sy0">==</span> <span class="nu0">0</span>
+&nbsp;
+    <span class="kw1">def</span> insert<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> cargo<span class="br0">&#41;</span>:
+        node <span class="sy0">=</span> Node<span class="br0">&#40;</span>cargo<span class="br0">&#41;</span>
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">length</span> <span class="sy0">==</span> <span class="nu0">0</span>:
+            <span class="kw2">self</span>.<span class="me1">head</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">last</span> <span class="sy0">=</span> node
+        <span class="kw1">else</span>:
+            last <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">last</span>
+            last.<span class="me1">next</span> <span class="sy0">=</span> node
+            <span class="kw2">self</span>.<span class="me1">last</span> <span class="sy0">=</span> node
+        <span class="kw2">self</span>.<span class="me1">length</span> +<span class="sy0">=</span> <span class="nu0">1</span>
+&nbsp;
+    <span class="kw1">def</span> remove<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        item <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">head</span>
+        maxi <span class="sy0">=</span> Node<span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">head</span><span class="br0">&#41;</span>
+        <span class="kw1">while</span> item.<span class="me1">next</span> <span class="kw1">is</span> <span class="kw1">not</span> <span class="kw2">None</span>:
+            <span class="kw1">if</span> item.<span class="me1">next</span>.<span class="me1">cargo</span> <span class="sy0">&gt;=</span> maxi.<span class="me1">next</span>.<span class="me1">cargo</span>:
+                maxi <span class="sy0">=</span> item
+            item <span class="sy0">=</span> item.<span class="me1">next</span>
+        result <span class="sy0">=</span> maxi.<span class="me1">next</span>.<span class="me1">cargo</span>
+        <span class="kw1">if</span> maxi.<span class="me1">cargo</span> <span class="sy0">==</span> <span class="st0">&quot;&quot;</span> <span class="kw1">and</span> maxi.<span class="me1">next</span> <span class="sy0">==</span> <span class="kw2">self</span>.<span class="me1">head</span>:
+            result <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">head</span>.<span class="me1">cargo</span>
+            <span class="kw2">self</span>.<span class="me1">head</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">head</span>.<span class="me1">next</span>
+            <span class="kw2">self</span>.<span class="me1">length</span> -<span class="sy0">=</span> <span class="nu0">1</span>
+            <span class="kw1">return</span> result
+        maxi.<span class="me1">next</span> <span class="sy0">=</span> maxi.<span class="me1">next</span>.<span class="me1">next</span>
+        <span class="kw2">self</span>.<span class="me1">length</span> -<span class="sy0">=</span> <span class="nu0">1</span>
+        <span class="kw1">return</span> result
+&nbsp;
+<span class="kw1">import</span> <span class="kw3">random</span>
+<span class="kw1">import</span> <span class="kw3">time</span>
+<span class="kw1">import</span> matplotlib.<span class="me1">pyplot</span> <span class="kw1">as</span> plt
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> performance_test<span class="br0">&#40;</span>start<span class="sy0">,</span> end<span class="sy0">,</span> step<span class="sy0">,</span> num_times<span class="br0">&#41;</span>:
+    time_linked_priqueue <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    time_list_priqueue <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>start<span class="sy0">,</span> end + step<span class="sy0">,</span> step<span class="br0">&#41;</span>:
+        sample <span class="sy0">=</span> <span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw3">random</span>.<span class="me1">shuffle</span><span class="br0">&#40;</span>sample<span class="br0">&#41;</span>
+        listp <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+        linkedp <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+        <span class="kw1">for</span> x <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>num_times<span class="br0">&#41;</span>:
+            <span class="co1"># change these two lines to evaluate and compare the time complexity of a pair of priority queues</span>
+            list_priqueue <span class="sy0">=</span> PriorityQueue<span class="br0">&#40;</span><span class="br0">&#41;</span>
+            linked_priqueue <span class="sy0">=</span> PriorityQueueNotKeepSorted<span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+            t0 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="kw1">for</span> item <span class="kw1">in</span> sample:
+                list_priqueue.<span class="me1">insert</span><span class="br0">&#40;</span>item<span class="br0">&#41;</span>
+            <span class="kw1">for</span> iii <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>sample<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+                list_priqueue.<span class="me1">remove</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            listp.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span> - t0<span class="br0">&#41;</span>
+&nbsp;
+            t0 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="kw1">for</span> item <span class="kw1">in</span> sample:
+                linked_priqueue.<span class="me1">insert</span><span class="br0">&#40;</span>item<span class="br0">&#41;</span>
+            <span class="kw1">for</span> iii <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>sample<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+                linked_priqueue.<span class="me1">remove</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            linkedp.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span> - t0<span class="br0">&#41;</span>
+&nbsp;
+        t1 <span class="sy0">=</span> <span class="kw2">round</span><span class="br0">&#40;</span><span class="kw2">sum</span><span class="br0">&#40;</span>listp<span class="br0">&#41;</span>/num_times<span class="sy0">,</span> <span class="nu0">5</span><span class="br0">&#41;</span>
+        time_list_priqueue.<span class="me1">append</span><span class="br0">&#40;</span>t1<span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;Time taken by 'Python List Priority Queue' in average is {0} when the length is {1}&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>t1<span class="sy0">,</span> i<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        t1 <span class="sy0">=</span> <span class="kw2">round</span><span class="br0">&#40;</span><span class="kw2">sum</span><span class="br0">&#40;</span>linkedp<span class="br0">&#41;</span> / num_times<span class="sy0">,</span> <span class="nu0">5</span><span class="br0">&#41;</span>
+        time_linked_priqueue.<span class="me1">append</span><span class="br0">&#40;</span>t1<span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;Time taken by 'Linked List Priority Queue' in average is {0} when the length is {1}&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>t1<span class="sy0">,</span> i<span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+    plt.<span class="me1">figure</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    plt.<span class="me1">hold</span><span class="br0">&#40;</span><span class="kw2">True</span><span class="br0">&#41;</span>
+    plt.<span class="me1">plot</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span>start<span class="sy0">,</span> end + step<span class="sy0">,</span> step<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> time_list_priqueue<span class="sy0">,</span> <span class="st0">&quot;b&quot;</span><span class="br0">&#41;</span>
+    plt.<span class="me1">plot</span><span class="br0">&#40;</span><span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span>start<span class="sy0">,</span> end + step<span class="sy0">,</span> step<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> time_linked_priqueue<span class="sy0">,</span> <span class="st0">&quot;r&quot;</span><span class="br0">&#41;</span>
+    plt.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+performance_test<span class="br0">&#40;</span><span class="nu0">2000</span><span class="sy0">,</span> <span class="nu0">3000</span><span class="sy0">,</span> <span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,288 @@
+<html>
+  <head>
+    <title>IBCS1-WD - October 1st, Tom's work on chapter 15 exercises (C sharp code was added!)</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>October 1st, Tom's work on chapter 15 exercises (C sharp code was added!)<small> #TomsProjects </small></h1><h2 id="toc0"><a name="x-E1~E5: Python"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">E1~E5: Python</span></h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">class</span> Point:
+    <span class="st0">&quot;&quot;&quot; Point class represents and manipulates x,y coords. &quot;&quot;&quot;</span>
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span> y<span class="sy0">=</span><span class="nu0">0</span><span class="br0">&#41;</span>:
+        <span class="st0">&quot;&quot;&quot; Create a new point at the origin &quot;&quot;&quot;</span>
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__str__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="st0">&quot;({0}, {1})&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> set_cor<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x<span class="sy0">=</span><span class="kw2">None</span><span class="sy0">,</span> y<span class="sy0">=</span><span class="kw2">None</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> x <span class="kw1">is</span> <span class="kw2">None</span>: x <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">x</span>
+        <span class="kw1">if</span> y <span class="kw1">is</span> <span class="kw2">None</span>: y <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">y</span>
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+&nbsp;
+    <span class="kw1">def</span> get_distance<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> target<span class="sy0">=</span><span class="kw2">None</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> target <span class="kw1">is</span> <span class="kw2">None</span>: target <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span>-target.<span class="me1">x</span><span class="br0">&#41;</span>**<span class="nu0">2</span> + <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">y</span>-target.<span class="me1">y</span><span class="br0">&#41;</span>**<span class="nu0">2</span><span class="br0">&#41;</span>**<span class="nu0">0.5</span>
+&nbsp;
+    <span class="kw1">def</span> print_coor<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;({0}, {1})&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> mid_point<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> target<span class="br0">&#41;</span>:
+        <span class="kw1">return</span> Point<span class="br0">&#40;</span><span class="nu0">0.5</span>*<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span>+target.<span class="me1">x</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu0">0.5</span>*<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">y</span>+target.<span class="me1">y</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> get_slope<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> target<span class="sy0">=</span><span class="kw2">None</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> target <span class="kw1">is</span> <span class="kw2">None</span>: target <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">y</span>-target.<span class="me1">y</span><span class="br0">&#41;</span> / <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span>-target.<span class="me1">x</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> reflect_x<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> Point<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> -<span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> get_line_to<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> point<span class="br0">&#41;</span>:
+        slope <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">get_slope</span><span class="br0">&#40;</span>point<span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;y = {0}x + {1}&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>slope<span class="sy0">,</span> point.<span class="me1">y</span> - slope * point.<span class="me1">x</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> <span class="br0">&#40;</span>slope<span class="sy0">,</span> point.<span class="me1">y</span> - slope * point.<span class="me1">x</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> get_perpendicular_bisector<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> point<span class="br0">&#41;</span>:
+        slope <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">get_slope</span><span class="br0">&#40;</span>point<span class="br0">&#41;</span>
+        midpoint <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">mid_point</span><span class="br0">&#40;</span>point<span class="br0">&#41;</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;y = {0}x + {1}&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>-<span class="nu0">1</span> / slope<span class="sy0">,</span> midpoint.<span class="me1">y</span> + <span class="br0">&#40;</span><span class="nu0">1</span> / slope<span class="br0">&#41;</span> * midpoint.<span class="me1">x</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> <span class="br0">&#40;</span>-<span class="nu0">1</span> / slope<span class="sy0">,</span> midpoint.<span class="me1">y</span> + <span class="br0">&#40;</span><span class="nu0">1</span> / slope<span class="br0">&#41;</span> * midpoint.<span class="me1">x</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> get_center_of_circle<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> p1<span class="sy0">,</span> p2<span class="br0">&#41;</span>:
+        coeff1 <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">get_perpendicular_bisector</span><span class="br0">&#40;</span>p1<span class="br0">&#41;</span>
+        coeff2 <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">get_perpendicular_bisector</span><span class="br0">&#40;</span>p2<span class="br0">&#41;</span>
+        x_coor <span class="sy0">=</span> <span class="br0">&#40;</span>coeff2<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> - coeff1<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span> / <span class="br0">&#40;</span>coeff1<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> - coeff2<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> Point<span class="br0">&#40;</span>x_coor<span class="sy0">,</span> x_coor * coeff1<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> + coeff1<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">print</span><span class="br0">&#40;</span>Point<span class="br0">&#40;</span><span class="nu0">4</span><span class="sy0">,</span> <span class="nu0">11</span><span class="br0">&#41;</span>.<span class="me1">get_line_to</span><span class="br0">&#40;</span>Point<span class="br0">&#40;</span><span class="nu0">6</span><span class="sy0">,</span> <span class="nu0">15</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>Point<span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span>.<span class="me1">get_center_of_circle</span><span class="br0">&#40;</span>Point<span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">,</span> Point<span class="br0">&#40;</span>-<span class="nu0">1</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<h2 id="toc1"> </h2>
+ <br />
+<h2 id="toc2"><a name="x-E6:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">E6:</span></h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">class</span> SMS_store:
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">message</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+        <span class="kw2">self</span>.<span class="me1">view_state</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+&nbsp;
+    <span class="kw1">def</span> add_new_arrival<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> from_number<span class="sy0">,</span> time_arrived<span class="sy0">,</span> text_of_SMS<span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">message</span>.<span class="me1">append</span><span class="br0">&#40;</span><span class="br0">&#40;</span>from_number<span class="sy0">,</span> time_arrived<span class="sy0">,</span> text_of_SMS<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">view_state</span>.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">False</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> message_count<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw2">len</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">message</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> get_unread_indexes<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        indices <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span>i<span class="sy0">,</span> v<span class="br0">&#41;</span> <span class="kw1">in</span> <span class="kw2">enumerate</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">view_state</span><span class="br0">&#41;</span>:
+            <span class="kw1">if</span> <span class="kw1">not</span> v:
+                indices.<span class="me1">append</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+        <span class="kw1">return</span> indices
+&nbsp;
+    <span class="kw1">def</span> get_message<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>i<span class="br0">&#41;</span>:
+        <span class="kw1">try</span>:
+            <span class="kw2">self</span>.<span class="me1">view_state</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw2">True</span>
+            <span class="kw1">return</span> <span class="kw2">self</span>.<span class="me1">message</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span>
+        <span class="kw1">except</span>:
+            <span class="kw1">return</span> <span class="kw2">None</span>
+&nbsp;
+    <span class="kw1">def</span> delete<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>i<span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">message</span>.<span class="me1">remove</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">message</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">view_state</span>.<span class="me1">remove</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">view_state</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> clear<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">message</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+        <span class="kw2">self</span>.<span class="me1">view_state</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+&nbsp;
+my_inbox <span class="sy0">=</span> SMS_store<span class="br0">&#40;</span><span class="br0">&#41;</span>
+my_inbox.<span class="me1">add_new_arrival</span><span class="br0">&#40;</span><span class="st0">&quot;110011001&quot;</span><span class="sy0">,</span> <span class="st0">&quot;2000-0-0 00:00:00&quot;</span><span class="sy0">,</span> <span class="st0">&quot;It's a nice day today&quot;</span><span class="br0">&#41;</span>
+my_inbox.<span class="me1">add_new_arrival</span><span class="br0">&#40;</span><span class="st0">&quot;23&quot;</span><span class="sy0">,</span><span class="st0">&quot;233&quot;</span><span class="sy0">,</span> <span class="st0">&quot;2333&quot;</span><span class="br0">&#41;</span>
+my_inbox.<span class="me1">add_new_arrival</span><span class="br0">&#40;</span><span class="st0">&quot;a&quot;</span><span class="sy0">,</span><span class="st0">&quot;aa&quot;</span><span class="sy0">,</span><span class="st0">&quot;aaa&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>my_inbox.<span class="me1">get_unread_indexes</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>my_inbox.<span class="me1">get_message</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>my_inbox.<span class="me1">get_unread_indexes</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<br />
+<h2 id="toc3"><a name="x-E1~E5: Visual C# code (Console)"></a><span style="color: #ff0000; font-family: arial,helvetica,sans-serif;">E1~E5: Visual C# code (Console)</span></h2>
+ <br />
+<span style="color: #ff0000;">System requirement for running the following code: Windows XP or later version of Windows OS with net framework 2.0 or later version installed and a Visual C# compiler.</span><br />
+<span style="color: #ff0000;">Comparing between C# and python:</span><br />
+<ol><li><span style="color: #ff0000; line-height: 1.5;">In C#, we can set the accessibility of functions and variables, while this is impossible in python</span></li><li><span style="color: #ff0000; line-height: 1.5;">In C#, there is no operator dealing with the power, while in python we can use **</span></li><li><span style="color: #ff0000; line-height: 1.5;">In C#, there are many annoying braces and semicolons, while indents solve the problem in python</span></li><li><span style="color: #ff0000; line-height: 1.5;">In C#, variables need to be declared before usage, while we don't need to do that in python</span></li><li><span style="color: #ff0000; line-height: 1.5;">In C#, it's easy to declare a n-dimensional array, while in python we have to use nested list (but we have third-party modules while are powerful!)</span></li><li><span style="color: #ff0000; line-height: 1.5;">In C#, storing multiple datatypes in a single array is not achievable, while we have lists in python which are powerful compound datatype.</span></li><li><span style="color: #ff0000; line-height: 1.5;">To find out more, learn C# by yourself! Ha ha!</span></li></ol>
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.csharp  {font-family:monospace;}
+.csharp .imp {font-weight: bold; color: red;}
+.csharp .kw1 {color: #0600FF; font-weight: bold;}
+.csharp .kw2 {color: #FF8000; font-weight: bold;}
+.csharp .kw3 {color: #008000;}
+.csharp .kw4 {color: #6666cc; font-weight: bold;}
+.csharp .kw5 {color: #000000;}
+.csharp .co1 {color: #008080; font-style: italic;}
+.csharp .co2 {color: #008080;}
+.csharp .co3 {color: #008080;}
+.csharp .coMULTI {color: #008080; font-style: italic;}
+.csharp .es0 {color: #008080; font-weight: bold;}
+.csharp .es_h {color: #008080; font-weight: bold;}
+.csharp .br0 {color: #008000;}
+.csharp .sy0 {color: #008000;}
+.csharp .st0 {color: #666666;}
+.csharp .st_h {color: #666666;}
+.csharp .nu0 {color: #FF0000;}
+.csharp .me1 {color: #0000FF;}
+.csharp .me2 {color: #0000FF;}
+.csharp span.xtra { display:block; }
+
+-->
+</style><pre class="csharp"><span class="kw1">using</span> <span class="co3">System</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">namespace</span> Class_Points
+<span class="br0">&#123;</span>
+    <span class="kw4">class</span> Program
+    <span class="br0">&#123;</span>
+        <span class="kw4">class</span> Point
+        <span class="br0">&#123;</span>
+            <span class="kw1">private</span> <span class="kw4">double</span> x <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+            <span class="kw1">private</span> <span class="kw4">double</span> y <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+            <span class="kw1">public</span> <span class="kw4">double</span> return_xcoor<span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                <span class="kw1">return</span> x<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">public</span> <span class="kw4">double</span> return_ycoor<span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                <span class="kw1">return</span> y<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> set_coor<span class="br0">&#40;</span><span class="kw4">double</span> x_cor, <span class="kw4">double</span> y_cor<span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                x <span class="sy0">=</span> x_cor<span class="sy0">;</span>
+                y <span class="sy0">=</span> y_cor<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">public</span> <span class="kw4">double</span> get_distance<span class="br0">&#40;</span>Point point<span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                <span class="kw1">return</span> Math<span class="sy0">.</span><span class="me1">Pow</span><span class="br0">&#40;</span>Math<span class="sy0">.</span><span class="me1">Pow</span><span class="br0">&#40;</span>point<span class="sy0">.</span><span class="me1">x</span> <span class="sy0">-</span> x,<span class="nu0">2</span><span class="br0">&#41;</span> <span class="sy0">+</span> Math<span class="sy0">.</span><span class="me1">Pow</span><span class="br0">&#40;</span>point<span class="sy0">.</span><span class="me1">y</span> <span class="sy0">-</span> y,<span class="nu0">2</span><span class="br0">&#41;</span>, <span class="nu0">0.5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">public</span> <span class="kw4">void</span> print_coor<span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                Console<span class="sy0">.</span><span class="me1">WriteLine</span><span class="br0">&#40;</span><span class="st0">&quot;({0}, {1})&quot;</span>, x<span class="sy0">.</span><span class="me1">ToString</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, y<span class="sy0">.</span><span class="me1">ToString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">public</span> Point mid_point<span class="br0">&#40;</span>Point point<span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                Point a <span class="sy0">=</span> <span class="kw3">new</span> Point<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                a<span class="sy0">.</span><span class="me1">set_coor</span><span class="br0">&#40;</span><span class="br0">&#40;</span>x<span class="sy0">+</span>point<span class="sy0">.</span><span class="me1">x</span><span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">2</span>,<span class="br0">&#40;</span>y<span class="sy0">+</span>point<span class="sy0">.</span><span class="me1">y</span><span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">return</span> a<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">public</span> <span class="kw4">double</span> get_slope<span class="br0">&#40;</span>Point point<span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                <span class="kw1">return</span> <span class="br0">&#40;</span>point<span class="sy0">.</span><span class="me1">y</span> <span class="sy0">-</span> y<span class="br0">&#41;</span> <span class="sy0">/</span> <span class="br0">&#40;</span>point<span class="sy0">.</span><span class="me1">x</span> <span class="sy0">-</span> x<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">public</span> Point reflect_x<span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                Point result <span class="sy0">=</span> <span class="kw3">new</span> Point<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                result<span class="sy0">.</span><span class="me1">set_coor</span><span class="br0">&#40;</span>x, <span class="sy0">-</span>y<span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">return</span> result<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">public</span> <span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span> get_line_to<span class="br0">&#40;</span>Point point<span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                <span class="kw4">double</span> slope <span class="sy0">=</span> get_slope<span class="br0">&#40;</span>point<span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span> coeff <span class="sy0">=</span> <span class="br0">&#123;</span>slope, point<span class="sy0">.</span><span class="me1">y</span> <span class="sy0">-</span> slope <span class="sy0">*</span> point<span class="sy0">.</span><span class="me1">x</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+                <span class="kw1">return</span> coeff<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">public</span> <span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span> get_bisector<span class="br0">&#40;</span>Point point<span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                <span class="kw4">double</span> slope <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">1</span> <span class="sy0">/</span> get_slope<span class="br0">&#40;</span>point<span class="br0">&#41;</span><span class="sy0">;</span>
+                Point midpoint <span class="sy0">=</span> mid_point<span class="br0">&#40;</span>point<span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span> coeff <span class="sy0">=</span> <span class="br0">&#123;</span>slope, midpoint<span class="sy0">.</span><span class="me1">y</span> <span class="sy0">-</span> slope <span class="sy0">*</span> midpoint<span class="sy0">.</span><span class="me1">x</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+                <span class="kw1">return</span> coeff<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">public</span> Point get_center_of_circle<span class="br0">&#40;</span>Point p1, Point p2<span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+                <span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span> coeff1 <span class="sy0">=</span> get_bisector<span class="br0">&#40;</span>p1<span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span> coeff2 <span class="sy0">=</span> get_bisector<span class="br0">&#40;</span>p2<span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw4">double</span> xcoor <span class="sy0">=</span> <span class="br0">&#40;</span>coeff2<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">-</span> coeff1<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="sy0">/</span> <span class="br0">&#40;</span>coeff1<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">-</span> coeff2<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                Point result <span class="sy0">=</span> <span class="kw3">new</span> Point<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                result<span class="sy0">.</span><span class="me1">set_coor</span><span class="br0">&#40;</span>xcoor, xcoor <span class="sy0">*</span> coeff1<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">+</span> coeff1<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">return</span> result<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+&nbsp;
+        <span class="br0">&#125;</span>
+        <span class="kw1">static</span> <span class="kw4">void</span> Main<span class="br0">&#40;</span><span class="kw4">string</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span>
+        <span class="br0">&#123;</span>
+            Point a <span class="sy0">=</span> <span class="kw3">new</span> Point<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            a<span class="sy0">.</span><span class="me1">set_coor</span><span class="br0">&#40;</span><span class="nu0">1</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            Point b <span class="sy0">=</span> <span class="kw3">new</span> Point<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            b<span class="sy0">.</span><span class="me1">set_coor</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            Point c <span class="sy0">=</span> <span class="kw3">new</span> Point<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            c <span class="sy0">=</span> b<span class="sy0">.</span><span class="me1">reflect_x</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            Point origin <span class="sy0">=</span> <span class="kw3">new</span> Point<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            origin<span class="sy0">.</span><span class="me1">set_coor</span><span class="br0">&#40;</span><span class="nu0">0</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            Console<span class="sy0">.</span><span class="me1">WriteLine</span><span class="br0">&#40;</span><span class="st0">&quot;{0}&quot;</span>, a<span class="sy0">.</span><span class="me1">get_slope</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span><span class="sy0">.</span><span class="me1">ToString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            Console<span class="sy0">.</span><span class="me1">WriteLine</span><span class="br0">&#40;</span><span class="st0">&quot;y = {0}x + {1}&quot;</span>, a<span class="sy0">.</span><span class="me1">get_bisector</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">.</span><span class="me1">ToString</span><span class="br0">&#40;</span><span class="br0">&#41;</span>, a<span class="sy0">.</span><span class="me1">get_bisector</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">.</span><span class="me1">ToString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            Point center <span class="sy0">=</span> <span class="kw3">new</span> Point<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            center <span class="sy0">=</span> a<span class="sy0">.</span><span class="me1">get_center_of_circle</span><span class="br0">&#40;</span>b, c<span class="br0">&#41;</span><span class="sy0">;</span>
+            center<span class="sy0">.</span><span class="me1">print_coor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            Console<span class="sy0">.</span><span class="me1">WriteLine</span><span class="br0">&#40;</span><span class="st0">&quot;Press any key to continue&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            Console<span class="sy0">.</span><span class="me1">ReadKey</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

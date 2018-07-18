@@ -1,0 +1,299 @@
+<html>
+  <head>
+    <title>IBCS1-WD - June 1st 2016 by Tom</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>June 1st 2016 by Tom<small> #Log </small></h1><h1 id="toc0"><a name="Wednesday (June 1st)"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;">Wednesday (June 1st)</span></h1>
+ <h2 id="toc1"><a name="Wednesday (June 1st)-Agenda:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;"><a name="Wednesday (June 1st)-Agenda:"></a><strong><span style="color: #000000; font-family: sans-serif;">Agenda:</span></strong></span></h2>
+ <ul><li><strong><span style="color: #000000; font-family: sans-serif;">1. Introduction: WikiSpace and your role in this course</span></strong></li><li><strong><span style="color: #000000; font-family: sans-serif;">2. IBO CS guide + course structure + course online resources. Option B: Modelling and Simulation</span></strong></li><li><strong><span style="color: #000000; font-family: sans-serif;">3. Python: installation and resources</span></strong></li><li><strong><span style="color: #000000; font-family: sans-serif;">4. Python learning (Think like a computer scientist): chapter 1&amp;2</span></strong></li></ul><br />
+<h2 id="toc2"><a name="Wednesday (June 1st)-Homework:"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;"><a name="Wednesday (June 1st)-Homework:"></a>Homework:</span></h2>
+ <strong><span style="color: #000000; font-family: sans-serif;">Exercises from </span></strong><strong><span style="color: #000000; font-family: sans-serif;">chapter 1&amp;2 in </span></strong><strong><span style="color: #000000; font-family: sans-serif;">(Think like a computer scientist)</span></strong><br />
+<strong><span style="color: #000000; font-family: sans-serif;">Submit your code to project</span></strong><br />
+<br />
+<h2 id="toc3"><a name="Wednesday (June 1st)-Learning outcomes -- Edited by Tom Zhou on June 1st"></a><span style="color: #333333; font-family: arial,helvetica,sans-serif;"><strong><span style="color: #000000; font-family: sans-serif;">Learning outcomes -- Edited by Tom Zhou on June 1</span></strong><span style="font-size: 12px; vertical-align: super;">st</span></span></h2>
+ <br />
+----About half of the things that we learned today are referred to the chapter one of the book &quot;How to think like a computer scientist&quot;. To find out more, <a class="wiki_link_ext" href="http://openbookproject.net/thinkcs/python/english3e/way_of_the_program.html" rel="nofollow">click me</a> to see that chapter.<br />
+<br />
+<em>WikiSpace is the place where you show the result of your study, works, projects and activities. Everyone in our class can be the editor, and your efforts will make it more diverse and appealing to others.</em><br />
+<br />
+To be a good computer scientist, you should:<br />
+<ol><li>Be able to solve problems</li><li>Be able to solve problems creatively</li><li>Be able to denote your thoughts using formal languages</li></ol><br />
+Also we should be aware of the term &quot;open source&quot;, which means that the code of the programes is published to all programmers in the world and you can change any part of it if you want. A significant benefit of open source is that others will not only have the chance of learning your code and algorithms, but also they can improve it bit by bit. In the class, we had better share our resources and workings in order to improve our abilities together.<br />
+<br />
+The key things we learned today of programming may include:<br />
+--Introduction to Python as a programming language<br />
+--Definition of debugging and three errors that may occur<br />
+--Simple grammars involved in Python programming<br />
+--Some useful functions and modules in Python<br />
+<br />
+As beginners, we should know that Python is an interpreted language. It is interpreted line by line, to a language that computers can understand and it runs immediately. By comparison, compiled languages such as VB and C++ will be only translated as a whole and it will not run right after translation.<br />
+<br />
+There are three general types of errors that may occur during debugging. The first one is called “Syntax error”, which is resulted from incorrect notations or grammar. For example:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">print</span> <span class="st0">&quot;This is a great example&quot;</span></pre>
+
+If you execute the program, it is very likely to return an error simply because you missed the parentheses. The correct format should be:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">print</span> <span class="br0">&#40;</span><span class="st0">&quot;This is the correct format&quot;</span><span class="br0">&#41;</span></pre>
+
+Also please notice that the uppercase letters are very DIFFERENT from lowercase letters. Your Python interpreter will not recognize them if you type the word &quot;Print&quot; rather than the word &quot;print&quot;.<br />
+<br />
+The second type of errors are runtime errors. Their typical examples are the inappropriate operations between data types. For instance:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">a <span class="sy0">=</span> <span class="st0">&quot;Tom&quot;</span>
+b <span class="sy0">=</span> <span class="nu0">2</span>
+<span class="kw1">print</span> <span class="br0">&#40;</span>a+b<span class="br0">&#41;</span></pre>
+
+You cannot add a string and a number together, otherwise what would you get? If you really want to do the &quot;addition&quot;, there is a solution:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">a <span class="sy0">=</span> <span class="st0">&quot;Tom&quot;</span>
+b <span class="sy0">=</span> <span class="st0">&quot;2&quot;</span>
+<span class="kw1">print</span> <span class="br0">&#40;</span>a+b<span class="br0">&#41;</span></pre>
+
+What you will get is a combination of two strings, in their sequence of addition, which is &quot;Tom2&quot;.<br />
+<br />
+Besides, if you would like to add a number with a &quot;string number&quot; (a string which contains ONLY numbers), there is a way to do it:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">a <span class="sy0">=</span> <span class="st0">&quot;100&quot;</span>
+b <span class="sy0">=</span> <span class="nu0">133</span>
+<span class="kw1">print</span> <span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span> + <span class="nu0">133</span><span class="br0">&#41;</span></pre>
+
+You will get 233 as a result obviously. I have also discovered that &quot;int()&quot; can convert a decimal number to a whole number, throwing its decimal place away. For example, the result of both int(1.4) and int(1.6) are 1.<br />
+<br />
+The third type of errors are called semantic errors. They are very hard to detect and fix, at least the Python interpreter will not return an error. You will not get an ideal result or a correct result. From what I have learned today and my early programming experience, semantic errors maybe caused by mistaking the open interval and closed interval, incorrect exit condition of repetition, neglect of resetting variables and deficiency in algorithms. For simplification, I will only show the example that our teacher gave in class.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">Result <span class="sy0">=</span> <span class="nu0">0</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span> <span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">10</span><span class="br0">&#41;</span>:
+    Result <span class="sy0">=</span> Result + i
+<span class="kw1">print</span> <span class="br0">&#40;</span>Result<span class="br0">&#41;</span></pre>
+
+This is the program ideally designed to sum up integers from 1 to 10 and get the result. However, the programmer forgot that the number on the right side of the comma in the parenthesis should be the closed interval, so the i will stop increasing when it reaches 9. As the result he will get 45 instead of 55.<br />
+<br />
+Other details of Python that we have come across today:<br />
+<br />
+Problems of quotation marks: There are three kinds of quotation marks that are used to hold strings. They are single quotation mark, double quotation marks and triple quotation marks. They have no difference normally, but you may need to use them wisely when you come across a situation in which quotation marks within the quotation marks are necessary. For instance:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">print</span> <span class="br0">&#40;</span><span class="st0">'''&quot;Tom is tricky&quot;, Doris said'''</span><span class="br0">&#41;</span></pre>
+
+It will not be a problem as you use only one quotation mark rather than a pair of quotation marks. Use apostrophe as an example:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">print</span> <span class="br0">&#40;</span><span class="st0">&quot;Tom's hair style looks cool&quot;</span><span class="br0">&#41;</span></pre>
+
+When you type the apostrophe, you are actually typing a quotation mark. You can try it out in Python shell and see if it will affect the result or not.<br />
+You can actually use any combination of any two kinds of quotation marks when you need them, and you can even use them all.<br />
+<br />
+Unlike some other programming languages such as VB or C++, you do not need to declare the data types of variables before using them in Python. In addition, the data types of variables can be altered during operations, as you may assign a different type of data to it. For example:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">a <span class="sy0">=</span> <span class="st0">&quot;Nice day today&quot;</span>
+a <span class="sy0">=</span> <span class="nu0">666</span>
+<span class="kw1">print</span> <span class="br0">&#40;</span>a<span class="br0">&#41;</span></pre>
+
+The original data type of the variable &quot;a&quot; is string, then it is changed to integer. The final output of the program is the integer 666.<br />
+<br />
+You can think of more if you can recall from the class or if you want. :)</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

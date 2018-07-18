@@ -1,0 +1,127 @@
+<html>
+  <head>
+    <title>IBCS1-WD - eight_queens</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> draw_board<span class="br0">&#40;</span>the_board<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Draw a chess board with queens, as determined by the the_board. &quot;&quot;&quot;</span>
+&nbsp;
+    pygame.<span class="me1">init</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    colors <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#93;</span>    <span class="co1"># Set up colors [red, black]</span>
+&nbsp;
+    n <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>the_board<span class="br0">&#41;</span>         <span class="co1"># This is an NxN chess board.</span>
+    surface_sz <span class="sy0">=</span> <span class="nu0">480</span>           <span class="co1"># Proposed physical surface size.</span>
+    sq_sz <span class="sy0">=</span> surface_sz // n    <span class="co1"># sq_sz is length of a square.</span>
+    surface_sz <span class="sy0">=</span> n * sq_sz     <span class="co1"># Adjust to exactly fit n squares.</span>
+    surface <span class="sy0">=</span> pygame.<span class="me1">display</span>.<span class="me1">set_mode</span><span class="br0">&#40;</span><span class="br0">&#40;</span>surface_sz<span class="sy0">,</span> surface_sz<span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+    ball <span class="sy0">=</span> pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">&quot;queen.gif&quot;</span><span class="br0">&#41;</span>
+    ball_offset <span class="sy0">=</span> <span class="br0">&#40;</span>sq_sz-ball.<span class="me1">get_width</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> // <span class="nu0">2</span>
+&nbsp;
+    <span class="kw1">while</span> <span class="kw2">True</span>:
+&nbsp;
+        <span class="co1"># Look for an event from keyboard, mouse, etc.</span>
+        ev <span class="sy0">=</span> pygame.<span class="me1">event</span>.<span class="me1">poll</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> ev.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">QUIT</span>:
+            <span class="kw1">break</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1"># Draw a fresh background (a blank chess board)</span>
+        <span class="kw1">for</span> row <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>n<span class="br0">&#41;</span>:           <span class="co1"># Draw each row of the board.</span>
+            c_indx <span class="sy0">=</span> row % <span class="nu0">2</span>           <span class="co1"># Alternate starting color</span>
+            <span class="kw1">for</span> col <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>n<span class="br0">&#41;</span>:       <span class="co1"># Run through cols drawing squares</span>
+                the_square <span class="sy0">=</span> <span class="br0">&#40;</span>col*sq_sz<span class="sy0">,</span> row*sq_sz<span class="sy0">,</span> sq_sz<span class="sy0">,</span> sq_sz<span class="br0">&#41;</span>
+                surface.<span class="me1">fill</span><span class="br0">&#40;</span>colors<span class="br0">&#91;</span>c_indx<span class="br0">&#93;</span><span class="sy0">,</span> the_square<span class="br0">&#41;</span>
+                <span class="co1"># Now flip the color index for the next square</span>
+                c_indx <span class="sy0">=</span> <span class="br0">&#40;</span>c_indx + <span class="nu0">1</span><span class="br0">&#41;</span> % <span class="nu0">2</span>
+&nbsp;
+        <span class="co1"># Now that squares are drawn, draw the queens.</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span>col<span class="sy0">,</span> row<span class="br0">&#41;</span> <span class="kw1">in</span> <span class="kw2">enumerate</span><span class="br0">&#40;</span>the_board<span class="br0">&#41;</span>:
+          surface.<span class="me1">blit</span><span class="br0">&#40;</span>ball<span class="sy0">,</span>
+                   <span class="br0">&#40;</span>col*sq_sz+ball_offset<span class="sy0">,</span>row*sq_sz+ball_offset<span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+        pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> sp <span class="sy0">==</span> <span class="st0">&quot;&quot;</span>:
+            <span class="kw1">break</span>
+ <span class="co1">#   pygame.quit()</span>
+&nbsp;
+<span class="kw1">def</span> col_clashes<span class="br0">&#40;</span>bs<span class="sy0">,</span> c<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Return True if the queen at column c clashes
+         with any queen to its left.
+    &quot;&quot;&quot;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>c<span class="br0">&#41;</span>:     <span class="co1"># Look at all columns to the left of c</span>
+          <span class="kw1">if</span> share_diagonal<span class="br0">&#40;</span>i<span class="sy0">,</span> bs<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">,</span> c<span class="sy0">,</span> bs<span class="br0">&#91;</span>c<span class="br0">&#93;</span><span class="br0">&#41;</span>:
+              <span class="kw1">return</span> <span class="kw2">True</span>
+&nbsp;
+    <span class="kw1">return</span> <span class="kw2">False</span>           <span class="co1"># No clashes - col c has a safe placement.</span>
+<span class="kw1">def</span> share_diagonal<span class="br0">&#40;</span>x0<span class="sy0">,</span> y0<span class="sy0">,</span> x1<span class="sy0">,</span> y1<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Is (x0, y0) on a shared diagonal with (x1, y1)? &quot;&quot;&quot;</span>
+    dy <span class="sy0">=</span> <span class="kw2">abs</span><span class="br0">&#40;</span>y1 - y0<span class="br0">&#41;</span>        <span class="co1"># Calc the absolute y distance</span>
+    dx <span class="sy0">=</span> <span class="kw2">abs</span><span class="br0">&#40;</span>x1 - x0<span class="br0">&#41;</span>        <span class="co1"># CXalc the absolute x distance</span>
+    <span class="kw1">return</span> dx <span class="sy0">==</span> dy          <span class="co1"># They clash if dx == dy</span>
+&nbsp;
+<span class="kw1">print</span><span class="br0">&#40;</span>col_clashes<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> has_clashes<span class="br0">&#40;</span>the_board<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Determine whether we have any queens clashing on the diagonals.
+        We're assuming here that the_board is a permutation of column
+        numbers, so we're not explicitly checking row or column clashes.
+    &quot;&quot;&quot;</span>
+    <span class="kw1">for</span> col <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="kw2">len</span><span class="br0">&#40;</span>the_board<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> col_clashes<span class="br0">&#40;</span>the_board<span class="sy0">,</span> col<span class="br0">&#41;</span>:
+            <span class="kw1">return</span> <span class="kw2">True</span>
+    <span class="kw1">return</span> <span class="kw2">False</span>
+&nbsp;
+<span class="kw1">import</span> <span class="kw3">random</span>
+<span class="kw1">import</span> pygame
+rng <span class="sy0">=</span> <span class="kw3">random</span>.<span class="me1">Random</span><span class="br0">&#40;</span><span class="br0">&#41;</span>   <span class="co1"># Instantiate a generator</span>
+bd <span class="sy0">=</span> <span class="kw2">list</span><span class="br0">&#40;</span><span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">8</span><span class="br0">&#41;</span><span class="br0">&#41;</span>     <span class="co1"># Generate the initial permutation</span>
+num_found <span class="sy0">=</span> <span class="nu0">0</span>
+tries <span class="sy0">=</span> <span class="nu0">0</span>
+<span class="kw1">while</span> num_found <span class="sy0">&lt;</span> <span class="nu0">10</span>:
+   rng.<span class="me1">shuffle</span><span class="br0">&#40;</span>bd<span class="br0">&#41;</span>
+   tries +<span class="sy0">=</span> <span class="nu0">1</span>
+   <span class="kw1">if</span> <span class="kw1">not</span> has_clashes<span class="br0">&#40;</span>bd<span class="br0">&#41;</span>:
+       <span class="kw1">print</span><span class="br0">&#40;</span>bd<span class="br0">&#41;</span>
+       sp <span class="sy0">=</span> <span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;press enter&quot;</span><span class="br0">&#41;</span>
+       draw_board<span class="br0">&#40;</span>bd<span class="br0">&#41;</span>
+       tries +<span class="sy0">=</span> <span class="nu0">1</span>
+       num_found +<span class="sy0">=</span> <span class="nu0">1</span>
+&nbsp;
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;work summary&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;You have tried {0} times, and found {1} solutions&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="kw2">str</span><span class="br0">&#40;</span>tries<span class="br0">&#41;</span><span class="sy0">,</span><span class="kw2">str</span><span class="br0">&#40;</span>num_found<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+pygame.<span class="me1">quit</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+<h1 id="toc0"><a name="The pic is attached here 👇"></a><strong>The pic is attached here 👇</strong></h1>
+ <br />
+<img src="files/queen.gif" alt="queen.gif" title="queen.gif" /></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

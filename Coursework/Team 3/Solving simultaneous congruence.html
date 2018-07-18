@@ -1,0 +1,240 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Solving simultaneous congruence</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>Solving simultaneous congruence<small> #TomsProjects </small></h1>...<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.javascript  {font-family:monospace;}
+.javascript .imp {font-weight: bold; color: red;}
+.javascript .kw1 {color: #000066; font-weight: bold;}
+.javascript .kw2 {color: #003366; font-weight: bold;}
+.javascript .kw3 {color: #000066;}
+.javascript .co1 {color: #006600; font-style: italic;}
+.javascript .co2 {color: #009966; font-style: italic;}
+.javascript .coMULTI {color: #006600; font-style: italic;}
+.javascript .es0 {color: #000099; font-weight: bold;}
+.javascript .br0 {color: #009900;}
+.javascript .sy0 {color: #339933;}
+.javascript .st0 {color: #3366CC;}
+.javascript .nu0 {color: #CC0000;}
+.javascript .me1 {color: #660066;}
+.javascript span.xtra { display:block; }
+
+-->
+</style><pre class="javascript"><span class="sy0">&lt;!</span>doctype html<span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>html<span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>head<span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>link rel<span class="sy0">=</span><span class="st0">&quot;shortcut icon&quot;</span> href<span class="sy0">=</span><span class="st0">&quot;../Doc/head.ico&quot;</span> type<span class="sy0">=</span><span class="st0">&quot;image/x-icon&quot;</span><span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>meta charset<span class="sy0">=</span><span class="st0">&quot;utf-8&quot;</span><span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>title<span class="sy0">&gt;</span>Simultaneous Congruences<span class="sy0">&lt;/</span>title<span class="sy0">&gt;</span>
+<span class="sy0">&lt;/</span>head<span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>style<span class="sy0">&gt;</span>
+<span class="sy0">*</span> <span class="br0">&#123;</span>
+    font<span class="sy0">-</span>family<span class="sy0">:</span>Baskerville<span class="sy0">,</span> <span class="st0">&quot;Palatino Linotype&quot;</span><span class="sy0">,</span> Palatino<span class="sy0">,</span> <span class="st0">&quot;Century Schoolbook L&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Times New Roman&quot;</span><span class="sy0">,</span> serif<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+.<span class="me1">v</span> <span class="br0">&#123;</span>
+    font<span class="sy0">-</span>size<span class="sy0">:</span> 23px<span class="sy0">;</span>
+    width<span class="sy0">:</span> 50px<span class="sy0">;</span>
+    text<span class="sy0">-</span>align<span class="sy0">:</span> center<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+.<span class="me1">button</span> <span class="br0">&#123;</span>
+    font<span class="sy0">-</span>size<span class="sy0">:</span> 22px<span class="sy0">;</span>
+<span class="br0">&#125;</span>
+<span class="sy0">&lt;/</span>style<span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>body style<span class="sy0">=</span><span class="st0">&quot;text-align:center; width: 800px; margin:auto auto; font-size: 24px;&quot;</span><span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>p style<span class="sy0">=</span><span class="st0">&quot;font-size:26px; margin: 10px;&quot;</span><span class="sy0">&gt;</span>Simultaneous Congruences<span class="sy0">:</span> The Chinese Remainder Theorem<span class="sy0">&lt;/</span>p<span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>table style<span class="sy0">=</span><span class="st0">&quot;margin: auto auto&quot;</span><span class="sy0">&gt;</span>
+    <span class="sy0">&lt;</span>tr<span class="sy0">&gt;</span>
+        <span class="sy0">&lt;</span>td style<span class="sy0">=</span><span class="st0">&quot;padding-right: 20px; vertical-align: top;&quot;</span><span class="sy0">&gt;</span>
+            <span class="sy0">&lt;</span>div id<span class="sy0">=</span><span class="st0">&quot;equations&quot;</span><span class="sy0">&gt;</span>
+                Congruences<span class="sy0">:</span> ax≡b <span class="br0">&#40;</span>mod m<span class="br0">&#41;</span><span class="sy0">&lt;</span>br <span class="sy0">/&gt;&lt;</span>br <span class="sy0">/&gt;</span>
+                <span class="sy0">&lt;</span>div <span class="kw2">class</span><span class="sy0">=</span><span class="st0">&quot;equation&quot;</span><span class="sy0">&gt;</span>
+                    <span class="sy0">&lt;</span>input type<span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw2">class</span><span class="sy0">=</span><span class="st0">&quot;v&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;a&quot;</span> <span class="sy0">/&gt;</span>x≡<span class="sy0">&lt;</span>input type<span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw2">class</span><span class="sy0">=</span><span class="st0">&quot;v&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;b&quot;</span> <span class="sy0">/&gt;&amp;</span>nbsp<span class="sy0">;</span><span class="br0">&#40;</span>mod<span class="sy0">&amp;</span>nbsp<span class="sy0">;&lt;</span>input type<span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw2">class</span><span class="sy0">=</span><span class="st0">&quot;v&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;m&quot;</span> <span class="sy0">/&gt;</span><span class="br0">&#41;</span><span class="sy0">&lt;</span>br <span class="sy0">/&gt;</span>
+                    <span class="sy0">&lt;</span>br <span class="sy0">/&gt;</span>
+                <span class="sy0">&lt;/</span>div<span class="sy0">&gt;</span>
+                <span class="sy0">&lt;</span>div <span class="kw2">class</span><span class="sy0">=</span><span class="st0">&quot;equation&quot;</span><span class="sy0">&gt;</span>
+                    <span class="sy0">&lt;</span>input type<span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw2">class</span><span class="sy0">=</span><span class="st0">&quot;v&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;a&quot;</span> <span class="sy0">/&gt;</span>x≡<span class="sy0">&lt;</span>input type<span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw2">class</span><span class="sy0">=</span><span class="st0">&quot;v&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;b&quot;</span> <span class="sy0">/&gt;&amp;</span>nbsp<span class="sy0">;</span><span class="br0">&#40;</span>mod<span class="sy0">&amp;</span>nbsp<span class="sy0">;&lt;</span>input type<span class="sy0">=</span><span class="st0">&quot;text&quot;</span> <span class="kw2">class</span><span class="sy0">=</span><span class="st0">&quot;v&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;m&quot;</span> <span class="sy0">/&gt;</span><span class="br0">&#41;</span><span class="sy0">&lt;</span>br <span class="sy0">/&gt;</span>
+                    <span class="sy0">&lt;</span>br <span class="sy0">/&gt;</span>
+                <span class="sy0">&lt;/</span>div<span class="sy0">&gt;</span>
+            <span class="sy0">&lt;/</span>div<span class="sy0">&gt;</span>
+            <span class="sy0">&lt;</span>input type<span class="sy0">=</span><span class="st0">&quot;button&quot;</span> <span class="kw2">class</span><span class="sy0">=</span><span class="st0">&quot;button&quot;</span> value<span class="sy0">=</span><span class="st0">&quot;Add&quot;</span> onClick<span class="sy0">=</span><span class="st0">&quot;addOne();&quot;</span><span class="sy0">/&gt;&amp;</span>nbsp<span class="sy0">;</span>
+            <span class="sy0">&lt;</span>input type<span class="sy0">=</span><span class="st0">&quot;button&quot;</span> <span class="kw2">class</span><span class="sy0">=</span><span class="st0">&quot;button&quot;</span> value<span class="sy0">=</span><span class="st0">&quot;Delete&quot;</span> onClick<span class="sy0">=</span><span class="st0">&quot;deleteOne();&quot;</span><span class="sy0">/&gt;&amp;</span>nbsp<span class="sy0">;</span>
+            <span class="sy0">&lt;</span>input type<span class="sy0">=</span><span class="st0">&quot;button&quot;</span> <span class="kw2">class</span><span class="sy0">=</span><span class="st0">&quot;button&quot;</span> value<span class="sy0">=</span><span class="st0">&quot;Solve&quot;</span> onClick<span class="sy0">=</span><span class="st0">&quot;init();&quot;</span><span class="sy0">&gt;&lt;/</span>td<span class="sy0">&gt;</span>
+        <span class="sy0">&lt;</span>td style<span class="sy0">=</span><span class="st0">&quot;vertical-align: top;&quot;</span><span class="sy0">&gt;</span> Solution<span class="sy0">:&lt;</span>br <span class="sy0">/&gt;&lt;</span>br <span class="sy0">/&gt;</span>
+            <span class="sy0">&lt;</span>textarea id<span class="sy0">=</span><span class="st0">&quot;result&quot;</span> <span class="kw3">name</span><span class="sy0">=</span><span class="st0">&quot;result&quot;</span> cols<span class="sy0">=</span><span class="st0">&quot;35&quot;</span> rows<span class="sy0">=</span><span class="st0">&quot;10&quot;</span> style<span class="sy0">=</span><span class="st0">&quot;font-size:20px;&quot;</span><span class="sy0">&gt;&lt;/</span>textarea<span class="sy0">&gt;&lt;/</span>td<span class="sy0">&gt;</span>
+    <span class="sy0">&lt;/</span>tr<span class="sy0">&gt;</span>
+<span class="sy0">&lt;/</span>table<span class="sy0">&gt;</span>
+<span class="sy0">&lt;</span>br <span class="sy0">/&gt;</span>
+By Tom Zhou
+&nbsp;
+<span class="sy0">&lt;</span>script<span class="sy0">&gt;</span>
+&nbsp;
+    <span class="kw2">var</span> x <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="kw2">var</span> y <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+    <span class="kw2">var</span> d <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="kw2">var</span> equs <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;equations&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw2">var</span> result <span class="sy0">=</span> document.<span class="me1">getElementById</span><span class="br0">&#40;</span><span class="st0">&quot;result&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw2">function</span> addOne<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw2">var</span> newequ <span class="sy0">=</span> document.<span class="me1">createElement</span><span class="br0">&#40;</span><span class="st0">'div'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        newequ.<span class="me1">className</span> <span class="sy0">=</span> <span class="st0">&quot;equation&quot;</span><span class="sy0">;</span>
+        newequ.<span class="me1">innerHTML</span> <span class="sy0">=</span> <span class="st0">'&lt;input type=&quot;text&quot; class=&quot;v&quot; name=&quot;a&quot; /&gt;x≡&lt;input type=&quot;text&quot; class=&quot;v&quot; name=&quot;b&quot; /&gt;&amp;nbsp;(mod&amp;nbsp;&lt;input type=&quot;text&quot; class=&quot;v&quot; name=&quot;m&quot; /&gt;)&lt;br /&gt;&lt;br /&gt;'</span><span class="sy0">;</span>
+        equs.<span class="me1">appendChild</span><span class="br0">&#40;</span>newequ<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw2">function</span> deleteOne<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw2">var</span> equations <span class="sy0">=</span> document.<span class="me1">getElementsByClassName</span><span class="br0">&#40;</span><span class="st0">&quot;equation&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        equs.<span class="me1">removeChild</span><span class="br0">&#40;</span>equations<span class="br0">&#91;</span>equations.<span class="me1">length</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="co1">//initialize global variables</span>
+    <span class="kw2">function</span> initVariables<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        x <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        y <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        d <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw2">function</span> init<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        result.<span class="me1">value</span> <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+        <span class="kw2">var</span> inputAs <span class="sy0">=</span> document.<span class="me1">getElementsByName</span><span class="br0">&#40;</span><span class="st0">'a'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw2">var</span> inputBs <span class="sy0">=</span> document.<span class="me1">getElementsByName</span><span class="br0">&#40;</span><span class="st0">'b'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw2">var</span> inputMs <span class="sy0">=</span> document.<span class="me1">getElementsByName</span><span class="br0">&#40;</span><span class="st0">'m'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw2">var</span> <span class="kw1">As</span> <span class="sy0">=</span> <span class="kw2">new</span> Array<span class="br0">&#40;</span>inputAs.<span class="me1">length</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw2">var</span> Bs <span class="sy0">=</span> <span class="kw2">new</span> Array<span class="br0">&#40;</span>inputBs.<span class="me1">length</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw2">var</span> Ms <span class="sy0">=</span> <span class="kw2">new</span> Array<span class="br0">&#40;</span>inputMs.<span class="me1">length</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw2">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span>inputAs.<span class="me1">length</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw2">var</span> a <span class="sy0">=</span> parseInt<span class="br0">&#40;</span>inputAs<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">value</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw2">var</span> b <span class="sy0">=</span> parseInt<span class="br0">&#40;</span>inputBs<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">value</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw2">var</span> m <span class="sy0">=</span> parseInt<span class="br0">&#40;</span>inputMs<span class="br0">&#91;</span>i<span class="br0">&#93;</span>.<span class="me1">value</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>isNaN<span class="br0">&#40;</span>a<span class="br0">&#41;</span> <span class="sy0">||</span> isNaN<span class="br0">&#40;</span>b<span class="br0">&#41;</span> <span class="sy0">||</span> isNaN<span class="br0">&#40;</span>m<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                result.<span class="me1">value</span> <span class="sy0">=</span> <span class="st0">&quot;Illegal Input!!!&quot;</span><span class="sy0">;</span>
+                <span class="kw1">return</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span><span class="br0">&#123;</span>
+                <span class="kw1">As</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> a<span class="sy0">;</span>
+                Bs<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> b<span class="sy0">;</span>
+                Ms<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> m<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw2">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span>Ms.<span class="me1">length</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw2">var</span> j<span class="sy0">=</span>i<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span> j<span class="sy0">&lt;</span>Ms.<span class="me1">length</span><span class="sy0">;</span> j<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                initVariables<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                gcd<span class="br0">&#40;</span>Ms<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">,</span> Ms<span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>d<span class="sy0">!=</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    result.<span class="me1">value</span> <span class="sy0">=</span> <span class="st0">&quot;No solution! Ms are not relatively prime to each other&quot;</span><span class="sy0">;</span>
+                    <span class="kw1">return</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw2">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="kw1">As</span>.<span class="me1">length</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw1">As</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">&gt;</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="co1">// get x which satisfies a*c≡1 (mod m), or ac-my=1</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>solveDiophantine<span class="br0">&#40;</span><span class="kw1">As</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">,</span> <span class="sy0">-</span>Ms<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    result.<span class="me1">value</span> <span class="sy0">+=</span> <span class="kw1">As</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">+</span><span class="st0">&quot; * &quot;</span><span class="sy0">+</span>x<span class="sy0">+</span><span class="st0">&quot;≡&quot;</span><span class="sy0">+</span><span class="st0">&quot;1 (mod &quot;</span><span class="sy0">+</span>Ms<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">+</span><span class="st0">&quot;)→&quot;</span><span class="sy0">;</span>
+                    <span class="co1">//multiply ax≡b (mod m) by c</span>
+                    <span class="co1">//so it becomes x≡b*c≡r(mod m), where r = b*c-q*m, q∈Integers</span>
+                    Bs<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>Bs<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">*</span>x<span class="br0">&#41;</span><span class="sy0">%</span>Ms<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+                    <span class="kw1">As</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+                    result.<span class="me1">value</span> <span class="sy0">+=</span> <span class="st0">&quot;x≡&quot;</span><span class="sy0">+</span>Bs<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">+</span><span class="st0">&quot; (mod &quot;</span><span class="sy0">+</span>Ms<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">+</span><span class="st0">&quot;)<span class="es0">\n</span>&quot;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span><span class="br0">&#123;</span>
+                    result.<span class="me1">value</span> <span class="sy0">+=</span> <span class="st0">&quot;No solution!!!&quot;</span><span class="sy0">;</span>
+                    <span class="kw1">return</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span><span class="br0">&#123;</span>
+                result.<span class="me1">value</span> <span class="sy0">+=</span> <span class="st0">&quot;x≡&quot;</span><span class="sy0">+</span>Bs<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">+</span><span class="st0">&quot; (mod &quot;</span><span class="sy0">+</span>Ms<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">+</span><span class="st0">&quot;)<span class="es0">\n</span>&quot;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw2">var</span> M <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="co1">// calculate M, which is m1*m2*...mn</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw2">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span>Ms.<span class="me1">length</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            M <span class="sy0">=</span> M <span class="sy0">*</span> Ms<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        result.<span class="me1">value</span> <span class="sy0">+=</span> <span class="st0">&quot;M = &quot;</span> <span class="sy0">+</span> M <span class="sy0">+</span> <span class="st0">&quot;<span class="es0">\n</span>&quot;</span><span class="sy0">;</span>
+        <span class="co1">// prepare the array of solutions</span>
+        <span class="kw2">var</span> Xs <span class="sy0">=</span> <span class="kw2">new</span> Array<span class="br0">&#40;</span>Ms.<span class="me1">length</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="co1">// solving xiMi≡bi (mod mi)</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw2">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span>Ms.<span class="me1">length</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw2">var</span> a <span class="sy0">=</span> <span class="kw1">As</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="kw2">var</span> b <span class="sy0">=</span> Bs<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="kw2">var</span> m <span class="sy0">=</span> Ms<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="kw2">var</span> Mi <span class="sy0">=</span> M <span class="sy0">/</span> m<span class="sy0">;</span>
+            result.<span class="me1">value</span> <span class="sy0">+=</span> Mi<span class="sy0">+</span><span class="st0">&quot;*x&quot;</span><span class="sy0">+</span><span class="br0">&#40;</span>i<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot;≡&quot;</span><span class="sy0">+</span>b<span class="sy0">+</span><span class="st0">&quot; (mod &quot;</span><span class="sy0">+</span>m<span class="sy0">+</span><span class="st0">&quot;)→&quot;</span><span class="sy0">;</span>
+            solveDiophantine<span class="br0">&#40;</span>Mi<span class="sy0">,</span> <span class="sy0">-</span>m<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="sy0">;</span>
+            result.<span class="me1">value</span> <span class="sy0">+=</span> <span class="st0">&quot;x&quot;</span><span class="sy0">+</span><span class="br0">&#40;</span>i<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot;=&quot;</span><span class="sy0">+</span>x<span class="sy0">+</span><span class="st0">&quot;<span class="es0">\n</span>&quot;</span><span class="sy0">;</span>
+            Xs<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> x<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="co1">// the general solution x</span>
+        <span class="kw2">var</span> sol <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw2">var</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span>Ms.<span class="me1">length</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            sol <span class="sy0">+=</span> Xs<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">*</span>M<span class="sy0">/</span>Ms<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        sol <span class="sy0">=</span> sol <span class="sy0">%</span> M<span class="sy0">;</span>
+        result.<span class="me1">value</span> <span class="sy0">+=</span> <span class="st0">&quot;General Solution: x=&quot;</span><span class="sy0">+</span>sol<span class="sy0">+</span><span class="st0">&quot;+&quot;</span><span class="sy0">+</span>M<span class="sy0">+</span><span class="st0">&quot;*n&quot;</span><span class="sy0">;</span>
+        <span class="co1">//Done!</span>
+    <span class="br0">&#125;</span>
+    <span class="co1">//solve x, y such that ax+by=c</span>
+    <span class="kw2">function</span> solveDiophantine<span class="br0">&#40;</span>a<span class="sy0">,</span> b<span class="sy0">,</span> c<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        initVariables<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        gcd<span class="br0">&#40;</span>a<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>Math.<span class="me1">floor</span><span class="br0">&#40;</span>c<span class="sy0">/</span>d<span class="br0">&#41;</span><span class="sy0">==</span><span class="br0">&#40;</span>c<span class="sy0">/</span>d<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            a <span class="sy0">=</span> a<span class="sy0">/</span>d<span class="sy0">;</span>
+            b <span class="sy0">=</span> b<span class="sy0">/</span>d<span class="sy0">;</span>
+            c <span class="sy0">=</span> c<span class="sy0">/</span>d<span class="sy0">;</span>
+            <span class="co1">// now gcd(a,b)=1</span>
+&nbsp;
+            initVariables<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            gcd<span class="br0">&#40;</span>a<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="sy0">;</span>
+            x <span class="sy0">=</span> c<span class="sy0">*</span>x<span class="sy0">;</span>
+            <span class="co1">//make sure that x is the smallest positive integer (for convenience of further calculations)</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>b<span class="sy0">&gt;</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">while</span> <span class="br0">&#40;</span>x<span class="sy0">&lt;</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    x <span class="sy0">+=</span> b<span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span><span class="br0">&#123;</span>
+                <span class="kw1">while</span> <span class="br0">&#40;</span>x<span class="sy0">&lt;</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    x <span class="sy0">+=</span> <span class="sy0">-</span>b<span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="co1">// find d = cd(a, b) and x and y such that ax+by=d</span>
+    <span class="co1">// pass the result by changing global variables x, y and d.</span>
+    <span class="kw2">function</span> gcd<span class="br0">&#40;</span>a<span class="sy0">,</span> b<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>a<span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            d <span class="sy0">=</span> b<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            q <span class="sy0">=</span> parseInt<span class="br0">&#40;</span>b <span class="sy0">/</span> a<span class="br0">&#41;</span><span class="sy0">;</span>
+            r <span class="sy0">=</span> b <span class="sy0">%</span> a<span class="sy0">;</span>
+            gcd<span class="br0">&#40;</span>r<span class="sy0">,</span> a<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            <span class="co1">//working backward to obtain x and y such that ax+by=gcd(a, b)</span>
+            temp <span class="sy0">=</span> y<span class="sy0">;</span>
+            y <span class="sy0">=</span> x<span class="sy0">;</span>
+            x <span class="sy0">=</span> temp <span class="sy0">-</span> parseInt<span class="br0">&#40;</span>b <span class="sy0">/</span> a<span class="br0">&#41;</span> <span class="sy0">*</span> x<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="sy0">&lt;/</span>script<span class="sy0">&gt;</span>
+<span class="sy0">&lt;/</span>body<span class="sy0">&gt;</span>
+<span class="sy0">&lt;/</span>html<span class="sy0">&gt;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

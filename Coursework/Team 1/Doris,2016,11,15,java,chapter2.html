@@ -1,0 +1,109 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Doris,2016,11,15,java,chapter2</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>Doris,2016,11,15,java,chapter2<small> #java </small></h1>
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">java.util.Scanner</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">class</span> BankAccount <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw4">double</span> intRate<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> password<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">double</span> balance<span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">double</span> OVERDRAWN_PENALTY <span class="sy0">=</span> <span class="nu0">20.00</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> Scanner in<span class="sy0">=</span><span class="kw1">new</span> Scanner<span class="br0">&#40;</span><span class="kw3">System</span>.<span class="me1">in</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+&nbsp;
+    <span class="kw1">public</span> BankAccount<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        password <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+        balance <span class="sy0">=</span> <span class="nu0">0.0</span><span class="sy0">;</span><span class="br0">&#125;</span>
+    <span class="kw1">public</span> BankAccount<span class="br0">&#40;</span><span class="kw3">String</span> acctPassword, <span class="kw4">double</span> acctBalance<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        password <span class="sy0">=</span> acctPassword<span class="sy0">;</span>
+        balance <span class="sy0">=</span> acctBalance<span class="sy0">;</span><span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">double</span> getBalance<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+         <span class="kw1">return</span> balance<span class="sy0">;</span> <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> deposit<span class="br0">&#40;</span><span class="kw3">String</span> acctPassword, <span class="kw4">double</span> amount<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>acctPassword.<span class="me1">equals</span><span class="br0">&#40;</span>password<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">;</span>
+        <span class="kw1">else</span>
+            balance <span class="sy0">+=</span> amount<span class="sy0">;</span> <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> withdraw<span class="br0">&#40;</span><span class="kw3">String</span> acctPassword, <span class="kw4">double</span> amount<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>acctPassword.<span class="me1">equals</span><span class="br0">&#40;</span>password<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">else</span>
+            balance <span class="sy0">-=</span> amount<span class="sy0">;</span>
+            <span class="kw1">if</span>  <span class="br0">&#40;</span>balance <span class="sy0">&lt;</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+                balance <span class="sy0">-=</span> OVERDRAWN_PENALTY<span class="sy0">;</span> <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">double</span> getInterestRate<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Enter interest rate for bank account&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Enter in decimal form:&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        intRate <span class="sy0">=</span> in.<span class="me1">nextDouble</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="co1">// read user input return intRate;</span>
+        <span class="kw1">return</span> intRate<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw3">String</span> chooseBestAccount<span class="br0">&#40;</span>BankAccount b1, BankAccount b2<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>b1.<span class="me1">getBalance</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&gt;</span> b2.<span class="me1">getBalance</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            <span class="kw1">return</span> <span class="st0">&quot;b1 better&quot;</span><span class="sy0">;</span>
+        <span class="kw1">else</span>
+            <span class="kw1">return</span> <span class="st0">&quot;b2 better&quot;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> chargeFee<span class="br0">&#40;</span>BankAccount b, <span class="kw3">String</span> password,
+            <span class="kw4">double</span> fee<span class="br0">&#41;</span>
+            <span class="br0">&#123;</span>
+            <span class="kw1">final</span> <span class="kw4">double</span> MIN_BALANCE <span class="sy0">=</span> <span class="nu0">10.00</span><span class="sy0">;</span> <span class="kw1">if</span> <span class="br0">&#40;</span>b.<span class="me1">getBalance</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&lt;</span> MIN_BALANCE<span class="br0">&#41;</span>
+            b.<span class="me1">withdraw</span><span class="br0">&#40;</span>password, fee<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+ <span class="br0">&#125;</span>
+<span class="kw1">public</span> <span class="kw1">class</span> Test <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+        BankAccount a <span class="sy0">=</span> <span class="kw1">new</span> BankAccount<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        BankAccount b <span class="sy0">=</span> <span class="kw1">new</span> BankAccount<span class="br0">&#40;</span><span class="st0">&quot;asdasd&quot;</span>,<span class="nu0">800.00</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>b.<span class="me1">getBalance</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b.<span class="me1">deposit</span><span class="br0">&#40;</span><span class="st0">&quot;asdasd&quot;</span>,<span class="nu0">500.00</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>b.<span class="me1">getBalance</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        b.<span class="me1">withdraw</span><span class="br0">&#40;</span><span class="st0">&quot;asdasd&quot;</span>,<span class="nu0">1400</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>b.<span class="me1">getBalance</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        BankAccount briansFund <span class="sy0">=</span> <span class="kw1">new</span> BankAccount<span class="br0">&#40;</span><span class="st0">&quot;BrianL&quot;</span>, <span class="nu0">10000</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        BankAccount paulsFund <span class="sy0">=</span> <span class="kw1">new</span> BankAccount<span class="br0">&#40;</span><span class="st0">&quot;PaulM&quot;</span>, <span class="nu0">90000</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">String</span> betterFund <span class="sy0">=</span> BankAccount.<span class="me1">chooseBestAccount</span><span class="br0">&#40;</span>briansFund, paulsFund<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span>betterFund<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

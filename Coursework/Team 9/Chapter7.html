@@ -1,0 +1,180 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Chapter7</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> ColorGrid <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> pixels<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> rows<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> cols<span class="sy0">;</span>
+&nbsp;
+    <span class="co3">/**
+     * Creates numRows × numCols ColorGrid from String s. * @param s the string
+     * containing colors of the ColorGrid * @param numRows the number of rows in
+     * the ColorGrid * @param numCols the number of columns in the ColorGrid
+     */</span>
+    <span class="kw1">public</span> ColorGrid<span class="br0">&#40;</span><span class="kw3">String</span> s, <span class="kw4">int</span> numRows, <span class="kw4">int</span> numCols<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw4">int</span> index <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">rows</span> <span class="sy0">=</span> numRows<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cols</span> <span class="sy0">=</span> numCols<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">pixels</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">String</span><span class="br0">&#91;</span>rows<span class="br0">&#93;</span><span class="br0">&#91;</span>cols<span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> rows<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> j <span class="sy0">&lt;</span> rows<span class="sy0">;</span> j<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    pixels<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> s.<span class="me1">substring</span><span class="br0">&#40;</span>index, index <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    index <span class="sy0">=</span> index <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="co3">/**
+     * Precondition: * - pixels[row][col] is oldColor, one of &quot;r&quot;, &quot;b&quot;,&quot;g&quot;, or
+     * &quot;y&quot;. * - newColor is one of &quot;r&quot;,&quot;b&quot;,&quot;g&quot;, or &quot;y&quot;. * Postcondition: * - If
+     * 0 &lt;= row &lt; rows and 0 &lt;= col &lt; cols, paints the * connected region of
+     * pixels[row][col] the newColor. * - Does nothing if oldColor is the same
+     * as newColor. * @param row the given row * @param col the given column
+     * * @param newColor the new color for painting * @param oldColor the
+     * current color of pixels[row][col]
+     */</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> paintRegion<span class="br0">&#40;</span><span class="kw4">int</span> row, <span class="kw4">int</span> col, <span class="kw3">String</span> newColor, <span class="kw3">String</span> oldColor<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="co1">// Other methods are not shown.</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>row <span class="sy0">&gt;=</span> <span class="nu0">0</span> <span class="sy0">&amp;&amp;</span> row <span class="sy0">&lt;</span> rows <span class="sy0">&amp;&amp;</span> col <span class="sy0">&gt;=</span> <span class="nu0">0</span> <span class="sy0">&amp;&amp;</span> col <span class="sy0">&lt;</span> cols<span class="br0">&#41;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>pixels<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span>oldColor<span class="br0">&#41;</span><span class="sy0">&amp;&amp;!</span>pixels<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span>.<span class="me1">equals</span><span class="br0">&#40;</span>newColor<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            pixels<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span> <span class="sy0">=</span> newColor<span class="sy0">;</span>
+            paintRegion<span class="br0">&#40;</span>row <span class="sy0">+</span> <span class="nu0">1</span>, col, newColor, oldColor<span class="br0">&#41;</span><span class="sy0">;</span>
+            paintRegion<span class="br0">&#40;</span>row <span class="sy0">-</span> <span class="nu0">1</span>, col, newColor, oldColor<span class="br0">&#41;</span><span class="sy0">;</span>
+            paintRegion<span class="br0">&#40;</span>row, col <span class="sy0">+</span> <span class="nu0">1</span>, newColor, oldColor<span class="br0">&#41;</span><span class="sy0">;</span>
+            paintRegion<span class="br0">&#40;</span>row, col <span class="sy0">-</span> <span class="nu0">1</span>, newColor, oldColor<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> Sentence <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> sentence<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> numWords<span class="sy0">;</span>
+&nbsp;
+    <span class="co3">/**
+     * Constructor. Creates sentence from String str. * Finds the number of
+     * words in sentence. * Precondition: Words in str separated by exactly one
+     * blank. * @param str the string containing a sentence
+     */</span>
+    <span class="kw1">public</span> Sentence<span class="br0">&#40;</span><span class="kw3">String</span> str<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+         sentence <span class="sy0">=</span> str<span class="sy0">;</span> numWords <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+         <span class="kw4">int</span> k <span class="sy0">=</span> str.<span class="me1">indexOf</span><span class="br0">&#40;</span><span class="st0">&quot; &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+         <span class="kw1">while</span> <span class="br0">&#40;</span>k <span class="sy0">!=</span> <span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+             numWords<span class="sy0">++;</span>
+             str <span class="sy0">=</span> str.<span class="me1">substring</span><span class="br0">&#40;</span>k <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//substring after blank k = str.indexOf(&quot; &quot;); //get index of next blank } }</span>
+         <span class="br0">&#125;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getNumWords<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> numWords<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">String</span> getSentence<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> sentence<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co3">/**
+     * @param s
+     *            the specified string * @return a copy of String s with all
+     *            blanks removed * Postcondition: Returned string contains just
+     *            one word.
+     */</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw3">String</span> removeBlanks<span class="br0">&#40;</span><span class="kw3">String</span> s<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> s.<span class="me1">replace</span><span class="br0">&#40;</span><span class="st0">&quot; &quot;</span>, <span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw3">String</span> lowerCase<span class="br0">&#40;</span><span class="kw3">String</span> s<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">return</span> s.<span class="me1">toLowerCase</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw3">String</span> removePunctuation<span class="br0">&#40;</span><span class="kw3">String</span> s<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw3">String</span> stri <span class="sy0">=</span> <span class="st0">&quot;&quot;</span><span class="sy0">;</span>
+        <span class="kw3">String</span> punctuations <span class="sy0">=</span> <span class="st0">&quot;~!@#$%^&amp;*()_+][}{|&gt;&lt;.,?/;:&quot;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i<span class="sy0">&lt;</span>s.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> a <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>a<span class="sy0">&lt;</span>punctuations.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>a<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span><span class="br0">&#40;</span>s.<span class="me1">substring</span><span class="br0">&#40;</span>i, i<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span>.<span class="me1">compareTo</span><span class="br0">&#40;</span>punctuations.<span class="me1">substring</span><span class="br0">&#40;</span>a,a<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">1</span><span class="sy0">||</span>
+                        s.<span class="me1">substring</span><span class="br0">&#40;</span>i, i<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span>.<span class="me1">compareTo</span><span class="br0">&#40;</span>punctuations.<span class="me1">substring</span><span class="br0">&#40;</span>a,a<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">==-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    stri <span class="sy0">+=</span> s.<span class="me1">substring</span><span class="br0">&#40;</span>i,i<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">private</span> <span class="kw1">static</span> <span class="kw4">boolean</span> isPalindrome<span class="br0">&#40;</span><span class="kw3">String</span> s, <span class="kw4">int</span> start, <span class="kw4">int</span> end<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>start <span class="sy0">&gt;=</span> end<span class="br0">&#41;</span> <span class="co1">//substring has length 0 or 1</span>
+        <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span>
+    <span class="kw1">else</span> <span class="br0">&#123;</span>
+        <span class="kw3">String</span> first <span class="sy0">=</span> s.<span class="me1">substring</span><span class="br0">&#40;</span>start, start <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">String</span> last <span class="sy0">=</span> s.<span class="me1">substring</span><span class="br0">&#40;</span>end, end <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>first.<span class="me1">equals</span><span class="br0">&#40;</span>last<span class="br0">&#41;</span><span class="br0">&#41;</span>
+            <span class="kw1">return</span> isPalindrome<span class="br0">&#40;</span>s, start <span class="sy0">+</span> <span class="nu0">1</span>, end <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">else</span> <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

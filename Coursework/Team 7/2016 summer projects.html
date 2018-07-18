@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 2016 summer projects</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> hanoi<span class="br0">&#40;</span>f<span class="br0">&#41;</span>:
+      <span class="kw1">if</span> f <span class="sy0">&gt;</span> <span class="nu0">0</span>:
+            <span class="kw1">return</span>  <span class="nu0">2</span>*f - <span class="nu0">1</span>
+&nbsp;
+f <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">'How many layers are there? '</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="sy0">,</span>f+<span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#91;</span>::-<span class="nu0">1</span><span class="br0">&#93;</span>:
+      <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'moving the layer'</span><span class="sy0">,</span>i<span class="sy0">,</span><span class="st0">'from stick.1 to stick.2'</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'moving the layer 1 from stick.1 to stick.3'</span><span class="br0">&#41;</span>
+<span class="kw1">for</span> k <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="sy0">,</span>f+<span class="nu0">1</span><span class="br0">&#41;</span>:
+      <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'moving the layer'</span><span class="sy0">,</span>k<span class="sy0">,</span><span class="st0">'from stick.2 to stick3'</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>hanoi<span class="br0">&#40;</span>f<span class="br0">&#41;</span><span class="sy0">,</span><span class="st0">'steps in total.'</span><span class="br0">&#41;</span></pre>
+
+<br />
+<br />
+<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+f <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> dr<span class="br0">&#40;</span>si<span class="br0">&#41;</span>:
+      f.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">120</span><span class="br0">&#41;</span>
+      f.<span class="me1">forward</span><span class="br0">&#40;</span>si<span class="br0">&#41;</span>
+      f.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">120</span><span class="br0">&#41;</span>
+      f.<span class="me1">forward</span><span class="br0">&#40;</span>si<span class="br0">&#41;</span>
+      f.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">120</span><span class="br0">&#41;</span>
+      f.<span class="me1">forward</span><span class="br0">&#40;</span>si<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> de<span class="br0">&#40;</span>si<span class="br0">&#41;</span>:
+      f.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">120</span><span class="br0">&#41;</span>
+      f.<span class="me1">forward</span><span class="br0">&#40;</span>si<span class="br0">&#41;</span>
+      f.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">120</span><span class="br0">&#41;</span>
+      f.<span class="me1">forward</span><span class="br0">&#40;</span>si<span class="br0">&#41;</span>
+      f.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">120</span><span class="br0">&#41;</span>
+      f.<span class="me1">forward</span><span class="br0">&#40;</span>si<span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#for si in range(1,300,50)[::-1]:</span>
+<span class="kw1">def</span> ag<span class="br0">&#40;</span>si<span class="br0">&#41;</span>:
+      <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">7</span><span class="br0">&#41;</span>:
+            dr<span class="br0">&#40;</span>si<span class="br0">&#41;</span>
+            f.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">120</span><span class="br0">&#41;</span>
+            f.<span class="me1">forward</span><span class="br0">&#40;</span>si/<span class="nu0">2</span><span class="br0">&#41;</span>
+            f.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">180</span><span class="br0">&#41;</span>
+      <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">7</span><span class="br0">&#41;</span>:
+            de<span class="br0">&#40;</span>si<span class="br0">&#41;</span>
+            f.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">120</span><span class="br0">&#41;</span>
+            f.<span class="me1">forward</span><span class="br0">&#40;</span>si/<span class="nu0">2</span><span class="br0">&#41;</span>
+            f.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">180</span><span class="br0">&#41;</span>
+&nbsp;
+f.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>
+f.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">53</span><span class="br0">&#41;</span>
+<span class="kw1">for</span> si <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">300</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span>:
+      ag<span class="br0">&#40;</span>si<span class="br0">&#41;</span>
+      f.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+      f.<span class="me1">circle</span><span class="br0">&#40;</span>si/<span class="nu0">2</span><span class="br0">&#41;</span>
+      f.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+&nbsp;
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

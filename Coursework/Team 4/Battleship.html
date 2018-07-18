@@ -1,0 +1,601 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Battleship</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+UML<br />
+<br />
+<br />
+<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-16%20%E4%B8%8A%E5%8D%883.22.15.png" alt=" 2016-12-16 上午3.22.15.png" title=" 2016-12-16 上午3.22.15.png" style="height: 1102px; width: 782px;" /><br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> Battleships <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> has_battleship<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> has_cruiser<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> has_submarine<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> has_destroyer<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> has_frigate<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> battleshipx<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> cruiserx<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> submarinex<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> destroyerx<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> frigatex<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> battleshipy<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> cruisery<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> submariney<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> destroyery<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> frigatey<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> battack<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> cattack<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> sattack<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> dattack<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> fattack<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Battleships<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">has_battleship</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">has_cruiser</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">has_submarine</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">has_destroyer</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">has_frigate</span> <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">battleshipx</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">battleshipy</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">cruiserx</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">cruisery</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">submarinex</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">submariney</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">destroyerx</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">destroyery</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">frigatex</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">frigatey</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> set_battleship<span class="br0">&#40;</span><span class="kw4">int</span> firstx, <span class="kw4">int</span> firsty, <span class="kw4">int</span> lastx, <span class="kw4">int</span> lasty<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">battack</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>firstx <span class="sy0">==</span> lastx<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipx</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipx</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipx</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipx</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipx</span><span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipy</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipy</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipy</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">2</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipy</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">3</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipy</span><span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">3</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>firsty <span class="sy0">==</span> lasty<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipx</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipx</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipx</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">2</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipx</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">3</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipx</span><span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">4</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipy</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipy</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipy</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipy</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipy</span><span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipx</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipx</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipx</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">2</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipx</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">3</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipx</span><span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">4</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipy</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipy</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipy</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">2</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipy</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">3</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">battleshipy</span><span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">3</span><span class="sy0">;</span>
+&nbsp;
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> set_cruiser<span class="br0">&#40;</span><span class="kw4">int</span> firstx, <span class="kw4">int</span> firsty, <span class="kw4">int</span> lastx, <span class="kw4">int</span> lasty<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">cattack</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>firstx <span class="sy0">==</span> lastx<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">this</span>.<span class="me1">cruiserx</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruiserx</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruiserx</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruiserx</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruisery</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruisery</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruisery</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">2</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruisery</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">3</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>firsty <span class="sy0">==</span> lasty<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">this</span>.<span class="me1">cruiserx</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruiserx</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruiserx</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">2</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruiserx</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">3</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruisery</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruisery</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruisery</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruisery</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            <span class="kw1">this</span>.<span class="me1">cruiserx</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruiserx</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruiserx</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">2</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruiserx</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">3</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruisery</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruisery</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruisery</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">2</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">cruisery</span><span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">3</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> set_submarine<span class="br0">&#40;</span><span class="kw4">int</span> firstx, <span class="kw4">int</span> firsty, <span class="kw4">int</span> lastx, <span class="kw4">int</span> lasty<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">sattack</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>firstx <span class="sy0">==</span> lastx<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">this</span>.<span class="me1">submarinex</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">submarinex</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">submarinex</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">submariney</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">submariney</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">submariney</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">2</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>firsty <span class="sy0">==</span> lasty<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">this</span>.<span class="me1">submarinex</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">submarinex</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">submarinex</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">2</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">submariney</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">submariney</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">submariney</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            <span class="kw1">this</span>.<span class="me1">submarinex</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">submarinex</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">submarinex</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx <span class="sy0">+</span> <span class="nu0">2</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">submariney</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">submariney</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">this</span>.<span class="me1">submariney</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty <span class="sy0">+</span> <span class="nu0">2</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> set_destroyer<span class="br0">&#40;</span><span class="kw4">int</span> firstx, <span class="kw4">int</span> firsty, <span class="kw4">int</span> lastx, <span class="kw4">int</span> lasty<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">dattack</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">this</span>.<span class="me1">destroyerx</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">destroyerx</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> lastx<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">destroyery</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">destroyery</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> lasty<span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> set_frigate<span class="br0">&#40;</span><span class="kw4">int</span> firstx, <span class="kw4">int</span> firsty<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">fattack</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">frigatex</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firstx<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">frigatey</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> firsty<span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getbattleshipx<span class="br0">&#40;</span><span class="kw4">int</span> a<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">battleshipx</span><span class="br0">&#91;</span>a<span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getbattleshipy<span class="br0">&#40;</span><span class="kw4">int</span> a<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">battleshipy</span><span class="br0">&#91;</span>a<span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getcruiserx<span class="br0">&#40;</span><span class="kw4">int</span> a<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">cruiserx</span><span class="br0">&#91;</span>a<span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getcruisery<span class="br0">&#40;</span><span class="kw4">int</span> a<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">cruisery</span><span class="br0">&#91;</span>a<span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getsubmarinex<span class="br0">&#40;</span><span class="kw4">int</span> a<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">submarinex</span><span class="br0">&#91;</span>a<span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getsubmariney<span class="br0">&#40;</span><span class="kw4">int</span> a<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">submariney</span><span class="br0">&#91;</span>a<span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getdestroyerx<span class="br0">&#40;</span><span class="kw4">int</span> a<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">destroyerx</span><span class="br0">&#91;</span>a<span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getdestroyery<span class="br0">&#40;</span><span class="kw4">int</span> a<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">destroyery</span><span class="br0">&#91;</span>a<span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getfrigatex<span class="br0">&#40;</span><span class="kw4">int</span> a<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">frigatex</span><span class="br0">&#91;</span>a<span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getfrigatey<span class="br0">&#40;</span><span class="kw4">int</span> a<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">frigatey</span><span class="br0">&#91;</span>a<span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> desbattleship<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">has_battleship</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> descruiser<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">has_cruiser</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> dessubmarine<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">has_submarine</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> desdestroyer<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">has_destroyer</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> desfrigate<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">has_frigate</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> gethas_battleship<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">has_battleship</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> gethas_cruiser<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">has_cruiser</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> gethas_submarine<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">has_submarine</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> gethas_destroyer<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">has_destroyer</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> gethas_frigate<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">has_frigate</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> get_battack<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">battack</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> get_cattack<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">cattack</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> get_sattack<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">sattack</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> get_dattack<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">dattack</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> get_fattack<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span>.<span class="me1">fattack</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> set_battack<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">battack</span> <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">battack</span> <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> set_cattack<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">cattack</span> <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">cattack</span> <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> set_sattack<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">sattack</span> <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">sattack</span> <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> set_dattack<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">dattack</span> <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">dattack</span> <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> set_fattack<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">fattack</span> <span class="sy0">=</span> <span class="kw1">this</span>.<span class="me1">fattack</span> <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">java.util.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> game <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+        <span class="kw4">int</span> player <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+        Scanner input <span class="sy0">=</span> <span class="kw1">new</span> Scanner<span class="br0">&#40;</span><span class="kw3">System</span>.<span class="me1">in</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Battleships one <span class="sy0">=</span> <span class="kw1">new</span> Battleships<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the battleship begining  x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> bfx1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> bfy1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the battleship endining  x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> blx1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> bly1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the cruiser begining   x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> cfx1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> cfy1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the cruiser endining  x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> clx1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> cly1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the submarine begining  x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sfx1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sfy1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the submarine endining  x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> slx1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sly1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the destroyer begining  x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> dfx1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> dfy1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the destroyer endining  x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> dlx1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> dly1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the frigate begining  x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> ffx1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> ffy1 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        one.<span class="me1">set_battleship</span><span class="br0">&#40;</span>bfx1, bfy1, blx1, bly1<span class="br0">&#41;</span><span class="sy0">;</span>
+        one.<span class="me1">set_cruiser</span><span class="br0">&#40;</span>cfx1, cfy1, clx1, cly1<span class="br0">&#41;</span><span class="sy0">;</span>
+        one.<span class="me1">set_submarine</span><span class="br0">&#40;</span>sfx1, sfy1, slx1, sly1<span class="br0">&#41;</span><span class="sy0">;</span>
+        one.<span class="me1">set_destroyer</span><span class="br0">&#40;</span>dfx1, dfy1, dlx1, dly1<span class="br0">&#41;</span><span class="sy0">;</span>
+        one.<span class="me1">set_frigate</span><span class="br0">&#40;</span>ffx1, ffy1<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        Battleships two <span class="sy0">=</span> <span class="kw1">new</span> Battleships<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the battleship begining  x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> bfx2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> bfy2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the battleship endining  x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> blx2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> bly2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the cruiser begining  x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> cfx2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> cfy2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the cruiser endining  x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> clx2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> cly2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the submarine begining  x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sfx2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sfy2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the submarine endining  x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> slx2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> sly2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the destroyer begining  x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> dfx2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> dfy2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the destroyer endining  x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> dlx2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> dly2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;please set the frigate begining x y axes&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> ffx2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> ffy2 <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        two.<span class="me1">set_battleship</span><span class="br0">&#40;</span>bfx2, bfy2, blx2, bly2<span class="br0">&#41;</span><span class="sy0">;</span>
+        two.<span class="me1">set_cruiser</span><span class="br0">&#40;</span>cfx2, cfy2, clx2, cly2<span class="br0">&#41;</span><span class="sy0">;</span>
+        two.<span class="me1">set_submarine</span><span class="br0">&#40;</span>sfx2, sfy2, slx2, sly2<span class="br0">&#41;</span><span class="sy0">;</span>
+        two.<span class="me1">set_destroyer</span><span class="br0">&#40;</span>dfx2, dfy2, dlx2, dly2<span class="br0">&#41;</span><span class="sy0">;</span>
+        two.<span class="me1">set_frigate</span><span class="br0">&#40;</span>ffx2, ffy2<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">while</span> <span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>player <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                player <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;player 1 please input x and y&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw4">int</span> x <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw4">int</span> y <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">5</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>two.<span class="me1">getbattleshipx</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span> <span class="sy0">==</span> x<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>two.<span class="me1">getbattleshipy</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span> <span class="sy0">==</span> y<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                            two.<span class="me1">set_battack</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;1bboom&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            player <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+&nbsp;
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> q <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> q <span class="sy0">&lt;</span> <span class="nu0">4</span><span class="sy0">;</span> q<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>two.<span class="me1">getcruiserx</span><span class="br0">&#40;</span>q<span class="br0">&#41;</span> <span class="sy0">==</span> x<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>two.<span class="me1">getcruisery</span><span class="br0">&#40;</span>q<span class="br0">&#41;</span> <span class="sy0">==</span> y<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                            two.<span class="me1">set_cattack</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;1cboom&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            player <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+&nbsp;
+                        <span class="br0">&#125;</span>
+&nbsp;
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+&nbsp;
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> e <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> e <span class="sy0">&lt;</span> <span class="nu0">3</span><span class="sy0">;</span> e<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>two.<span class="me1">getsubmarinex</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="sy0">==</span> x<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>two.<span class="me1">getsubmariney</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="sy0">==</span> y<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                            two.<span class="me1">set_sattack</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;1sboom&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            player <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+&nbsp;
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> t <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> t <span class="sy0">&lt;</span> <span class="nu0">2</span><span class="sy0">;</span> t<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>two.<span class="me1">getdestroyerx</span><span class="br0">&#40;</span>t<span class="br0">&#41;</span> <span class="sy0">==</span> x<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>two.<span class="me1">getdestroyery</span><span class="br0">&#40;</span>t<span class="br0">&#41;</span> <span class="sy0">==</span> y<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                            two.<span class="me1">set_dattack</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;1dboom&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            player <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+&nbsp;
+                <span class="kw1">if</span> <span class="br0">&#40;</span>two.<span class="me1">getfrigatex</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span> <span class="sy0">==</span> x<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>two.<span class="me1">getfrigatey</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span> <span class="sy0">==</span> y<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        two.<span class="me1">set_fattack</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;1fboom&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        player <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+&nbsp;
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>two.<span class="me1">get_battack</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">5</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    two.<span class="me1">desbattleship</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+                <span class="br0">&#125;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>two.<span class="me1">get_cattack</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">4</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    two.<span class="me1">descruiser</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+                <span class="br0">&#125;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>two.<span class="me1">get_sattack</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">3</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    two.<span class="me1">dessubmarine</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+                <span class="br0">&#125;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>two.<span class="me1">get_dattack</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">2</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    two.<span class="me1">desdestroyer</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+                <span class="br0">&#125;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>two.<span class="me1">get_fattack</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    two.<span class="me1">desfrigate</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+                <span class="br0">&#125;</span>
+&nbsp;
+            <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+                player <span class="sy0">=</span> <span class="nu0">1</span><span class="sy0">;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;player 2 please input x and y&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw4">int</span> x <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw4">int</span> y <span class="sy0">=</span> input.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">5</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>one.<span class="me1">getbattleshipx</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span> <span class="sy0">==</span> x<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>one.<span class="me1">getbattleshipy</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span> <span class="sy0">==</span> y<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                            one.<span class="me1">set_battack</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;2bboom&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            player <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+&nbsp;
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> q <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> q <span class="sy0">&lt;</span> <span class="nu0">4</span><span class="sy0">;</span> q<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>one.<span class="me1">getcruiserx</span><span class="br0">&#40;</span>q<span class="br0">&#41;</span> <span class="sy0">==</span> x<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>one.<span class="me1">getcruisery</span><span class="br0">&#40;</span>q<span class="br0">&#41;</span> <span class="sy0">==</span> y<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                            one.<span class="me1">set_cattack</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;2cboom&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            player <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+&nbsp;
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+&nbsp;
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> e <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> e <span class="sy0">&lt;</span> <span class="nu0">3</span><span class="sy0">;</span> e<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>one.<span class="me1">getsubmarinex</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="sy0">==</span> x<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>one.<span class="me1">getsubmariney</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span> <span class="sy0">==</span> y<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                            one.<span class="me1">set_sattack</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;2sboom&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            player <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+&nbsp;
+                <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> t <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> t <span class="sy0">&lt;</span> <span class="nu0">2</span><span class="sy0">;</span> t<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>one.<span class="me1">getdestroyerx</span><span class="br0">&#40;</span>t<span class="br0">&#41;</span> <span class="sy0">==</span> x<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span>one.<span class="me1">getdestroyery</span><span class="br0">&#40;</span>t<span class="br0">&#41;</span> <span class="sy0">==</span> y<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                            one.<span class="me1">set_dattack</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;2dboom&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            player <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+&nbsp;
+                <span class="kw1">if</span> <span class="br0">&#40;</span>one.<span class="me1">getfrigatex</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span> <span class="sy0">==</span> x<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>one.<span class="me1">getfrigatey</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span> <span class="sy0">==</span> y<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        one.<span class="me1">set_fattack</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;2fboom&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        player <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>one.<span class="me1">get_battack</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">5</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    one.<span class="me1">desbattleship</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+                <span class="br0">&#125;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>one.<span class="me1">get_cattack</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">4</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    one.<span class="me1">descruiser</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+                <span class="br0">&#125;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>one.<span class="me1">get_sattack</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">3</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    one.<span class="me1">dessubmarine</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+                <span class="br0">&#125;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>one.<span class="me1">get_dattack</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">2</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    one.<span class="me1">desdestroyer</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+                <span class="br0">&#125;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>one.<span class="me1">get_fattack</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    one.<span class="me1">desfrigate</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+                <span class="br0">&#125;</span>
+&nbsp;
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>one.<span class="me1">gethas_battleship</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span> <span class="sy0">&amp;&amp;</span> one.<span class="me1">gethas_cruiser</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span> <span class="sy0">&amp;&amp;</span>
+                     one.<span class="me1">gethas_submarine</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span> <span class="sy0">&amp;&amp;</span> one.<span class="me1">gethas_destroyer</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span> <span class="sy0">&amp;&amp;</span>
+                     one.<span class="me1">gethas_frigate</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;two wins&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">break</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>two.<span class="me1">gethas_battleship</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span> <span class="sy0">&amp;&amp;</span>
+                     two.<span class="me1">gethas_cruiser</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span> <span class="sy0">&amp;&amp;</span> two.<span class="me1">gethas_submarine</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span> <span class="sy0">&amp;&amp;</span>
+                     two.<span class="me1">gethas_destroyer</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span> <span class="sy0">&amp;&amp;</span> two.<span class="me1">gethas_frigate</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;one wins&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">break</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+&nbsp;
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

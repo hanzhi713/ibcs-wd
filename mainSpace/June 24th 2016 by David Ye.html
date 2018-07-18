@@ -1,0 +1,337 @@
+<html>
+  <head>
+    <title>IBCS1-WD - June 24th 2016 by David Ye</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>June 24th 2016 by David Ye<small> #Log </small></h1>1.&quot;==&quot; , &quot;=&quot; &amp; &quot;&gt;=&quot;<br />
+== 意为判断前后是否相等，如下例所示：<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&gt;&gt;&gt;</span> <span class="nu0">10</span> <span class="sy0">==</span> <span class="nu0">8</span>
+<span class="kw2">False</span></pre>
+
+= 意为赋值，如：<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="sy0">&gt;&gt;&gt;</span> a <span class="sy0">=</span> <span class="nu0">10</span>
+<span class="sy0">&gt;&gt;&gt;</span> <span class="kw1">print</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>
+<span class="nu0">10</span></pre>
+
+&gt;= 大于等于号，如：<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">age <span class="sy0">=</span> <span class="nu0">20</span>
+<span class="sy0">&gt;&gt;&gt;</span> Old_enough <span class="sy0">=</span> age <span class="sy0">&gt;=</span> <span class="nu0">17</span>
+<span class="sy0">&gt;&gt;&gt;</span> Old_enough
+<span class="kw2">True</span></pre>
+
+2.Logical Operators (武老大高一的时候讲过，不会的要被查水表了)<br />
+(1) And: 只有在input都为&quot;True&quot;的条件下output才为&quot;True&quot;<br />
+(2) Or: 只要input中有一个为&quot;True&quot;那么output就为&quot;True&quot;<br />
+(3)Not: &quot;False&quot;变&quot;True&quot;,&quot;True&quot;变&quot;False&quot;<br />
+<br />
+3.Truth Tables<br />
+
+
+<table class="wiki_table">
+    <tr>
+        <th>a<br />
+</th>
+        <th>b<br />
+</th>
+        <th>a or b<br />
+</th>
+    </tr>
+    <tr>
+        <td>F<br />
+</td>
+        <td>F<br />
+</td>
+        <td>F<br />
+</td>
+    </tr>
+    <tr>
+        <td>F<br />
+</td>
+        <td>T<br />
+</td>
+        <td>T<br />
+</td>
+    </tr>
+    <tr>
+        <td>T<br />
+</td>
+        <td>F<br />
+</td>
+        <td>T<br />
+</td>
+    </tr>
+    <tr>
+        <td>T<br />
+</td>
+        <td>T<br />
+</td>
+        <td>T<br />
+</td>
+    </tr>
+</table>
+
+<br />
+
+
+<table class="wiki_table">
+    <tr>
+        <th>a<br />
+</th>
+        <th>b<br />
+</th>
+        <th>a and b<br />
+</th>
+    </tr>
+    <tr>
+        <td>False<br />
+</td>
+        <td>False<br />
+</td>
+        <td>False<br />
+</td>
+    </tr>
+    <tr>
+        <td>False<br />
+</td>
+        <td>True<br />
+</td>
+        <td>False<br />
+</td>
+    </tr>
+    <tr>
+        <td>True<br />
+</td>
+        <td>False<br />
+</td>
+        <td>False<br />
+</td>
+    </tr>
+    <tr>
+        <td>True<br />
+</td>
+        <td>True<br />
+</td>
+        <td>True<br />
+</td>
+    </tr>
+</table>
+
+<br />
+
+
+<table class="wiki_table">
+    <tr>
+        <th>a<br />
+</th>
+        <th>not a<br />
+</th>
+    </tr>
+    <tr>
+        <td>F<br />
+</td>
+        <td>T<br />
+</td>
+    </tr>
+    <tr>
+        <td>T<br />
+</td>
+        <td>F<br />
+</td>
+    </tr>
+</table>
+
+4. Break<br />
+The <strong>break</strong> statement is used to immediately leave the body of its loop. The next statement to be executed is the first one after the body:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">for</span> i <span class="kw1">in</span> <span class="br0">&#91;</span><span class="nu0">12</span><span class="sy0">,</span> <span class="nu0">16</span><span class="sy0">,</span> <span class="nu0">17</span><span class="sy0">,</span> <span class="nu0">24</span><span class="sy0">,</span> <span class="nu0">29</span><span class="br0">&#93;</span>:
+    <span class="kw1">if</span> i % <span class="nu0">2</span> <span class="sy0">==</span> <span class="nu0">1</span>:
+        <span class="kw1">break</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>done<span class="br0">&#41;</span></pre>
+
+5.Continue<br />
+This is a control flow statement that causes the program to immediately skip the processing of the rest of the body of the loop, <em>for the current iteration</em>. But the loop still carries on running for its remaining iterations:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">for</span> i <span class="kw1">in</span> <span class="br0">&#91;</span><span class="nu0">12</span><span class="sy0">,</span> <span class="nu0">16</span><span class="sy0">,</span> <span class="nu0">17</span><span class="sy0">,</span> <span class="nu0">24</span><span class="sy0">,</span> <span class="nu0">29</span><span class="sy0">,</span> <span class="nu0">30</span><span class="br0">&#93;</span>:
+    <span class="kw1">if</span> i % <span class="nu0">2</span> <span class="sy0">==</span> <span class="nu0">1</span>:
+        <span class="kw1">continue</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;done&quot;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+6.Return<br />
+跳出函数，把后面作为返回值，只能用于函数中。<br />
+<br />
+7.Comments and Notations are very important! (To remind yourself)<br />
+<br />
+8.Composition<br />
+即函数调用函数，在之前用五个五角星组一个大五角星一题中大家已经练习过了。<br />
+<br />
+9.Recursion<br />
+即函数调用自己，递归，如：<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> Factorial<span class="br0">&#40;</span>n<span class="br0">&#41;</span>:
+    <span class="kw1">if</span> n <span class="sy0">==</span> <span class="nu0">0</span> <span class="kw1">or</span> n <span class="sy0">==</span> <span class="nu0">1</span>:
+        <span class="kw1">return</span> <span class="nu0">1</span>
+    <span class="kw1">else</span>:
+        <span class="kw1">return</span><span class="br0">&#40;</span>n * Factorial<span class="br0">&#40;</span>n - <span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">print</span><span class="br0">&#40;</span>Factorial<span class="br0">&#40;</span><span class="nu0">6</span><span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+<br />
+Finally, the homework is to write a program to represent the steps of the Hanoi Tower.<br />
+-different sides of disks on the first rod<br />
+-there are three rods in total<br />
+-only one disk can be moved at a time<br />
+-each move consists of taking the upper disk from one of thstacks and placing it on top of another stack<br />
+-no disk may be placed on top of a smaller disk<br />
+<br />
+Hanoi(a, c, n)<br />
+Hanoi(a, c, 1)<br />
+Hanoi(a, c, n-1)<br />
+Leave the calculations to your computer<br />
+show each of the steps!</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

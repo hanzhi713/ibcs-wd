@@ -1,0 +1,128 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 9.21test</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+1:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">urllib2</span>
+response1 <span class="sy0">=</span> <span class="kw3">urllib2</span>.<span class="me1">urlopen</span><span class="br0">&#40;</span><span class="st0">'https://ibcs1-wd.wikispaces.com/file/view/vocab.txt/591053286/vocab.txt'</span><span class="br0">&#41;</span>
+response2 <span class="sy0">=</span> <span class="kw3">urllib2</span>.<span class="me1">urlopen</span><span class="br0">&#40;</span><span class="st0">'https://ibcs1-wd.wikispaces.com/file/view/alice_in_wonderland.txt/591053270/alice_in_wonderland.txt'</span><span class="br0">&#41;</span>
+file1 <span class="sy0">=</span> response1.<span class="me1">read</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+file2 <span class="sy0">=</span> response2.<span class="me1">read</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+outfile1 <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">'newfile1.txt'</span><span class="sy0">,</span> <span class="st0">&quot;w&quot;</span><span class="br0">&#41;</span>
+outfile2 <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">'newfile2.txt'</span><span class="sy0">,</span> <span class="st0">&quot;w&quot;</span><span class="br0">&#41;</span>
+outfile1.<span class="me1">write</span><span class="br0">&#40;</span>file1<span class="br0">&#41;</span>
+outfile2.<span class="me1">write</span><span class="br0">&#40;</span>file2<span class="br0">&#41;</span>
+outfile1.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+outfile2.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+2:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">infile <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">&quot;newfile1.txt&quot;</span><span class="sy0">,</span> <span class="st0">&quot;r&quot;</span><span class="br0">&#41;</span>
+outfile <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">&quot;newfileNo2.txt&quot;</span><span class="sy0">,</span> <span class="st0">&quot;w&quot;</span><span class="br0">&#41;</span>
+file1 <span class="sy0">=</span> infile.<span class="me1">read</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+k <span class="sy0">=</span> file1.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> reverse<span class="br0">&#40;</span>a<span class="br0">&#41;</span>:
+    b <span class="sy0">=</span> a<span class="br0">&#91;</span>::-<span class="nu0">1</span><span class="br0">&#93;</span>
+    <span class="kw1">return</span> b
+&nbsp;
+newlist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> k:
+    p <span class="sy0">=</span> reverse<span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+    newlist.<span class="me1">append</span><span class="br0">&#40;</span>p<span class="br0">&#41;</span>
+&nbsp;
+final <span class="sy0">=</span> <span class="st0">&quot; &quot;</span>.<span class="me1">join</span><span class="br0">&#40;</span>newlist<span class="br0">&#41;</span>
+outfile.<span class="me1">write</span><span class="br0">&#40;</span>final<span class="br0">&#41;</span></pre>
+
+3:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">infile <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">&quot;newfile2.txt&quot;</span><span class="sy0">,</span> <span class="st0">&quot;r&quot;</span><span class="br0">&#41;</span>
+outfile <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">&quot;newfileNo3.txt&quot;</span><span class="sy0">,</span> <span class="st0">&quot;w&quot;</span><span class="br0">&#41;</span>
+file1 <span class="sy0">=</span> infile.<span class="me1">read</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+k <span class="sy0">=</span> file1.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+newlist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> k:
+    <span class="kw1">if</span> i <span class="sy0">==</span> <span class="st0">&quot;Alice&quot;</span> <span class="kw1">or</span> <span class="st0">&quot;alice&quot;</span>:
+        newlist.<span class="me1">append</span><span class="br0">&#40;</span><span class="st0">&quot;Michael&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">else</span>:
+        newlist.<span class="me1">append</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+final <span class="sy0">=</span> <span class="st0">&quot; &quot;</span>.<span class="me1">join</span><span class="br0">&#40;</span>newlist<span class="br0">&#41;</span>
+outfile.<span class="me1">write</span><span class="br0">&#40;</span>final<span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

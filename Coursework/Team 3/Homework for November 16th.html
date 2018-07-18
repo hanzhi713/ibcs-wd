@@ -1,0 +1,284 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Homework for November 16th</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>Homework for November 16th<small> #TomsProjects </small></h1>Java<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">java.util.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">class</span> <span class="kw3">Date</span>
+<span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> day<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> month<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> year<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">Date</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="co1">//default constructor</span>
+    <span class="br0">&#123;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">Date</span><span class="br0">&#40;</span><span class="kw4">int</span> mo, <span class="kw4">int</span> da, <span class="kw4">int</span> yr<span class="br0">&#41;</span> <span class="co1">//constructor</span>
+    <span class="br0">&#123;</span>
+        day<span class="sy0">=</span>da<span class="sy0">;</span>
+        month<span class="sy0">=</span>mo<span class="sy0">;</span>
+        year<span class="sy0">=</span>yr<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> month<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="co1">//returns month of Date</span>
+    <span class="br0">&#123;</span>
+        <span class="kw1">return</span> month<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> day<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="co1">//returns day of Date</span>
+    <span class="br0">&#123;</span>
+        <span class="kw1">return</span> day<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> year<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="co1">//returns year of Date</span>
+    <span class="br0">&#123;</span>
+        <span class="kw1">return</span> year<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="co1">//Returns String representation of Date as &quot;m/d/y&quot;, e.g. 4/18/1985.</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="kw1">return</span> month<span class="sy0">+</span><span class="st0">&quot;/&quot;</span><span class="sy0">+</span>day<span class="sy0">+</span><span class="st0">'/'</span><span class="sy0">+</span>year<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> write<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="kw1">this</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> addYears<span class="br0">&#40;</span><span class="kw4">int</span> n<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        year <span class="sy0">+=</span> n<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">class</span> Rational
+<span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> numerator<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> denominator<span class="sy0">;</span>
+    <span class="co3">/** default constructor */</span>
+    Rational<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span> <span class="coMULTI">/* implementation not shown */</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+    <span class="co3">/** Constructs a Rational with numerator n and
+    * denominator 1. */</span>
+    Rational<span class="br0">&#40;</span><span class="kw4">int</span> n<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span> <span class="coMULTI">/* implementation not shown */</span>
+        numerator<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span>
+        denominator<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="co3">/** Constructs a Rational with specified numerator and
+    * denominator. */</span>
+    Rational<span class="br0">&#40;</span><span class="kw4">int</span> numer, <span class="kw4">int</span> denom<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span> <span class="coMULTI">/* implementation not shown */</span>
+        numerator<span class="sy0">=</span>numer<span class="sy0">;</span>
+        denominator<span class="sy0">=</span>denom<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="co3">/** @return numerator */</span>
+    <span class="kw4">int</span> numerator<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span> <span class="coMULTI">/* implementation not shown */</span>
+        <span class="kw1">return</span> numerator<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="co3">/** @return denominator */</span>
+    <span class="kw4">int</span> denominator<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span> <span class="coMULTI">/* implementation not shown */</span>
+        <span class="kw1">return</span> denominator<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="co3">/** Returns (this + r). Leaves this unchanged.
+    * @return this rational number plus r
+    * @param r a rational number to be added to this Rational
+    */</span>
+    <span class="kw1">public</span> Rational plus<span class="br0">&#40;</span>Rational r<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span> <span class="coMULTI">/* implementation not shown */</span>
+        fixSigns<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        r.<span class="me1">fixSigns</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> denom <span class="sy0">=</span> denominator <span class="sy0">*</span> r.<span class="me1">denominator</span><span class="sy0">;</span>
+        <span class="kw4">int</span> numer <span class="sy0">=</span> numerator <span class="sy0">*</span> r.<span class="me1">denominator</span> <span class="sy0">+</span> r.<span class="me1">numerator</span> <span class="sy0">*</span> denominator<span class="sy0">;</span>
+        Rational rat <span class="sy0">=</span> <span class="kw1">new</span> Rational<span class="br0">&#40;</span>numer, denom<span class="br0">&#41;</span><span class="sy0">;</span>
+        rat.<span class="me1">reduce</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> rat<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="co1">//Similarly for times, minus, divide</span>
+&nbsp;
+    <span class="co3">/** Ensures denominator &gt; 0. */</span>
+    <span class="kw1">private</span> <span class="kw4">void</span> fixSigns<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>denominator<span class="sy0">&lt;</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            denominator <span class="sy0">=</span> <span class="sy0">-</span>denominator<span class="sy0">;</span>
+            numerator<span class="sy0">=-</span>numerator<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="co3">/** Ensures lowest terms. */</span>
+    <span class="kw1">private</span> <span class="kw4">void</span> reduce<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span> <span class="coMULTI">/* implementation not shown */</span>
+        <span class="kw4">int</span> gCD<span class="sy0">=</span>greatestCommonDivisor<span class="br0">&#40;</span>numerator,denominator<span class="br0">&#41;</span><span class="sy0">;</span>
+        numerator<span class="sy0">/=</span>gCD<span class="sy0">;</span>
+        denominator<span class="sy0">/=</span>gCD<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw4">int</span> greatestCommonDivisor<span class="br0">&#40;</span><span class="kw4">int</span> a, <span class="kw4">int</span> b<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>b<span class="sy0">==</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">return</span> a<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            <span class="kw1">return</span> greatestCommonDivisor<span class="br0">&#40;</span>b, a<span class="sy0">%</span>b<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> numerator<span class="sy0">+</span><span class="st0">&quot;/&quot;</span><span class="sy0">+</span>denominator<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">class</span> Temperature
+<span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> scale<span class="sy0">;</span> <span class="co1">//valid values are &quot;F&quot; or &quot;C&quot;</span>
+    <span class="kw1">private</span> <span class="kw4">double</span> degrees<span class="sy0">;</span>
+    <span class="co3">/** constructor with specified degrees and scale */</span>
+&nbsp;
+    <span class="kw1">public</span> Temperature<span class="br0">&#40;</span><span class="kw4">double</span> tempDegrees, <span class="kw3">String</span> tempScale<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span> <span class="coMULTI">/* implementation not shown */</span>
+        degrees<span class="sy0">=</span>tempDegrees<span class="sy0">;</span>
+        scale<span class="sy0">=</span>tempScale<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="co3">/** Mutator. Converts this Temperature to degrees Fahrenheit.
+    * Precondition: Temperature is a valid temperature
+    * in degrees Celsius.
+    * @return this temperature in degrees Fahrenheit
+    */</span>
+&nbsp;
+    <span class="kw1">public</span> Temperature toFahrenheit<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span> <span class="coMULTI">/* implementation not shown */</span>
+        scale<span class="sy0">=</span><span class="st0">&quot;F&quot;</span><span class="sy0">;</span>
+        degrees<span class="sy0">=</span>degrees <span class="sy0">*</span> <span class="nu0">9.0</span><span class="sy0">/</span><span class="nu0">5.0</span><span class="sy0">+</span><span class="nu0">32</span><span class="sy0">;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="co3">/** Mutator. Converts this Temperature to degrees Celsius.
+    * Precondition: Temperature is a valid temperature
+    * in degrees Fahrenheit.
+    * @return this temperature in degrees Celsius
+    */</span>
+&nbsp;
+    <span class="kw1">public</span> Temperature toCelsius<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span> <span class="coMULTI">/* implementation not shown */</span>
+        scale<span class="sy0">=</span><span class="st0">&quot;C&quot;</span><span class="sy0">;</span>
+        degrees<span class="sy0">=</span><span class="br0">&#40;</span>degrees <span class="sy0">-</span> <span class="nu0">32</span><span class="br0">&#41;</span> <span class="sy0">*</span> <span class="nu0">5.0</span><span class="sy0">/</span><span class="nu0">9.0</span><span class="sy0">;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="co3">/** Mutator.
+    * @param amt the number of degrees to raise this temperature
+    * @return this temperature raised by amt degrees
+    */</span>
+&nbsp;
+    <span class="kw1">public</span> Temperature raise<span class="br0">&#40;</span><span class="kw4">double</span> amt<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span> <span class="coMULTI">/* implementation not shown */</span>
+        degrees<span class="sy0">+=</span>amt<span class="sy0">;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="co3">/** Mutator.
+    * @param amt the number of degrees to lower this temperature
+    * @return this temperature lowered by amt degrees
+    */</span>
+    <span class="kw1">public</span> Temperature lower<span class="br0">&#40;</span><span class="kw4">double</span> amt<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span> <span class="coMULTI">/* implementation not shown */</span>
+        degrees<span class="sy0">-=</span>amt<span class="sy0">;</span>
+        <span class="kw1">return</span> <span class="kw1">this</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="co3">/** @param tempDegrees the number of degrees
+    * @param tempScale the temperature scale
+    * @return true if tempDegrees is a valid temperature
+    * in the given temperature scale, false otherwise
+    */</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">boolean</span> isValidTemp<span class="br0">&#40;</span><span class="kw4">double</span> tempDegrees, <span class="kw3">String</span> tempScale<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span> <span class="coMULTI">/* implementation not shown */</span>
+        <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="co1">//Other methods are not shown.</span>
+<span class="br0">&#125;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Homework_11_16 <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> Scanner sc <span class="sy0">=</span> <span class="kw1">new</span> Scanner<span class="br0">&#40;</span><span class="kw3">System</span>.<span class="me1">in</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> addCentury<span class="br0">&#40;</span><span class="kw3">Date</span> old<span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+        old.<span class="me1">addYears</span><span class="br0">&#40;</span><span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw3">Date</span> findBirthdate<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="br0">&#123;</span>
+&nbsp;
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Enter birthdate: mo, day, yr: &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> m <span class="sy0">=</span> sc.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//read user input</span>
+        <span class="kw4">int</span> d <span class="sy0">=</span> sc.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//read user input</span>
+        <span class="kw4">int</span> y <span class="sy0">=</span> sc.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//read user input</span>
+        <span class="kw3">Date</span> birthDate <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Date</span><span class="br0">&#40;</span>m, d, y<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> birthDate<span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> testRational<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        Rational r <span class="sy0">=</span> <span class="kw1">new</span> Rational<span class="br0">&#40;</span><span class="nu0">3</span>,<span class="nu0">8</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>r.<span class="me1">plus</span><span class="br0">&#40;</span><span class="kw1">new</span> Rational<span class="br0">&#40;</span><span class="nu0">1</span>,<span class="nu0">100</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> testTemperature<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Enter temperature scale: &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">String</span> tempScale <span class="sy0">=</span> sc.<span class="me1">next</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//read user input</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Enter number of degrees: &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">double</span> tempDegrees <span class="sy0">=</span> sc.<span class="me1">nextDouble</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">//read user input</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>Temperature.<span class="me1">isValidTemp</span><span class="br0">&#40;</span>tempDegrees,tempScale<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            Temperature t <span class="sy0">=</span> <span class="kw1">new</span> Temperature<span class="br0">&#40;</span>tempDegrees, tempScale<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Invalid temperature!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="co1">// TODO Auto-generated method stub</span>
+        <span class="kw3">Date</span> oldDate <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Date</span><span class="br0">&#40;</span><span class="nu0">1</span>, <span class="nu0">13</span>, <span class="nu0">1900</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        addCentury<span class="br0">&#40;</span>oldDate<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>oldDate<span class="br0">&#41;</span><span class="sy0">;</span>
+        findBirthdate<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        testRational<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        testTemperature<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,224 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Die & Puzzle Dec.9th.2016</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+Die:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">com.company</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">java.util.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> TestDie <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main <span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span>numlist<span class="sy0">=</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">600</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> count1<span class="sy0">=</span><span class="nu0">0</span>, count2<span class="sy0">=</span><span class="nu0">0</span>,count3<span class="sy0">=</span><span class="nu0">0</span>,count4<span class="sy0">=</span><span class="nu0">0</span>,count5<span class="sy0">=</span><span class="nu0">0</span>,count6<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span>countlist<span class="sy0">=</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> unfair<span class="sy0">=</span><span class="nu0">0</span>, fair<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">600</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw4">int</span> num <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="br0">&#40;</span><span class="kw3">Math</span>.<span class="me1">random</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">*</span><span class="nu0">5</span><span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            numlist<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> num<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> element<span class="sy0">:</span>numlist<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>element<span class="sy0">==</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                count1<span class="sy0">++;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>element<span class="sy0">==</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                count2<span class="sy0">++;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>element<span class="sy0">==</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                count3<span class="sy0">++;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>element<span class="sy0">==</span><span class="nu0">4</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                count4<span class="sy0">++;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>element<span class="sy0">==</span><span class="nu0">5</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                count5<span class="sy0">++;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>element<span class="sy0">==</span><span class="nu0">6</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                count6<span class="sy0">++;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;1 occurrs &quot;</span><span class="sy0">+</span>count1<span class="sy0">+</span><span class="st0">&quot; times, 2 occurrs &quot;</span><span class="sy0">+</span>count2<span class="sy0">+</span><span class="st0">&quot; times, 3 occurrs &quot;</span><span class="sy0">+</span>count3<span class="sy0">+</span><span class="st0">&quot; times, 4 occurrs &quot;</span><span class="sy0">+</span>count4<span class="sy0">+</span><span class="st0">&quot; times, 5 occurrs &quot;</span><span class="sy0">+</span>count5<span class="sy0">+</span><span class="st0">&quot; times, 6 occurrs &quot;</span><span class="sy0">+</span>count6<span class="br0">&#41;</span><span class="sy0">;</span>
+        countlist<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">=</span>count1<span class="sy0">;</span> countlist<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">=</span>count2<span class="sy0">;</span> countlist<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">=</span>count3<span class="sy0">;</span> countlist<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">=</span>count4<span class="sy0">;</span> countlist<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="sy0">=</span>count5<span class="sy0">;</span> countlist<span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span><span class="sy0">=</span>count6<span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> count<span class="sy0">:</span>countlist<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw4">int</span> ratio<span class="sy0">=</span>count<span class="sy0">/</span><span class="nu0">600</span><span class="sy0">;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>ratio<span class="sy0">&gt;</span><span class="nu0">0</span> <span class="sy0">&amp;&amp;</span> ratio<span class="sy0">&lt;</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">/</span><span class="nu0">6</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                fair<span class="sy0">++;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span><span class="br0">&#123;</span>
+                unfair<span class="sy0">++;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span><span class="br0">&#40;</span>unfair<span class="sy0">&gt;</span>fair<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;This is unfair.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;This is fair.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+Puzzle:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">com.company</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> PuzzleTest <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">boolean</span> flag<span class="sy0">=</span><span class="kw2">false</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;n is : &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Scanner in <span class="sy0">=</span> <span class="kw1">new</span> Scanner<span class="br0">&#40;</span><span class="kw3">System</span>.<span class="me1">in</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> n<span class="sy0">=</span>in.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> check<span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>n<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#91;</span>n<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> row, col, sumrow<span class="sy0">=</span><span class="nu0">0</span>, sumcol<span class="sy0">=</span><span class="nu0">0</span>, sumdia<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> results<span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="sy0">*</span>n<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        row<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>col<span class="sy0">=</span><span class="br0">&#40;</span><span class="br0">&#40;</span>n<span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        check<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span><span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> z<span class="sy0">=</span><span class="nu0">2</span><span class="sy0">;</span>z<span class="sy0">&lt;</span><span class="kw3">Math</span>.<span class="me1">pow</span><span class="br0">&#40;</span>n,<span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>z<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            row<span class="sy0">=</span>row<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+            col<span class="sy0">=</span>col<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+                <span class="kw1">if</span><span class="br0">&#40;</span>row<span class="sy0">&gt;=</span><span class="nu0">0</span> <span class="sy0">&amp;&amp;</span> col<span class="sy0">&gt;</span>n<span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    col <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>check<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span> <span class="sy0">!=</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        row <span class="sy0">=</span> row <span class="sy0">+</span> <span class="nu0">2</span><span class="sy0">;</span>
+                        col <span class="sy0">=</span> col <span class="sy0">-</span> <span class="nu0">1</span><span class="sy0">;</span>
+                        check<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span><span class="sy0">=</span>z<span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">else</span><span class="br0">&#123;</span>
+                        check<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span><span class="sy0">=</span>z<span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>col<span class="sy0">&lt;=</span>n<span class="sy0">-</span><span class="nu0">1</span> <span class="sy0">&amp;&amp;</span> row<span class="sy0">&lt;</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    row<span class="sy0">=</span>n<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+                        <span class="kw1">if</span><span class="br0">&#40;</span>check<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span> <span class="sy0">!=</span> <span class="nu0">0</span> <span class="br0">&#41;</span><span class="br0">&#123;</span>
+                            row<span class="sy0">=</span>row<span class="sy0">+</span><span class="nu0">2</span><span class="sy0">;</span>
+                            col<span class="sy0">=</span>col<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+                            check<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span><span class="sy0">=</span>z<span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="kw1">else</span><span class="br0">&#123;</span>
+                            check<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span><span class="sy0">=</span>z<span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>col<span class="sy0">&gt;</span>n<span class="sy0">-</span><span class="nu0">1</span> <span class="sy0">&amp;&amp;</span> row<span class="sy0">&lt;</span><span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        row<span class="sy0">=</span>row<span class="sy0">+</span><span class="nu0">2</span><span class="sy0">;</span>
+                        col<span class="sy0">=</span>col<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+                        check<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span><span class="sy0">=</span>z<span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span><span class="br0">&#123;</span>
+                    <span class="kw1">if</span><span class="br0">&#40;</span>check<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span> <span class="sy0">!=</span> <span class="nu0">0</span> <span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        row<span class="sy0">=</span>row<span class="sy0">+</span><span class="nu0">2</span><span class="sy0">;</span>
+                        col<span class="sy0">=</span>col<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+                        check<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span><span class="sy0">=</span>z<span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">else</span><span class="br0">&#123;</span>
+                        check<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span><span class="sy0">=</span>z<span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="kw1">for</span><span class="br0">&#40;</span>row<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>row<span class="sy0">&lt;</span>n<span class="sy0">;</span>row<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            results<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="sy0">=</span>sumcol<span class="sy0">;</span>
+            sumcol<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">for</span><span class="br0">&#40;</span>col<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>col<span class="sy0">&lt;</span>n<span class="sy0">;</span>col<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                sumcol<span class="sy0">=</span>sumcol<span class="sy0">+</span>check<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span><span class="sy0">;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span><span class="st0">&quot; &quot;</span><span class="sy0">+</span>check<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">for</span><span class="br0">&#40;</span>row<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>row<span class="sy0">&lt;</span>n<span class="sy0">;</span>row<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span><span class="br0">&#40;</span>col<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>col<span class="sy0">&lt;</span>n<span class="sy0">;</span>col<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                sumcol<span class="sy0">=</span>sumcol<span class="sy0">+</span>check<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            results<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="sy0">=</span>sumcol<span class="sy0">;</span>
+            sumcol<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="kw1">for</span><span class="br0">&#40;</span>col<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>col<span class="sy0">&lt;</span>n<span class="sy0">;</span>col<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span><span class="br0">&#40;</span>row<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>row<span class="sy0">&lt;</span>n<span class="sy0">;</span>row<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                sumrow<span class="sy0">=</span>sumrow<span class="sy0">+</span>check<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>col<span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            results<span class="br0">&#91;</span>col<span class="sy0">+</span>n<span class="br0">&#93;</span><span class="sy0">=</span>sumrow<span class="sy0">;</span>
+            sumrow<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> j<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>j<span class="sy0">&lt;</span>n<span class="sy0">;</span>j<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            sumdia<span class="sy0">=</span>sumdia<span class="sy0">+</span>check<span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+            results<span class="br0">&#91;</span><span class="nu0">2</span><span class="sy0">*</span>n<span class="br0">&#93;</span><span class="sy0">=</span>sumdia<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">2</span><span class="sy0">*</span>n<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span><span class="sy0">!</span><span class="br0">&#40;</span>results<span class="br0">&#91;</span>i<span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">==</span>results<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                flag<span class="sy0">=</span><span class="kw2">false</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span><span class="br0">&#123;</span>
+                flag<span class="sy0">=</span><span class="kw2">true</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>flag<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;\csgray\c100000;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww6020\viewh18000\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2629\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 A // A list that has 100 elements\
+B // A list that has 100 elements\
+C// A list that has 100 elements\
+D// A list that has 100 elements\
+E// A list that has 100 elements\
+F// A list that has 100 elements\
+\
+loop i from 0 to 100\
+	A[i] = randomInt(0, 100)\
+end loop\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2629\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 loop i from 0 to 100\
+	B[i] = randomInt(0, 100)\
+end loop\
+\
+loop i from 0 to 100\
+	C[i] = randomInt(0, 100)\
+end loop\
+\
+loop i from 0 to 100\
+	D[i] = randomInt(0, 100)\
+end loop\
+\
+loop i from 0 to 100\
+	E[i] = randomInt(0, 100)\
+end loop\
+\
+loop i from 0 to 100\
+	F[i] = randomInt(0, 100)\
+end loop\
+\
+a\
+b\
+c\
+d\
+e\
+f\
+\
+Results = [A, B, C, D, E, F]\
+loop i from 1 to 6\
+	loop j from 1 to 100\
+		if Results[i][j] = 1\
+			a += 1\
+		end if\
+		else if Results[i][j] = 2\
+			b += 1\
+		end if\
+		else if Results[i][j] = 3\
+			b += 1\
+		end if\
+		else if Results[i][j] = 4\
+			b += 1\
+		end if\
+		else if Results[i][j] = 5\
+			b += 1\
+		end if\
+		else if Results[i][j] = 6\
+			b += 1\
+		end if\
+	end loop\
+end loop\
+\
+\
+\
+		}

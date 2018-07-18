@@ -1,0 +1,133 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 8.14 Assignment - Draw parabolas interactively</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+Intro:<br />
+This program can draw parabolas according to your click!<br />
+It can work multiple times without closing the window!<br />
+Clear the traces by pressing 'space'.<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+<span class="kw1">import</span> <span class="kw3">math</span>
+&nbsp;
+<span class="co1">#functions</span>
+<span class="kw1">def</span> set_up<span class="br0">&#40;</span>tess<span class="br0">&#41;</span>:
+    tess.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    tess.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">'white'</span><span class="br0">&#41;</span>
+    tess.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    tess.<span class="me1">setpos</span><span class="br0">&#40;</span>-<span class="nu0">600</span><span class="sy0">,</span>-<span class="nu0">300</span><span class="br0">&#41;</span>
+    tess.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    tess.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> draw_axis<span class="br0">&#40;</span>tess<span class="sy0">,</span>length<span class="br0">&#41;</span>:
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span>length<span class="br0">&#41;</span>:
+        tess.<span class="me1">fd</span><span class="br0">&#40;</span><span class="nu0">80</span><span class="br0">&#41;</span>
+        tess.<span class="me1">rt</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+        tess.<span class="me1">fd</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span>
+        tess.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">180</span><span class="br0">&#41;</span>
+        tess.<span class="me1">write</span><span class="br0">&#40;</span><span class="kw2">str</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>+<span class="st0">'0m'</span><span class="sy0">,</span><span class="kw2">False</span><span class="sy0">,</span>align<span class="sy0">=</span><span class="st0">'right'</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">18</span><span class="sy0">,</span><span class="st0">&quot;normal&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        tess.<span class="me1">fd</span><span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span>
+        tess.<span class="me1">rt</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> move<span class="br0">&#40;</span>x<span class="sy0">,</span>y<span class="br0">&#41;</span>:
+    <span class="kw1">global</span> ball<span class="sy0">,</span>strength
+    set_up<span class="br0">&#40;</span>strength<span class="br0">&#41;</span>
+    strength.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">'red'</span><span class="br0">&#41;</span>
+    strength.<span class="me1">shapesize</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>
+    strength.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'red'</span><span class="br0">&#41;</span>
+    strength.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span>
+    set_up<span class="br0">&#40;</span>ball<span class="br0">&#41;</span>
+    ball.<span class="me1">shape</span><span class="br0">&#40;</span><span class="st0">'circle'</span><span class="br0">&#41;</span>
+    ball.<span class="me1">shapesize</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span>
+    ball.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'green'</span><span class="br0">&#41;</span>
+    ball.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">'green'</span><span class="br0">&#41;</span>
+    strength.<span class="me1">showturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    strength.<span class="me1">goto</span><span class="br0">&#40;</span>x<span class="sy0">,</span>y<span class="br0">&#41;</span>
+    x<span class="sy0">=</span><span class="br0">&#40;</span>x+<span class="nu0">600</span><span class="br0">&#41;</span>/<span class="nu0">8</span>
+    y<span class="sy0">=</span><span class="br0">&#40;</span>y+<span class="nu0">300</span><span class="br0">&#41;</span>/<span class="nu0">8</span>
+    strength.<span class="me1">seth</span><span class="br0">&#40;</span><span class="kw3">math</span>.<span class="me1">degrees</span><span class="br0">&#40;</span><span class="kw3">math</span>.<span class="me1">atan</span><span class="br0">&#40;</span>y/x<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    strength.<span class="me1">stamp</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>strength.<span class="me1">heading</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> t <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">161</span><span class="br0">&#41;</span>:
+        up<span class="sy0">=</span>-<span class="nu0">32</span>*a/x**<span class="nu0">2</span>*t**<span class="nu0">2</span>+<span class="nu0">8</span>*y/x*t
+        i<span class="sy0">=</span>-<span class="nu0">600</span>+<span class="nu0">8</span>*t
+        j<span class="sy0">=</span>-<span class="nu0">300</span>+up
+        ball.<span class="me1">setpos</span><span class="br0">&#40;</span>i<span class="sy0">,</span>j<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> clear<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    ball.<span class="me1">clear</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    strength.<span class="me1">clear</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">while</span> <span class="nu0">1</span>:
+    <span class="co1">#set_ups</span>
+    acceleration<span class="sy0">=</span><span class="nu0">10</span>/<span class="nu0">8</span>
+    a<span class="sy0">=</span>acceleration
+&nbsp;
+    wn<span class="sy0">=</span><span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    wn.<span class="me1">bgcolor</span><span class="br0">&#40;</span><span class="st0">'black'</span><span class="br0">&#41;</span>
+&nbsp;
+    axis1<span class="sy0">=</span><span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    set_up<span class="br0">&#40;</span>axis1<span class="br0">&#41;</span>
+&nbsp;
+    axis2<span class="sy0">=</span><span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    set_up<span class="br0">&#40;</span>axis2<span class="br0">&#41;</span>
+    axis2.<span class="me1">left</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+&nbsp;
+    ball<span class="sy0">=</span><span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    ball.<span class="me1">write</span><span class="br0">&#40;</span><span class="st0">'0m'</span><span class="sy0">,</span><span class="kw2">False</span><span class="sy0">,</span>align<span class="sy0">=</span><span class="st0">'left'</span><span class="sy0">,</span>font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">&quot;Arial&quot;</span><span class="sy0">,</span><span class="nu0">18</span><span class="sy0">,</span><span class="st0">&quot;normal&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    set_up<span class="br0">&#40;</span>ball<span class="br0">&#41;</span>
+    ball.<span class="me1">shape</span><span class="br0">&#40;</span><span class="st0">'circle'</span><span class="br0">&#41;</span>
+    ball.<span class="me1">shapesize</span><span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span>
+    ball.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'green'</span><span class="br0">&#41;</span>
+    ball.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">'green'</span><span class="br0">&#41;</span>
+&nbsp;
+    strength<span class="sy0">=</span><span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    strength.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    set_up<span class="br0">&#40;</span>strength<span class="br0">&#41;</span>
+    strength.<span class="me1">pencolor</span><span class="br0">&#40;</span><span class="st0">'red'</span><span class="br0">&#41;</span>
+    strength.<span class="me1">shapesize</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>
+    strength.<span class="me1">fillcolor</span><span class="br0">&#40;</span><span class="st0">'red'</span><span class="br0">&#41;</span>
+    strength.<span class="me1">pensize</span><span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1">#main</span>
+    draw_axis<span class="br0">&#40;</span>axis1<span class="sy0">,</span><span class="nu0">16</span><span class="br0">&#41;</span>
+    draw_axis<span class="br0">&#40;</span>axis2<span class="sy0">,</span><span class="nu0">8</span><span class="br0">&#41;</span>
+    wn.<span class="me1">onclick</span><span class="br0">&#40;</span>move<span class="br0">&#41;</span>
+    wn.<span class="me1">onkey</span><span class="br0">&#40;</span>clear<span class="sy0">,</span><span class="st0">' '</span><span class="br0">&#41;</span>
+&nbsp;
+    wn.<span class="me1">listen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

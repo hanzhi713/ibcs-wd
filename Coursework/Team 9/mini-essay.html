@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title>IBCS1-WD - mini-essay</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<span style="color: #000000; font-family: 宋体; font-size: 14px;">Basically, there are 3 states for the traffic light to change:</span> {<span style="color: #000000; font-family: 宋体; font-size: 14px;">0: green light};,{1:yellow light},{ 2:red light},hence so S = {0,1,2}; O = {green, yellow, red}</span> Also,<span style="color: #000000; font-family: 宋体; font-size: 14px;"> this finite-machine is controlled by timer, so its input is input by the timer. We may use this table to determine the transportation of this state machine.</span><br />
+
+
+<table class="wiki_table">
+    <tr>
+        <td><span style="color: #000000; font-family: 宋体; font-size: 14px;">timer</span><br />
+</td>
+        <td><span style="color: #000000; font-family: 宋体; font-size: 14px;">4500 miliseconds</span><br />
+</td>
+        <td><span style="color: #000000; font-family: 宋体; font-size: 14px;">2000 miliseconds</span><br />
+</td>
+        <td><span style="color: #000000; font-family: 宋体; font-size: 14px;">6000 miliseconds</span><br />
+</td>
+    </tr>
+    <tr>
+        <td><span style="color: #000000; font-family: 宋体; font-size: 14px;">state</span><br />
+</td>
+        <td><span style="color: #000000; font-family: 宋体; font-size: 14px;">0</span><br />
+</td>
+        <td><span style="color: #000000; font-family: 宋体; font-size: 14px;">1</span><br />
+</td>
+        <td><span style="color: #000000; font-family: 宋体; font-size: 14px;">2</span><br />
+</td>
+    </tr>
+    <tr>
+        <td><span style="color: #000000; font-family: 宋体; font-size: 14px;">output</span><br />
+</td>
+        <td><span style="color: #000000; font-family: 宋体; font-size: 14px;">green light</span><br />
+</td>
+        <td><span style="color: #000000; font-family: 宋体; font-size: 14px;">yellow light</span><br />
+</td>
+        <td><span style="color: #000000; font-family: 宋体; font-size: 14px;">red light</span><br />
+</td>
+    </tr>
+</table>
+
+<span style="color: #000000; font-family: 宋体; font-size: 14px;">So the initial state of the machine is state 0 which has an output of green light. When the time finish 4.5 seconds counting, state += 1 which will give an output of the yellow light in state one. And timer again counts down from 0 to 2 seconds and state will add 1 again. This time the output changes to the red light. But this time, in order to go back to the state 0 when the time counts all 30 seconds state = 0. (state = state % 3) Then the output will be green light again after the timer counts from 0 to 6 seconds. Then we can get the conclusion that this state machine</span><span style="color: #000000; font-family: Calibri; font-size: 14px;">’</span><span style="color: #000000; font-family: 宋体; font-size: 14px;">s state depends on the last state and the time counting.</span></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,91 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Test-160921</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1">#1.</span>
+<span class="kw1">import</span> <span class="kw3">urllib</span>.<span class="me1">request</span>
+&nbsp;
+url <span class="sy0">=</span> <span class="st0">&quot;https://ibcs1-wd.wikispaces.com/file/view/vocab.txt/591053286/vocab.txt&quot;</span>
+destination_filename <span class="sy0">=</span> <span class="st0">&quot;vocab.txt&quot;</span>
+&nbsp;
+<span class="kw3">urllib</span>.<span class="me1">request</span>.<span class="me1">urlretrieve</span><span class="br0">&#40;</span>url<span class="sy0">,</span> destination_filename<span class="br0">&#41;</span>
+&nbsp;
+url2 <span class="sy0">=</span> <span class="st0">&quot;https://ibcs1-wd.wikispaces.com/file/view/alice_in_wonderland.txt/591053270/alice_in_wonderland.txt&quot;</span>
+destination_filename2 <span class="sy0">=</span> <span class="st0">&quot;alice_in_wonderland.txt&quot;</span>
+&nbsp;
+<span class="kw3">urllib</span>.<span class="me1">request</span>.<span class="me1">urlretrieve</span><span class="br0">&#40;</span>url2<span class="sy0">,</span> destination_filename2<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="co1">#2.</span>
+f <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">&quot;vocab.txt&quot;</span><span class="sy0">,</span><span class="st0">&quot;r&quot;</span><span class="br0">&#41;</span>
+h <span class="sy0">=</span> f.<span class="me1">readlines</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+f.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+k <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">&quot;vocab_ENZO.txt&quot;</span><span class="sy0">,</span><span class="st0">&quot;w&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> h:
+      k.<span class="me1">write</span><span class="br0">&#40;</span>i<span class="br0">&#91;</span>::-<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+k.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="co1">#3.</span>
+ff<span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">&quot;alice_in_wonderland.txt&quot;</span><span class="sy0">,</span><span class="st0">&quot;r&quot;</span><span class="br0">&#41;</span>
+o <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">&quot;alice_on_wonderland_ENZO.txt&quot;</span><span class="sy0">,</span><span class="st0">&quot;w&quot;</span><span class="br0">&#41;</span>
+count <span class="sy0">=</span> <span class="nu0">0</span>
+&nbsp;
+<span class="kw1">while</span> <span class="nu0">1</span>:
+      <span class="kw1">global</span> count
+      h <span class="sy0">=</span> ff.<span class="kw3">readline</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+      h <span class="sy0">=</span> h.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+      <span class="co1">#print(h)</span>
+      <span class="kw1">for</span> i <span class="kw1">in</span> h:
+            temp <span class="sy0">=</span> i
+            ii <span class="sy0">=</span> temp.<span class="me1">lower</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            <span class="kw1">if</span> ii <span class="sy0">==</span> <span class="st0">&quot;alice&quot;</span>:
+                  o.<span class="me1">write</span><span class="br0">&#40;</span><span class="st0">&quot;Enzo &quot;</span><span class="br0">&#41;</span>
+            <span class="kw1">else</span>:
+                  o.<span class="me1">write</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+                  o.<span class="me1">write</span><span class="br0">&#40;</span><span class="st0">' '</span><span class="br0">&#41;</span>
+      o.<span class="me1">write</span><span class="br0">&#40;</span><span class="st0">&quot;<span class="es0">\n</span>&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+ff.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+o.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

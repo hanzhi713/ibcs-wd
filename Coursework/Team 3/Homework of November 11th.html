@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Homework of November 11th</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>Homework of November 11th<small> #TomsProjects </small></h1><h2 id="toc0"><a name="x-Happy single's day!"></a>Happy single's day!</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">java.util.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">class</span> Matrix<span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> DiagonalMatrix<span class="br0">&#40;</span><span class="kw4">int</span> n, <span class="kw4">int</span>...<span class="me1">args</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> e <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>args.<span class="me1">length</span><span class="sy0">==</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            e<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">=</span>e<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">=</span>args<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>args.<span class="me1">length</span><span class="sy0">&gt;=</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            e<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">=</span>args<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span>
+            e<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">=</span>args<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> matrix <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">double</span><span class="br0">&#91;</span>n<span class="br0">&#93;</span><span class="br0">&#91;</span>n<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> x <span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>x<span class="sy0">&lt;</span>n<span class="sy0">;</span>x<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> y <span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>y<span class="sy0">&lt;</span>x<span class="sy0">;</span>y<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                matrix<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>y<span class="br0">&#93;</span><span class="sy0">=</span>e<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            matrix<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="sy0">=</span>x<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> y <span class="sy0">=</span>x<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>y<span class="sy0">&lt;</span>n<span class="sy0">;</span>y<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                matrix<span class="br0">&#91;</span>x<span class="br0">&#93;</span><span class="br0">&#91;</span>y<span class="br0">&#93;</span><span class="sy0">=</span>e<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> matrix<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> printMatrix<span class="br0">&#40;</span><span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> mx, <span class="kw4">int</span> len, <span class="kw4">int</span> precision<span class="br0">&#41;</span><span class="br0">&#123;</span>
+         <span class="kw3">String</span> format_text<span class="sy0">=</span><span class="st0">&quot;%&quot;</span><span class="sy0">+</span><span class="br0">&#40;</span>precision<span class="sy0">+</span>len<span class="sy0">+</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot;.&quot;</span><span class="sy0">+</span>precision<span class="sy0">+</span><span class="st0">&quot;f  &quot;</span><span class="sy0">;</span>
+         <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">double</span><span class="br0">&#91;</span><span class="br0">&#93;</span> x <span class="sy0">:</span> mx<span class="br0">&#41;</span><span class="br0">&#123;</span>
+             <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">double</span> y<span class="sy0">:</span> x<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                 <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">printf</span><span class="br0">&#40;</span>format_text,y<span class="br0">&#41;</span><span class="sy0">;</span>
+             <span class="br0">&#125;</span>
+             <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+             <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+         <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;
+<span class="kw1">class</span> GuessNumber<span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw3">Random</span> rng <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Random</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> Scanner sc <span class="sy0">=</span> <span class="kw1">new</span> Scanner<span class="br0">&#40;</span><span class="kw3">System</span>.<span class="me1">in</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> Game<span class="br0">&#40;</span><span class="kw4">int</span> lower, <span class="kw4">int</span> upper<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">printf</span><span class="br0">&#40;</span><span class="st0">&quot;Lower bound: %d<span class="es0">\n</span>Upper bound: %d<span class="es0">\n</span>&quot;</span>, lower,upper<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> num <span class="sy0">=</span> rng.<span class="me1">nextInt</span><span class="br0">&#40;</span>upper<span class="sy0">-</span>lower<span class="br0">&#41;</span><span class="sy0">+</span>lower<span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Guess the number:&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> user_input <span class="sy0">=</span> sc.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> counter <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">while</span> <span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            counter<span class="sy0">++;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>user_input <span class="sy0">==</span> num<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;You win! Number of trials:&quot;</span><span class="sy0">+</span>counter<span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">break</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>user_input<span class="sy0">&lt;</span>num<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Too low!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">else</span><span class="br0">&#123;</span>
+                    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Too high&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Guess the number:&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            user_input <span class="sy0">=</span> sc.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+<span class="kw1">public</span> <span class="kw1">class</span> Homework_11_11 <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        Matrix.<span class="me1">printMatrix</span><span class="br0">&#40;</span>Matrix.<span class="me1">DiagonalMatrix</span><span class="br0">&#40;</span><span class="nu0">10</span>,<span class="nu0">0</span>,<span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span>,<span class="nu0">2</span>,<span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        GuessNumber.<span class="me1">Game</span><span class="br0">&#40;</span><span class="nu0">1</span>,<span class="nu0">10</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;
+&nbsp;
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

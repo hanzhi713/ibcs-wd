@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Major Assessment 3 -- Programming test</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>Major Assessment 3 -- Programming test<small> #test </small></h1><u><strong><span style="color: #ff0000;">Choose one question</span></strong></u> from problem A and problem B:<br />
+Problem A. <a class="wiki_link_ext" href="http://codingbat.com/prob/p194530" rel="nofollow">http://codingbat.com/prob/p194530</a>,<br />
+Problem B. <a class="wiki_link_ext" href="http://codingbat.com/prob/p157900" rel="nofollow">http://codingbat.com/prob/p157900</a><br />
+<br />
+please write code for it and pass the online judge.<br />
+Create a link in your project page naming: 2016Nov30_Major3_ProgrammingTest_YourName<br />
+The linked page contains<br />
+<ul><li>1. your code</li><li>2. a image of your pass test screenshot.</li></ul><br />
+<br />
+You can refer to this Reference for array manipulation, especially about how to loop an array.<br />
+<a class="wiki_link_ext" href="http://codingbat.com/doc/java-array-loops.html" rel="nofollow">http://codingbat.com/doc/java-array-loops.html</a><br />
+The following is an example for loop an array for the maximum value from the reference link.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">// Find-Max
+// Given a non-empty array of ints, returns
+// the largest int value found in the array.
+// (does not work with empty arrays)
+public int findMax(int[] nums) {
+  int maxSoFar = nums[0];  // use nums[0] as the max to start
+&nbsp;
+  // Look at every element, starting at 1
+  for (int i=1; i&lt;nums.length; i++) {
+    if (nums[i] &gt; maxSoFar) {
+      maxSoFar = nums[i];
+    }
+  }
+  return maxSoFar;
+}</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

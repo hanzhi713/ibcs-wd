@@ -1,0 +1,206 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Doris,2016,12,23,sorting and selection</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>Doris,2016,12,23,sorting and selection<small> #java </small></h1>binary search:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> BinarySearch <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span> key <span class="sy0">=</span> <span class="nu0">9</span><span class="sy0">;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> a <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">1</span>,<span class="nu0">2</span>,<span class="nu0">3</span>,<span class="nu0">4</span>,<span class="nu0">5</span>,<span class="nu0">6</span>,<span class="nu0">7</span>,<span class="nu0">8</span>,<span class="nu0">9</span>,<span class="nu0">0</span><span class="br0">&#125;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>search<span class="br0">&#40;</span>a,<span class="nu0">0</span>,a.<span class="me1">length</span><span class="sy0">-</span><span class="nu0">1</span>,key<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span> search<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> a,<span class="kw4">int</span> l,<span class="kw4">int</span> r, <span class="kw4">int</span> key<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>l<span class="sy0">&gt;</span>r<span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">return</span> <span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            <span class="kw4">int</span> mid <span class="sy0">=</span> <span class="br0">&#40;</span>l<span class="sy0">+</span>r<span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">2</span><span class="sy0">;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>key<span class="sy0">==</span>a<span class="br0">&#91;</span>mid<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">return</span> mid<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>key<span class="sy0">&lt;</span>a<span class="br0">&#91;</span>mid<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">return</span> search<span class="br0">&#40;</span>a,<span class="nu0">0</span>,mid,key<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span><span class="br0">&#123;</span>
+                <span class="kw1">return</span> search<span class="br0">&#40;</span>a,mid<span class="sy0">+</span><span class="nu0">1</span>,r,key<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+QuickSort:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> QuickSort <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> quickSort<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> a, <span class="kw4">int</span> low, <span class="kw4">int</span> high<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> i <span class="sy0">=</span> low<span class="sy0">;</span>
+        <span class="kw4">int</span> j <span class="sy0">=</span> high<span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>i <span class="sy0">&gt;=</span> j<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> z <span class="sy0">:</span> a<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>z<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">return</span> <span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>i <span class="sy0">&lt;</span> j<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw4">int</span> value <span class="sy0">=</span> a<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="kw1">while</span> <span class="br0">&#40;</span>i <span class="sy0">&lt;</span> j<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">while</span> <span class="br0">&#40;</span>i <span class="sy0">&lt;</span> j <span class="sy0">&amp;&amp;</span> a<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&gt;=</span> value<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    j <span class="sy0">-=</span> <span class="nu0">1</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+                <span class="kw1">while</span> <span class="br0">&#40;</span>i <span class="sy0">&lt;</span> j <span class="sy0">&amp;&amp;</span> a<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">&lt;</span> value<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw4">int</span> x <span class="sy0">=</span> a<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+                    <span class="kw4">int</span> y <span class="sy0">=</span> a<span class="br0">&#91;</span>i<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">;</span>
+                    a<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> a<span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+                    a<span class="br0">&#91;</span>i<span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">=</span>a<span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">;</span>
+                    a<span class="br0">&#91;</span>j<span class="br0">&#93;</span> <span class="sy0">=</span> x<span class="sy0">;</span>
+                    a<span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">=</span>y<span class="sy0">;</span>
+                    i<span class="sy0">+=</span><span class="nu0">1</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+            a<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> value<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        quickSort<span class="br0">&#40;</span>a, low, i<span class="br0">&#41;</span><span class="sy0">;</span>
+        quickSort<span class="br0">&#40;</span>a, i <span class="sy0">+</span> <span class="nu0">1</span>, high<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> x <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="br0">&#123;</span> <span class="nu0">7</span>, <span class="nu0">32</span>, <span class="nu0">28</span>, <span class="nu0">3</span>, <span class="nu0">1</span>, <span class="nu0">8</span>, <span class="nu0">0</span>, <span class="nu0">4</span>, <span class="nu0">3</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+        QuickSort y <span class="sy0">=</span> <span class="kw1">new</span> QuickSort<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        y.<span class="me1">quickSort</span><span class="br0">&#40;</span>x, <span class="nu0">0</span>, <span class="nu0">8</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+mergeSort:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> MergeSort <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> sort<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> x, <span class="kw4">int</span> l, <span class="kw4">int</span> r<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>l <span class="sy0">&gt;=</span> r<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">return</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw4">int</span> m <span class="sy0">=</span> <span class="br0">&#40;</span>l <span class="sy0">+</span> r<span class="br0">&#41;</span> <span class="sy0">/</span> <span class="nu0">2</span><span class="sy0">;</span>
+        sort<span class="br0">&#40;</span>x, l, m<span class="br0">&#41;</span><span class="sy0">;</span>
+        sort<span class="br0">&#40;</span>x, m <span class="sy0">+</span> <span class="nu0">1</span>, r<span class="br0">&#41;</span><span class="sy0">;</span>
+        mergeTwo<span class="br0">&#40;</span>x, l, m, r<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> mergeTwo<span class="br0">&#40;</span><span class="kw4">int</span> a<span class="br0">&#91;</span><span class="br0">&#93;</span>, <span class="kw4">int</span> l, <span class="kw4">int</span> m, <span class="kw4">int</span> r<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> newList <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>a.<span class="me1">length</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> rIndex <span class="sy0">=</span> m <span class="sy0">+</span> <span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw4">int</span> lIndex <span class="sy0">=</span> l<span class="sy0">;</span>
+        <span class="kw4">int</span> counter <span class="sy0">=</span> l<span class="sy0">;</span>
+        <span class="kw1">while</span> <span class="br0">&#40;</span>l <span class="sy0">&lt;=</span> m <span class="sy0">&amp;&amp;</span> rIndex <span class="sy0">&lt;=</span> r<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>a<span class="br0">&#91;</span>l<span class="br0">&#93;</span> <span class="sy0">&lt;=</span> a<span class="br0">&#91;</span>rIndex<span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                newList<span class="br0">&#91;</span>lIndex<span class="sy0">++</span><span class="br0">&#93;</span> <span class="sy0">=</span> a<span class="br0">&#91;</span>l<span class="sy0">++</span><span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="br0">&#123;</span>
+                newList<span class="br0">&#91;</span>lIndex<span class="sy0">++</span><span class="br0">&#93;</span> <span class="sy0">=</span> a<span class="br0">&#91;</span>rIndex<span class="sy0">++</span><span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+            <span class="kw1">while</span> <span class="br0">&#40;</span>l <span class="sy0">&lt;=</span> m<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                newList<span class="br0">&#91;</span>lIndex<span class="sy0">++</span><span class="br0">&#93;</span> <span class="sy0">=</span> a<span class="br0">&#91;</span>l<span class="sy0">++</span><span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">while</span> <span class="br0">&#40;</span>rIndex <span class="sy0">&lt;=</span> r<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                newList<span class="br0">&#91;</span>lIndex<span class="sy0">++</span><span class="br0">&#93;</span> <span class="sy0">=</span> a<span class="br0">&#91;</span>rIndex<span class="sy0">++</span><span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+&nbsp;
+        <span class="kw1">while</span> <span class="br0">&#40;</span>counter <span class="sy0">&lt;=</span> r<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            a<span class="br0">&#91;</span>counter<span class="br0">&#93;</span> <span class="sy0">=</span> newList<span class="br0">&#91;</span>counter<span class="br0">&#93;</span><span class="sy0">;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span>a<span class="br0">&#91;</span>counter<span class="br0">&#93;</span> <span class="sy0">+</span> <span class="st0">&quot;  &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            counter<span class="sy0">++;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> a<span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="br0">&#123;</span> <span class="nu0">26</span>, <span class="nu0">5</span>, <span class="nu0">98</span>, <span class="nu0">108</span>, <span class="nu0">28</span>, <span class="nu0">99</span>, <span class="nu0">100</span>, <span class="nu0">56</span>, <span class="nu0">34</span>, <span class="nu0">1</span> <span class="br0">&#125;</span><span class="sy0">;</span>
+        MergeSort.<span class="me1">sort</span><span class="br0">&#40;</span>a, <span class="nu0">0</span>, a.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

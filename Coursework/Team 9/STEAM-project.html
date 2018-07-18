@@ -1,0 +1,259 @@
+<html>
+  <head>
+    <title>IBCS1-WD - STEAM-project</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<a href="files/Poster.docx">Poster.docx</a><a href="files/Poster.docx">Poster.docx</a><br />
+<a href="files/STEAM.pptx">STEAM.pptx</a><br />
+Demo<br />
+<a href="files/Demostration.pptx">Demostration.pptx</a><br />
+Code<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">from</span> PIL <span class="kw1">import</span> Image <span class="kw1">as</span> I
+<span class="kw1">import</span> <span class="kw3">random</span>
+<span class="kw1">from</span> PIL <span class="kw1">import</span> ImageFilter
+<span class="kw1">from</span> tkinter <span class="kw1">import</span> *
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> save<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    a <span class="sy0">=</span> var.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    image <span class="sy0">=</span> I.<span class="kw2">open</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>
+    name <span class="sy0">=</span> lb.<span class="me1">get</span><span class="br0">&#40;</span>lb.<span class="me1">curselection</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> name <span class="sy0">==</span> <span class="st0">&quot;blackandwhite&quot;</span>:
+        blackwhite<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name <span class="sy0">==</span> <span class="st0">&quot;salt&quot;</span>:
+        salt<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name <span class="sy0">==</span> <span class="st0">&quot;sketch&quot;</span>:
+        sketch<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name <span class="sy0">==</span> <span class="st0">&quot;blur&quot;</span>:
+        blur<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name <span class="sy0">==</span> <span class="st0">&quot;detail&quot;</span>:
+        detail<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name <span class="sy0">==</span> <span class="st0">&quot;edgeenhance&quot;</span>:
+        edgeenhance<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name <span class="sy0">==</span> <span class="st0">&quot;emboss&quot;</span>:
+        emboss<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name <span class="sy0">==</span> <span class="st0">&quot;smooth&quot;</span>:
+        smooth<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name<span class="sy0">==</span><span class="st0">&quot;dark&quot;</span>:
+        dark<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name <span class="sy0">==</span> <span class="st0">&quot;light&quot;</span>:
+        light<span class="br0">&#40;</span>image<span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> show<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    a <span class="sy0">=</span> var.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    image <span class="sy0">=</span> I.<span class="kw2">open</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>
+    image.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> a
+&nbsp;
+<span class="kw1">def</span> process<span class="br0">&#40;</span>event<span class="br0">&#41;</span>:
+    a<span class="sy0">=</span>var.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    image <span class="sy0">=</span> I.<span class="kw2">open</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>
+    name<span class="sy0">=</span>lb.<span class="me1">get</span><span class="br0">&#40;</span>lb.<span class="me1">curselection</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> name <span class="sy0">==</span> <span class="st0">&quot;blackandwhite&quot;</span>:
+        blackwhite<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name<span class="sy0">==</span><span class="st0">&quot;salt&quot;</span>:
+        salt<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name <span class="sy0">==</span> <span class="st0">&quot;sketch&quot;</span>:
+        sketch<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name <span class="sy0">==</span><span class="st0">&quot;blur&quot;</span>:
+        blur<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name <span class="sy0">==</span><span class="st0">&quot;detail&quot;</span>:
+        detail<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name <span class="sy0">==</span><span class="st0">&quot;edgeenhance&quot;</span>:
+        edgeenhance<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name <span class="sy0">==</span> <span class="st0">&quot;emboss&quot;</span>:
+        emboss<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name<span class="sy0">==</span><span class="st0">&quot;smooth&quot;</span>:
+        smooth<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name<span class="sy0">==</span><span class="st0">&quot;dark&quot;</span>:
+        dark<span class="br0">&#40;</span>image<span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> name <span class="sy0">==</span> <span class="st0">&quot;light&quot;</span>:
+        light<span class="br0">&#40;</span>image<span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> blackwhite<span class="br0">&#40;</span>image<span class="sy0">,</span>x<span class="br0">&#41;</span>:
+    image <span class="sy0">=</span> image.<span class="me1">convert</span><span class="br0">&#40;</span><span class="st0">'L'</span><span class="br0">&#41;</span>  <span class="co1"># convert image to black and white</span>
+    <span class="kw1">if</span> x<span class="sy0">==</span><span class="nu0">0</span>:
+        image.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> x<span class="sy0">==</span> <span class="nu0">1</span>:
+        name<span class="sy0">=</span>s.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        image.<span class="me1">save</span><span class="br0">&#40;</span>name<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> salt<span class="br0">&#40;</span>image<span class="sy0">,</span>x<span class="br0">&#41;</span>:
+    a<span class="sy0">=</span>x
+    h<span class="sy0">,</span> w <span class="sy0">=</span> image.<span class="me1">size</span>
+    pixel<span class="sy0">=</span>image.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">10000</span><span class="br0">&#41;</span>:
+        x<span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span>h<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        y<span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span>w<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        pixel<span class="br0">&#91;</span>x<span class="sy0">,</span>y<span class="br0">&#93;</span><span class="sy0">=</span> <span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> a <span class="sy0">==</span> <span class="nu0">0</span>:
+        image.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">elif</span> a <span class="sy0">==</span> <span class="nu0">1</span>:
+        name <span class="sy0">=</span> s.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        image.<span class="me1">save</span><span class="br0">&#40;</span>name<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> sketch<span class="br0">&#40;</span>image<span class="sy0">,</span>x<span class="br0">&#41;</span>:
+    threshold <span class="sy0">=</span> <span class="nu0">10</span>
+    <span class="kw1">if</span> threshold <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+        threshold <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">if</span> threshold <span class="sy0">&gt;</span> <span class="nu0">60</span>:
+        threshold  <span class="sy0">=</span> <span class="nu0">60</span>
+&nbsp;
+    width<span class="sy0">,</span>height <span class="sy0">=</span> image.<span class="me1">size</span>
+    img <span class="sy0">=</span> image.<span class="me1">convert</span><span class="br0">&#40;</span><span class="st0">'L'</span><span class="br0">&#41;</span>
+    pixel <span class="sy0">=</span> img.<span class="me1">load</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">for</span> w <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>width<span class="br0">&#41;</span>:
+        <span class="kw1">for</span> h <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>height<span class="br0">&#41;</span>:
+            <span class="kw1">if</span> w <span class="sy0">==</span> width -<span class="nu0">1</span> <span class="kw1">or</span> h <span class="sy0">==</span> height - <span class="nu0">1</span>:
+                <span class="kw1">continue</span>
+&nbsp;
+            screen <span class="sy0">=</span> pixel<span class="br0">&#91;</span>w<span class="sy0">,</span>h<span class="br0">&#93;</span>
+            distance <span class="sy0">=</span> pixel<span class="br0">&#91;</span>w+<span class="nu0">1</span><span class="sy0">,</span>h+<span class="nu0">1</span><span class="br0">&#93;</span>
+&nbsp;
+            difference <span class="sy0">=</span> <span class="kw2">abs</span><span class="br0">&#40;</span>screen - distance<span class="br0">&#41;</span>
+&nbsp;
+            <span class="kw1">if</span> difference <span class="sy0">&gt;=</span> threshold:
+                pixel<span class="br0">&#91;</span>w<span class="sy0">,</span>h<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">0</span>
+            <span class="kw1">else</span>:
+                pixel<span class="br0">&#91;</span>w<span class="sy0">,</span>h<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">255</span>
+&nbsp;
+    <span class="kw1">if</span> x <span class="sy0">==</span> <span class="nu0">0</span>:
+        img.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> x <span class="sy0">==</span> <span class="nu0">1</span>:
+        name <span class="sy0">=</span> s.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        image.<span class="me1">save</span><span class="br0">&#40;</span>name<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> blur<span class="br0">&#40;</span>image<span class="sy0">,</span>x<span class="br0">&#41;</span>:
+    image<span class="sy0">=</span>image.<span class="kw2">filter</span><span class="br0">&#40;</span>ImageFilter.<span class="me1">BLUR</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> x <span class="sy0">==</span> <span class="nu0">0</span>:
+        image.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> x <span class="sy0">==</span> <span class="nu0">1</span>:
+        name <span class="sy0">=</span> s.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        image.<span class="me1">save</span><span class="br0">&#40;</span>name<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> detail<span class="br0">&#40;</span>image<span class="sy0">,</span>x<span class="br0">&#41;</span>:
+    image<span class="sy0">=</span>image.<span class="kw2">filter</span><span class="br0">&#40;</span>ImageFilter.<span class="me1">DETAIL</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> x <span class="sy0">==</span> <span class="nu0">0</span>:
+        image.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> x <span class="sy0">==</span> <span class="nu0">1</span>:
+        name <span class="sy0">=</span> s.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        image.<span class="me1">save</span><span class="br0">&#40;</span>name<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> edgeenhance<span class="br0">&#40;</span>image<span class="sy0">,</span>x<span class="br0">&#41;</span>:
+    image<span class="sy0">=</span>image.<span class="kw2">filter</span><span class="br0">&#40;</span>ImageFilter.<span class="me1">EDGE_ENHANCE</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> x <span class="sy0">==</span> <span class="nu0">0</span>:
+        image.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> x <span class="sy0">==</span> <span class="nu0">1</span>:
+        name <span class="sy0">=</span> s.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        image.<span class="me1">save</span><span class="br0">&#40;</span>name<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> emboss<span class="br0">&#40;</span>image<span class="sy0">,</span>x<span class="br0">&#41;</span>:
+    image<span class="sy0">=</span>image.<span class="kw2">filter</span><span class="br0">&#40;</span>ImageFilter.<span class="me1">EMBOSS</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> x <span class="sy0">==</span> <span class="nu0">0</span>:
+        image.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> x <span class="sy0">==</span> <span class="nu0">1</span>:
+        name <span class="sy0">=</span> s.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        image.<span class="me1">save</span><span class="br0">&#40;</span>name<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> smooth<span class="br0">&#40;</span>image<span class="sy0">,</span>x<span class="br0">&#41;</span>:
+    image<span class="sy0">=</span>image.<span class="kw2">filter</span><span class="br0">&#40;</span>ImageFilter.<span class="me1">SMOOTH</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> x <span class="sy0">==</span> <span class="nu0">0</span>:
+        image.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> x <span class="sy0">==</span> <span class="nu0">1</span>:
+        name <span class="sy0">=</span> s.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        image.<span class="me1">save</span><span class="br0">&#40;</span>name<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> dark<span class="br0">&#40;</span>image<span class="sy0">,</span>x<span class="br0">&#41;</span>:
+&nbsp;
+    image <span class="sy0">=</span> image.<span class="me1">point</span><span class="br0">&#40;</span><span class="kw1">lambda</span> p: p * <span class="nu0">0.5</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> x <span class="sy0">==</span> <span class="nu0">0</span>:
+        image.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> x <span class="sy0">==</span> <span class="nu0">1</span>:
+        name <span class="sy0">=</span> s.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        image.<span class="me1">save</span><span class="br0">&#40;</span>name<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> light<span class="br0">&#40;</span>image<span class="sy0">,</span>x<span class="br0">&#41;</span>:
+&nbsp;
+    image <span class="sy0">=</span> image.<span class="me1">point</span><span class="br0">&#40;</span><span class="kw1">lambda</span> p: p * <span class="nu0">1.5</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> x <span class="sy0">==</span> <span class="nu0">0</span>:
+        image.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> x <span class="sy0">==</span> <span class="nu0">1</span>:
+        name <span class="sy0">=</span> s.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        image.<span class="me1">save</span><span class="br0">&#40;</span>name<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+root <span class="sy0">=</span> Tk<span class="br0">&#40;</span><span class="br0">&#41;</span>
+root.<span class="me1">title</span><span class="br0">&#40;</span><span class="st0">&quot;Image Filter&quot;</span><span class="br0">&#41;</span>
+root.<span class="me1">geometry</span><span class="br0">&#40;</span><span class="st0">'300x340'</span><span class="br0">&#41;</span>
+&nbsp;
+Label<span class="br0">&#40;</span>root<span class="sy0">,</span> text<span class="sy0">=</span><span class="st0">'Image Filter'</span><span class="sy0">,</span> font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">'Arial'</span><span class="sy0">,</span> <span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span>.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>TOP <span class="br0">&#41;</span>
+&nbsp;
+frm <span class="sy0">=</span> Frame<span class="br0">&#40;</span>root<span class="br0">&#41;</span>
+&nbsp;
+var <span class="sy0">=</span> StringVar<span class="br0">&#40;</span><span class="br0">&#41;</span>
+var.<span class="kw2">set</span><span class="br0">&#40;</span><span class="st0">&quot;image name&quot;</span><span class="br0">&#41;</span>
+e <span class="sy0">=</span> Entry<span class="br0">&#40;</span>frm <span class="sy0">,</span> textvariable <span class="sy0">=</span> var<span class="br0">&#41;</span>.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>TOP<span class="br0">&#41;</span>
+&nbsp;
+Button<span class="br0">&#40;</span>frm <span class="sy0">,</span> text<span class="sy0">=</span><span class="st0">&quot;show image&quot;</span><span class="sy0">,</span> command <span class="sy0">=</span> show<span class="br0">&#41;</span>.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>TOP<span class="br0">&#41;</span>
+&nbsp;
+Label<span class="br0">&#40;</span>frm<span class="sy0">,</span> text<span class="sy0">=</span><span class="st0">'Choose Filter'</span><span class="sy0">,</span> font<span class="sy0">=</span><span class="br0">&#40;</span><span class="st0">'Arial'</span><span class="sy0">,</span> <span class="nu0">15</span><span class="br0">&#41;</span><span class="br0">&#41;</span>.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>TOP<span class="br0">&#41;</span>
+&nbsp;
+li <span class="sy0">=</span> StringVar<span class="br0">&#40;</span><span class="br0">&#41;</span>
+lb <span class="sy0">=</span> Listbox<span class="br0">&#40;</span>frm <span class="sy0">,</span>  listvariable <span class="sy0">=</span> li<span class="br0">&#41;</span>
+li.<span class="kw2">set</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="st0">&quot;blackandwhite&quot;</span><span class="sy0">,</span><span class="st0">&quot;salt&quot;</span><span class="sy0">,</span><span class="st0">&quot;sketch&quot;</span><span class="sy0">,</span><span class="st0">&quot;blur&quot;</span><span class="sy0">,</span><span class="st0">&quot;detail&quot;</span><span class="sy0">,</span><span class="st0">&quot;edgeenhance&quot;</span><span class="sy0">,</span><span class="st0">&quot;emboss&quot;</span><span class="sy0">,</span><span class="st0">&quot;smooth&quot;</span><span class="sy0">,</span><span class="st0">&quot;dark&quot;</span><span class="sy0">,</span><span class="st0">&quot;light&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+lb.<span class="me1">bind</span><span class="br0">&#40;</span><span class="st0">'&lt;ButtonRelease-1&gt;'</span><span class="sy0">,</span> process<span class="br0">&#41;</span>
+lb.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>TOP <span class="br0">&#41;</span>
+&nbsp;
+s<span class="sy0">=</span>StringVar<span class="br0">&#40;</span><span class="br0">&#41;</span>
+s.<span class="kw2">set</span><span class="br0">&#40;</span><span class="st0">&quot;name you want to save as&quot;</span><span class="br0">&#41;</span>
+saven <span class="sy0">=</span> Entry<span class="br0">&#40;</span>frm <span class="sy0">,</span> textvariable <span class="sy0">=</span> s<span class="br0">&#41;</span>.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>TOP<span class="br0">&#41;</span>
+&nbsp;
+Button<span class="br0">&#40;</span>frm <span class="sy0">,</span> text<span class="sy0">=</span><span class="st0">&quot;Save&quot;</span><span class="sy0">,</span>command <span class="sy0">=</span> save<span class="br0">&#41;</span>.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>TOP <span class="br0">&#41;</span>
+&nbsp;
+frm.<span class="me1">pack</span><span class="br0">&#40;</span>side<span class="sy0">=</span>TOP<span class="br0">&#41;</span>
+frm.<span class="me1">pack</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+root.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

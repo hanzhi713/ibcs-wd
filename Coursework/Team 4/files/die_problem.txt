@@ -1,0 +1,38 @@
+// RESULTS is a collection that already exists
+A = 0
+B = 0
+C = 0
+D = 0
+E = 0
+F = 0
+loop o from 0 to 5
+	loop i from 0 to 99
+		RESULTS.addItem(personResults)
+
+	end loop
+end loop
+
+loop while RESULTS.hasNext()
+	RESULTS.getNext()
+	if personResults = 1
+		A = A+1
+	else if personResults = 2
+		B = B+1
+	else if personResults = 3
+		C = C+1
+	else if personResults = 4
+		D = D+1
+	else if personResults = 5
+		E = E+1
+	else 
+		F = F+1
+	end if
+end loop
+
+output "one",A,"two",B,"three",C,"four",D,"five",E,"six",F
+
+if 15<A<18 AND 15<B<18 AND 15<C<18 AND 15<D<18 AND 15<E<18 AND 15<F<18 then
+	output "unbiased"
+else
+	output "biased"
+end if

@@ -1,0 +1,295 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 9.14 test</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+1:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> is_sorted<span class="br0">&#40;</span>xs<span class="br0">&#41;</span>:
+    k <span class="sy0">=</span> xs<span class="br0">&#91;</span>:<span class="br0">&#93;</span>
+    k.<span class="me1">sort</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> k <span class="sy0">==</span> xs:
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;is sorted&quot;</span><span class="br0">&#41;</span>
+    <span class="kw1">else</span>:<span class="nu0">6</span>
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;not sorted&quot;</span><span class="br0">&#41;</span>
+&nbsp;
+xs <span class="sy0">=</span> <span class="br0">&#91;</span><span class="st0">&quot;a&quot;</span><span class="sy0">,</span><span class="st0">&quot;c&quot;</span><span class="sy0">,</span><span class="st0">&quot;b&quot;</span><span class="br0">&#93;</span>
+is_sorted<span class="br0">&#40;</span>xs<span class="br0">&#41;</span></pre>
+
+2:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> is_anagram<span class="br0">&#40;</span>l1<span class="sy0">,</span>l2<span class="br0">&#41;</span>:
+    l1 <span class="sy0">=</span> l1.<span class="me1">lower</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    l2 <span class="sy0">=</span> l2.<span class="me1">lower</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    l11 <span class="sy0">=</span> l1<span class="br0">&#91;</span>:<span class="br0">&#93;</span>
+    l21 <span class="sy0">=</span> l2<span class="br0">&#91;</span>:<span class="br0">&#93;</span>
+    l1.<span class="me1">sort</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    l2.<span class="me1">sort</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> l1 <span class="sy0">==</span> l2:
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;they are anagrams&quot;</span><span class="br0">&#41;</span></pre>
+
+<br />
+3:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">random</span>
+&nbsp;
+<span class="kw1">def</span> has_duplicates<span class="br0">&#40;</span>xs<span class="br0">&#41;</span>:
+    xs.<span class="me1">sort</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> xs:
+        k <span class="sy0">=</span> <span class="nu0">0</span>
+        <span class="kw1">if</span> k <span class="sy0">==</span> i:
+            <span class="kw1">global</span> p
+            p <span class="sy0">=</span> p + <span class="nu0">1</span>
+            <span class="kw1">break</span>
+        k <span class="sy0">=</span> i
+&nbsp;
+&nbsp;
+j <span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+p <span class="sy0">=</span> <span class="nu0">0</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">50</span><span class="br0">&#41;</span>:
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">23</span><span class="br0">&#41;</span>:
+       k <span class="sy0">=</span> <span class="kw3">random</span>.<span class="me1">randint</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">365</span><span class="br0">&#41;</span>
+       j.<span class="me1">append</span><span class="br0">&#40;</span>k<span class="br0">&#41;</span>
+    has_duplicates<span class="br0">&#40;</span>j<span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>p/<span class="nu0">50</span><span class="br0">&#41;</span></pre>
+
+<br />
+<br />
+4:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> remove_duplicates<span class="br0">&#40;</span>xs<span class="br0">&#41;</span>:
+    <span class="kw3">new</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    k <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> xs:
+        <span class="kw1">if</span> i <span class="sy0">!=</span> k:
+            <span class="kw3">new</span>.<span class="me1">append</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">continue</span>
+        k <span class="sy0">=</span> i
+    <span class="kw1">return</span> <span class="kw3">new</span>
+&nbsp;
+<span class="kw1">print</span><span class="br0">&#40;</span>remove_duplicates<span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">2</span><span class="sy0">,</span><span class="nu0">2</span><span class="sy0">,</span><span class="nu0">3</span><span class="sy0">,</span><span class="nu0">3</span><span class="sy0">,</span><span class="nu0">4</span><span class="sy0">,</span><span class="nu0">4</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+5:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> state_machine1<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="kw1">global</span> state
+    state <span class="sy0">=</span> <span class="nu0">0</span>
+    output <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    inpu <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    count <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">while</span> <span class="kw2">True</span>:
+        <span class="kw1">if</span> state <span class="sy0">==</span> <span class="nu0">0</span>:
+            i <span class="sy0">=</span> <span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Enter a character&quot;</span><span class="br0">&#41;</span>
+            inpu.<span class="me1">append</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+            sli <span class="sy0">=</span> inpu<span class="br0">&#91;</span>:<span class="nu0">3</span><span class="br0">&#93;</span>
+            <span class="kw1">if</span> sli<span class="br0">&#91;</span>state<span class="br0">&#93;</span> <span class="sy0">==</span> i:
+                state +<span class="sy0">=</span> <span class="nu0">1</span>
+                output.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">True</span><span class="br0">&#41;</span>
+            <span class="kw1">else</span>:
+                state <span class="sy0">=</span> <span class="nu0">3</span>
+        <span class="kw1">if</span> state <span class="sy0">==</span> <span class="nu0">1</span>:
+            i <span class="sy0">=</span> <span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Enter a character&quot;</span><span class="br0">&#41;</span>
+            inpu.<span class="me1">append</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+            sli <span class="sy0">=</span> inpu<span class="br0">&#91;</span>:<span class="nu0">3</span><span class="br0">&#93;</span>
+            <span class="kw1">if</span> sli<span class="br0">&#91;</span>state<span class="br0">&#93;</span> <span class="sy0">==</span> i:
+                state +<span class="sy0">=</span> <span class="nu0">1</span>
+                output.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">True</span><span class="br0">&#41;</span>
+            <span class="kw1">else</span>:
+                state <span class="sy0">=</span> <span class="nu0">3</span>
+        <span class="kw1">if</span> state <span class="sy0">==</span> <span class="nu0">2</span>:
+            i <span class="sy0">=</span> <span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Enter a character&quot;</span><span class="br0">&#41;</span>
+            inpu.<span class="me1">append</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+            sli <span class="sy0">=</span> inpu<span class="br0">&#91;</span>:<span class="nu0">3</span><span class="br0">&#93;</span>
+            <span class="kw1">if</span> sli<span class="br0">&#91;</span>state<span class="br0">&#93;</span> <span class="sy0">==</span> i:
+                state <span class="sy0">=</span> <span class="nu0">0</span>
+                output.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">True</span><span class="br0">&#41;</span>
+            <span class="kw1">else</span>:
+                state <span class="sy0">=</span> <span class="nu0">3</span>
+        <span class="kw1">if</span> state <span class="sy0">==</span> <span class="nu0">3</span>:
+            output.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">False</span><span class="br0">&#41;</span>
+            a <span class="sy0">=</span> <span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;Enter a character&quot;</span><span class="br0">&#41;</span>
+            <span class="kw1">if</span> a <span class="sy0">==</span> <span class="st0">&quot;&quot;</span>:
+                <span class="kw1">break</span>
+            inpu.<span class="me1">append</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>output<span class="br0">&#41;</span>
+&nbsp;
+state_machine1<span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+<br />
+6:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> state_machine2<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="kw1">global</span> state
+    state <span class="sy0">=</span> <span class="nu0">0</span>
+    summ <span class="sy0">=</span> <span class="nu0">0</span>
+    inpu <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    count <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">while</span> <span class="kw2">True</span>:
+        <span class="kw1">if</span> state <span class="sy0">==</span> <span class="nu0">0</span>:
+            a <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;give me an integer&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            inpu.<span class="me1">append</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>
+            state <span class="sy0">=</span> a
+            summ <span class="sy0">=</span> a
+            count +<span class="sy0">=</span> <span class="nu0">1</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">if</span> state <span class="sy0">==</span> inpu<span class="br0">&#91;</span>count-<span class="nu0">1</span><span class="br0">&#93;</span>:
+                a <span class="sy0">=</span> <span class="kw2">input</span><span class="br0">&#40;</span><span class="st0">&quot;give me an integer&quot;</span><span class="br0">&#41;</span>
+                <span class="kw1">if</span> a <span class="sy0">==</span> <span class="st0">&quot;&quot;</span>:
+                    <span class="kw1">print</span><span class="br0">&#40;</span>summ<span class="br0">&#41;</span>
+                    <span class="kw1">break</span>
+                <span class="kw1">else</span>:
+                    a <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>
+                    inpu.<span class="me1">append</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>
+                    state <span class="sy0">=</span> a
+                    summ <span class="sy0">=</span> summ + state
+                    count +<span class="sy0">=</span> <span class="nu0">1</span>
+&nbsp;
+state_machine2<span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<br />
+<br />
+<br />
+<br />
+、</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

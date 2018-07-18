@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Opencv project study</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<h1 id="toc0"><a name="STAGE 1"></a>STAGE 1</h1>
+ <br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">cv2</span> as cv
+<span class="kw1">import</span> <span class="co2">random</span>
+from matplotlib <span class="kw1">import</span> <span class="co2">pyplot</span> as plt
+&nbsp;
+def salt<span class="br0">&#40;</span>number_pixel,img<span class="br0">&#41;</span><span class="sy0">:</span>
+    <span class="br0">&#40;</span>height,width,k<span class="br0">&#41;</span> <span class="sy0">=</span> img.<span class="me1">shape</span>
+    <span class="kw1">for</span> k in range<span class="br0">&#40;</span>number_pixel<span class="br0">&#41;</span><span class="sy0">:</span>
+        i <span class="sy0">=</span> random.<span class="me1">randint</span><span class="br0">&#40;</span><span class="nu0">0</span>,height<span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span>
+        j <span class="sy0">=</span> random.<span class="me1">randint</span><span class="br0">&#40;</span><span class="nu0">0</span>,width<span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span>
+        img<span class="br0">&#91;</span>i,j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="nu0">255</span>,<span class="nu0">255</span>,<span class="nu0">255</span><span class="br0">&#41;</span>
+&nbsp;
+def pepper<span class="br0">&#40;</span>number_pixel,img<span class="br0">&#41;</span><span class="sy0">:</span>
+    <span class="br0">&#40;</span>height,width,k<span class="br0">&#41;</span> <span class="sy0">=</span> img.<span class="me1">shape</span>
+    <span class="kw1">for</span> k in range<span class="br0">&#40;</span>number_pixel<span class="br0">&#41;</span><span class="sy0">:</span>
+        i <span class="sy0">=</span> random.<span class="me1">randint</span><span class="br0">&#40;</span><span class="nu0">0</span>,height<span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span>
+        j <span class="sy0">=</span> random.<span class="me1">randint</span><span class="br0">&#40;</span><span class="nu0">0</span>,width<span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span>
+        img<span class="br0">&#91;</span>i,j<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="nu0">0</span>,<span class="nu0">0</span>,<span class="nu0">0</span><span class="br0">&#41;</span>
+&nbsp;
+im <span class="sy0">=</span> cv.<span class="me1">imread</span><span class="br0">&#40;</span><span class="st0">&quot;testimg.jpg&quot;</span><span class="br0">&#41;</span>
+salt<span class="br0">&#40;</span><span class="nu0">5000</span>,im<span class="br0">&#41;</span>
+pepper<span class="br0">&#40;</span><span class="nu0">5000</span>,im<span class="br0">&#41;</span>
+cv.<span class="me1">imwrite</span><span class="br0">&#40;</span><span class="st0">&quot;testok.jpg&quot;</span>,im<span class="br0">&#41;</span>
+plt.<span class="me1">imshow</span><span class="br0">&#40;</span>cv.<span class="me1">cvtColor</span><span class="br0">&#40;</span>im, cv.<span class="me1">COLOR_BGR2RGB</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+plt.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+<img src="files/testok.jpg" alt="testok.jpg" title="testok.jpg" style="height: 620px; width: 620px;" /><br />
+<br />
+<h1 id="toc1"><a name="STAGE 2"></a>STAGE 2</h1>
+ <h1 id="toc2"> </h1>
+ <br />
+<h1 id="toc3"><a name="STAGE 3"></a>STAGE 3</h1>
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,183 @@
+<html>
+  <head>
+    <title>IBCS1-WD - October 9th, Tom's work on the model of intermolecular random collision</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>October 9th, Tom's work on the model of intermolecular random collision<small> #TomsProjects </small></h1><h2 id="toc0"><a name="x-Known deficiency: There is a sudden increase in velocity after two molecules collided, although it's not so noticeable."></a><span style="color: #ff0000;">Known deficiency: There is a sudden increase in velocity after two molecules collided, although it's not so noticeable.</span></h2>
+ <br />
+<h2 id="toc1"><a name="x-Support file: Interesting.png"></a>Support file: <a href="files/Interesting.png">Interesting.png</a></h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> pygame
+<span class="kw1">import</span> <span class="kw3">sys</span>
+pygame.<span class="me1">init</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+screen <span class="sy0">=</span> pygame.<span class="me1">display</span>.<span class="me1">set_mode</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="nu0">800</span><span class="sy0">,</span> <span class="nu0">630</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+pygame.<span class="me1">display</span>.<span class="me1">set_caption</span><span class="br0">&#40;</span><span class="st0">&quot;Molecules&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">from</span> <span class="kw3">math</span> <span class="kw1">import</span> *
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> Point:
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span> y<span class="sy0">=</span><span class="nu0">0</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+&nbsp;
+    <span class="kw1">def</span> get_distance<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> target<span class="sy0">=</span><span class="kw2">None</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> target <span class="kw1">is</span> <span class="kw2">None</span>: target <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span> - target.<span class="me1">x</span><span class="br0">&#41;</span> ** <span class="nu0">2</span> + <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">y</span> - target.<span class="me1">y</span><span class="br0">&#41;</span> ** <span class="nu0">2</span><span class="br0">&#41;</span> ** <span class="nu0">0.5</span>
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> Circle:
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> center<span class="sy0">=</span>Point<span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">,</span> radius<span class="sy0">=</span><span class="nu0">10</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">center</span> <span class="sy0">=</span> center
+        <span class="kw2">self</span>.<span class="me1">radius</span> <span class="sy0">=</span> radius
+&nbsp;
+    <span class="kw1">def</span> draw<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> screen<span class="sy0">,</span> color<span class="br0">&#41;</span>:
+        pygame.<span class="me1">draw</span>.<span class="me1">circle</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> color<span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">center</span>.<span class="me1">x</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">center</span>.<span class="me1">y</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">radius</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1"># return True if two circles overlap</span>
+    <span class="kw1">def</span> if_collide<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> cir<span class="br0">&#41;</span>:
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">center</span>.<span class="me1">get_distance</span><span class="br0">&#40;</span>cir.<span class="me1">center</span><span class="br0">&#41;</span> <span class="sy0">&lt;</span> <span class="kw2">self</span>.<span class="me1">radius</span> + cir.<span class="me1">radius</span>:
+            <span class="kw1">return</span> <span class="kw2">True</span>
+        <span class="kw1">return</span> <span class="kw2">False</span>
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> Molecule:
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span> y<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span> angle<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span> radius<span class="sy0">=</span><span class="nu0">12</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+        <span class="co1"># collide box slightly bigger than the picture</span>
+        <span class="kw2">self</span>.<span class="me1">circle</span> <span class="sy0">=</span> Circle<span class="br0">&#40;</span>Point<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span><span class="sy0">,</span> radius + <span class="kw2">round</span><span class="br0">&#40;</span>radius / <span class="nu0">10</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">actual_radius</span> <span class="sy0">=</span> radius
+        <span class="kw2">self</span>.<span class="me1">image</span> <span class="sy0">=</span> pygame.<span class="me1">transform</span>.<span class="me1">smoothscale</span><span class="br0">&#40;</span>pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">&quot;Interesting.png&quot;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span>radius*<span class="nu0">2</span><span class="sy0">,</span> radius*<span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">angle</span> <span class="sy0">=</span> angle
+        <span class="kw2">self</span>.<span class="me1">left_edge</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">circle</span>.<span class="me1">radius</span>
+        <span class="kw2">self</span>.<span class="me1">right_edge</span> <span class="sy0">=</span> <span class="nu0">800</span> - <span class="kw2">self</span>.<span class="me1">circle</span>.<span class="me1">radius</span>
+        <span class="kw2">self</span>.<span class="me1">top_edge</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">circle</span>.<span class="me1">radius</span>
+        <span class="kw2">self</span>.<span class="me1">bottom_edge</span> <span class="sy0">=</span> <span class="nu0">600</span> - <span class="kw2">self</span>.<span class="me1">circle</span>.<span class="me1">radius</span>
+&nbsp;
+    <span class="co1"># move with given distance and an angle, and check collision in the meantime</span>
+    <span class="kw1">def</span> move<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> dist<span class="sy0">,</span> others<span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">circle</span>.<span class="me1">draw</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">x</span> +<span class="sy0">=</span> dist * cos<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">angle</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">y</span> -<span class="sy0">=</span> dist * sin<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">angle</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">circle</span>.<span class="me1">center</span>.<span class="me1">x</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">x</span>
+        <span class="kw2">self</span>.<span class="me1">circle</span>.<span class="me1">center</span>.<span class="me1">y</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">y</span>
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">&gt;=</span> <span class="kw2">self</span>.<span class="me1">right_edge</span>:
+            <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">angle</span> <span class="sy0">&lt;</span> <span class="nu0">0.5</span>*pi <span class="kw1">or</span> <span class="kw2">self</span>.<span class="me1">angle</span> <span class="sy0">&gt;</span> <span class="nu0">1.5</span>*pi:
+                <span class="kw2">self</span>.<span class="me1">angle</span> <span class="sy0">=</span> pi - <span class="kw2">self</span>.<span class="me1">angle</span>
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">&lt;=</span> <span class="kw2">self</span>.<span class="me1">left_edge</span>:
+            <span class="kw1">if</span> <span class="nu0">0.5</span>*pi <span class="sy0">&lt;</span> <span class="kw2">self</span>.<span class="me1">angle</span> <span class="sy0">&lt;</span> <span class="nu0">1.5</span>*pi:
+                <span class="kw2">self</span>.<span class="me1">angle</span> <span class="sy0">=</span> pi - <span class="kw2">self</span>.<span class="me1">angle</span>
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">&gt;=</span> <span class="kw2">self</span>.<span class="me1">bottom_edge</span>:
+            <span class="kw1">if</span> pi <span class="sy0">&lt;</span> <span class="kw2">self</span>.<span class="me1">angle</span> <span class="sy0">&lt;</span> <span class="nu0">2</span>*pi:
+                <span class="kw2">self</span>.<span class="me1">angle</span> <span class="sy0">=</span> -<span class="kw2">self</span>.<span class="me1">angle</span>
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">&lt;=</span> <span class="kw2">self</span>.<span class="me1">top_edge</span>:
+            <span class="kw1">if</span> <span class="nu0">0</span> <span class="sy0">&lt;</span> <span class="kw2">self</span>.<span class="me1">angle</span> <span class="sy0">&lt;</span> pi:
+                <span class="kw2">self</span>.<span class="me1">angle</span> <span class="sy0">=</span> -<span class="kw2">self</span>.<span class="me1">angle</span>
+        <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">angle</span> <span class="sy0">&lt;</span> <span class="nu0">0</span>:
+            <span class="kw2">self</span>.<span class="me1">angle</span> +<span class="sy0">=</span> <span class="nu0">2</span>*pi
+        <span class="co1"># detect collisions between any two molecules</span>
+        <span class="kw1">for</span> one <span class="kw1">in</span> others:
+            <span class="kw1">if</span> <span class="kw2">self</span> <span class="kw1">is</span> <span class="kw1">not</span> one:
+                <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">circle</span>.<span class="me1">if_collide</span><span class="br0">&#40;</span>one.<span class="me1">circle</span><span class="br0">&#41;</span>:
+                    <span class="co1"># if collide, exchange their velocity vectors</span>
+                    <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">angle</span><span class="sy0">,</span> one.<span class="me1">angle</span><span class="br0">&#41;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>one.<span class="me1">angle</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">angle</span><span class="br0">&#41;</span>
+                    <span class="co1"># move them immediately to avoid repetitive collision detection</span>
+                    <span class="kw2">self</span>.<span class="me1">abs_move</span><span class="br0">&#40;</span>dist<span class="br0">&#41;</span>
+                    one.<span class="me1">abs_move</span><span class="br0">&#40;</span>dist<span class="br0">&#41;</span>
+        screen.<span class="me1">blit</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">image</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span>-<span class="kw2">self</span>.<span class="me1">actual_radius</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span>-<span class="kw2">self</span>.<span class="me1">actual_radius</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1"># move without concerning any collision</span>
+    <span class="kw1">def</span> abs_move<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> dist<span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">circle</span>.<span class="me1">draw</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">x</span> +<span class="sy0">=</span> dist * cos<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">angle</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">y</span> -<span class="sy0">=</span> dist * sin<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">angle</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">circle</span>.<span class="me1">center</span>.<span class="me1">x</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">x</span>
+        <span class="kw2">self</span>.<span class="me1">circle</span>.<span class="me1">center</span>.<span class="me1">y</span> <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">y</span>
+        screen.<span class="me1">blit</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">image</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span>-<span class="kw2">self</span>.<span class="me1">actual_radius</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span>-<span class="kw2">self</span>.<span class="me1">actual_radius</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">import</span> <span class="kw3">random</span>
+<span class="kw1">import</span> <span class="kw3">time</span>
+molecule_list <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+number <span class="sy0">=</span> <span class="nu0">30</span>
+t0 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="co1"># instantiate molecule objects and generate distinct initial positions</span>
+<span class="kw1">while</span> <span class="kw2">len</span><span class="br0">&#40;</span>molecule_list<span class="br0">&#41;</span> <span class="sy0">&lt;</span> number:
+    flag <span class="sy0">=</span> <span class="kw2">False</span>
+    <span class="kw3">new</span> <span class="sy0">=</span> Molecule<span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">randint</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">765</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw3">random</span>.<span class="me1">randint</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">565</span><span class="br0">&#41;</span><span class="sy0">,</span> radians<span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">randint</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">359</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu0">18</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> obj <span class="kw1">in</span> molecule_list:
+        <span class="kw1">if</span> <span class="kw3">new</span>.<span class="me1">circle</span>.<span class="me1">if_collide</span><span class="br0">&#40;</span>obj.<span class="me1">circle</span><span class="br0">&#41;</span>:
+            flag <span class="sy0">=</span> <span class="kw2">True</span>
+            <span class="kw1">break</span>
+    <span class="kw1">if</span> flag:
+        <span class="kw1">continue</span>
+    molecule_list.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw3">new</span><span class="br0">&#41;</span>
+my_font1 <span class="sy0">=</span> pygame.<span class="me1">font</span>.<span class="me1">SysFont</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span><span class="sy0">,</span> <span class="nu0">20</span><span class="sy0">,</span> <span class="kw2">True</span><span class="br0">&#41;</span>
+my_font2 <span class="sy0">=</span> pygame.<span class="me1">font</span>.<span class="me1">SysFont</span><span class="br0">&#40;</span><span class="st0">&quot;Calibri&quot;</span><span class="sy0">,</span> <span class="nu0">20</span><span class="sy0">,</span> <span class="kw2">True</span><span class="br0">&#41;</span>
+<span class="co1"># main game loop</span>
+vel <span class="sy0">=</span> <span class="nu0">1</span>
+instructions <span class="sy0">=</span> <span class="br0">&#91;</span><span class="st0">&quot;Instructions:&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Use the key UP and DOWN to change the velocity&quot;</span><span class="sy0">,</span>
+                <span class="st0">&quot;If velocity is negative, then molecules will be able to move out of the window&quot;</span><span class="br0">&#93;</span>
+<span class="kw1">for</span> ins <span class="kw1">in</span> instructions:
+    <span class="kw1">print</span><span class="br0">&#40;</span>ins<span class="br0">&#41;</span>
+frames <span class="sy0">=</span> <span class="nu0">0</span>
+FPS <span class="sy0">=</span> my_font2.<span class="me1">render</span><span class="br0">&#40;</span><span class="st0">&quot;FPS: Calculating&quot;</span><span class="sy0">,</span> <span class="kw2">True</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw1">while</span> <span class="nu0">1</span>:
+    <span class="kw1">for</span> molecule <span class="kw1">in</span> molecule_list:
+        molecule.<span class="me1">move</span><span class="br0">&#40;</span>vel<span class="sy0">,</span> molecule_list<span class="br0">&#41;</span>
+    pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">700</span><span class="sy0">,</span> <span class="nu0">605</span><span class="sy0">,</span> <span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">30</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">draw</span>.<span class="me1">line</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">100</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">602</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">800</span><span class="sy0">,</span> <span class="nu0">602</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#41;</span>
+    text_surf <span class="sy0">=</span> my_font1.<span class="me1">render</span><span class="br0">&#40;</span><span class="st0">&quot;Velocity: {0}&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>vel<span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">True</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    frames +<span class="sy0">=</span> <span class="nu0">1</span>
+    pygame.<span class="me1">draw</span>.<span class="me1">rect</span><span class="br0">&#40;</span>screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">605</span><span class="sy0">,</span> <span class="nu0">150</span><span class="sy0">,</span> <span class="nu0">30</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> frames % <span class="nu0">30</span> <span class="sy0">==</span> <span class="nu0">0</span>:
+        frames <span class="sy0">=</span> <span class="nu0">0</span>
+        FPS <span class="sy0">=</span> my_font2.<span class="me1">render</span><span class="br0">&#40;</span><span class="st0">&quot;FPS: {0}&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="kw2">round</span><span class="br0">&#40;</span><span class="nu0">30</span> / <span class="br0">&#40;</span><span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>- t0<span class="br0">&#41;</span><span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">True</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+        t0 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    screen.<span class="me1">blit</span><span class="br0">&#40;</span>FPS<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">605</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    screen.<span class="me1">blit</span><span class="br0">&#40;</span>text_surf<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">690</span><span class="sy0">,</span> <span class="nu0">605</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> event <span class="kw1">in</span> pygame.<span class="me1">event</span>.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> event.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">QUIT</span>:
+            <span class="kw3">sys</span>.<span class="me1">exit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> event.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">KEYDOWN</span>:
+            <span class="kw1">if</span> event.<span class="me1">key</span> <span class="sy0">==</span> pygame.<span class="me1">K_UP</span>:
+                vel +<span class="sy0">=</span> <span class="nu0">1</span>
+            <span class="kw1">elif</span> event.<span class="me1">key</span> <span class="sy0">==</span> pygame.<span class="me1">K_DOWN</span>:
+                vel -<span class="sy0">=</span> <span class="nu0">1</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,174 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Doris,pygame1</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>Doris,pygame1<small> #Python </small></h1>Actually this game is an excerpt of another more complex game which I am codeing now. At the begging, I want to regard the complex one as my homeword but I found I didn't finish it...<br />
+So, I will finish it next week!<br />
+good luck :)<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> pygame
+<span class="kw1">import</span> <span class="kw3">sys</span>
+<span class="kw1">import</span> <span class="kw3">random</span>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> <span class="kw2">object</span><span class="br0">&#40;</span>pygame.<span class="me1">sprite</span>.<span class="me1">Sprite</span><span class="br0">&#41;</span>:
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>object_position<span class="sy0">,</span>v<span class="br0">&#41;</span>:
+        pygame.<span class="me1">sprite</span>.<span class="me1">Sprite</span>.<span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">image</span><span class="sy0">=</span>pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">'damge0.png'</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">rectangle</span><span class="sy0">=</span><span class="kw2">self</span>.<span class="me1">image</span>.<span class="me1">get_rect</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">rectangle</span>.<span class="me1">topleft</span><span class="sy0">=</span>object_position
+        <span class="kw2">self</span>.<span class="me1">v</span><span class="sy0">=</span>v
+    <span class="kw1">def</span> move<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">rectangle</span><span class="sy0">=</span><span class="kw2">self</span>.<span class="me1">rectangle</span>.<span class="me1">move</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">v</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> rect<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>picture_filename<span class="sy0">,</span>p<span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">image</span> <span class="sy0">=</span> pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span>picture_filename<span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">rectangle</span><span class="sy0">=</span><span class="kw2">self</span>.<span class="me1">image</span>.<span class="me1">get_rect</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw2">self</span>.<span class="me1">rectangle</span>.<span class="me1">topleft</span><span class="sy0">=</span>p
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> loadtext<span class="br0">&#40;</span>levelnum<span class="sy0">,</span>score<span class="br0">&#41;</span>:
+    my_font<span class="sy0">=</span>pygame.<span class="me1">font</span>.<span class="me1">SysFont</span><span class="br0">&#40;</span><span class="kw2">None</span><span class="sy0">,</span><span class="nu0">30</span><span class="br0">&#41;</span>
+    levelstr<span class="sy0">=</span><span class="st0">'Level:'</span>+<span class="kw2">str</span><span class="br0">&#40;</span>levelnum<span class="br0">&#41;</span>
+    scores<span class="sy0">=</span>my_font.<span class="me1">render</span><span class="br0">&#40;</span>levelstr<span class="sy0">,</span> <span class="kw2">True</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    bakscreen.<span class="me1">blit</span><span class="br0">&#40;</span>scores<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">50</span><span class="sy0">,</span><span class="nu0">20</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    scorestr<span class="sy0">=</span><span class="st0">'Score:'</span>+<span class="kw2">str</span><span class="br0">&#40;</span>score<span class="br0">&#41;</span>
+    scores<span class="sy0">=</span>my_font.<span class="me1">render</span><span class="br0">&#40;</span>scorestr<span class="sy0">,</span> <span class="kw2">True</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    bakscreen.<span class="me1">blit</span><span class="br0">&#40;</span>scores<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">50</span><span class="sy0">,</span><span class="nu0">50</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">def</span> over<span class="br0">&#40;</span>scorenum<span class="br0">&#41;</span>:
+    my_font<span class="sy0">=</span>pygame.<span class="me1">font</span>.<span class="me1">SysFont</span><span class="br0">&#40;</span><span class="kw2">None</span><span class="sy0">,</span><span class="nu0">80</span><span class="br0">&#41;</span>
+    levelstr<span class="sy0">=</span><span class="st0">'GAME OVER! hhh!'</span>
+    over_screen<span class="sy0">=</span>my_font.<span class="me1">render</span><span class="br0">&#40;</span>levelstr<span class="sy0">,</span> <span class="kw2">True</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    bakscreen.<span class="me1">blit</span><span class="br0">&#40;</span>over_screen<span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">200</span><span class="sy0">,</span><span class="nu0">300</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+level<span class="sy0">=</span><span class="nu0">1</span>
+score<span class="sy0">=</span><span class="nu0">0</span>
+&nbsp;
+totall<span class="sy0">=</span><span class="nu0">1</span>
+totalr<span class="sy0">=</span><span class="nu0">10</span>
+x<span class="sy0">=</span><span class="nu0">100</span>
+y<span class="sy0">=</span><span class="nu0">450</span>
+filename<span class="sy0">=</span><span class="st0">'enemy.png'</span>
+&nbsp;
+bakscreen<span class="sy0">=</span>pygame.<span class="me1">display</span>.<span class="me1">set_mode</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">1000</span><span class="sy0">,</span><span class="nu0">750</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+pygame.<span class="me1">display</span>.<span class="me1">set_caption</span><span class="br0">&#40;</span><span class="st0">&quot;Doris' pygame - booooom!!&quot;</span><span class="br0">&#41;</span>
+backimg_ren<span class="sy0">=</span>rect<span class="br0">&#40;</span>filename<span class="sy0">,</span><span class="br0">&#91;</span>x<span class="sy0">,</span>y<span class="br0">&#93;</span><span class="br0">&#41;</span>
+bakscreen.<span class="me1">blit</span><span class="br0">&#40;</span>backimg_ren.<span class="me1">image</span><span class="sy0">,</span>backimg_ren.<span class="me1">rectangle</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+loadtext<span class="br0">&#40;</span>level<span class="sy0">,</span>score<span class="br0">&#41;</span>
+bullet<span class="sy0">=</span><span class="kw3">random</span>.<span class="me1">randint</span><span class="br0">&#40;</span><span class="nu0">50</span><span class="sy0">,</span><span class="nu0">700</span><span class="br0">&#41;</span>
+speed<span class="sy0">=</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="sy0">,</span>level*<span class="nu0">10</span><span class="br0">&#93;</span>
+boom<span class="sy0">=</span><span class="kw2">object</span><span class="br0">&#40;</span><span class="br0">&#91;</span>bullet<span class="sy0">,</span><span class="nu0">100</span><span class="br0">&#93;</span><span class="sy0">,</span>speed<span class="br0">&#41;</span>
+pygame.<span class="me1">display</span>.<span class="me1">update</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">while</span> <span class="kw2">True</span>:
+    pressed_keys <span class="sy0">=</span> pygame.<span class="me1">key</span>.<span class="me1">get_pressed</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">if</span> score<span class="sy0">&gt;</span><span class="nu0">0</span> <span class="kw1">and</span> score/<span class="nu0">10.0</span><span class="sy0">==</span>score//<span class="nu0">10</span>:
+        level<span class="sy0">=</span>score//<span class="nu0">20</span>+<span class="nu0">1</span>
+        speed<span class="sy0">=</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="sy0">,</span>level*<span class="nu0">10</span><span class="br0">&#93;</span>
+&nbsp;
+    <span class="kw1">for</span> event <span class="kw1">in</span> pygame.<span class="me1">event</span>.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> event.<span class="kw2">type</span><span class="sy0">==</span>pygame.<span class="me1">QUIT</span>:
+            <span class="kw3">sys</span>.<span class="me1">exit</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">if</span> pressed_keys<span class="br0">&#91;</span>pygame.<span class="me1">K_LEFT</span><span class="br0">&#93;</span>:
+        my_back<span class="sy0">=</span>pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">'background.png'</span><span class="br0">&#41;</span>
+        bakscreen.<span class="me1">blit</span><span class="br0">&#40;</span>my_back<span class="sy0">,</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+        loadtext<span class="br0">&#40;</span>level<span class="sy0">,</span>score<span class="br0">&#41;</span>
+&nbsp;
+        <span class="kw1">if</span> totalr <span class="sy0">&gt;</span> <span class="nu0">14</span> :
+            totalr<span class="sy0">=</span><span class="nu0">10</span>
+        totalr<span class="sy0">=</span>totalr+<span class="nu0">1</span>
+&nbsp;
+        <span class="kw1">if</span> x<span class="sy0">&lt;</span><span class="nu0">50</span> :
+            x<span class="sy0">=</span><span class="nu0">50</span>
+        <span class="kw1">else</span>:
+            x<span class="sy0">=</span>x-<span class="nu0">10</span>
+        backimg_surface<span class="sy0">=</span>rect<span class="br0">&#40;</span>filename<span class="sy0">,</span><span class="br0">&#91;</span>x<span class="sy0">,</span>y<span class="br0">&#93;</span><span class="br0">&#41;</span>
+        bakscreen.<span class="me1">blit</span><span class="br0">&#40;</span>backimg_surface.<span class="me1">image</span><span class="sy0">,</span>backimg_surface.<span class="me1">rect</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+    <span class="kw1">if</span> pressed_keys<span class="br0">&#91;</span>pygame.<span class="me1">K_RIGHT</span><span class="br0">&#93;</span>:
+        my_back<span class="sy0">=</span>pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">'background.png'</span><span class="br0">&#41;</span>
+        bakscreen.<span class="me1">blit</span><span class="br0">&#40;</span>my_back<span class="sy0">,</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+        loadtext<span class="br0">&#40;</span>level<span class="sy0">,</span>score<span class="br0">&#41;</span>
+&nbsp;
+        <span class="kw1">if</span> totall <span class="sy0">&gt;</span> <span class="nu0">4</span> :
+            totall<span class="sy0">=</span><span class="nu0">0</span>
+        totalr <span class="sy0">=</span> totalr + <span class="nu0">1</span>
+&nbsp;
+        <span class="kw1">if</span> x<span class="sy0">&gt;</span><span class="nu0">700</span>:
+            x<span class="sy0">=</span><span class="nu0">700</span>
+        <span class="kw1">else</span>:
+            x<span class="sy0">=</span>x+<span class="nu0">10</span>
+&nbsp;
+        backimg_surface<span class="sy0">=</span>rect<span class="br0">&#40;</span>filename<span class="sy0">,</span><span class="br0">&#91;</span>x<span class="sy0">,</span>y<span class="br0">&#93;</span><span class="br0">&#41;</span>
+        bakscreen.<span class="me1">blit</span><span class="br0">&#40;</span>backimg_surface.<span class="me1">image</span><span class="sy0">,</span>backimg_surface.<span class="me1">rectangle</span><span class="br0">&#41;</span>
+&nbsp;
+    my_back<span class="sy0">=</span>pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">'background.png'</span><span class="br0">&#41;</span>
+    bakscreen.<span class="me1">blit</span><span class="br0">&#40;</span>my_back<span class="sy0">,</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    loadtext<span class="br0">&#40;</span>level<span class="sy0">,</span>score<span class="br0">&#41;</span>
+    boom.<span class="me1">move</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    bakscreen.<span class="me1">blit</span><span class="br0">&#40;</span>boom.<span class="me1">image</span><span class="sy0">,</span>boom.<span class="me1">rectangle</span><span class="br0">&#41;</span>
+&nbsp;
+    backimg_surface<span class="sy0">=</span>rect<span class="br0">&#40;</span>filename<span class="sy0">,</span><span class="br0">&#91;</span>x<span class="sy0">,</span>y<span class="br0">&#93;</span><span class="br0">&#41;</span>
+    bakscreen.<span class="me1">blit</span><span class="br0">&#40;</span>backimg_surface.<span class="me1">image</span><span class="sy0">,</span>backimg_surface.<span class="me1">rectangle</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> boom.<span class="me1">rectangle</span>.<span class="me1">top</span><span class="sy0">&gt;</span><span class="nu0">600</span>:
+        over<span class="br0">&#40;</span>score<span class="br0">&#41;</span>
+    <span class="kw1">if</span> boom.<span class="me1">rectangle</span>.<span class="me1">colliderect</span><span class="br0">&#40;</span>backimg_surface.<span class="me1">rectangle</span><span class="br0">&#41;</span>:
+        score+<span class="sy0">=</span><span class="nu0">5</span>
+        loadtext<span class="br0">&#40;</span>level<span class="sy0">,</span>score<span class="br0">&#41;</span>
+        bullet<span class="sy0">=</span><span class="kw3">random</span>.<span class="me1">randint</span><span class="br0">&#40;</span><span class="nu0">50</span><span class="sy0">,</span><span class="nu0">580</span><span class="br0">&#41;</span>
+        boom<span class="sy0">=</span><span class="kw2">object</span><span class="br0">&#40;</span><span class="br0">&#91;</span>bullet<span class="sy0">,</span><span class="nu0">100</span><span class="br0">&#93;</span><span class="sy0">,</span>speed<span class="br0">&#41;</span>
+    pygame.<span class="me1">display</span>.<span class="me1">update</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+background:<br />
+<img src="files/background.png" alt="background.png" title="background.png" /><br />
+enemy:<br />
+<img src="files/damge0.png" alt="damge0.png" title="damge0.png" /><br />
+bullet:<br />
+<img src="files/enemy.png" alt="enemy.png" title="enemy.png" /></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

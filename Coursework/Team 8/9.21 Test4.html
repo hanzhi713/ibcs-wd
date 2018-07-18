@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 9.21 Test4</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">urllib</span>.<span class="me1">request</span> <span class="kw1">as</span> ur
+&nbsp;
+<span class="co1">#1</span>
+url1 <span class="sy0">=</span> <span class="st0">&quot;https://ibcs1-wd.wikispaces.com/file/view/vocab.txt/591053286/vocab.txt&quot;</span>
+destination_filename1 <span class="sy0">=</span> <span class="st0">&quot;textfile_vocab.txt&quot;</span>
+ur.<span class="me1">urlretrieve</span><span class="br0">&#40;</span>url1<span class="sy0">,</span> destination_filename1<span class="br0">&#41;</span>
+&nbsp;
+url2 <span class="sy0">=</span> <span class="st0">&quot;https://ibcs1-wd.wikispaces.com/file/view/alice_in_wonderland.txt/591053270/alice_in_wonderland.txt&quot;</span>
+destination_filename2 <span class="sy0">=</span> <span class="st0">&quot;textfile_alice_on_wonderland.txt&quot;</span>
+ur.<span class="me1">urlretrieve</span><span class="br0">&#40;</span>url2<span class="sy0">,</span> destination_filename2<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'1 pass'</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#2</span>
+&nbsp;
+handle1 <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">'textfile_vocab.txt'</span><span class="sy0">,</span><span class="st0">'r'</span><span class="br0">&#41;</span>
+lst<span class="sy0">=</span>handle1.<span class="me1">read</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+lst2<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+lst<span class="sy0">=</span>lst.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> lst:
+    lst2.<span class="me1">append</span><span class="br0">&#40;</span>i<span class="br0">&#91;</span>::-<span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+handle2 <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">'textfile_vocab_Arthur.txt'</span><span class="sy0">,</span><span class="st0">'w'</span><span class="br0">&#41;</span>
+lst2<span class="sy0">=</span><span class="st0">'<span class="es0">\n</span>'</span>.<span class="me1">join</span><span class="br0">&#40;</span>lst2<span class="br0">&#41;</span>
+handle2.<span class="me1">write</span><span class="br0">&#40;</span>lst2<span class="br0">&#41;</span>
+handle1.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+handle2.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'2 pass'</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#3</span>
+From<span class="sy0">=</span><span class="br0">&#91;</span><span class="st0">'Alice'</span><span class="sy0">,</span><span class="st0">'ALICE'</span><span class="sy0">,</span><span class="st0">'She '</span><span class="sy0">,</span><span class="st0">'she '</span><span class="sy0">,</span><span class="st0">'Herself'</span><span class="sy0">,</span><span class="st0">'Her '</span><span class="sy0">,</span><span class="st0">' herself'</span><span class="sy0">,</span><span class="st0">' hers'</span><span class="sy0">,</span><span class="st0">' her '</span><span class="sy0">,</span><span class="st0">' her'</span><span class="sy0">,</span><span class="st0">' she<span class="es0">\n</span>'</span><span class="sy0">,</span><span class="st0">'girl'</span><span class="br0">&#93;</span>
+To<span class="sy0">=</span><span class="br0">&#91;</span><span class="st0">'Arthur'</span><span class="sy0">,</span><span class="st0">'ARTHUR'</span><span class="sy0">,</span><span class="st0">'He '</span><span class="sy0">,</span><span class="st0">'he '</span><span class="sy0">,</span><span class="st0">'Himself'</span><span class="sy0">,</span><span class="st0">'His '</span><span class="sy0">,</span><span class="st0">' himself'</span><span class="sy0">,</span><span class="st0">' his'</span><span class="sy0">,</span><span class="st0">' his '</span><span class="sy0">,</span><span class="st0">' him'</span><span class="sy0">,</span><span class="st0">' he<span class="es0">\n</span>'</span><span class="sy0">,</span><span class="st0">'boy'</span><span class="br0">&#93;</span>
+<span class="kw1">def</span> clear<span class="br0">&#40;</span>a<span class="br0">&#41;</span>:
+    x<span class="sy0">=</span><span class="kw2">len</span><span class="br0">&#40;</span>a<span class="br0">&#41;</span>
+    <span class="kw1">if</span> x<span class="sy0">&lt;</span><span class="nu0">5</span>:
+        <span class="kw1">return</span> a
+    <span class="kw1">else</span>:
+        <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>From<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+            <span class="kw1">while</span> <span class="kw2">True</span>:
+                ind<span class="sy0">=</span>a.<span class="me1">find</span><span class="br0">&#40;</span>From<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span>
+                <span class="kw1">if</span> ind<span class="sy0">==</span>-<span class="nu0">1</span>:
+                    <span class="kw1">break</span>
+                <span class="kw1">else</span>:
+                    a<span class="sy0">=</span>a<span class="br0">&#91;</span>:ind<span class="br0">&#93;</span>+To<span class="br0">&#91;</span>i<span class="br0">&#93;</span>+a<span class="br0">&#91;</span>ind+<span class="kw2">len</span><span class="br0">&#40;</span>From<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span>:<span class="br0">&#93;</span>
+        <span class="kw1">return</span> a
+handle3 <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">'textfile_alice_on_wonderland.txt'</span><span class="sy0">,</span><span class="st0">'r'</span><span class="br0">&#41;</span>
+handle4 <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span><span class="st0">&quot;textfile_alice_on_wonderland_Arthur.txt&quot;</span><span class="sy0">,</span><span class="st0">'w'</span><span class="br0">&#41;</span>
+<span class="kw1">while</span> <span class="kw2">True</span>:
+    line<span class="sy0">=</span>handle3.<span class="kw3">readline</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>line<span class="br0">&#41;</span><span class="sy0">==</span><span class="nu0">0</span>:
+        <span class="kw1">break</span>
+    line<span class="sy0">=</span>clear<span class="br0">&#40;</span>line<span class="br0">&#41;</span>
+    handle4.<span class="me1">write</span><span class="br0">&#40;</span>line<span class="br0">&#41;</span>
+handle3.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+handle4.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">'3 pass'</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<a href="files/textfile_alice_on_wonderland_Arthur.txt">textfile_alice_on_wonderland_Arthur.txt</a><br />
+<a href="files/textfile_vocab_Arthur.txt">textfile_vocab_Arthur.txt</a></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

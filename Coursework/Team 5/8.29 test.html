@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 8.29 test</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>8.29 test<small> #test </small></h1>1. random pick from 1 to 50<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> randompicknumber<span class="br0">&#40;</span>n<span class="sy0">,</span>a<span class="sy0">,</span>b<span class="br0">&#41;</span>:
+    <span class="kw1">import</span> <span class="kw3">random</span>
+    l<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>n<span class="br0">&#41;</span>:
+        x<span class="sy0">=</span><span class="kw3">random</span>.<span class="me1">randint</span><span class="br0">&#40;</span>a<span class="sy0">,</span>b<span class="br0">&#41;</span>
+        <span class="kw1">if</span> x <span class="kw1">in</span> l:
+            <span class="kw1">continue</span>
+        <span class="kw1">else</span>:
+            l.<span class="me1">append</span><span class="br0">&#40;</span>x<span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span>l<span class="br0">&#41;</span>
+randompicknumber<span class="br0">&#40;</span><span class="nu0">6</span><span class="sy0">,</span><span class="nu0">1</span><span class="sy0">,</span><span class="nu0">50</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<br />
+2. encrypt<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> encrypt<span class="br0">&#40;</span>a<span class="br0">&#41;</span>:
+    <span class="kw1">import</span> <span class="kw3">string</span>
+    alphabet<span class="sy0">=</span><span class="st0">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz &quot;</span>
+    substitute<span class="sy0">=</span><span class="st0">&quot;PLFNOCQUDZVGIXMWJBKEAHSYRTplfnocqudzvgixmwjbkeahsyrt &quot;</span>
+    l<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> a:
+        <span class="kw1">if</span> i <span class="kw1">not</span> <span class="kw1">in</span> <span class="kw3">string</span>.<span class="me1">punctuation</span>:
+            l+<span class="sy0">=</span>substitute<span class="br0">&#91;</span>alphabet.<span class="me1">index</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#93;</span>
+        <span class="kw1">else</span>:
+            l+<span class="sy0">=</span>i
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;&quot;</span>.<span class="me1">join</span><span class="br0">&#40;</span>l<span class="br0">&#41;</span><span class="br0">&#41;</span>
+encrypt<span class="br0">&#40;</span><span class="st0">&quot;hello world!&quot;</span><span class="br0">&#41;</span>
+encrypt<span class="br0">&#40;</span><span class="st0">&quot;HEI HEI HEI.&quot;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

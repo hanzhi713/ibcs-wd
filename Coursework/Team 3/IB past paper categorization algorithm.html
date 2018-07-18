@@ -1,0 +1,116 @@
+<html>
+  <head>
+    <title>IBCS1-WD - IB past paper categorization algorithm</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>IB past paper categorization algorithm<small> #TomsProjects </small></h1><h2 id="toc0"><a name="x-Original past paper hierarchy: Year/Group/Papers"></a>Original past paper hierarchy: Year/Group/Papers</h2>
+ <h2 id="toc1"><a name="x-Destination past paper hierarchy: Subject/Level(HL/SL)/Year"></a>Destination past paper hierarchy: Subject/Level(HL/SL)/Year</h2>
+ <h2 id="toc2"><a name="x-Language: PHP (v5+)"></a>Language: PHP (v5+)</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.php  {font-family:monospace;}
+.php .imp {font-weight: bold; color: red;}
+.php .kw1 {color: #b1b100;}
+.php .kw2 {color: #000000; font-weight: bold;}
+.php .kw3 {color: #990000;}
+.php .kw4 {color: #009900; font-weight: bold;}
+.php .co1 {color: #666666; font-style: italic;}
+.php .co2 {color: #666666; font-style: italic;}
+.php .co3 {color: #0000cc; font-style: italic;}
+.php .co4 {color: #009933; font-style: italic;}
+.php .coMULTI {color: #666666; font-style: italic;}
+.php .es0 {color: #000099; font-weight: bold;}
+.php .es1 {color: #000099; font-weight: bold;}
+.php .es2 {color: #660099; font-weight: bold;}
+.php .es3 {color: #660099; font-weight: bold;}
+.php .es4 {color: #006699; font-weight: bold;}
+.php .es5 {color: #006699; font-weight: bold; font-style: italic;}
+.php .es6 {color: #009933; font-weight: bold;}
+.php .es_h {color: #000099; font-weight: bold;}
+.php .br0 {color: #009900;}
+.php .sy0 {color: #339933;}
+.php .sy1 {color: #000000; font-weight: bold;}
+.php .st0 {color: #0000ff;}
+.php .st_h {color: #0000ff;}
+.php .nu0 {color: #cc66cc;}
+.php .nu8 {color: #208080;}
+.php .nu12 {color: #208080;}
+.php .nu19 {color:#800080;}
+.php .me1 {color: #004000;}
+.php .me2 {color: #004000;}
+.php .re0 {color: #000088;}
+.php span.xtra { display:block; }
+
+-->
+</style><pre class="php"><span class="kw2">&lt;?php</span>
+    <span class="co1">//programmed by Tom Zhou</span>
+    <span class="re0">$rootpath</span> <span class="sy0">=</span> <span class="st_h">'/xampp/htdocs/repository/IB/past papers/Grouped by Year/'</span><span class="sy0">;</span>
+    <span class="re0">$paperpath</span> <span class="sy0">=</span> <span class="st_h">'/xampp/htdocs/repository/IB/past papers/Grouped by Subject/'</span><span class="sy0">;</span>
+    <span class="re0">$years</span> <span class="sy0">=</span> <span class="kw3">scandir</span><span class="br0">&#40;</span><span class="re0">$rootpath</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span><span class="kw3">file_exists</span><span class="br0">&#40;</span><span class="re0">$paperpath</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw3">mkdir</span><span class="br0">&#40;</span><span class="re0">$paperpath</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="re0">$a</span> <span class="sy0">=</span> <span class="kw3">time</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">foreach</span> <span class="br0">&#40;</span><span class="re0">$years</span> <span class="kw1">as</span> <span class="re0">$year</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span><span class="br0">&#40;</span><span class="kw3">is_file</span><span class="br0">&#40;</span><span class="re0">$rootpath</span><span class="sy0">.</span><span class="re0">$year</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">&amp;&amp;</span> <span class="re0">$year</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">!=</span><span class="st_h">'.'</span> <span class="sy0">&amp;&amp;</span> <span class="re0">$year</span><span class="sy0">!=</span><span class="st_h">'Subjects'</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw3">unset</span><span class="br0">&#40;</span><span class="re0">$papers</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="re0">$cdir</span> <span class="sy0">=</span> <span class="re0">$rootpath</span><span class="sy0">.</span><span class="re0">$year</span><span class="sy0">.</span><span class="st_h">'/'</span><span class="sy0">;</span>
+            <span class="re0">$groups</span> <span class="sy0">=</span> <span class="kw3">scandir</span><span class="br0">&#40;</span><span class="re0">$cdir</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">foreach</span> <span class="br0">&#40;</span><span class="re0">$groups</span> <span class="kw1">as</span> <span class="re0">$group</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span><span class="br0">&#40;</span><span class="kw3">is_file</span><span class="br0">&#40;</span><span class="re0">$cdir</span><span class="sy0">.</span><span class="re0">$group</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">&amp;&amp;</span> <span class="re0">$group</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">!=</span><span class="st_h">'.'</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                    <span class="re0">$fdir</span> <span class="sy0">=</span> <span class="re0">$cdir</span><span class="sy0">.</span><span class="re0">$group</span><span class="sy0">.</span><span class="st_h">'/'</span><span class="sy0">;</span>
+                    <span class="re0">$files</span> <span class="sy0">=</span> <span class="kw3">scandir</span><span class="br0">&#40;</span><span class="re0">$fdir</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw1">foreach</span> <span class="br0">&#40;</span><span class="re0">$files</span> <span class="kw1">as</span> <span class="re0">$paper</span><span class="br0">&#41;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw3">is_file</span><span class="br0">&#40;</span><span class="re0">$fdir</span><span class="sy0">.</span><span class="re0">$paper</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="re0">$papers</span><span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="re0">$paper</span><span class="sy0">;</span>
+&nbsp;
+                    <span class="re0">$subjects</span> <span class="sy0">=</span> <span class="kw3">array</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw1">foreach</span> <span class="br0">&#40;</span><span class="re0">$papers</span> <span class="kw1">as</span> <span class="re0">$paper</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        <span class="re0">$info</span> <span class="sy0">=</span> <span class="kw3">explode</span><span class="br0">&#40;</span><span class="st_h">'_'</span><span class="sy0">,</span><span class="re0">$paper</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="re0">$subj</span> <span class="sy0">=</span> <span class="kw3">stripos</span><span class="br0">&#40;</span><span class="re0">$paper</span><span class="sy0">,</span> <span class="st_h">'_paper'</span><span class="br0">&#41;</span> ? <span class="kw3">substr</span><span class="br0">&#40;</span><span class="re0">$paper</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="kw3">stripos</span><span class="br0">&#40;</span><span class="re0">$paper</span><span class="sy0">,</span> <span class="st_h">'_paper'</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">:</span> <span class="re0">$info</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span><span class="kw3">isset</span><span class="br0">&#40;</span><span class="re0">$subjects</span><span class="br0">&#91;</span><span class="re0">$subj</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                            <span class="re0">$subjects</span><span class="br0">&#91;</span><span class="re0">$subj</span><span class="br0">&#93;</span><span class="sy0">=</span><span class="kw4">true</span><span class="sy0">;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw3">strpos</span><span class="br0">&#40;</span><span class="re0">$paper</span><span class="sy0">,</span> <span class="st_h">'HL'</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                            <span class="re0">$subjects</span><span class="br0">&#91;</span><span class="re0">$subj</span><span class="br0">&#93;</span><span class="sy0">=</span><span class="kw4">false</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">foreach</span> <span class="br0">&#40;</span><span class="re0">$subjects</span> <span class="kw1">as</span> <span class="re0">$subject</span><span class="sy0">=&gt;</span><span class="re0">$isOnlySL</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        <span class="re0">$subjectdir</span> <span class="sy0">=</span> <span class="re0">$paperpath</span><span class="sy0">.</span><span class="re0">$subject</span><span class="sy0">.</span><span class="st_h">'/'</span><span class="sy0">;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span><span class="kw3">file_exists</span><span class="br0">&#40;</span><span class="re0">$subjectdir</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw3">mkdir</span><span class="br0">&#40;</span><span class="re0">$subjectdir</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span><span class="kw3">file_exists</span><span class="br0">&#40;</span><span class="re0">$subjectdir</span><span class="sy0">.</span><span class="st_h">'SL/'</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw3">mkdir</span><span class="br0">&#40;</span><span class="re0">$subjectdir</span><span class="sy0">.</span><span class="st_h">'SL/'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span><span class="kw3">file_exists</span><span class="br0">&#40;</span><span class="re0">$subjectdir</span><span class="sy0">.</span><span class="st_h">'SL/'</span><span class="sy0">.</span><span class="re0">$year</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw3">mkdir</span><span class="br0">&#40;</span><span class="re0">$subjectdir</span><span class="sy0">.</span><span class="st_h">'SL/'</span><span class="sy0">.</span><span class="re0">$year</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span><span class="re0">$isOnlySL</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                            <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span><span class="kw3">file_exists</span><span class="br0">&#40;</span><span class="re0">$subjectdir</span><span class="sy0">.</span><span class="st_h">'HL/'</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw3">mkdir</span><span class="br0">&#40;</span><span class="re0">$subjectdir</span><span class="sy0">.</span><span class="st_h">'HL/'</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                            <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span><span class="kw3">file_exists</span><span class="br0">&#40;</span><span class="re0">$subjectdir</span><span class="sy0">.</span><span class="st_h">'HL/'</span><span class="sy0">.</span><span class="re0">$year</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw3">mkdir</span><span class="br0">&#40;</span><span class="re0">$subjectdir</span><span class="sy0">.</span><span class="st_h">'HL/'</span><span class="sy0">.</span><span class="re0">$year</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+                    <span class="kw1">foreach</span> <span class="br0">&#40;</span><span class="re0">$papers</span> <span class="kw1">as</span> <span class="re0">$paper</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                        <span class="re0">$info</span> <span class="sy0">=</span> <span class="kw3">explode</span><span class="br0">&#40;</span><span class="st_h">'_'</span><span class="sy0">,</span><span class="re0">$paper</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="re0">$subject</span> <span class="sy0">=</span> <span class="kw3">stripos</span><span class="br0">&#40;</span><span class="re0">$paper</span><span class="sy0">,</span> <span class="st_h">'_paper'</span><span class="br0">&#41;</span> ? <span class="kw3">substr</span><span class="br0">&#40;</span><span class="re0">$paper</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="kw3">stripos</span><span class="br0">&#40;</span><span class="re0">$paper</span><span class="sy0">,</span> <span class="st_h">'_paper'</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">:</span> <span class="re0">$info</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">;</span>
+                        <span class="re0">$paperdir</span> <span class="sy0">=</span> <span class="re0">$paperpath</span><span class="sy0">.</span><span class="re0">$subject</span><span class="sy0">.</span><span class="st_h">'/'</span><span class="sy0">;</span>
+                        <span class="kw1">if</span> <span class="br0">&#40;</span><span class="kw3">strpos</span><span class="br0">&#40;</span><span class="re0">$paper</span><span class="sy0">,</span> <span class="st_h">'SL'</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                            <span class="re0">$pp</span> <span class="sy0">=</span> <span class="re0">$paperdir</span><span class="sy0">.</span><span class="st_h">'SL/'</span><span class="sy0">.</span><span class="re0">$year</span><span class="sy0">.</span><span class="st_h">'/'</span><span class="sy0">;</span>
+                            <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span><span class="kw3">file_exists</span><span class="br0">&#40;</span><span class="re0">$pp</span><span class="sy0">.</span><span class="re0">$paper</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw3">copy</span><span class="br0">&#40;</span><span class="re0">$fdir</span><span class="sy0">.</span><span class="re0">$paper</span><span class="sy0">,</span> <span class="re0">$pp</span><span class="sy0">.</span><span class="re0">$paper</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                        <span class="kw1">else</span><span class="br0">&#123;</span>
+                            <span class="re0">$pp</span> <span class="sy0">=</span> <span class="re0">$paperdir</span><span class="sy0">.</span><span class="st_h">'HL/'</span><span class="sy0">.</span><span class="re0">$year</span><span class="sy0">.</span><span class="st_h">'/'</span><span class="sy0">;</span>
+                            <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span><span class="kw3">file_exists</span><span class="br0">&#40;</span><span class="re0">$pp</span><span class="sy0">.</span><span class="re0">$paper</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw3">copy</span><span class="br0">&#40;</span><span class="re0">$fdir</span><span class="sy0">.</span><span class="re0">$paper</span><span class="sy0">,</span> <span class="re0">$pp</span><span class="sy0">.</span><span class="re0">$paper</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="br0">&#125;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">echo</span> <span class="st_h">'Succeeded!'</span><span class="sy0">,</span> <span class="st_h">'&lt;br&gt;'</span><span class="sy0">;</span>
+    <span class="kw1">echo</span> <span class="kw3">time</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span><span class="re0">$a</span><span class="sy0">;</span>
+<span class="sy1">?&gt;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

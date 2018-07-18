@@ -1,0 +1,183 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Doris,2016,12,19,chapter 7</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>Doris,2016,12,19,chapter 7<small> #java </small></h1>client：<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">battleShipSample</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">java.util.Scanner</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> ClientTicTacToe <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;one player or two players? Please input the number:&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Scanner in <span class="sy0">=</span> <span class="kw1">new</span> Scanner<span class="br0">&#40;</span><span class="kw3">System</span>.<span class="me1">in</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> numController <span class="sy0">=</span> in.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        TicTacToe newGame <span class="sy0">=</span> <span class="kw1">new</span> TicTacToe<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">Random</span> random <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw3">Random</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">while</span> <span class="br0">&#40;</span>newGame.<span class="me1">controller</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">!=</span> <span class="kw2">true</span> <span class="sy0">&amp;&amp;</span> newGame.<span class="me1">emptyPoint</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw2">true</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw3">String</span> Player1Symble <span class="sy0">=</span> <span class="st0">&quot;x&quot;</span><span class="sy0">;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Player 1&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">while</span> <span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;select a row&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw4">int</span> player1Row <span class="sy0">=</span> in.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;select a col&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw4">int</span> player1Col <span class="sy0">=</span> in.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">if</span> <span class="br0">&#40;</span>newGame.<span class="me1">checkPoint</span><span class="br0">&#40;</span>player1Row, player1Col<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw2">false</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    newGame.<span class="me1">makeMove</span><span class="br0">&#40;</span>player1Row, player1Col, Player1Symble<span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw3">String</span> s <span class="sy0">=</span> newGame.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span>s<span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw1">break</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>numController <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw3">String</span> AIsymble <span class="sy0">=</span> <span class="st0">&quot;o&quot;</span><span class="sy0">;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;computer&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">while</span> <span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw4">int</span> randomRow <span class="sy0">=</span> random.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw4">int</span> randomCol <span class="sy0">=</span> random.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>newGame.<span class="me1">checkPoint</span><span class="br0">&#40;</span>randomRow, randomCol<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw2">false</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        newGame.<span class="me1">makeMove</span><span class="br0">&#40;</span>randomRow, randomCol, AIsymble<span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw3">String</span> s <span class="sy0">=</span> newGame.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span>s<span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw1">break</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+                <span class="kw3">String</span> Player2Symble <span class="sy0">=</span> <span class="st0">&quot;o&quot;</span><span class="sy0">;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Player 2&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">while</span> <span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;select a row&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw4">int</span> player2Row <span class="sy0">=</span> in.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;select a col&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw4">int</span> player2Col <span class="sy0">=</span> in.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    <span class="kw1">if</span> <span class="br0">&#40;</span>newGame.<span class="me1">checkPoint</span><span class="br0">&#40;</span>player2Row, player2Col<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw2">false</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                        newGame.<span class="me1">makeMove</span><span class="br0">&#40;</span>player2Row, player2Col, Player2Symble<span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw3">String</span> s <span class="sy0">=</span> newGame.<span class="me1">toString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span>s<span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                        <span class="kw1">break</span><span class="sy0">;</span>
+                    <span class="br0">&#125;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+&nbsp;
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span></pre>
+
+TicTacToe：<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package battleShipSample;
+&nbsp;
+public class TicTacToe {
+    private String[][] board;
+    private static final int ROWS = 3;
+    private static final int COLS = 3;
+&nbsp;
+    public TicTacToe() {
+        board = new String[ROWS][COLS];
+        for (int r = 0; r &lt; ROWS; r++)
+            for (int c = 0; c &lt; COLS; c++)
+                board[r][c] = &quot; &quot;;
+    }
+&nbsp;
+    public void makeMove(int r, int c, String symbol) {
+        board[r][c] = symbol;
+    }
+&nbsp;
+    public boolean checkPoint(int row, int col){
+        if( board[row][col]==&quot; &quot;){
+            return false;
+        }
+        return true;
+    }
+    public String toString() {
+        String s = &quot;&quot;;
+        for (int r = 0; r &lt; ROWS; r++) {
+            s = s + &quot;|&quot;;
+            for (int c = 0; c &lt; COLS; c++)
+                s = s + board[r][c];
+            s = s + &quot;|\n&quot;;
+        }
+        return s;
+    }
+    public boolean controller(){
+        for(int i = 0;i&lt;3;i++){
+            if(board[i][0]==board[i][1]&amp;&amp;board[i][0]==board[i][2]&amp;&amp;board[i][0]!=&quot; &quot;){
+                System.out.println(board[i][0]+&quot;is win&quot;);
+                return true;
+            }
+            if(board[0][i]==board[1][i]&amp;&amp;board[0][i]==board[2][i]&amp;&amp;board[0][i]!=&quot; &quot;){
+                System.out.println(board[0][i]+&quot;is win&quot;);
+                return true;
+            }
+            if(board[0][0]==board[1][1]&amp;&amp;board[0][0]==board[2][2]&amp;&amp;board[0][0]!=&quot; &quot;){
+                System.out.println(board[0][0]+&quot;is win&quot;);
+                return true;
+            }
+            if(board[0][2]==board[1][1]&amp;&amp;board[0][2]==board[2][0]&amp;&amp;board[0][2]!=&quot; &quot;){
+                System.out.println(board[0][2]+&quot;is win&quot;);
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean emptyPoint(){
+        boolean controller = false;
+        for (int r = 0; r &lt; ROWS; r++)
+            for (int c = 0; c &lt; COLS; c++)
+                if(board[r][c]==&quot; &quot;){
+                    controller = true;
+                }
+        return controller;
+    }
+}</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

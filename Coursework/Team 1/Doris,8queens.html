@@ -1,0 +1,117 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Doris,8queens</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">class</span> Queens:
+    queen <span class="sy0">=</span> <span class="nu0">8</span>
+    <span class="kw1">def</span> get<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>x<span class="sy0">,</span>srow<span class="br0">&#41;</span>:
+         <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>x<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw2">self</span>.<span class="me1">queen</span>:
+            <span class="kw2">self</span>.<span class="me1">num</span> +<span class="sy0">=</span> <span class="nu0">1</span>
+            <span class="kw1">print</span> <span class="br0">&#40;</span><span class="st0">&quot;method &quot;</span>+<span class="kw2">str</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">num</span><span class="br0">&#41;</span>+<span class="st0">&quot;is:&quot;</span>+<span class="kw2">str</span><span class="br0">&#40;</span>x<span class="br0">&#41;</span><span class="br0">&#41;</span>
+            a.<span class="me1">append</span><span class="br0">&#40;</span>x<span class="br0">&#41;</span>
+            <span class="kw1">return</span>
+         <span class="kw1">if</span> srow <span class="sy0">&gt;</span> <span class="kw2">len</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">board</span><span class="br0">&#41;</span>:
+             <span class="kw1">return</span>
+         <span class="kw1">for</span> d <span class="kw1">in</span> <span class="kw2">self</span>.<span class="me1">board</span><span class="br0">&#91;</span>srow<span class="br0">&#93;</span>:
+             <span class="kw1">if</span> <span class="kw2">self</span>.<span class="me1">matchAll</span><span class="br0">&#40;</span>x<span class="sy0">,</span>d<span class="br0">&#41;</span>:
+                 xdeepcopy <span class="sy0">=</span> x<span class="br0">&#91;</span>:<span class="br0">&#93;</span>
+                 xdeepcopy.<span class="me1">append</span><span class="br0">&#40;</span>d<span class="br0">&#41;</span>
+                 <span class="kw2">self</span>.<span class="me1">get</span><span class="br0">&#40;</span>xdeepcopy<span class="sy0">,</span>srow+<span class="nu0">1</span><span class="br0">&#41;</span>
+    <span class="kw1">def</span> NumC<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">self</span>.<span class="me1">board</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>:
+            <span class="kw2">self</span>.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">,</span><span class="nu0">1</span><span class="br0">&#41;</span>
+        <span class="kw1">print</span> <span class="br0">&#40;</span><span class="st0">&quot;all method is:&quot;</span>+<span class="kw2">str</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">num</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> matchAll<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>x<span class="sy0">,</span>next<span class="br0">&#41;</span>:
+        <span class="kw1">for</span> i <span class="kw1">in</span> x:
+            <span class="kw1">if</span> <span class="kw1">not</span> <span class="kw2">self</span>.<span class="me1">isMatch</span><span class="br0">&#40;</span>i<span class="sy0">,</span>next<span class="br0">&#41;</span>:
+                <span class="kw1">return</span> <span class="kw2">False</span>
+        <span class="kw1">return</span> <span class="kw2">True</span>
+    <span class="kw1">def</span> isMatch<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span>f<span class="sy0">,</span>g<span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="br0">&#40;</span>f<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>+f<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">!=</span> g<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>+g<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="kw1">and</span>\
+               <span class="br0">&#40;</span>f<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>-f<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">!=</span> g<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>-g<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>  <span class="kw1">and</span>\
+               <span class="br0">&#40;</span>f<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">!=</span> g<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span> <span class="kw1">and</span> <span class="br0">&#40;</span>f<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">!=</span> g<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">board</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+        <span class="kw2">self</span>.<span class="me1">num</span> <span class="sy0">=</span> <span class="nu0">0</span>
+        <span class="kw1">for</span> a <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">queen</span><span class="br0">&#41;</span>:
+            rown <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+            <span class="kw1">for</span> b <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">queen</span><span class="br0">&#41;</span>:
+                xy <span class="sy0">=</span> <span class="br0">&#91;</span>a<span class="sy0">,</span>b<span class="br0">&#93;</span>
+                rown.<span class="me1">append</span><span class="br0">&#40;</span>xy<span class="br0">&#41;</span>
+            <span class="kw2">self</span>.<span class="me1">board</span>.<span class="me1">append</span><span class="br0">&#40;</span>rown<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+e <span class="sy0">=</span> Queens<span class="br0">&#40;</span><span class="br0">&#41;</span>
+a <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+e.<span class="me1">NumC</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">import</span> pygame
+<span class="kw1">def</span> draw_board<span class="br0">&#40;</span>b<span class="br0">&#41;</span>:
+    pygame.<span class="me1">init</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    colors <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#40;</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#93;</span>    <span class="co1"># Set up colors [red, black]</span>
+&nbsp;
+    n <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>b<span class="br0">&#41;</span>         <span class="co1"># This is an NxN chess board.</span>
+    sq_sz <span class="sy0">=</span> <span class="nu0">50</span>           <span class="co1"># Proposed physical surface size.</span>
+    surface_sz <span class="sy0">=</span> n * sq_sz     <span class="co1"># Adjust to exactly fit n squares.</span>
+&nbsp;
+    <span class="co1"># Create the surface of (width, height), and its window.</span>
+    surface <span class="sy0">=</span> pygame.<span class="me1">display</span>.<span class="me1">set_mode</span><span class="br0">&#40;</span><span class="br0">&#40;</span>surface_sz<span class="sy0">,</span> surface_sz<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">while</span> <span class="kw2">True</span>:
+&nbsp;
+        <span class="co1"># Look for an event from keyboard, mouse, etc.</span>
+        ev <span class="sy0">=</span> pygame.<span class="me1">event</span>.<span class="me1">poll</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> ev.<span class="kw2">type</span> <span class="sy0">==</span> pygame.<span class="me1">QUIT</span>:
+            <span class="kw1">break</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1"># Draw a fresh background (a blank chess board)</span>
+        <span class="kw1">for</span> row <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>n<span class="br0">&#41;</span>:           <span class="co1"># Draw each row of the board.</span>
+            c_indx <span class="sy0">=</span> row % <span class="nu0">2</span>           <span class="co1"># Alternate starting color</span>
+            <span class="kw1">for</span> col <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>n<span class="br0">&#41;</span>:       <span class="co1"># Run through cols drawing squares</span>
+                the_square <span class="sy0">=</span> <span class="br0">&#40;</span>col*sq_sz<span class="sy0">,</span> row*sq_sz<span class="sy0">,</span> sq_sz<span class="sy0">,</span> sq_sz<span class="br0">&#41;</span>
+                surface.<span class="me1">fill</span><span class="br0">&#40;</span>colors<span class="br0">&#91;</span>c_indx<span class="br0">&#93;</span><span class="sy0">,</span> the_square<span class="br0">&#41;</span>
+                <span class="co1"># Now flip the color index for the next square</span>
+                c_indx <span class="sy0">=</span> <span class="br0">&#40;</span>c_indx + <span class="nu0">1</span><span class="br0">&#41;</span> % <span class="nu0">2</span>
+&nbsp;
+        queen <span class="sy0">=</span> pygame.<span class="me1">transform</span>.<span class="me1">smoothscale</span><span class="br0">&#40;</span>pygame.<span class="me1">image</span>.<span class="me1">load</span><span class="br0">&#40;</span><span class="st0">&quot;queen.png&quot;</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span>sq_sz<span class="sy0">,</span> sq_sz<span class="br0">&#41;</span><span class="br0">&#41;</span>
+        <span class="kw1">for</span> i <span class="kw1">in</span> b:
+            surface.<span class="me1">blit</span><span class="br0">&#40;</span>queen<span class="sy0">,</span> <span class="br0">&#91;</span>i<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> * sq_sz<span class="sy0">,</span> i<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> * sq_sz<span class="br0">&#93;</span><span class="br0">&#41;</span>
+        pygame.<span class="me1">display</span>.<span class="me1">flip</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> a:
+    draw_board<span class="br0">&#40;</span>i<span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

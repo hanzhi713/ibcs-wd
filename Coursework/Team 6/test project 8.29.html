@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <title>IBCS1-WD - test project 8.29</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">random</span>
+i <span class="sy0">=</span> <span class="nu0">0</span>
+<span class="kw1">while</span> i <span class="sy0">&lt;</span> <span class="nu0">6</span>:
+    Nextnumber <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="nu0">50</span>*<span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0.99999999</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> Nextnumber <span class="sy0">!=</span> <span class="kw2">int</span><span class="br0">&#40;</span><span class="nu0">50</span>*<span class="br0">&#40;</span><span class="kw3">random</span>.<span class="me1">uniform</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0.99999999</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        <span class="kw1">print</span><span class="br0">&#40;</span>Nextnumber<span class="br0">&#41;</span>
+        i <span class="sy0">=</span> i + <span class="nu0">1</span>
+    <span class="kw1">else</span>:
+        <span class="kw1">continue</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">Substitude <span class="sy0">=</span> <span class="br0">&#91;</span><span class="st0">&quot;P&quot;</span><span class="sy0">,</span><span class="st0">&quot;L&quot;</span><span class="sy0">,</span><span class="st0">&quot;F&quot;</span><span class="sy0">,</span><span class="st0">&quot;N&quot;</span><span class="sy0">,</span><span class="st0">&quot;O&quot;</span><span class="sy0">,</span><span class="st0">&quot;C&quot;</span><span class="sy0">,</span><span class="st0">&quot;Q&quot;</span><span class="sy0">,</span><span class="st0">&quot;U&quot;</span><span class="sy0">,</span><span class="st0">&quot;D&quot;</span><span class="sy0">,</span><span class="st0">&quot;Z&quot;</span><span class="sy0">,</span><span class="st0">&quot;V&quot;</span><span class="sy0">,</span><span class="st0">&quot;G&quot;</span><span class="sy0">,</span><span class="st0">&quot;I&quot;</span><span class="sy0">,</span><span class="st0">&quot;X&quot;</span><span class="sy0">,</span><span class="st0">&quot;M&quot;</span><span class="sy0">,</span><span class="st0">&quot;W&quot;</span><span class="sy0">,</span><span class="st0">&quot;J&quot;</span><span class="sy0">,</span><span class="st0">&quot;B&quot;</span><span class="sy0">,</span><span class="st0">&quot;K&quot;</span><span class="sy0">,</span><span class="st0">&quot;E&quot;</span><span class="sy0">,</span><span class="st0">&quot;A&quot;</span><span class="sy0">,</span><span class="st0">&quot;H&quot;</span><span class="sy0">,</span><span class="st0">&quot;S&quot;</span><span class="sy0">,</span><span class="st0">&quot;Y&quot;</span><span class="sy0">,</span><span class="st0">&quot;R&quot;</span><span class="sy0">,</span><span class="st0">&quot;T&quot;</span><span class="br0">&#93;</span>
+MessageString <span class="sy0">=</span> <span class="st0">&quot;YESICAN&quot;</span>
+L <span class="sy0">=</span> <span class="kw2">list</span><span class="br0">&#40;</span>MessageString<span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>L<span class="br0">&#41;</span>
+K <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> L:
+    k <span class="sy0">=</span> <span class="kw2">ord</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span> - <span class="nu0">65</span>
+    K.<span class="me1">append</span><span class="br0">&#40;</span>Substitude<span class="br0">&#91;</span>k<span class="br0">&#93;</span><span class="br0">&#41;</span>
+dst <span class="sy0">=</span> <span class="kw2">str</span><span class="br0">&#40;</span>K<span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>dst<span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

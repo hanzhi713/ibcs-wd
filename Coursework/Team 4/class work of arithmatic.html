@@ -1,0 +1,129 @@
+<html>
+  <head>
+    <title>IBCS1-WD - class work of arithmatic</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">&lt;span style=&quot;background-color: #ffffff; color: #000000; font-family: Menlo; font-size: 9pt;&quot;&gt;&lt;span style=&quot;color: #000080;&quot;&gt;import &lt;/span&gt;matplotlib.pyplot &lt;span style=&quot;color: #000080;&quot;&gt;as &lt;/span&gt;plt
+&lt;span style=&quot;color: #000080;&quot;&gt;import &lt;/span&gt;random
+&lt;span style=&quot;color: #000080;&quot;&gt;import &lt;/span&gt;time
+&nbsp;
+&nbsp;
+&lt;span style=&quot;color: #000080;&quot;&gt;def &lt;/span&gt;insertionsort(alist):
+    n = &lt;span style=&quot;color: #000080;&quot;&gt;len&lt;/span&gt;(alist)
+    &lt;span style=&quot;color: #000080;&quot;&gt;for &lt;/span&gt;i &lt;span style=&quot;color: #000080;&quot;&gt;in range&lt;/span&gt;(&lt;span style=&quot;color: #0000ff;&quot;&gt;1&lt;/span&gt;,n):
+        curvalue= alist[i]
+        j = i
+        &lt;span style=&quot;color: #000080;&quot;&gt;while &lt;/span&gt;j&gt; &lt;span style=&quot;color: #0000ff;&quot;&gt;0 &lt;/span&gt;&lt;span style=&quot;color: #000080;&quot;&gt;and &lt;/span&gt;curvalue&lt;alist[j-&lt;span style=&quot;color: #0000ff;&quot;&gt;1&lt;/span&gt;]:
+            alist[j]=alist[j-&lt;span style=&quot;color: #0000ff;&quot;&gt;1&lt;/span&gt;]
+            j = j-&lt;span style=&quot;color: #0000ff;&quot;&gt;1&lt;/span&gt;
+alist[j] = curvalue
+    &lt;span style=&quot;color: #000080;&quot;&gt;return &lt;/span&gt;alist
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&lt;span style=&quot;color: #000080;&quot;&gt;def &lt;/span&gt;selectionsort(alist):
+    n = &lt;span style=&quot;color: #000080;&quot;&gt;len&lt;/span&gt;(alist)
+    &lt;span style=&quot;color: #000080;&quot;&gt;for &lt;/span&gt;i &lt;span style=&quot;color: #000080;&quot;&gt;in range&lt;/span&gt;(n - &lt;span style=&quot;color: #0000ff;&quot;&gt;1&lt;/span&gt;):
+        minsub = i
+        &lt;span style=&quot;color: #000080;&quot;&gt;for &lt;/span&gt;j &lt;span style=&quot;color: #000080;&quot;&gt;in range&lt;/span&gt;(i+&lt;span style=&quot;color: #0000ff;&quot;&gt;1&lt;/span&gt;,n):
+            &lt;span style=&quot;color: #000080;&quot;&gt;if &lt;/span&gt;alist[j]&lt;alist[minsub]:
+                minsub = j
+        temp = alist[i]
+        alist[i]=alist[minsub]
+        alist[minsub] = temp
+    &lt;span style=&quot;color: #000080;&quot;&gt;return &lt;/span&gt;alist
+&nbsp;
+&nbsp;
+&nbsp;
+&lt;span style=&quot;color: #000080;&quot;&gt;def &lt;/span&gt;bubblesort(alist):
+    n = &lt;span style=&quot;color: #000080;&quot;&gt;len&lt;/span&gt;(alist)
+    &lt;span style=&quot;color: #000080;&quot;&gt;for &lt;/span&gt;i &lt;span style=&quot;color: #000080;&quot;&gt;in range&lt;/span&gt;(n - &lt;span style=&quot;color: #0000ff;&quot;&gt;1&lt;/span&gt;):
+        &lt;span style=&quot;color: #000080;&quot;&gt;for &lt;/span&gt;j &lt;span style=&quot;color: #000080;&quot;&gt;in range&lt;/span&gt;(n-i-&lt;span style=&quot;color: #0000ff;&quot;&gt;1&lt;/span&gt;):
+            &lt;span style=&quot;color: #000080;&quot;&gt;if &lt;/span&gt;alist[j]&gt;alist[j+&lt;span style=&quot;color: #0000ff;&quot;&gt;1&lt;/span&gt;]:
+                temp = alist[j]
+                alist[j]=alist[j+&lt;span style=&quot;color: #0000ff;&quot;&gt;1&lt;/span&gt;]
+                alist[j+&lt;span style=&quot;color: #0000ff;&quot;&gt;1&lt;/span&gt;] = temp
+    &lt;span style=&quot;color: #000080;&quot;&gt;return &lt;/span&gt;alist
+&nbsp;
+&lt;span style=&quot;color: #808080;&quot;&gt;## simple test&lt;/span&gt;
+alist = [&lt;span style=&quot;color: #0000ff;&quot;&gt;54&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;26&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;93&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;17&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;77&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;31&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;44&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;55&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;20&lt;/span&gt;]
+&lt;span style=&quot;color: #000080;&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #008080;&quot;&gt;&quot;original List:&quot;&lt;/span&gt;, alist)
+insertionsort(alist)
+&lt;span style=&quot;color: #000080;&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #008080;&quot;&gt;&quot;insertion sort result:&quot;&lt;/span&gt;,alist)
+&nbsp;
+alist = [&lt;span style=&quot;color: #0000ff;&quot;&gt;54&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;26&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;93&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;17&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;77&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;31&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;44&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;55&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;20&lt;/span&gt;]
+&lt;span style=&quot;color: #000080;&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #008080;&quot;&gt;&quot;original List:&quot;&lt;/span&gt;, alist)
+selectionsort(alist)
+&lt;span style=&quot;color: #000080;&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #008080;&quot;&gt;&quot;insertion sort result:&quot;&lt;/span&gt;,alist)
+&nbsp;
+alist = [&lt;span style=&quot;color: #0000ff;&quot;&gt;54&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;26&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;93&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;17&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;77&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;31&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;44&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;55&lt;/span&gt;,&lt;span style=&quot;color: #0000ff;&quot;&gt;20&lt;/span&gt;]
+&lt;span style=&quot;color: #000080;&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #008080;&quot;&gt;&quot;original List:&quot;&lt;/span&gt;, alist)
+bubblesort(alist)
+&lt;span style=&quot;color: #000080;&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #008080;&quot;&gt;&quot;insertion sort result:&quot;&lt;/span&gt;,alist)
+&nbsp;
+&nbsp;
+&lt;span style=&quot;color: #808080;&quot;&gt;## We compare the running time of the 3 basic algorithms.
+#&lt;/span&gt;
+&lt;span style=&quot;color: #000080;&quot;&gt;def &lt;/span&gt;CompRunningTimeWithPlot():
+    rng = random.Random()
+    itemNum = &lt;span style=&quot;color: #0000ff;&quot;&gt;10&lt;/span&gt;
+base = &lt;span style=&quot;color: #0000ff;&quot;&gt;2&lt;/span&gt;
+timeSeqInsertion = []
+    timeSeqSelection = []
+    timeSeqBubble = []
+&nbsp;
+    &lt;span style=&quot;color: #000080;&quot;&gt;for &lt;/span&gt;i &lt;span style=&quot;color: #000080;&quot;&gt;in range&lt;/span&gt;(itemNum//&lt;span style=&quot;color: #0000ff;&quot;&gt;2&lt;/span&gt;,itemNum):
+        alist = &lt;span style=&quot;color: #000080;&quot;&gt;list&lt;/span&gt;(&lt;span style=&quot;color: #000080;&quot;&gt;range&lt;/span&gt;(base**i))
+        rng.shuffle(alist)
+        t0 = time.clock()
+        insertionsort(alist)
+        t1 = time.clock()
+        &lt;span style=&quot;color: #000080;&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #008080;&quot;&gt;&quot;The list has {} items, it takes {} seconds by insertion sort.&quot;&lt;/span&gt;.format(base**i, t1-t0))
+        timeSeqInsertion.append(t1-t0)
+&nbsp;
+        rng.shuffle(alist)
+        t0 = time.clock()
+        selectionsort(alist)
+        t1 = time.clock()
+        &lt;span style=&quot;color: #000080;&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #008080;&quot;&gt;&quot;The list has {} items, it takes {} seconds by Selection sort.&quot;&lt;/span&gt;.format(base ** i, t1 - t0))
+        timeSeqSelection.append(t1-t0)
+&nbsp;
+        rng.shuffle(alist)
+        t0 = time.clock()
+        bubblesort(alist)
+        t1 = time.clock()
+        &lt;span style=&quot;color: #000080;&quot;&gt;print&lt;/span&gt;(&lt;span style=&quot;color: #008080;&quot;&gt;&quot;The list has {} items, it takes {} seconds by Bubble sort.&quot;&lt;/span&gt;.format(base ** i, t1 - t0))
+        timeSeqBubble.append(t1-t0)
+&nbsp;
+    plt.figure()
+    plt.hold(&lt;span style=&quot;color: #000080;&quot;&gt;True&lt;/span&gt;)
+    plt.plot(&lt;span style=&quot;color: #000080;&quot;&gt;list&lt;/span&gt;(&lt;span style=&quot;color: #000080;&quot;&gt;range&lt;/span&gt;(itemNum//&lt;span style=&quot;color: #0000ff;&quot;&gt;2&lt;/span&gt;,itemNum)), timeSeqInsertion,&lt;span style=&quot;color: #008080;&quot;&gt;'r'&lt;/span&gt;)
+    plt.plot(&lt;span style=&quot;color: #000080;&quot;&gt;list&lt;/span&gt;(&lt;span style=&quot;color: #000080;&quot;&gt;range&lt;/span&gt;(itemNum//&lt;span style=&quot;color: #0000ff;&quot;&gt;2&lt;/span&gt;,itemNum)), timeSeqSelection,&lt;span style=&quot;color: #008080;&quot;&gt;'g'&lt;/span&gt;)
+    plt.plot(&lt;span style=&quot;color: #000080;&quot;&gt;list&lt;/span&gt;(&lt;span style=&quot;color: #000080;&quot;&gt;range&lt;/span&gt;(itemNum//&lt;span style=&quot;color: #0000ff;&quot;&gt;2&lt;/span&gt;,itemNum)), timeSeqBubble,&lt;span style=&quot;color: #008080;&quot;&gt;'b'&lt;/span&gt;)
+    plt.show()
+&lt;span style=&quot;color: #808080;&quot;&gt;### if your 3 basic sorting algorithms are ready, please uncomment the following statement
+### to compare their running-time&lt;/span&gt;
+CompRunningTimeWithPlot()&lt;/span&gt;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

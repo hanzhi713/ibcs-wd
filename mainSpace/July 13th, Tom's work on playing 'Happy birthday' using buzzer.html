@@ -1,0 +1,208 @@
+<html>
+  <head>
+    <title>IBCS1-WD - July 13th, Tom's work on playing 'Happy birthday' using buzzer</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<h1 id="toc0"><a name="Dependencies: Pi4j, Raspberry Pi"></a>Dependencies: Pi4j, Raspberry Pi</h1>
+ <h2 id="toc1"> </h2>
+ <h2 id="toc2"><a name="Dependencies: Pi4j, Raspberry Pi-PlayMusic Class"></a>PlayMusic Class</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">tests</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">com.pi4j.io.gpio.GpioController</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">com.pi4j.io.gpio.GpioFactory</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">com.pi4j.io.gpio.GpioPinDigitalOutput</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">com.pi4j.io.gpio.Pin</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">java.util.HashMap</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.Iterator</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.LinkedHashMap</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.Map</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">static</span> com.<span class="me1">pi4j</span>.<span class="me1">wiringpi</span>.<span class="me1">Gpio</span>.<span class="me1">delay</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">static</span> com.<span class="me1">pi4j</span>.<span class="me1">wiringpi</span>.<span class="me1">Gpio</span>.<span class="me1">delayMicroseconds</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> PlayMusic <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw1">final</span> GpioController gpio <span class="sy0">=</span> GpioFactory.<span class="me1">getInstance</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw1">final</span> GpioPinDigitalOutput buzzer<span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw1">final</span> Map<span class="sy0">&lt;</span><span class="kw3">Character</span>, Integer<span class="sy0">&gt;</span> TONES <span class="sy0">=</span> <span class="kw1">new</span> HashMap<span class="sy0">&lt;&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">static</span> <span class="br0">&#123;</span>
+        <span class="kw1">final</span> <span class="kw4">char</span> names<span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#123;</span><span class="st0">'c'</span>, <span class="st0">'d'</span>, <span class="st0">'e'</span>, <span class="st0">'f'</span>, <span class="st0">'g'</span>, <span class="st0">'a'</span>, <span class="st0">'b'</span>, <span class="st0">'C'</span>, <span class="st0">'D'</span>, <span class="st0">'E'</span>, <span class="st0">'F'</span>, <span class="st0">'G'</span><span class="br0">&#125;</span><span class="sy0">;</span>
+        <span class="kw1">final</span> <span class="kw4">int</span> tones<span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#123;</span><span class="nu0">1915</span>, <span class="nu0">1700</span>, <span class="nu0">1519</span>, <span class="nu0">1432</span>, <span class="nu0">1275</span>, <span class="nu0">1136</span>, <span class="nu0">1014</span>, <span class="nu0">956</span>, <span class="nu0">853</span>, <span class="nu0">759</span>, <span class="nu0">716</span>, <span class="nu0">637</span>, <span class="nu0">568</span><span class="br0">&#125;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> names.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            TONES.<span class="me1">put</span><span class="br0">&#40;</span>names<span class="br0">&#91;</span>i<span class="br0">&#93;</span>, tones<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> PlayMusic<span class="br0">&#40;</span>Pin p<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        buzzer <span class="sy0">=</span> gpio.<span class="me1">provisionDigitalOutputPin</span><span class="br0">&#40;</span>p<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> play<span class="br0">&#40;</span>LinkedHashMap<span class="sy0">&lt;</span><span class="kw3">Character</span>, Integer<span class="sy0">&gt;</span> musicScore<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Iterator</span> it <span class="sy0">=</span> musicScore.<span class="me1">keySet</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">iterator</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> it.<span class="me1">hasNext</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw3">Object</span> note <span class="sy0">=</span> it.<span class="me1">next</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            playNote<span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">char</span><span class="br0">&#41;</span> note, musicScore.<span class="me1">get</span><span class="br0">&#40;</span>note<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> play<span class="br0">&#40;</span>LinkedHashMap<span class="sy0">&lt;</span><span class="kw3">Character</span>, Integer<span class="sy0">&gt;</span> musicScore, <span class="kw4">int</span> tempo<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw3">Iterator</span> it <span class="sy0">=</span> musicScore.<span class="me1">keySet</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">iterator</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> it.<span class="me1">hasNext</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw3">Object</span> note <span class="sy0">=</span> it.<span class="me1">next</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            playNote<span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">char</span><span class="br0">&#41;</span> note, musicScore.<span class="me1">get</span><span class="br0">&#40;</span>note<span class="br0">&#41;</span> <span class="sy0">*</span> tempo<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> play<span class="br0">&#40;</span><span class="kw4">char</span><span class="br0">&#91;</span><span class="br0">&#93;</span> notes, <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> durations<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>notes.<span class="me1">length</span> <span class="sy0">!=</span> durations.<span class="me1">length</span><span class="br0">&#41;</span>
+            <span class="kw1">throw</span> <span class="kw1">new</span> <span class="kw3">IllegalArgumentException</span><span class="br0">&#40;</span><span class="st0">&quot;Inconsistent length!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">else</span> <span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> notes.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                playNote<span class="br0">&#40;</span>notes<span class="br0">&#91;</span>i<span class="br0">&#93;</span>, durations<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> play<span class="br0">&#40;</span><span class="kw3">String</span> notes, <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> durations<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>notes.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">!=</span> durations.<span class="me1">length</span><span class="br0">&#41;</span>
+            <span class="kw1">throw</span> <span class="kw1">new</span> <span class="kw3">IllegalArgumentException</span><span class="br0">&#40;</span><span class="st0">&quot;Inconsistent length!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">else</span> <span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> notes.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                playNote<span class="br0">&#40;</span>notes.<span class="me1">charAt</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>, durations<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> play<span class="br0">&#40;</span><span class="kw3">String</span> notes, <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> beats, <span class="kw4">int</span> tempo<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>notes.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">!=</span> beats.<span class="me1">length</span><span class="br0">&#41;</span>
+            <span class="kw1">throw</span> <span class="kw1">new</span> <span class="kw3">IllegalArgumentException</span><span class="br0">&#40;</span><span class="st0">&quot;Inconsistent length!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">else</span> <span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> notes.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                playNote<span class="br0">&#40;</span>notes.<span class="me1">charAt</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>, beats<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">*</span> tempo<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> play<span class="br0">&#40;</span><span class="kw4">char</span><span class="br0">&#91;</span><span class="br0">&#93;</span> notes, <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> beats, <span class="kw4">int</span> tempo<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>notes.<span class="me1">length</span> <span class="sy0">!=</span> beats.<span class="me1">length</span><span class="br0">&#41;</span>
+            <span class="kw1">throw</span> <span class="kw1">new</span> <span class="kw3">IllegalArgumentException</span><span class="br0">&#40;</span><span class="st0">&quot;Inconsistent length!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">else</span> <span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> notes.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                playNote<span class="br0">&#40;</span>notes<span class="br0">&#91;</span>i<span class="br0">&#93;</span>, beats<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">*</span> tempo<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> playTone<span class="br0">&#40;</span><span class="kw4">int</span> tone, <span class="kw4">int</span> duration<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">long</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> duration <span class="sy0">*</span> 1000L<span class="sy0">;</span> i <span class="sy0">+=</span> tone <span class="sy0">*</span> <span class="nu0">2</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            buzzer.<span class="me1">high</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            delayMicroseconds<span class="br0">&#40;</span>tone<span class="br0">&#41;</span><span class="sy0">;</span>
+            buzzer.<span class="me1">low</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            delayMicroseconds<span class="br0">&#40;</span>tone<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> playNote<span class="br0">&#40;</span><span class="kw4">char</span> note, <span class="kw4">int</span> duration<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>note <span class="sy0">==</span> <span class="st0">' '</span><span class="br0">&#41;</span>
+            delay<span class="br0">&#40;</span>duration<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">else</span>
+            playTone<span class="br0">&#40;</span>TONES.<span class="me1">get</span><span class="br0">&#40;</span>note<span class="br0">&#41;</span>, duration <span class="sy0">*</span> <span class="nu0">4</span> <span class="sy0">/</span> <span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        delay<span class="br0">&#40;</span>duration <span class="sy0">/</span> <span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<h2 id="toc3"><a name="Dependencies: Pi4j, Raspberry Pi-Class HappyBirthday"></a>Class HappyBirthday</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">tests</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">com.pi4j.io.gpio.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> HappyBirthday <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw3">String</span> notes <span class="sy0">=</span> <span class="st0">&quot;ggagCbggagDCggGECbaffECDC&quot;</span><span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">int</span> beats<span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#123;</span><span class="nu0">1</span>, <span class="nu0">1</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">4</span>, <span class="nu0">1</span>, <span class="nu0">1</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">4</span>, <span class="nu0">1</span>, <span class="nu0">1</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">1</span>, <span class="nu0">1</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">2</span>, <span class="nu0">4</span><span class="br0">&#125;</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> tempo <span class="sy0">=</span> <span class="nu0">300</span><span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw1">final</span> PlayMusic p<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> HappyBirthday<span class="br0">&#40;</span>Pin p, <span class="kw4">int</span> tempo<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">p</span> <span class="sy0">=</span> <span class="kw1">new</span> PlayMusic<span class="br0">&#40;</span>p<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">tempo</span> <span class="sy0">=</span> tempo<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> HappyBirthday<span class="br0">&#40;</span>Pin p<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">p</span> <span class="sy0">=</span> <span class="kw1">new</span> PlayMusic<span class="br0">&#40;</span>p<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> setTempo<span class="br0">&#40;</span><span class="kw4">int</span> tempo<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">tempo</span> <span class="sy0">=</span> tempo<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getTempo<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> tempo<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> play<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        p.<span class="me1">play</span><span class="br0">&#40;</span>notes, beats, tempo<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

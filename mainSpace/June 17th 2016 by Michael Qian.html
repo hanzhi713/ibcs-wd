@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <title>IBCS1-WD - June 17th 2016 by Michael Qian</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>June 17th 2016 by Michael Qian<small> #Log </small></h1>What's up everybody!<br />
+<h3 id="toc0"><a name="x--welcome to today's log file of 2016 IB hacker group!"></a>welcome to today's log file of 2016 IB hacker group!</h3>
+ before you get started on your homework, let your dearest friend Michael to help u do a little recap first!<br />
+Anyway, let's cut the crap and get started!<br />
+<br />
+<h1 id="toc1"><a name="x1: chr() and ord() method"></a>1: chr() and ord() method</h1>
+ <br />
+After today's lecture you should have an intuitive sense of the function of chr() and ord()<br />
+When we type in numbers, English characters or even weird notations like (sigma) in python, the computer wouldn't<br />
+recognize the things we type in. Stupid huh? However, to make the computer understand it better, it undergoes a conversion of the things you typed in and ACSII code, basically every button on the normal QWERTY computer keyboard has its corresponding ACSII value. Here is the illustration:<br />
+<u>note the differences:</u><br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">&gt;&gt;&gt; ord(&quot;a&quot;)
+97
+&gt;&gt;&gt;ord(&quot;A&quot;)
+65
+&gt;&gt;&gt;chr(97)
+a</pre>
+
+<h1 id="toc2"><a name="x2: writing our own function!"></a>2: writing our own function!</h1>
+ <br />
+After all these work, we finally get to write our own functions, which made our work much easier!<br />
+Nevertheless, there are some points worth noting about it.<br />
+<br />
+<h2 id="toc3"><a name="x2: writing our own function!-2.1:parameters"></a>2.1:parameters</h2>
+ parameter most functions requires parameters which is located in the parentheses after the functions you defined.<br />
+make clear extinction between these two fellow:<br />
+formal parameter:variables which will later be given values<br />
+actual parameter:the actual parameter or number which get substitute into the function<br />
+<br />
+<h2 id="toc4"><a name="x2: writing our own function!-2.2:parameter has its life"></a>2.2:parameter has its life</h2>
+ <br />
+bear in mind that parameter has its life! depending on where it is declared. parameters in the functions you defined will only live in the functions which you defined! As soon as it gets out of the function the parameter die with it. So here comes the problem. What should we do if we still want to utilize the parameter's value? the answer is using <strong><u>return:</u></strong>  <u>here's a simple illustration:</u><br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">def a(a):
+    if a &lt; 0:
+        return(-a)
+    else:
+        return(a)
+a = int(input(&quot;give me a number&quot;))
+print(a(a))</pre>
+
+if we don't use return the program will have no memory of the parameter and when you tries to use it afterwards, that's generally bad times....<br />
+<br />
+<h2 id="toc5"><a name="x2: writing our own function!-2.3:coding convention"></a>2.3:coding convention</h2>
+ <br />
+here is a special point you should consider regards to coding convention. In other words make your functions more self-explanatory. &quot;&quot;&quot; helps you to do that. You can put in notes between &quot;&quot;&quot; (notes)&quot;&quot;&quot; in the definition of the function. And a special method called help() enables you to check your notes:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import math
+def max_simple(x,y,z):
+    &quot;&quot;&quot;This is quite simple&quot;&quot;&quot;
+    if x(z)&gt;y(z):
+        return x(z)
+    else:
+        return y(z)
+help(max_simple)
+print(max_simple(math.sin, math.cos , 1))</pre>
+
+and the result<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">Help on function max_simple in module __main__:
+&nbsp;
+max_simple(x, y, z)
+    This is quite simple
+&nbsp;
+0.8414709848078965</pre>
+
+We already know that # is a way of explaining the code for our reader and programmer, but it isn't as unique as the &quot;&quot;&quot; since it doesn't show its content when we use help(), and it can only mark one single line as notes.<br />
+<br />
+Thats it for Today's log, bye!!<br />
+<br />
+your friendly neighborhood Muscle<br />
+<br />
+Homework： No mandatory homework.<br />
+<h1 id="toc6"><a name="Hooooooray!!!!"></a>Hooooooray!!!!</h1>
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

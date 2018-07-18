@@ -1,0 +1,630 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Implementing serial communication protocol for Alpha 1 Pro robot</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>Implementing serial communication protocol for Alpha 1 Pro robot<small> #TomsProjects </small></h1><h1 id="toc0"><a name="AlphaProtocol Abstract Class"></a>AlphaProtocol Abstract Class</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">alpha</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">com.pi4j.io.serial.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">com.pi4j.util.CommandArgumentParser</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">com.pi4j.util.Console</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">java.io.IOException</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.Date</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.Map</span><span class="sy0">;</span>
+<span class="co3">/**
+ * @author Hanzhi Zhou
+ * */</span>
+<span class="kw1">public</span> <span class="kw1">abstract</span> <span class="kw1">class</span> AlphaProtocol <span class="br0">&#123;</span>
+&nbsp;
+    <span class="co1">// Default motor rotational values</span>
+    <span class="co1">// used to reset the robot</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> initialMotorPositions <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span>
+            <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">60</span>, <span class="nu0">76</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">120</span>, <span class="nu0">104</span>, <span class="nu0">70</span>, <span class="nu0">90</span>
+    <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="co1">// used to record the current motor rotational values</span>
+    <span class="kw1">public</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> currentMotorRotations <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span>
+            <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">60</span>, <span class="nu0">76</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">120</span>, <span class="nu0">104</span>, <span class="nu0">70</span>, <span class="nu0">90</span>
+    <span class="br0">&#125;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="co1">// the command tail of the bluetooth serial</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">int</span> COMMAND_TAIL <span class="sy0">=</span> 0xed<span class="sy0">;</span>
+&nbsp;
+&nbsp;
+    <span class="co3">/**
+     * reset motors' rotational values
+     */</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> restoreMotorDefaultState<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        moveMotor<span class="br0">&#40;</span>initialMotorPositions, <span class="nu0">1000</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        sleep<span class="br0">&#40;</span><span class="nu0">1020</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co3">/**
+     * @param command The array of hexadecimal commands
+     *                Add the head and tail for this command
+     */</span>
+    <span class="kw1">public</span> <span class="kw1">abstract</span> <span class="kw4">void</span> addHeadAndTail<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> command<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="co3">/**
+     * @param commands The array of hexadecimal commands
+     *                 Output commands to the serial
+     */</span>
+    <span class="kw1">public</span> <span class="kw1">abstract</span> <span class="kw4">void</span> outputSerial<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> commands<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> moveForward<span class="br0">&#40;</span><span class="kw4">int</span> steps<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> steps<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">54</span>, <span class="nu0">20</span>, <span class="nu0">67</span>, <span class="nu0">40</span>, <span class="nu0">162</span>, <span class="nu0">111</span>, <span class="nu0">75</span>, <span class="nu0">108</span>, <span class="nu0">104</span>, <span class="nu0">120</span>, <span class="nu0">103</span>, <span class="nu0">80</span>, <span class="nu0">90</span>, <span class="nu0">72</span>, <span class="nu0">78</span>, <span class="nu0">102</span><span class="br0">&#125;</span>, <span class="nu0">500</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">105</span>, <span class="nu0">31</span>, <span class="nu0">67</span>, <span class="nu0">65</span>, <span class="nu0">162</span>, <span class="nu0">111</span>, <span class="nu0">75</span>, <span class="nu0">58</span>, <span class="nu0">55</span>, <span class="nu0">122</span>, <span class="nu0">100</span>, <span class="nu0">80</span>, <span class="nu0">90</span>, <span class="nu0">72</span>, <span class="nu0">78</span>, <span class="nu0">102</span><span class="br0">&#125;</span>, <span class="nu0">240</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">105</span>, <span class="nu0">31</span>, <span class="nu0">67</span>, <span class="nu0">65</span>, <span class="nu0">162</span>, <span class="nu0">111</span>, <span class="nu0">75</span>, <span class="nu0">58</span>, <span class="nu0">55</span>, <span class="nu0">122</span>, <span class="nu0">100</span>, <span class="nu0">80</span>, <span class="nu0">90</span>, <span class="nu0">72</span>, <span class="nu0">78</span>, <span class="nu0">102</span><span class="br0">&#125;</span>, <span class="nu0">40</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">135</span>, <span class="nu0">20</span>, <span class="nu0">66</span>, <span class="nu0">120</span>, <span class="nu0">162</span>, <span class="nu0">123</span>, <span class="nu0">75</span>, <span class="nu0">61</span>, <span class="nu0">115</span>, <span class="nu0">68</span>, <span class="nu0">100</span>, <span class="nu0">80</span>, <span class="nu0">90</span>, <span class="nu0">72</span>, <span class="nu0">78</span>, <span class="nu0">102</span><span class="br0">&#125;</span>, <span class="nu0">240</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">135</span>, <span class="nu0">20</span>, <span class="nu0">66</span>, <span class="nu0">120</span>, <span class="nu0">162</span>, <span class="nu0">123</span>, <span class="nu0">75</span>, <span class="nu0">61</span>, <span class="nu0">115</span>, <span class="nu0">68</span>, <span class="nu0">100</span>, <span class="nu0">80</span>, <span class="nu0">90</span>, <span class="nu0">72</span>, <span class="nu0">78</span>, <span class="nu0">102</span><span class="br0">&#125;</span>, <span class="nu0">40</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">121</span>, <span class="nu0">20</span>, <span class="nu0">67</span>, <span class="nu0">85</span>, <span class="nu0">151</span>, <span class="nu0">110</span>, <span class="nu0">100</span>, <span class="nu0">90</span>, <span class="nu0">108</span>, <span class="nu0">100</span>, <span class="nu0">79</span>, <span class="nu0">105</span>, <span class="nu0">74</span>, <span class="nu0">69</span>, <span class="nu0">66</span>, <span class="nu0">79</span><span class="br0">&#125;</span>, <span class="nu0">500</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">105</span>, <span class="nu0">20</span>, <span class="nu0">67</span>, <span class="nu0">65</span>, <span class="nu0">162</span>, <span class="nu0">111</span>, <span class="nu0">98</span>, <span class="nu0">87</span>, <span class="nu0">108</span>, <span class="nu0">100</span>, <span class="nu0">79</span>, <span class="nu0">105</span>, <span class="nu0">123</span>, <span class="nu0">125</span>, <span class="nu0">57</span>, <span class="nu0">80</span><span class="br0">&#125;</span>, <span class="nu0">240</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">105</span>, <span class="nu0">20</span>, <span class="nu0">67</span>, <span class="nu0">65</span>, <span class="nu0">162</span>, <span class="nu0">111</span>, <span class="nu0">98</span>, <span class="nu0">87</span>, <span class="nu0">108</span>, <span class="nu0">100</span>, <span class="nu0">79</span>, <span class="nu0">105</span>, <span class="nu0">123</span>, <span class="nu0">125</span>, <span class="nu0">57</span>, <span class="nu0">80</span><span class="br0">&#125;</span>, <span class="nu0">40</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">105</span>, <span class="nu0">20</span>, <span class="nu0">67</span>, <span class="nu0">65</span>, <span class="nu0">162</span>, <span class="nu0">111</span>, <span class="nu0">100</span>, <span class="nu0">87</span>, <span class="nu0">108</span>, <span class="nu0">100</span>, <span class="nu0">79</span>, <span class="nu0">104</span>, <span class="nu0">114</span>, <span class="nu0">72</span>, <span class="nu0">105</span>, <span class="nu0">80</span><span class="br0">&#125;</span>, <span class="nu0">240</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">105</span>, <span class="nu0">20</span>, <span class="nu0">67</span>, <span class="nu0">65</span>, <span class="nu0">162</span>, <span class="nu0">111</span>, <span class="nu0">100</span>, <span class="nu0">87</span>, <span class="nu0">108</span>, <span class="nu0">100</span>, <span class="nu0">79</span>, <span class="nu0">104</span>, <span class="nu0">114</span>, <span class="nu0">72</span>, <span class="nu0">105</span>, <span class="nu0">80</span><span class="br0">&#125;</span>, <span class="nu0">40</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> moveBackward<span class="br0">&#40;</span><span class="kw4">int</span> steps<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> steps<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">105</span>, <span class="nu0">20</span>, <span class="nu0">67</span>, <span class="nu0">65</span>, <span class="nu0">162</span>, <span class="nu0">111</span>, <span class="nu0">100</span>, <span class="nu0">87</span>, <span class="nu0">108</span>, <span class="nu0">100</span>, <span class="nu0">78</span>, <span class="nu0">107</span>, <span class="nu0">114</span>, <span class="nu0">65</span>, <span class="nu0">108</span>, <span class="nu0">76</span><span class="br0">&#125;</span>, <span class="nu0">500</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">105</span>, <span class="nu0">20</span>, <span class="nu0">67</span>, <span class="nu0">65</span>, <span class="nu0">162</span>, <span class="nu0">111</span>, <span class="nu0">100</span>, <span class="nu0">87</span>, <span class="nu0">108</span>, <span class="nu0">100</span>, <span class="nu0">78</span>, <span class="nu0">104</span>, <span class="nu0">110</span>, <span class="nu0">125</span>, <span class="nu0">50</span>, <span class="nu0">80</span><span class="br0">&#125;</span>, <span class="nu0">240</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">121</span>, <span class="nu0">20</span>, <span class="nu0">67</span>, <span class="nu0">85</span>, <span class="nu0">162</span>, <span class="nu0">111</span>, <span class="nu0">100</span>, <span class="nu0">90</span>, <span class="nu0">108</span>, <span class="nu0">102</span>, <span class="nu0">78</span>, <span class="nu0">105</span>, <span class="nu0">84</span>, <span class="nu0">94</span>, <span class="nu0">53</span>, <span class="nu0">76</span><span class="br0">&#125;</span>, <span class="nu0">240</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">135</span>, <span class="nu0">35</span>, <span class="nu0">66</span>, <span class="nu0">120</span>, <span class="nu0">162</span>, <span class="nu0">123</span>, <span class="nu0">75</span>, <span class="nu0">68</span>, <span class="nu0">123</span>, <span class="nu0">70</span>, <span class="nu0">102</span>, <span class="nu0">80</span>, <span class="nu0">90</span>, <span class="nu0">72</span>, <span class="nu0">78</span>, <span class="nu0">104</span><span class="br0">&#125;</span>, <span class="nu0">500</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">105</span>, <span class="nu0">30</span>, <span class="nu0">67</span>, <span class="nu0">65</span>, <span class="nu0">162</span>, <span class="nu0">111</span>, <span class="nu0">75</span>, <span class="nu0">70</span>, <span class="nu0">55</span>, <span class="nu0">135</span>, <span class="nu0">100</span>, <span class="nu0">80</span>, <span class="nu0">90</span>, <span class="nu0">72</span>, <span class="nu0">78</span>, <span class="nu0">104</span><span class="br0">&#125;</span>, <span class="nu0">240</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">54</span>, <span class="nu0">32</span>, <span class="nu0">67</span>, <span class="nu0">40</span>, <span class="nu0">162</span> ,<span class="nu0">111</span>, <span class="nu0">75</span>, <span class="nu0">96</span>, <span class="nu0">90</span>, <span class="nu0">123</span>, <span class="nu0">106</span>, <span class="nu0">80</span>, <span class="nu0">90</span>, <span class="nu0">72</span>, <span class="nu0">78</span>, <span class="nu0">104</span><span class="br0">&#125;</span>, <span class="nu0">240</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> turnLeft<span class="br0">&#40;</span><span class="kw4">int</span> steps<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> steps<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">38</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">87</span>, <span class="nu0">57</span>, <span class="nu0">74</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">123</span>, <span class="nu0">106</span>, <span class="nu0">72</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">100</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">103</span>, <span class="nu0">55</span>, <span class="nu0">55</span>, <span class="nu0">67</span>, <span class="nu0">124</span>, <span class="nu0">125</span>, <span class="nu0">72</span>, <span class="nu0">66</span>, <span class="nu0">102</span>, <span class="nu0">84</span>, <span class="nu0">107</span>, <span class="nu0">110</span>, <span class="nu0">68</span>, <span class="nu0">71</span>, <span class="nu0">60</span>, <span class="nu0">69</span><span class="br0">&#125;</span>, <span class="nu0">100</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">39</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">88</span>, <span class="nu0">57</span>, <span class="nu0">72</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">123</span>, <span class="nu0">110</span>, <span class="nu0">70</span>, <span class="nu0">88</span><span class="br0">&#125;</span>, <span class="nu0">200</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">103</span>, <span class="nu0">55</span>, <span class="nu0">55</span>, <span class="nu0">67</span>, <span class="nu0">124</span>, <span class="nu0">125</span>, <span class="nu0">72</span>, <span class="nu0">66</span>, <span class="nu0">102</span>, <span class="nu0">84</span>, <span class="nu0">107</span>, <span class="nu0">110</span>, <span class="nu0">68</span>, <span class="nu0">71</span>, <span class="nu0">60</span>, <span class="nu0">69</span><span class="br0">&#125;</span>, <span class="nu0">100</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">39</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">88</span>, <span class="nu0">57</span>, <span class="nu0">72</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">123</span>, <span class="nu0">110</span>, <span class="nu0">70</span>, <span class="nu0">88</span><span class="br0">&#125;</span>, <span class="nu0">200</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> turnRight<span class="br0">&#40;</span><span class="kw4">int</span> steps<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> steps<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">87</span>, <span class="nu0">57</span>, <span class="nu0">72</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">121</span>, <span class="nu0">106</span>, <span class="nu0">72</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">100</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">103</span>, <span class="nu0">54</span>, <span class="nu0">55</span>, <span class="nu0">67</span>, <span class="nu0">124</span>, <span class="nu0">125</span>, <span class="nu0">69</span>, <span class="nu0">92</span>, <span class="nu0">93</span>, <span class="nu0">120</span>, <span class="nu0">109</span>, <span class="nu0">105</span>, <span class="nu0">122</span>, <span class="nu0">72</span>, <span class="nu0">108</span>, <span class="nu0">72</span><span class="br0">&#125;</span>, <span class="nu0">100</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">87</span>, <span class="nu0">57</span>, <span class="nu0">72</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">123</span>, <span class="nu0">106</span>, <span class="nu0">72</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">200</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">103</span>, <span class="nu0">54</span>, <span class="nu0">55</span>, <span class="nu0">67</span>, <span class="nu0">124</span>, <span class="nu0">125</span>, <span class="nu0">69</span>, <span class="nu0">92</span>, <span class="nu0">93</span>, <span class="nu0">120</span>, <span class="nu0">109</span>, <span class="nu0">105</span>, <span class="nu0">122</span>, <span class="nu0">72</span>, <span class="nu0">108</span>, <span class="nu0">72</span><span class="br0">&#125;</span>, <span class="nu0">100</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">87</span>, <span class="nu0">57</span>, <span class="nu0">72</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">90</span>, <span class="nu0">123</span>, <span class="nu0">106</span>, <span class="nu0">72</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">200</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> moveLeft<span class="br0">&#40;</span><span class="kw4">int</span> steps<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> steps<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">52</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">64</span>, <span class="nu0">63</span>, <span class="nu0">72</span>, <span class="nu0">112</span>, <span class="nu0">104</span>, <span class="nu0">89</span>, <span class="nu0">127</span>, <span class="nu0">125</span>, <span class="nu0">63</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">100</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">52</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">64</span>, <span class="nu0">63</span>, <span class="nu0">72</span>, <span class="nu0">112</span>, <span class="nu0">104</span>, <span class="nu0">89</span>, <span class="nu0">127</span>, <span class="nu0">125</span>, <span class="nu0">63</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">200</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">90</span>, <span class="nu0">63</span>, <span class="nu0">76</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">91</span>, <span class="nu0">117</span>, <span class="nu0">104</span>, <span class="nu0">70</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">100</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">90</span>, <span class="nu0">63</span>, <span class="nu0">76</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">91</span>, <span class="nu0">117</span>, <span class="nu0">104</span>, <span class="nu0">70</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">200</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">52</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">64</span>, <span class="nu0">63</span>, <span class="nu0">72</span>, <span class="nu0">112</span>, <span class="nu0">104</span>, <span class="nu0">89</span>, <span class="nu0">127</span>, <span class="nu0">125</span>, <span class="nu0">63</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">100</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">52</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">64</span>, <span class="nu0">63</span>, <span class="nu0">72</span>, <span class="nu0">112</span>, <span class="nu0">104</span>, <span class="nu0">89</span>, <span class="nu0">127</span>, <span class="nu0">125</span>, <span class="nu0">63</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">200</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">90</span>, <span class="nu0">63</span>, <span class="nu0">76</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">91</span>, <span class="nu0">117</span>, <span class="nu0">104</span>, <span class="nu0">70</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">100</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">90</span>, <span class="nu0">63</span>, <span class="nu0">76</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">91</span>, <span class="nu0">117</span>, <span class="nu0">104</span>, <span class="nu0">70</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">200</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">90</span>, <span class="nu0">63</span>, <span class="nu0">76</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">91</span>, <span class="nu0">117</span>, <span class="nu0">104</span>, <span class="nu0">70</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">100</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">90</span>, <span class="nu0">63</span>, <span class="nu0">76</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">91</span>, <span class="nu0">117</span>, <span class="nu0">104</span>, <span class="nu0">70</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">200</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> moveRight<span class="br0">&#40;</span><span class="kw4">int</span> steps<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> steps<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">40</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">136</span>, <span class="nu0">150</span>, <span class="nu0">90</span>, <span class="nu0">53</span>, <span class="nu0">58</span>, <span class="nu0">117</span>, <span class="nu0">90</span>, <span class="nu0">116</span>, <span class="nu0">116</span>, <span class="nu0">98</span>, <span class="nu0">76</span>, <span class="nu0">76</span><span class="br0">&#125;</span>, <span class="nu0">100</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">40</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">136</span>, <span class="nu0">150</span>, <span class="nu0">90</span>, <span class="nu0">53</span>, <span class="nu0">58</span>, <span class="nu0">117</span>, <span class="nu0">90</span>, <span class="nu0">116</span>, <span class="nu0">116</span>, <span class="nu0">98</span>, <span class="nu0">76</span>, <span class="nu0">76</span><span class="br0">&#125;</span>, <span class="nu0">200</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">90</span>, <span class="nu0">63</span>, <span class="nu0">76</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">91</span>, <span class="nu0">117</span>, <span class="nu0">104</span>, <span class="nu0">70</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">100</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">90</span>, <span class="nu0">63</span>, <span class="nu0">76</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">91</span>, <span class="nu0">117</span>, <span class="nu0">104</span>, <span class="nu0">70</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">200</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">40</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">136</span>, <span class="nu0">150</span>, <span class="nu0">90</span>, <span class="nu0">53</span>, <span class="nu0">58</span>, <span class="nu0">117</span>, <span class="nu0">90</span>, <span class="nu0">116</span>, <span class="nu0">116</span>, <span class="nu0">98</span>, <span class="nu0">76</span>, <span class="nu0">76</span><span class="br0">&#125;</span>, <span class="nu0">100</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">40</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">136</span>, <span class="nu0">150</span>, <span class="nu0">90</span>, <span class="nu0">53</span>, <span class="nu0">58</span>, <span class="nu0">117</span>, <span class="nu0">90</span>, <span class="nu0">116</span>, <span class="nu0">116</span>, <span class="nu0">98</span>, <span class="nu0">76</span>, <span class="nu0">76</span><span class="br0">&#125;</span>, <span class="nu0">200</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">90</span>, <span class="nu0">63</span>, <span class="nu0">76</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">91</span>, <span class="nu0">117</span>, <span class="nu0">104</span>, <span class="nu0">70</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">100</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">90</span>, <span class="nu0">63</span>, <span class="nu0">76</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">91</span>, <span class="nu0">117</span>, <span class="nu0">104</span>, <span class="nu0">70</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">200</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">90</span>, <span class="nu0">63</span>, <span class="nu0">76</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">91</span>, <span class="nu0">117</span>, <span class="nu0">104</span>, <span class="nu0">70</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">100</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            moveMotor<span class="br0">&#40;</span><span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">90</span>, <span class="nu0">30</span>, <span class="nu0">40</span>, <span class="nu0">90</span>, <span class="nu0">144</span>, <span class="nu0">150</span>, <span class="nu0">90</span>, <span class="nu0">63</span>, <span class="nu0">76</span>, <span class="nu0">110</span>, <span class="nu0">90</span>, <span class="nu0">91</span>, <span class="nu0">117</span>, <span class="nu0">104</span>, <span class="nu0">70</span>, <span class="nu0">90</span><span class="br0">&#125;</span>, <span class="nu0">200</span>, <span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co3">/**
+     * set the degree of the motor with key (motorID) A to its value B
+     * remain other motors' rotational value unchanged
+     *
+     * @param degrees The motorID → degree map.
+     * @param time    the rotation time
+     * @param delay   delay for the next action
+     */</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> moveMotor<span class="br0">&#40;</span>Map<span class="sy0">&lt;</span><span class="kw3">Integer</span>, Integer<span class="sy0">&gt;</span> degrees, <span class="kw4">int</span> time, <span class="kw4">int</span> delay<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> key <span class="sy0">:</span> degrees.<span class="me1">keySet</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+            currentMotorRotations<span class="br0">&#91;</span>key <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> degrees.<span class="me1">get</span><span class="br0">&#40;</span>key<span class="br0">&#41;</span><span class="sy0">;</span>
+        moveMotor<span class="br0">&#40;</span>currentMotorRotations, time, delay<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co3">/**
+     * set the rotational values of all the motors
+     *
+     * @param degrees The degrees for motors numbering from 1 to 16.
+     * @param time    the rotation time
+     * @param delay   delay for the next action
+     */</span>
+    <span class="kw1">public</span> <span class="kw1">abstract</span> <span class="kw4">void</span> moveMotor<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> degrees, <span class="kw4">int</span> time, <span class="kw4">int</span> delay<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="co3">/**
+     * set the rotational value for a given motor
+     *
+     * @param motorID the id of the motor to be controlled
+     * @param degree  the degree of rotation, between 0 to 180
+     * @param time    the time of rotation, unit: milliseconds
+     * @param delay   the delay after the action, unit: milliseconds
+     */</span>
+    <span class="kw1">public</span> <span class="kw1">abstract</span> <span class="kw4">void</span> moveMotor<span class="br0">&#40;</span><span class="kw4">int</span> motorID, <span class="kw4">int</span> degree, <span class="kw4">int</span> time, <span class="kw4">int</span> delay<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="co3">/**
+     * Add the check code for the bluetooth serial command
+     *
+     * @param command The serial command
+     */</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> check<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> command<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> sum <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">2</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> command.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">2</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+            sum <span class="sy0">+=</span> command<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+        command<span class="br0">&#91;</span>command.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> sum <span class="sy0">%</span> 0x100<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co3">/**
+     * sleep the main thread
+     *
+     * @param ms time in milliseconds
+     */</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> sleep<span class="br0">&#40;</span><span class="kw4">int</span> ms<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">try</span> <span class="br0">&#123;</span>
+            <span class="kw3">Thread</span>.<span class="me1">sleep</span><span class="br0">&#40;</span>ms<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">InterruptedException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co3">/**
+     * output the hexadecimal code for a command sent via serial
+     *
+     * @param command the command which takes integer form
+     */</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> outputHexCode<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> command<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> a <span class="sy0">:</span> command<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">printf</span><span class="br0">&#40;</span><span class="st0">&quot;%02X &quot;</span>, a<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<h1 id="toc1"><a name="BluetoothProtocol extends AlphaProtocol"></a>BluetoothProtocol extends AlphaProtocol</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">alpha</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">com.pi4j.io.serial.*</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">com.pi4j.util.Console</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">java.io.IOException</span><span class="sy0">;</span>
+&nbsp;
+<span class="co3">/**
+ * @author Hanzhi Zhou
+ * */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> BluetoothProtocol <span class="kw1">extends</span> AlphaProtocol <span class="br0">&#123;</span>
+&nbsp;
+    <span class="co1">// the command head of the bluetooth serial</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">int</span> HEAD1 <span class="sy0">=</span> 0xfb<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">int</span> HEAD2 <span class="sy0">=</span> 0xbf<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">final</span> Serial serial<span class="sy0">;</span>
+&nbsp;
+    <span class="co3">/**
+     * @param portName the serial port to be used. i.e. &quot;COM3&quot;
+     */</span>
+    <span class="kw1">public</span> BluetoothProtocol<span class="br0">&#40;</span><span class="kw3">String</span> portName<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">final</span> Console console <span class="sy0">=</span> <span class="kw1">new</span> Console<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="co1">// allow for user to exit program using CTRL-C</span>
+        console.<span class="me1">promptForExit</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1">// create an instance of the serial communications class</span>
+        serial <span class="sy0">=</span> SerialFactory.<span class="me1">createInstance</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1">// create and register the serial data listener</span>
+        serial.<span class="me1">addListener</span><span class="br0">&#40;</span><span class="kw1">new</span> SerialDataEventListener<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            @Override
+            <span class="kw1">public</span> <span class="kw4">void</span> dataReceived<span class="br0">&#40;</span>SerialDataEvent event<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+                <span class="co1">// NOTE! - It is extremely important to read the data received from the</span>
+                <span class="co1">// serial port.  If it does not get read from the receive buffer, the</span>
+                <span class="co1">// buffer will continue to grow and consume memory.</span>
+&nbsp;
+                <span class="co1">// print out the data received to the console</span>
+                <span class="kw1">try</span> <span class="br0">&#123;</span>
+                    console.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;[HEX DATA]   &quot;</span> <span class="sy0">+</span> event.<span class="me1">getHexByteString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                    console.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;[ASCII DATA] &quot;</span> <span class="sy0">+</span> event.<span class="me1">getAsciiString</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                    e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="br0">&#125;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">try</span> <span class="br0">&#123;</span>
+            <span class="co1">// create serial config object</span>
+            SerialConfig config <span class="sy0">=</span> <span class="kw1">new</span> SerialConfig<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            <span class="co1">// set default serial settings (device, baud rate, flow control, etc)</span>
+            <span class="co1">//</span>
+            <span class="co1">// by default, use the DEFAULT com port on the Raspberry Pi (exposed on GPIO header)</span>
+            <span class="co1">// NOTE: this utility method will determine the default serial port for the</span>
+            <span class="co1">//       detected platform and board/model.  For all Raspberry Pi models</span>
+            <span class="co1">//       except the 3B, it will return &quot;/dev/ttyAMA0&quot;.  For Raspberry Pi</span>
+            <span class="co1">//       model 3B may return &quot;/dev/ttyS0&quot; or &quot;/dev/ttyAMA0&quot; depending on</span>
+            <span class="co1">//       environment configuration.</span>
+            config.<span class="me1">device</span><span class="br0">&#40;</span><span class="st0">&quot;/dev/rfcomm0&quot;</span><span class="br0">&#41;</span>
+                    .<span class="me1">baud</span><span class="br0">&#40;</span>Baud._9600<span class="br0">&#41;</span>
+                    .<span class="me1">dataBits</span><span class="br0">&#40;</span>DataBits._8<span class="br0">&#41;</span>
+                    .<span class="me1">parity</span><span class="br0">&#40;</span>Parity.<span class="me1">NONE</span><span class="br0">&#41;</span>
+                    .<span class="me1">stopBits</span><span class="br0">&#40;</span>StopBits._1<span class="br0">&#41;</span>
+                    .<span class="me1">flowControl</span><span class="br0">&#40;</span>FlowControl.<span class="me1">NONE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+            <span class="co1">// open the default serial device/port with the configuration settings</span>
+            serial.<span class="me1">open</span><span class="br0">&#40;</span>config<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="br0">&#125;</span>
+        <span class="kw1">catch</span><span class="br0">&#40;</span><span class="kw3">IOException</span> ex<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            console.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot; ==&gt;&gt; SERIAL SETUP FAILED : &quot;</span> <span class="sy0">+</span> ex.<span class="me1">getMessage</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">return</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> handShake<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        sendCommand<span class="br0">&#40;</span>0x01, <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span>0x00<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> heartBeat<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        sendCommand<span class="br0">&#40;</span>0x08, <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span>0x00<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> moveMotor<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> degrees, <span class="kw4">int</span> time, <span class="kw4">int</span> delay<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> len <span class="sy0">=</span> <span class="nu0">9</span> <span class="sy0">+</span> degrees.<span class="me1">length</span><span class="sy0">;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> command <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>len<span class="br0">&#93;</span><span class="sy0">;</span><span class="co1">// 2+1+1+1+2+1+1</span>
+        addHeadAndTail<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+        command<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> len <span class="sy0">-</span> <span class="nu0">1</span><span class="sy0">;</span>
+        command<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> 0x23<span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> degrees.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            command<span class="br0">&#91;</span><span class="nu0">4</span> <span class="sy0">+</span> i<span class="br0">&#93;</span> <span class="sy0">=</span> degrees<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        command<span class="br0">&#91;</span>len <span class="sy0">-</span> <span class="nu0">5</span><span class="br0">&#93;</span> <span class="sy0">=</span> time <span class="sy0">/</span> <span class="nu0">20</span><span class="sy0">;</span>
+        delay <span class="sy0">=</span> delay <span class="sy0">/</span> <span class="nu0">20</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>delay <span class="sy0">&gt;</span> 0xff<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            command<span class="br0">&#91;</span>len <span class="sy0">-</span> <span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> 0xff<span class="sy0">;</span>
+            command<span class="br0">&#91;</span>len <span class="sy0">-</span> <span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> delay <span class="sy0">-</span> 0xff<span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            command<span class="br0">&#91;</span>len <span class="sy0">-</span> <span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> delay<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        check<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+        currentMotorRotations <span class="sy0">=</span> degrees.<span class="me1">clone</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        outputSerial<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+        outputHexCode<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+        sleep<span class="br0">&#40;</span>time <span class="sy0">+</span> delay <span class="sy0">*</span> <span class="nu0">20</span> <span class="sy0">+</span> <span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> moveMotor<span class="br0">&#40;</span><span class="kw4">int</span> motorID, <span class="kw4">int</span> degree, <span class="kw4">int</span> time, <span class="kw4">int</span> delay<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> command <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">11</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        addHeadAndTail<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+        command<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="nu0">10</span><span class="sy0">;</span> <span class="co1">// 2 + 1 + 1 + 5 + 1;</span>
+        command<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> 0x22<span class="sy0">;</span>
+        command<span class="br0">&#91;</span><span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> motorID<span class="sy0">;</span>
+        command<span class="br0">&#91;</span><span class="nu0">5</span><span class="br0">&#93;</span> <span class="sy0">=</span> degree<span class="sy0">;</span>
+        command<span class="br0">&#91;</span><span class="nu0">6</span><span class="br0">&#93;</span> <span class="sy0">=</span> time <span class="sy0">/</span> <span class="nu0">20</span><span class="sy0">;</span>
+        delay <span class="sy0">=</span> delay <span class="sy0">/</span> <span class="nu0">20</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>delay <span class="sy0">&gt;</span> 0xff<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            command<span class="br0">&#91;</span><span class="nu0">7</span><span class="br0">&#93;</span> <span class="sy0">=</span> 0xff<span class="sy0">;</span>
+            command<span class="br0">&#91;</span><span class="nu0">8</span><span class="br0">&#93;</span> <span class="sy0">=</span> delay <span class="sy0">-</span> 0xff<span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            command<span class="br0">&#91;</span><span class="nu0">7</span><span class="br0">&#93;</span> <span class="sy0">=</span> delay<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        check<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+        currentMotorRotations<span class="br0">&#91;</span>motorID <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> degree<span class="sy0">;</span>
+        outputSerial<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+        outputHexCode<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+        sleep<span class="br0">&#40;</span>time <span class="sy0">+</span> delay <span class="sy0">*</span> <span class="nu0">20</span> <span class="sy0">+</span> <span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> outputSerial<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> command<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">try</span> <span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> b <span class="sy0">:</span> command<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                serial.<span class="me1">write</span><span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw4">byte</span><span class="br0">&#41;</span> b<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            serial.<span class="me1">writeln</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">catch</span> <span class="br0">&#40;</span><span class="kw3">IOException</span> e<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            e.<span class="me1">printStackTrace</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> addHeadAndTail<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> command<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        command<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> HEAD1<span class="sy0">;</span>
+        command<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> HEAD2<span class="sy0">;</span>
+        command<span class="br0">&#91;</span>command.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> COMMAND_TAIL<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="co3">/**
+     * @param cmd The command in hexadecimal format
+     * @param params The corresponding parameters for the command code cmd
+     * send a command to the robot
+     */</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> sendCommand<span class="br0">&#40;</span><span class="kw4">int</span> cmd, <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> params<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> command <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">6</span> <span class="sy0">+</span> params.<span class="me1">length</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        command<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> command.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">1</span><span class="sy0">;</span>
+        command<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> cmd<span class="sy0">;</span>
+        addHeadAndTail<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> params.<span class="me1">length</span> <span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            command<span class="br0">&#91;</span><span class="nu0">4</span><span class="sy0">+</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> params<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        check<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+        outputSerial<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+        outputHexCode<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> moveForward<span class="br0">&#40;</span><span class="kw4">int</span> steps<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> steps <span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            sendCommand<span class="br0">&#40;</span>0x03, <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span>0x6d, 0x66<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            sleep<span class="br0">&#40;</span><span class="nu0">2200</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> moveBackward<span class="br0">&#40;</span><span class="kw4">int</span> steps<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> steps <span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            sendCommand<span class="br0">&#40;</span>0x03, <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span>0x6d, 0x62<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            sleep<span class="br0">&#40;</span><span class="nu0">2200</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> moveLeft<span class="br0">&#40;</span><span class="kw4">int</span> steps<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> steps <span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            sendCommand<span class="br0">&#40;</span>0x03, <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span>0x6d, 0x6c<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            sleep<span class="br0">&#40;</span><span class="nu0">700</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> moveRight<span class="br0">&#40;</span><span class="kw4">int</span> steps<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> steps <span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            sendCommand<span class="br0">&#40;</span>0x03, <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span>0x6d, 0x72<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            sleep<span class="br0">&#40;</span><span class="nu0">700</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> turnLeft<span class="br0">&#40;</span><span class="kw4">int</span> steps<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> steps <span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            sendCommand<span class="br0">&#40;</span>0x03, <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span>0x74, 0x6c<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            sleep<span class="br0">&#40;</span><span class="nu0">1000</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> turnRight<span class="br0">&#40;</span><span class="kw4">int</span> steps<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> steps <span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            sendCommand<span class="br0">&#40;</span>0x03, <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span>0x74, 0x72<span class="br0">&#125;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            sleep<span class="br0">&#40;</span><span class="nu0">1000</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<h1 id="toc2"><a name="PCProtocol extends AlphaProtocol"></a>PCProtocol extends AlphaProtocol</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">alpha</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">org.hid4java.*</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">import</span> <span class="co2">java.io.IOException</span><span class="sy0">;</span>
+&nbsp;
+<span class="co3">/**
+ * @author Hanzhi Zhou
+ * */</span>
+<span class="kw1">public</span> <span class="kw1">class</span> PCProtocol <span class="kw1">extends</span> AlphaProtocol <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">int</span> HEAD1 <span class="sy0">=</span> 0xfb<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw1">static</span> <span class="kw1">final</span> <span class="kw4">int</span> HEAD2 <span class="sy0">=</span> 0xbf<span class="sy0">;</span>
+    <span class="kw1">private</span> HidDevice robot <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> PCProtocol<span class="br0">&#40;</span><span class="kw4">int</span> vendorID, <span class="kw4">int</span> productID<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+&nbsp;
+        <span class="co1">// HID Service configuration</span>
+        HidServicesSpecification hidServicesSpecification <span class="sy0">=</span> <span class="kw1">new</span> HidServicesSpecification<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        hidServicesSpecification.<span class="me1">setAutoShutdown</span><span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        hidServicesSpecification.<span class="me1">setScanInterval</span><span class="br0">&#40;</span><span class="nu0">250</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        hidServicesSpecification.<span class="me1">setPauseInterval</span><span class="br0">&#40;</span><span class="nu0">1000</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        hidServicesSpecification.<span class="me1">setScanMode</span><span class="br0">&#40;</span>ScanMode.<span class="me1">SCAN_AT_FIXED_INTERVAL_WITH_PAUSE_AFTER_WRITE</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1">// Get HID services using custom specification</span>
+        HidServices hidServices <span class="sy0">=</span> HidManager.<span class="me1">getHidServices</span><span class="br0">&#40;</span>hidServicesSpecification<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1">// Start the services</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Starting HID services.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        hidServices.<span class="me1">start</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="co1">// Provide a list of attached devices</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Enumerating attached devices...&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span>HidDevice hidDevice <span class="sy0">:</span> hidServices.<span class="me1">getAttachedHidDevices</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>hidDevice<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>hidDevice.<span class="me1">getProductId</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> productID <span class="sy0">&amp;&amp;</span> hidDevice.<span class="me1">getVendorId</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> vendorID<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                robot <span class="sy0">=</span> hidDevice<span class="sy0">;</span>
+                <span class="kw1">break</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+        <span class="kw1">if</span> <span class="br0">&#40;</span>robot <span class="sy0">==</span> <span class="kw2">null</span><span class="br0">&#41;</span>
+            <span class="kw1">throw</span> <span class="kw1">new</span> <span class="kw3">IllegalArgumentException</span><span class="br0">&#40;</span><span class="st0">&quot;Robot not found! Please make sure that the vendor and product id that you entered are correct!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span><span class="sy0">!</span>robot.<span class="me1">isOpen</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                robot.<span class="me1">open</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> moveMotor<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> degrees, <span class="kw4">int</span> time, <span class="kw4">int</span> delay<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> len <span class="sy0">=</span> <span class="nu0">17</span> <span class="sy0">+</span> degrees.<span class="me1">length</span><span class="sy0">;</span>
+        <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> command <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>len<span class="br0">&#93;</span><span class="sy0">;</span><span class="co1">// 2+1+1+1+2+1+1</span>
+        addHeadAndTail<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+        command<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> 0x01<span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">8</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> degrees.<span class="me1">length</span> <span class="sy0">+</span> <span class="nu0">8</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            command<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> degrees<span class="br0">&#91;</span>i <span class="sy0">-</span> <span class="nu0">8</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        command<span class="br0">&#91;</span>len <span class="sy0">-</span> <span class="nu0">5</span><span class="br0">&#93;</span> <span class="sy0">=</span> time <span class="sy0">/</span> <span class="nu0">20</span><span class="sy0">;</span>
+        delay <span class="sy0">=</span> delay <span class="sy0">/</span> <span class="nu0">20</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>delay <span class="sy0">&gt;</span> 0xff<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            command<span class="br0">&#91;</span>len <span class="sy0">-</span> <span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> 0xff<span class="sy0">;</span>
+            command<span class="br0">&#91;</span>len <span class="sy0">-</span> <span class="nu0">4</span><span class="br0">&#93;</span> <span class="sy0">=</span> delay <span class="sy0">-</span> 0xff<span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            command<span class="br0">&#91;</span>len <span class="sy0">-</span> <span class="nu0">3</span><span class="br0">&#93;</span> <span class="sy0">=</span> delay<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        check<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+        outputSerial<span class="br0">&#40;</span>command<span class="br0">&#41;</span><span class="sy0">;</span>
+<span class="co1">//        outputHexCode(command);</span>
+        currentMotorRotations <span class="sy0">=</span> degrees.<span class="me1">clone</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        sleep<span class="br0">&#40;</span>time <span class="sy0">+</span> delay <span class="sy0">*</span> <span class="nu0">20</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> moveMotor<span class="br0">&#40;</span><span class="kw4">int</span> motorID, <span class="kw4">int</span> degree, <span class="kw4">int</span> time, <span class="kw4">int</span> delay<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        currentMotorRotations<span class="br0">&#91;</span>motorID <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> degree<span class="sy0">;</span>
+        moveMotor<span class="br0">&#40;</span>currentMotorRotations, time, delay<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> outputSerial<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> command<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">byte</span><span class="br0">&#91;</span><span class="br0">&#93;</span> msg <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">byte</span><span class="br0">&#91;</span>command.<span class="me1">length</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> command.<span class="me1">length</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span>
+            msg<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw4">byte</span><span class="br0">&#41;</span> command<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="kw4">int</span> val <span class="sy0">=</span> robot.<span class="me1">write</span><span class="br0">&#40;</span>msg, <span class="nu0">64</span>, <span class="br0">&#40;</span><span class="kw4">byte</span><span class="br0">&#41;</span> 0x00<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">//        if (val &gt;= 0) {</span>
+<span class="co1">//            System.out.println(&quot;&gt; [&quot; + val + &quot;]&quot;);</span>
+<span class="co1">//        } else {</span>
+<span class="co1">//            System.err.println(robot.getLastErrorMessage());</span>
+<span class="co1">//        }</span>
+&nbsp;
+<span class="co1">//        // Prepare to read a single data packet</span>
+<span class="co1">//        boolean moreData = true;</span>
+<span class="co1">//        while (moreData) {</span>
+<span class="co1">//            byte data[] = new byte[64];</span>
+<span class="co1">//            // This method will now block for 500ms or until data is read</span>
+<span class="co1">//            val = robot.read(data, 500);</span>
+<span class="co1">//            switch (val) {</span>
+<span class="co1">//                case -1:</span>
+<span class="co1">//                    System.err.println(robot.getLastErrorMessage());</span>
+<span class="co1">//                    break;</span>
+<span class="co1">//                case 0:</span>
+<span class="co1">//                    moreData = false;</span>
+<span class="co1">//                    break;</span>
+<span class="co1">//                default:</span>
+<span class="co1">//                    System.out.print(&quot;&lt; [&quot;);</span>
+<span class="co1">//                    for (byte b : data) {</span>
+<span class="co1">//                        System.out.printf(&quot; %02x&quot;, b);</span>
+<span class="co1">//                    }</span>
+<span class="co1">//                    System.out.println(&quot;]&quot;);</span>
+<span class="co1">//                    break;</span>
+<span class="co1">//            }</span>
+<span class="co1">//        }</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> addHeadAndTail<span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> command<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        command<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> HEAD1<span class="sy0">;</span>
+        command<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> HEAD2<span class="sy0">;</span>
+        command<span class="br0">&#91;</span>command.<span class="me1">length</span> <span class="sy0">-</span> <span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> COMMAND_TAIL<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

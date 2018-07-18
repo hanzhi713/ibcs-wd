@@ -1,0 +1,193 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Binary Tree</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>Binary Tree<small> #java </small></h1>Delete and Traverse Binary Tree<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">java.util.ArrayList</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Tree <span class="br0">&#123;</span>
+    Station station<span class="sy0">;</span>
+    Tree left<span class="sy0">;</span>
+    Tree right<span class="sy0">;</span>
+    Tree a<span class="sy0">;</span>
+    <span class="kw1">static</span> ArrayList<span class="sy0">&lt;</span>Tree<span class="sy0">&gt;</span> Nodes <span class="sy0">=</span> <span class="kw1">new</span> ArrayList<span class="sy0">&lt;</span>Tree<span class="sy0">&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Tree<span class="br0">&#40;</span>Station station, Tree left, Tree right<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">station</span> <span class="sy0">=</span> station<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">left</span> <span class="sy0">=</span> left<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">right</span> <span class="sy0">=</span> right<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> Tree<span class="br0">&#40;</span>Station station<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">station</span> <span class="sy0">=</span> station<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">right</span> <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">left</span> <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> Tree<span class="br0">&#40;</span>Station station, Tree left, <span class="kw3">String</span> a<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">station</span> <span class="sy0">=</span> station<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">left</span> <span class="sy0">=</span> left<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">right</span> <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> Tree<span class="br0">&#40;</span>Station station, <span class="kw3">String</span> a, Tree right<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">station</span> <span class="sy0">=</span> station<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">right</span> <span class="sy0">=</span> right<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">left</span> <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span> getZone<span class="br0">&#40;</span>Tree rootNode, <span class="kw3">String</span> stationName<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        Tree treeNode <span class="sy0">=</span> Tree.<span class="me1">search</span><span class="br0">&#40;</span>rootNode, stationName<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> treeNode.<span class="me1">station</span>.<span class="me1">getZone</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span> getLineNumber<span class="br0">&#40;</span>Tree rootNode, <span class="kw3">String</span> stationName<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        Tree treeNode <span class="sy0">=</span> Tree.<span class="me1">search</span><span class="br0">&#40;</span>rootNode, stationName<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">return</span> treeNode.<span class="me1">station</span>.<span class="me1">getLineNumber</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> Tree search<span class="br0">&#40;</span>Tree treeNode, <span class="kw3">String</span> stationName<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>stationName.<span class="me1">equals</span><span class="br0">&#40;</span>treeNode.<span class="me1">station</span>.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">return</span> treeNode<span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>stationName.<span class="me1">compareTo</span><span class="br0">&#40;</span>treeNode.<span class="me1">station</span>.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">return</span> Tree.<span class="me1">search</span><span class="br0">&#40;</span>treeNode.<span class="me1">left</span>, stationName<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            <span class="kw1">return</span> Tree.<span class="me1">search</span><span class="br0">&#40;</span>treeNode.<span class="me1">right</span>, stationName<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> Tree findSmallest<span class="br0">&#40;</span>Tree rootNode<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        Tree root <span class="sy0">=</span> rootNode.<span class="me1">right</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>root.<span class="me1">left</span><span class="sy0">==</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            Nodes.<span class="me1">add</span><span class="br0">&#40;</span>root<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">return</span> root<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">else</span><span class="br0">&#123;</span>
+            <span class="kw1">while</span><span class="br0">&#40;</span>root.<span class="me1">left</span><span class="sy0">!=</span><span class="kw2">null</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                Nodes.<span class="me1">add</span><span class="br0">&#40;</span>root<span class="br0">&#41;</span><span class="sy0">;</span>
+                root <span class="sy0">=</span> root.<span class="me1">left</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">return</span> root<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> delete2<span class="br0">&#40;</span>Tree delNode<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        Tree repNode <span class="sy0">=</span> findSmallest<span class="br0">&#40;</span>delNode<span class="br0">&#41;</span><span class="sy0">;</span>
+        Tree parentNode <span class="sy0">=</span> Nodes.<span class="me1">remove</span><span class="br0">&#40;</span>Nodes.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        parentNode.<span class="me1">left</span> <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+        delNode.<span class="me1">station</span> <span class="sy0">=</span> repNode.<span class="me1">station</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+      <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> inOrderTraverse<span class="br0">&#40;</span>Tree node<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>node <span class="sy0">==</span> <span class="kw2">null</span><span class="br0">&#41;</span>
+                <span class="kw1">return</span><span class="sy0">;</span>
+            inOrderTraverse<span class="br0">&#40;</span>node.<span class="me1">left</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span>node.<span class="me1">station</span>.<span class="me1">getName</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">+</span> <span class="st0">&quot; &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            inOrderTraverse<span class="br0">&#40;</span>node.<span class="me1">right</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+client:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">class</span> StationClient <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        Station Pizarra <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;Pizarra&quot;</span>,<span class="nu0">1</span>,<span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Station Alora <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;Alora&quot;</span>,<span class="nu0">1</span>,<span class="nu0">3</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Station Alamo <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;Alamo&quot;</span>,<span class="nu0">1</span>,<span class="nu0">3</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Station Lomas <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;Lomas&quot;</span>,<span class="nu0">1</span>,<span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Station Torrox <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;Torrox&quot;</span>,<span class="nu0">1</span>,<span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Station Centro <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;Centro&quot;</span>,<span class="nu0">1</span>,<span class="nu0">0</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Station Col <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;Col&quot;</span>,<span class="nu0">2</span>,<span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Station David <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;David&quot;</span>,<span class="nu0">2</span>,<span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Station PlazaMayor <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;Plaza Mayor&quot;</span>,<span class="nu0">2</span>,<span class="nu0">3</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Station Lima <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;Lima&quot;</span>,<span class="nu0">2</span>,<span class="nu0">3</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Station Prados <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;Prados&quot;</span>,<span class="nu0">2</span>,<span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Station Fuengirola <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;Fuengirola&quot;</span>,<span class="nu0">2</span>,<span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Station zz <span class="sy0">=</span> <span class="kw1">new</span> Station<span class="br0">&#40;</span><span class="st0">&quot;智障王安怡&quot;</span>,<span class="nu0">250</span>,<span class="nu0">250</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        Tree fuengirola <span class="sy0">=</span> <span class="kw1">new</span> Tree<span class="br0">&#40;</span>Fuengirola<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        Tree alamo <span class="sy0">=</span> <span class="kw1">new</span> Tree<span class="br0">&#40;</span>Alamo<span class="br0">&#41;</span><span class="sy0">;</span>
+        Tree zZ <span class="sy0">=</span> <span class="kw1">new</span> Tree<span class="br0">&#40;</span>zz<span class="br0">&#41;</span><span class="sy0">;</span>
+        Tree prados <span class="sy0">=</span> <span class="kw1">new</span> Tree<span class="br0">&#40;</span>Prados,zZ,<span class="st0">&quot;null&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Tree pizarra <span class="sy0">=</span> <span class="kw1">new</span> Tree<span class="br0">&#40;</span>Pizarra<span class="br0">&#41;</span><span class="sy0">;</span>
+        Tree lima <span class="sy0">=</span> <span class="kw1">new</span> Tree<span class="br0">&#40;</span>Lima,fuengirola,<span class="st0">&quot;null&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Tree david <span class="sy0">=</span> <span class="kw1">new</span> Tree<span class="br0">&#40;</span>David,<span class="st0">&quot;null&quot;</span>,lima<span class="br0">&#41;</span><span class="sy0">;</span>
+        Tree plazoMayor <span class="sy0">=</span> <span class="kw1">new</span> Tree<span class="br0">&#40;</span>PlazaMayor,pizarra,prados<span class="br0">&#41;</span><span class="sy0">;</span>
+        Tree lomas <span class="sy0">=</span> <span class="kw1">new</span> Tree<span class="br0">&#40;</span>Lomas,david,plazoMayor<span class="br0">&#41;</span><span class="sy0">;</span>
+        Tree col <span class="sy0">=</span> <span class="kw1">new</span> Tree<span class="br0">&#40;</span>Col,<span class="st0">&quot;null&quot;</span>,lomas<span class="br0">&#41;</span><span class="sy0">;</span>
+        Tree torrox <span class="sy0">=</span> <span class="kw1">new</span> Tree<span class="br0">&#40;</span>Torrox,col,<span class="st0">&quot;null&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Tree alora <span class="sy0">=</span> <span class="kw1">new</span> Tree<span class="br0">&#40;</span>Alora,alamo,<span class="st0">&quot;null&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Tree centro <span class="sy0">=</span> <span class="kw1">new</span> Tree<span class="br0">&#40;</span>Centro,alora,torrox<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+&nbsp;
+        Tree.<span class="me1">inOrderTraverse</span><span class="br0">&#40;</span>lomas<span class="br0">&#41;</span><span class="sy0">;</span>
+        Tree.<span class="me1">delete2</span><span class="br0">&#40;</span>plazoMayor<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Tree.<span class="me1">inOrderTraverse</span><span class="br0">&#40;</span>lomas<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

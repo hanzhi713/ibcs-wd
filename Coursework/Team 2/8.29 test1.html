@@ -1,0 +1,104 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 8.29 test1</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>8.29 test1<small> #test </small></h1><h1 id="toc0"><a name="x#1"></a>#1</h1>
+ <h1 id="toc1"> </h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">&nbsp;
+<span class="kw1">import</span> <span class="kw3">random</span>
+NumberDrawn <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">50</span><span class="br0">&#41;</span>:
+    NumberDrawn.<span class="me1">append</span><span class="br0">&#40;</span><span class="kw2">False</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> GeneratedNumber<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    rng <span class="sy0">=</span> <span class="kw3">random</span>.<span class="me1">Random</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    number <span class="sy0">=</span>  rng.<span class="kw3">random</span><span class="br0">&#40;</span><span class="br0">&#41;</span> * <span class="nu0">50</span>
+    <span class="kw1">return</span> number
+&nbsp;
+Generated <span class="sy0">=</span> <span class="nu0">0</span>
+<span class="kw1">while</span> Generated <span class="sy0">&lt;</span> <span class="nu0">6</span>:
+    NextNumber <span class="sy0">=</span> <span class="kw2">int</span><span class="br0">&#40;</span>GeneratedNumber<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> NumberDrawn<span class="br0">&#91;</span>NextNumber - <span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">==</span> <span class="kw2">False</span>:
+        <span class="kw1">print</span><span class="br0">&#40;</span>NextNumber<span class="br0">&#41;</span>
+        Generated +<span class="sy0">=</span> <span class="nu0">1</span>
+        NumberDrawn<span class="br0">&#91;</span>NextNumber - <span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw2">True</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;That completes the draw&quot;</span><span class="br0">&#41;</span></pre>
+
+<img src="files/Screen%20Shot%202016-08-29%20at%209.27.03%20AM.png" alt="Screen Shot 2016-08-29 at 9.27.03 AM.png" title="Screen Shot 2016-08-29 at 9.27.03 AM.png" /><br />
+<br />
+<h1 id="toc2"><a name="x#2"></a>#2</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python">alphabet <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#40;</span><span class="st0">'A'</span><span class="sy0">,</span> <span class="st0">'P'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'B'</span><span class="sy0">,</span> <span class="st0">'L'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'C'</span><span class="sy0">,</span> <span class="st0">'F'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'D'</span><span class="sy0">,</span> <span class="st0">'N'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'E'</span><span class="sy0">,</span> <span class="st0">'O'</span><span class="br0">&#41;</span><span class="sy0">,</span>
+            <span class="br0">&#40;</span><span class="st0">'F'</span><span class="sy0">,</span> <span class="st0">'C'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'G'</span><span class="sy0">,</span> <span class="st0">'Q'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'H'</span><span class="sy0">,</span> <span class="st0">'U'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'I'</span><span class="sy0">,</span> <span class="st0">'D'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'J'</span><span class="sy0">,</span> <span class="st0">'Z'</span><span class="br0">&#41;</span><span class="sy0">,</span>
+            <span class="br0">&#40;</span><span class="st0">'K'</span><span class="sy0">,</span> <span class="st0">'V'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'L'</span><span class="sy0">,</span> <span class="st0">'G'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'M'</span><span class="sy0">,</span> <span class="st0">'I'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'N'</span><span class="sy0">,</span> <span class="st0">'X'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'O'</span><span class="sy0">,</span> <span class="st0">'M'</span><span class="br0">&#41;</span><span class="sy0">,</span>
+            <span class="br0">&#40;</span><span class="st0">'P'</span><span class="sy0">,</span> <span class="st0">'W'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'Q'</span><span class="sy0">,</span> <span class="st0">'J'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'R'</span><span class="sy0">,</span> <span class="st0">'B'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'S'</span><span class="sy0">,</span> <span class="st0">'K'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'T'</span><span class="sy0">,</span> <span class="st0">'E'</span><span class="br0">&#41;</span><span class="sy0">,</span>
+            <span class="br0">&#40;</span><span class="st0">'U'</span><span class="sy0">,</span> <span class="st0">'A'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'V'</span><span class="sy0">,</span> <span class="st0">'H'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'W'</span><span class="sy0">,</span> <span class="st0">'S'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'X'</span><span class="sy0">,</span> <span class="st0">'Y'</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#40;</span><span class="st0">'Y'</span><span class="sy0">,</span> <span class="st0">'R'</span><span class="br0">&#41;</span><span class="sy0">,</span>
+            <span class="br0">&#40;</span><span class="st0">'Z'</span><span class="sy0">,</span> <span class="st0">'T'</span><span class="br0">&#41;</span><span class="br0">&#93;</span>
+<span class="kw1">def</span> encryption<span class="br0">&#40;</span>messageString<span class="br0">&#41;</span>:
+    j <span class="sy0">=</span> <span class="nu0">0</span>
+    someNumbers <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    s <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> messageString:
+        <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">26</span><span class="br0">&#41;</span>:
+            <span class="kw1">if</span> i <span class="sy0">==</span> alphabet<span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>:
+                someNumbers.<span class="me1">append</span><span class="br0">&#40;</span>j<span class="br0">&#41;</span>
+    <span class="kw1">for</span> k <span class="kw1">in</span> someNumbers:
+        s.<span class="me1">append</span><span class="br0">&#40;</span>alphabet<span class="br0">&#91;</span>k<span class="br0">&#93;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> s
+<span class="kw1">print</span><span class="br0">&#40;</span>encryption<span class="br0">&#40;</span><span class="st0">'YESICAN'</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<img src="files/Screen%20Shot%202016-08-29%20at%209.27.47%20AM.png" alt="Screen Shot 2016-08-29 at 9.27.47 AM.png" title="Screen Shot 2016-08-29 at 9.27.47 AM.png" /></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

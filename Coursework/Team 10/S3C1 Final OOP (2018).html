@@ -1,0 +1,277 @@
+<html>
+  <head>
+    <title>IBCS1-WD - S3C1 Final OOP (2018)</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<h4 id="toc0"><a name="x---S3S1 Final Implementation OOP"></a><span style="font-size: 120%;">S3S1 Final Implementation OOP</span></h4>
+ <br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">com.company</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> TrainCompany <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> companyName<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> companyCode<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> numberOfJourneys<span class="sy0">;</span>
+    <span class="kw1">private</span> Journey<span class="br0">&#91;</span><span class="br0">&#93;</span> journeyHistory <span class="sy0">=</span> <span class="kw1">new</span> Journey<span class="br0">&#91;</span><span class="nu0">1000000</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> TrainCompany<span class="br0">&#40;</span><span class="kw3">String</span> x, <span class="kw3">String</span> y<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">companyName</span> <span class="sy0">=</span> x<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">companyCode</span> <span class="sy0">=</span> y<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">numberOfJourneys</span> <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">String</span> getCompanyName<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> companyName<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getCompanyCode<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> companyCode<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">int</span> getNumberOfJourneys<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> numberOfJourneys<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="co1">//    public Journey getJourneyHistory(){</span>
+<span class="co1">//        return journeyHistory;</span>
+<span class="co1">//    }</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setCompanyName<span class="br0">&#40;</span><span class="kw3">String</span> companyName1<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        companyName <span class="sy0">=</span> companyName1<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setCompanyCode<span class="br0">&#40;</span><span class="kw3">String</span> companyCode1<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        companyCode <span class="sy0">=</span> companyCode1<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw4">void</span> setNumberOfJourneys<span class="br0">&#40;</span><span class="kw4">int</span> numberOfJourneys1<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        numberOfJourneys <span class="sy0">=</span> numberOfJourneys1<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> addJourney<span class="br0">&#40;</span>Journey j<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        journeyHistory<span class="br0">&#91;</span>numberOfJourneys<span class="br0">&#93;</span> <span class="sy0">=</span> j<span class="sy0">;</span>
+        numberOfJourneys<span class="sy0">++;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">double</span> averageDelay<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+&nbsp;
+        <span class="kw4">int</span> sum <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> num <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> ad <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> k <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> k<span class="sy0">&lt;</span>numberOfJourneys<span class="sy0">;</span> k<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>journeyHistory<span class="br0">&#91;</span>k<span class="br0">&#93;</span>.<span class="me1">getWeatherRelated</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw2">false</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                sum <span class="sy0">=</span> sum <span class="sy0">+</span> journeyHistory<span class="br0">&#91;</span>k<span class="br0">&#93;</span>.<span class="me1">getDelay</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                num<span class="sy0">++;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        ad <span class="sy0">=</span> sum<span class="sy0">/</span>num<span class="sy0">;</span>
+        <span class="kw1">return</span> ad<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">String</span> longestDelay<span class="br0">&#40;</span>Codes<span class="br0">&#91;</span><span class="br0">&#93;</span> c<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span> max <span class="sy0">=</span> <span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw3">String</span> rc <span class="sy0">=</span> <span class="st0">&quot; &quot;</span><span class="sy0">;</span>
+        <span class="kw3">String</span> name <span class="sy0">=</span> <span class="st0">&quot; &quot;</span><span class="sy0">;</span>
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> k <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> k <span class="sy0">&lt;</span> numberOfJourneys<span class="sy0">;</span> k<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span><span class="sy0">!</span>journeyHistory<span class="br0">&#91;</span>k<span class="br0">&#93;</span>.<span class="me1">getWeatherRelated</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&amp;&amp;</span> journeyHistory<span class="br0">&#91;</span>k<span class="br0">&#93;</span>.<span class="me1">getDelay</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">&gt;</span>max<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                max <span class="sy0">=</span> journeyHistory<span class="br0">&#91;</span>k<span class="br0">&#93;</span>.<span class="me1">getDelay</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                rc <span class="sy0">=</span> journeyHistory<span class="br0">&#91;</span>k<span class="br0">&#93;</span>.<span class="me1">getRouteCode</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">for</span><span class="br0">&#40;</span><span class="kw4">int</span> n <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> n <span class="sy0">&lt;</span> c.<span class="me1">length</span><span class="sy0">;</span> n<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span><span class="br0">&#40;</span>c<span class="br0">&#91;</span>n<span class="br0">&#93;</span>.<span class="me1">getRouteCode</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">equals</span><span class="br0">&#40;</span>rc<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                name <span class="sy0">=</span> c<span class="br0">&#91;</span>n<span class="br0">&#93;</span>.<span class="me1">getRouteName</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> name<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span>Codes<span class="br0">&#91;</span><span class="br0">&#93;</span>c<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> companyName<span class="sy0">+</span><span class="st0">&quot; Average Delay = &quot;</span><span class="sy0">+</span>averageDelay<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">+</span><span class="st0">&quot; minutes : Longest Delay = &quot;</span><span class="sy0">+</span>longestDelay<span class="br0">&#40;</span>c<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">com.company</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Codes <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> routeName<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> routeCode<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Codes<span class="br0">&#40;</span><span class="kw3">String</span> a, <span class="kw3">String</span> b<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>. <span class="me1">routeName</span> <span class="sy0">=</span> a<span class="sy0">;</span>
+        <span class="kw1">this</span>. <span class="me1">routeCode</span> <span class="sy0">=</span> b<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getRouteCode<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> routeCode<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw3">String</span> getRouteName<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> routeName<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">com.company</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Journey <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> routeCode<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> delay<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">boolean</span> weatherRelated<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Journey<span class="br0">&#40;</span><span class="kw3">String</span> r, <span class="kw4">int</span> d, <span class="kw4">boolean</span> w<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">this</span>.<span class="me1">routeCode</span> <span class="sy0">=</span> r<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">delay</span> <span class="sy0">=</span> d<span class="sy0">;</span>
+        <span class="kw1">this</span>.<span class="me1">weatherRelated</span> <span class="sy0">=</span> w<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">String</span> getRouteCode<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> routeCode<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getDelay<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> delay<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">boolean</span> getWeatherRelated<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">return</span> weatherRelated<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">com.company</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> TestTrain <span class="br0">&#123;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span>args<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        TrainCompany tc1 <span class="sy0">=</span> <span class="kw1">new</span> TrainCompany<span class="br0">&#40;</span><span class="st0">&quot;Southern&quot;</span>, <span class="st0">&quot;T290&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        Journey s <span class="sy0">=</span> <span class="kw1">new</span> Journey<span class="br0">&#40;</span><span class="st0">&quot;J100&quot;</span>, <span class="nu0">3</span>, <span class="kw2">false</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Journey t <span class="sy0">=</span> <span class="kw1">new</span> Journey<span class="br0">&#40;</span><span class="st0">&quot;J103&quot;</span>, <span class="nu0">8</span>, <span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        Journey u <span class="sy0">=</span> <span class="kw1">new</span> Journey<span class="br0">&#40;</span><span class="st0">&quot;J104&quot;</span>, <span class="nu0">10</span>, <span class="kw2">true</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        tc1.<span class="me1">addJourney</span><span class="br0">&#40;</span>s<span class="br0">&#41;</span><span class="sy0">;</span>
+        tc1.<span class="me1">addJourney</span><span class="br0">&#40;</span>t<span class="br0">&#41;</span><span class="sy0">;</span>
+        tc1.<span class="me1">addJourney</span><span class="br0">&#40;</span>u<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;average delay: &quot;</span> <span class="sy0">+</span> tc1.<span class="me1">averageDelay</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        Codes<span class="br0">&#91;</span><span class="br0">&#93;</span> c <span class="sy0">=</span> <span class="kw1">new</span> Codes<span class="br0">&#91;</span><span class="nu0">3</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        Codes c1 <span class="sy0">=</span> <span class="kw1">new</span> Codes<span class="br0">&#40;</span><span class="st0">&quot;A&quot;</span>, <span class="st0">&quot;J100&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> c<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> c1<span class="sy0">;</span>
+        Codes c2 <span class="sy0">=</span> <span class="kw1">new</span> Codes<span class="br0">&#40;</span><span class="st0">&quot;B&quot;</span>, <span class="st0">&quot;J103&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> c<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> c2<span class="sy0">;</span>
+        Codes c3 <span class="sy0">=</span> <span class="kw1">new</span> Codes<span class="br0">&#40;</span><span class="st0">&quot;C&quot;</span>, <span class="st0">&quot;J104&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> c<span class="br0">&#91;</span><span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> c3<span class="sy0">;</span>
+&nbsp;
+&nbsp;
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;longest delay: &quot;</span> <span class="sy0">+</span> tc1.<span class="me1">longestDelay</span><span class="br0">&#40;</span>c<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;train company&quot;</span> <span class="sy0">+</span> tc1.<span class="me1">toString</span><span class="br0">&#40;</span>c<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<img src="files/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-24%20%E4%B8%8B%E5%8D%8812.17.55.png" alt=" 2018-01-24 下午12.17.55.png" title=" 2018-01-24 下午12.17.55.png" /></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

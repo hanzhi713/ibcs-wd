@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <title>IBCS1-WD - September 27th, Tom's work on establishing classes for 2D and 3D points</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>September 27th, Tom's work on establishing classes for 2D and 3D points<small> #TomsProjects </small></h1>
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">class</span> Point:
+    <span class="st0">&quot;&quot;&quot; Point class represents and manipulates x,y coords. &quot;&quot;&quot;</span>
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span> y<span class="sy0">=</span><span class="nu0">0</span><span class="br0">&#41;</span>:
+        <span class="st0">&quot;&quot;&quot; Create a new point at the origin &quot;&quot;&quot;</span>
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__str__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="st0">&quot;({0}, {1})&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> set_cor<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x<span class="sy0">=</span><span class="kw2">None</span><span class="sy0">,</span> y<span class="sy0">=</span><span class="kw2">None</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> x <span class="kw1">is</span> <span class="kw2">None</span>: x <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">x</span>
+        <span class="kw1">if</span> y <span class="kw1">is</span> <span class="kw2">None</span>: y <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">y</span>
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+&nbsp;
+    <span class="kw1">def</span> get_distance<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> target<span class="sy0">=</span><span class="kw2">None</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> target <span class="kw1">is</span> <span class="kw2">None</span>: target <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span>-target.<span class="me1">x</span><span class="br0">&#41;</span>**<span class="nu0">2</span> + <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">y</span>-target.<span class="me1">y</span><span class="br0">&#41;</span>**<span class="nu0">2</span><span class="br0">&#41;</span>**<span class="nu0">0.5</span>
+&nbsp;
+    <span class="kw1">def</span> print_coor<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;({0}, {1})&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> mid_point<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> target<span class="br0">&#41;</span>:
+        <span class="kw1">return</span> Point<span class="br0">&#40;</span><span class="nu0">0.5</span>*<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span>+target.<span class="me1">x</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="nu0">0.5</span>*<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">y</span>+target.<span class="me1">y</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> get_slope<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> target<span class="sy0">=</span><span class="kw2">None</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> target <span class="kw1">is</span> <span class="kw2">None</span>: target <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">y</span>-target.<span class="me1">y</span><span class="br0">&#41;</span> / <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span>-target.<span class="me1">x</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> Point3D:
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span> y<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">,</span> z<span class="sy0">=</span><span class="nu0">0</span><span class="br0">&#41;</span>:
+        <span class="st0">&quot;&quot;&quot; Create a new point at the origin &quot;&quot;&quot;</span>
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+        <span class="kw2">self</span>.<span class="me1">z</span> <span class="sy0">=</span> z
+&nbsp;
+    <span class="kw1">def</span> <span class="kw4">__str__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="st0">&quot;({0}, {1}, {2})&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">y</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">z</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> set_cor<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> x<span class="sy0">=</span><span class="kw2">None</span><span class="sy0">,</span> y<span class="sy0">=</span><span class="kw2">None</span><span class="sy0">,</span> z<span class="sy0">=</span><span class="kw2">None</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> x <span class="kw1">is</span> <span class="kw2">None</span>: x <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">x</span>
+        <span class="kw1">if</span> y <span class="kw1">is</span> <span class="kw2">None</span>: y <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">y</span>
+        <span class="kw1">if</span> z <span class="kw1">is</span> <span class="kw2">None</span>: z <span class="sy0">=</span> <span class="kw2">self</span>.<span class="me1">z</span>
+        <span class="kw2">self</span>.<span class="me1">x</span> <span class="sy0">=</span> x
+        <span class="kw2">self</span>.<span class="me1">y</span> <span class="sy0">=</span> y
+        <span class="kw2">self</span>.<span class="me1">z</span> <span class="sy0">=</span> z
+&nbsp;
+    <span class="kw1">def</span> get_distance<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> target<span class="sy0">=</span><span class="kw2">None</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> target <span class="kw1">is</span> <span class="kw2">None</span>: target <span class="sy0">=</span> Point3D<span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> <span class="br0">&#40;</span><span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span> - target.<span class="me1">x</span><span class="br0">&#41;</span>**<span class="nu0">2</span> + <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">y</span> - target.<span class="me1">y</span><span class="br0">&#41;</span> + <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">z</span> - target.<span class="me1">z</span><span class="br0">&#41;</span>**<span class="nu0">2</span><span class="br0">&#41;</span>**<span class="nu0">0.5</span>
+&nbsp;
+    <span class="kw1">def</span> get_intra_point<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> proportion<span class="sy0">,</span>target<span class="sy0">=</span><span class="kw2">None</span><span class="br0">&#41;</span>:
+        <span class="kw1">if</span> target <span class="kw1">is</span> <span class="kw2">None</span>: target <span class="sy0">=</span> Point3D<span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> Point3D<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">x</span> + <span class="br0">&#40;</span>target.<span class="me1">x</span> - <span class="kw2">self</span>.<span class="me1">x</span><span class="br0">&#41;</span>*proportion<span class="sy0">,</span>
+                       <span class="kw2">self</span>.<span class="me1">y</span> + <span class="br0">&#40;</span>target.<span class="me1">y</span> - <span class="kw2">self</span>.<span class="me1">y</span><span class="br0">&#41;</span>*proportion<span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">z</span> + <span class="br0">&#40;</span>target.<span class="me1">z</span> - <span class="kw2">self</span>.<span class="me1">z</span><span class="br0">&#41;</span>*proportion<span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+point1_3d <span class="sy0">=</span> Point3D<span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> <span class="nu0">5</span><span class="sy0">,</span> <span class="nu0">7</span><span class="br0">&#41;</span>
+point2_3d <span class="sy0">=</span> Point3D<span class="br0">&#40;</span><span class="nu0">2</span><span class="sy0">,</span> <span class="nu0">3</span><span class="sy0">,</span> <span class="nu0">5</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>point1_3d.<span class="me1">get_intra_point</span><span class="br0">&#40;</span><span class="nu0">0.5</span><span class="sy0">,</span> point2_3d<span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+point3_2d <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="nu0">2</span><span class="sy0">,</span> <span class="nu0">4</span><span class="br0">&#41;</span>
+point4_2d <span class="sy0">=</span> Point<span class="br0">&#40;</span><span class="nu0">3</span><span class="sy0">,</span> <span class="nu0">5</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>point3_2d.<span class="me1">get_slope</span><span class="br0">&#40;</span>point4_2d<span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

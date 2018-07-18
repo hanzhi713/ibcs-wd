@@ -1,0 +1,152 @@
+<html>
+  <head>
+    <title>IBCS1-WD - May 10th, Tom's work on image rotation algorithm</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>May 10th, Tom's work on image rotation algorithm<small> #TomsProjects </small></h1><h2 id="toc0"><a name="x-Python code"></a>Python code</h2>
+ <h2 id="toc1"><a name="x-Dependencies: numpy+mkl, scipy, opencv, matplotlib"></a>Dependencies: numpy+mkl, scipy, opencv, matplotlib</h2>
+ <br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">from</span> <span class="kw3">math</span> <span class="kw1">import</span> *
+<span class="kw1">import</span> numpy <span class="kw1">as</span> np
+<span class="kw1">import</span> cv2<span class="sy0">,</span> <span class="kw3">time</span>
+<span class="kw1">import</span> matplotlib.<span class="me1">pyplot</span> <span class="kw1">as</span> plt
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> ComplexPolar:
+    <span class="co1"># params: real positive number modulus, argument in radians</span>
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> mod<span class="sy0">,</span> arg<span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">mod</span> <span class="sy0">=</span> mod
+        <span class="kw2">self</span>.<span class="me1">arg</span> <span class="sy0">=</span> arg
+&nbsp;
+    <span class="co1"># overrides the operator '*'</span>
+    <span class="co1"># for efficiency, only ComplexPolar*ComplexPolar is considered and implemented</span>
+    <span class="kw1">def</span> <span class="kw4">__mul__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> other<span class="br0">&#41;</span>:
+        <span class="co1"># if type(other) == type(int) or type(other) == type(float):</span>
+        <span class="co1">#     return self * ComplexPolar.toModArg(other, 0)</span>
+        <span class="co1"># if type(other) == type(self):</span>
+        <span class="kw1">return</span> ComplexPolar<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">mod</span> * other.<span class="me1">mod</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">arg</span> + other.<span class="me1">arg</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1"># convert modulus-argument from to cartesian coordinates (x, y)</span>
+    <span class="kw1">def</span> toCartesian<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw2">self</span>.<span class="me1">mod</span> * cos<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">arg</span><span class="br0">&#41;</span><span class="sy0">,</span> <span class="kw2">self</span>.<span class="me1">mod</span> * sin<span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">arg</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1"># convert cartesian coordinate (x, y) to modulus-argument form: (|z|*e^(i*theta))</span>
+    <span class="sy0">@</span><span class="kw2">staticmethod</span>
+    <span class="kw1">def</span> toModArg<span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="br0">&#41;</span>:
+        <span class="kw1">return</span> ComplexPolar<span class="br0">&#40;</span>sqrt<span class="br0">&#40;</span>x ** <span class="nu0">2</span> + y ** <span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">,</span> atan2<span class="br0">&#40;</span>y<span class="sy0">,</span> x<span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1"># calculate the result of transformation of coordinate (x, y) in a computer coordinate system</span>
+<span class="co1"># the computer coordinate system has an origin of (0, 0) at the upper left corner</span>
+<span class="co1"># x-axis points rightward, y-axis points downward</span>
+<span class="kw1">def</span> transform<span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="sy0">,</span> orgX<span class="sy0">,</span> orgY<span class="sy0">,</span> z<span class="br0">&#41;</span>:
+    <span class="kw1">return</span> <span class="br0">&#40;</span>ComplexPolar.<span class="me1">toModArg</span><span class="br0">&#40;</span>x - orgX<span class="sy0">,</span> orgY - y<span class="br0">&#41;</span> * z<span class="br0">&#41;</span>.<span class="me1">toCartesian</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="co1"># convert the sparse matrix dictionary (mapping (x, y) to (b, g, r)) to a numpy three dimensional array</span>
+const <span class="sy0">=</span> np.<span class="kw3">array</span><span class="br0">&#40;</span><span class="br0">&#91;</span><span class="nu0">256</span><span class="sy0">,</span> <span class="nu0">256</span><span class="sy0">,</span> <span class="nu0">256</span><span class="br0">&#93;</span><span class="sy0">,</span> np.<span class="me1">int16</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> toMatrix<span class="br0">&#40;</span>newDict<span class="br0">&#41;</span>:
+    <span class="kw1">global</span> const
+    arrs <span class="sy0">=</span> newDict.<span class="me1">keys</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    xRange <span class="sy0">=</span> <span class="kw2">max</span><span class="br0">&#40;</span>arrs<span class="sy0">,</span> key<span class="sy0">=</span><span class="kw1">lambda</span> x: x<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> - <span class="kw2">min</span><span class="br0">&#40;</span>arrs<span class="sy0">,</span> key<span class="sy0">=</span><span class="kw1">lambda</span> x: x<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+    yRange <span class="sy0">=</span> <span class="kw2">max</span><span class="br0">&#40;</span>arrs<span class="sy0">,</span> key<span class="sy0">=</span><span class="kw1">lambda</span> x: x<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> - <span class="kw2">min</span><span class="br0">&#40;</span>arrs<span class="sy0">,</span> key<span class="sy0">=</span><span class="kw1">lambda</span> x: x<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span>
+    shiftX <span class="sy0">=</span> xRange // <span class="nu0">2</span>
+    shiftY <span class="sy0">=</span> yRange // <span class="nu0">2</span>
+    imgArr <span class="sy0">=</span> np.<span class="me1">zeros</span><span class="br0">&#40;</span><span class="br0">&#40;</span>yRange<span class="sy0">,</span> xRange<span class="sy0">,</span> <span class="nu0">3</span><span class="br0">&#41;</span><span class="sy0">,</span> np.<span class="me1">int16</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> x <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>xRange<span class="br0">&#41;</span>:
+        <span class="kw1">for</span> y <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>yRange<span class="br0">&#41;</span>:
+            imgArr<span class="br0">&#91;</span>y<span class="sy0">,</span> x<span class="sy0">,</span> :<span class="br0">&#93;</span> <span class="sy0">=</span> np.<span class="kw3">array</span><span class="br0">&#40;</span>newDict.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#40;</span>x - shiftX<span class="sy0">,</span> shiftY - y<span class="br0">&#41;</span><span class="sy0">,</span> <span class="br0">&#91;</span><span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="sy0">,</span> <span class="nu0">255</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="sy0">,</span> np.<span class="me1">int16</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> const - imgArr<span class="br0">&#91;</span>:<span class="sy0">,</span> :<span class="sy0">,</span> :<span class="br0">&#93;</span>
+&nbsp;
+&nbsp;
+<span class="co1"># display the image of the three dimensional image array</span>
+<span class="kw1">def</span> show<span class="br0">&#40;</span>img<span class="br0">&#41;</span>:
+    img_rgb <span class="sy0">=</span> np.<span class="me1">zeros</span><span class="br0">&#40;</span>img.<span class="me1">shape</span><span class="sy0">,</span> img.<span class="me1">dtype</span><span class="br0">&#41;</span>
+    img_rgb<span class="br0">&#91;</span>:<span class="sy0">,</span> :<span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">=</span> img<span class="br0">&#91;</span>:<span class="sy0">,</span> :<span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#93;</span>
+    img_rgb<span class="br0">&#91;</span>:<span class="sy0">,</span> :<span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">=</span> img<span class="br0">&#91;</span>:<span class="sy0">,</span> :<span class="sy0">,</span> <span class="nu0">1</span><span class="br0">&#93;</span>
+    img_rgb<span class="br0">&#91;</span>:<span class="sy0">,</span> :<span class="sy0">,</span> <span class="nu0">2</span><span class="br0">&#93;</span> <span class="sy0">=</span> img<span class="br0">&#91;</span>:<span class="sy0">,</span> :<span class="sy0">,</span> <span class="nu0">0</span><span class="br0">&#93;</span>
+    plt.<span class="me1">figure</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    plt.<span class="me1">imshow</span><span class="br0">&#40;</span>img_rgb<span class="br0">&#41;</span>
+    plt.<span class="me1">show</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="co1"># interpolate the pixels with a matrix of size (size*size)</span>
+<span class="kw1">def</span> avPixels<span class="br0">&#40;</span>newImg<span class="sy0">,</span> xy<span class="sy0">,</span> bgr<span class="sy0">,</span> size<span class="br0">&#41;</span>:
+    <span class="co1"># fX, rX, cX = floor(x), round(x), ceil(x)</span>
+    <span class="co1"># fY, rY, cY = floor(y), round(y), ceil(y)</span>
+    a <span class="sy0">=</span> <span class="kw2">round</span><span class="br0">&#40;</span>xy<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    b <span class="sy0">=</span> <span class="kw2">round</span><span class="br0">&#40;</span>xy<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    c <span class="sy0">=</span> size//<span class="nu0">2</span>
+    <span class="co1"># fX, rX, cX = a - 1, a, a + 1</span>
+    <span class="co1"># fY, rY, cY = b - 1, b, b + 1</span>
+    <span class="co1"># mat = [(fX, fY), (fX, rY), (fX, cY),</span>
+    <span class="co1">#        (rX, fY), (rX, rY), (rX, cY),</span>
+    <span class="co1">#        (cX, fY), (cX, rY), (cX, cY)]</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>-c<span class="sy0">,</span> size - c<span class="br0">&#41;</span>:
+        <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>-c<span class="sy0">,</span> size - c<span class="br0">&#41;</span>:
+            <span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="br0">&#41;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>a+i<span class="sy0">,</span> b+j<span class="br0">&#41;</span>
+            <span class="kw1">if</span> newImg.<span class="me1">get</span><span class="br0">&#40;</span><span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="kw1">is</span> <span class="kw2">None</span>:
+                newImg<span class="br0">&#91;</span><span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="br0">&#41;</span><span class="br0">&#93;</span> <span class="sy0">=</span> bgr
+            <span class="kw1">else</span>:
+                newImg<span class="br0">&#91;</span><span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="br0">&#41;</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="br0">&#40;</span>newImg<span class="br0">&#91;</span><span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="br0">&#41;</span><span class="br0">&#93;</span> + bgr<span class="br0">&#41;</span> / <span class="nu0">2</span>
+&nbsp;
+<span class="co1"># calculate the size of average array using the modulus of transformation</span>
+<span class="kw1">def</span> calcAVArray<span class="br0">&#40;</span>modulus<span class="br0">&#41;</span>:
+    kernal <span class="sy0">=</span> <span class="kw2">round</span><span class="br0">&#40;</span>modulus<span class="br0">&#41;</span> + <span class="nu0">2</span>
+    <span class="kw1">if</span> kernal % <span class="nu0">2</span> <span class="sy0">==</span> <span class="nu0">0</span>: kernal +<span class="sy0">=</span> <span class="nu0">1</span>
+    <span class="kw1">return</span> kernal
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span>:
+    t <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    img <span class="sy0">=</span> cv2.<span class="me1">imread</span><span class="br0">&#40;</span><span class="st0">&quot;1.jpg&quot;</span><span class="br0">&#41;</span>
+    height<span class="sy0">,</span> width <span class="sy0">=</span> img.<span class="me1">shape</span><span class="br0">&#91;</span><span class="nu0">0</span>:<span class="nu0">2</span><span class="br0">&#93;</span>
+    orgX<span class="sy0">,</span> orgY <span class="sy0">=</span> <span class="br0">&#40;</span>width // <span class="nu0">2</span><span class="sy0">,</span> height // <span class="nu0">2</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1"># stretch the graph by scale factor 'modulus' and rotate the graph clockwise by angle 'argument'</span>
+    modulus<span class="sy0">,</span> argument <span class="sy0">=</span> <span class="br0">&#40;</span><span class="nu0">1</span><span class="sy0">,</span> radians<span class="br0">&#40;</span><span class="nu0">75</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    z <span class="sy0">=</span> ComplexPolar<span class="br0">&#40;</span>modulus<span class="sy0">,</span> argument<span class="br0">&#41;</span>
+    kernal <span class="sy0">=</span> calcAVArray<span class="br0">&#40;</span>modulus<span class="br0">&#41;</span>
+    newImg <span class="sy0">=</span> <span class="br0">&#123;</span><span class="br0">&#125;</span>
+    <span class="kw1">for</span> x <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>width<span class="br0">&#41;</span>:
+        <span class="kw1">for</span> y <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>height<span class="br0">&#41;</span>:
+            xy <span class="sy0">=</span> transform<span class="br0">&#40;</span>x<span class="sy0">,</span> y<span class="sy0">,</span> orgX<span class="sy0">,</span> orgY<span class="sy0">,</span> z<span class="br0">&#41;</span>
+            avPixels<span class="br0">&#40;</span>newImg<span class="sy0">,</span> xy<span class="sy0">,</span> img<span class="br0">&#91;</span>y<span class="sy0">,</span> x<span class="sy0">,</span> :<span class="br0">&#93;</span><span class="sy0">,</span> kernal<span class="br0">&#41;</span>
+    imgArr <span class="sy0">=</span> toMatrix<span class="br0">&#40;</span>newImg<span class="br0">&#41;</span>
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span> - t<span class="br0">&#41;</span>
+    show<span class="br0">&#40;</span>imgArr<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">if</span> __name__ <span class="sy0">==</span> <span class="st0">&quot;__main__&quot;</span>:
+    main<span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

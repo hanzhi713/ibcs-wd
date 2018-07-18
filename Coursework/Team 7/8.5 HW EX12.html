@@ -1,0 +1,206 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 8.5 HW EX12</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1">#1.</span>
+<span class="co1">#b.</span>
+<span class="kw1">import</span> <span class="kw3">calendar</span>
+cal <span class="sy0">=</span> <span class="kw3">calendar</span>.<span class="me1">TextCalendar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>       <span class="co1"># Create an instance</span>
+cal.<span class="me1">setfirstweekday</span><span class="br0">&#40;</span><span class="kw3">calendar</span>.<span class="me1">THURSDAY</span><span class="br0">&#41;</span>
+cal.<span class="me1">pryear</span><span class="br0">&#40;</span><span class="nu0">2012</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#c.</span>
+<span class="kw1">import</span> <span class="kw3">calendar</span>
+<span class="kw1">def</span> mb<span class="br0">&#40;</span>a<span class="sy0">,</span> b<span class="br0">&#41;</span>:
+      cal <span class="sy0">=</span> <span class="kw3">calendar</span>.<span class="me1">TextCalendar</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+      cal <span class="sy0">=</span> <span class="kw3">calendar</span>.<span class="me1">month</span><span class="br0">&#40;</span>a<span class="sy0">,</span> b<span class="br0">&#41;</span>
+      <span class="kw1">print</span><span class="br0">&#40;</span>cal<span class="br0">&#41;</span>
+&nbsp;
+f <span class="sy0">=</span> mb<span class="br0">&#40;</span><span class="nu0">2000</span><span class="sy0">,</span> <span class="nu0">3</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>f<span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#d.</span>
+<span class="kw1">import</span> <span class="kw3">calendar</span>
+d <span class="sy0">=</span> <span class="kw3">calendar</span>.<span class="me1">LocaleTextCalendar</span><span class="br0">&#40;</span><span class="nu0">6</span><span class="sy0">,</span> <span class="st0">&quot;CHINESE&quot;</span><span class="br0">&#41;</span>
+d.<span class="me1">pryear</span><span class="br0">&#40;</span><span class="nu0">2012</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#2.a</span>
+<span class="co1">#44</span>
+<span class="co1">#2.b</span>
+<span class="co1">#1)Return the ceiling of x, the smallest integer greater than or equal to x. If x is not a float, delegates to x.__ceil__(), which should return an Integral value.</span>
+<span class="co1">#2)Return the floor of x, the largest integer less than or equal to x. If x is not a float, delegates to x.__floor__(), which should return an Integral value.</span>
+<span class="co1">#2.c</span>
+<span class="co1">#2.d</span>
+<span class="co1">#pi / e</span>
+&nbsp;
+<span class="co1">#3.</span>
+<span class="co1">#Return a deep copy of x</span>
+&nbsp;
+<span class="co1">#4.</span>
+<span class="co1">#mymodule1.py</span>
+<span class="co1">#myage = 16</span>
+<span class="co1">#year = 2016</span>
+<span class="co1">#mymodule2.py</span>
+<span class="co1">#myage = 0</span>
+<span class="co1">#year = 2000</span>
+&nbsp;
+<span class="kw1">import</span> mymodule1.<span class="me1">py</span>
+<span class="kw1">import</span> mymodule2.<span class="me1">py</span>
+<span class="kw1">print</span><span class="br0">&#40;</span> <span class="br0">&#40;</span>mymodule2.<span class="me1">myage</span> - mymodule1.<span class="me1">myage</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="br0">&#40;</span>mymodule2.<span class="me1">year</span> - mymodule1.<span class="me1">year</span><span class="br0">&#41;</span>  <span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#5.</span>
+<span class="co1">#mymodule1.py</span>
+myage <span class="sy0">=</span> <span class="nu0">16</span>
+year <span class="sy0">=</span> <span class="nu0">2016</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;My name is&quot;</span><span class="sy0">,</span> _name_<span class="br0">&#41;</span>
+<span class="kw1">if</span> __name__ <span class="sy0">==</span> <span class="st0">&quot;__main__&quot;</span>:
+    <span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;This won't run if I'm  imported.&quot;</span><span class="br0">&#41;</span>
+<span class="co1">#mymodule2.py</span>
+myage <span class="sy0">=</span> <span class="nu0">0</span>
+year <span class="sy0">=</span> <span class="nu0">2000</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;My name is&quot;</span><span class="sy0">,</span> _name_<span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">import</span> mymodule1.<span class="me1">py</span>
+<span class="kw1">import</span> mymodule2.<span class="me1">py</span>
+<span class="kw1">print</span><span class="br0">&#40;</span> <span class="br0">&#40;</span>mymodule2.<span class="me1">myage</span> - mymodule1.<span class="me1">myage</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="br0">&#40;</span>mymodule2.<span class="me1">year</span> - mymodule1.<span class="me1">year</span><span class="br0">&#41;</span>  <span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;My name is&quot;</span><span class="sy0">,</span> _name_<span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#6.</span>
+<span class="sy0">&gt;&gt;&gt;</span><span class="kw1">import</span> this
+The Zen of Python<span class="sy0">,</span> by Tim Peters
+&nbsp;
+Beautiful <span class="kw1">is</span> better than ugly.
+<span class="me1">Explicit</span> <span class="kw1">is</span> better than implicit.
+<span class="me1">Simple</span> <span class="kw1">is</span> better than <span class="kw2">complex</span>.
+<span class="me1">Complex</span> <span class="kw1">is</span> better than complicated.
+<span class="me1">Flat</span> <span class="kw1">is</span> better than nested.
+<span class="me1">Sparse</span> <span class="kw1">is</span> better than dense.
+<span class="me1">Readability</span> counts.
+<span class="me1">Special</span> cases aren<span class="st0">'t special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you'</span><span class="kw3">re</span> Dutch.
+<span class="me1">Now</span> <span class="kw1">is</span> better than never.
+<span class="me1">Although</span> never <span class="kw1">is</span> often better than *right* now.
+<span class="me1">If</span> the implementation <span class="kw1">is</span> hard to explain<span class="sy0">,</span> it<span class="st0">'s a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let'</span>s do more of those<span class="sy0">!</span>
+&nbsp;
+<span class="co1">#7.</span>
+<span class="kw1">def</span> myreplace<span class="br0">&#40;</span>old<span class="sy0">,</span> <span class="kw3">new</span><span class="sy0">,</span> s<span class="br0">&#41;</span>:
+      <span class="kw1">print</span><span class="br0">&#40;</span><span class="kw3">new</span>.<span class="me1">join</span><span class="br0">&#40;</span>s.<span class="me1">split</span><span class="br0">&#40;</span>old<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+f <span class="sy0">=</span> myreplace<span class="br0">&#40;</span><span class="st0">&quot; &quot;</span><span class="sy0">,</span> <span class="st0">&quot;**&quot;</span><span class="sy0">,</span> <span class="st0">&quot;Words will now be separated by stars.&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span>f<span class="br0">&#41;</span>
+&nbsp;
+<span class="co1">#8.</span>
+<span class="co1">#wordtools.py</span>
+<span class="co1">#1)</span>
+<span class="kw1">import</span> <span class="kw3">string</span>
+<span class="kw1">def</span> cleanword<span class="br0">&#40;</span>f<span class="br0">&#41;</span>:
+      ff <span class="sy0">=</span> <span class="st0">&quot;&quot;</span>
+      <span class="kw1">for</span> i <span class="kw1">in</span> f:
+            <span class="kw1">if</span> i <span class="kw1">not</span> <span class="kw1">in</span> <span class="kw3">string</span>.<span class="me1">punctuation</span>:
+                  ff +<span class="sy0">=</span> i
+      <span class="kw1">return</span> <span class="st0">&quot;ff
+&nbsp;
+f = cleanword(&quot;</span>what?<span class="st0">&quot;)
+print(f)
+&nbsp;
+#2)
+def has_dashdash(f):
+      if &quot;</span>--<span class="st0">&quot; in f:
+            return True
+      else:
+            return False
+&nbsp;
+f = has_dashdash(&quot;</span>-yo-yo-<span class="st0">&quot;)
+print(f)
+&nbsp;
+#3)
+import string
+def extract_words(f):
+      f = f.split(&quot;</span> <span class="st0">&quot;)
+      d = []
+      for i in f:
+            ff = &quot;</span> <span class="st0">&quot;
+            for h in i:
+                  if h not in string.punctuation:
+                        ff += h
+            d.append(ff)
+      return d
+&nbsp;
+f = extract_words(&quot;</span>she tried to curtsey <span class="kw1">as</span> she spoke--fancy<span class="st0">&quot;)
+print(f)
+&nbsp;
+#4)
+def wordcount(a,c):
+      f = 0
+      for i in c:
+            if a == i:
+                  f += 1
+      return f
+&nbsp;
+f = wordcount(&quot;</span>frog<span class="st0">&quot;, [&quot;</span>now<span class="st0">&quot;,&quot;</span><span class="kw1">is</span><span class="st0">&quot;,&quot;</span><span class="kw3">time</span><span class="st0">&quot;,&quot;</span><span class="kw1">is</span><span class="st0">&quot;,&quot;</span>now<span class="st0">&quot;,&quot;</span><span class="kw1">is</span><span class="st0">&quot;,&quot;</span><span class="kw1">is</span><span class="st0">&quot;])
+print(f)
+&nbsp;
+#5)
+def wordset(f):
+      ff = []
+      for i in f:
+            if i not in ff:
+                  ff.append(i)
+      ff.sort()
+      return ff
+&nbsp;
+f = wordset([&quot;</span>now<span class="st0">&quot;, &quot;</span><span class="kw1">is</span><span class="st0">&quot;, &quot;</span><span class="kw3">time</span><span class="st0">&quot;, &quot;</span><span class="kw1">is</span><span class="st0">&quot;, &quot;</span>now<span class="st0">&quot;, &quot;</span><span class="kw1">is</span><span class="st0">&quot;, &quot;</span><span class="kw1">is</span><span class="st0">&quot;])
+print(f)
+&nbsp;
+#6)
+def longestword(f):
+      al = 0
+      for i in f:
+            if len(i) &gt; al:
+                  al = len(i)
+      return al
+&nbsp;
+f = longestword([ ])
+print(f)
+</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

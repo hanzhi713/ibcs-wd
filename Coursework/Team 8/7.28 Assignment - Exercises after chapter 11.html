@@ -1,0 +1,243 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 7.28 Assignment - Exercises after chapter 11</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<h2 id="toc0"><a name="x-11.1"></a>11.1</h2>
+ list(range(10, 0, -2))<br />
+[10, 8, 6, 4, 2]<br />
+If start&lt;stop and step&lt;0, it will return an empty list.<br />
+Rule: Add <em>step</em> to <em>start</em> and add the result to the list until (not including the step when) <em>start</em> is <strong>'passing'</strong> <em>end.</em> <strong>'Passing'</strong> means from &gt;= to &lt;= or from &lt;= to &gt;=.<br />
+<br />
+<h2 id="toc1"><a name="x-11.2"></a>11.2</h2>
+ It only creates one turtle instances. S<span style="font-family: NimbusRomNo9L; font-size: 12pt;">etting the color of </span><span style="font-family: NimbusMonL; font-size: 12pt;">alex </span><span style="font-family: NimbusRomNo9L; font-size: 12pt;">also change the color of </span><span style="font-family: NimbusMonL; font-size: 12pt;">tess, because when we assign tess to alex, the name alex becomes the alias of tess; tess and alex both refer to the turtle created in line 3.</span><br />
+<br />
+<h2 id="toc2"><a name="x-11.3"></a><span style="font-family: NimbusMonL; font-size: 12pt;">11.3</span></h2>
+ a ---&gt; [1,2,3]<br />
+b ---&gt; [5,2,3]<br />
+<br />
+<h2 id="toc3"><a name="x-11.4"></a>11.4</h2>
+ The first output is :<br />
+Test 1: False<br />
+<br />
+The second output is:<br />
+Test 2: True<br />
+<br />
+At first, 'This' refers to the list assigned to it and so do 'That'. The content of the two lists are the same, but they are stored in different places in the computer. The 'is' operator is used to check if the two lists are the same list, or, say, if the two names on it's two sides are alias. Therefore the first test returns 'False'.<br />
+When we assign 'this' to 'that' in line 4, 'this' and 'that' become alias, or, say, they refer to the same list. Therefore the second test returns 'True'.<br />
+<br />
+<h2 id="toc4"><a name="x-11.5"></a>11.5</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> add_vectors<span class="br0">&#40;</span>u<span class="sy0">,</span> v<span class="br0">&#41;</span>:
+    c<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>u<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        c.<span class="me1">append</span><span class="br0">&#40;</span>u<span class="br0">&#91;</span>i<span class="br0">&#93;</span>+v<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> c
+<span class="co1">##&gt;&gt;&gt; add_vectors([1, 1], [1, 1]) == [2, 2]</span>
+<span class="co1">##True</span>
+<span class="co1">##&gt;&gt;&gt; add_vectors([1, 2], [1, 4]) == [2, 6]</span>
+<span class="co1">##True</span>
+<span class="co1">##&gt;&gt;&gt; add_vectors([1, 2, 1], [1, 4, 3]) == [2, 6, 4]</span>
+<span class="co1">##True</span></pre>
+
+<h2 id="toc5"><a name="x-11.6"></a>11.6</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> scalar_mult<span class="br0">&#40;</span>s<span class="sy0">,</span> v<span class="br0">&#41;</span>:
+    c<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>v<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        c.<span class="me1">append</span><span class="br0">&#40;</span>s*v<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> c
+<span class="co1">##&gt;&gt;&gt; scalar_mult(5, [1, 2]) == [5, 10]</span>
+<span class="co1">##True</span>
+<span class="co1">##&gt;&gt;&gt; scalar_mult(3, [1, 0, -1]) == [3, 0, -3]</span>
+<span class="co1">##True</span>
+<span class="co1">##&gt;&gt;&gt; scalar_mult(7, [3, 0, 5, 11, 2]) == [21, 0, 35, 77, 14]</span>
+<span class="co1">##True</span></pre>
+
+<h2 id="toc6"><a name="x-11.7"></a>11.7</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> dot_product<span class="br0">&#40;</span>u<span class="sy0">,</span>v<span class="br0">&#41;</span>:
+    c<span class="sy0">=</span><span class="nu0">0</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>v<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        c+<span class="sy0">=</span>u<span class="br0">&#91;</span>i<span class="br0">&#93;</span>*v<span class="br0">&#91;</span>i<span class="br0">&#93;</span>
+    <span class="kw1">return</span> c
+<span class="co1">##&gt;&gt;&gt; dot_product([1, 1], [1, 1]) == 2</span>
+<span class="co1">##True</span>
+<span class="co1">##&gt;&gt;&gt; dot_product([1, 2], [1, 4]) == 9</span>
+<span class="co1">##True</span>
+<span class="co1">##&gt;&gt;&gt; dot_product([1, 2, 1], [1, 4, 3]) == 12</span>
+<span class="co1">##True</span></pre>
+
+<h2 id="toc7"><a name="x-11.8"></a>11.8</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> cross_product<span class="br0">&#40;</span>u<span class="sy0">,</span>v<span class="br0">&#41;</span>:
+    c<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>u<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+        c.<span class="me1">append</span><span class="br0">&#40;</span>u<span class="br0">&#91;</span><span class="br0">&#40;</span>i+<span class="nu0">1</span><span class="br0">&#41;</span>%<span class="nu0">3</span><span class="br0">&#93;</span>*v<span class="br0">&#91;</span><span class="br0">&#40;</span>i+<span class="nu0">2</span><span class="br0">&#41;</span>%<span class="nu0">3</span><span class="br0">&#93;</span>-u<span class="br0">&#91;</span><span class="br0">&#40;</span>i+<span class="nu0">2</span><span class="br0">&#41;</span>%<span class="nu0">3</span><span class="br0">&#93;</span>*v<span class="br0">&#91;</span><span class="br0">&#40;</span>i+<span class="nu0">1</span><span class="br0">&#41;</span>%<span class="nu0">3</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> c
+<span class="co1">##&gt;&gt;&gt; cross_product([1,1,1],[1,1,1]) == [0,0,0]</span>
+<span class="co1">##True</span>
+<span class="co1">##&gt;&gt;&gt; cross_product([1,2,3],[4,5,6]) == [-3,6,-3]</span>
+<span class="co1">##True</span>
+<span class="co1">##&gt;&gt;&gt; cross_product([1,2,3],[3,2,1]) == [-4,8,-4]</span>
+<span class="co1">##True</span></pre>
+
+<h2 id="toc8"><a name="x-11.9"></a>11.9</h2>
+ They are the same.<br />
+They are different when there is at least a double space in the sentence, or there is a space at the beginning or the end.<br />
+<br />
+<h2 id="toc9"><a name="x-11.10"></a>11.10</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="co1">##Version 1</span>
+<span class="co1">##def replace(s, old, new):</span>
+<span class="co1">##    ns=s</span>
+<span class="co1">##    while old in ns:</span>
+<span class="co1">##        x=ns.find(old)</span>
+<span class="co1">##        ns=ns[:x]+new+ns[x+len(new):]</span>
+<span class="co1">##    return ns</span>
+&nbsp;
+<span class="co1">##Version 2</span>
+<span class="kw1">def</span> replace<span class="br0">&#40;</span>s<span class="sy0">,</span> old<span class="sy0">,</span> <span class="kw3">new</span><span class="br0">&#41;</span>:
+    s<span class="sy0">=</span>s.<span class="me1">split</span><span class="br0">&#40;</span>old<span class="br0">&#41;</span>
+    s<span class="sy0">=</span><span class="kw3">new</span>.<span class="me1">join</span><span class="br0">&#40;</span>s<span class="br0">&#41;</span>
+    <span class="kw1">return</span> s
+&nbsp;
+<span class="co1">##&gt;&gt;&gt; replace(&quot;Mississippi&quot;, &quot;i&quot;, &quot;I&quot;) == &quot;MIssIssIppI&quot;</span>
+<span class="co1">##True</span>
+<span class="co1">##&gt;&gt;&gt; s = &quot;I love spom! Spom is my favorite food. Spom, spom, yum!&quot;</span>
+<span class="co1">##&gt;&gt;&gt; replace(s, &quot;om&quot;, &quot;am&quot;) == &quot;I love spam! Spam is my favorite food. Spam, spam, yum!&quot;</span>
+<span class="co1">##True</span>
+<span class="co1">##&gt;&gt;&gt; replace(s, &quot;o&quot;, &quot;a&quot;) == &quot;I lave spam! Spam is my favarite faad. Spam, spam, yum!&quot;</span>
+<span class="co1">##True</span></pre>
+
+<h2 id="toc10"><a name="x-11.11"></a>11.11</h2>
+ before swap function call: a: ['This', 'is', 'fun'] b: [2, 3, 4]<br />
+before swap statement: x: ['This', 'is', 'fun'] y: [2, 3, 4]<br />
+after swap statement: x: [2, 3, 4] y: ['This', 'is', 'fun']<br />
+after swap function call: a: ['This', 'is', 'fun'] b: [2, 3, 4]<br />
+<br />
+a,b are not swapped<br />
+<br />
+Reason:<br />
+<ul><li>x,y are just local variables. NOT alias of a,b</li><li>The function isn't returning anything useful</li></ul><br />
+So after the call 'swap', a is still ['This', 'is', 'fun'] and b is still [2, 3, 4]. We didn't make any change to them.<br />
+<br />
+To fix this problem, we can add 'return (x,y)' at the end of the function.</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

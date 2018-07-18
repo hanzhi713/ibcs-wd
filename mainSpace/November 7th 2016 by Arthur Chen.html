@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <title>IBCS1-WD - November 7th 2016 by Arthur Chen</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+Today we mainly studied the basic components of java programing, including datatypes, syntax features, and memory allocation.<br />
+<br />
+First, let's recap what we learned:do you still remember what the following piece of code means?<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+<span class="br0">&#125;</span></pre>
+
+&quot;Public&quot; makes the functions accessible by all the users. There are two other similar key words: One is &quot;protected&quot;, which restricts the accessibility only to the &quot;family&quot; of the class; the other is &quot;private&quot;, which means the function can only be called by the &quot;direct relatives&quot; of the class.<br />
+&quot;Static&quot; makes the function belongs to the class, but not any instances of it. Therefore we can call the function without instantiate the class.<br />
+&quot;Void&quot; tells us that the function only returns &quot;void&quot;. &quot;void&quot; is the java equivalent of python's &quot;None&quot;.<br />
+This line is a required component of every java code, so it's good to remember them.<br />
+<br />
+Now let's look at how java programmer name their variables:<br />
+The naming convention is quite similar to python --- only numbers, _, and characters are allowed.<br />
+However, the brackets may cause some confusion:<br />
+<ol><li>[ ] is NOT a list that can hold any object anymore. It IS an array. In variable declaration, we should write it as, for example, &quot;<span style="color: #8f2100; font-family: NimbusMonL; font-size: 9pt;">int</span><span style="color: #666666; font-family: NimbusMonL; font-size: 9pt;">[] </span><span style="font-family: NimbusMonL; font-size: 9pt;">count </span><span style="color: #666666; font-family: NimbusMonL; font-size: 9pt;">= {</span><span style="color: #21804f; font-family: NimbusMonL; font-size: 9pt;">0</span><span style="color: #666666; font-family: NimbusMonL; font-size: 9pt;">,</span><span style="color: #21804f; font-family: NimbusMonL; font-size: 9pt;">0</span><span style="color: #666666; font-family: NimbusMonL; font-size: 9pt;">,</span><span style="color: #21804f; font-family: NimbusMonL; font-size: 9pt;">0</span><span style="color: #666666; font-family: NimbusMonL; font-size: 9pt;">,</span><span style="color: #21804f; font-family: NimbusMonL; font-size: 9pt;">0</span><span style="color: #666666; font-family: NimbusMonL; font-size: 9pt;">,</span><span style="color: #21804f; font-family: NimbusMonL; font-size: 9pt;">0</span><span style="color: #666666; font-family: NimbusMonL; font-size: 9pt;">,</span><span style="color: #21804f; font-family: NimbusMonL; font-size: 9pt;">0</span><span style="color: #666666; font-family: NimbusMonL; font-size: 9pt;">,</span><span style="color: #21804f; font-family: NimbusMonL; font-size: 9pt;">0</span><span style="color: #666666; font-family: NimbusMonL; font-size: 9pt;">,</span><span style="color: #21804f; font-family: NimbusMonL; font-size: 9pt;">0</span><span style="color: #666666; font-family: NimbusMonL; font-size: 9pt;">,</span><span style="color: #21804f; font-family: NimbusMonL; font-size: 9pt;">0</span><span style="color: #666666; font-family: NimbusMonL; font-size: 9pt;">,</span><span style="color: #21804f; font-family: NimbusMonL; font-size: 9pt;">0</span><span style="color: #666666; font-family: NimbusMonL; font-size: 9pt;">}; </span>&quot;.The &quot;int&quot; here shows that the array is composed of integers. That place may also be float, bool, etc. Note that in the array, there could be only ONE TYPE of variables.</li><li>{ } brackets the main codes under the function. It's recommended to align the two brackets but not required.</li></ol>Keep in mind that every sentence should end with a &quot;;&quot;, as indentation doesn't mean anything in java!<br />
+<br />
+There are many useful methods in java.utl. One example is java.utl.Scanner, which can read both inputs and files. Scanner is actually a class, which means it needs to be instantiated to use.<br />
+There's also a package called system. One of it's various methods is System.out.println(). It can print the string in he bracket and start a new line. &quot;println&quot; is short for &quot;printline&quot;. Here, &quot;out&quot; is an object in &quot;System&quot;; their relationship is like &quot;Point&quot; in a &quot;Rectangle&quot;.<br />
+These are all feature of a OOP programming language. Everything are class or instances or methods.<br />
+<br />
+Since Java is a static language, we must declare them before using. The reason behind this is that doing so can improve efficiency. This is how it works:<br />
+Different datatypes are given different memory spaces. In other words, we are allocating the least possible memory space to the variables. <br />
+For instance, the byte type data is given eight bits of memory. Therefore if can store 2^7(one space for the sign) different integers. There are two ways to represent the data:<br />
+<ol><li>&quot;Sign and Magnitude&quot;: one place for sign, the others are binary representation of the number. The range is hence -127~+127. (0 is repeated twice)</li><li>&quot;two's complement&quot;: the first bit represents -128, and the others are the binary representation of the difference of the integer and -128. The range is hence -128~127.</li></ol>(Today's computer normally use the second method, but for convenience, we will study the first one only.)<br />
+<br />
+For more information, please refer to the book Java4python chapter one and two.</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

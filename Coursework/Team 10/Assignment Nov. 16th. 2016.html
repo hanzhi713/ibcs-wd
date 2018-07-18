@@ -1,0 +1,292 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Assignment Nov. 16th. 2016</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+Implementation:<br />
+1. Date<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import java.util.Scanner;
+&nbsp;
+public class Date {
+    private int day;
+    private int month;
+    private int year;
+&nbsp;
+    public Date(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(&quot;Enter your birthday month please.&quot;);
+        month=scanner.nextInt();
+        System.out.println(&quot;Enter your birthday day please.&quot;);
+        day=scanner.nextInt();
+        System.out.println(&quot;Enter your birthday year please.&quot;);
+        year=scanner.nextInt();
+    }
+&nbsp;
+    public Date(int mo, int da, int yr){
+&nbsp;
+    }
+&nbsp;
+    public int getMonth(){
+        return month;
+    }
+&nbsp;
+    public int getDay(){
+        return day;
+    }
+&nbsp;
+    public int getYear(){
+        return year;
+    }
+&nbsp;
+    public String toString(){
+        return getMonth()+&quot;/&quot;+getDay()+&quot;/&quot;+getYear();
+    }
+&nbsp;
+    public void write(){
+        System.out.println(month+&quot;/&quot;+day+&quot;/&quot;+year);
+    }
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import java.util.Scanner;
+&nbsp;
+public class BirthdayStuff {
+&nbsp;
+    public static Date findBirthdate(){
+        Date birthdate=new Date();
+        return birthdate;
+    }
+    public static void main(String[]args){
+        Date d=findBirthdate();
+        System.out.println(d.toString());
+    }
+}
+&nbsp;</pre>
+
+2. Rational<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import java.util.Scanner;
+&nbsp;
+public class Rational {
+    private int numerator;
+    private int denominator;
+&nbsp;
+    public Rational(){
+    }
+&nbsp;
+    public Rational(int n){
+    }
+&nbsp;
+    public Rational(int numer, int denom){
+        numerator=numer;
+        denominator=denom;
+    }
+&nbsp;
+    public int numerator(){
+        return numerator;
+    }
+&nbsp;
+    public int denominator(){
+        return denominator;
+    }
+&nbsp;
+    public Rational plus(Rational r){
+        fixSigns();
+        r.fixSigns();
+        int denom = denominator * r.denominator;
+        int numer = numerator * r.denominator+ r.numerator * denominator;
+        Rational rat = new Rational(numer, denom);
+        rat.reduce();
+        return rat;
+    }
+&nbsp;
+    private void fixSigns(){
+        if(!(denominator&gt;0)){
+            denominator=denominator*(-1);
+        }
+    }
+&nbsp;
+    private void reduce(){
+        if(denominator&lt;numerator){
+            for(int i=1;i&lt;denominator;i++){
+                if((numerator%i==0)&amp;&amp;(denominator%i==0)){
+                    denominator=denominator/i;
+                    numerator=numerator/i;}
+                else{
+                    continue;}
+            }
+        }
+        else if(denominator&gt;numerator){
+            for(int i=1;i&lt;numerator;i++){
+                if((numerator%i==0)&amp;&amp;(denominator%i==0)){
+                    denominator=denominator/i;
+                    numerator=numerator/i;}
+                else{
+                    continue;}
+            }
+        }
+    }
+&nbsp;
+    public String toString(){
+        return (numerator+&quot; &quot;+denominator+&quot; &quot;);
+    }
+&nbsp;
+&nbsp;
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import java.util.Scanner;
+&nbsp;
+public class RationalTest {
+    public static void main(String[]args){
+        Rational a= new Rational(3,6);
+        System.out.println(a.numerator());
+        System.out.println(a.denominator());
+        System.out.println(a.plus(new Rational(2,3)));
+    }
+}
+&nbsp;</pre>
+
+<br />
+3. Temperature<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import java.util.Scanner;
+&nbsp;
+public class Temperature {
+    private String scale;
+    private double degrees;
+&nbsp;
+    public Temperature(double tempDegrees, String tempScale) {
+        degrees=tempDegrees;
+        scale=tempScale;
+    }
+&nbsp;
+    public Temperature toFahrenheit() {
+        Temperature result = new Temperature(degrees * 1.8 + 32, &quot;F&quot;);
+        return result;
+    }
+&nbsp;
+    public Temperature toCelsius(){
+        Temperature result = new Temperature(degrees/1.8,&quot;C&quot;);
+        return result;
+    }
+&nbsp;
+    public Temperature raise(double amt) {
+        Temperature result = new Temperature(degrees+amt,&quot;C&quot;);
+        return result;
+    }
+&nbsp;
+    public Temperature lower(double amt) {
+        Temperature result = new Temperature(degrees-amt,&quot;C&quot;);
+        return result;
+&nbsp;
+    }
+&nbsp;
+    public String toString(){
+        return degrees+&quot; &quot;+scale;
+    }
+&nbsp;
+    public static boolean isValidTemp(double tempDegrees, String tempScale){
+        boolean flag = false;
+        if(!(tempDegrees&gt;0 &amp;&amp; tempDegrees&lt;100)){
+        }
+        else if(tempDegrees&gt;0 &amp;&amp; tempDegrees&lt;100){
+            flag=true;
+        }
+        else if(!(tempScale==&quot;C&quot;||tempScale==&quot;F&quot;)){
+        }
+        else if(tempScale==&quot;C&quot;||tempScale==&quot;F&quot;){
+            flag=true;
+        }
+        return flag;
+    }
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">import java.util.Scanner;
+&nbsp;
+public class TemperatureTest {
+    public static void main(String[]args){
+        Temperature t = new Temperature(33.3,&quot;C&quot;);
+        System.out.println(t.toFahrenheit());
+        System.out.println(t.toCelsius());
+        System.out.println(t.raise(3));
+        System.out.println(t.lower(5));
+        System.out.println(t.isValidTemp(33.3,&quot;C&quot;));
+    }
+}
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

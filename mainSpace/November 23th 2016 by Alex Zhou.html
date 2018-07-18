@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>IBCS1-WD - November 23th 2016 by Alex Zhou</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>November 23th 2016 by Alex Zhou<small> #Log </small></h1>今天我们学习了继承、多态、抽象、接口<br />
+<br />
+1. 继承<br />
+类的继承的关键字是extends。使用extends就能使子类继承父类。子类与父类之间的关系永远都是子类is-a 父类，千万不能弄反。<br />
+在继承关系中，所有public的变量以及方法都能被继承到子类中，而且子类可以直接调用。但是，如果父类的变量或方法的访问请求是private,那子类就不能直接调用这些方法，只能使用accessor。<br />
+子类能有自己异于父类的方法，而这些方法是父类不能调用的，因为子类is-a 父类，而非反过来。<br />
+如果子类有一个函数，其函数签名和父类的某一函数相同，但内容与之不同，那这种情况叫做override。调用子类的这个函数时，会运行子类函数里面的内容。<br />
+<br />
+2 多态<br />
+如果又一个类是这样的：<br />
+public class Students<br />
+public UnderGrad extends Students<br />
+public Gradstud extends Students<br />
+那么 UnderGrad 继承Students<br />
+Gradstud 继承 Students<br />
+<br />
+Students 里有一个public函数a<br />
+UnderGrad 里有一个函数a，内容跟Students的不一样，但签名一样<br />
+Gradstud里有一个函数a，内容跟Students 和 UnderGrad的不一样，但签名一样。<br />
+<br />
+Students s = new Students();<br />
+Students u = new UnderGrad();<br />
+Students g = new Gradstud();<br />
+<br />
+s.a, u.a, g.a 这三个声明究竟调用的是哪个函数？这就是多态，s.a调用的是Students的，u.a调用的是UnderGrad的，g.a调用的是Gradstud的。这个过程是在运行代码时进行的。<br />
+<br />
+UnderGrad里若有一个函数b，Students 里没有b，那写下u.b时会报错，因为Students里没有b，因此需要强制转换类型变成((UnderGrad) u) .b。<br />
+<br />
+3 抽象<br />
+抽象类里面可以有完整的变量，完整的函数，也可以有抽象的、只有一个函数头的函数。抽象类永远不能被实例化。一个普通类可以继承抽象类，但是普通类里面必须把继承下来的抽象方法通过override变成普通方法。普通类里不能有抽象方法。抽象类也能继承抽象类。<br />
+<br />
+4 接口<br />
+只有函数头，关键字implements.</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

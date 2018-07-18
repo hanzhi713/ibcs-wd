@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 9.18 HW miniessay</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">In this case, there are 3 states for the traffic light. They are:</span></span><br />
+<span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">0: orange light;</span></span><br />
+<span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">1:red light:</span></span><br />
+<span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">2:green light:</span></span><br />
+<span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">so S = {0,1,2}; O = {red,orange,green}</span></span><br />
+<span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">Because it is a finite-machine that controlled by timer, we could ignores its input.</span></span><br />
+<span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;"> </span></span><br />
+<span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">We can use this table to examine the evolution of this state machine.</span></span><br />
+
+
+<table class="wiki_table">
+    <tr>
+        <td><span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">timer</span></span><br />
+</td>
+        <td><span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">30 seconds</span></span><br />
+</td>
+        <td><span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">30 seconds</span></span><br />
+</td>
+        <td><span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">30 seconds</span></span><br />
+</td>
+    </tr>
+    <tr>
+        <td><span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">state</span></span><br />
+</td>
+        <td><span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">0</span></span><br />
+</td>
+        <td><span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">1</span></span><br />
+</td>
+        <td><span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">2</span></span><br />
+</td>
+    </tr>
+    <tr>
+        <td><span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">output</span></span><br />
+</td>
+        <td><span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">orange light</span></span><br />
+</td>
+        <td><span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">red light</span></span><br />
+</td>
+        <td><span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">green light</span></span><br />
+</td>
+    </tr>
+</table>
+
+<span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;"> </span></span><br />
+<span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">So the initial state of the machine is state 0 which has an output of orange light. When the time finish 30 seconds counting, state += 1 which will out put the red light in state one. And timer again counts down from 30 to 0 and state will add 1 again. This time the output changes to the green light. But this time, in order to back to the state 0 when the time counts all 30 seconds state = 0. Then the out put will be orange light again. </span></span><br />
+<span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;"> </span></span><br />
+<span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">Then we can get the conclusion that this state machine</span></span><span style="font-family: Calibri; font-size: 14px;"><span style="color: #000000;">’</span></span><span style="font-family: 宋体; font-size: 14px;"><span style="color: #000000;">s state depends on the last state and the time counting.</span></span></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

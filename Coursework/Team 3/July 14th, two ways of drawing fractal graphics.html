@@ -1,0 +1,169 @@
+<html>
+  <head>
+    <title>IBCS1-WD - July 14th, two ways of drawing fractal graphics</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>July 14th, two ways of drawing fractal graphics<small> #TomsProjects </small></h1><h1 id="toc0"><a name="Two ways of drawing Pythagora's tree"></a>Two ways of drawing Pythagora's tree</h1>
+ <br />
+<h2 id="toc1"><a name="Two ways of drawing Pythagora's tree-Recursion:"></a>Recursion:</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+<span class="kw1">import</span> <span class="kw3">math</span>
+sqrt2 <span class="sy0">=</span> <span class="kw3">math</span>.<span class="me1">sqrt</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>
+Tom <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">def</span> DrawSquare<span class="br0">&#40;</span>sidelength<span class="sy0">,</span>x<span class="sy0">,</span>y<span class="sy0">,</span>rotation<span class="sy0">,</span>oddore<span class="br0">&#41;</span>:
+    Tom.<span class="me1">setheading</span><span class="br0">&#40;</span>rotation+<span class="nu0">90</span><span class="br0">&#41;</span>
+    Tom.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    Tom.<span class="me1">goto</span><span class="br0">&#40;</span>x<span class="sy0">,</span>y<span class="br0">&#41;</span>
+    Tom.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    xcorlist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    ycorlist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    oddorelist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    flag <span class="sy0">=</span> <span class="kw2">True</span>
+    <span class="kw1">if</span> sidelength <span class="sy0">&lt;=</span> <span class="nu0">15</span>:
+        <span class="kw1">return</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span>:
+        Tom.<span class="me1">forward</span><span class="br0">&#40;</span>sidelength<span class="br0">&#41;</span>
+        Tom.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> oddore % <span class="nu0">2</span> <span class="sy0">==</span> <span class="nu0">0</span>:
+            flag <span class="sy0">=</span> <span class="kw2">True</span>
+            <span class="kw1">if</span> i <span class="sy0">==</span> <span class="nu0">0</span>:
+                xcorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">xcor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                ycorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">ycor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                oddorelist.<span class="me1">append</span><span class="br0">&#40;</span>oddore+<span class="nu0">2</span><span class="br0">&#41;</span>
+            <span class="kw1">elif</span> i <span class="sy0">==</span> <span class="nu0">1</span>:
+                xcorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">xcor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                ycorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">ycor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                oddorelist.<span class="me1">append</span><span class="br0">&#40;</span>oddore + <span class="nu0">1</span><span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            flag <span class="sy0">=</span> <span class="kw2">False</span>
+            <span class="kw1">if</span> i <span class="sy0">==</span> <span class="nu0">1</span>:
+                xcorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">xcor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                ycorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">ycor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                oddorelist.<span class="me1">append</span><span class="br0">&#40;</span>oddore + <span class="nu0">1</span><span class="br0">&#41;</span>
+            <span class="kw1">elif</span> i <span class="sy0">==</span> <span class="nu0">2</span>:
+                xcorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">xcor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                ycorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">ycor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                oddorelist.<span class="me1">append</span><span class="br0">&#40;</span>oddore + <span class="nu0">2</span><span class="br0">&#41;</span>
+    <span class="kw1">if</span> flag <span class="sy0">==</span> <span class="kw2">True</span>:
+        DrawSquare<span class="br0">&#40;</span>sidelength / sqrt2 <span class="sy0">,</span> xcorlist<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span>ycorlist<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span>rotation + <span class="nu0">45</span><span class="sy0">,</span>oddorelist<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+        DrawSquare<span class="br0">&#40;</span>sidelength / sqrt2<span class="sy0">,</span> xcorlist<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> ycorlist<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> rotation + <span class="nu0">45</span><span class="sy0">,</span> oddorelist<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+    <span class="kw1">else</span>:
+        DrawSquare<span class="br0">&#40;</span>sidelength / sqrt2<span class="sy0">,</span> xcorlist<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span> ycorlist<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="sy0">,</span> rotation - <span class="nu0">45</span><span class="sy0">,</span> oddorelist<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+        DrawSquare<span class="br0">&#40;</span>sidelength / sqrt2<span class="sy0">,</span> xcorlist<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> ycorlist<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> rotation - <span class="nu0">45</span><span class="sy0">,</span> oddorelist<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+DrawSquare<span class="br0">&#40;</span><span class="nu0">200</span><span class="sy0">,</span>-<span class="nu0">100</span><span class="sy0">,</span>-<span class="nu0">380</span><span class="sy0">,</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">0</span><span class="br0">&#41;</span>
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+<h2 id="toc2"> </h2>
+ <h2 id="toc3"><a name="Two ways of drawing Pythagora's tree-Iteration:"></a>Iteration:</h2>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">turtle</span>
+<span class="kw1">import</span> <span class="kw3">math</span>
+sqrt2 <span class="sy0">=</span> <span class="kw3">math</span>.<span class="me1">sqrt</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span>
+Tom <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Turtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">speed</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="br0">&#41;</span>
+wn <span class="sy0">=</span> <span class="kw3">turtle</span>.<span class="me1">Screen</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+Tom.<span class="me1">hideturtle</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+xcoorlist <span class="sy0">=</span> <span class="br0">&#91;</span>-<span class="nu0">100</span><span class="br0">&#93;</span>
+ycoorlist <span class="sy0">=</span> <span class="br0">&#91;</span>-<span class="nu0">380</span><span class="br0">&#93;</span>
+radiuslist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">200</span><span class="br0">&#93;</span>
+rotationlist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+oddorevenlist <span class="sy0">=</span> <span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span>
+<span class="kw1">def</span> DrawSquare<span class="br0">&#40;</span>sidelength<span class="sy0">,</span>x<span class="sy0">,</span>y<span class="sy0">,</span>rotation<span class="sy0">,</span>oddore<span class="br0">&#41;</span>:
+    Tom.<span class="me1">setheading</span><span class="br0">&#40;</span>rotation+<span class="nu0">90</span><span class="br0">&#41;</span>
+    Tom.<span class="me1">penup</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    Tom.<span class="me1">goto</span><span class="br0">&#40;</span>x<span class="sy0">,</span>y<span class="br0">&#41;</span>
+    Tom.<span class="me1">pendown</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span>:
+        Tom.<span class="me1">forward</span><span class="br0">&#40;</span>sidelength<span class="br0">&#41;</span>
+        Tom.<span class="me1">right</span><span class="br0">&#40;</span><span class="nu0">90</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> oddore % <span class="nu0">2</span> <span class="sy0">==</span> <span class="nu0">0</span>:
+            <span class="kw1">if</span> i <span class="sy0">==</span> <span class="nu0">0</span>:
+                xcoorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">xcor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                ycoorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">ycor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                radiuslist.<span class="me1">append</span><span class="br0">&#40;</span>sidelength / sqrt2<span class="br0">&#41;</span>
+                rotationlist.<span class="me1">append</span><span class="br0">&#40;</span>rotation +<span class="nu0">45</span><span class="br0">&#41;</span>
+                oddorevenlist.<span class="me1">append</span><span class="br0">&#40;</span>oddore+<span class="nu0">2</span><span class="br0">&#41;</span>
+            <span class="kw1">elif</span> i <span class="sy0">==</span> <span class="nu0">1</span>:
+                xcoorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">xcor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                ycoorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">ycor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                radiuslist.<span class="me1">append</span><span class="br0">&#40;</span>sidelength / sqrt2<span class="br0">&#41;</span>
+                rotationlist.<span class="me1">append</span><span class="br0">&#40;</span>rotation + <span class="nu0">45</span><span class="br0">&#41;</span>
+                oddorevenlist.<span class="me1">append</span><span class="br0">&#40;</span>oddore+<span class="nu0">1</span><span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">if</span> i <span class="sy0">==</span> <span class="nu0">1</span>:
+                xcoorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">xcor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                ycoorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">ycor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                radiuslist.<span class="me1">append</span><span class="br0">&#40;</span>sidelength / sqrt2<span class="br0">&#41;</span>
+                rotationlist.<span class="me1">append</span><span class="br0">&#40;</span>rotation - <span class="nu0">45</span><span class="br0">&#41;</span>
+                oddorevenlist.<span class="me1">append</span><span class="br0">&#40;</span>oddore+<span class="nu0">1</span><span class="br0">&#41;</span>
+            <span class="kw1">elif</span> i <span class="sy0">==</span> <span class="nu0">2</span>:
+                xcoorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">xcor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                ycoorlist.<span class="me1">append</span><span class="br0">&#40;</span>Tom.<span class="me1">ycor</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+                radiuslist.<span class="me1">append</span><span class="br0">&#40;</span>sidelength / sqrt2<span class="br0">&#41;</span>
+                rotationlist.<span class="me1">append</span><span class="br0">&#40;</span>rotation - <span class="nu0">45</span><span class="br0">&#41;</span>
+                oddorevenlist.<span class="me1">append</span><span class="br0">&#40;</span>oddore+<span class="nu0">2</span><span class="br0">&#41;</span>
+<span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="nu0">0</span><span class="sy0">,</span><span class="nu0">255</span><span class="br0">&#41;</span>:
+    DrawSquare<span class="br0">&#40;</span>radiuslist<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">,</span>xcoorlist<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">,</span>ycoorlist<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">,</span>rotationlist<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">,</span>oddorevenlist<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#41;</span>
+wn.<span class="me1">mainloop</span><span class="br0">&#40;</span><span class="br0">&#41;</span></pre>
+
+<br />
+<br />
+<br />
+<h2 id="toc4"> </h2>
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

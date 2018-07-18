@@ -1,0 +1,65 @@
+SUM = 0
+loop i from 0 to 6
+	SUM = SUM + A[i+1,1+1]
+end loop
+output SUM
+
+
+
+a = 0
+b = (n-1)/2
+loop i from 1 to n^2
+	if a = -1
+		a = n-1
+	end if
+	if b = n
+		b = 0
+	end if
+	if A[a][b]>0
+		a = temp[0]+1
+		b = temp[1]
+	end if
+			
+	A[a][b] = i
+	temp[0] = a
+	temp[1] = b
+	A[i-1] = a
+	B[i-1] = b
+end loop
+output A
+
+
+
+a = 0
+b = (n-1)/2
+jus = true
+loop i from 1 to n^2
+	if a = -1
+		a = n-1
+	end if
+	if b = n
+		b = 0
+	end if
+	if A[a][b]>0
+		a = temp[0]+1
+		b = temp[1]
+	end if
+			
+	if not A[a][b] = i
+		jus = false
+	end if
+	temp[0] = a
+	temp[1] = b
+	A[i-1] = a
+	B[i-1] = b
+end loop
+	
+
+
+
+
+
+
+
+
+	

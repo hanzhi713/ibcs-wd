@@ -1,0 +1,239 @@
+<html>
+  <head>
+    <title>IBCS1-WD - paper2 study</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<h1 id="toc0"><a name="note:"></a>note:</h1>
+ <br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">1. Definition
+Constructor: A (special) method (with the same name as the class) that instantiates an object of that class.
+exp: public Patient(int i, String n, int p) {
+        id = i;
+        name = n;
+        priority = p;
+        doctor = null;
+    }
+&nbsp;
+NOTE: Don’t forget to include an example.
+&nbsp;
+2. additional field to be included in a class
+    String gender = “male”;
+&nbsp;
+3. relationship between objects
+    Composition, the WaitingRoom object has a Patient object.
+&nbsp;
+NOTE: Aggregation?
+&nbsp;
+4,5. construct code
+    private int findNextPatientIndex(){
+        int max = 0;
+        for(Patient apatient:patients){
+            if (apatient==null){
+                break;
+            }
+            else if (apatient.getPriority()&gt;max){
+                max=apatient.getId();
+            }
+        }
+        return max;
+    }
+NOTE: “while” loop is also ok.
+&nbsp;
+    private void remove(int n){
+        System.out.println(patients[n]+&quot;&quot;);
+        for(int i=n;i&lt;9;i++){
+            patients[i]=patients[i+1];
+        }
+        patients[9]=null;
+    }
+&nbsp;
+6. advantage analysis / ethical consideration
+    encapsulation: Encapsulation means having private variables.Variables not accessible from outside the class. Methods and variables are all included in the class definition. So that the patient data cannot be accessed/modified accidentally (more secure).
+    Sensitive information should be separated from identity data in order to avoid information misuse. The consultation object does not include the patient’s name (only an ID), so that a sensitive diagnosis (like AIDS) is not directly linked to a name.
+&nbsp;
+NOTE: outline=definition+explanation
+&nbsp;
+7. UML diagram.
+    NOTE: three parts, datatypes, private or public (-/+), parameters’ datatype, output datatype.
+&nbsp;
+8. Extended character sets
+NOTE: it means UNICODE!</pre>
+
+<h1 id="toc1"><a name="code:"></a>code:</h1>
+ <br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">clinic</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> Patient <span class="br0">&#123;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> id<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> name<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw4">int</span> priority<span class="sy0">;</span>
+    <span class="kw1">private</span> <span class="kw3">String</span> doctor<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> Patient<span class="br0">&#40;</span><span class="kw4">int</span> i, <span class="kw3">String</span> n, <span class="kw4">int</span> p<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        id <span class="sy0">=</span> i<span class="sy0">;</span>
+        name <span class="sy0">=</span> n<span class="sy0">;</span>
+        priority <span class="sy0">=</span> p<span class="sy0">;</span>
+        doctor <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> setId<span class="br0">&#40;</span><span class="kw4">int</span> i<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        id <span class="sy0">=</span> i<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> setName<span class="br0">&#40;</span><span class="kw3">String</span> n<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        name <span class="sy0">=</span> n<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> setPriority<span class="br0">&#40;</span><span class="kw4">int</span> p<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        priority <span class="sy0">=</span> p<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> setDoctor<span class="br0">&#40;</span><span class="kw3">String</span> d<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        doctor <span class="sy0">=</span> d<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getId<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> id<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">String</span> getName<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> name<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">int</span> getPriority<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> priority<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">String</span> getDoctor<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> doctor<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw3">String</span> toString<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">return</span> id <span class="sy0">+</span> <span class="st0">&quot; &quot;</span> <span class="sy0">+</span> name <span class="sy0">+</span> <span class="st0">&quot; &quot;</span> <span class="sy0">+</span> priority <span class="sy0">+</span> <span class="st0">&quot; &quot;</span> <span class="sy0">+</span> doctor<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">package</span> <span class="co2">clinic</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> WaitingRoom <span class="br0">&#123;</span>
+    <span class="kw1">private</span> Patient<span class="br0">&#91;</span><span class="br0">&#93;</span> patients <span class="sy0">=</span> <span class="kw1">new</span> Patient<span class="br0">&#91;</span><span class="nu0">10</span><span class="br0">&#93;</span><span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> add<span class="br0">&#40;</span>Patient newPatient<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">while</span> <span class="br0">&#40;</span><span class="br0">&#40;</span>patients<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">!=</span> <span class="kw2">null</span><span class="br0">&#41;</span> <span class="sy0">&amp;&amp;</span> <span class="br0">&#40;</span>i <span class="sy0">&lt;</span> <span class="nu0">10</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            i<span class="sy0">++;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>i <span class="sy0">==</span> <span class="nu0">10</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;No more space in the waiting room.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            patients<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> newPatient<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw4">void</span> callNextPatient<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> index <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>patients<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">==</span> <span class="kw2">null</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;The waiting room is empty.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            index <span class="sy0">=</span> findNextPatientIndex<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            remove<span class="br0">&#40;</span>index<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw4">int</span> findNextPatientIndex<span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> max <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span>Patient apatient <span class="sy0">:</span> patients<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>apatient <span class="sy0">==</span> <span class="kw2">null</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">break</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>apatient.<span class="me1">getPriority</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&gt;</span> max<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                max <span class="sy0">=</span> apatient.<span class="me1">getId</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> max<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">private</span> <span class="kw4">void</span> remove<span class="br0">&#40;</span><span class="kw4">int</span> n<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>patients<span class="br0">&#91;</span>n<span class="br0">&#93;</span> <span class="sy0">+</span> <span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> n<span class="sy0">;</span> i <span class="sy0">&lt;</span> <span class="nu0">9</span><span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            patients<span class="br0">&#91;</span>i<span class="br0">&#93;</span> <span class="sy0">=</span> patients<span class="br0">&#91;</span>i <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        patients<span class="br0">&#91;</span><span class="nu0">9</span><span class="br0">&#93;</span> <span class="sy0">=</span> <span class="kw2">null</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

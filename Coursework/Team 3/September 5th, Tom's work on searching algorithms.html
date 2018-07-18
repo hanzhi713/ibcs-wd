@@ -1,0 +1,154 @@
+<html>
+  <head>
+    <title>IBCS1-WD - September 5th, Tom's work on searching algorithms</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>September 5th, Tom's work on searching algorithms<small> #TomsProjects </small></h1>
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">random</span>
+<span class="kw1">import</span> <span class="kw3">time</span>
+<span class="kw1">import</span> <span class="kw3">math</span>
+<span class="kw1">def</span> search_linear<span class="br0">&#40;</span>xs<span class="sy0">,</span> target<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Find and return the index of target in sequence xs &quot;&quot;&quot;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>xs<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+       <span class="kw1">if</span> xs<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">==</span> target:
+           <span class="kw1">return</span> i
+    <span class="kw1">return</span> -<span class="nu0">1</span>
+&nbsp;
+<span class="kw1">def</span> search_binary_iter<span class="br0">&#40;</span>xs<span class="sy0">,</span> target<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Find and return the index of key in sequence xs &quot;&quot;&quot;</span>
+    ub <span class="sy0">=</span> <span class="kw2">len</span><span class="br0">&#40;</span>xs<span class="br0">&#41;</span> -<span class="nu0">1</span>
+    lb <span class="sy0">=</span> <span class="nu0">0</span>
+    <span class="kw1">while</span> <span class="nu0">1</span>:
+        <span class="kw1">if</span> ub-lb <span class="sy0">==</span> <span class="nu0">0</span>:
+            <span class="kw1">return</span> -<span class="nu0">1</span>
+        mid_index <span class="sy0">=</span> <span class="br0">&#40;</span>lb + ub<span class="br0">&#41;</span> // <span class="nu0">2</span>
+        <span class="kw1">if</span> target <span class="sy0">&gt;</span> xs<span class="br0">&#91;</span>mid_index<span class="br0">&#93;</span>:
+            lb <span class="sy0">=</span> mid_index + <span class="nu0">1</span>
+        <span class="kw1">elif</span> target <span class="sy0">&lt;</span> xs<span class="br0">&#91;</span>mid_index<span class="br0">&#93;</span>:
+            ub <span class="sy0">=</span> mid_index
+        <span class="kw1">else</span>:
+            <span class="kw1">return</span> <span class="nu0">1</span>
+    <span class="kw1">return</span> -<span class="nu0">1</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> search_binary_recur<span class="br0">&#40;</span>xs<span class="sy0">,</span> target<span class="br0">&#41;</span>:
+    <span class="kw1">if</span> <span class="kw2">len</span><span class="br0">&#40;</span>xs<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">2</span>:
+        <span class="kw1">if</span> xs<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span> <span class="sy0">==</span> target:
+            <span class="kw1">return</span> <span class="nu0">1</span>
+        <span class="kw1">if</span> xs<span class="br0">&#91;</span><span class="nu0">1</span><span class="br0">&#93;</span> <span class="sy0">==</span> target:
+            <span class="kw1">return</span> <span class="nu0">1</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">return</span> -<span class="nu0">1</span>
+    <span class="kw1">elif</span> <span class="kw2">len</span><span class="br0">&#40;</span>xs<span class="br0">&#41;</span> <span class="sy0">&lt;</span> <span class="nu0">2</span>:
+        <span class="kw1">return</span> -<span class="nu0">1</span>
+    mid_index <span class="sy0">=</span> <span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>xs<span class="br0">&#41;</span> - <span class="nu0">1</span><span class="br0">&#41;</span>//<span class="nu0">2</span>
+    <span class="kw1">if</span> target <span class="sy0">&gt;</span> xs<span class="br0">&#91;</span>mid_index<span class="br0">&#93;</span>:
+        <span class="kw1">return</span> search_binary_recur<span class="br0">&#40;</span>xs<span class="br0">&#91;</span>mid_index:<span class="br0">&#93;</span><span class="sy0">,</span>target<span class="br0">&#41;</span>
+    <span class="kw1">if</span> target <span class="sy0">&lt;</span> xs<span class="br0">&#91;</span>mid_index<span class="br0">&#93;</span>:
+        <span class="kw1">return</span> search_binary_recur<span class="br0">&#40;</span>xs<span class="br0">&#91;</span>:mid_index + <span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">,</span> target<span class="br0">&#41;</span>
+    <span class="kw1">else</span>:
+        <span class="kw1">return</span> <span class="nu0">1</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> find_unknown_words<span class="br0">&#40;</span>vocab<span class="sy0">,</span> wds<span class="sy0">,</span>method<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Return a list of words in wds that do not occur in vocab &quot;&quot;&quot;</span>
+    result <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    <span class="kw1">if</span> method <span class="sy0">==</span> <span class="nu0">1</span>:
+        <span class="kw1">for</span> w <span class="kw1">in</span> wds:
+            <span class="kw1">if</span> <span class="br0">&#40;</span>search_linear<span class="br0">&#40;</span>vocab<span class="sy0">,</span> w<span class="br0">&#41;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span><span class="br0">&#41;</span>:
+                result.<span class="me1">append</span><span class="br0">&#40;</span>w<span class="br0">&#41;</span>
+    <span class="kw1">else</span>:
+        vocab.<span class="me1">sort</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">if</span> method <span class="sy0">==</span> <span class="nu0">2</span>:
+            <span class="kw1">for</span> w <span class="kw1">in</span> wds:
+                <span class="kw1">if</span> <span class="br0">&#40;</span>search_binary_recur<span class="br0">&#40;</span>vocab<span class="sy0">,</span> w<span class="br0">&#41;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span><span class="br0">&#41;</span>:
+                    result.<span class="me1">append</span><span class="br0">&#40;</span>w<span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">for</span> w <span class="kw1">in</span> wds:
+                <span class="kw1">if</span> <span class="br0">&#40;</span>search_binary_iter<span class="br0">&#40;</span>vocab<span class="sy0">,</span> w<span class="br0">&#41;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span><span class="br0">&#41;</span>:
+                    result.<span class="me1">append</span><span class="br0">&#40;</span>w<span class="br0">&#41;</span>
+    <span class="kw1">return</span> result
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> load_words_from_file<span class="br0">&#40;</span>filename<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Read words from filename, return list of words. &quot;&quot;&quot;</span>
+    f <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span>filename<span class="sy0">,</span> <span class="st0">&quot;r&quot;</span><span class="br0">&#41;</span>
+    file_content <span class="sy0">=</span> f.<span class="me1">read</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    f.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    wds <span class="sy0">=</span> file_content.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> wds
+&nbsp;
+<span class="kw1">def</span> text_to_words<span class="br0">&#40;</span>the_text<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; return a list of words with all punctuation removed,
+        and all in lowercase.
+    &quot;&quot;&quot;</span>
+    my_substitutions <span class="sy0">=</span> the_text.<span class="me1">maketrans</span><span class="br0">&#40;</span>
+      <span class="co1"># If you find any of these</span>
+      <span class="st0">&quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!<span class="es0">\&quot;</span>#$%&amp;()*+,-./:;&lt;=&gt;?@[]^_`{|}~'<span class="es0">\\</span>&quot;</span><span class="sy0">,</span>
+      <span class="co1"># Replace them by these</span>
+      <span class="st0">&quot;abcdefghijklmnopqrstuvwxyz                                          &quot;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="co1"># Translate the text now.</span>
+    cleaned_text <span class="sy0">=</span> the_text.<span class="me1">translate</span><span class="br0">&#40;</span>my_substitutions<span class="br0">&#41;</span>
+    wds <span class="sy0">=</span> cleaned_text.<span class="me1">split</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> wds
+&nbsp;
+<span class="kw1">def</span> get_words_in_book<span class="br0">&#40;</span>filename<span class="br0">&#41;</span>:
+    <span class="st0">&quot;&quot;&quot; Read a book from filename, and return a list of its words. &quot;&quot;&quot;</span>
+    f <span class="sy0">=</span> <span class="kw2">open</span><span class="br0">&#40;</span>filename<span class="sy0">,</span> <span class="st0">&quot;r&quot;</span><span class="br0">&#41;</span>
+    content <span class="sy0">=</span> f.<span class="me1">read</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    f.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    wds <span class="sy0">=</span> text_to_words<span class="br0">&#40;</span>content<span class="br0">&#41;</span>
+    <span class="kw1">return</span> wds
+&nbsp;
+&nbsp;
+bigger_vocab <span class="sy0">=</span> load_words_from_file<span class="br0">&#40;</span><span class="st0">&quot;vocab.txt&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;There are {0} words in the vocab, starting with<span class="es0">\n</span> {1} &quot;</span>
+      .<span class="me1">format</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>bigger_vocab<span class="br0">&#41;</span><span class="sy0">,</span> bigger_vocab<span class="br0">&#91;</span>:<span class="nu0">6</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+book_words <span class="sy0">=</span> get_words_in_book<span class="br0">&#40;</span><span class="st0">&quot;alice_in_wonderland.txt&quot;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;There are {0} words in the book, the first 100 are<span class="es0">\n</span>{1}&quot;</span>.
+           <span class="me1">format</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>book_words<span class="br0">&#41;</span><span class="sy0">,</span> book_words<span class="br0">&#91;</span>:<span class="nu0">100</span><span class="br0">&#93;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="co1"># t0 = time.clock()</span>
+<span class="co1"># missing_words = find_unknown_words_linear(bigger_vocab, book_words)</span>
+<span class="co1"># t1 = time.clock()</span>
+<span class="co1"># print(&quot;Search linear: There are {0} unknown words.&quot;.format(len(missing_words)))</span>
+<span class="co1"># print(&quot;That took {0:.4f} seconds.&quot;.format(t1-t0))</span>
+t0 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+missing_words <span class="sy0">=</span> find_unknown_words<span class="br0">&#40;</span>bigger_vocab<span class="sy0">,</span> book_words<span class="sy0">,</span><span class="nu0">2</span><span class="br0">&#41;</span>
+t1 <span class="sy0">=</span> <span class="kw3">time</span>.<span class="me1">clock</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;There are {0} unknown words.&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>missing_words<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+<span class="kw1">print</span><span class="br0">&#40;</span><span class="st0">&quot;That took {0:.4f} seconds.&quot;</span>.<span class="me1">format</span><span class="br0">&#40;</span>t1-t0<span class="br0">&#41;</span><span class="br0">&#41;</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

@@ -1,0 +1,287 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 12.9 Assignment - pseudocode and java implementation</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+1.<br />
+pseudo code:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">INPUT MAX_VARIANCE
+&nbsp;
+RESULTS=[]
+throws=0
+COLLECT=[0,0,0,0,0,0]
+&nbsp;
+loop while throws&lt;600
+    X=Random integer from 1 to 6 inclusive
+    RESULT.addItem(X)
+    throws=throws + 1
+end loop
+&nbsp;
+loop while RESULTS.hasNext()
+    Y=RESULTS.getNext()
+    COLLECT[Y-1]=COLLECT[Y-1]+1
+end loop
+&nbsp;
+OUTPUT “1 is got”,COLLECT[0],”times”
+OUTPUT “2 is got”,COLLECT[1],”times”
+OUTPUT “3 is got”,COLLECT[2],”times”
+OUTPUT “4 is got”,COLLECT[3],”times”
+OUTPUT “5 is got”,COLLECT[4],”times”
+OUTPUT “6 is got”,COLLECT[5],”times”
+&nbsp;
+VARIANCE=(COLLECT[0]-MEAN)^2+(COLLECT[1]-MEAN)^2+(COLLECT[2]-MEAN)^2+(COLLECT[3]-MEAN)^2+(COLLECT[4]-MEAN)^2+(COLLECT[5]-MEAN)^2
+&nbsp;
+if VARIANCE&gt;MAX_VARIANCE
+    OUTPUT “The dice is biased!”
+else
+    OUTPUT “The dice is OK”
+end if
+&nbsp;</pre>
+
+<br />
+java implementation:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">static</span> java.<span class="me1">lang</span>.<span class="kw3">Math</span>.<span class="sy0">*;</span>
+<span class="kw1">import</span> <span class="co2">java.util.Scanner</span><span class="sy0">;</span>
+<span class="kw1">public</span> <span class="kw1">class</span> Die <span class="br0">&#123;</span>
+    <span class="kw1">static</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> Result <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="nu0">600</span><span class="br0">&#93;</span><span class="sy0">;</span>
+    <span class="kw1">static</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span> <span class="kw3">Collection</span> <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#123;</span><span class="nu0">0</span>,<span class="nu0">0</span>,<span class="nu0">0</span>,<span class="nu0">0</span>,<span class="nu0">0</span>,<span class="nu0">0</span><span class="br0">&#125;</span><span class="sy0">;</span>
+    <span class="kw1">static</span> <span class="kw4">int</span> Variance<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> arg<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        Scanner in <span class="sy0">=</span> <span class="kw1">new</span> Scanner<span class="br0">&#40;</span><span class="kw3">System</span>.<span class="me1">in</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span><span class="st0">&quot;Input max variance: &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">final</span> <span class="kw4">double</span> MAXVARIANCE<span class="sy0">=</span>in.<span class="me1">nextDouble</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        in.<span class="me1">close</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> <span class="kw1">Throws</span><span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>Throws<span class="sy0">&lt;</span><span class="nu0">600</span><span class="sy0">;</span><span class="kw1">Throws</span><span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        Result<span class="br0">&#91;</span><span class="kw1">Throws</span><span class="br0">&#93;</span><span class="sy0">=</span><span class="br0">&#40;</span><span class="kw4">int</span><span class="br0">&#41;</span><span class="br0">&#40;</span>random<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">*</span><span class="nu0">6</span><span class="sy0">+</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;The first 100: &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    report<span class="br0">&#40;</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;The second 100: &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    report<span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;The third 100: &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    report<span class="br0">&#40;</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;The fourth 100: &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    report<span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;The fifth 100: &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    report<span class="br0">&#40;</span><span class="nu0">5</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;The sixth 100: &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    report<span class="br0">&#40;</span><span class="nu0">6</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;The result is: &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">6</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+    <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;    There are &quot;</span><span class="sy0">+</span><span class="kw3">Collection</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">+</span><span class="st0">&quot; &quot;</span><span class="sy0">+</span>i<span class="sy0">+</span><span class="st0">&quot;s.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    calcVariance<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">if</span> <span class="br0">&#40;</span>Variance<span class="sy0">&gt;</span>MAXVARIANCE<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;The Variance is &quot;</span><span class="sy0">+</span>Variance<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;The die is biased!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">else</span><span class="br0">&#123;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;The die is OK.&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> report<span class="br0">&#40;</span><span class="kw4">int</span> n<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">100</span><span class="sy0">*</span><span class="br0">&#40;</span>n<span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">100</span><span class="sy0">*</span>n<span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span>Result<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">+</span><span class="st0">&quot;, &quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw3">Collection</span><span class="br0">&#91;</span>Result<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#93;</span><span class="sy0">+=</span><span class="nu0">1</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> calcVariance<span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span><span class="nu0">6</span><span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            Variance<span class="sy0">+=</span><span class="br0">&#40;</span><span class="kw3">Collection</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">-</span><span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">*</span><span class="br0">&#40;</span><span class="kw3">Collection</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">-</span><span class="nu0">100</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+2.<br />
+java implementation:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">java.util.Scanner</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> MagicSquare <span class="br0">&#123;</span>
+    <span class="kw1">static</span> Scanner in <span class="sy0">=</span> <span class="kw1">new</span> Scanner<span class="br0">&#40;</span><span class="kw3">System</span>.<span class="me1">in</span><span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span><span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#91;</span><span class="br0">&#93;</span> Grid<span class="sy0">;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw1">while</span> <span class="br0">&#40;</span><span class="kw2">true</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Please input an odd number:&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw4">int</span> scale <span class="sy0">=</span> in.<span class="me1">nextInt</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>scale <span class="sy0">%</span> <span class="nu0">2</span> <span class="sy0">==</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;Odd number only!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+                <span class="kw1">continue</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            Grid <span class="sy0">=</span> <span class="kw1">new</span> <span class="kw4">int</span><span class="br0">&#91;</span>scale<span class="br0">&#93;</span><span class="br0">&#91;</span>scale<span class="br0">&#93;</span><span class="sy0">;</span>
+            Construct<span class="br0">&#40;</span>scale<span class="br0">&#41;</span><span class="sy0">;</span>
+            show<span class="br0">&#40;</span>scale<span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>isMS<span class="br0">&#40;</span>scale<span class="br0">&#41;</span> <span class="sy0">==</span> <span class="kw2">true</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;This IS a Magic Square!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;This is NOT a Magic Square!&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span> getDiagnalSum<span class="br0">&#40;</span><span class="kw4">int</span> scale<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> sum <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> scale<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            sum <span class="sy0">+=</span> Grid<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> sum<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span> getMinorDiagnalSum<span class="br0">&#40;</span><span class="kw4">int</span> scale<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> sum <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> scale<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            sum <span class="sy0">+=</span> Grid<span class="br0">&#91;</span>scale <span class="sy0">-</span> <span class="nu0">1</span> <span class="sy0">-</span> i<span class="br0">&#93;</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> sum<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span> getRowSum<span class="br0">&#40;</span><span class="kw4">int</span> scale, <span class="kw4">int</span> n<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> sum <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> scale<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            sum <span class="sy0">+=</span> Grid<span class="br0">&#91;</span>n<span class="br0">&#93;</span><span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> sum<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">int</span> getColumnSum<span class="br0">&#40;</span><span class="kw4">int</span> scale, <span class="kw4">int</span> n<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> sum <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> scale<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            sum <span class="sy0">+=</span> Grid<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>n<span class="br0">&#93;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">return</span> sum<span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">boolean</span> isMS<span class="br0">&#40;</span><span class="kw4">int</span> scale<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">int</span> Sum <span class="sy0">=</span> <span class="br0">&#40;</span>scale <span class="sy0">*</span> scale <span class="sy0">+</span> <span class="nu0">1</span><span class="br0">&#41;</span> <span class="sy0">*</span> scale <span class="sy0">/</span> <span class="nu0">2</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span> i <span class="sy0">&lt;</span> scale<span class="sy0">;</span> i<span class="sy0">++</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>getColumnSum<span class="br0">&#40;</span>scale, i<span class="br0">&#41;</span> <span class="sy0">!=</span> Sum <span class="sy0">||</span> getRowSum<span class="br0">&#40;</span>scale, i<span class="br0">&#41;</span> <span class="sy0">!=</span> Sum<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+                <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>getDiagnalSum<span class="br0">&#40;</span>scale<span class="br0">&#41;</span> <span class="sy0">!=</span> Sum<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="kw1">if</span> <span class="br0">&#40;</span>getMinorDiagnalSum<span class="br0">&#40;</span>scale<span class="br0">&#41;</span> <span class="sy0">!=</span> Sum<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">return</span> <span class="kw2">false</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span> <span class="kw1">else</span> <span class="br0">&#123;</span>
+            <span class="kw1">return</span> <span class="kw2">true</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> Construct<span class="br0">&#40;</span><span class="kw4">int</span> scale<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw4">int</span> row<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> column<span class="sy0">=</span><span class="br0">&#40;</span>scale<span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">/</span><span class="nu0">2</span><span class="sy0">;</span>
+        <span class="kw4">int</span> newrow<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw4">int</span> newcolumn<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+<span class="co1">//        for(int i=0;i&lt;scale;i++){</span>
+<span class="co1">//            for (int j=0;j&lt;scale;j++){</span>
+<span class="co1">//                Grid[i][j]=0;</span>
+<span class="co1">//            }</span>
+<span class="co1">//        }</span>
+        Grid<span class="br0">&#91;</span>row<span class="br0">&#93;</span><span class="br0">&#91;</span>column<span class="br0">&#93;</span><span class="sy0">=</span><span class="nu0">1</span><span class="sy0">;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">2</span><span class="sy0">;</span>i<span class="sy0">&lt;=</span>scale<span class="sy0">*</span>scale<span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            newrow<span class="sy0">=</span>row<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+            newcolumn<span class="sy0">=</span>column<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>newrow<span class="sy0">==-</span><span class="nu0">1</span> <span class="sy0">&amp;&amp;</span> newcolumn<span class="sy0">==</span>scale<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                newrow<span class="sy0">=</span>row<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+                newcolumn<span class="sy0">=</span>column<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>newrow<span class="sy0">==-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                newrow<span class="sy0">=</span>scale<span class="sy0">-</span><span class="nu0">1</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>newcolumn<span class="sy0">==</span>scale<span class="br0">&#41;</span><span class="br0">&#123;</span>
+                newcolumn<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw1">else</span> <span class="kw1">if</span><span class="br0">&#40;</span>Grid<span class="br0">&#91;</span>newrow<span class="br0">&#93;</span><span class="br0">&#91;</span>newcolumn<span class="br0">&#93;</span><span class="sy0">!=</span><span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                newrow<span class="sy0">=</span>row<span class="sy0">+</span><span class="nu0">1</span><span class="sy0">;</span>
+                newcolumn<span class="sy0">=</span>column<span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            Grid<span class="br0">&#91;</span>newrow<span class="br0">&#93;</span><span class="br0">&#91;</span>newcolumn<span class="br0">&#93;</span><span class="sy0">=</span>i<span class="sy0">;</span>
+            row<span class="sy0">=</span>newrow<span class="sy0">;</span>
+            column<span class="sy0">=</span>newcolumn<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> show<span class="br0">&#40;</span><span class="kw4">int</span> scale<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> i<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>i<span class="sy0">&lt;</span>scale<span class="sy0">;</span>i<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">for</span> <span class="br0">&#40;</span><span class="kw4">int</span> j<span class="sy0">=</span><span class="nu0">0</span><span class="sy0">;</span>j<span class="sy0">&lt;</span>scale<span class="sy0">;</span>j<span class="sy0">++</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">print</span><span class="br0">&#40;</span>Grid<span class="br0">&#91;</span>i<span class="br0">&#93;</span><span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">+</span><span class="st0">&quot;<span class="es0">\t</span>&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+            <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span><span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

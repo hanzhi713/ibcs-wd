@@ -1,0 +1,98 @@
+<html>
+  <head>
+    <title>IBCS1-WD - September 9th 2016 by Matt An</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>September 9th 2016 by Matt An<small> #lessonlog #Log </small></h1>September 5th<br />
+1. the use of bisects in python<br />
+binary search:<br />
+when we want to search an element in a list, we can take the middle value, find out the target is bigger than the middle or not, then we can abandon half of a list. keep on doing it, we can find it at last. the maximum time we take is log2n.<br />
+2. the example<br />
+2.1 iteration binary search<br />
+use iteration to make a binary search function, it's faster than recursion in binary search. but iteration use counter as the condition of a loop, when all the number count off, the loop will finish.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> search_binary_iter<span class="br0">&#40;</span>xs<span class="sy0">,</span> target<span class="br0">&#41;</span>:
+    low<span class="sy0">=</span><span class="nu0">0</span>
+    high<span class="sy0">=</span><span class="kw2">len</span><span class="br0">&#40;</span>xs<span class="br0">&#41;</span>-<span class="nu0">1</span>
+    <span class="kw1">while</span> low<span class="sy0">&lt;=</span>high:
+        middle<span class="sy0">=</span><span class="br0">&#40;</span>low+high<span class="br0">&#41;</span>//<span class="nu0">2</span>
+        <span class="kw1">if</span> xs<span class="br0">&#91;</span>middle<span class="br0">&#93;</span><span class="sy0">&lt;</span>target:
+            low<span class="sy0">=</span>middle+<span class="nu0">1</span>
+        <span class="kw1">elif</span> xs<span class="br0">&#91;</span>middle<span class="br0">&#93;</span><span class="sy0">&gt;</span>target:
+            high<span class="sy0">=</span>middle-<span class="nu0">1</span>
+        <span class="kw1">else</span>:
+            <span class="kw1">return</span> middle
+    <span class="kw1">return</span> -<span class="nu0">1</span></pre>
+
+2.2 recursive binary search<br />
+recursion use the output as input again, the code will shorter than iteration, but it's slower,use more RAM.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">def</span> search_binary_recur<span class="br0">&#40;</span>xs<span class="sy0">,</span> target<span class="br0">&#41;</span>:
+    low<span class="sy0">=</span><span class="nu0">0</span>
+    high<span class="sy0">=</span><span class="kw2">len</span><span class="br0">&#40;</span>xs<span class="br0">&#41;</span>-<span class="nu0">1</span>
+    middle<span class="sy0">=</span><span class="br0">&#40;</span>low+high<span class="br0">&#41;</span>//<span class="nu0">2</span>
+    <span class="kw1">if</span> low<span class="sy0">==</span>high:
+        <span class="kw1">return</span> -<span class="nu0">1</span>
+    <span class="kw1">else</span>:
+      <span class="kw1">if</span> xs<span class="br0">&#91;</span>middle<span class="br0">&#93;</span><span class="sy0">==</span>target:
+         <span class="kw1">return</span> middle
+      <span class="kw1">elif</span> xs<span class="br0">&#91;</span>middle<span class="br0">&#93;</span><span class="sy0">&gt;</span>target:
+        <span class="kw1">return</span> search_binary_recur<span class="br0">&#40;</span>xs<span class="br0">&#91;</span>:middle<span class="sy0">,</span>target<span class="br0">&#93;</span><span class="br0">&#41;</span>
+      <span class="kw1">elif</span> xs<span class="br0">&#91;</span>middle<span class="br0">&#93;</span><span class="sy0">&lt;</span>target:
+         <span class="kw1">return</span> search_binary_recur<span class="br0">&#40;</span>xs<span class="br0">&#91;</span>middle:<span class="sy0">,</span>target<span class="br0">&#93;</span><span class="br0">&#41;</span>
+      <span class="kw1">else</span>:
+        <span class="kw1">return</span> -<span class="nu0">1</span></pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

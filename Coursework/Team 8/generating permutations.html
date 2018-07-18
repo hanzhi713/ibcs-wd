@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <title>IBCS1-WD - generating permutations</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<h1 id="toc0"><a name="This is what I refer to when I say &quot;import permutations&quot; in my code:"></a>This is what I refer to when I say &quot;import permutations&quot; in my code:</h1>
+ <br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">copy</span>
+<span class="kw1">def</span> unitpermutations<span class="br0">&#40;</span>n<span class="br0">&#41;</span>:
+    <span class="kw1">if</span> n<span class="sy0">==</span><span class="nu0">1</span>:
+        <span class="kw1">return</span> <span class="br0">&#91;</span><span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#93;</span>
+    <span class="kw1">else</span>:
+        result<span class="sy0">=</span>unitpermutations<span class="br0">&#40;</span>n-<span class="nu0">1</span><span class="br0">&#41;</span>
+        newresult<span class="sy0">=</span><span class="br0">&#91;</span><span class="br0">&#93;</span>
+        k<span class="sy0">=</span><span class="kw2">len</span><span class="br0">&#40;</span>result<span class="br0">&#91;</span><span class="nu0">0</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+        <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span>k+<span class="nu0">1</span><span class="br0">&#41;</span>:
+            <span class="kw1">for</span> i <span class="kw1">in</span> result:
+                add<span class="sy0">=</span><span class="kw3">copy</span>.<span class="me1">deepcopy</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span>
+                add<span class="br0">&#91;</span>j:j<span class="br0">&#93;</span><span class="sy0">=</span><span class="br0">&#91;</span>n-<span class="nu0">1</span><span class="br0">&#93;</span>
+                newresult.<span class="me1">append</span><span class="br0">&#40;</span>add<span class="br0">&#41;</span>
+        newresult.<span class="me1">sort</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+        <span class="kw1">return</span> newresult
+&nbsp;
+<span class="kw1">def</span> remove_adjacent_dups<span class="br0">&#40;</span>xs<span class="br0">&#41;</span>:
+    result <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+    most_recent_elem <span class="sy0">=</span> <span class="kw2">None</span>
+    <span class="kw1">for</span> e <span class="kw1">in</span> xs:
+        <span class="kw1">if</span> e <span class="sy0">!=</span> most_recent_elem:
+            result.<span class="me1">append</span><span class="br0">&#40;</span>e<span class="br0">&#41;</span>
+            most_recent_elem <span class="sy0">=</span> e
+    <span class="kw1">return</span> result
+&nbsp;
+<span class="kw1">def</span> permutations<span class="br0">&#40;</span>lst<span class="br0">&#41;</span>:
+    mod<span class="sy0">=</span>unitpermutations<span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>lst<span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> i <span class="kw1">in</span> mod:
+        <span class="kw1">for</span> j <span class="kw1">in</span> <span class="kw2">range</span><span class="br0">&#40;</span><span class="kw2">len</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="br0">&#41;</span>:
+            i<span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="sy0">=</span>lst<span class="br0">&#91;</span>i<span class="br0">&#91;</span>j<span class="br0">&#93;</span><span class="br0">&#93;</span>
+    mod.<span class="me1">sort</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+    result<span class="sy0">=</span>remove_adjacent_dups<span class="br0">&#40;</span>mod<span class="br0">&#41;</span>
+    <span class="kw1">return</span> result</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

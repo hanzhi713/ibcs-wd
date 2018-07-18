@@ -1,0 +1,1122 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Assignment Nov.24th.2016</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+Ex. 2.1<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class Author {
+&nbsp;
+    private String name;
+    private String email;
+    private char gender;
+&nbsp;
+    public Author(String name, String email, char gender) {
+        this.name = name;
+        this.email = email;
+        this.gender = gender;
+    }
+&nbsp;
+    public String getName() {return name;}
+&nbsp;
+    public String getEmail() {
+        return email;
+    }
+&nbsp;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+&nbsp;
+    public char getGender() {
+        return gender;
+    }
+&nbsp;
+    public String toString() {
+        return name + &quot; (&quot; + gender + &quot;) at &quot; + email;
+    }
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class Book {
+    private String name;
+    private Author author;
+    private double price;
+    private int qty;
+&nbsp;
+    public Book(String name,Author author,double price){
+        this.name=name;
+        this.author=author;
+        this.price=price;
+    }
+    public Book(String name,Author author,double price,int qty){
+        this.name=name;
+        this.author=author;
+        this.price=price;
+        this.qty=qty;
+    }
+    public String getName(){
+        return name;
+    }
+    public Author getAuthor(){
+        return author;
+    }
+    public double getPrice(){
+        return price;
+    }
+    public void setPrice(double price){
+        this.price=price;
+    }
+    public int getQty(){
+        return qty;
+    }
+    public void setQty(int qty){
+        this.qty=qty;
+    }
+    public String toString(){
+        return &quot;Book[name=&quot;+getName()+&quot; ,Author[name=&quot;+getAuthor().getName()
+                +&quot; ,email=&quot;+getAuthor().getEmail()+&quot; ,gender=&quot;+getAuthor().getGender()+&quot;], price=&quot;
+                +getPrice()+&quot; ,qty=&quot;+getQty();
+    }
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class TestBook {
+    public static void main(String[] args){
+        Author ahTeck = new Author(&quot;Tan Ah Teck&quot;, &quot;ahteck@nowhere.com&quot;, 'm');
+        System.out.println(ahTeck);  // Author's toString()
+&nbsp;
+        Book dummyBook = new Book(&quot;Java for dummy&quot;, ahTeck, 19.95, 99);
+        System.out.println(dummyBook);  // Test Book's toString()
+&nbsp;
+        dummyBook.setPrice(29.95);
+        dummyBook.setQty(28);
+        System.out.println(&quot;name is: &quot; + dummyBook.getName());
+        System.out.println(&quot;price is: &quot; + dummyBook.getPrice());
+        System.out.println(&quot;qty is: &quot; + dummyBook.getQty());
+        System.out.println(&quot;Author is: &quot; + dummyBook.getAuthor());
+        System.out.println(&quot;Author's name is: &quot; + dummyBook.getAuthor().getName());
+        System.out.println(&quot;Author's email is: &quot; + dummyBook.getAuthor().getEmail());
+    }
+&nbsp;
+}
+&nbsp;</pre>
+
+Ex. 4.1<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+public class Circle {
+&nbsp;
+    private double radius;
+    private String color;
+&nbsp;
+&nbsp;
+    public Circle() {
+        this.radius = 1.0;
+        this.color = &quot;red&quot;;
+    }
+    public Circle(double radius) {
+        this.radius = radius;
+        this.color = &quot;red&quot;;
+    }
+    public Circle(double radius, String color) {
+        this.radius = radius;
+        this.color = color;
+    }
+&nbsp;
+    public double getRadius() {
+        return this.radius;
+    }
+    public String getColor() {
+        return this.color;
+    }
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+    public void setColor(String color) {
+        this.color = color;
+    }
+&nbsp;
+    public String toString() {
+        return &quot;Circle[radius=&quot; + radius + &quot;,color=&quot; + color + &quot;]&quot;;
+    }
+&nbsp;
+    public double getArea() {
+        return radius * radius * Math.PI;
+    }
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class Cylinder extends Circle{
+    private double height;
+&nbsp;
+    public Cylinder() {
+        super();
+        this.height = 1.0;
+    }
+    public Cylinder(double height) {
+        super();
+        this.height = height;
+    }
+    public Cylinder(double height, double radius) {
+        super(radius);
+        this.height = height;
+    }
+    public Cylinder(double height, double radius, String color) {
+        super(radius, color);
+        this.height = height;
+    }
+&nbsp;
+    public double getHeight() {
+        return this.height;
+    }
+    public void setHeight(double height) {
+        this.height = height;
+    }
+&nbsp;
+    public double getVolume() {
+        return getArea()*height;
+    }
+&nbsp;
+    public String toString() {
+        return &quot;This is a Cylinder&quot;;
+    }
+}</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class TestCylinder {
+        public static void main (String[] args) {
+&nbsp;
+            Cylinder c1 = new Cylinder();
+            System.out.println(&quot;Cylinder:&quot;
+                    + &quot; radius=&quot; + c1.getRadius()
+                    + &quot; height=&quot; + c1.getHeight()
+                    + &quot; base area=&quot; + c1.getArea()
+                    + &quot; volume=&quot; + c1.getVolume());
+&nbsp;
+&nbsp;
+            Cylinder c2 = new Cylinder(10.0);
+            System.out.println(&quot;Cylinder:&quot;
+                    + &quot; radius=&quot; + c2.getRadius()
+                    + &quot; height=&quot; + c2.getHeight()
+                    + &quot; base area=&quot; + c2.getArea()
+                    + &quot; volume=&quot; + c2.getVolume());
+&nbsp;
+&nbsp;
+            Cylinder c3 = new Cylinder(2.0, 10.0);
+            System.out.println(&quot;Cylinder:&quot;
+                    + &quot; radius=&quot; + c3.getRadius()
+                    + &quot; height=&quot; + c3.getHeight()
+                    + &quot; base area=&quot; + c3.getArea()
+                    + &quot; volume=&quot; + c3.getVolume());
+        }
+    }</pre>
+
+Ex. 4.3<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+&nbsp;
+public class Point2D {
+    private int x, y;
+&nbsp;
+    public Point2D() {
+        this.x = 0;
+        this.y = 0;
+    }
+    public Point2D(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+&nbsp;
+    public int getX() {
+        return this.x;
+    }
+    public void setX(int x) {
+        this.x = x;
+    }
+    public int getY() {
+        return this.y;
+    }
+    public void setY(int y) {
+        this.y = y;
+    }
+    public int[] getXY(){
+        int XY[] = new int[2];
+        XY[0]=x;
+        XY[1]=y;
+        return XY;
+    }
+    public void setXY(int x, int y){
+        this.x=x;
+        this.y=y;
+    }
+    public String toString() {
+        return &quot;(&quot; + this.x + &quot;,&quot; + this.y + &quot;)&quot;;
+    }
+&nbsp;
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class Point3D extends Point2D {
+    private int z;
+&nbsp;
+    public Point3D() {
+        super();
+        this.z = 0;
+    }
+    public Point3D(int x, int y, int z) {
+        super(x, y);
+        this.z = z;
+    }
+&nbsp;
+    public int getZ() {
+        return this.z;
+    }
+    public void setZ(int z) {
+        this.z = z;
+    }
+    public void setXYZ(int x,int y,int z){
+        super.setX(x);
+        super.setY(y);
+        this.z=z;
+    }
+    public int[] getXYZ(){
+        int[] XYZ=new int[3];
+        XYZ[0]=getX();
+        XYZ[1]=getY();
+        XYZ[2]=z;
+        return XYZ;
+    }
+&nbsp;
+&nbsp;
+    public String toString() {
+        return &quot;(&quot; + super.getX() + &quot;,&quot; + super.getY() + &quot;,&quot; + this.z + &quot;)&quot;;
+    }
+}
+&nbsp;</pre>
+
+Ex 4.4<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class Point {
+    private float x, y;
+&nbsp;
+    public Point() {
+        this.x = 0;
+        this.y = 0;
+    }
+    public Point(float x, float y) {
+        this.x = x;
+        this.y = y;
+    }
+&nbsp;
+    public float getX() {
+        return this.x;
+    }
+    public void setX(int x) {
+        this.x = x;
+    }
+    public float getY() {
+        return this.y;
+    }
+    public void setY(int y) {
+        this.y = y;
+    }
+    public float[] getXY(){
+        float XY[] = new float[2];
+        XY[0]=x;
+        XY[1]=y;
+        return XY;
+    }
+    public void setXY(float x, float y){
+        this.x=x;
+        this.y=y;
+    }
+    public String toString() {
+        return &quot;(&quot; + this.x + &quot;,&quot; + this.y + &quot;)&quot;;
+    }
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class MovablePoint extends Point{
+    private float xSpeed;
+    private float ySpeed;
+&nbsp;
+    public MovablePoint(float x,float y,float xSpeed,float ySpeed){
+        super(x,y);
+        this.xSpeed=xSpeed;
+        this.ySpeed=ySpeed;
+    }
+    public MovablePoint(float xSpeed,float ySpeed){
+        this.xSpeed=xSpeed;
+        this.ySpeed=ySpeed;
+    }
+    public MovablePoint(){
+        super();
+        this.xSpeed=0;
+        this.ySpeed=0;
+    }
+    public float getXSpeed(){
+        return xSpeed;
+    }
+    public void setXSpeed(float xSpeed){
+        this.xSpeed=xSpeed;
+    }
+    public float getYSpeed(){
+        return ySpeed;
+    }
+    public void setYSpeed(float ySpeed){
+        this.ySpeed=ySpeed;
+    }
+    public float[] getSpeed(){
+        float[] getSpeed=new float[2];
+        getSpeed[0]=xSpeed;
+        getSpeed[1]=ySpeed;
+        return getSpeed;
+    }
+    public void setSpeed(float xSpeed,float ySpeed){
+        this.xSpeed=xSpeed;
+        this.ySpeed=ySpeed;
+    }
+    public String toString(){
+        return &quot;(x,y) speed is&quot;+getSpeed();
+    }
+    public Point move(float x,float y){
+        xSpeed+=x;
+        ySpeed+=y;
+        return this;
+    }
+}
+&nbsp;</pre>
+
+Ex. 5.2<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class Circle3 {
+    private double radius;
+    private String color;
+&nbsp;
+    public Circle3() {
+        this.radius = 1.0;
+        this.color = &quot;red&quot;;
+    }
+    public Circle3(double radius) {
+        this.radius = radius;
+        this.color = &quot;red&quot;;
+    }
+    public Circle3(double radius, String color) {
+        this.radius = radius;
+        this.color = color;
+    }
+&nbsp;
+    public double getRadius() {
+        return this.radius;
+    }
+    public String getColor() {
+        return this.color;
+    }
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+    public void setColor(String color) {
+        this.color = color;
+    }
+&nbsp;
+    public String toString() {
+        return &quot;Circle[radius=&quot; + radius + &quot;,color=&quot; + color + &quot;]&quot;;
+    }
+&nbsp;
+    public double getArea() {
+        return radius * radius * Math.PI;
+    }
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class Cylinder3 {
+    private Circle3 base;
+    private double height;
+&nbsp;
+    public Cylinder3(){
+        base=new Circle3();
+        height=1.0;
+    }
+    public double getArea(){
+        return base.getRadius()*base.getRadius()*Math.PI
+    }
+    public double getVolume(){
+        return base.getArea()*height;
+    }
+}
+&nbsp;</pre>
+
+Ex. 6.1<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+abstract public class Shape {
+    protected String color;
+    protected boolean filled;
+&nbsp;
+    public Shape(){}
+    public Shape(String color,boolean filled){
+        this.color=color;
+        this.filled=filled;
+    }
+    public void setColor(String color){
+        this.color=color;
+    }
+    public String getColor(){
+        return color;
+    }
+    public boolean isFilled(){
+        return filled;
+    }
+    public void setFilled(boolean filled){
+        this.filled=filled;
+    }
+    abstract public double getArea();
+    abstract public double getPerimeter();
+    abstract public String toString();
+&nbsp;
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class Circle1 extends Shape{
+    protected double radius;
+&nbsp;
+    public Circle1(){
+        super();
+    }
+    public Circle1(double radius){
+        super();
+        this.radius=radius;
+    }
+    public Circle1(double radius, String color, boolean filled){
+        super(color,filled);
+        this.radius=radius;
+    }
+    public double getRadius(){
+        return radius;
+    }
+    public void setRadius(double radius){
+        this.radius=radius;
+    }
+    public double getArea(){
+        return Math.PI * radius * radius;
+    }
+    public double getPerimeter(){
+        return Math.PI*2*radius;
+    }
+    public String toString(){
+        return &quot;The circlec[area= &quot;+getArea()+&quot; ,perimeter=&quot;+getPerimeter()+&quot; ]&quot;;
+    }
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class Rectangle extends Shape{
+    protected double width;
+    protected double length;
+&nbsp;
+    public Rectangle(){
+    }
+    public Rectangle(double width,double length){
+        this.width=width;
+        this.length=length;
+    }
+    public Rectangle(double width,double length,boolean filled){
+        this.width=width;
+        this.length=length;
+        filled=isFilled();
+    }
+    public double getWidth(){
+        return width;
+    }
+    public void setWidth(double width){
+        this.width=width;
+    }
+    public double getLength(){
+        return length;
+    }
+    public void setLength(double length){
+        this.length=length;
+    }
+    public double getArea(){
+        return width*length;
+    }
+    public double getPerimeter(){
+        return 2*(width+length);
+    }
+    public String toString(){
+        return &quot;The area is&quot;+getArea()+&quot; .the perimeter is&quot;+getPerimeter();
+    }
+&nbsp;
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class Square extends Rectangle{
+    public Square(){
+        super();
+    }
+    public Square(double side){
+        super(side,side);
+    }
+    public Square(double side,String color,boolean filled){
+        super(side,side,filled);
+        this.color=color;
+    }
+    public double getSide(){
+        return width;
+    }
+    public void setSide(double side){
+        this.width=side;
+        this.length=side;
+    }
+    public void setWidth(double side){
+        this.width=side;
+    }
+    public void Length(double side){
+        this.length=side;
+    }
+    public String toString(){
+        return &quot;[ side = &quot;+getSide();
+    }
+&nbsp;
+}
+&nbsp;</pre>
+
+Ex. 6.2<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+abstract public class Animal {
+    abstract public void greeting();
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class Cat extends Animal {
+    @Override
+    public void greeting() {
+        System.out.println(&quot;Meow!&quot;);
+    }
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class Dog extends Animal {
+    @Override
+    public void greeting() {
+        System.out.println(&quot;Woof!&quot;);
+    }
+&nbsp;
+    public void greeting(Dog another) {
+        System.out.println(&quot;Woooooooooof!&quot;);
+    }
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class BigDog extends Dog {
+    @Override
+    public void greeting() {
+        System.out.println(&quot;Woow!&quot;);
+    }
+&nbsp;
+    @Override
+    public void greeting(Dog another) {
+        System.out.println(&quot;Woooooowwwww!&quot;);
+    }
+}</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class TestAnimal {
+    public static void main(String[] args) {
+        // Using the subclasses
+        Cat cat1 = new Cat();
+        cat1.greeting();
+        Dog dog1 = new Dog();
+        dog1.greeting();
+        BigDog bigDog1 = new BigDog();
+        bigDog1.greeting();
+&nbsp;
+        // Using Polymorphism
+        Animal animal1 = new Cat();
+        animal1.greeting();
+        Animal animal2 = new Dog();
+        animal2.greeting();
+        Animal animal3 = new BigDog();
+        animal3.greeting();
+&nbsp;
+&nbsp;
+        // Downcast
+        Dog dog2 = (Dog)animal2;
+        BigDog bigDog2 = (BigDog)animal3;
+        Dog dog3 = (Dog)animal3;
+        Cat cat2 = (Cat)animal2;
+        dog2.greeting(dog3);
+        dog3.greeting(dog2);
+        dog2.greeting(bigDog2);
+        bigDog2.greeting(dog2);
+        bigDog2.greeting(bigDog1);
+    }
+}</pre>
+
+Ex. 6.3<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public interface Movable {
+    public void moveUp();
+    public void moveDown();
+    public void moveLeft();
+    public void moveRight();
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+&nbsp;
+public class MovableCircle implements Movable{
+    private int radius;
+    private MovablePoint1 center;
+&nbsp;
+    public MovableCircle(int x, int y, int xSpeed,int ySpeed, int radius){
+        center = new MovablePoint1(x,y,xSpeed,ySpeed);
+        this.radius=radius;
+    }
+    public String toString(){
+        return &quot;The movable circle [ radius = &quot;+radius+&quot; ,center = &quot;+center+&quot; ]&quot;;
+    }
+    public void moveUp(){
+        center.y+=center.ySpeed;
+    }
+    public void moveDown(){
+        center.y-=center.ySpeed;
+    }
+    public void moveLeft(){
+        center.x-=center.xSpeed;
+    }
+    public void moveRight(){
+        center.x+=center.xSpeed;
+    }
+&nbsp;
+&nbsp;
+&nbsp;
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class MovablePoint1 implements Movable {
+    public int x;
+    public int y;
+    public int xSpeed;
+    public int ySpeed;
+&nbsp;
+    public MovablePoint1(int x,int y,int xSpeed, int ySpeed){
+        this.x=x;
+        this.y=y;
+        this.xSpeed=xSpeed;
+        this.ySpeed=ySpeed;
+    }
+    public String toString(){
+        return &quot;The movable point [x= &quot;+x+&quot;, y=&quot;+y+&quot;, x speed=&quot;+xSpeed+&quot;, y speed=&quot;+ySpeed+&quot; ]&quot;;
+    }
+    public void moveUp(){
+        y+=ySpeed;
+    }
+    public void moveDown(){
+        y-=ySpeed;
+    }
+    public void moveLeft(){
+        x-=xSpeed;
+    }
+    public void moveRight() {
+        x +=xSpeed;
+    }
+}
+&nbsp;</pre>
+
+Ex. 6.4<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public interface GeometricObject {
+    public double getPerimeter();
+    public double getArea();
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class Circle2 implements GeometricObject {
+    protected double radius;
+&nbsp;
+    public Circle2(double radius){
+        this.radius=radius;
+    }
+    public double getPerimeter(){
+        return Math.PI*2*radius;
+    }
+    public double getArea(){
+        return Math.PI*radius*radius;
+    }
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public interface Resizable {
+    public void resize(int percent);
+}
+&nbsp;</pre>
+
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.text  {font-family:monospace;}
+.text .imp {font-weight: bold; color: red;}
+.text span.xtra { display:block; }
+
+-->
+</style><pre class="text">package com.company;
+&nbsp;
+public class ResizableCircle extends Circle2 implements Resizable{
+&nbsp;
+    public ResizableCircle(double radius){
+        super(radius);
+    }
+&nbsp;
+    public void resize(int percent){
+        radius=radius*percent;
+    }
+}
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

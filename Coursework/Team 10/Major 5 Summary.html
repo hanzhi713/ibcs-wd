@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>IBCS1-WD - Major 5 Summary</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<span style="font-size: 150%;">Major 5 Summary</span><br />
+<br />
+<ul><li><span style="font-size: 120%;"> What is a constructor?</span></li></ul><span style="font-size: 120%;">A constructor creates an object of the class. You can recognize a constructor by its name—always the same as the class. Also, a constructor has no return type. </span><br />
+<span style="font-size: 120%;">Having several constructors provides different ways of initializing class objects. </span><br />
+<br />
+<ul><li><span style="font-size: 120%;"> What is encapsulation?</span></li></ul><span style="font-size: 120%;">•Encapsulation refers to the practice of hiding the structure and representation of data within a class and making it accessible outside that class via accessor functions;</span><br />
+<span style="font-size: 120%;">•Or “Refers to bundling the data and methods that operate on the data into one unit the methods and data can be accessed via dot notation or accessor methods.”</span><br />
+<br />
+<ul><li><span style="font-size: 120%;"> Advantage of encapsulation</span></li></ul><span style="font-size: 120%;">•Data hiding and security;</span><br />
+<span style="font-size: 120%;">•Ease of maintenance: If there are changes to the data, or how it is stored or accessed internally, only the one class needs to be changed to accommodate that. All the other classes will continue to use the public accessor methods and will not need to be changed;</span><br />
+<span style="font-size: 120%;">•Ease of testing: By putting all the structure of the data in a single class, other classes which make use of that data can be easily tested by simply providing them with data values even before the “real” data class is available for testing;</span><br />
+<span style="font-size: 120%;">•Speed of development;</span><br />
+<br />
+<ul><li><span style="font-size: 120%;"> What is polymorphism?</span></li></ul><span style="font-size: 120%;">Polymorphism, is the ability to treat an object of any subclass of a base class as if it were an object of the base class.</span><br />
+<br />
+<ul><li><span style="font-size: 120%;"> Advantage of polymorphism</span></li></ul><span style="font-size: 120%;">•Extensible code: other subclasses could be added later to the family of types, and objects of those new subclasses would also work with the existing code;</span><br />
+<span style="font-size: 120%;">• Code is easier for you to write and easier for others to understand;</span><br />
+<br />
+<br />
+<ul><li><span style="font-size: 120%;"> Advantage of inheritance</span></li></ul><span style="font-size: 120%;">•Avoids duplicate code: Since all functionality of the parent class is inherited, it is not necessary to duplicate the code to reproduce that functionality in the new class;</span><br />
+<span style="font-size: 120%;">•Simplifies testing: Functionality inherited from a parent class does not need to be re-tested in the new class;</span><br />
+<span style="font-size: 120%;">•Faster development;</span><br />
+<span style="font-size: 120%;">•Can mimic real-world object relationships;</span><br />
+<br />
+<ul><li><span style="font-size: 120%;"> Advantage of composition</span></li></ul><span style="font-size: 120%;">•It is easier to change the interface of a back-end class (composition) than a superclass (inheritance): a change to the interface of a back-end class necessitates a change to the front-end class implementation, but not necessarily the front-end interface. Code that depends only on the front-end interface still works, so long as the front-end interface remains the same.</span><br />
+<span style="font-size: 120%;">•It is easier to change the interface of a front-end class (composition) than a subclass (inheritance): just as superclasses can be fragile, subclasses can be rigid. You can't just change a subclass's interface without making sure the subclass's new interface is compatible with that of its super-types. For example, you can't add to a subclass a method with the same signature but a different return type as a method inherited from a superclass. Composition, on the other hand, allows you to change the interface of a front-end class without affecting back-end classes. </span><br />
+<span style="font-size: 120%;">•Composition allows you to delay the creation of back-end objects until (and unless) they are needed, as well as changing the back-end objects dynamically throughout the lifetime of the front-end object. With inheritance, you get the image of the superclass in your subclass object image as soon as the subclass is created, and it remains part of the subclass object throughout the lifetime of the subclass.</span><br />
+<span style="font-size: 120%;"> </span></div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

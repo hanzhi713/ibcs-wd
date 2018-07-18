@@ -1,0 +1,154 @@
+<html>
+  <head>
+    <title>IBCS1-WD - 20162016</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">java.util.ArrayList</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.List</span><span class="sy0">;</span>
+&nbsp;
+<span class="kw1">public</span> <span class="kw1">class</span> list <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        List<span class="sy0">&lt;</span>String<span class="sy0">&gt;</span> list <span class="sy0">=</span> <span class="kw1">new</span> ArrayList<span class="sy0">&lt;</span>String<span class="sy0">&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        list.<span class="me1">add</span><span class="br0">&#40;</span><span class="st0">&quot;a&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// list is 0 7 1 5</span>
+        list.<span class="me1">add</span><span class="br0">&#40;</span><span class="st0">&quot;b&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        list.<span class="me1">add</span><span class="br0">&#40;</span><span class="st0">&quot;c&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// list is 0 7 1 5</span>
+        list.<span class="me1">add</span><span class="br0">&#40;</span><span class="st0">&quot;d&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="co1">// insert(list,5);</span>
+        <span class="co1">// swap(list,2,3);</span>
+        changeEvenToEmpty<span class="br0">&#40;</span>list<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+&nbsp;
+     <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> insert<span class="br0">&#40;</span>List<span class="sy0">&lt;</span>Integer<span class="sy0">&gt;</span> list, <span class="kw3">Integer</span> value<span class="br0">&#41;</span>
+     <span class="br0">&#123;</span>
+     <span class="kw3">Integer</span> index <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+     <span class="co1">//find insertion point</span>
+     <span class="kw1">while</span> <span class="br0">&#40;</span>index <span class="sy0">&lt;</span> list.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&amp;&amp;</span>
+     value.<span class="me1">compareTo</span><span class="br0">&#40;</span>list.<span class="me1">get</span><span class="br0">&#40;</span>index<span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="sy0">&gt;</span> <span class="nu0">0</span><span class="br0">&#41;</span>
+     index<span class="sy0">++;</span>
+     <span class="co1">//insert value</span>
+     list.<span class="me1">add</span><span class="br0">&#40;</span>index, value<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+     <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>list<span class="br0">&#41;</span><span class="sy0">;</span>
+     <span class="br0">&#125;</span>
+     <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> swap<span class="br0">&#40;</span>List<span class="sy0">&lt;</span>Integer<span class="sy0">&gt;</span> list, <span class="kw4">int</span> i, <span class="kw4">int</span> j<span class="br0">&#41;</span>
+     <span class="br0">&#123;</span>
+     <span class="kw3">Integer</span> temp <span class="sy0">=</span> list.<span class="me1">get</span><span class="br0">&#40;</span>i<span class="br0">&#41;</span><span class="sy0">;</span>
+     list.<span class="me1">set</span><span class="br0">&#40;</span>i, list.<span class="me1">get</span><span class="br0">&#40;</span>j<span class="br0">&#41;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+     list.<span class="me1">set</span><span class="br0">&#40;</span>j, temp<span class="br0">&#41;</span><span class="sy0">;</span>
+     <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>list<span class="br0">&#41;</span><span class="sy0">;</span>
+     <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> changeEvenToEmpty<span class="br0">&#40;</span>List<span class="sy0">&lt;</span>String<span class="sy0">&gt;</span> strList<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        <span class="kw4">boolean</span> even <span class="sy0">=</span> <span class="kw2">true</span><span class="sy0">;</span>
+        <span class="kw4">int</span> index <span class="sy0">=</span> <span class="nu0">0</span><span class="sy0">;</span>
+        <span class="kw1">while</span> <span class="br0">&#40;</span>index <span class="sy0">&lt;</span> strList.<span class="me1">size</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span> <span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>even<span class="br0">&#41;</span>
+                strList.<span class="me1">set</span><span class="br0">&#40;</span>index, <span class="st0">&quot;&quot;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            index<span class="sy0">++;</span>
+            even <span class="sy0">=</span> <span class="sy0">!</span>even<span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>strList<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+<br />
+<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.java  {font-family:monospace;}
+.java .imp {font-weight: bold; color: red;}
+.java .kw1 {color: #000000; font-weight: bold;}
+.java .kw2 {color: #000066; font-weight: bold;}
+.java .kw3 {color: #003399;}
+.java .kw4 {color: #000066; font-weight: bold;}
+.java .co1 {color: #666666; font-style: italic;}
+.java .co2 {color: #006699;}
+.java .co3 {color: #008000; font-style: italic; font-weight: bold;}
+.java .coMULTI {color: #666666; font-style: italic;}
+.java .es0 {color: #000099; font-weight: bold;}
+.java .br0 {color: #009900;}
+.java .sy0 {color: #339933;}
+.java .st0 {color: #0000ff;}
+.java .nu0 {color: #cc66cc;}
+.java .me1 {color: #006633;}
+.java .me2 {color: #006633;}
+.java span.xtra { display:block; }
+
+-->
+</style><pre class="java"><span class="kw1">import</span> <span class="co2">java.util.ArrayList</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.Iterator</span><span class="sy0">;</span>
+<span class="kw1">import</span> <span class="co2">java.util.List</span><span class="sy0">;</span>
+<span class="kw1">public</span> <span class="kw1">class</span> clist <span class="br0">&#123;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> main<span class="br0">&#40;</span><span class="kw3">String</span><span class="br0">&#91;</span><span class="br0">&#93;</span> args<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        List<span class="sy0">&lt;</span>Integer<span class="sy0">&gt;</span> list <span class="sy0">=</span> <span class="kw1">new</span> ArrayList<span class="sy0">&lt;</span>Integer<span class="sy0">&gt;</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+        list.<span class="me1">add</span><span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">1</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// list is 0 7 1 5</span>
+        list.<span class="me1">add</span><span class="br0">&#40;</span><span class="nu0">2</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        list.<span class="me1">add</span><span class="br0">&#40;</span><span class="sy0">-</span><span class="nu0">3</span><span class="br0">&#41;</span><span class="sy0">;</span> <span class="co1">// list is 0 7 1 5</span>
+        list.<span class="me1">add</span><span class="br0">&#40;</span><span class="nu0">4</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        removeNegs<span class="br0">&#40;</span>list<span class="br0">&#41;</span><span class="sy0">;</span>
+&nbsp;
+<span class="co1">//        removeTwos(list);</span>
+<span class="co1">//        Iterator&lt;String&gt; itr = list.iterator();</span>
+<span class="co1">//        while (itr.hasNext()){</span>
+<span class="co1">//        System.out.println(itr.next());}</span>
+    <span class="br0">&#125;</span>
+    <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> removeTwos<span class="br0">&#40;</span>List<span class="sy0">&lt;</span>String<span class="sy0">&gt;</span> strList<span class="br0">&#41;</span> <span class="br0">&#123;</span>
+        Iterator<span class="sy0">&lt;</span>String<span class="sy0">&gt;</span> itr <span class="sy0">=</span> strList.<span class="me1">iterator</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">while</span> <span class="br0">&#40;</span>itr.<span class="me1">hasNext</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+            <span class="kw1">if</span> <span class="br0">&#40;</span>itr.<span class="me1">next</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">length</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">==</span> <span class="nu0">2</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+                itr.<span class="me1">remove</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+            <span class="br0">&#125;</span>
+        <span class="br0">&#125;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>strList<span class="br0">&#41;</span><span class="sy0">;</span>
+    <span class="br0">&#125;</span>
+        <span class="kw1">public</span> <span class="kw1">static</span> <span class="kw4">void</span> removeNegs<span class="br0">&#40;</span>List<span class="sy0">&lt;</span>Integer<span class="sy0">&gt;</span> intList<span class="br0">&#41;</span><span class="br0">&#123;</span>
+        Iterator<span class="sy0">&lt;</span>Integer<span class="sy0">&gt;</span> itr <span class="sy0">=</span> intList.<span class="me1">iterator</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="kw1">while</span> <span class="br0">&#40;</span>itr.<span class="me1">hasNext</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        <span class="kw1">if</span> <span class="br0">&#40;</span>itr.<span class="me1">next</span><span class="br0">&#40;</span><span class="br0">&#41;</span>.<span class="me1">intValue</span><span class="br0">&#40;</span><span class="br0">&#41;</span> <span class="sy0">&lt;</span> <span class="nu0">0</span><span class="br0">&#41;</span><span class="br0">&#123;</span>
+        itr.<span class="me1">remove</span><span class="br0">&#40;</span><span class="br0">&#41;</span><span class="sy0">;</span><span class="br0">&#125;</span><span class="br0">&#125;</span>
+        <span class="kw3">System</span>.<span class="me1">out</span>.<span class="me1">println</span><span class="br0">&#40;</span>intList<span class="br0">&#41;</span><span class="sy0">;</span>
+        <span class="br0">&#125;</span>
+<span class="br0">&#125;</span>
+&nbsp;</pre>
+
+</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>

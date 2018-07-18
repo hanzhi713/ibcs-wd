@@ -1,0 +1,82 @@
+<html>
+  <head>
+    <title>IBCS1-WD - October 21st, Tom's work on chapter 25 (Stacks) exercises</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<p><h1>October 21st, Tom's work on chapter 25 (Stacks) exercises<small> #TomsProjects </small></h1><h1 id="toc0"><a name="E1:"></a>E1:</h1>
+ 
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.python  {font-family:monospace;}
+.python .imp {font-weight: bold; color: red;}
+.python .kw1 {color: #ff7700;font-weight:bold;}
+.python .kw2 {color: #008000;}
+.python .kw3 {color: #dc143c;}
+.python .kw4 {color: #0000cd;}
+.python .co1 {color: #808080; font-style: italic;}
+.python .coMULTI {color: #808080; font-style: italic;}
+.python .es0 {color: #000099; font-weight: bold;}
+.python .br0 {color: black;}
+.python .sy0 {color: #66cc66;}
+.python .st0 {color: #483d8b;}
+.python .nu0 {color: #ff4500;}
+.python .me1 {color: black;}
+.python span.xtra { display:block; }
+
+-->
+</style><pre class="python"><span class="kw1">import</span> <span class="kw3">re</span>
+&nbsp;
+&nbsp;
+<span class="kw1">class</span> Stack:
+    <span class="kw1">def</span> <span class="kw4">__init__</span><span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">items</span> <span class="sy0">=</span> <span class="br0">&#91;</span><span class="br0">&#93;</span>
+&nbsp;
+    <span class="kw1">def</span> push<span class="br0">&#40;</span><span class="kw2">self</span><span class="sy0">,</span> item<span class="br0">&#41;</span>:
+        <span class="kw2">self</span>.<span class="me1">items</span>.<span class="me1">append</span><span class="br0">&#40;</span>item<span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> pop<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="kw2">self</span>.<span class="me1">items</span>.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+    <span class="kw1">def</span> is_empty<span class="br0">&#40;</span><span class="kw2">self</span><span class="br0">&#41;</span>:
+        <span class="kw1">return</span> <span class="br0">&#40;</span><span class="kw2">self</span>.<span class="me1">items</span> <span class="sy0">==</span> <span class="br0">&#91;</span><span class="br0">&#93;</span><span class="br0">&#41;</span>
+&nbsp;
+&nbsp;
+<span class="kw1">def</span> eval_postfix<span class="br0">&#40;</span>expr<span class="br0">&#41;</span>:
+    token_list <span class="sy0">=</span> <span class="kw3">re</span>.<span class="me1">split</span><span class="br0">&#40;</span><span class="st0">&quot;([^0-9])&quot;</span><span class="sy0">,</span> expr<span class="br0">&#41;</span>
+    stack <span class="sy0">=</span> Stack<span class="br0">&#40;</span><span class="br0">&#41;</span>
+    <span class="kw1">for</span> <span class="kw3">token</span> <span class="kw1">in</span> token_list:
+        <span class="kw1">if</span> <span class="kw3">token</span> <span class="sy0">==</span> <span class="st0">&quot;&quot;</span> <span class="kw1">or</span> <span class="kw3">token</span> <span class="sy0">==</span> <span class="st0">&quot; &quot;</span>:
+            <span class="kw1">continue</span>
+        <span class="kw1">if</span> <span class="kw3">token</span> <span class="sy0">==</span> <span class="st0">&quot;+&quot;</span>:
+            <span class="kw2">sum</span> <span class="sy0">=</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span> + stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            stack.<span class="me1">push</span><span class="br0">&#40;</span><span class="kw2">sum</span><span class="br0">&#41;</span>
+        <span class="kw1">elif</span> <span class="kw3">token</span> <span class="sy0">==</span> <span class="st0">&quot;*&quot;</span>:
+            product <span class="sy0">=</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span> * stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            stack.<span class="me1">push</span><span class="br0">&#40;</span>product<span class="br0">&#41;</span>
+        <span class="kw1">elif</span> <span class="kw3">token</span> <span class="sy0">==</span> <span class="st0">&quot;-&quot;</span>:
+            sub <span class="sy0">=</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span> - stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            stack.<span class="me1">push</span><span class="br0">&#40;</span>sub<span class="br0">&#41;</span>
+        <span class="kw1">elif</span> <span class="kw3">token</span> <span class="sy0">==</span> <span class="st0">&quot;/&quot;</span>:
+            quotient <span class="sy0">=</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span> / stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+            stack.<span class="me1">push</span><span class="br0">&#40;</span>quotient<span class="br0">&#41;</span>
+        <span class="kw1">else</span>:
+            stack.<span class="me1">push</span><span class="br0">&#40;</span><span class="kw2">int</span><span class="br0">&#40;</span><span class="kw3">token</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+    <span class="kw1">return</span> stack.<span class="me1">pop</span><span class="br0">&#40;</span><span class="br0">&#41;</span>
+&nbsp;
+<span class="kw1">print</span><span class="br0">&#40;</span>eval_postfix<span class="br0">&#40;</span><span class="st0">&quot;1 2 + 3 *&quot;</span><span class="br0">&#41;</span><span class="br0">&#41;</span>
+&nbsp;</pre>
+
+<h1 id="toc1"><a name="E2:"></a>E2:</h1>
+ <br />
+1 2 3 * +</div>
+      <h2>Discussions</h2></hr>
+      <div id="share-list">
+    </div>
+  </body>
+</html>
